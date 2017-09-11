@@ -1,7 +1,5 @@
 set +e
 
-echo "Runnint post_start script"
-
 while true; do  
   nodetool ping
   EXIT_CODE=$?
