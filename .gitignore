@@ -32,6 +32,7 @@ npm-debug.log
 .env
 plum.tar.gz
 plum.zip
+*.plt
 
 *.swp
 
