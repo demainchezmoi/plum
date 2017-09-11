@@ -1,5 +1,6 @@
 #!/bin/bash
-docker-compose run plum mix dialyzer
+set -e
+docker-compose run plum mix dialyzer --halt-exit-status
 docker-compose run test
 mix docker.shipit
 mix docker.publish --tag latest
