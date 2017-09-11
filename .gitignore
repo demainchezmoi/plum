@@ -33,10 +33,4 @@ npm-debug.log
 plum.tar.gz
 plum.zip
 *.plt
-
 *.swp
-
-# Elastic Beanstalk Files
-.elasticbeanstalk/*
-!.elasticbeanstalk/*.cfg.yml
-!.elasticbeanstalk/*.global.yml
