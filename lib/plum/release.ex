@@ -6,8 +6,4 @@ defmodule Release.Tasks do
 
     Ecto.Migrator.run(Plum.Repo, path, :up, all: true)
   end
-
-  def create do
-    Mix.Tasks.Ecto.Create.run []
-  end
 end
