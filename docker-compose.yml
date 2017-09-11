@@ -1,0 +1,41 @@
+version: "2"
+
+services:
+  plum:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    ports:
+      - "4000:4000"
+    depends_on:
+      - psql
+    env_file: .env
+    environment:
+        HOST: "localhost"
+        DATABASE_HOST: "psql"
+        MIX_ENV: "dev"
+        PORT: "4000"
+        SECRET_KEY_BASE: "1234"
+    volumes:
+      - .:/opt/app
+
+  test:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    environment:
+      DATABASE_HOST: "psql"
+      MIX_ENV: "test"
+    volumes:
+      - .:/opt/app
+
+  psql:
+    image: mdillon/postgis:9.5
+    ports:
+      - "5432:5432"
+    volumes:
+      - database:/var/lib/postgresql/data
+
+volumes:
+  database:
+    driver: local

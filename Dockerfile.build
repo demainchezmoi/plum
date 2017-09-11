@@ -1,0 +1,54 @@
+FROM bitwalker/alpine-erlang:20.0
+
+ENV HOME=/opt/app/ TERM=xterm
+ENV ELIXIR_VERSION=v1.5.1
+
+WORKDIR /tmp/elixir-build
+
+# Install Elixir and basic build dependencies
+RUN \
+    echo "@edge http://nl.alpinelinux.org/alpine/edge/community" >> /etc/apk/repositories && \
+		apk update && \
+    apk --update upgrade && \
+    apk --update upgrade musl && \
+		apk add --no-cache --update --virtual .elixir-build make && \
+    apk --no-cache add git && \
+
+		git clone https://github.com/elixir-lang/elixir --depth 1 --branch $ELIXIR_VERSION && \
+    cd elixir && \
+    make && make install && \
+		mix local.hex --force && \
+    mix local.rebar --force && \
+    cd $HOME && \
+
+    apk --no-cache add git g++ nodejs nodejs-npm python && \
+
+   	rm -rf /tmp/elixir-build && \
+    apk del .elixir-build && \
+		rm -rf /var/cache/apk/*
+
+# Install Hex+Rebar
+# RUN mix local.hex --force && \
+    # mix local.rebar --force
+
+WORKDIR ${HOME}
+
+ENV MIX_ENV=prod
+
+# Cache elixir deps
+RUN mkdir config
+COPY config/* config/
+COPY mix.exs mix.lock ./
+RUN mix do deps.get, deps.compile
+
+# Cache node deps
+COPY assets/package.json ./assets/
+RUN cd ./assets && npm install
+
+COPY . .
+
+RUN cd ./assets && ./node_modules/brunch/bin/brunch b -p && \
+		cd .. && \
+    mix phx.digest
+
+RUN mix release --env=prod --verbose
