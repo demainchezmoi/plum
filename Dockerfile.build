@@ -1,4 +1,4 @@
-FROM bitwalker/alpine-erlang:20.0
+FROM bitwalker/alpine-erlang:19.3
 
 ENV HOME=/opt/app/ TERM=xterm
 ENV ELIXIR_VERSION=v1.5.1
