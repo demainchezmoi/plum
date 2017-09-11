@@ -15,5 +15,5 @@ config :plum, Plum.Repo,
   username: "postgres",
   password: "postgres",
   database: "plum_test",
-  hostname: "localhost",
+  hostname: System.get_env("DATABASE_HOST") || "localhost",
   pool: Ecto.Adapters.SQL.Sandbox

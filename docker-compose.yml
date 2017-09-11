@@ -18,16 +18,20 @@ services:
         SECRET_KEY_BASE: "1234"
     volumes:
       - .:/opt/app
+    command: "iex -S mix phoenix.server"
 
   test:
     build:
       context: .
       dockerfile: Dockerfile.dev
+    depends_on:
+      - psql
     environment:
       DATABASE_HOST: "psql"
       MIX_ENV: "test"
     volumes:
       - .:/opt/app
+    command: "mix test"
 
   psql:
     image: mdillon/postgis:9.5

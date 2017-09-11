@@ -35,8 +35,6 @@ RUN apk add --no-cache erlang-dialyzer
 
 WORKDIR ${HOME}
 
-ENV MIX_ENV=dev
-
 # Cache elixir deps
 RUN mkdir config
 COPY config/* config/
