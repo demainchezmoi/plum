@@ -7,12 +7,11 @@ WORKDIR /tmp/elixir-build
 
 # Install Elixir and basic build dependencies
 RUN \
-    echo "@edge http://nl.alpinelinux.org/alpine/edge/community" >> /etc/apk/repositories && \
-		apk update && \
-    apk --update upgrade && \
+    apk update && \
+    apk upgrade && \
     apk --update upgrade musl && \
+    apk --no-cache add nodejs nodejs-npm git inotify-tools g++ python erlang-dialyzer && \
 		apk add --no-cache --update --virtual .elixir-build make && \
-    apk --no-cache add git && \
 
 		git clone https://github.com/elixir-lang/elixir --depth 1 --branch $ELIXIR_VERSION && \
     cd elixir && \
@@ -21,17 +20,9 @@ RUN \
     mix local.rebar --force && \
     cd $HOME && \
 
-    apk --no-cache add inotify-tools git g++ nodejs nodejs-npm python && \
-
    	rm -rf /tmp/elixir-build && \
     apk del .elixir-build && \
 		rm -rf /var/cache/apk/*
-
-RUN apk add --no-cache erlang-dialyzer
-
-# Install Hex+Rebar
-# RUN mix local.hex --force && \
-    # mix local.rebar --force
 
 WORKDIR ${HOME}
 
@@ -47,8 +38,9 @@ RUN cd ./assets && npm install
 
 COPY . .
 
-RUN cd ./assets && ./node_modules/brunch/bin/brunch b -p && \
-		cd .. && \
+RUN cd ./assets && \
+    ./node_modules/brunch/bin/brunch b -p && \
+    cd .. && \
     mix phx.digest
 
 CMD ["mix", "phoenix.server"]

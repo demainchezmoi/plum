@@ -18,7 +18,7 @@ services:
         SECRET_KEY_BASE: "1234"
     volumes:
       - .:/opt/app
-    command: "iex -S mix phoenix.server"
+    command: "iex -S mix phx.server"
 
   test:
     build:
