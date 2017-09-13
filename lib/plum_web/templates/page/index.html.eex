@@ -31,7 +31,7 @@
 <section class="container mb-5">
   <div class="row justify-content-center">
     <div class="col-md-10">
-      <h3 class="h3-responsive mb-3 font-bold">Votre terrain</h3>
+      <h3 class="h3-responsive mb-3 font-bold text-dark-gray">Votre terrain</h3>
 			<!-- {{{ Carousel Wrapper-->
 			<div id="carousel-land" class="carousel slide carousel-fade" data-ride="carousel">
     		<!--Indicators-->
@@ -81,7 +81,7 @@
 <section class="container mb-5">
   <div class="row justify-content-center">
     <div class="col-md-10">
-      <h3 class="h3-responsive mb-3 font-bold">La maison Léo</h3>
+      <h3 class="h3-responsive mb-3 font-bold text-dark-gray">La maison Léo</h3>
 			<!-- {{{ Carousel Wrapper-->
 			<div id="carousel-example-1z" class="carousel slide carousel-fade" data-ride="carousel">
     		<!--Indicators-->
