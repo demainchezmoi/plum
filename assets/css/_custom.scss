@@ -2,7 +2,7 @@
   // position: absolute;
   font-weight: bold;
   font-size: 20px;
-  color: lighten(#4285F4, 10%);
+  // color: lighten(#4285F4, 10%);
   i.logo {
     text-shadow: none;
   	font-size: 30px;
@@ -15,6 +15,9 @@
 }
 
 .intro-1 {
+  .full-bg-img {
+    background-color: rgba(0, 0, 0, 0.5);
+  }
   height: 500px;
   background: url("/images/maison.png") no-repeat center center;
   background-size: cover;
