@@ -1,23 +1,18 @@
-.logo-wrapper {
-  // position: absolute;
-  font-weight: bold;
-  font-size: 20px;
-  // color: lighten(#4285F4, 10%);
-  i.logo {
-    text-shadow: none;
-  	font-size: 30px;
-  	line-height: 60px;
-    height: 60px;
-    border-radius: 0%;
-    text-align: center;
-    background-color: transparent;
-  }
+.text-shadow {
+  text-shadow: 2px 2px 3px rgba(0,0,0,0.3);
+}
+
+.title {
+  @include media-breakpoint-up(md) { font-size: 280%; }
+  @extend .text-shadow;
+}
+.brand {
+  @include media-breakpoint-up(md) { margin-bottom: map-get($spacers, 5); }
+  @extend .text-shadow;
 }
 
 .intro-1 {
-  .full-bg-img {
-    background-color: rgba(0, 0, 0, 0.5);
-  }
+  .full-bg-img { background-color: rgba(0, 0, 0, 0.6); }
   height: 500px;
   background: url("/images/maison.png") no-repeat center center;
   background-size: cover;
@@ -34,5 +29,21 @@
   @include media-breakpoint-up(md) { height: 360px; } 
   @include media-breakpoint-up(lg) { height: 440px; }
   @include media-breakpoint-up(xl) { height: 520px; }
+  width: auto;
 }
 
+$yellow: #e4ff00;
+$green: #11ef37;
+
+.btn-yellow-flash {
+  background-color: $yellow !important;
+  color: black !important;
+  font-weight: bold;
+  &:hover, &:focus {
+    background-color: darken($yellow, 5%) !important;
+    color: black !important;
+  }
+}
+.badge-green {
+  background-color: $green;
+}

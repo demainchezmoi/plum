@@ -1,8 +1,104 @@
 $roboto-font-path: "/fonts/";
-$image-path: "/images";
-$fa-font-path: "../fonts";
 
-@import "bootstrap";
+$yellow: #e4ff00;
+$green: #11ef37;
+
+
+/*
+ * =================
+ * Import mdbootstrap
+ * =================
+ */
+@import "functions";
+@import "variables";
+@import "mixins";
+@import "print";
+@import "reboot";
+@import "type";
+@import "images";
+// @import "code";
+@import "grid";
+// @import "tables";
+@import "forms";
+@import "buttons";
+@import "transitions";
+@import "dropdown";
+@import "button-group";
+@import "input-group";
+@import "custom-forms";
+// @import "nav";
+// @import "navbar";
+@import "card";
+// @import "breadcrumb";
+// @import "pagination";
+@import "badge";
+// @import "jumbotron";
+// @import "alert";
+// @import "progress";
+// @import "media";
+// @import "list-group";
+// @import "close";
+// @import "modal";
+// @import "tooltip";
+// @import "popover";
+@import "carousel";
+@import "utilities";
+
+
+/*
+ * =================
+ * Import font awesome
+ * =================
+ */
+$fa-font-path: "../fonts";
 @import "font-awesome";
-@import "mdb";
+
+
+/*
+ * =================
+ * Import mdbootstrap
+ * =================
+ */
+@charset "UTF-8";
+@import "mdb/free/data/functions";
+@import "mdb/free/data/variables-b4";
+
+// MDB Framework //
+@import "mdb/free/data/prefixer";
+@import "mdb/free/data/mixins";
+@import "mdb/free/data/colors";
+@import "mdb/free/data/variables";
+// override variables
+$image-path: "/images";
+@import "mdb/free/global";
+@import "mdb/free/animations";
+@import "mdb/free/helpers";
+@import "mdb/free/typography";
+@import "mdb/free/buttons";
+@import "mdb/free/cards-basic";
+// @import "mdb/free/dropdowns";
+// @import "mdb/free/navbar";
+// @import "mdb/free/pagination";
+@import "mdb/free/badge";
+// @import "mdb/free/breadcrumb";
+// @import "mdb/free/modals";
+// @import "mdb/free/progress";
+@import "mdb/free/carousel-basic";
+// @import "mdb/free/collapse";
+// @import "mdb/free/jumbotron";
+// @import "mdb/free/masks";
+// @import "mdb/free/waves";
+@import "mdb/free/forms-basic";
+// @import "mdb/free/msc";
+// @import "mdb/free/footer";
+// @import "mdb/free/list-group";
+// @import "mdb/free/tables";
+// @import "mdb/custom";
+
+
+/*
+ * =================
+ * Import custom styles 
+ * =================
+ */
 @import "custom";
