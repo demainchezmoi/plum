@@ -17,6 +17,8 @@ defmodule PlumWeb.Router do
     pipe_through :browser # Use the default browser stack
 
     get "/", PageController, :index
+    get "/merci", PageController, :merci
+    get "/confidentialité", PageController, :confidentialite
   end
 
   # Other scopes may use custom stacks.

@@ -56,7 +56,10 @@ exports.config = {
       "fonts": [
         "node_modules/font-awesome/fonts",
         "node_modules/mdbootstrap/font/roboto"
-      ] // copy to priv/static/fonts/
+      ],
+      "images/svg": [
+        "node_modules/mdbootstrap/img/svg"
+      ]
     },
     sass: {
       options: {
