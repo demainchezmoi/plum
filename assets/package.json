@@ -16,7 +16,10 @@
     "clean-css-brunch": "2.10.0",
     "copycat-brunch": "^1.1.0",
     "font-awesome": "^4.7.0",
+    "install": "^0.10.1",
     "jquery": "^3.2.1",
+    "mdbootstrap": "^4.4.1",
+    "npm": "^5.4.1",
     "popper.js": "^1.12.5",
     "sass-brunch": "git+https://git@github.com/jukebox017/sass-brunch.git",
     "uglify-js-brunch": "2.10.0"

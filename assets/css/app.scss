@@ -1,4 +1,30 @@
 $fa-font-path: "../fonts";
-@import "custom";
-@import "font-awesome";
+$roboto-font-path: "/fonts/";
+
 @import "bootstrap";
+@import "font-awesome";
+@import "mdb";
+@import "custom";
+
+.logo-wrapper {
+  position: absolute;
+  color: rgb(79, 179, 255);
+  font-size: 20px;
+	font-weight: bold;
+  i.logo {
+    text-shadow: none;
+  	font-size: 30px;
+  	line-height: 60px;
+    height: 60px;
+    width: 40px;
+    border-radius: 0%;
+    text-align: center;
+    background-color: transparent;
+  }
+}
+
+.intro-1 {
+  height: 500px;
+  background: url("/images/maison.png") no-repeat center center;
+  background-size: cover;
+}
