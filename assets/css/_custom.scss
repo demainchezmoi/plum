@@ -1,6 +1,6 @@
-.text-shadow {
-  text-shadow: 2px 2px 3px rgba(0,0,0,0.3);
-}
+.text-yellow-flash { color: $yellow-flash; }
+
+.text-shadow { text-shadow: 2px 2px 3px rgba(0,0,0,0.3); }
 
 .title {
   @include media-breakpoint-up(md) { font-size: 280%; }
@@ -32,26 +32,16 @@
   width: auto;
 }
 
-$yellow: #e4ff00;
-$green: #11ef37;
-
 .btn-yellow-flash {
-  background-color: $yellow !important;
+  background-color: $yellow-flash !important;
   color: black !important;
   font-weight: bold;
   &:hover, &:focus {
-    background-color: darken($yellow, 5%) !important;
+    background-color: darken($yellow-flash, 5%) !important;
     color: black !important;
   }
 }
-.badge-green {
-  background-color: $green;
-}
 
-.text-dark-gray {
-  color: $gray-700;
-}
-
-.badge {
-  border: 0 !important;
-}
+.badge-green-flash { background-color: $green-flash; }
+.text-dark-gray { color: $gray-700; }
+.badge { border: 0 !important; }

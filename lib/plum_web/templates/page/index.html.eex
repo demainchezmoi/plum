@@ -5,7 +5,7 @@
       <div class="container">
         <ul>
           <li>
-            <h2 class="h2-responsive font-bold brand text-warning">
+            <h2 class="h2-responsive font-bold brand text-yellow-flash">
               <i id="icon" class="fa fa-home logo"></i>
               Maisons Léo
             </h2>
@@ -13,11 +13,11 @@
           <li><h1 class="title h1-responsive font-bold wow fadeInDown" data-wow-delay="0.2s" style="color: white">Devenez propriétaire à Clisson&nbsp;(44)</h1></li>
           <li><h4 class="h4-responsive text-shadow" style="font-weight: 300; color: white" data-wow-delay="0.2s">
               Annonce
-              <span class="text-warning font-bold">maison Léo</span>
+              <span class="text-yellow-flash font-bold">maison Léo</span>
               neuve +
-              <span class="text-warning font-bold">terrain 680&nbsp;m<sup>2</sup></span>
+              <span class="text-yellow-flash font-bold">terrain 680&nbsp;m<sup>2</sup></span>
               pour
-              <span class="text-warning font-bold">120&nbsp;000&nbsp;€</span>
+              <span class="text-yellow-flash font-bold">120&nbsp;000&nbsp;€</span>
           </h4></li>
           <li><a class="btn btn-yellow-flash" href="#">Ça m'intéresse</a></li>
         </ul>
@@ -68,8 +68,8 @@
 			<!-- }}} /.Carousel Wrapper-->
       <div class="clearfix mt-2">
         <span class="mt-2 h4 pull-right">
-			    <span class="badge badge-green">580 m<sup>2</sup></span>
-          <span class="badge badge-green">34&nbsp;000&nbsp;€</span>
+			    <span class="badge badge-green-flash">580 m<sup>2</sup></span>
+          <span class="badge badge-green-flash">34&nbsp;000&nbsp;€</span>
         </span>
       </div>
     </div>
@@ -124,10 +124,10 @@
 			<!-- }}} /.Carousel Wrapper-->
       <div class="clearfix mt-2">
         <div class="mt-2 h4 pull-right">
-			    <span class="badge badge-green">80 m<sup>2</sup></span>
-			    <span class="badge badge-green">3 chambres</span>
-			    <span class="badge badge-green">Classe énergie A &nbsp;<i class="fa fa-thumbs-up"></i></span>
-          <span class="badge badge-green">68&nbsp;000&nbsp;€</span>
+			    <span class="badge badge-green-flash">80 m<sup>2</sup></span>
+			    <span class="badge badge-green-flash">3 chambres</span>
+			    <span class="badge badge-green-flash">Classe énergie A &nbsp;<i class="fa fa-thumbs-up"></i></span>
+          <span class="badge badge-green-flash">68&nbsp;000&nbsp;€</span>
         </div>
       </div>
     </div>
