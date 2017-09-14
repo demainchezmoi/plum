@@ -10,7 +10,7 @@ defmodule PlumWeb.ContactController do
         conn |> redirect(to: contact_path(conn, :show, contact))
       {:error, %Ecto.Changeset{} = changeset} ->
         conn
-        |> put_flash(:error, "Le formulaire est invalide, veuillez corriger les erreurs ci-dessous.")
+        |> put_flash(:error, "Le formulaire est invalide, merci de corriger les erreurs ci-dessous.")
         |> render("new.html", changeset: changeset)
     end
   end

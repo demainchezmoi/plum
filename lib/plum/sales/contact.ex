@@ -3,6 +3,7 @@ defmodule Plum.Sales.Contact do
   import Ecto.Changeset
   alias Plum.Sales.Contact
 
+  @required_message "Champ requis."
 
   schema "contact" do
     field :email, :string
@@ -16,6 +17,6 @@ defmodule Plum.Sales.Contact do
   def changeset(%Contact{} = contact, attrs) do
     contact
     |> cast(attrs, [:email, :phone, :name])
-    |> validate_required([:email, :phone, :name])
+    |> validate_required([:email, :phone, :name], message: @required_message)
   end
 end
