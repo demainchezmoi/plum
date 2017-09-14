@@ -1,0 +1,16 @@
+<%= Phoenix.View.render PlumWeb.SharedView, "navbar.html", %{} %>
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <h1 class="h1-responsive mt-3 mb-4">Votre demande a bien été prise en compte.</h1>
+      <dl>
+        <dt>Nom</dt>
+        <dd><%= @contact.name %></dd>
+        <dt>Email</dt>
+        <dd><%= @contact.email %></dd>
+        <dt>Téléphone</dt>
+        <dd><%= @contact.phone %></dd>
+      </dl>
+    </div>
+  </div>
+</div>

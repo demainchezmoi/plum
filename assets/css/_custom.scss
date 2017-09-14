@@ -3,16 +3,22 @@
 .text-shadow { text-shadow: 2px 2px 3px rgba(0,0,0,0.3); }
 
 .title {
-  @include media-breakpoint-up(md) { font-size: 280%; }
+  @include media-breakpoint-up(md) { font-size: 300%; }
   @extend .text-shadow;
 }
+
+.subtitle {
+  @include media-breakpoint-down(xs) { font-size: small; }
+}
+
 .brand {
   @include media-breakpoint-up(md) { margin-bottom: map-get($spacers, 5); }
+  @include media-breakpoint-down(xs) { font-size: small; }
   @extend .text-shadow;
 }
 
 .intro-1 {
-  .full-bg-img { background-color: rgba(0, 0, 0, 0.6); }
+  .full-bg-img { background-color: rgba(0, 0, 0, 0.7); }
   height: 500px;
   background: url("/images/maison.png") no-repeat center center;
   background-size: cover;
@@ -44,4 +50,11 @@
 
 .badge-green-flash { background-color: $green-flash; }
 .text-dark-gray { color: $gray-700; }
+.background-dark-gray { background-color: $gray-900; }
 .badge { border: 0 !important; }
+
+.alert {
+  // position: absolute;
+  // z-index: 1000;
+  @extend .m-0;
+}

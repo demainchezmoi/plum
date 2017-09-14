@@ -14,15 +14,13 @@ defmodule PlumWeb.Router do
   end
 
   scope "/", PlumWeb do
-    pipe_through :browser # Use the default browser stack
+    pipe_through :browser
 
     get "/", PageController, :index
     get "/merci", PageController, :merci
     get "/confidentialité", PageController, :confidentialite
-  end
 
-  # Other scopes may use custom stacks.
-  # scope "/api", PlumWeb do
-  #   pipe_through :api
-  # end
+    resources "/ad", AdController
+    resources "/contact", ContactController, only: [:create, :show]
+  end
 end

@@ -14,9 +14,26 @@
 
 import 'phoenix_html'
 
+// import 'mdbootstrap/js/jquery-3.2.1.min.js'
+// import 'waves/dist/waves.js'
+// import 'mdbootstrap/js/popper.min.js'
+// import 'mdbootstrap/js/bootstrap.js'
+// import 'mdbootstrap/js/mdb.js'
+
 // Import local files
 //
 // Local files can be imported directly using relative
 // paths "./socket" or full ones "web/static/js/socket".
 
 // import socket from "./socket"
+
+jQuery.fn.extend({
+  scrollToMe: function () {
+    var x = jQuery(this).offset().top - 100;
+    jQuery('html,body').animate({scrollTop: x}, 400);
+  }
+});
+
+$("#interested-button").click(function() {
+  $("#contact-form").scrollToMe();
+});

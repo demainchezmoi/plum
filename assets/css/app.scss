@@ -1,11 +1,11 @@
 $roboto-font-path: "/fonts/";
 $yellow-flash: #e4ff00;
-$green-flash: #11ef37;
+$green-flash: #07d82b;
 
 
 /*
  * =================
- * Import mdbootstrap
+ * Import bootstrap
  * =================
  */
 @import "functions";
@@ -32,11 +32,11 @@ $green-flash: #11ef37;
 // @import "pagination";
 @import "badge";
 // @import "jumbotron";
-// @import "alert";
+@import "alert";
 // @import "progress";
 // @import "media";
 // @import "list-group";
-// @import "close";
+@import "close";
 // @import "modal";
 // @import "tooltip";
 // @import "popover";
@@ -70,11 +70,11 @@ $fa-font-path: "../fonts";
 // override variables
 $image-path: "/images";
 @import "mdb/free/global";
-@import "mdb/free/animations";
+// @import "mdb/free/animations";
 @import "mdb/free/helpers";
 @import "mdb/free/typography";
 @import "mdb/free/buttons";
-@import "mdb/free/cards-basic";
+// @import "mdb/free/cards-basic";
 // @import "mdb/free/dropdowns";
 // @import "mdb/free/navbar";
 // @import "mdb/free/pagination";
@@ -86,9 +86,9 @@ $image-path: "/images";
 // @import "mdb/free/collapse";
 // @import "mdb/free/jumbotron";
 // @import "mdb/free/masks";
-// @import "mdb/free/waves";
-@import "mdb/free/forms-basic";
-// @import "mdb/free/msc";
+@import "mdb/free/waves";
+// @import "mdb/free/forms-basic";
+@import "mdb/free/msc";
 // @import "mdb/free/footer";
 // @import "mdb/free/list-group";
 // @import "mdb/free/tables";
