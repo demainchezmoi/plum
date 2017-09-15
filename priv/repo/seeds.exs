@@ -9,3 +9,7 @@
 #
 # We recommend using the bang functions (`insert!`, `update!`
 # and so on) as they will fail if something goes wrong.
+Plum.Repo.delete_all Plum.Coherence.User
+
+Plum.Coherence.User.changeset(%Plum.Coherence.User{}, %{name: "Test User", email: "testuser@example.com", password: "secret", password_confirmation: "secret"})
+|> Plum.Repo.insert!
