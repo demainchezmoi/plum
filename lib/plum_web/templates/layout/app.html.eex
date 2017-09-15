@@ -32,7 +32,14 @@
     <% end %>
 
     <main role="main">
-      <%= render @view_module, @view_template, assigns %>
+      <%= Phoenix.View.render PlumWeb.SharedView, "navbar.html", %{} %>
+      <div class="container">
+        <div class="row">
+          <div class="col">
+            <%= render @view_module, @view_template, assigns %>
+          </div>
+        </div>
+      </div>
     </main>
     <script src="<%= static_path(@conn, "/js/app.js") %>"></script>
   </body>

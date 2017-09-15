@@ -10,7 +10,7 @@ defmodule Plum.Sales.Ad do
 
   schema "ads" do
     belongs_to :land, Land
-    field :active, :boolean
+    field :active, :boolean, default: true
     has_many :contacts, Contact
     timestamps()
   end

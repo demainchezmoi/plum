@@ -6,27 +6,23 @@
   <% end %>
 
   <div class="form-group">
-    <%= label f, :land_surface, class: "control-label" %>
-    <%= number_input f, :land_surface, class: "form-control" %>
-    <%= error_tag f, :land_surface %>
+    Status&nbsp;:
+    <div class="form-check form-check-inline">
+      <label class="form-check-label">
+        <%= radio_button f, :active, true %> Active
+      </label>
+    </div>
+    <div class="form-check form-check-inline">
+      <label class="form-check-label">
+        <%= radio_button f, :active, false %> Désactivée
+      </label>
+    </div>
+    <%= error_tag f, :active %>
   </div>
 
   <div class="form-group">
-    <%= label f, :land_price, class: "control-label" %>
-    <%= number_input f, :land_price, class: "form-control" %>
-    <%= error_tag f, :land_price %>
-  </div>
-
-  <div class="form-group">
-    <%= label f, :land_lat, class: "control-label" %>
-    <%= number_input f, :land_lat, step: "any", class: "form-control" %>
-    <%= error_tag f, :land_lat %>
-  </div>
-
-  <div class="form-group">
-    <%= label f, :land_lng, class: "control-label" %>
-    <%= number_input f, :land_lng, step: "any", class: "form-control" %>
-    <%= error_tag f, :land_lng %>
+    <%= select(f, :land_id, Enum.map(@lands, & &1.id), prompt: "Terrain", class: "custom-select") %>
+    <%= error_tag f, :ad_land_id %>
   </div>
 
   <div class="form-group">

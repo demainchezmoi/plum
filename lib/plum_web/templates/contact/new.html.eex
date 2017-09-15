@@ -1,8 +1,1 @@
-<%= Phoenix.View.render PlumWeb.SharedView, "navbar.html", %{} %>
-<div class="container">
-  <div class="row">
-    <div class="col">
-      <%= render "form.html", Map.put(assigns, :action, contact_path(@conn, :create)) %>
-    </div>
-  </div>
-</div>
+<%= render "form.html", Map.put(assigns, :action, contact_path(@conn, :create)) %>
