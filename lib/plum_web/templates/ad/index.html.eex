@@ -3,10 +3,7 @@
 <table class="table">
   <thead>
     <tr>
-      <th>Land surface</th>
-      <th>Land price</th>
-      <th>Land lat</th>
-      <th>Land lng</th>
+      <th>Active</th>
 
       <th></th>
     </tr>
@@ -14,10 +11,7 @@
   <tbody>
 <%= for ad <- @ad do %>
     <tr>
-      <td><%= ad.land_surface %></td>
-      <td><%= ad.land_price %></td>
-      <td><%= ad.land_lat %></td>
-      <td><%= ad.land_lng %></td>
+      <td><%= ad.active %></td>
 
       <td class="text-right">
         <span><%= link "Show", to: ad_path(@conn, :show, ad), class: "btn btn-default btn-xs" %></span>

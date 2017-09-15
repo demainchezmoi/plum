@@ -1,12 +1,28 @@
-<h1 class="h1-responsive mb-4">Votre demande a bien été prise en compte.</h1>
-<p class="lead font-bold text-muted">Merci, nous vous contactons dès que possible.</p>
-<dl>
-  <dt>Annonce</dt>
-  <dd>Maison sur terrain de <%= @contact.ad.land.surface %>&nbsp;m<sup>2</sup></dd>
-  <dt>Nom</dt>
-  <dd><%= @contact.name %></dd>
-  <dt>Email</dt>
-  <dd><%= @contact.email %></dd>
-  <dt>Téléphone</dt>
-  <dd><%= @contact.phone %></dd>
-</dl>
+<h2>Show Contact</h2>
+
+<ul>
+
+  <li>
+    <strong>Annonce:</strong>
+    <%= @contact.ad.id %>
+  </li>
+
+  <li>
+    <strong>Nom:</strong>
+    <%= @contact.name %>
+  </li>
+
+  <li>
+    <strong>Email:</strong>
+    <%= @contact.email %>
+  </li>
+
+  <li>
+    <strong>Phone:</strong>
+    <%= @contact.phone %>
+  </li>
+
+</ul>
+
+<span><%= link "Edit", to: contact_path(@conn, :edit, @contact) %></span>
+<span><%= link "Back", to: contact_path(@conn, :index) %></span>

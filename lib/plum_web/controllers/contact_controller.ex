@@ -5,7 +5,7 @@ defmodule PlumWeb.ContactController do
   alias Plum.Sales.Contact
 
   def index(conn, _params) do
-    contacts = Sales.list_contact()
+    contacts = Sales.list_contact() |> Enum.map(& &1 |> Repo.preload(:ad))
     render(conn, "index.html", contacts: contacts)
   end
 
@@ -18,7 +18,7 @@ defmodule PlumWeb.ContactController do
   def create(conn, %{"contact" => contact_params}) do
     case Sales.create_contact(contact_params) do
       {:ok, contact} ->
-        conn |> redirect(to: contact_path(conn, :show, contact))
+        conn |> redirect(to: page_path(conn, :merci))
       {:error, %Ecto.Changeset{} = changeset} ->
         ad = Sales.get_ad!(contact_params["ad_id"])
         conn

@@ -13,7 +13,7 @@
   <tbody>
 <%= for contact <- @contacts do %>
     <tr>
-      <td><%= contact.ad |> inspect %></td>
+      <td><%= contact.ad.id %></td>
       <td><%= contact.name %></td>
       <td><%= contact.email %></td>
       <td><%= contact.phone %></td>
@@ -27,6 +27,3 @@
 <% end %>
   </tbody>
 </table>
-
-<span><%= link "New Contact", to: contact_path(@conn, :new) %></span>
-
