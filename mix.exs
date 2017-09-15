@@ -33,6 +33,7 @@ defmodule Plum.Mixfile do
   # Type `mix help deps` for examples and options.
   defp deps do
     [
+      {:coherence, "~> 0.5"},
       {:cowboy, "~> 1.0"},
       {:dialyxir, "~> 0.5", only: [:dev], runtime: false},
       {:ex_machina, "~> 2.1", only: [:test]},

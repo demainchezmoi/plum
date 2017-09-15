@@ -10,8 +10,8 @@ RUN \
     apk update && \
     apk upgrade && \
     apk --update upgrade musl && \
-    apk --no-cache add nodejs nodejs-npm git inotify-tools g++ python erlang-dialyzer && \
-		apk add --no-cache --update --virtual .elixir-build make && \
+    apk --no-cache add nodejs nodejs-npm git inotify-tools g++ python erlang-dialyzer erlang-dev make && \
+		apk add --no-cache --update --virtual .elixir-build && \
 
 		git clone https://github.com/elixir-lang/elixir --depth 1 --branch $ELIXIR_VERSION && \
     cd elixir && \

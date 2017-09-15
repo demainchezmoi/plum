@@ -4,6 +4,7 @@
 /deps
 /*.ez
 .npm
+.cache
 
 # Generated on crash by the VM
 erl_crash.dump
