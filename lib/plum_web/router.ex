@@ -32,25 +32,13 @@ defmodule PlumWeb.Router do
 
   scope "/", PlumWeb do
     pipe_through :browser
-  end
-
-  scope "/", PlumWeb do
-    pipe_through :browser
 
     get "/", PageController, :index
-    get "/confidentialité", PageController, :confidentialite
+    get "/confidentialite", PageController, :confidentialite
     get "/merci", PageController, :merci
 
-    resources "/ads", AdController, only: [:show]
-    resources "/contacts", ContactController, only: [:new, :create]
-  end
-
-  scope "/", PlumWeb do
-    pipe_through :protected
-
-    resources "/ads", AdController, except: [:show]
-    resources "/contacts", ContactController, except: [:new, :create]
+    resources "/ads", AdController
+    resources "/contacts", ContactController
     resources "/lands", LandController
   end
-
 end

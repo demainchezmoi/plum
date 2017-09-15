@@ -1,8 +1,9 @@
 defmodule PlumWeb.LandController do
   use PlumWeb, :controller
-
   alias Plum.Sales
   alias Plum.Sales.Land
+
+  plug Coherence.Authentication.Session, [protected: true]
 
   def index(conn, _params) do
     lands = Sales.list_lands()

@@ -4,6 +4,7 @@ defmodule PlumWeb.AdControllerTest do
   alias Plum.Sales
 
   describe "index" do
+    @tag :logged_in
     test "lists all ad", %{conn: conn} do
       conn = get conn, ad_path(conn, :index)
       assert html_response(conn, 200)
@@ -11,6 +12,7 @@ defmodule PlumWeb.AdControllerTest do
   end
 
   describe "new ad" do
+    @tag :logged_in
     test "renders form", %{conn: conn} do
       conn = get conn, ad_path(conn, :new)
       assert html_response(conn, 200)
@@ -18,6 +20,7 @@ defmodule PlumWeb.AdControllerTest do
   end
 
   describe "create ad" do
+    @tag :logged_in
     test "redirects to show when data is valid", %{conn: conn} do
       land = insert(:land)
       ad_params = params_for(:ad, land_id: land.id)
@@ -30,6 +33,7 @@ defmodule PlumWeb.AdControllerTest do
       assert html_response(conn, 200)
     end
 
+    @tag :logged_in
     test "renders errors when data is invalid", %{conn: conn} do
       land = insert(:land)
       ad_params = params_for(:ad, land_id: land.id) |> Map.put(:active, "astring")
@@ -41,6 +45,7 @@ defmodule PlumWeb.AdControllerTest do
   describe "edit ad" do
     setup [:create_ad]
 
+    @tag :logged_in
     test "renders form for editing chosen ad", %{conn: conn, ad: ad} do
       conn = get conn, ad_path(conn, :edit, ad)
       assert html_response(conn, 200) =~ ~S(action="/ad)
@@ -50,6 +55,7 @@ defmodule PlumWeb.AdControllerTest do
   describe "update ad" do
     setup [:create_ad]
 
+    @tag :logged_in
     test "redirects when data is valid", %{conn: conn, ad: ad, land: land} do
       ad_params = params_for(:ad, land_id: land.id) |> Map.put(:active, false)
       conn = put conn, ad_path(conn, :update, ad), ad: ad_params 
@@ -59,6 +65,7 @@ defmodule PlumWeb.AdControllerTest do
       assert html_response(conn, 200)
     end
 
+    @tag :logged_in
     test "renders errors when data is invalid", %{conn: conn, ad: ad, land: land} do
       ad_params = params_for(:ad, land_id: land.id) |> Map.put(:active, "astring")
       conn = put conn, ad_path(conn, :update, ad), ad: ad_params 
@@ -69,6 +76,7 @@ defmodule PlumWeb.AdControllerTest do
   describe "delete ad" do
     setup [:create_ad]
 
+    @tag :logged_in
     test "deletes chosen ad", %{conn: conn, ad: ad} do
       conn = delete conn, ad_path(conn, :delete, ad)
       assert redirected_to(conn) == ad_path(conn, :index)

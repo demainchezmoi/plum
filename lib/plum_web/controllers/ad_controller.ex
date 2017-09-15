@@ -6,6 +6,8 @@ defmodule PlumWeb.AdController do
   alias Plum.Sales.Ad
   alias Plum.Sales.Contact
 
+  plug Coherence.Authentication.Session, [protected: true] when action not in [:show]
+
   def index(conn, _params) do
     ad = Sales.list_ad()
     render(conn, "index.html", ad: ad)
@@ -23,7 +25,7 @@ defmodule PlumWeb.AdController do
         |> put_flash(:info, "Ad created successfully.")
         |> redirect(to: ad_path(conn, :show, ad))
       {:error, %Ecto.Changeset{} = changeset} ->
-        render(conn, "new.html", changeset: changeset |> IO.inspect, lands: Sales.list_lands())
+        render(conn, "new.html", changeset: changeset, lands: Sales.list_lands())
     end
   end
 

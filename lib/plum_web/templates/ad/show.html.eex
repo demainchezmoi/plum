@@ -137,7 +137,7 @@
     <div class="col-md-10">
       <h3 class="h3-responsive mb-3 font-bold text-dark-gray">En savoir plus</h3>
       <div id="contact-form">
-        <%= Phoenix.View.render PlumWeb.ContactView, "form.html", changeset: @contact_changeset, conn: @conn, ad: @ad %>
+        <%= Phoenix.View.render PlumWeb.ContactView, "form.html", changeset: @contact_changeset, conn: @conn, ad: @ad, action: contact_path(@conn, :create) %>
       </div>
     </div>
   </div>

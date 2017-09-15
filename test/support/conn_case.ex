@@ -14,6 +14,8 @@ defmodule PlumWeb.ConnCase do
   """
 
   use ExUnit.CaseTemplate
+  alias Plug.Conn
+  import Plum.Factory
 
   using do
     quote do
@@ -29,10 +31,18 @@ defmodule PlumWeb.ConnCase do
 
   setup tags do
     :ok = Ecto.Adapters.SQL.Sandbox.checkout(Plum.Repo)
+
     unless tags[:async] do
       Ecto.Adapters.SQL.Sandbox.mode(Plum.Repo, {:shared, self()})
     end
-    {:ok, conn: Phoenix.ConnTest.build_conn()}
-  end
 
+    conn = Phoenix.ConnTest.build_conn()
+
+    if tags[:logged_in] do
+      user = insert(:user)
+      {:ok, conn: Conn.assign(conn, :current_user, user), current_user: user}
+    else
+      {:ok, conn: conn}
+    end
+  end
 end

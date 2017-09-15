@@ -4,6 +4,8 @@ defmodule PlumWeb.ContactController do
   alias Plum.Sales
   alias Plum.Sales.Contact
 
+  plug Coherence.Authentication.Session, [protected: true] when action not in [:new, :create]
+
   def index(conn, _params) do
     contacts = Sales.list_contact() |> Enum.map(& &1 |> Repo.preload(:ad))
     render(conn, "index.html", contacts: contacts)

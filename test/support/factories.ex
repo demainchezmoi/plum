@@ -1,4 +1,5 @@
 defmodule Plum.Factory do
+
   use ExMachina.Ecto, repo: Plum.Repo
 
   alias Plum.Sales.{
@@ -6,6 +7,8 @@ defmodule Plum.Factory do
     Contact,
     Land
   }
+
+  alias Plum.Coherence.User
 
   def ad_factory do
     %Ad{
@@ -31,6 +34,15 @@ defmodule Plum.Factory do
       lng: 2.1201,
       price: 42_000,
       surface: 396,
+    }
+  end
+
+  def user_factory do
+    %User{
+      name: "Hubert",
+      email: "hubert@bonnisseur.com",
+      password: "secret",
+      password_confirmation: "secret",
     }
   end
 end
