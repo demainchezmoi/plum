@@ -6,7 +6,7 @@
       <p class="lead font-bold text-muted">Merci, nous vous contactons dès que possible.</p>
       <dl>
         <dt>Annonce</dt>
-        <dd>Maison sur terrain de <%= @contact.ad.land_surface %>&nbsp;m<sup>2</sup></dd>
+        <dd>Maison sur terrain de <%= @contact.ad.land.surface %>&nbsp;m<sup>2</sup></dd>
         <dt>Nom</dt>
         <dd><%= @contact.name %></dd>
         <dt>Email</dt>

@@ -4,7 +4,17 @@ defmodule PlumWeb.ContactController do
   alias Plum.Sales
   alias Plum.Sales.Contact
 
-  @spec create(Plug.Conn.t, map)::Plug.Conn.t
+  def index(conn, _params) do
+    contacts = Sales.list_contact()
+    render(conn, "index.html", contacts: contacts)
+  end
+
+  def new(conn, %{"ad" => ad_id}) do
+    ad = Sales.get_ad!(ad_id)
+    changeset = Sales.change_contact(%Contact{ad_id: ad.id})
+    render(conn, "new.html", changeset: changeset, ad: ad)
+  end
+
   def create(conn, %{"contact" => contact_params}) do
     case Sales.create_contact(contact_params) do
       {:ok, contact} ->
@@ -17,16 +27,37 @@ defmodule PlumWeb.ContactController do
     end
   end
 
-  @spec new(Plug.Conn.t, map)::Plug.Conn.t
-  def new(conn, %{"ad" => ad_id}) do
-    ad = Sales.get_ad!(ad_id)
-    changeset = Sales.change_contact(%Contact{ad_id: ad.id})
-    render(conn, "new.html", changeset: changeset, ad: ad)
+  def show(conn, %{"id" => id}) do
+    contact = Sales.get_contact!(id) |> Repo.preload([ad: :land])
+    render(conn, "show.html", contact: contact)
   end
 
-  @spec show(Plug.Conn.t, map)::Plug.Conn.t
-  def show(conn, %{"id" => id}) do
-    contact = Sales.get_contact!(id) |> Repo.preload(:ad)
-    render(conn, "show.html", contact: contact)
+  def edit(conn, %{"id" => id}) do
+    contact = Sales.get_contact!(id) |> Repo.preload([ad: :land])
+    changeset = Sales.change_contact(contact)
+    render(conn, "edit.html", contact: contact, changeset: changeset, ad: contact.ad)
+  end
+
+  def update(conn, %{"id" => id, "contact" => contact_params}) do
+    contact = Sales.get_contact!(id)
+
+    case Sales.update_contact(contact, contact_params) do
+      {:ok, contact} ->
+        conn
+        |> put_flash(:info, "Contact updated successfully.")
+        |> redirect(to: contact_path(conn, :show, contact))
+      {:error, %Ecto.Changeset{} = changeset} ->
+        ad = Sales.get_ad!(contact_params["ad_id"])
+        render(conn, "edit.html", contact: contact, changeset: changeset, ad: ad)
+    end
+  end
+
+  def delete(conn, %{"id" => id}) do
+    contact = Sales.get_contact!(id)
+    {:ok, _contact} = Sales.delete_contact(contact)
+
+    conn
+    |> put_flash(:info, "Contact deleted successfully.")
+    |> redirect(to: contact_path(conn, :index))
   end
 end

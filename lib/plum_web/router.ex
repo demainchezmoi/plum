@@ -16,12 +16,14 @@ defmodule PlumWeb.Router do
   scope "/", PlumWeb do
     pipe_through :browser
 
+    # Pages
     get "/", PageController, :index
     get "/confidentialité", PageController, :confidentialite
     get "/merci", PageController, :merci
 
+    # Resources
     resources "/ads", AdController
-    resources "/contacts", ContactController, only: [:create, :show, :new]
+    resources "/contacts", ContactController
     resources "/lands", LandController
   end
 end
