@@ -50,7 +50,7 @@ defmodule PlumWeb.AdController do
         |> put_flash(:info, "Ad updated successfully.")
         |> redirect(to: ad_path(conn, :show, ad))
       {:error, %Ecto.Changeset{} = changeset} ->
-        render(conn, "edit.html", ad: ad, changeset: changeset)
+        render(conn, "edit.html", ad: ad, changeset: changeset, lands: Sales.list_lands())
     end
   end
 
