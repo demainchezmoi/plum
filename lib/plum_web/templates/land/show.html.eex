@@ -1,0 +1,38 @@
+<h2>Show Land</h2>
+
+<ul>
+
+  <li>
+    <strong>Surface:</strong>
+    <%= @land.surface %>
+  </li>
+
+  <li>
+    <strong>Lat:</strong>
+    <%= @land.lat %>
+  </li>
+
+  <li>
+    <strong>Lng:</strong>
+    <%= @land.lng %>
+  </li>
+
+  <li>
+    <strong>Price:</strong>
+    <%= @land.price %>
+  </li>
+
+  <li>
+    <strong>City:</strong>
+    <%= @land.city %>
+  </li>
+
+  <li>
+    <strong>Department:</strong>
+    <%= @land.department %>
+  </li>
+
+</ul>
+
+<span><%= link "Edit", to: land_path(@conn, :edit, @land) %></span>
+<span><%= link "Back", to: land_path(@conn, :index) %></span>

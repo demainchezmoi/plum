@@ -197,4 +197,100 @@ defmodule Plum.Sales do
   def change_ad(%Ad{} = ad) do
     Ad.changeset(ad, %{})
   end
+
+  alias Plum.Sales.Land
+
+  @doc """
+  Returns the list of lands.
+
+  ## Examples
+
+      iex> list_lands()
+      [%Land{}, ...]
+
+  """
+  def list_lands do
+    Repo.all(Land)
+  end
+
+  @doc """
+  Gets a single land.
+
+  Raises `Ecto.NoResultsError` if the Land does not exist.
+
+  ## Examples
+
+      iex> get_land!(123)
+      %Land{}
+
+      iex> get_land!(456)
+      ** (Ecto.NoResultsError)
+
+  """
+  def get_land!(id), do: Repo.get!(Land, id)
+
+  @doc """
+  Creates a land.
+
+  ## Examples
+
+      iex> create_land(%{field: value})
+      {:ok, %Land{}}
+
+      iex> create_land(%{field: bad_value})
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def create_land(attrs \\ %{}) do
+    %Land{}
+    |> Land.changeset(attrs)
+    |> Repo.insert()
+  end
+
+  @doc """
+  Updates a land.
+
+  ## Examples
+
+      iex> update_land(land, %{field: new_value})
+      {:ok, %Land{}}
+
+      iex> update_land(land, %{field: bad_value})
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def update_land(%Land{} = land, attrs) do
+    land
+    |> Land.changeset(attrs)
+    |> Repo.update()
+  end
+
+  @doc """
+  Deletes a Land.
+
+  ## Examples
+
+      iex> delete_land(land)
+      {:ok, %Land{}}
+
+      iex> delete_land(land)
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def delete_land(%Land{} = land) do
+    Repo.delete(land)
+  end
+
+  @doc """
+  Returns an `%Ecto.Changeset{}` for tracking land changes.
+
+  ## Examples
+
+      iex> change_land(land)
+      %Ecto.Changeset{source: %Land{}}
+
+  """
+  def change_land(%Land{} = land) do
+    Land.changeset(land, %{})
+  end
 end

@@ -35,8 +35,10 @@ defmodule Plum.Mixfile do
     [
       {:cowboy, "~> 1.0"},
       {:dialyxir, "~> 0.5", only: [:dev], runtime: false},
+      {:ex_machina, "~> 2.1", only: [:test]},
       {:gettext, "~> 0.11"},
       {:mix_docker, "~> 0.5.0"},
+      {:mix_test_watch, "~> 0.3", only: [:test], runtime: false},
       {:phoenix, "~> 1.3.0"},
       {:phoenix_ecto, "~> 3.2"},
       {:phoenix_html, "~> 2.10"},

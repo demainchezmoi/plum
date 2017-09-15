@@ -1,22 +1,27 @@
 defmodule Plum.Sales.Ad do
   use Ecto.Schema
   import Ecto.Changeset
-  alias Plum.Sales.Ad
+  alias Plum.Sales.{
+    Ad,
+    Contact,
+    Land
+  }
 
 
-  schema "ad" do
-    field :land_lat, :float
-    field :land_lng, :float
-    field :land_price, :integer
-    field :land_surface, :integer
-
+  schema "ads" do
+    belongs_to :land, Land
+    field :active, :boolean
+    has_many :contacts, Contact
     timestamps()
   end
+
+  @required_fields ~w(land_id)a
+  @optional_fields ~w(active)a
 
   @doc false
   def changeset(%Ad{} = ad, attrs) do
     ad
-    |> cast(attrs, [:land_surface, :land_price, :land_lat, :land_lng])
-    |> validate_required([:land_surface, :land_price, :land_lat, :land_lng])
+    |> cast(attrs, @required_fields ++ @optional_fields)
+    |> validate_required(@required_fields)
   end
 end

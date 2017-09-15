@@ -1,1 +1,8 @@
-Merci
+<%= Phoenix.View.render PlumWeb.SharedView, "navbar.html", %{} %>
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <h1 class="h1-responsive mb-4">Votre demande a bien été prise en compte.</h1>
+      <p class="lead font-bold text-muted">Merci, nous vous contactons dès que possible.</p>
+  </div>
+</div>

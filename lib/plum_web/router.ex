@@ -17,10 +17,11 @@ defmodule PlumWeb.Router do
     pipe_through :browser
 
     get "/", PageController, :index
-    get "/merci", PageController, :merci
     get "/confidentialité", PageController, :confidentialite
+    get "/merci", PageController, :merci
 
-    resources "/ad", AdController
-    resources "/contact", ContactController, only: [:create, :show]
+    resources "/ads", AdController
+    resources "/contacts", ContactController, only: [:create, :show, :new]
+    resources "/lands", LandController
   end
 end

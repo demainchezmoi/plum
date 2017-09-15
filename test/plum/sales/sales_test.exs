@@ -1,135 +1,172 @@
 defmodule Plum.SalesTest do
   use Plum.DataCase
-
   alias Plum.Sales
+  alias Plum.Sales.{
+    Ad,
+    Contact,
+    Land
+  }
+  import Plum.Factory
 
   describe "contact" do
-    alias Plum.Sales.Contact
-
-    @valid_attrs %{email: "some email", name: "some name", phone: "some phone"}
-    @update_attrs %{email: "some updated email", name: "some updated name", phone: "some updated phone"}
-    @invalid_attrs %{email: nil, name: nil, phone: nil}
-
-    def contact_fixture(attrs \\ %{}) do
-      {:ok, contact} =
-        attrs
-        |> Enum.into(@valid_attrs)
-        |> Sales.create_contact()
-
-      contact
-    end
 
     test "list_contact/0 returns all contact" do
-      contact = contact_fixture()
-      assert Sales.list_contact() == [contact]
+      land = insert(:land)
+      [contact|_] = land.ad.contacts
+      assert Sales.list_contact() |> Enum.map(& &1.id) == [contact.id]
     end
 
     test "get_contact!/1 returns the contact with given id" do
-      contact = contact_fixture()
+      contact = insert(:contact)
       assert Sales.get_contact!(contact.id) == contact
     end
 
     test "create_contact/1 with valid data creates a contact" do
-      assert {:ok, %Contact{} = contact} = Sales.create_contact(@valid_attrs)
-      assert contact.email == "some email"
-      assert contact.name == "some name"
-      assert contact.phone == "some phone"
+      land = insert(:land)
+      contact_params = params_for(:contact) |> Map.put(:ad_id, land.ad.id)
+      assert {:ok, %Contact{}} = Sales.create_contact(contact_params)
     end
 
     test "create_contact/1 with invalid data returns error changeset" do
-      assert {:error, %Ecto.Changeset{}} = Sales.create_contact(@invalid_attrs)
+      land = insert(:land)
+      contact_params = params_for(:contact) |> Map.put(:ad_id, land.ad.id) |> Map.delete(:phone)
+      assert {:error, %Ecto.Changeset{}} = Sales.create_contact(contact_params)
     end
 
     test "update_contact/2 with valid data updates the contact" do
-      contact = contact_fixture()
-      assert {:ok, contact} = Sales.update_contact(contact, @update_attrs)
+      new_email = "coucou@lol.changed"
+      land = insert(:land)
+      [contact|_] = land.ad.contacts
+      contact_params = params_for(:contact) |> Map.put(:ad_id, land.ad.id) |> Map.put(:email, new_email)
+      assert {:ok, contact} = Sales.update_contact(contact, contact_params)
       assert %Contact{} = contact
-      assert contact.email == "some updated email"
-      assert contact.name == "some updated name"
-      assert contact.phone == "some updated phone"
+      assert contact.email == new_email 
     end
 
     test "update_contact/2 with invalid data returns error changeset" do
-      contact = contact_fixture()
-      assert {:error, %Ecto.Changeset{}} = Sales.update_contact(contact, @invalid_attrs)
+      land = insert(:land)
+      [contact|_] = land.ad.contacts
+      contact_params = params_for(:contact) |> Map.put(:ad_id, land.ad.id) |> Map.put(:email, nil)
+      assert {:error, %Ecto.Changeset{}} = Sales.update_contact(contact, contact_params)
       assert contact == Sales.get_contact!(contact.id)
     end
 
     test "delete_contact/1 deletes the contact" do
-      contact = contact_fixture()
+      land = insert(:land)
+      [contact|_] = land.ad.contacts
       assert {:ok, %Contact{}} = Sales.delete_contact(contact)
       assert_raise Ecto.NoResultsError, fn -> Sales.get_contact!(contact.id) end
     end
 
     test "change_contact/1 returns a contact changeset" do
-      contact = contact_fixture()
+      land = insert(:land)
+      [contact|_] = land.ad.contacts
       assert %Ecto.Changeset{} = Sales.change_contact(contact)
     end
   end
 
   describe "ad" do
-    alias Plum.Sales.Ad
-
-    @valid_attrs %{land_lat: 120.5, land_lng: 120.5, land_price: 42, land_surface: 42}
-    @update_attrs %{land_lat: 456.7, land_lng: 456.7, land_price: 43, land_surface: 43}
-    @invalid_attrs %{land_lat: nil, land_lng: nil, land_price: nil, land_surface: nil}
-
-    def ad_fixture(attrs \\ %{}) do
-      {:ok, ad} =
-        attrs
-        |> Enum.into(@valid_attrs)
-        |> Sales.create_ad()
-
-      ad
-    end
 
     test "list_ad/0 returns all ad" do
-      ad = ad_fixture()
-      assert Sales.list_ad() == [ad]
+      land = insert(:land)
+      assert Sales.list_ad() |> Enum.map(& &1.id) == [land.ad.id]
     end
 
     test "get_ad!/1 returns the ad with given id" do
-      ad = ad_fixture()
-      assert Sales.get_ad!(ad.id) == ad
+      land = insert(:land)
+      assert Sales.get_ad!(land.ad.id).id == land.ad.id
     end
 
     test "create_ad/1 with valid data creates a ad" do
-      assert {:ok, %Ad{} = ad} = Sales.create_ad(@valid_attrs)
-      assert ad.land_lat == 120.5
-      assert ad.land_lng == 120.5
-      assert ad.land_price == 42
-      assert ad.land_surface == 42
+      land = insert(:land)
+      ad_params = params_for(:ad) |> Map.put(:land_id, land.id)
+      assert {:ok, %Ad{} = ad} = Sales.create_ad(ad_params)
+      assert ad.land_id == land.id
     end
 
     test "create_ad/1 with invalid data returns error changeset" do
-      assert {:error, %Ecto.Changeset{}} = Sales.create_ad(@invalid_attrs)
+      land = insert(:land)
+      ad_params = params_for(:ad) # missing land_id
+      assert {:error, %Ecto.Changeset{}} = Sales.create_ad(ad_params)
     end
 
     test "update_ad/2 with valid data updates the ad" do
-      ad = ad_fixture()
-      assert {:ok, ad} = Sales.update_ad(ad, @update_attrs)
+      land = insert(:land)
+      ad = land.ad
+      ad_params = params_for(:ad) |> Map.put(:land_id, land.id) |> Map.put(:active, false)
+      assert {:ok, ad} = Sales.update_ad(ad, ad_params)
       assert %Ad{} = ad
-      assert ad.land_lat == 456.7
-      assert ad.land_lng == 456.7
-      assert ad.land_price == 43
-      assert ad.land_surface == 43
+      assert ad.active == false 
     end
 
     test "update_ad/2 with invalid data returns error changeset" do
-      ad = ad_fixture()
-      assert {:error, %Ecto.Changeset{}} = Sales.update_ad(ad, @invalid_attrs)
-      assert ad == Sales.get_ad!(ad.id)
+      land = insert(:land)
+      ad = land.ad
+      ad_params = params_for(:ad) |> Map.put(:active, "astring") 
+      assert {:error, %Ecto.Changeset{}} = Sales.update_ad(ad, ad_params)
+      assert ad.active == Sales.get_ad!(ad.id).active
     end
 
     test "delete_ad/1 deletes the ad" do
-      ad = ad_fixture()
-      assert {:ok, %Ad{}} = Sales.delete_ad(ad)
-      assert_raise Ecto.NoResultsError, fn -> Sales.get_ad!(ad.id) end
+      land = insert(:land)
+      assert {:ok, %Ad{}} = Sales.delete_ad(land.ad)
+      assert_raise Ecto.NoResultsError, fn -> Sales.get_ad!(land.ad.id) end
     end
 
     test "change_ad/1 returns a ad changeset" do
-      ad = ad_fixture()
-      assert %Ecto.Changeset{} = Sales.change_ad(ad)
+      land = insert(:land)
+      assert %Ecto.Changeset{} = Sales.change_ad(land.ad)
+    end
+  end
+
+  describe "lands" do
+
+    test "list_lands/0 returns all lands" do
+      land = insert(:land)
+      assert Sales.list_lands() |> Enum.map(& &1.id) == [land.id]
+    end
+
+    test "get_land!/1 returns the land with given id" do
+      land = insert(:land)
+      assert Sales.get_land!(land.id).id == land.id
+    end
+
+    test "create_land/1 with valid data creates a land" do
+      land_params = params_for(:land)
+      assert {:ok, %Land{} = land} = Sales.create_land(land_params)
+    end
+
+    test "create_land/1 with invalid data returns error changeset" do
+      land_params = params_for(:land) |> Map.delete(:price)
+      assert {:error, %Ecto.Changeset{}} = Sales.create_land(land_params)
+    end
+
+    test "update_land/2 with valid data updates the land" do
+      land_params = params_for(:land)
+      land = insert(:land, land_params)
+      land_params_updated = land_params |> Map.put(:surface, 10_000)
+      assert {:ok, land} = Sales.update_land(land, land_params_updated)
+      assert %Land{} = land
+      assert land.surface == land_params_updated.surface
+    end
+
+    test "update_land/2 with invalid data returns error changeset" do
+      land_params = params_for(:land)
+      land = insert(:land)
+      land_params_updated = land_params |> Map.put(:surface, nil)
+      assert {:error, %Ecto.Changeset{}} = Sales.update_land(land, land_params_updated)
+      assert land.surface == Sales.get_land!(land.id).surface
+    end
+
+    test "delete_land/1 deletes the land" do
+      land = insert(:land)
+      assert {:ok, %Land{}} = Sales.delete_land(land)
+      assert_raise Ecto.NoResultsError, fn -> Sales.get_land!(land.id) end
+    end
+
+    test "change_land/1 returns a land changeset" do
+      land = insert(:land)
+      assert %Ecto.Changeset{} = Sales.change_land(land)
     end
   end
 end

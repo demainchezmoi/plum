@@ -14,5 +14,6 @@
     <%= text_input f, :phone, class: "form-control" %>
     <span class="text-danger"><%= error_tag f, :phone %></span>
   </div>
+  <%= hidden_input f, :ad_id, value: @ad.id %>
   <%= submit "Valider", class: "btn btn-yellow-flash pull-right" %>
 <% end %>

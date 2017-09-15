@@ -1,6 +1,7 @@
 defmodule PlumWeb.AdController do
   use PlumWeb, :controller
 
+  alias Plum.Repo
   alias Plum.Sales
   alias Plum.Sales.Ad
   alias Plum.Sales.Contact
@@ -27,7 +28,7 @@ defmodule PlumWeb.AdController do
   end
 
   def show(conn, %{"id" => id}) do
-    ad = Sales.get_ad!(id)
+    ad = Sales.get_ad!(id) |> Repo.preload(:land)
     contact_changeset = Sales.change_contact(%Contact{}) 
     render(conn, "show.html", ad: ad, contact_changeset: contact_changeset)
   end
