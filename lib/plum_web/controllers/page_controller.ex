@@ -3,7 +3,9 @@ defmodule PlumWeb.PageController do
 
   @spec index(Plug.Conn.t, map)::Plug.Conn.t
   def index(conn, _params) do
-    render conn, "index.html"
+    conn
+    |> put_layout("landing.html")
+    |> render("index.html")
   end
 
   @spec merci(Plug.Conn.t, map)::Plug.Conn.t
