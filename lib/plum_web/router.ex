@@ -30,6 +30,10 @@ defmodule PlumWeb.Router do
     coherence_routes :protected
   end
 
+  # scope "/", PlumWeb do
+    # pipe_through :protected
+  # end
+
   scope "/", PlumWeb do
     pipe_through :browser
 
@@ -40,5 +44,7 @@ defmodule PlumWeb.Router do
     resources "/ads", AdController
     resources "/contacts", ContactController
     resources "/lands", LandController
+
+    get "/annonces/:id", AdController, :public
   end
 end

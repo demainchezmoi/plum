@@ -85,7 +85,7 @@ defmodule Plum.SalesTest do
     end
 
     test "create_ad/1 with invalid data returns error changeset" do
-      land = insert(:land)
+      insert(:land)
       ad_params = params_for(:ad) # missing land_id
       assert {:error, %Ecto.Changeset{}} = Sales.create_ad(ad_params)
     end
@@ -133,7 +133,7 @@ defmodule Plum.SalesTest do
 
     test "create_land/1 with valid data creates a land" do
       land_params = params_for(:land)
-      assert {:ok, %Land{} = land} = Sales.create_land(land_params)
+      assert {:ok, %Land{}} = Sales.create_land(land_params)
     end
 
     test "create_land/1 with invalid data returns error changeset" do

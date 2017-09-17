@@ -1,7 +1,6 @@
 defmodule PlumWeb.AdControllerTest do
   use PlumWeb.ConnCase
   import Plum.Factory
-  alias Plum.Sales
 
   describe "index" do
     @tag :logged_in
@@ -24,13 +23,13 @@ defmodule PlumWeb.AdControllerTest do
     test "redirects to show when data is valid", %{conn: conn} do
       land = insert(:land)
       ad_params = params_for(:ad, land_id: land.id)
-      conn = post conn, ad_path(conn, :create), ad: ad_params 
+      conn1 = post conn, ad_path(conn, :create), ad: ad_params 
 
-      assert %{id: id} = redirected_params(conn)
-      assert redirected_to(conn) == ad_path(conn, :show, id)
+      assert %{id: id} = redirected_params(conn1)
+      assert redirected_to(conn1) == ad_path(conn, :show, id)
 
-      conn = get conn, ad_path(conn, :show, id)
-      assert html_response(conn, 200)
+      conn2 = get conn, ad_path(conn, :show, id)
+      assert html_response(conn2, 200)
     end
 
     @tag :logged_in
@@ -58,11 +57,11 @@ defmodule PlumWeb.AdControllerTest do
     @tag :logged_in
     test "redirects when data is valid", %{conn: conn, ad: ad, land: land} do
       ad_params = params_for(:ad, land_id: land.id) |> Map.put(:active, false)
-      conn = put conn, ad_path(conn, :update, ad), ad: ad_params 
-      assert redirected_to(conn) == ad_path(conn, :show, ad)
+      conn1 = put conn, ad_path(conn, :update, ad), ad: ad_params 
+      assert redirected_to(conn1) == ad_path(conn, :show, ad)
 
-      conn = get conn, ad_path(conn, :show, ad)
-      assert html_response(conn, 200)
+      conn2 = get conn, ad_path(conn, :show, ad)
+      assert html_response(conn2, 200)
     end
 
     @tag :logged_in
@@ -78,8 +77,8 @@ defmodule PlumWeb.AdControllerTest do
 
     @tag :logged_in
     test "deletes chosen ad", %{conn: conn, ad: ad} do
-      conn = delete conn, ad_path(conn, :delete, ad)
-      assert redirected_to(conn) == ad_path(conn, :index)
+      conn1 = delete conn, ad_path(conn, :delete, ad)
+      assert redirected_to(conn1) == ad_path(conn, :index)
       assert_error_sent 404, fn ->
         get conn, ad_path(conn, :show, ad)
       end

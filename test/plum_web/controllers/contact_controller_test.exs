@@ -1,7 +1,6 @@
 defmodule PlumWeb.ContactControllerTest do
   use PlumWeb.ConnCase
   import Plum.Factory
-  alias Plum.Sales
 
   describe "index" do
     @tag :logged_in
