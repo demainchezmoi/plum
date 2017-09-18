@@ -40,6 +40,7 @@ defmodule Plum.Mixfile do
       {:gettext, "~> 0.11"},
       {:mix_docker, "~> 0.5.0"},
       {:mix_test_watch, "~> 0.3", only: [:test], runtime: false},
+      {:number, "~> 0.5.4"},
       {:phoenix, "~> 1.3.0"},
       {:phoenix_ecto, "~> 3.2"},
       {:phoenix_html, "~> 2.10"},
