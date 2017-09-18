@@ -4,7 +4,7 @@
 
   <li>
     <strong>Annonce:</strong>
-    <%= @contact.ad.id %>
+    <%= link @contact.ad.id, to: ad_path(@conn, :show, @contact.ad) %>
   </li>
 
   <li>

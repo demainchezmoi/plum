@@ -4,7 +4,7 @@
 
   <li>
     <strong>Terrain:</strong>
-    <%= @ad.land.id %>
+    <%= link @ad.land.id, to: land_path(@conn, :show, @ad.land) %>
   </li>
 
   <li>

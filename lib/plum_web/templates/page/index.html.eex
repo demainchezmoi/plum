@@ -1,18 +1,58 @@
 <!-- {{{ Header -->
-<header class="mb-5">
-  <section class="intro-1">
+<header class="">
+  <section class="intro-1" style="max-height: 350px;">
     <div class="full-bg-img flex-center">
       <div class="container">
         <ul>
           <li>
             <h2 class="h2-responsive font-bold brand text-yellow-flash">
               <i id="icon" class="fa fa-home logo"></i>
-              Maison Léo
+              Maisons Léo
             </h2>
+          </li>
+          <li><h1 class="title h1-responsive font-bold wow fadeInDown" data-wow-delay="0.2s" style="color: white">Demain, votre maison</h1></li>
+          <li>
+            <p class="subtitle lead text-shadow" style="color: white" data-wow-delay="0.2s">
+            Le confort d'une maison moderne et la fiabilité d'un savoir faire à l'épreuve du temps.
+            </p>
           </li>
         </ul>
       </div>
     </div>
   </section>
 </header>
+<!-- }}} -->
+<!-- {{{ Content -->
+<section class="mb-5">
+  <div class="container">
+    <div class="row">
+      <div class="col text-center">
+        <article>
+          <div class="divider-new"><h2 class="h2-responsive">L'habitat</h2></div>
+          <p>La maison Léo cumule l'expérience accumulée sur des miliers de plans de T3 pour trouver LE plan qui fonctionne. Sa surface de 80m<sup>2</sup> la rendra confortable pour toute la famille.</p>
+      	  <img class="d-block w-50 mr-auto ml-auto" src="<%= static_path(@conn, "/images/maison.png") %>">
+      	</article>
+
+        <article>
+          <div class="divider-new"><h2 class="h2-responsive">Les performances</h2></div>
+          <p>La maison Léo, première de la classe en isolation.</p>
+      	</article>
+
+        <article>
+          <div class="divider-new"><h2 class="h2-responsive">Le bâti</h2></div>
+          <p>Avec ses murs de 25cm d'épaisseur, de ses fondations sur pieux l'isolant du sol et de son isolation high-tech, la maison Léo est conçue à l'épreuve du temps et des éléments.</p>
+      	</article>
+
+        <article>
+          <div class="divider-new"><h2 class="h2-responsive">Coûts et qualité</h2></div>
+          <p>Le concept de Maisons Léo repose sur un concept de coûts maîtrisés pour une qualité garantie. Cette prouesse est rendue possible par des choix critiques&nbsp;:
+          <ol style="text-align: left">
+            <li>ne produire qu'un seul modèle, et le maîtriser à 100%. La maison Léo n'est pas et ne sera jamais une maison sur mesure.</li>
+            <li>réduire le temps de construction et augmenter la qualité en produisant une partie de la maison en atelier.</li>
+          </ol>
+      	</article>
+      </div>
+    </div>
+  </div>
+</section>
 <!-- }}} -->
