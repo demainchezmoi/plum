@@ -37,6 +37,14 @@
         <article>
           <div class="divider-new"><h2 class="h2-responsive">Les performances</h2></div>
           <p>La maison Léo, première de la classe, affiche des performances classe A en isolation.</p>
+          <div class="row">
+            <div class="col-xs col-md-6 mt-5">
+      	      <img class="d-block w-50 mr-auto ml-auto" src="<%= static_path(@conn, "/images/dpe.png") %>">
+      	    </div>
+            <div class="col-xs col-md-6 mt-5">
+      	      <img class="d-block w-50 mr-auto ml-auto" src="<%= static_path(@conn, "/images/ges.png") %>">
+      	    </div>
+      	  </div>
       	</article>
 
         <article>
