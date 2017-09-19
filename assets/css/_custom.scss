@@ -18,9 +18,9 @@
 }
 
 .intro-1 {
-  .full-bg-img { background-color: rgba(0, 0, 0, 0.7); }
+  .full-bg-img { background-color: rgba(0, 0, 0, 0.6); }
   height: 500px;
-  background: url("/images/maison.png") no-repeat center center;
+  background: url("/images/maison_toit.jpg") no-repeat center center;
   background-size: cover;
   @include media-breakpoint-up(xs) { height: 300px; }
   @include media-breakpoint-up(sm) { height: 380px; }
@@ -52,6 +52,7 @@
 .badge-yellow-flash { background-color: $yellow-flash; color: black; }
 
 .text-dark-gray { color: $gray-700; }
+.text-green-flash { color: $green-flash; }
 .background-dark-gray { background-color: $gray-900; }
 .badge { border: 0 !important; }
 

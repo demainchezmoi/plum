@@ -43,14 +43,14 @@ config :coherence,
 
 config :number, delimit: [
   precision: 2,
-  delimiter: " ",
+  delimiter: "&nbsp;",
   separator: ","
 ]
 
 config :number, currency: [
   unit: "€",
   precision: 0,
-  delimiter: " ",
+  delimiter: "&nbsp;",
   separator: ",",
   format: "%n %u",
   negative_format: "%n %u" # "(£30.00)"

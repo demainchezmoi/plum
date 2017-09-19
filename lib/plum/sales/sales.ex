@@ -134,6 +134,22 @@ defmodule Plum.Sales do
   def get_ad!(id), do: Repo.get!(Ad, id)
 
   @doc """
+  Gets a single ad by attributes.
+
+  Raises `Ecto.NoResultsError` if the Ad does not exist with those attributes.
+
+  ## Examples
+
+      iex> get_ad_where!(123, %{active: true})
+      %Ad{}
+
+      iex> get_ad_where!(123, %{active: false})
+      ** (Ecto.NoResultsError)
+
+  """
+  def get_ad_where!(id, params), do: Repo.get_by!(Ad, Map.put(params, :id, id))
+
+  @doc """
   Creates a ad.
 
   ## Examples

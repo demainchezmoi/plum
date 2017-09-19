@@ -10,10 +10,10 @@
               Maisons Léo
             </h2>
           </li>
-          <li><h1 class="title h1-responsive font-bold wow fadeInDown" data-wow-delay="0.2s" style="color: white">Demain, votre maison</h1></li>
+          <li><h1 class="title h1-responsive font-bold wow fadeInDown" data-wow-delay="0.2s" style="color: white">La Maison Léo</h1></li>
           <li>
             <p class="subtitle lead text-shadow" style="color: white" data-wow-delay="0.2s">
-            Le confort d'une maison moderne et la fiabilité d'un savoir faire à l'épreuve du temps.
+            Le confort d'une maison moderne et la fiabilité issue d'un savoir faire à l'épreuve du temps.
             </p>
           </li>
         </ul>
@@ -28,6 +28,12 @@
   <div class="container">
     <div class="row">
       <div class="col text-center">
+        <article>
+          <div class="divider-new"><h2 class="h2-responsive">Le bâti</h2></div>
+          <p>Avec ses murs robustes de 25cm d'épaisseur, de ses fondations sur pieux l'isolant du sol et de son isolation high-tech, la maison Léo est conçue à l'épreuve du temps et des éléments.</p>
+      	  <img class="d-block w-50 mr-auto ml-auto" src="<%= static_path(@conn, "/images/maison_toit.jpg") %>">
+      	</article>
+
         <article>
           <div class="divider-new"><h2 class="h2-responsive">L'habitat</h2></div>
           <p>La maison Léo cumule l'expérience accumulée sur des miliers de plans de T3 pour trouver LE plan qui fonctionne. Sa surface de 80m<sup>2</sup> la rendra confortable pour toute la famille.</p>
@@ -45,11 +51,6 @@
       	      <img class="d-block w-50 mr-auto ml-auto" src="<%= static_path(@conn, "/images/ges.png") %>">
       	    </div>
       	  </div>
-      	</article>
-
-        <article>
-          <div class="divider-new"><h2 class="h2-responsive">Le bâti</h2></div>
-          <p>Avec ses murs robustes de 25cm d'épaisseur, de ses fondations sur pieux l'isolant du sol et de son isolation high-tech, la maison Léo est conçue à l'épreuve du temps et des éléments.</p>
       	</article>
 
         <article>

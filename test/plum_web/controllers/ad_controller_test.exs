@@ -18,6 +18,37 @@ defmodule PlumWeb.AdControllerTest do
     end
   end
 
+  describe "show ad" do
+    setup [:create_ad]
+
+    @tag :logged_in
+    test "renders show", %{conn: conn, ad: ad} do
+      conn = get conn, ad_path(conn, :show, ad)
+      assert html_response(conn, 200)
+    end
+
+    test "doesnt render show when not logged in", %{conn: conn, ad: ad} do
+      conn = get conn, ad_path(conn, :show, ad)
+      assert html_response(conn, 302)
+    end
+  end
+
+  describe "public ad" do
+    setup [:create_ad]
+
+    test "shows add", %{conn: conn, ad: ad} do
+      conn = get conn, ad_path(conn, :public, ad)
+      assert html_response(conn, 200)
+    end
+
+    test "doesn't show deactivated add", %{conn: conn, ad: ad} do
+      Plum.Sales.update_ad(ad, %{active: false})
+      assert_error_sent 404, fn ->
+        get conn, ad_path(conn, :public, ad)
+      end
+    end
+  end
+
   describe "create ad" do
     @tag :logged_in
     test "redirects to show when data is valid", %{conn: conn} do

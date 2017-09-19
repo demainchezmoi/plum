@@ -77,6 +77,18 @@ defmodule Plum.SalesTest do
       assert Sales.get_ad!(land.ad.id).id == land.ad.id
     end
 
+    test "get_ad_where!/2 returns the ad with given id" do
+      land = insert(:land)
+      ad = insert(:ad, land_id: land.id, active: false)
+      assert Sales.get_ad_where!(ad.id, %{active: false}).id == ad.id
+    end
+
+    test "get_ad_where!/2 raises when ad doesn't match" do
+      land = insert(:land)
+      ad = insert(:ad, land_id: land.id, active: false)
+      assert_raise Ecto.NoResultsError, fn -> Sales.get_ad_where!(ad.id, %{active: true}) end
+    end
+
     test "create_ad/1 with valid data creates a ad" do
       land = insert(:land)
       ad_params = params_for(:ad) |> Map.put(:land_id, land.id)

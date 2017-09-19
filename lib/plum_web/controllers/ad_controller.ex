@@ -36,7 +36,7 @@ defmodule PlumWeb.AdController do
   end
 
   def public(conn, %{"id" => id}) do
-    ad = Sales.get_ad!(id) |> Repo.preload(:land)
+    ad = Sales.get_ad_where!(id, %{active: true}) |> Repo.preload(:land)
     contact_changeset = Sales.change_contact(%Contact{}) 
     conn
     |> put_layout("landing.html")
