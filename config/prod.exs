@@ -15,7 +15,11 @@ use Mix.Config
 # which you typically run after static files are built.
 config :plum, PlumWeb.Endpoint,
   load_from_system_env: true,
-  url: [host: "${HOST}", port: "${PORT}"],
+  url: [
+    scheme: "http",
+    host: "${APP_URL}",
+    port: 80
+  ],
   cache_static_manifest: "priv/static/cache_manifest.json",
   server: true
 
