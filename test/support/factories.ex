@@ -21,7 +21,7 @@ defmodule Plum.Factory do
     %Contact{
       name: "Noel Flantier",
       email: "noel@flantier.com",
-      phone: "05 63 78 12 43",
+      phone: sequence(:phone, &"78 12 43 #{&1}"),
     }
   end
 

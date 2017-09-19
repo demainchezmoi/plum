@@ -1,0 +1,5 @@
+<div>
+  Un nouveau formulaire a été soumis sur l'annonce <%= link @contact.ad.id, to: ad_url(PlumWeb.Endpoint, :show, @contact.ad) %>.
+
+  <%# <%= Phoenix.View.render PlumWeb.ContactView, "show.html", %{ %>
+</div>

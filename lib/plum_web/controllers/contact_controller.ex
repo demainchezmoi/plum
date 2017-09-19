@@ -3,6 +3,8 @@ defmodule PlumWeb.ContactController do
   alias Plum.Repo
   alias Plum.Sales
   alias Plum.Sales.Contact
+  alias PlumWeb.Mailer
+  alias PlumWeb.Email
 
   plug Coherence.Authentication.Session, [protected: true] when action not in [:new, :create]
 
@@ -20,6 +22,7 @@ defmodule PlumWeb.ContactController do
   def create(conn, %{"contact" => contact_params}) do
     case Sales.create_contact(contact_params) do
       {:ok, contact} ->
+        contact |> Repo.preload([ad: :land]) |> Email.new_contact |> Mailer.deliver
         conn |> redirect(to: page_path(conn, :merci))
       {:error, %Ecto.Changeset{} = changeset} ->
         ad = Sales.get_ad!(contact_params["ad_id"])

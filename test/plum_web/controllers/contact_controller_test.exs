@@ -1,6 +1,10 @@
 defmodule PlumWeb.ContactControllerTest do
   use PlumWeb.ConnCase
   import Plum.Factory
+  import Swoosh.TestAssertions
+  alias PlumWeb.Mailer
+  alias Plum.Repo
+  alias Plum.Sales.Contact
 
   describe "index" do
     @tag :logged_in
@@ -23,7 +27,6 @@ defmodule PlumWeb.ContactControllerTest do
       land = insert(:land)
       contact_params = params_for(:contact, ad_id: land.ad.id)
       conn = post conn, contact_path(conn, :create), contact: contact_params 
-
       assert redirected_to(conn) == page_path(conn, :merci)
     end
 
@@ -32,6 +35,16 @@ defmodule PlumWeb.ContactControllerTest do
       contact_params = params_for(:contact, ad_id: land.ad.id) |> Map.put(:phone, 123)
       conn = post conn, contact_path(conn, :create), contact: contact_params 
       assert html_response(conn, 200) =~ ~S(action="/contact)
+    end
+
+    test "sends an email", %{conn: conn} do
+      phone = "19471-="
+      land = insert(:land)
+      contact_params = params_for(:contact, ad_id: land.ad.id, phone: phone)
+      conn = post conn, contact_path(conn, :create), contact: contact_params 
+      contact = Contact |> Repo.get_by!(%{phone: phone}) |> Repo.preload([ad: :land])
+      email = PlumWeb.Email.new_contact(contact)
+      assert_email_sent email
     end
   end
 
