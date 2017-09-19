@@ -57,6 +57,22 @@ config :number, currency: [
 ]
 
 config :coherence, PlumWeb.Coherence.Mailer,
-  adapter: Swoosh.Adapters.Sendgrid,
-  api_key: "your api key here"
+  adapter: Swoosh.Adapters.SMTP,
+  server: "email-smtp.eu-west-1.amazonaws.com",
+  port: 465,
+  username: System.get_env("SMTP_USERNAME"),
+  password: System.get_env("SMTP_PASSWORD"),
+  tls: :if_available, # can be `:always` or `:never`
+  ssl: true, # can be `true`
+  retries: 1
 # %% End Coherence Configuration %%
+
+config :coherence, Mailer
+  adapter: Swoosh.Adapters.SMTP,
+  server: "email-smtp.eu-west-1.amazonaws.com",
+  port: 465,
+  username: System.get_env("SMTP_USERNAME"),
+  password: System.get_env("SMTP_PASSWORD"),
+  tls: :if_available, # can be `:always` or `:never`
+  ssl: true, # can be `true`
+  retries: 1

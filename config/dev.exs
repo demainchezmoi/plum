@@ -56,3 +56,6 @@ config :plum, Plum.Repo,
   database: "plum_dev",
   hostname: System.get_env("DATABASE_HOST") || "localhost",
   pool_size: 10
+
+config :plum, Mailer,
+  adapter: Swoosh.Adapters.Local

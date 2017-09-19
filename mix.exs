@@ -37,6 +37,7 @@ defmodule Plum.Mixfile do
       {:cowboy, "~> 1.0"},
       {:dialyxir, "~> 0.5", only: [:dev], runtime: false},
       {:ex_machina, "~> 2.1", only: [:test]},
+      {:gen_smtp, "~> 0.12.0"},
       {:gettext, "~> 0.11"},
       {:mix_docker, "~> 0.5.0"},
       {:mix_test_watch, "~> 0.3", only: [:test], runtime: false},
@@ -47,6 +48,7 @@ defmodule Plum.Mixfile do
       {:phoenix_live_reload, "~> 1.0", only: :dev},
       {:phoenix_pubsub, "~> 1.0"},
       {:postgrex, ">= 0.0.0"},
+      {:swoosh, "~> 0.10.0"},
     ]
   end
 
