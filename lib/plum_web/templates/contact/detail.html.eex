@@ -1,0 +1,20 @@
+<ul>
+  <li>
+    <%= link "Annonce: #{@contact.ad.id}", to: ad_path(@conn, :show, @contact.ad) %>
+  </li>
+
+  <li>
+    <strong>Nom:</strong>
+    <%= @contact.name %>
+  </li>
+
+  <li>
+    <strong>Email:</strong>
+    <%= @contact.email %>
+  </li>
+
+  <li>
+    <strong>Phone:</strong>
+    <%= @contact.phone %>
+  </li>
+</ul>

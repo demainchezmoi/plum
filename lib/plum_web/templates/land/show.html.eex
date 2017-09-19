@@ -32,6 +32,19 @@
     <%= @land.department %>
   </li>
 
+  <%= if ad = @land.ad do %>
+  <li>
+    <strong>Contacts:</strong>
+      <%= for contact <- ad.contacts do %>
+        <div class="card mb-3">
+          <div class="card-block">
+            <%= Phoenix.View.render PlumWeb.ContactView, "detail.html", contact: Map.put(contact, :ad, ad), conn: @conn %>
+          </div>
+        </div>
+      <% end %>
+  </li>
+  <% end %>
+
 </ul>
 
 <span><%= link "Edit", to: land_path(@conn, :edit, @land) %></span>

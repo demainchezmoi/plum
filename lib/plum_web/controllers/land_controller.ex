@@ -2,6 +2,7 @@ defmodule PlumWeb.LandController do
   use PlumWeb, :controller
   alias Plum.Sales
   alias Plum.Sales.Land
+  alias Plum.Repo
 
   plug Coherence.Authentication.Session, [protected: true]
 
@@ -27,7 +28,7 @@ defmodule PlumWeb.LandController do
   end
 
   def show(conn, %{"id" => id}) do
-    land = Sales.get_land!(id)
+    land = Sales.get_land!(id) |> Repo.preload([ad: :contacts])
     render(conn, "show.html", land: land)
   end
 
