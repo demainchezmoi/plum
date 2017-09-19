@@ -2,7 +2,6 @@ defmodule PlumWeb.ContactControllerTest do
   use PlumWeb.ConnCase
   import Plum.Factory
   import Swoosh.TestAssertions
-  alias PlumWeb.Mailer
   alias Plum.Repo
   alias Plum.Sales.Contact
 
@@ -41,7 +40,7 @@ defmodule PlumWeb.ContactControllerTest do
       phone = "19471-="
       land = insert(:land)
       contact_params = params_for(:contact, ad_id: land.ad.id, phone: phone)
-      conn = post conn, contact_path(conn, :create), contact: contact_params 
+      post conn, contact_path(conn, :create), contact: contact_params 
       contact = Contact |> Repo.get_by!(%{phone: phone}) |> Repo.preload([ad: :land])
       email = PlumWeb.Email.new_contact(contact)
       assert_email_sent email
