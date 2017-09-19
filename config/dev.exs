@@ -57,5 +57,8 @@ config :plum, Plum.Repo,
   hostname: System.get_env("DATABASE_HOST") || "localhost",
   pool_size: 10
 
-config :plum, Mailer,
+config :coherence, PlumWeb.Coherence.Mailer,
+  adapter: Swoosh.Adapters.Local
+
+config :plum, PlumWeb.Mailer,
   adapter: Swoosh.Adapters.Local

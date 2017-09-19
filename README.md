@@ -23,3 +23,4 @@
   * SSH: `ssh -i ~/.ssh/aws-eb4 ec2-user@54.194.151.97`
   * Start app: `docker run -p 80:4000 -it --env-file .env 383646808490.dkr.ecr.eu-west-1.amazonaws.com/demainchezmoi/plum:<version> foreground`
   * Connect to running app: `docker ps` then `sudo docker exec -it <container_id> /opt/app/bin/plum remote_console`
+  * Connect with local container: `docker run -it --rm --env-file .env 383646808490.dkr.ecr.eu-west-1.amazonaws.com/demainchezmoi/plum:release console`

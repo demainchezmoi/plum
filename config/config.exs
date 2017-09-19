@@ -37,9 +37,10 @@ config :coherence,
   router: PlumWeb.Router,
   messages_backend: PlumWeb.Coherence.Messages,
   logged_out_url: "/",
-  email_from_name: "Your Name",
-  email_from_email: "yourname@example.com",
+  email_from_name: "Alexandre Hervé",
+  email_from_email: "aherve@demainchezmoi.fr",
   opts: [:authenticatable, :recoverable, :lockable, :trackable, :unlockable_with_token, :invitable]
+# %% End Coherence Configuration %%
 
 config :number, delimit: [
   precision: 2,
@@ -55,14 +56,3 @@ config :number, currency: [
   format: "%n %u",
   negative_format: "%n %u" # "(£30.00)"
 ]
-
-config :coherence, PlumWeb.Coherence.Mailer,
-  adapter: Swoosh.Adapters.SMTP,
-  relay: "email-smtp.eu-west-1.amazonaws.com",
-  port: 465,
-  username: System.get_env("SMTP_USERNAME"),
-  password: System.get_env("SMTP_PASSWORD"),
-  tls: :always, # can be `:always` or `:never`
-  auth: :always
-# %% End Coherence Configuration %%
-
