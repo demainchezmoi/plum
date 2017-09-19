@@ -17,3 +17,6 @@ config :plum, Plum.Repo,
   database: "plum_test",
   hostname: System.get_env("DATABASE_HOST") || "localhost",
   pool: Ecto.Adapters.SQL.Sandbox
+
+config :plum, Mailer,
+  adapter: Swoosh.Adapters.Test

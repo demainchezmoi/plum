@@ -63,13 +63,20 @@ config :logger, level: :info
 config :plum, PlumWeb.Endpoint,
   secret_key_base: "RLN4oJZRgNsGUAEuRErB0LYRwFE6hbq/AmObcpOc8WWQjZtU4H5HQVDtThZpa2+C"
 
-# Configure your database
 config :plum, Plum.Repo,
   adapter: Ecto.Adapters.Postgres,
   username: "${RDS_USERNAME}",
   password: "${RDS_PASSWORD}",
-  # url: "${RDS_URL}",
   database: "${RDS_DB_NAME}",
   hostname: "${RDS_URL}",
   port: "${RDS_PORT}",
   pool_size: 15
+
+config :plum, Mailer,
+  adapter: Swoosh.Adapters.SMTP,
+  relay: "email-smtp.eu-west-1.amazonaws.com",
+  port: 465,
+  username: System.get_env("SMTP_USERNAME"),
+  password: System.get_env("SMTP_PASSWORD"),
+  tls: :always, # can be `:always` or `:never`
+  auth: :always
