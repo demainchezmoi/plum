@@ -8,14 +8,18 @@ import Update exposing (..)
 import View exposing (view)
 
 
-init : ( Model, Cmd Msg )
-init =
-    initialModel ! [ fetch ]
+init : Flags -> ( Model, Cmd Msg )
+init flags =
+    let
+        { apiToken } =
+            flags
+    in
+        initialModel apiToken ! [ fetch apiToken ]
 
 
-main : Program Never Model Msg
+main : Program Flags Model Msg
 main =
-    Html.program
+    Html.programWithFlags
         { init = init
         , view = view
         , update = update

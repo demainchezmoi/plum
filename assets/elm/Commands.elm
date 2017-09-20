@@ -3,13 +3,14 @@ module Commands exposing (..)
 import Decoders exposing (landListDecoder)
 import Http
 import Messages exposing (Msg(..))
+import Model exposing (ApiToken)
 
 
-fetch : Cmd Msg
-fetch =
+fetch : ApiToken -> Cmd Msg
+fetch apiToken =
     let
         apiUrl =
-            "/api/lands"
+            String.concat [ "/api/lands/?token=", apiToken ]
 
         request =
             Http.get apiUrl landListDecoder

@@ -16,8 +16,6 @@ defmodule PlumWeb.PageController do
   end
 
   def admin(conn, _params) do
-    conn
-    |> put_layout("elm.html")
-    |> render("admin.html")
+    conn |> render("admin.html")
   end
 end

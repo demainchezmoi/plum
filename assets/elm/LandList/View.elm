@@ -19,7 +19,7 @@ indexView model =
 
 landsList : Model -> Html Msg
 landsList model =
-    if (List.length <| model.landList.entries) > 0 then
+    if (List.length (model.landList.entries) > 0) then
         model.landList.entries
             |> List.map landView
             |> div [ class "cards-wrapper" ]

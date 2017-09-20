@@ -1,9 +1,14 @@
 module Model exposing (..)
 
 
+type alias ApiToken =
+    String
+
+
 type alias Model =
     { landList : LandList
     , error : Maybe String
+    , apiToken : ApiToken
     }
 
 
@@ -22,14 +27,20 @@ type alias LandList =
     }
 
 
+type alias Flags =
+    { apiToken : ApiToken
+    }
+
+
 initialLandList : LandList
 initialLandList =
     { entries = []
     }
 
 
-initialModel : Model
-initialModel =
+initialModel : ApiToken -> Model
+initialModel apiToken =
     { landList = initialLandList
     , error = Nothing
+    , apiToken = apiToken
     }
