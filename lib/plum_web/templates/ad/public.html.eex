@@ -121,7 +121,7 @@
 			  <span class="badge badge-green-flash">80 m<sup>2</sup></span>
 			  <span class="badge badge-green-flash">3 chambres</span>
         <span class="badge badge-green-flash"><%= raw Number.Currency.number_to_currency(house_price) %></span>
-        <small><%= link raw(~S(<i class="fa fa-plus"></i> d'infos sur la maison)), to: page_path(@conn, :index), target: "_blank", class: "text-green-flash" %></small>
+        <small><%= link raw(~S(<i class="fa fa-plus"></i> sur la maison)), to: page_path(@conn, :index), target: "_blank", class: "text-green-flash" %></small>
       </div>
     </div>
   </div>

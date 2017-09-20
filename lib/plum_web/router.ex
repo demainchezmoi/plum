@@ -30,9 +30,19 @@ defmodule PlumWeb.Router do
     coherence_routes :protected
   end
 
+  pipeline :protected_api do
+    plug :accepts, ["json"]
+    plug PlumWeb.Plugs.TokenAuthorization
+  end
+
   # scope "/", PlumWeb do
     # pipe_through :protected
   # end
+
+  scope "/api", PlumWeb.Api do
+    pipe_through :protected_api
+    resources "/lands", LandController, only: [:index], name: "api_land"
+  end
 
   scope "/", PlumWeb do
     pipe_through :browser

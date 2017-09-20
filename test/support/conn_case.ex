@@ -28,7 +28,6 @@ defmodule PlumWeb.ConnCase do
     end
   end
 
-
   setup tags do
     :ok = Ecto.Adapters.SQL.Sandbox.checkout(Plum.Repo)
 
@@ -40,7 +39,9 @@ defmodule PlumWeb.ConnCase do
 
     if tags[:logged_in] do
       user = insert(:user)
-      {:ok, conn: Conn.assign(conn, :current_user, user), current_user: user}
+      token = Phoenix.Token.sign(PlumWeb.Endpoint, "user", user.id)
+      conn = Conn.assign(conn, :current_user, user)
+      {:ok, conn: conn, current_user: user, token: token}
     else
       {:ok, conn: conn}
     end

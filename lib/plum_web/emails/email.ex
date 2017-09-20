@@ -1,9 +1,8 @@
 defmodule PlumWeb.Email do
   use Phoenix.Swoosh, view: PlumWeb.EmailView, layout: {PlumWeb.LayoutView, :email}
-  alias Plum.Sales.{Ad, Contact}
 
   def new_contact(contact) do
-    new
+    new()
     |> to({"Contact", "contact@demainchezmoi.fr"})
     |> from({"Formulaire", "contact@demainchezmoi.fr"})
     |> subject("Nouveau formulaire soumis")
