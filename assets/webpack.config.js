@@ -4,18 +4,28 @@ var path = require('path');
 var webpack = require('webpack');
 
 config = {
-  entry: [
-    './js/app.js',
-  ],
+  entry: {
+    app: './js/app.js',
+    admin: './js/admin.js'
+  },
   output: {
     path: path.join(__dirname, '..', 'priv', 'static'),
-    filename: 'js/app.js'
+    filename: 'js/[name].js'
   },
   module: {
     rules: [{
+      test: /\.elm$/,
+      exclude: [/elm-stuff/, /node_modules/],
+      use: {
+        loader: 'elm-webpack-loader',
+        options: {
+          cwd: 'elm'
+        }
+      }
+    }, {
       // test: /\.png$|\.jpg$/,
       // loader: 'url-loader',
-    // }, {
+      // }, {
       test: /\.js$/,
       exclude: /(node_modules)/,
       loader: 'babel-loader',

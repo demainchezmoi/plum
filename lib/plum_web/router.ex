@@ -37,7 +37,7 @@ defmodule PlumWeb.Router do
 
   scope "/", PlumWeb do
     pipe_through :protected
-    get "/admin", PageController, :admin
+    get "/admin*path", PageController, :admin
   end
 
   scope "/api", PlumWeb.Api do
