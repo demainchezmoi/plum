@@ -1,0 +1,4 @@
+{
+  "plugins": ["transform-object-assign", "transform-strict-mode"]
+}
+

@@ -1,7 +1,7 @@
 $roboto-font-path: "/fonts/";
 $yellow-flash: #e4ff00;
 $green-flash: #07d82b;
-
+$fa-font-path: "../static/fonts";
 
 /*
  * =================
@@ -49,7 +49,6 @@ $green-flash: #07d82b;
  * Import font awesome
  * =================
  */
-$fa-font-path: "../fonts";
 @import "font-awesome";
 
 

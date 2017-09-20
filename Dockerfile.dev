@@ -85,7 +85,7 @@ RUN cd ./assets && npm install
 COPY . .
 
 RUN cd ./assets && \
-    ./node_modules/brunch/bin/brunch b && \
+    ./node_modules/.bin/webpack && \
     cd .. && \
     mix phx.digest
 
