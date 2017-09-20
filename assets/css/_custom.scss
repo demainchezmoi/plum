@@ -52,7 +52,12 @@
 .badge-yellow-flash { background-color: $yellow-flash; color: black; }
 
 .text-dark-gray { color: $gray-700; }
-.text-green-flash { color: $green-flash; }
+.text-green-flash {
+  color: $green-flash;
+}
+a.text-green-flash:hover {
+  color: darken($green-flash, 5%);
+}
 .background-dark-gray { background-color: $gray-900; }
 .badge { border: 0 !important; }
 
