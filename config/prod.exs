@@ -65,7 +65,7 @@ config :logger, level: :info
 #
 
 config :plum, PlumWeb.Endpoint,
-  secret_key_base: "RLN4oJZRgNsGUAEuRErB0LYRwFE6hbq/AmObcpOc8WWQjZtU4H5HQVDtThZpa2+C"
+  secret_key_base: "${SECRET_KEY_BASE}"
 
 config :plum, Plum.Repo,
   adapter: Ecto.Adapters.Postgres,
