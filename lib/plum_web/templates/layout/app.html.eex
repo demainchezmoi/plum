@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="<%= static_path(@conn, "/css/app.css") %>">
     <%= if current_user = @conn.assigns[:current_user] do %>
       <%= tag :meta, name: "token", content: Phoenix.Token.sign(@conn, "user", current_user.id) %>
-    <%= end %>
+    <% end %>
   </head>
 
   <body>

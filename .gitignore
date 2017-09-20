@@ -5,6 +5,7 @@
 /*.ez
 .npm
 .cache
+.elm
 
 # Generated on crash by the VM
 erl_crash.dump
@@ -14,6 +15,7 @@ npm-debug.log
 
 # Static artifacts
 /assets/node_modules
+/assets/elm/elm-stuff
 /assets/static/fonts/fontawesome*
 /assets/static/fonts/FontAwesome*
 /assets/static/font/roboto

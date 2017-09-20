@@ -37,3 +37,4 @@ jQuery.fn.extend({
 $("#interested-button").click(function() {
   $("#contact-form").scrollToMe();
 });
+
