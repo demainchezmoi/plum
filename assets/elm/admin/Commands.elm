@@ -4,15 +4,15 @@ import Decoders exposing (landListDecoder)
 import Http
 import Messages exposing (Msg(..))
 import Model exposing (ApiToken)
+import RemoteData exposing (..)
 
 
-fetch : ApiToken -> Cmd Msg
-fetch apiToken =
+getLandList : ApiToken -> Cmd Msg
+getLandList apiToken =
     let
         apiUrl =
             String.concat [ "/api/lands/?token=", apiToken ]
-
-        request =
-            Http.get apiUrl landListDecoder
     in
-        Http.send FetchResult request
+        Http.get apiUrl landListDecoder
+            |> RemoteData.sendRequest
+            |> Cmd.map LandListResponse

@@ -31,13 +31,13 @@ defmodule PlumWeb.AdController do
 
   def show(conn, %{"id" => id}) do
     ad = Sales.get_ad!(id) |> Repo.preload(:land)
-    contact_changeset = Sales.change_contact(%Contact{}) 
+    contact_changeset = Sales.change_contact(%Contact{})
     conn |> render("show.html", ad: ad, contact_changeset: contact_changeset)
   end
 
   def public(conn, %{"id" => id}) do
     ad = Sales.get_ad_where!(id, %{active: true}) |> Repo.preload(:land)
-    contact_changeset = Sales.change_contact(%Contact{}) 
+    contact_changeset = Sales.change_contact(%Contact{})
     conn
     |> put_layout("landing.html")
     |> render("public.html", ad: ad, contact_changeset: contact_changeset)

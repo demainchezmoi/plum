@@ -7,9 +7,7 @@ import Model exposing (..)
 
 landListDecoder : JD.Decoder LandList
 landListDecoder =
-    succeed
-        LandList
-        |: (field "entries" (list landDecoder))
+    JD.list landDecoder
 
 
 landDecoder : JD.Decoder Land

@@ -1,4 +1,4 @@
-import Elm from '../elm/Main.elm';
+import Elm from '../elm/admin/Main.elm';
 
 const elmDiv = document.querySelector('#elm_target');
 

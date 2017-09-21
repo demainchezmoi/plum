@@ -1,14 +1,18 @@
 module Model exposing (..)
 
+import Routing exposing (Route)
+import RemoteData exposing (..)
+
 
 type alias ApiToken =
     String
 
 
 type alias Model =
-    { landList : LandList
+    { landList : WebData LandList
     , error : Maybe String
     , apiToken : ApiToken
+    , route : Route
     }
 
 
@@ -23,8 +27,7 @@ type alias Land =
 
 
 type alias LandList =
-    { entries : List Land
-    }
+    List Land
 
 
 type alias Flags =
@@ -32,15 +35,10 @@ type alias Flags =
     }
 
 
-initialLandList : LandList
-initialLandList =
-    { entries = []
-    }
-
-
-initialModel : ApiToken -> Model
-initialModel apiToken =
-    { landList = initialLandList
+initialModel : ApiToken -> Route -> Model
+initialModel apiToken route =
+    { landList = Loading
     , error = Nothing
     , apiToken = apiToken
+    , route = route
     }

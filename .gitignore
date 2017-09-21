@@ -6,6 +6,8 @@
 .npm
 .cache
 .elm
+ctags
+tags
 
 # Generated on crash by the VM
 erl_crash.dump

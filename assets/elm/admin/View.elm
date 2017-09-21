@@ -1,10 +1,11 @@
 module View exposing (..)
 
-import LandList.View exposing (indexView)
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Messages exposing (..)
 import Model exposing (..)
+import LandList.View exposing (indexView)
+import Routing exposing (Route(..))
 
 
 view : Model -> Html Msg
@@ -13,7 +14,7 @@ view model =
         []
         [ headerView
         , div []
-            [ indexView model ]
+            [ page model ]
         ]
 
 
@@ -25,3 +26,18 @@ headerView =
             []
             [ text "Admin app" ]
         ]
+
+
+page : Model -> Html Msg
+page model =
+    case model.route of
+        LandsRoute ->
+            indexView model
+
+        NotFoundRoute ->
+            notFoundView
+
+
+notFoundView : Html Msg
+notFoundView =
+    text "Route not found"

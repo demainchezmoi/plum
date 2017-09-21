@@ -14,8 +14,7 @@ landView land =
             join " - "
                 [ concat [ "lat: ", toString land.lat ]
                 , concat [ "lng: ", toString land.lng ]
-                , land.city
-                , concat [ "(", land.department, ")" ]
+                , concat [ land.city, " (", land.department, ")" ]
                 , concat [ toString land.price, " euros" ]
                 , concat [ toString land.surface, " m2" ]
                 ]

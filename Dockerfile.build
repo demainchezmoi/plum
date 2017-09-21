@@ -73,6 +73,7 @@ RUN npm install --global \
 
 
 ENV MIX_ENV=prod
+ENV NODE_ENV=production
 
 # Cache elixir deps
 RUN mkdir config
