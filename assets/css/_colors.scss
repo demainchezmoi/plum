@@ -17,6 +17,23 @@ $yellow-flash: (
   "accent-4": rgb(237, 255, 166),
 );
 
+$green-flash: (
+  "lighten-5": rgb(225, 250, 230),
+  "lighten-4": rgb(181, 243, 191),
+  "lighten-3": rgb(131, 236, 149),
+  "lighten-2": rgb(81, 228, 107),
+  "lighten-1": rgb(44, 222, 75),
+  "base": rgb(7, 216, 43),
+  "darken-1": rgb(6, 212, 38),
+  "darken-2": rgb(5, 206, 32),
+  "darken-3": rgb(4, 200, 26),
+  "darken-4": rgb(2, 191, 16),
+  "accent-1": rgb(231, 255, 232),
+  "accent-2": rgb(180, 255, 183),
+  "accent-3": rgb(129, 255, 134),
+  "accent-4": rgb(104, 255, 110),
+);
+
 $mdb-color: (
   "lighten-5":  #D0D6E2,
   "lighten-4":  #B1BACE,
@@ -349,6 +366,7 @@ $shades: (
 
 $colors: (
   "yellow-flash": $yellow-flash,
+  "green-flash": $green-flash,
   "mdb-color": $mdb-color,
   "red": $red,
   "pink": $pink,
@@ -925,6 +943,7 @@ $material-colors: (
     "lime": map-get($lime, darken-2),
     "yellow": map-get($yellow, darken-2),
     "yellow-flash": map-get($yellow-flash, darken-2),
+    "green-flash": map-get($green-flash, darken-2),
     "amber": map-get($amber, darken-2),
     "orange": map-get($orange, darken-2),
     "deep-orange": map-get($deep-orange, lighten-1),

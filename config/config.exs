@@ -53,6 +53,6 @@ config :number, currency: [
   precision: 0,
   delimiter: "&nbsp;",
   separator: ",",
-  format: "%n %u",
-  negative_format: "%n %u" # "(£30.00)"
+  format: "%n&nbsp;%u",
+  negative_format: "%n&nbsp;%u" # "(£30.00)"
 ]

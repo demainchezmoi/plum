@@ -1,0 +1,21 @@
+<%= Phoenix.View.render PlumWeb.SharedView, "navbar-landing.html", active: :contact %>
+
+<!-- {{{ Header -->
+<header class="">
+  <section class="intro-1" style="max-height: 550px;">
+    <div class="full-bg-img flex-center">
+      <div class="container">
+        <ul>
+          <li><h1 class="title h1-responsive font-bold wow fadeInDown" data-wow-delay="0.2s" style="color: white">La Maison Léo</h1></li>
+          <li>
+            <p class="subtitle lead text-shadow" style="color: white" data-wow-delay="0.2s">
+            Le confort d'une maison moderne et la fiabilité issue d'un savoir faire à l'épreuve du temps.
+            </p>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </section>
+</header>
+<!-- }}} -->
+

@@ -2,13 +2,39 @@
 .full-width { width: 100% }
 .text-shadow { text-shadow: 2px 2px 3px rgba(0,0,0,0.3); }
 
+nav.navbar.translucid {
+ background: rgba(0, 0, 0, 0.6);
+ @include media-breakpoint-up(sm) {
+   background: rgba(0, 0, 0, 0.2);
+ }
+}
+
+.badge-yellow-flash {
+  color: black !important;
+}
+
+nav.navbar.yellow-flash-text a {
+  @extend .yellow-flash-text;
+  @extend .font-bold;
+}
+
+nav.navbar.green-flash-text a {
+  @extend .green-flash-text;
+  @extend .font-bold;
+}
+
 .title {
-  @include media-breakpoint-up(md) { font-size: 300%; }
+  @include media-breakpoint-up(md) { font-size: 200%; }
   @extend .text-shadow;
 }
 
 .subtitle {
+  font-size: 150%;
   @include media-breakpoint-down(xs) { font-size: small; }
+}
+
+.font-thin {
+  font-weight: thin;
 }
 
 .brand {
@@ -46,16 +72,21 @@
   }
 }
 
-.badge-green-flash { background-color: $green-flash; }
+// .badge-green-flash { background-color: $green-flash; }
 // .badge-yellow-flash { background-color: $yellow-flash; color: black; }
 
-.text-dark-gray { color: $gray-700; }
-.text-green-flash {
-  color: $green-flash;
+.dark-grey-text {
+  color: $gray-700;
 }
-a.text-green-flash:hover {
-  color: darken($green-flash, 5%);
+a.dark-grey-text:hover {
+  color: $gray-900 !important;
 }
+// .text-green-flash {
+  // color: $green-flash;
+// }
+// a.text-green-flash:hover {
+  // color: darken($green-flash, 5%);
+// }
 .background-dark-gray { background-color: $gray-900; }
 .badge { border: 0 !important; }
 

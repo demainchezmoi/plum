@@ -14,7 +14,9 @@ defmodule PlumWeb.PageController do
   end
 
   def contact(conn, _params) do
-    conn |> render("contact.html")
+    conn
+    |> put_layout("landing.html")
+    |> render("contact.html")
   end
 
   def merci(conn, _params) do

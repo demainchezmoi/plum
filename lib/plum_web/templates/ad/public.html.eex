@@ -1,23 +1,30 @@
 <% house_price = 68_000 %>
 
-<%= Phoenix.View.render PlumWeb.SharedView, "navbar-landing.html", active: nil %>
-
 <!-- {{{ Header -->
 <header class="mb-5">
   <section class="intro-1">
     <div class="full-bg-img flex-center">
       <div class="container">
         <ul>
-          <li><h1 class="title h1-responsive font-bold wow fadeInDown" data-wow-delay="0.2s" style="color: white">Devenez propriétaire à <%= @ad.land.city %>&nbsp;(<%= @ad.land.department %>)</h1></li>
-          <li><p class="subtitle lead text-shadow" style="color: white" data-wow-delay="0.2s">
-              Annonce
-              <span class="yellow-flash-text font-bold">Maison Léo</span>
-              neuve +
-              <span class="yellow-flash-text font-bold">terrain <%= @ad.land.surface %>&nbsp;m<sup>2</sup></span>
-              pour
-              <span class="text-yellow-flash font-bold"><%= raw Number.Currency.number_to_currency(@ad.land.price + house_price) %></span>
-          </p></li>
-          <li><a class="btn btn-yellow-flash" id="interested-button">En savoir plus</a></li>
+          <h2 class="h2-responsive font-bold brand yellow-flash-text">
+            <i id="icon" class="fa fa-home logo"></i>
+            Maisons Léo
+          </h2>
+          <li>
+            <h1 class="h1-responsive font-bold" data-wow-delay="0.2s" style="color: white">
+              <span class="badge-yellow-flash">&nbsp;Maison 80m<sup>2</sup>&nbsp;</span>
+              +
+              <span class="badge-yellow-flash">&nbsp;terrain&nbsp;<%= @ad.land.surface %>&nbsp;m<sup>2</sup>&nbsp;</span>
+              =
+              <span class="badge-yellow-flash">&nbsp;<%= raw Number.Currency.number_to_currency(@ad.land.price + house_price) %>&nbsp;</span>
+            </h1>
+          </li>
+          <li>
+            <h4 class="responsive-h4" style="color: white" data-wow-delay="0.2s">
+              Devenez propriétaire à <%= @ad.land.city %>&nbsp;(<%= @ad.land.department %>)
+            </h4>
+          </li>
+          <li><a class="btn btn-outline-yellow-flash" id="interested-button">Prendre contact</a></li>
         </ul>
       </div>
     </div>
@@ -65,8 +72,8 @@
 			</div>
 			<!-- }}} /.Carousel Wrapper-->
       <div class="h4 mt-2">
-			  <span class="badge badge-green-flash"><%= @ad.land.surface %>&nbsp;m<sup>2</sup></span>
-        <span class="badge badge-green-flash"><%= raw Number.Currency.number_to_currency(@ad.land.price) %></span>
+			  <span class="badge badge-yellow-flash"><%= @ad.land.surface %>&nbsp;m<sup>2</sup></span>
+        <span class="badge badge-yellow-flash"><%= raw Number.Currency.number_to_currency(@ad.land.price) %></span>
       </div>
     </div>
   </div>
@@ -113,11 +120,11 @@
 			</div>
 			<!-- }}} /.Carousel Wrapper-->
       <div class="h4 mt-2">
-			  <span class="badge badge-green-flash">Classe énergie A</span>
-			  <span class="badge badge-green-flash">80 m<sup>2</sup></span>
-			  <span class="badge badge-green-flash">3 chambres</span>
-        <span class="badge badge-green-flash"><%= raw Number.Currency.number_to_currency(house_price) %></span>
-        <small><%= link raw(~S(<i class="fa fa-plus"></i> sur la maison)), to: page_path(@conn, :index), target: "_blank", class: "text-green-flash" %></small>
+			  <span class="badge badge-yellow-flash">Classe énergie A</span>
+			  <span class="badge badge-yellow-flash">80 m<sup>2</sup></span>
+			  <span class="badge badge-yellow-flash">3 chambres</span>
+        <span class="badge badge-yellow-flash"><%= raw Number.Currency.number_to_currency(house_price) %></span>
+        <small><%= link raw(~S(<i class="fa fa-plus"></i> d'infos sur la maison)), to: page_path(@conn, :index), target: "_blank", class: "dark-grey-text" %></small>
       </div>
     </div>
   </div>
@@ -128,7 +135,7 @@
 <section class="container mb-5">
   <div class="row justify-content-center">
     <div class="col-md-10">
-      <h3 class="h3-responsive mb-3 font-bold text-dark-gray">L'ensemble maison + terrain</h3>
+      <h3 class="h3-responsive mb-3 font-bold dark-grey-text">L'ensemble maison + terrain</h3>
       <p>
       Les Maisons Léo vous proposent cette annonce maison + terrain pour une valeur totale de <b><%= raw Number.Currency.number_to_currency(@ad.land.price + house_price) %></b>, hors frais d'adaptation au sol.<br />
       Pour obtenir de plus amples informations, n'hésitez pas à remplir le formulaire ci-dessous. Nous vous contacterons dès que possible.
@@ -142,7 +149,7 @@
 <section class="container mb-5">
   <div class="row justify-content-center" style="margin-bottom: 300px">
     <div class="col-md-10">
-      <h3 class="h3-responsive mb-3 font-bold text-dark-gray">En savoir plus</h3>
+      <h3 class="h3-responsive mb-3 font-bold dark-grey-text">Prendre contact</h3>
       <div id="contact-form">
         <%= Phoenix.View.render PlumWeb.ContactView, "form.html", changeset: @contact_changeset, conn: @conn, ad: @ad, action: contact_path(@conn, :create) %>
       </div>
