@@ -2,6 +2,7 @@ module Model exposing (..)
 
 import Routing exposing (Route)
 import RemoteData exposing (..)
+import LandList.Model exposing (LandList)
 
 
 type alias ApiToken =
@@ -14,20 +15,6 @@ type alias Model =
     , apiToken : ApiToken
     , route : Route
     }
-
-
-type alias Land =
-    { city : String
-    , department : String
-    , lat : Float
-    , lng : Float
-    , price : Int
-    , surface : Int
-    }
-
-
-type alias LandList =
-    List Land
 
 
 type alias Flags =

@@ -48,8 +48,10 @@ defmodule PlumWeb.Router do
   scope "/", PlumWeb do
     pipe_through :browser
     get "/", PageController, :index
+    get "/technique", PageController, :technical
     get "/confidentialite", PageController, :confidentialite
     get "/merci", PageController, :merci
+    get "/contact", PageController, :contact
     resources "/ads", AdController
     resources "/contacts", ContactController
     resources "/lands", LandController

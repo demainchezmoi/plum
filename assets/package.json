@@ -23,11 +23,13 @@
     "install": "^0.10.1",
     "jquery": "^3.2.1",
     "mdbootstrap": "^4.4.1",
+    "node-waves": "^0.7.5",
     "npm": "^5.4.1",
     "popper.js": "^1.12.5",
     "resolve-url-loader": "^2.1.0",
     "sass-loader": "^6.0.6",
     "style-loader": "^0.18.2",
+    "tether": "^1.4.0",
     "url-loader": "^0.5.9",
     "waves": "^0.1.1",
     "webpack": "^2.7.0"

@@ -1,15 +1,11 @@
+<%= Phoenix.View.render PlumWeb.SharedView, "navbar-landing.html", active: :home %>
+
 <!-- {{{ Header -->
 <header class="">
-  <section class="intro-1" style="max-height: 350px;">
+  <section class="intro-1" style="max-height: 550px;">
     <div class="full-bg-img flex-center">
       <div class="container">
         <ul>
-          <li>
-            <h2 class="h2-responsive font-bold brand text-yellow-flash">
-              <i id="icon" class="fa fa-home logo"></i>
-              Maisons Léo
-            </h2>
-          </li>
           <li><h1 class="title h1-responsive font-bold wow fadeInDown" data-wow-delay="0.2s" style="color: white">La Maison Léo</h1></li>
           <li>
             <p class="subtitle lead text-shadow" style="color: white" data-wow-delay="0.2s">

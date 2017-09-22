@@ -71,10 +71,13 @@ config = {
     new ExtractTextPlugin({filename: 'css/app.css'}),
     new CopyWebpackPlugin([{from: './static'}, {from: './node_modules/mdbootstrap/font/roboto', to: 'fonts'}]),
     new webpack.ProvidePlugin({
-      $: 'jquery',
-      jQuery: 'jquery',
-      'window.jQuery': 'jquery'
-    })
+      '$': 'jquery',
+      'jQuery': 'jquery',
+      'window.jQuery': 'jquery',
+			'Tether': 'tether',
+			'Popper': ['popper.js', 'default'],
+			'Waves': 'node-waves'
+		})
   ]
 };
 

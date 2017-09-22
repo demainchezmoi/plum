@@ -3,7 +3,7 @@ module Land.View exposing (..)
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Messages exposing (..)
-import Model exposing (..)
+import Land.Model exposing (Land)
 import String exposing (join, concat)
 
 

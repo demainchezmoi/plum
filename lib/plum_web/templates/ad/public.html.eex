@@ -1,23 +1,19 @@
 <% house_price = 68_000 %>
 
+<%= Phoenix.View.render PlumWeb.SharedView, "navbar-landing.html", active: nil %>
+
 <!-- {{{ Header -->
 <header class="mb-5">
   <section class="intro-1">
     <div class="full-bg-img flex-center">
       <div class="container">
         <ul>
-          <li>
-            <h2 class="h2-responsive font-bold brand text-yellow-flash">
-              <i id="icon" class="fa fa-home logo"></i>
-              Maisons Léo
-            </h2>
-          </li>
           <li><h1 class="title h1-responsive font-bold wow fadeInDown" data-wow-delay="0.2s" style="color: white">Devenez propriétaire à <%= @ad.land.city %>&nbsp;(<%= @ad.land.department %>)</h1></li>
           <li><p class="subtitle lead text-shadow" style="color: white" data-wow-delay="0.2s">
               Annonce
-              <span class="text-yellow-flash font-bold">Maison Léo</span>
+              <span class="yellow-flash-text font-bold">Maison Léo</span>
               neuve +
-              <span class="text-yellow-flash font-bold">terrain <%= @ad.land.surface %>&nbsp;m<sup>2</sup></span>
+              <span class="yellow-flash-text font-bold">terrain <%= @ad.land.surface %>&nbsp;m<sup>2</sup></span>
               pour
               <span class="text-yellow-flash font-bold"><%= raw Number.Currency.number_to_currency(@ad.land.price + house_price) %></span>
           </p></li>

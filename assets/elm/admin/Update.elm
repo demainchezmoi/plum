@@ -28,7 +28,7 @@ update msg model =
 urlUpdate : Model -> ( Model, Cmd Msg )
 urlUpdate model =
     case model.route of
-        LandsRoute ->
+        LandListRoute ->
             ( model, Cmd.none )
 
         _ ->

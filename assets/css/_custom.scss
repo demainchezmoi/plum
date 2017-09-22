@@ -1,5 +1,5 @@
-.text-yellow-flash { color: $yellow-flash; }
-
+// .text-yellow-flash { color: $yellow-flash; }
+.full-width { width: 100% }
 .text-shadow { text-shadow: 2px 2px 3px rgba(0,0,0,0.3); }
 
 .title {
@@ -19,7 +19,7 @@
 
 .intro-1 {
   .full-bg-img { background-color: rgba(0, 0, 0, 0.6); }
-  height: 500px;
+  height: 600px;
   background: url("/images/maison_toit.jpg") no-repeat center center;
   background-size: cover;
   @include media-breakpoint-up(xs) { height: 300px; }
@@ -39,17 +39,15 @@
 }
 
 .btn-yellow-flash {
-  background-color: $yellow-flash !important;
   color: black !important;
   font-weight: bold;
   &:hover, &:focus {
-    background-color: darken($yellow-flash, 5%) !important;
     color: black !important;
   }
 }
 
 .badge-green-flash { background-color: $green-flash; }
-.badge-yellow-flash { background-color: $yellow-flash; color: black; }
+// .badge-yellow-flash { background-color: $yellow-flash; color: black; }
 
 .text-dark-gray { color: $gray-700; }
 .text-green-flash {
@@ -65,5 +63,9 @@ a.text-green-flash:hover {
   // position: absolute;
   // z-index: 1000;
   @extend .m-0;
+  border-radius: 0;
+}
+
+nav.navbar {
   border-radius: 0;
 }

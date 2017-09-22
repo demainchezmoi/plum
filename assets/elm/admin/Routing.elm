@@ -5,14 +5,14 @@ import UrlParser exposing (..)
 
 
 type Route
-    = LandsRoute
+    = LandListRoute
     | NotFoundRoute
 
 
 matchers : Parser (Route -> a) a
 matchers =
     oneOf
-        [ map LandsRoute <| s "admin"
+        [ map LandListRoute (s "admin")
         ]
 
 
@@ -29,7 +29,7 @@ parse location =
 toPath : Route -> String
 toPath route =
     case route of
-        LandsRoute ->
+        LandListRoute ->
             "/lands"
 
         NotFoundRoute ->

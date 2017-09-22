@@ -1,25 +1,16 @@
-module LandList.View exposing (indexView)
+module LandList.View exposing (landListView)
 
 import Land.View exposing (landView)
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Messages exposing (..)
+import LandList.Model exposing (LandList)
 import Model exposing (..)
 import RemoteData exposing (..)
 
 
-indexView : Model -> Html Msg
-indexView model =
-    div
-        [ id "home_index" ]
-        [ div
-            []
-            [ landsList model ]
-        ]
-
-
-landsList : Model -> Html Msg
-landsList model =
+landListView : Model -> Html Msg
+landListView model =
     case model.landList of
         NotAsked ->
             text "Initialising."
@@ -31,11 +22,11 @@ landsList model =
             text ("Error: " ++ toString err)
 
         Success landList ->
-            viewLandList landList
+            renderLandList landList
 
 
-viewLandList : LandList -> Html Msg
-viewLandList landList =
+renderLandList : LandList -> Html Msg
+renderLandList landList =
     landList
         |> List.map landView
         |> div [ class "cards-wrapper" ]

@@ -1,10 +1,10 @@
 module Messages exposing (..)
 
 import Http
-import Model exposing (LandList)
 import Navigation
 import Routing exposing (Route)
 import RemoteData exposing (..)
+import LandList.Model exposing (LandList)
 
 
 type Msg
