@@ -46,11 +46,11 @@ nav.navbar.green-flash-text a {
 .intro-1 {
   .full-bg-img { background-color: rgba(0, 0, 0, 0.5); }
   height: 600px;
-  background: url("/images/maison_toit.jpg") no-repeat center center;
+  background: url("https://s3-eu-west-1.amazonaws.com/demainchezmoi/cloudfront_assets/images/maison_toit.jpg") no-repeat center center;
   background-size: cover;
   @include media-breakpoint-up(xs) { height: 300px; }
   @include media-breakpoint-up(sm) { height: 380px; }
-  @include media-breakpoint-up(md) { height: 460px; } 
+  @include media-breakpoint-up(md) { height: 460px; }
   @include media-breakpoint-up(lg) { height: 540px; }
   @include media-breakpoint-up(xl) { height: 620px; }
 }
@@ -58,7 +58,7 @@ nav.navbar.green-flash-text a {
 .responsive-map {
   @include media-breakpoint-up(xs) { height: 200px; }
   @include media-breakpoint-up(sm) { height: 280px; }
-  @include media-breakpoint-up(md) { height: 360px; } 
+  @include media-breakpoint-up(md) { height: 360px; }
   @include media-breakpoint-up(lg) { height: 440px; }
   @include media-breakpoint-up(xl) { height: 520px; }
   width: auto;

@@ -9,7 +9,7 @@
           <li><h1 class="font-bold" style="color: white">La Maison Léo</h1></li>
           <li>
             <p class="lead text-shadow font-bold" style="color: white" data-wow-delay="0.2s">
-            Un lieu de vie conçu pour la famille, robuste et durable.
+            Pour la famille
             </p>
           </li>
         </ul>
@@ -31,11 +31,11 @@
         <article>
           <h2 class="text-secondary font-bold mt-5">L'habitat</h2>
           <p>D'une surface de 80m<sup>2</sup>, munie de trois chambres et d'un vaste espace commun, la Maison Léo constitue un lieu de vie idéal pour une famille moderne.</p>
-      		<img class="d-block w-100 responsive-map" src="<%= static_path(@conn, "/images/maison.png") %>">
+      		<img class="d-block responsive-map" src="https://s3-eu-west-1.amazonaws.com/demainchezmoi/cloudfront_assets/images/maison.png">
 
           <h2 class="text-secondary font-bold mt-5">À l'abri des éléments</h2>
           <p>Robustes et parfaitement isolés, les murs de 20cm d'épaisseur de la Maison Léo protègent votre famille du monde extérieur. La Maison Léo respecte les normes RT2012 et affiche des performances classe A en énergie et émissions de gaz à effet de serre. Ce qui permet aussi de réaliser de sérieuses économies de chauffage&nbsp;!</p>
-      		<img class="d-block w-100 responsive-map" src="<%= static_path(@conn, "/images/maison_toit.jpg") %>">
+      		<img class="d-block responsive-map" src="https://s3-eu-west-1.amazonaws.com/demainchezmoi/cloudfront_assets/images/maison_11.png">
           <h2 class="text-secondary font-bold mt-5">Une garantie de qualité</h2>
           <p>Garantie de parfait achèvement, garantie décénale et processus de fabrication maîtrisé vous garantissent une qualité sans équivoque.</p>
 
