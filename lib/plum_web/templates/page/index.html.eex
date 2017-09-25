@@ -6,10 +6,10 @@
     <div class="full-bg-img flex-center">
       <div class="container">
         <ul>
-          <li><h1 class="title h1-responsive font-bold wow fadeInDown" data-wow-delay="0.2s" style="color: white">La Maison Léo</h1></li>
+          <li><h1 class="font-bold" style="color: white">La Maison Léo</h1></li>
           <li>
-            <p class="subtitle lead text-shadow" style="color: white" data-wow-delay="0.2s">
-            Le confort d'une maison moderne et la fiabilité issue d'un savoir faire à l'épreuve du temps.
+            <p class="lead text-shadow font-bold" style="color: white" data-wow-delay="0.2s">
+            Un lieu de vie conçu pour la famille, robuste et durable.
             </p>
           </li>
         </ul>
@@ -23,39 +23,26 @@
 <section class="mb-5">
   <div class="container">
     <div class="row">
-      <div class="col text-center">
+      <div class="col">
+
         <article>
-          <div class="divider-new"><h2 class="h2-responsive">Le bâti</h2></div>
-          <p>Avec ses murs robustes de 25cm d'épaisseur, de ses fondations sur pieux l'isolant du sol et de son isolation high-tech, la maison Léo est conçue à l'épreuve du temps et des éléments.</p>
-      	  <img class="d-block w-50 mr-auto ml-auto" src="<%= static_path(@conn, "/images/maison_toit.jpg") %>">
+        </article>
+
+        <article>
+          <h2 class="text-secondary font-bold mt-5">L'habitat</h2>
+          <p>D'une surface de 80m<sup>2</sup>, munie de trois chambres et d'un vaste espace commun, la Maison Léo constitue un lieu de vie idéal pour une famille moderne.</p>
+      		<img class="d-block w-100 responsive-map" src="<%= static_path(@conn, "/images/maison.png") %>">
+
+          <h2 class="text-secondary font-bold mt-5">À l'abri des éléments</h2>
+          <p>Robustes et parfaitement isolés, les murs de 20cm d'épaisseur de la Maison Léo protègent votre famille du monde extérieur. La Maison Léo respecte les normes RT2012 et affiche des performances classe A en énergie et émissions de gaz à effet de serre. Ce qui permet aussi de réaliser de sérieuses économies de chauffage&nbsp;!</p>
+      		<img class="d-block w-100 responsive-map" src="<%= static_path(@conn, "/images/maison_toit.jpg") %>">
+          <h2 class="text-secondary font-bold mt-5">Une garantie de qualité</h2>
+          <p>Garantie de parfait achèvement, garantie décénale et processus de fabrication maîtrisé vous garantissent une qualité sans équivoque.</p>
+
+
       	</article>
 
         <article>
-          <div class="divider-new"><h2 class="h2-responsive">L'habitat</h2></div>
-          <p>La maison Léo cumule l'expérience accumulée sur des miliers de plans de T3 pour trouver LE plan qui fonctionne. Sa surface de 80m<sup>2</sup> la rendra confortable pour toute la famille.</p>
-      	  <img class="d-block w-50 mr-auto ml-auto" src="<%= static_path(@conn, "/images/maison.png") %>">
-      	</article>
-
-        <article>
-          <div class="divider-new"><h2 class="h2-responsive">Les performances</h2></div>
-          <p>La maison Léo, première de la classe, affiche des performances classe A en isolation.</p>
-          <div class="row">
-            <div class="col-xs col-md-6 mt-5">
-      	      <img class="d-block w-50 mr-auto ml-auto" src="<%= static_path(@conn, "/images/dpe.png") %>">
-      	    </div>
-            <div class="col-xs col-md-6 mt-5">
-      	      <img class="d-block w-50 mr-auto ml-auto" src="<%= static_path(@conn, "/images/ges.png") %>">
-      	    </div>
-      	  </div>
-      	</article>
-
-        <article>
-          <div class="divider-new"><h2 class="h2-responsive">Coûts et qualité</h2></div>
-          <p>Le concept de Maisons Léo repose sur un concept de coûts maîtrisés pour une qualité garantie. Cette prouesse est rendue possible par des choix critiques&nbsp;:
-          <ol style="text-align: left">
-            <li>ne produire qu'un seul modèle, et le maîtriser à 100%. La maison Léo n'est pas et ne sera jamais une maison sur mesure.</li>
-            <li>réduire le temps de construction et augmenter la qualité en produisant une partie de la maison en atelier.</li>
-          </ol>
       	</article>
       </div>
     </div>

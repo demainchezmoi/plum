@@ -15,11 +15,14 @@
 
       <!-- Links -->
       <ul class="navbar-nav mr-auto">
+        <li class="nav-item <%= if @active == :home, do: "active" %>">
+          <%= link raw(~S(La maison)), to: page_path(PlumWeb.Endpoint, :index), class: "nav-link" %>
+        </li>
         <li class="nav-item <%= if @active == :tech, do: "active" %>">
-          <%= link raw(~S(La technique)), to: page_path(PlumWeb.Endpoint, :technical), class: "nav-link" %>
+          <%= link raw(~S(Le produit)), to: page_path(PlumWeb.Endpoint, :technical), class: "nav-link" %>
         </li>
         <li class="nav-item <%= if @active == :contact, do: "active" %>">
-          <%= link raw(~S(Contact)), to: page_path(PlumWeb.Endpoint, :contact), class: "nav-link" %>
+          <%= link raw(~S(Nous contacter)), to: page_path(PlumWeb.Endpoint, :contact), class: "nav-link" %>
         </li>
 
 

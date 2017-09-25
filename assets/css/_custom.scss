@@ -3,10 +3,10 @@
 .text-shadow { text-shadow: 2px 2px 3px rgba(0,0,0,0.3); }
 
 nav.navbar.translucid {
- background: rgba(0, 0, 0, 0.6);
- @include media-breakpoint-up(sm) {
-   background: rgba(0, 0, 0, 0.2);
- }
+  background: rgba(0, 0, 0, 0.2);
+  @include media-breakpoint-up(sm) {
+    background: rgba(0, 0, 0, 0.2);
+  }
 }
 
 .badge-yellow-flash {
@@ -44,7 +44,7 @@ nav.navbar.green-flash-text a {
 }
 
 .intro-1 {
-  .full-bg-img { background-color: rgba(0, 0, 0, 0.6); }
+  .full-bg-img { background-color: rgba(0, 0, 0, 0.5); }
   height: 600px;
   background: url("/images/maison_toit.jpg") no-repeat center center;
   background-size: cover;
@@ -82,10 +82,10 @@ a.dark-grey-text:hover {
   color: $gray-900 !important;
 }
 // .text-green-flash {
-  // color: $green-flash;
+// color: $green-flash;
 // }
 // a.text-green-flash:hover {
-  // color: darken($green-flash, 5%);
+// color: darken($green-flash, 5%);
 // }
 .background-dark-gray { background-color: $gray-900; }
 .badge { border: 0 !important; }
