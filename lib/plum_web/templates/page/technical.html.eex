@@ -22,54 +22,21 @@
 <section>
   <div class="container">
     <div class="row">
-      <div class="col">
-        <h1>Coûts</h1>
-				<img  class="d-block responsive-map" src="https://s3-eu-west-1.amazonaws.com/demainchezmoi/cloudfront_assets/images/leo_costs.png"/>
+      <div class="col-12 col-lg-10 position-relative mr-auto ml-auto">
+        <article>
+          <div class="container">
+            <div class="row align-items-center mt-4">
+              <div class="col-12 col-md-5">
+                <h2 class="text-secondary font-bold mt-5">Des coûts maîtrisés</h2>
+                <p class="text-justify">Le processus de construction des maisons Léo nous permet de garantir une qualité optimale avec les meilleurs matériaux tout en réduisant considérablement les coûts.</p>
+              </div>
+              <div class="col-12 col-md-7">
+      	        <img class="d-block p-3 img-thumbnail" src="https://s3-eu-west-1.amazonaws.com/demainchezmoi/cloudfront_assets/images/leo_costs.png" style="width: 100%">
+              </div>
+            </div>
+          </div>
+        </article>
       </div>
     </div>
   </div>
 </section>
-
-<%# <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.0/Chart.bundle.min.js"></script> %>
-
-<%# <script> %>
-  <%# var ctx = document.getElementById("chart"); %>
-  <%# var data = { %>
-    <%# labels: ["Traditionnel", "Maison Léo"], %>
-    <%# datasets: [{ %>
-      <%# data: [3, 3], %>
-      <%# backgroundColor: 'rgba(255, 99, 132, 1)', %>
-			<%# label: "Assurance" %>
-    <%# }, { %>
-      <%# data: [8, 4], %>
-      <%# backgroundColor: 'rgba(255, 206, 86, 1)', %>
-      <%# label: "Commercialisation" %>
-    <%# }, { %>
-      <%# data: [12, 3], %>
-      <%# backgroundColor: 'rgba(75, 192, 192, 1)', %>
-      <%# label: "Conception" %>
-    <%# }, { %>
-      <%# data: [30, 40], %>
-      <%# backgroundColor: 'rgba(153, 102, 255, 1)', %>
-      <%# label: "Matériaux" %>
-    <%# }, { %>
-      <%# data: [45, 24], %>
-      <%# backgroundColor: 'rgba(255, 159, 64, 1)', %>
-      <%# label: "Main d'œuvre" %>
-    <%# }] %>
-  <%# }; %>
-  <%# var myBarChart = new Chart(ctx, { %>
-    <%# type: 'bar', %>
-    <%# data: data, %>
-		<%# options: { %>
-      <%# scales: { %>
-        <%# xAxes: [{ %>
-          <%# stacked: true %>
-        <%# }], %>
-        <%# yAxes: [{ %>
-          <%# stacked: true %>
-        <%# }] %>
-      <%# } %>
-    <%# } %>
-  <%# }); %>
-<%# </script> %>

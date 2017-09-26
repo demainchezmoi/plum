@@ -9,6 +9,14 @@ nav.navbar.translucid {
   }
 }
 
+.presentation-img {
+  height: auto;
+  @include media-breakpoint-up(xs) { width: 100%; }
+  @include media-breakpoint-up(sm) { width: 100%; }
+  @include media-breakpoint-up(md) { width: 75%; }
+  @include media-breakpoint-up(lg) { width: 50%; }
+}
+
 .badge-yellow-flash {
   color: black !important;
 }
