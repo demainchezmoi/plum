@@ -50,17 +50,13 @@
           <div class="row align-items-center mt-4">
             <div class="col-5">
               <h2 class="text-secondary font-bold mt-5">Une garantie de qualité</h2>
-              <p>Garantie de parfait achèvement, garantie décénale et processus de fabrication maîtrisé vous garantissent une qualité sans équivoque.</p>
+              <p class="text-justify">Garantie de parfait achèvement, garantie décénale et processus de fabrication maîtrisé vous garantissent une qualité sans équivoque.</p>
             </div>
             <div class="col-12 col-md-7">
       		    <img class="d-block p-3 img-thumbnail" src="https://s3-eu-west-1.amazonaws.com/demainchezmoi/cloudfront_assets/images/maison_11.png" style="width: 100%">
       		  </div>
       		</div>
 
-
-      	</article>
-
-        <article>
       	</article>
       </div>
     </div>
