@@ -55,6 +55,6 @@ defmodule PlumWeb.Router do
     resources "/ads", AdController
     resources "/contacts", ContactController
     resources "/lands", LandController
-    get "/annonces/:id", AdController, :public
+    get "/maison-plus-terrain/:id", AdController, :public
   end
 end

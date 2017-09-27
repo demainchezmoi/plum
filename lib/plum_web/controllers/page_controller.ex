@@ -20,11 +20,15 @@ defmodule PlumWeb.PageController do
   end
 
   def merci(conn, _params) do
-    render conn, "merci.html"
+    conn
+    |> put_layout("landing.html")
+    |> render("merci.html")
   end
 
   def confidentialite(conn, _params) do
-    render conn, "confidentialite.html"
+    conn
+    |> put_layout("landing.html")
+    |> render("confidentialite.html")
   end
 
   def admin(conn, _params) do

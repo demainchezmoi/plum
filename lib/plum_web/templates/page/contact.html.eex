@@ -7,13 +7,10 @@
       <div class="container">
         <ul>
           <li><h1 class="title h1-responsive font-bold wow fadeInDown" data-wow-delay="0.2s" style="color: white">Contact</h1></li>
+          <li><h4 class="text-white">contact@demainchezmoi.fr</h4></li>
         </ul>
       </div>
     </div>
   </section>
 </header>
 <!-- }}} -->
-
-<section>
-</section>
-
