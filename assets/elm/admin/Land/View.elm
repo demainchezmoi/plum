@@ -7,8 +7,8 @@ import Land.Model exposing (Land)
 import String exposing (join, concat)
 
 
-landView : Land -> Html Msg
-landView land =
+landItemView : Land -> Html Msg
+landItemView land =
     let
         infos =
             join " - "

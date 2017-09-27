@@ -1,6 +1,6 @@
 module LandList.View exposing (landListView)
 
-import Land.View exposing (landView)
+import Land.View exposing (landItemView)
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Messages exposing (..)
@@ -22,11 +22,14 @@ landListView model =
             text ("Error: " ++ toString err)
 
         Success landList ->
-            renderLandList landList
+            div []
+                [ h1 [] [ text "Terrains" ]
+                , renderLandList landList
+                ]
 
 
 renderLandList : LandList -> Html Msg
 renderLandList landList =
     landList
-        |> List.map landView
+        |> List.map landItemView
         |> div [ class "cards-wrapper" ]

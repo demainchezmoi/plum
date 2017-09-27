@@ -12,13 +12,13 @@ type Route
 matchers : Parser (Route -> a) a
 matchers =
     oneOf
-        [ map LandListRoute (s "admin")
+        [ map LandListRoute (s "lands")
         ]
 
 
 parse : Navigation.Location -> Route
 parse location =
-    case UrlParser.parsePath matchers location of
+    case UrlParser.parseHash matchers location of
         Just route ->
             route
 
