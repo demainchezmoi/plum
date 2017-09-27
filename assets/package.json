@@ -12,6 +12,8 @@
   "devDependencies": {
     "babel-core": "^6.26.0",
     "babel-loader": "^7.1.2",
+    "babel-plugin-transform-object-assign": "^6.22.0",
+    "babel-plugin-transform-strict-mode": "^6.24.1",
     "babel-preset-env": "^1.6.0",
     "bootstrap": "^4.0.0-beta",
     "copy-webpack-plugin": "^4.0.1",
@@ -23,6 +25,7 @@
     "install": "^0.10.1",
     "jquery": "^3.2.1",
     "mdbootstrap": "^4.4.1",
+    "node-sass": "^4.5.3",
     "node-waves": "^0.7.5",
     "npm": "^5.4.1",
     "popper.js": "^1.12.5",
