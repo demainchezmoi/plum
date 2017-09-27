@@ -44,3 +44,4 @@ plum.zip
 *.plt
 *.swp
 core
+.bash_history

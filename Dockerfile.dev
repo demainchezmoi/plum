@@ -38,8 +38,32 @@ RUN ALPINE_GLIBC_BASE_URL="https://github.com/sgerrand/alpine-pkg-glibc/releases
 
 ENV LANG=C.UTF-8
 
-# Install Elixir and basic build dependencies
+# Install the magic docker wrapper.
+ADD ./wrapdocker /usr/local/bin/wrapdocker
 
+# Install Docker and dependencies
+RUN apk --update add \
+  bash \
+  iptables \
+  ca-certificates \
+  e2fsprogs \
+  docker \
+  && chmod +x /usr/local/bin/wrapdocker \
+  && rm -rf /var/cache/apk/*
+
+# Define additional metadata for our docker image.
+VOLUME /var/lib/docker
+
+# Install awscli
+RUN \
+	mkdir -p /aws && \
+	apk -Uuv add groff less python py-pip && \
+	pip install awscli && \
+	apk --purge -v del py-pip && \
+	rm /var/cache/apk/*
+
+
+# Install Elixir and basic build dependencies
 WORKDIR /tmp/elixir-build
 
 RUN \
@@ -62,7 +86,6 @@ RUN \
 
 WORKDIR ${HOME}
 
-
 # Install Elm
 RUN npm install --global \
       elm@0.18 \
@@ -70,7 +93,6 @@ RUN npm install --global \
       elm-live \
       elm-test \
       elm-upgrade
-
 
 # Cache elixir deps
 RUN mkdir config
@@ -84,9 +106,9 @@ RUN cd ./assets && npm install
 
 COPY . .
 
-RUN cd ./assets && \
-    ./node_modules/.bin/webpack && \
-    cd .. && \
-    mix phx.digest
+RUN cd ./assets \
+    && ./node_modules/.bin/webpack \
+    && cd .. \
+    && mix phx.digest
 
 CMD ["mix", "phoenix.server"]
