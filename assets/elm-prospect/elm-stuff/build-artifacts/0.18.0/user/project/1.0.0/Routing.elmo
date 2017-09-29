@@ -1,0 +1,35 @@
+var _user$project$Routing$toPath = function (route) {
+	var _p0 = route;
+	if (_p0.ctor === 'NotFoundRoute') {
+		return 'not-found';
+	} else {
+		return A2(
+			_elm_lang$core$Basics_ops['++'],
+			'project/',
+			_elm_lang$core$Basics$toString(_p0._0));
+	}
+};
+var _user$project$Routing$ProjectRoute = function (a) {
+	return {ctor: 'ProjectRoute', _0: a};
+};
+var _user$project$Routing$matchers = _evancz$url_parser$UrlParser$oneOf(
+	{
+		ctor: '::',
+		_0: A2(
+			_evancz$url_parser$UrlParser$map,
+			_user$project$Routing$ProjectRoute,
+			A2(
+				_evancz$url_parser$UrlParser_ops['</>'],
+				_evancz$url_parser$UrlParser$s('projet'),
+				_evancz$url_parser$UrlParser$string)),
+		_1: {ctor: '[]'}
+	});
+var _user$project$Routing$NotFoundRoute = {ctor: 'NotFoundRoute'};
+var _user$project$Routing$parse = function (location) {
+	var _p1 = A2(_evancz$url_parser$UrlParser$parseHash, _user$project$Routing$matchers, location);
+	if (_p1.ctor === 'Just') {
+		return _p1._0;
+	} else {
+		return _user$project$Routing$NotFoundRoute;
+	}
+};

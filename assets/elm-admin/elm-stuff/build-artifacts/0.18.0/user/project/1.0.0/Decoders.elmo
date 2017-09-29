@@ -1,0 +1,20 @@
+var _user$project$Decoders$landDecoder = A2(
+	_elm_community$json_extra$Json_Decode_Extra_ops['|:'],
+	A2(
+		_elm_community$json_extra$Json_Decode_Extra_ops['|:'],
+		A2(
+			_elm_community$json_extra$Json_Decode_Extra_ops['|:'],
+			A2(
+				_elm_community$json_extra$Json_Decode_Extra_ops['|:'],
+				A2(
+					_elm_community$json_extra$Json_Decode_Extra_ops['|:'],
+					A2(
+						_elm_community$json_extra$Json_Decode_Extra_ops['|:'],
+						_elm_lang$core$Json_Decode$succeed(_user$project$Land_Model$Land),
+						A2(_elm_lang$core$Json_Decode$field, 'city', _elm_lang$core$Json_Decode$string)),
+					A2(_elm_lang$core$Json_Decode$field, 'department', _elm_lang$core$Json_Decode$string)),
+				A2(_elm_lang$core$Json_Decode$field, 'lat', _elm_lang$core$Json_Decode$float)),
+			A2(_elm_lang$core$Json_Decode$field, 'lng', _elm_lang$core$Json_Decode$float)),
+		A2(_elm_lang$core$Json_Decode$field, 'price', _elm_lang$core$Json_Decode$int)),
+	A2(_elm_lang$core$Json_Decode$field, 'surface', _elm_lang$core$Json_Decode$int));
+var _user$project$Decoders$landListDecoder = _elm_lang$core$Json_Decode$list(_user$project$Decoders$landDecoder);

@@ -1,0 +1,102 @@
+var _user$project$Land_View$landItemView = function (land) {
+	var infos = A2(
+		_elm_lang$core$String$join,
+		' - ',
+		{
+			ctor: '::',
+			_0: _elm_lang$core$String$concat(
+				{
+					ctor: '::',
+					_0: 'lat: ',
+					_1: {
+						ctor: '::',
+						_0: _elm_lang$core$Basics$toString(land.lat),
+						_1: {ctor: '[]'}
+					}
+				}),
+			_1: {
+				ctor: '::',
+				_0: _elm_lang$core$String$concat(
+					{
+						ctor: '::',
+						_0: 'lng: ',
+						_1: {
+							ctor: '::',
+							_0: _elm_lang$core$Basics$toString(land.lng),
+							_1: {ctor: '[]'}
+						}
+					}),
+				_1: {
+					ctor: '::',
+					_0: _elm_lang$core$String$concat(
+						{
+							ctor: '::',
+							_0: land.city,
+							_1: {
+								ctor: '::',
+								_0: ' (',
+								_1: {
+									ctor: '::',
+									_0: land.department,
+									_1: {
+										ctor: '::',
+										_0: ')',
+										_1: {ctor: '[]'}
+									}
+								}
+							}
+						}),
+					_1: {
+						ctor: '::',
+						_0: _elm_lang$core$String$concat(
+							{
+								ctor: '::',
+								_0: _elm_lang$core$Basics$toString(land.price),
+								_1: {
+									ctor: '::',
+									_0: ' euros',
+									_1: {ctor: '[]'}
+								}
+							}),
+						_1: {
+							ctor: '::',
+							_0: _elm_lang$core$String$concat(
+								{
+									ctor: '::',
+									_0: _elm_lang$core$Basics$toString(land.surface),
+									_1: {
+										ctor: '::',
+										_0: ' m2',
+										_1: {ctor: '[]'}
+									}
+								}),
+							_1: {ctor: '[]'}
+						}
+					}
+				}
+			}
+		});
+	return A2(
+		_elm_lang$html$Html$div,
+		{
+			ctor: '::',
+			_0: _elm_lang$html$Html_Attributes$class('card mb-2'),
+			_1: {ctor: '[]'}
+		},
+		{
+			ctor: '::',
+			_0: A2(
+				_elm_lang$html$Html$div,
+				{
+					ctor: '::',
+					_0: _elm_lang$html$Html_Attributes$class('card-body'),
+					_1: {ctor: '[]'}
+				},
+				{
+					ctor: '::',
+					_0: _elm_lang$html$Html$text(infos),
+					_1: {ctor: '[]'}
+				}),
+			_1: {ctor: '[]'}
+		});
+};

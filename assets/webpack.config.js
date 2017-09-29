@@ -6,7 +6,8 @@ var webpack = require('webpack');
 config = {
   entry: {
     app: './js/app.js',
-    admin: './js/admin.js'
+    admin: './js/admin.js',
+    prospect: './js/prospect.js'
   },
   output: {
     path: path.join(__dirname, '..', 'priv', 'static'),
@@ -14,12 +15,21 @@ config = {
   },
   module: {
     rules: [{
-      test: /\.elm$/,
+      test: /.*elm-admin.*\.elm$/,
       exclude: [/elm-stuff/, /node_modules/],
       use: {
         loader: 'elm-webpack-loader',
         options: {
-          cwd: 'elm'
+          cwd: 'elm-admin'
+        }
+      }
+    }, {
+      test: /.*elm-prospect.*\.elm$/,
+      exclude: [/elm-stuff/, /node_modules/],
+      use: {
+        loader: 'elm-webpack-loader',
+        options: {
+          cwd: 'elm-prospect'
         }
       }
     }, {

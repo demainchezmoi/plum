@@ -1,0 +1,26 @@
+var _user$project$Commands$getProject = F2(
+	function (apiToken, projectId) {
+		var apiUrl = _elm_lang$core$String$concat(
+			{
+				ctor: '::',
+				_0: '/api/project/',
+				_1: {
+					ctor: '::',
+					_0: projectId,
+					_1: {
+						ctor: '::',
+						_0: '/?token=',
+						_1: {
+							ctor: '::',
+							_0: apiToken,
+							_1: {ctor: '[]'}
+						}
+					}
+				}
+			});
+		return A2(
+			_elm_lang$core$Platform_Cmd$map,
+			_user$project$Messages$ProjectResponse,
+			_krisajenkins$remotedata$RemoteData$sendRequest(
+				A2(_elm_lang$http$Http$get, apiUrl, _user$project$Decoders$projectDecoder)));
+	});

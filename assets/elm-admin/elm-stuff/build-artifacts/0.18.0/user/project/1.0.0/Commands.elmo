@@ -1,0 +1,17 @@
+var _user$project$Commands$getLandList = function (apiToken) {
+	var apiUrl = _elm_lang$core$String$concat(
+		{
+			ctor: '::',
+			_0: '/api/lands/?token=',
+			_1: {
+				ctor: '::',
+				_0: apiToken,
+				_1: {ctor: '[]'}
+			}
+		});
+	return A2(
+		_elm_lang$core$Platform_Cmd$map,
+		_user$project$Messages$LandListResponse,
+		_krisajenkins$remotedata$RemoteData$sendRequest(
+			A2(_elm_lang$http$Http$get, apiUrl, _user$project$Decoders$landListDecoder)));
+};

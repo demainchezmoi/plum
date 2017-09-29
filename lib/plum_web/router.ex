@@ -38,6 +38,7 @@ defmodule PlumWeb.Router do
   scope "/", PlumWeb do
     pipe_through :protected
     get "/admin*path", PageController, :admin
+    get "/mon-espace*path", PageController, :prospect
   end
 
   scope "/api", PlumWeb.Api do
