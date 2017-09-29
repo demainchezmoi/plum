@@ -6,6 +6,7 @@
 .npm
 .cache
 .elm
+.docker
 ctags
 tags
 
