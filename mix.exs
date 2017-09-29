@@ -35,6 +35,7 @@ defmodule Plum.Mixfile do
     [
       {:cowboy, "~> 1.0"},
       {:dialyxir, "~> 0.5", only: [:dev], runtime: false},
+      {:ecto_conditionals, "~> 0.1.0"},
       {:ex_machina, "~> 2.1", only: [:test]},
       {:gen_smtp, "~> 0.12.0"},
       {:gettext, "~> 0.11"},
@@ -46,8 +47,10 @@ defmodule Plum.Mixfile do
       {:phoenix_html, "~> 2.10"},
       {:phoenix_live_reload, "~> 1.0", only: :dev},
       {:phoenix_pubsub, "~> 1.0"},
+      {:phoenix_swoosh, "~> 0.2"},
       {:postgrex, ">= 0.0.0"},
-      {:swoosh, "~> 0.10.0"},
+      {:ueberauth, "~> 0.4"},
+      {:ueberauth_facebook, "~> 0.7"},
     ]
   end
 

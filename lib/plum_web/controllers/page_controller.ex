@@ -38,4 +38,8 @@ defmodule PlumWeb.PageController do
   def prospect(conn, _params) do
     conn |> render("prospect.html")
   end
+
+  def login(conn, _params) do
+    conn |> render("login.html")
+  end
 end

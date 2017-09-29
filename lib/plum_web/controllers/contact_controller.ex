@@ -6,7 +6,7 @@ defmodule PlumWeb.ContactController do
   alias PlumWeb.Mailer
   alias PlumWeb.Email
 
-  plug Coherence.Authentication.Session, [protected: true] when action not in [:new, :create]
+  # plug Coherence.Authentication.Session, [protected: true] when action not in [:new, :create]
 
   def index(conn, _params) do
     contacts = Sales.list_contact() |> Enum.map(& &1 |> Repo.preload(:ad))

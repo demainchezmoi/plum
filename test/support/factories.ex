@@ -8,7 +8,7 @@ defmodule Plum.Factory do
     Land
   }
 
-  alias Plum.Coherence.User
+  alias Plum.Accounts.User
 
   def ad_factory do
     %Ad{
@@ -39,10 +39,8 @@ defmodule Plum.Factory do
 
   def user_factory do
     %User{
-      name: "Hubert",
-      email: "hubert@bonnisseur.com",
-      password: "secret",
-      password_confirmation: "secret",
+      admin: true,
+      email: sequence(:email, &"hubert@bonnisseur#{&1}.com"),
     }
   end
 end

@@ -1,0 +1,4 @@
+<a class="btn btn-primary btn-lg" href="/auth/facebook">
+  <i class="fa fa-facebook"></i>
+  Sign in with Facebook
+</a>

@@ -2,7 +2,7 @@ defmodule PlumWeb.Plugs.TokenAuthorization do
   alias Plum.Api.ErrorView
   alias PlumWeb.Endpoint
   alias Plum.Repo
-  alias Plum.Coherence.User
+  alias Plum.Accounts.User
   alias Phoenix.Controller
   alias Phoenix.Token
   alias Plug.Conn

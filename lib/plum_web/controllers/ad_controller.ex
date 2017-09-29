@@ -6,7 +6,7 @@ defmodule PlumWeb.AdController do
   alias Plum.Sales.Ad
   alias Plum.Sales.Contact
 
-  plug Coherence.Authentication.Session, [protected: true] when action not in [:public]
+  # plug Coherence.Authentication.Session, [protected: true] when action not in [:public]
 
   def index(conn, _params) do
     ad = Sales.list_ad()
