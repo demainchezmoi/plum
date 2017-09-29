@@ -24,3 +24,6 @@
   * Start app: `docker run -p 80:4000 -it --env-file .env 383646808490.dkr.ecr.eu-west-1.amazonaws.com/demainchezmoi/plum:<version> foreground`
   * Connect to running app: `docker ps` then `sudo docker exec -it <container_id> /opt/app/bin/plum remote_console`
   * Connect with local container: `docker run -it --rm --env-file .env 383646808490.dkr.ecr.eu-west-1.amazonaws.com/demainchezmoi/plum:release console`
+  * Drop db:
+    * `psql --host=<host> --port=5432 --username=dcmplum --password --dbname=plum_prod --command "drop schema public cascade;"`
+    * `psql --host=<host> --port=5432 --username=dcmplum --password --dbname=plum_prod --command "create schema public;"`
