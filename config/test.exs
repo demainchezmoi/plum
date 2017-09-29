@@ -18,9 +18,6 @@ config :plum, Plum.Repo,
   hostname: System.get_env("DATABASE_HOST") || "localhost",
   pool: Ecto.Adapters.SQL.Sandbox
 
-config :coherence, PlumWeb.Coherence.Mailer,
-  adapter: Swoosh.Adapters.Test
-
 config :plum, PlumWeb.Mailer,
   adapter: Swoosh.Adapters.Test
 

@@ -28,20 +28,6 @@ config :mix_docker, image: "383646808490.dkr.ecr.eu-west-1.amazonaws.com/demainc
 # of this file so it overrides the configuration defined above.
 import_config "#{Mix.env}.exs"
 
-# %% Coherence Configuration %%   Don't remove this line
-config :coherence,
-  user_schema: Plum.Coherence.User,
-  repo: Plum.Repo,
-  module: Plum,
-  web_module: PlumWeb,
-  router: PlumWeb.Router,
-  messages_backend: PlumWeb.Coherence.Messages,
-  logged_out_url: "/",
-  email_from_name: "Alexandre Hervé",
-  email_from_email: "aherve@demainchezmoi.fr",
-  opts: [:authenticatable, :recoverable, :lockable, :trackable, :unlockable_with_token, :invitable]
-# %% End Coherence Configuration %%
-
 config :number, delimit: [
   precision: 2,
   delimiter: "&nbsp;",

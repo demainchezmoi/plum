@@ -76,17 +76,6 @@ config :plum, Plum.Repo,
   port: "${RDS_PORT}",
   pool_size: 15
 
-config :coherence, PlumWeb.Coherence.Mailer,
-  adapter: Swoosh.Adapters.SMTP,
-  relay: "email-smtp.eu-west-1.amazonaws.com",
-  port: 465,
-  username: "${SMTP_USERNAME}",
-  password: "${SMTP_PASSWORD}",
-  tls: :if_available,
-  ssl: true,
-  auth: :always,
-  retries: 3
-
 config :plum, PlumWeb.Mailer,
   adapter: Swoosh.Adapters.SMTP,
   relay: "email-smtp.eu-west-1.amazonaws.com",
