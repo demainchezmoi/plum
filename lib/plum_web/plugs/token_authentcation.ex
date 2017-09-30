@@ -1,4 +1,4 @@
-defmodule PlumWeb.Plugs.TokenAuthorization do
+defmodule PlumWeb.Plugs.TokenAuthentication do
   alias Plum.Api.ErrorView
   alias PlumWeb.Endpoint
   alias Plum.Repo
@@ -10,17 +10,17 @@ defmodule PlumWeb.Plugs.TokenAuthorization do
   def init(_), do: :ok
 
   def call(conn, _params) do
-    with {:ok, token} <- find_token(conn),
-         {:ok, user_id} <- verify_token(token),
-         user = %User{} <- fetch_user(user_id)
-    do
-      conn |> Conn.assign(:current_user, user)
+    if conn.assigns[:current_user] do
+      conn
     else
-      _ ->
-        conn
-        |> Conn.put_status(:unauthorized)
-        |> Controller.render(ErrorView, "401.json")
-        |> Conn.halt
+      with {:ok, token} <- find_token(conn),
+           {:ok, user_id} <- verify_token(token),
+           user = %User{} <- fetch_user(user_id)
+      do
+        conn |> Conn.assign(:current_user, user)
+      else
+        _ -> conn
+      end
     end
   end
 

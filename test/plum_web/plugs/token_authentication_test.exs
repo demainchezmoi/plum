@@ -1,24 +1,18 @@
-defmodule Plum.Plugs.TokenAuthorizationTest do
+defmodule Plum.Plugs.TokenAuthenticationTest do
   use PlumWeb.ConnCase
-  alias PlumWeb.Plugs.TokenAuthorization
+  alias PlumWeb.Plugs.TokenAuthentication
   alias PlumWeb.Endpoint
 
-  test "forbid access without token",
+  test "don't assign user without token",
   %{conn: conn} do
-    conn = conn |> TokenAuthorization.call(%{})
-    assert conn.status == 401
-    assert conn.halted
+    conn = conn |> TokenAuthentication.call(%{})
+    refute conn.assigns[:current_user]
   end
 
-  test "forbid access for invalid token",
+  test "don't assign user with invalid token",
   %{conn: conn} do
     token = Phoenix.Token.sign(Endpoint, "user", -1)
-    conn =
-      conn
-      |> Map.update(:body_params, %{"token" => token}, fn p -> Map.put(p, "token", token) end)
-      |> TokenAuthorization.call(%{})
-    assert conn.status == 401
-    assert conn.halted
+    refute conn.assigns[:current_user]
   end
 
   @tag :logged_in
@@ -28,7 +22,7 @@ defmodule Plum.Plugs.TokenAuthorizationTest do
     conn =
       conn
       |> Map.update(:body_params, %{"token" => token}, fn p -> Map.put(p, "token", token) end)
-      |> TokenAuthorization.call(%{})
+      |> TokenAuthentication.call(%{})
     refute conn.halted
     assert conn.assigns.current_user.id == current_user.id
   end

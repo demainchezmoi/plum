@@ -1,4 +1,4 @@
-defmodule PlumWeb.Plugs.Authentication do
+defmodule PlumWeb.Plugs.SessionAuthentication do
 
   import  Plug.Conn
   alias Plum.Accounts
