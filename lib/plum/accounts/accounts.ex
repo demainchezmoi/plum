@@ -98,6 +98,22 @@ defmodule Plum.Accounts do
   end
 
   @doc """
+  Adds "admin" to user roles.
+  Does nothing if user is already admin.
+
+  ## Examples
+
+      iex> make_admin(user)
+      %User{roles: ["admin"]}
+
+  """
+  def make_admin(%User{} = user) do
+    roles = ["admin" | user.roles] |> Enum.uniq
+    user |> update_user(%{roles: roles})
+  end
+
+
+  @doc """
   Returns an `%Ecto.Changeset{}` for tracking user changes.
 
   ## Examples

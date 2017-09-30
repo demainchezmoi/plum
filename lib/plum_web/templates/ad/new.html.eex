@@ -1,5 +1,0 @@
-<h2>New Ad</h2>
-
-<%= render "form.html", Map.put(assigns, :action, ad_path(@conn, :create)) %>
-
-<span><%= link "Back", to: ad_path(@conn, :index) %></span>

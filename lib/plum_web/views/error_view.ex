@@ -5,6 +5,10 @@ defmodule PlumWeb.ErrorView do
     "Page not found"
   end
 
+  def render("403.html", _assigns) do
+    "Forbidden"
+  end
+
   def render("500.html", _assigns) do
     "Internal server error"
   end

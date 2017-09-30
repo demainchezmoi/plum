@@ -50,6 +50,7 @@ defmodule Plum.Factory do
     %User{
       admin: true,
       email: sequence(:email, &"hubert@bonnisseur#{&1}.com"),
+      roles: [],
     }
   end
 end

@@ -3,7 +3,7 @@
   <ul>
     <li>
       <strong>Terrain:</strong>
-      <%= link "#{@contact.ad.land.surface} m2 à #{@contact.ad.land.city}(#{@contact.ad.land.department})", to: land_url(PlumWeb.Endpoint, :show, @contact.ad.land) %>
+      <%= "#{@contact.ad.land.surface} m2 à #{@contact.ad.land.city}(#{@contact.ad.land.department})" %>
     </li>
 
     <li>

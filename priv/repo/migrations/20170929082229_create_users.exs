@@ -6,6 +6,7 @@ defmodule Plum.Repo.Migrations.CreateUsers do
       add :email, :string
       add :admin, :boolean, default: false, null: false
       add :facebook_id, :string
+      add :roles, {:array, :string}
 
       timestamps()
     end

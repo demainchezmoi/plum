@@ -1,6 +1,0 @@
-<h2>Show Contact</h2>
-
-<%= render "detail.html", contact: @contact, conn: @conn %>
-
-<span><%= link "Edit", to: contact_path(@conn, :edit, @contact) %></span>
-<span><%= link "Back", to: contact_path(@conn, :index) %></span>

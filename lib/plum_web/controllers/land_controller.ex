@@ -4,59 +4,57 @@ defmodule PlumWeb.LandController do
   alias Plum.Sales.Land
   alias Plum.Repo
 
-  plug PlumWeb.Plugs.RequireLogin
+  # def index(conn, _params) do
+    # lands = Sales.list_lands()
+    # render(conn, "index.html", lands: lands)
+  # end
 
-  def index(conn, _params) do
-    lands = Sales.list_lands()
-    render(conn, "index.html", lands: lands)
-  end
+  # def new(conn, _params) do
+    # changeset = Sales.change_land(%Land{})
+    # render(conn, "new.html", changeset: changeset)
+  # end
 
-  def new(conn, _params) do
-    changeset = Sales.change_land(%Land{})
-    render(conn, "new.html", changeset: changeset)
-  end
+  # def create(conn, %{"land" => land_params}) do
+    # case Sales.create_land(land_params) do
+      # {:ok, land} ->
+        # conn
+        # |> put_flash(:info, "Land created successfully.")
+        # |> redirect(to: land_path(conn, :show, land))
+      # {:error, %Ecto.Changeset{} = changeset} ->
+        # render(conn, "new.html", changeset: changeset)
+    # end
+  # end
 
-  def create(conn, %{"land" => land_params}) do
-    case Sales.create_land(land_params) do
-      {:ok, land} ->
-        conn
-        |> put_flash(:info, "Land created successfully.")
-        |> redirect(to: land_path(conn, :show, land))
-      {:error, %Ecto.Changeset{} = changeset} ->
-        render(conn, "new.html", changeset: changeset)
-    end
-  end
+  # def show(conn, %{"id" => id}) do
+    # land = Sales.get_land!(id) |> Repo.preload([ad: :contacts])
+    # render(conn, "show.html", land: land)
+  # end
 
-  def show(conn, %{"id" => id}) do
-    land = Sales.get_land!(id) |> Repo.preload([ad: :contacts])
-    render(conn, "show.html", land: land)
-  end
+  # def edit(conn, %{"id" => id}) do
+    # land = Sales.get_land!(id)
+    # changeset = Sales.change_land(land)
+    # render(conn, "edit.html", land: land, changeset: changeset)
+  # end
 
-  def edit(conn, %{"id" => id}) do
-    land = Sales.get_land!(id)
-    changeset = Sales.change_land(land)
-    render(conn, "edit.html", land: land, changeset: changeset)
-  end
+  # def update(conn, %{"id" => id, "land" => land_params}) do
+    # land = Sales.get_land!(id)
 
-  def update(conn, %{"id" => id, "land" => land_params}) do
-    land = Sales.get_land!(id)
+    # case Sales.update_land(land, land_params) do
+      # {:ok, land} ->
+        # conn
+        # |> put_flash(:info, "Land updated successfully.")
+        # |> redirect(to: land_path(conn, :show, land))
+      # {:error, %Ecto.Changeset{} = changeset} ->
+        # render(conn, "edit.html", land: land, changeset: changeset)
+    # end
+  # end
 
-    case Sales.update_land(land, land_params) do
-      {:ok, land} ->
-        conn
-        |> put_flash(:info, "Land updated successfully.")
-        |> redirect(to: land_path(conn, :show, land))
-      {:error, %Ecto.Changeset{} = changeset} ->
-        render(conn, "edit.html", land: land, changeset: changeset)
-    end
-  end
+  # def delete(conn, %{"id" => id}) do
+    # land = Sales.get_land!(id)
+    # {:ok, _land} = Sales.delete_land(land)
 
-  def delete(conn, %{"id" => id}) do
-    land = Sales.get_land!(id)
-    {:ok, _land} = Sales.delete_land(land)
-
-    conn
-    |> put_flash(:info, "Land deleted successfully.")
-    |> redirect(to: land_path(conn, :index))
-  end
+    # conn
+    # |> put_flash(:info, "Land deleted successfully.")
+    # |> redirect(to: land_path(conn, :index))
+  # end
 end

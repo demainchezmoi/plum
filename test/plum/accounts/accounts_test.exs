@@ -56,6 +56,14 @@ defmodule Plum.AccountsTest do
       assert_raise Ecto.NoResultsError, fn -> Accounts.get_user!(user.id) end
     end
 
+    test "make_admin/1 adds admin to users roles" do
+      user = insert(:user)
+      assert "admin" not in user.roles
+      Accounts.make_admin(user)
+      assert %User{roles: roles} = Accounts.get_user!(user.id)
+      assert "admin" in roles
+    end
+
     test "change_user/1 returns a user changeset" do
       user = insert(:user)
       assert %Ecto.Changeset{} = Accounts.change_user(user)

@@ -38,7 +38,12 @@ defmodule PlumWeb.ConnCase do
     conn = Phoenix.ConnTest.build_conn()
 
     if tags[:logged_in] do
-      user = insert(:user)
+      roles =
+        case tags[:logged_in] do
+          true -> []
+          roles when is_list(roles) -> roles
+        end
+      user = insert(:user, roles: roles)
       token = Phoenix.Token.sign(PlumWeb.Endpoint, "user", user.id)
       conn = Conn.assign(conn, :current_user, user)
       {:ok, conn: conn, current_user: user, token: token}

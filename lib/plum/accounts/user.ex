@@ -8,11 +8,12 @@ defmodule Plum.Accounts.User do
     field :admin, :boolean, default: false
     field :email, :string
     field :facebook_id, :string
+    field :roles, {:array, :string}, default: []
 
     timestamps()
   end
 
-  @optional_fields ~w(facebook_id)a
+  @optional_fields ~w(facebook_id roles)a
   @required_fields ~w(email admin)a
 
   @doc false

@@ -1,4 +1,4 @@
-defmodule Plum.Api.ErrorView do
+defmodule PlumWeb.Api.ErrorView do
   use PlumWeb, :view
 
   def render("400.json", _assigns) do

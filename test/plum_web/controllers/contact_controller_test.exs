@@ -5,13 +5,13 @@ defmodule PlumWeb.ContactControllerTest do
   alias Plum.Repo
   alias Plum.Sales.Contact
 
-  describe "index" do
-    @tag :logged_in
-    test "lists all contact", %{conn: conn} do
-      conn = get conn, contact_path(conn, :index)
-      assert html_response(conn, 200)
-    end
-  end
+  # describe "index" do
+    # @tag :logged_in
+    # test "lists all contact", %{conn: conn} do
+      # conn = get conn, contact_path(conn, :index)
+      # assert html_response(conn, 200)
+    # end
+  # end
 
   describe "new contact" do
     test "renders form", %{conn: conn} do
@@ -47,65 +47,65 @@ defmodule PlumWeb.ContactControllerTest do
     end
   end
 
-  describe "edit contact" do
-    setup [:create_contact]
+  # describe "edit contact" do
+    # setup [:create_contact]
 
-    @tag :logged_in
-    test "renders form for editing chosen contact", %{conn: conn, contact: contact} do
-      conn = get conn, contact_path(conn, :edit, contact)
-      assert html_response(conn, 200) =~ ~S(action="/contact)
-    end
+    # @tag :logged_in
+    # test "renders form for editing chosen contact", %{conn: conn, contact: contact} do
+      # conn = get conn, contact_path(conn, :edit, contact)
+      # assert html_response(conn, 200) =~ ~S(action="/contact)
+    # end
 
-    test "doesnt edit contact when not logged in", %{conn: conn, contact: contact} do
-      conn = get conn, contact_path(conn, :edit, contact) 
-      assert html_response(conn, 302)
-    end
-  end
+    # test "doesnt edit contact when not logged in", %{conn: conn, contact: contact} do
+      # conn = get conn, contact_path(conn, :edit, contact) 
+      # assert html_response(conn, 302)
+    # end
+  # end
 
-  describe "update contact" do
-    setup [:create_contact]
+  # describe "update contact" do
+    # setup [:create_contact]
 
-    @tag :logged_in
-    test "redirects when data is valid", %{conn: conn, contact: contact, land: land} do
-      contact_params = params_for(:contact, ad_id: land.ad.id) |> Map.put(:active, false)
-      conn1 = put conn, contact_path(conn, :update, contact), contact: contact_params 
-      assert redirected_to(conn1) == contact_path(conn, :show, contact)
+    # @tag :logged_in
+    # test "redirects when data is valid", %{conn: conn, contact: contact, land: land} do
+      # contact_params = params_for(:contact, ad_id: land.ad.id) |> Map.put(:active, false)
+      # conn1 = put conn, contact_path(conn, :update, contact), contact: contact_params 
+      # assert redirected_to(conn1) == contact_path(conn, :show, contact)
 
-      conn2 = get conn, contact_path(conn, :show, contact)
-      assert html_response(conn2, 200)
-    end
+      # conn2 = get conn, contact_path(conn, :show, contact)
+      # assert html_response(conn2, 200)
+    # end
 
-    @tag :logged_in
-    test "renders errors when data is invalid", %{conn: conn, contact: contact, land: land} do
-      contact_params = params_for(:contact, ad_id: land.ad.id) |> Map.put(:phone, 1234)
-      conn = put conn, contact_path(conn, :update, contact), contact: contact_params 
-      assert html_response(conn, 200) =~ ~S(action="/contact)
-    end
+    # @tag :logged_in
+    # test "renders errors when data is invalid", %{conn: conn, contact: contact, land: land} do
+      # contact_params = params_for(:contact, ad_id: land.ad.id) |> Map.put(:phone, 1234)
+      # conn = put conn, contact_path(conn, :update, contact), contact: contact_params 
+      # assert html_response(conn, 200) =~ ~S(action="/contact)
+    # end
 
-    test "doesnt update contact when not logged in", %{conn: conn, contact: contact} do
-      conn = get conn, contact_path(conn, :update, contact), contact: %{} 
-      assert html_response(conn, 302)
-    end
-  end
+    # test "doesnt update contact when not logged in", %{conn: conn, contact: contact} do
+      # conn = get conn, contact_path(conn, :update, contact), contact: %{} 
+      # assert html_response(conn, 302)
+    # end
+  # end
 
-  describe "delete contact" do
-    setup [:create_contact]
+  # describe "delete contact" do
+    # setup [:create_contact]
 
-    @tag :logged_in
-    test "deletes chosen contact", %{conn: conn, contact: contact} do
-      conn1 = delete conn, contact_path(conn, :delete, contact)
-      assert redirected_to(conn1) == contact_path(conn, :index)
+    # @tag :logged_in
+    # test "deletes chosen contact", %{conn: conn, contact: contact} do
+      # conn1 = delete conn, contact_path(conn, :delete, contact)
+      # assert redirected_to(conn1) == contact_path(conn, :index)
 
-      assert_error_sent 404, fn ->
-        get conn, contact_path(conn, :show, contact)
-      end
-    end
+      # assert_error_sent 404, fn ->
+        # get conn, contact_path(conn, :show, contact)
+      # end
+    # end
 
-    test "doesnt delete contact when not logged in", %{conn: conn, contact: contact} do
-      conn = get conn, contact_path(conn, :delete, contact)
-      assert html_response(conn, 302)
-    end
-  end
+    # test "doesnt delete contact when not logged in", %{conn: conn, contact: contact} do
+      # conn = get conn, contact_path(conn, :delete, contact)
+      # assert html_response(conn, 302)
+    # end
+  # end
 
   defp create_contact(_) do
     land = insert(:land)
