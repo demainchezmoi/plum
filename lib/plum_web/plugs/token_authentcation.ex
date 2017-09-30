@@ -13,7 +13,8 @@ defmodule PlumWeb.Plugs.TokenAuthentication do
     if conn.assigns[:current_user] do
       conn
     else
-      with {:ok, token} <- find_token(conn),
+      with auth_header = Conn.get_req_header(conn, "authorization"),
+           {:ok, token}   <- parse_token(auth_header),
            {:ok, user_id} <- verify_token(token),
            user = %User{} <- fetch_user(user_id)
       do
@@ -26,23 +27,13 @@ defmodule PlumWeb.Plugs.TokenAuthentication do
 
   def fetch_user(user_id), do: User |> Repo.get(user_id)
 
+  defp parse_token(["Token token=" <> token]), do: {:ok, String.replace(token, "\"", "")}
+  defp parse_token(_non_token_header), do: :error
+
   def verify_token(token) do
     case Token.verify(Endpoint, "user", token, max_age: 1209600) do
       {:ok, token} -> {:ok, token}
       _ -> Token.verify(Endpoint, "api_key", token)
     end
   end
-
-  def find_token(conn) do
-    case conn.body_params do
-      %{"token" => token} -> {:ok, token}
-      _ ->
-        conn = conn |> Conn.fetch_query_params
-        case conn.query_params do
-          %{"token" => token} -> {:ok, token}
-          _ -> :error
-        end
-    end
-  end
 end
-

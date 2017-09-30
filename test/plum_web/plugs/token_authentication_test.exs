@@ -2,6 +2,7 @@ defmodule Plum.Plugs.TokenAuthenticationTest do
   use PlumWeb.ConnCase
   alias PlumWeb.Plugs.TokenAuthentication
   alias PlumWeb.Endpoint
+  import Plum.Factory
 
   test "don't assign user without token",
   %{conn: conn} do
@@ -12,19 +13,25 @@ defmodule Plum.Plugs.TokenAuthenticationTest do
   test "don't assign user with invalid token",
   %{conn: conn} do
     token = Phoenix.Token.sign(Endpoint, "user", -1)
+    conn =
+      conn
+      |> put_auth_token_in_header(token)
+      |> TokenAuthentication.call(%{})
     refute conn.assigns[:current_user]
   end
 
-  @tag :logged_in
-  test "fetches the user and authorizes access with valid token",
-  %{conn: conn, current_user: current_user} do
-    token = Phoenix.Token.sign(Endpoint, "user", current_user.id)
+  test "fetches the user and authorizes access with valid token", %{conn: conn} do
+    user = insert(:user)
+    token = Phoenix.Token.sign(Endpoint, "user", user.id)
     conn =
       conn
-      |> Map.update(:body_params, %{"token" => token}, fn p -> Map.put(p, "token", token) end)
+      |> put_auth_token_in_header(token)
       |> TokenAuthentication.call(%{})
     refute conn.halted
-    assert conn.assigns.current_user.id == current_user.id
+    assert conn.assigns.current_user.id == user.id
+  end
+
+  defp put_auth_token_in_header(conn, token) do
+    conn |> put_req_header("authorization", "Token token=\"#{token}\"")
   end
 end
-
