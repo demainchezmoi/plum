@@ -49,6 +49,7 @@ defmodule Plum.Mixfile do
       {:phoenix_pubsub, "~> 1.0"},
       {:phoenix_swoosh, "~> 0.2"},
       {:postgrex, ">= 0.0.0"},
+      {:secure_random, "~> 0.5"},
       {:ueberauth, "~> 0.4"},
       {:ueberauth_facebook, "~> 0.7"},
     ]

@@ -4,7 +4,7 @@ defmodule PlumWeb.LandController do
   alias Plum.Sales.Land
   alias Plum.Repo
 
-  # plug Coherence.Authentication.Session, [protected: true]
+  plug PlumWeb.Plugs.RequireLogin
 
   def index(conn, _params) do
     lands = Sales.list_lands()

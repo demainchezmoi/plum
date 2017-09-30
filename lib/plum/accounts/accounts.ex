@@ -7,7 +7,14 @@ defmodule Plum.Accounts do
   alias Plum.Repo
   use EctoConditionals, repo: Plum.Repo
 
-  alias Plum.Accounts.User
+  alias Plum.Accounts.{
+    Session,
+    User
+  }
+
+  # ===============
+  # Users
+  # ===============
 
   @doc """
   Returns the list of users.
@@ -118,5 +125,57 @@ defmodule Plum.Accounts do
   def upsert_user_by(attrs, field) do
     User |> struct(attrs) |> upsert_by(field)
   end
+
+
+  # ===============
+  # Sessions
+  # ===============
+
+  @doc """
+  Returns an `%Ecto.Changeset{}` for tracking session changes.
+
+  ## Examples
+
+      iex> change_session(session)
+      %Ecto.Changeset{source: %Session{}}
+
+  """
+  def change_session(%Session{} = session) do
+    Session.changeset(session, %{})
+  end
+
+
+  @doc """
+  Creates a session.
+
+  ## Examples
+
+      iex> create_session(%{field: value})
+      {:ok, %Session{}}
+
+      iex> create_user(%{field: bad_value})
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def create_session(attrs \\ %{}) do
+    %Session{}
+    |> Session.changeset(attrs)
+    |> Session.with_token()
+    |> Repo.insert()
+  end
+
+  @doc """
+  Gets a single session by field.
+
+  ## Examples
+
+      iex> get_session_by(123, :token)
+      %Session{}
+
+      iex> get_session_by(456, :token)
+      nil
+
+  """
+  def get_session_by(value, field), do: Repo.get_by(Session, %{field => value})
 
 end

@@ -9,6 +9,7 @@ defmodule PlumWeb.Router do
     plug :fetch_flash
     plug :protect_from_forgery
     plug :put_secure_browser_headers
+    plug PlumWeb.Plugs.Authentication
   end
 
   pipeline :protected_browser do
@@ -17,7 +18,7 @@ defmodule PlumWeb.Router do
     plug :fetch_flash
     plug :protect_from_forgery
     plug :put_secure_browser_headers
-    # TODO : authentify connections
+    plug PlumWeb.Plugs.Authentication
   end
 
   pipeline :protected_api do

@@ -9,6 +9,8 @@ defmodule PlumWeb.AuthController do
 
   alias Ueberauth.Strategy.Helpers
 
+  @session_key Application.get_env(:plum, :session_key)
+
   def request(conn, _params) do
     render(conn, "request.html", callback_url: Helpers.callback_url(conn))
   end
@@ -20,19 +22,14 @@ defmodule PlumWeb.AuthController do
     |> redirect(to: "/")
   end
 
-  def callback(%{assigns: %{ueberauth_failure: _fails}} = conn, _params) do
-    conn
-    |> put_flash(:error, "Erreur d'authentification")
-    |> redirect(to: "/")
-  end
-
-  def callback(%{assigns: %{ueberauth_auth: auth}} = conn, _params) do
-    with attrs <- extract_user(auth),
-         {:ok, user} <- Accounts.upsert_user_by(attrs, :email)
+  def callback(%{assigns: %{ueberauth_auth: auth = %{provider: :facebook}}} = conn, _params) do
+    with attrs <- extract_fb_user(auth),
+         {:ok, user} <- Accounts.upsert_user_by(attrs, :email),
+         {:ok, session} <- Accounts.create_session(%{user_id: user.id}) # TODO : if session already exists
     do
         conn
         |> put_flash(:info, "Vous avez bien été authentifié")
-        |> put_session(:current_user, user)
+        |> put_session(@session_key, session.token)
         |> redirect(to: "/")
     else
       {:error, reason} ->
@@ -46,10 +43,21 @@ defmodule PlumWeb.AuthController do
     end
   end
 
-  defp extract_user(%{info: %{email: email, name: name}, provider: provider, uid: uid}) do
-    key = provider |> to_string |> (& &1 <> "_id").() |> String.to_atom 
-    %{email: email, name: name} |> Map.put(key, uid)
+  # def callback(%{assigns: %{ueberauth_failure: _fails}} = conn, _params) do
+    # conn
+    # |> put_flash(:error, "Erreur d'authentification")
+    # |> redirect(to: "/")
+  # end
+
+  def callback(conn, _params) do
+    conn
+    |> put_flash(:error, "Erreur d'authentification")
+    |> redirect(to: "/")
   end
 
-  defp extract_user(_), do: {:error, "Profil incomplet"}
+  defp extract_fb_user(%{info: %{email: email, name: name}, uid: uid}) do
+    %{email: email, name: name, facebook_id: uid}
+  end
+
+  defp extract_fb_user(_), do: {:error, "Profil incomplet"}
 end

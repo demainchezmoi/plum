@@ -28,6 +28,8 @@ config :mix_docker, image: "383646808490.dkr.ecr.eu-west-1.amazonaws.com/demainc
 # of this file so it overrides the configuration defined above.
 import_config "#{Mix.env}.exs"
 
+config :plum, session_key: "session_auth"
+
 config :number, delimit: [
   precision: 2,
   delimiter: "&nbsp;",

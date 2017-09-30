@@ -12,14 +12,14 @@ defmodule Plum.Accounts.User do
     timestamps()
   end
 
-  @optional_params ~w(facebook_id)a
-  @required_params ~w(email admin)a
+  @optional_fields ~w(facebook_id)a
+  @required_fields ~w(email admin)a
 
   @doc false
   def changeset(%User{} = user, attrs) do
     user
-    |> cast(attrs, @optional_params ++ @required_params)
-    |> validate_required(@required_params)
+    |> cast(attrs, @optional_fields ++ @required_fields)
+    |> validate_required(@required_fields)
     |> unique_constraint(:email)
   end
 end

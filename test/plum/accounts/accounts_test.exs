@@ -5,9 +5,12 @@ defmodule Plum.AccountsTest do
   use EctoConditionals, repo: Plum.Repo
 
   import Plum.Factory
+  alias Plum.Accounts.{
+    Session,
+    User,
+  }
 
   describe "users" do
-    alias Plum.Accounts.User
 
     test "list_users/0 returns all users" do
       user = insert(:user)
@@ -66,7 +69,38 @@ defmodule Plum.AccountsTest do
     test "upsert_user_by/2 updates a User" do
       %{email: email, id: id} = insert(:user, admin: false)
       user_params = params_for(:user, admin: true, email: email)
-      assert {:ok, %User{id: id, email: email, admin: true}} = Accounts.upsert_user_by(user_params, :email)
+      assert {:ok, %User{id: ^id, email: ^email, admin: true}} = Accounts.upsert_user_by(user_params, :email)
+    end
+  end
+
+
+  describe "sessions" do
+    test "change_session/1 returns a user changeset" do
+      user = insert(:user)
+      session = insert(:session, user_id: user.id)
+      assert %Ecto.Changeset{} = Accounts.change_session(session)
+    end
+
+    test "create_session/1 with valid data creates a session" do
+      user = insert(:user)
+      session_params = params_for(:session, user: user)
+      assert {:ok, %Session{} = session} = Accounts.create_session(session_params)
+      assert session.user_id == user.id
+      assert session.token 
+    end
+
+    test "create_session/1 with invalid data returns error changeset" do
+      session_params = params_for(:session) |> Map.put(:token, 123)
+      assert {:error, %Ecto.Changeset{}} = Accounts.create_session(session_params)
+    end
+
+    test "get_session_by/2 finds a session by token" do
+      session = insert(:session)
+      assert ^session = Accounts.get_session_by(session.token, :token)
+    end
+
+    test "get_session_by/2 returns nil for unknown token" do
+      assert is_nil Accounts.get_session_by("=====", :token)
     end
   end
 end

@@ -5,10 +5,13 @@ defmodule Plum.Factory do
   alias Plum.Sales.{
     Ad,
     Contact,
-    Land
+    Land,
   }
 
-  alias Plum.Accounts.User
+  alias Plum.Accounts.{
+    Session,
+    User,
+  }
 
   def ad_factory do
     %Ad{
@@ -34,6 +37,12 @@ defmodule Plum.Factory do
       lng: 2.1201,
       price: 42_000,
       surface: 396,
+    }
+  end
+
+  def session_factory do
+    %Session{
+      token: sequence(:token, &"token_#{&1}")
     }
   end
 

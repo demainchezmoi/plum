@@ -55,6 +55,11 @@ defmodule PlumWeb.ContactControllerTest do
       conn = get conn, contact_path(conn, :edit, contact)
       assert html_response(conn, 200) =~ ~S(action="/contact)
     end
+
+    test "doesnt edit contact when not logged in", %{conn: conn, contact: contact} do
+      conn = get conn, contact_path(conn, :edit, contact) 
+      assert html_response(conn, 302)
+    end
   end
 
   describe "update contact" do
@@ -76,6 +81,11 @@ defmodule PlumWeb.ContactControllerTest do
       conn = put conn, contact_path(conn, :update, contact), contact: contact_params 
       assert html_response(conn, 200) =~ ~S(action="/contact)
     end
+
+    test "doesnt update contact when not logged in", %{conn: conn, contact: contact} do
+      conn = get conn, contact_path(conn, :update, contact), contact: %{} 
+      assert html_response(conn, 302)
+    end
   end
 
   describe "delete contact" do
@@ -89,6 +99,11 @@ defmodule PlumWeb.ContactControllerTest do
       assert_error_sent 404, fn ->
         get conn, contact_path(conn, :show, contact)
       end
+    end
+
+    test "doesnt delete contact when not logged in", %{conn: conn, contact: contact} do
+      conn = get conn, contact_path(conn, :delete, contact)
+      assert html_response(conn, 302)
     end
   end
 

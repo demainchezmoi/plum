@@ -16,6 +16,11 @@ defmodule PlumWeb.AdControllerTest do
       conn = get conn, ad_path(conn, :new)
       assert html_response(conn, 200)
     end
+
+    test "doesnt render new when not logged in", %{conn: conn} do
+      conn = get conn, ad_path(conn, :new)
+      assert html_response(conn, 302)
+    end
   end
 
   describe "show ad" do
@@ -70,6 +75,11 @@ defmodule PlumWeb.AdControllerTest do
       conn = post conn, ad_path(conn, :create), ad: ad_params 
       assert html_response(conn, 200) =~ ~S(action="/ad)
     end
+
+    test "doesnt create add when not logged in", %{conn: conn} do
+      conn = post conn, ad_path(conn, :create), ad: %{} 
+      assert html_response(conn, 302)
+    end
   end
 
   describe "edit ad" do
@@ -79,6 +89,11 @@ defmodule PlumWeb.AdControllerTest do
     test "renders form for editing chosen ad", %{conn: conn, ad: ad} do
       conn = get conn, ad_path(conn, :edit, ad)
       assert html_response(conn, 200) =~ ~S(action="/ad)
+    end
+
+    test "doesnt edit add when not logged in", %{conn: conn, ad: ad} do
+      conn = get conn, ad_path(conn, :edit, ad)
+      assert html_response(conn, 302)
     end
   end
 
@@ -101,6 +116,11 @@ defmodule PlumWeb.AdControllerTest do
       conn = put conn, ad_path(conn, :update, ad), ad: ad_params 
       assert html_response(conn, 200) =~ ~S(action="/ad)
     end
+
+    test "doesnt update add when not logged in", %{conn: conn, ad: ad} do
+      conn = put conn, ad_path(conn, :update, ad), ad: %{} 
+      assert html_response(conn, 302)
+    end
   end
 
   describe "delete ad" do
@@ -113,6 +133,11 @@ defmodule PlumWeb.AdControllerTest do
       assert_error_sent 404, fn ->
         get conn, ad_path(conn, :show, ad)
       end
+    end
+
+    test "doesnt delete add when not logged in", %{conn: conn, ad: ad} do
+      conn = delete conn, ad_path(conn, :delete, ad)
+      assert html_response(conn, 302)
     end
   end
 
