@@ -5,6 +5,7 @@ defmodule Plum.Sales do
 
   import Ecto.Query, warn: false
   alias Plum.Repo
+  use EctoConditionals, repo: Plum.Repo
 
   alias Plum.Sales.Ad
 
@@ -309,6 +310,25 @@ defmodule Plum.Sales do
   def change_project(%Project{} = project) do
     Project.changeset(project, %{})
   end
+
+  @doc """
+  Finds or create a project by attributes
+
+  ## Examples
+
+      iex> find_or_create_project(%{user_id: user_id, ad_id: ad_id})
+      {:ok, %User{email: email}}
+
+  """
+  def find_or_create_project(attrs) do
+    fields =
+      attrs |> Map.keys |> Enum.map(fn
+        f when is_binary(f) -> f |> String.to_atom
+        f when is_atom(f) -> f
+      end)
+    Project |> struct(attrs) |> find_or_create_by(fields)
+  end
+
 
   @doc """
   Gets a single project by attributes.

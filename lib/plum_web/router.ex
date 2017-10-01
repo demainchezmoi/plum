@@ -65,7 +65,8 @@ defmodule PlumWeb.Router do
 
   scope "/", PlumWeb do
     pipe_through :protected_browser
-    get "/mon-espace*path", PageController, :prospect
+    get "/mon-espace", PageController, :prospect
+    get "/ads/:id/interested", AdController, :interested
   end
 
   scope "/", PlumWeb do

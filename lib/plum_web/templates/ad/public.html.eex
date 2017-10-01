@@ -24,7 +24,7 @@
               Devenez propriétaire à <%= @ad.land.city %>&nbsp;(<%= @ad.land.department %>)
             </h4>
           </li>
-          <li><a class="btn btn-outline-yellow-flash" id="interested-button">Prendre contact</a></li>
+          <li><%= link "Me positionner", to: ad_path(@conn, :interested, @ad), class: "btn btn-outline-yellow-flash", id: "interested-button" %></li>
         </ul>
       </div>
     </div>

@@ -13,7 +13,7 @@ type Route
 matchers : Parser (Route -> a) a
 matchers =
     oneOf
-        [ map ProjectRoute (s "projet" </> string) ]
+        [ map ProjectRoute (s "projets" </> string) ]
 
 
 parse : Navigation.Location -> Route
