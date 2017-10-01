@@ -143,6 +143,20 @@ defmodule Plum.SalesTest do
       assert Sales.get_project!(project.id) == project
     end
 
+    test "get_project_by!/1 returns the project with given attributes" do
+      user = insert(:user)
+      ad = insert(:ad)
+      project = insert(:project, user_id: user.id, ad_id: ad.id)
+      assert Sales.get_project_by!(%{id: project.id, user_id: user.id}) == project
+    end
+
+    test "get_project_by!/1 raises for unfound attributes" do
+      user = insert(:user)
+      ad = insert(:ad)
+      project = insert(:project, user_id: user.id, ad_id: ad.id)
+      assert_raise Ecto.NoResultsError, fn -> Sales.get_project_by!(%{id: project.id, user_id: -1}) end
+    end
+
     test "create_project/1 with valid data creates a project" do
       user = insert(:user)
       ad = insert(:ad)

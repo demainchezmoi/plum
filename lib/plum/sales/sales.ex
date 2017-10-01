@@ -309,4 +309,20 @@ defmodule Plum.Sales do
   def change_project(%Project{} = project) do
     Project.changeset(project, %{})
   end
+
+  @doc """
+  Gets a single project by attributes.
+
+  Raises `Ecto.NoResultsError` if the Project does not exist.
+
+  ## Examples
+
+      iex> get_project_by!(%{id: 123, user_id: 456})
+      %Project{}
+
+      iex> get_project_by!(%{id: 456, user_id: 456})
+      ** (Ecto.NoResultsError)
+
+  """
+  def get_project_by!(attrs), do: Repo.get_by!(Project, attrs)
 end

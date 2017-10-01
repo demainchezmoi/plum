@@ -3,12 +3,6 @@ defmodule PlumWeb.Api.ProjectControllerTest do
 
   import Plum.Factory
 
-  def fixture(:project) do
-    user = insert(:user)
-    ad = insert(:ad)
-    insert(:project, user_id: user.id, ad_id: ad.id)
-  end
-
   setup %{conn: conn} do
     {:ok, conn: put_req_header(conn, "accept", "application/json")}
   end
@@ -21,12 +15,22 @@ defmodule PlumWeb.Api.ProjectControllerTest do
   # end
 
   describe "show" do
-    setup [:create_project]
-
     @tag :logged_in
-    test "shows a project", %{conn: conn, project: project} do
+    test "shows a project I own", %{conn: conn, current_user: current_user} do
+      ad = insert(:ad)
+      project = insert(:project, ad_id: ad.id, user_id: current_user.id)
       conn = get conn, api_project_path(conn, :show, project)
       assert json_response(conn, 200)["data"]["id"] == project.id
+    end
+
+    @tag :logged_in
+    test "doesn't show someone else's project", %{conn: conn} do
+      ad = insert(:ad)
+      user = insert(:user)
+      project = insert(:project, ad_id: ad.id, user_id: user.id)
+      assert_error_sent 404, fn ->
+        get conn, api_project_path(conn, :show, project)
+      end
     end
   end
 
@@ -75,9 +79,4 @@ defmodule PlumWeb.Api.ProjectControllerTest do
       # end
     # end
   # end
-
-  defp create_project(_) do
-    project = fixture(:project)
-    {:ok, project: project}
-  end
 end
