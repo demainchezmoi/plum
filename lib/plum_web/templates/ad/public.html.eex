@@ -24,7 +24,7 @@
               Devenez propriétaire à <%= @ad.land.city %>&nbsp;(<%= @ad.land.department %>)
             </h4>
           </li>
-          <li><%= link "Me positionner", to: ad_path(@conn, :interested, @ad), class: "btn btn-outline-yellow-flash", id: "interested-button" %></li>
+          <li><%= link "Me positionner", to: interested_url(@ad, @conn.assigns[:current_user]), class: "btn btn-outline-yellow-flash", id: "interested-button" %></li>
         </ul>
       </div>
     </div>

@@ -22,15 +22,15 @@ defmodule PlumWeb.AuthController do
     |> redirect(to: "/")
   end
 
-  def callback(%{assigns: %{ueberauth_auth: auth = %{provider: :facebook}}} = conn, _params) do
+  def callback(%{assigns: %{ueberauth_auth: auth = %{provider: :facebook}}} = conn, params) do
     with attrs <- extract_fb_user(auth),
          {:ok, user} <- Accounts.upsert_user_by(attrs, :email),
-         {:ok, session} <- Accounts.create_session(%{user_id: user.id}) # TODO : if session already exists
+         {:ok, session} <- Accounts.create_session(%{user_id: user.id}) # TODO : what if session already exists
     do
         conn
         |> put_flash(:info, "Vous avez bien été authentifié")
         |> put_session(@session_key, session.token)
-        |> redirect(to: "/")
+        |> redirect(to: params["state"] || "/")
     else
       {:error, reason} ->
         conn
