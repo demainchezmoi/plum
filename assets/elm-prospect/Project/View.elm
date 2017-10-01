@@ -3,8 +3,10 @@ module Project.View exposing (..)
 import Html exposing (..)
 import Project.Model exposing (ProjectId)
 import Messages exposing (..)
+import Model exposing (..)
+import Project.Model exposing (..)
 
 
-projectView : ProjectId -> Html Msg
-projectView projectId =
-    projectId |> text
+projectView : Project -> Html Msg
+projectView project =
+    project |> toString |> text
