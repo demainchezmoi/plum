@@ -17,16 +17,16 @@ type alias Url =
     String
 
 
+type alias Flags =
+    { apiToken : ApiToken
+    }
+
+
 type alias Model =
     { project : WebData Project
     , error : Maybe String
     , apiToken : ApiToken
     , route : Route
-    }
-
-
-type alias Flags =
-    { apiToken : ApiToken
     }
 
 

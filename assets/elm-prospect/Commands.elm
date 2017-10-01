@@ -1,6 +1,5 @@
 module Commands exposing (..)
 
-import Decoders exposing (projectDecoder)
 import Http
 import Json.Decode exposing (Decoder)
 import List exposing ((::))

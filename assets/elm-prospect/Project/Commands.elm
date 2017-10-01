@@ -1,10 +1,10 @@
 module Project.Commands exposing (..)
 
 import Commands exposing (authGet)
-import Decoders exposing (projectDecoder)
-import Model exposing (ApiToken)
-import Project.Model exposing (ProjectId)
 import Messages exposing (Msg(..))
+import Model exposing (ApiToken)
+import Project.Decoders exposing (projectDecoder)
+import Project.Model exposing (ProjectId)
 import RemoteData exposing (..)
 
 
