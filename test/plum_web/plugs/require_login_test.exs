@@ -10,7 +10,7 @@ defmodule PlumWeb.Plugs.RequireLoginTest do
     end
 
     @tag :logged_in
-    test "lets through when logged in", %{conn: conn, current_user: current_user} do
+    test "lets through when logged in", %{conn: conn} do
       conn = conn |> RequireLogin.call({:html, []})
       refute conn.halted
     end
@@ -22,7 +22,7 @@ defmodule PlumWeb.Plugs.RequireLoginTest do
       assert conn.halted
     end
 
-    @tag logged_in: ~w(admin) 
+    @tag logged_in: ~w(admin)
     test "lets through when admin", %{conn: conn} do
       conn = conn |> RequireLogin.call({:html, ["admin"]})
       refute conn.halted
@@ -37,9 +37,9 @@ defmodule PlumWeb.Plugs.RequireLoginTest do
     end
 
     @tag :logged_in
-    test "sends 200 when logged in", %{conn: conn, current_user: current_user} do
+    test "sends 200 when logged in", %{conn: conn} do
       conn = conn |> RequireLogin.call({:json, []})
-      refute conn.status == 403 
+      refute conn.status == 403
       refute conn.status == 401
       refute conn.halted
     end
@@ -51,7 +51,7 @@ defmodule PlumWeb.Plugs.RequireLoginTest do
       assert conn.halted
     end
 
-    @tag logged_in: ~w(admin) 
+    @tag logged_in: ~w(admin)
     test "sends 200 when admin", %{conn: conn} do
       conn = conn |> RequireLogin.call({:json, ["admin"]})
       refute conn.status == 403
