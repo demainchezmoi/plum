@@ -1,3 +1,0 @@
-var _user$project$Project_Model$Project = function (a) {
-	return {landId: a};
-};

@@ -1,4 +1,0 @@
-var _user$project$Decoders$projectDecoder = A2(
-	_elm_community$json_extra$Json_Decode_Extra_ops['|:'],
-	_elm_lang$core$Json_Decode$succeed(_user$project$Project_Model$Project),
-	A2(_elm_lang$core$Json_Decode$field, 'landId', _elm_lang$core$Json_Decode$int));

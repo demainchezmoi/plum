@@ -20,8 +20,8 @@ npm-debug.log
 
 # Static artifacts
 /assets/node_modules
-/assets/elm-prospect/elm-stuff
-/assets/elm-admin/elm-stuff
+assets/elm-prospect/elm-stuff
+assets/elm-admin/elm-stuff
 /assets/static/fonts/fontawesome*
 /assets/static/fonts/FontAwesome*
 /assets/static/font/roboto
