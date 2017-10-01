@@ -33,9 +33,6 @@ config = {
         }
       }
     }, {
-      // test: /\.png$|\.jpg$/,
-      // loader: 'url-loader',
-      // }, {
       test: /\.js$/,
       exclude: /(node_modules)/,
       loader: 'babel-loader',
@@ -66,10 +63,25 @@ config = {
       use: ExtractTextPlugin.extract({
         use: 'css-loader?sourceMap'
       })
-    }, {
-      test: /\.woff($|\?)|\.woff2($|\?)|\.ttf($|\?)|\.eot($|\?)|\.svg($|\?)/,
-      loader: 'url-loader'
-    }]
+    },  {
+  		test: /\.(png|jpe?g|gif|ico)$/,
+  		loader: 'file-loader?name=assets/[name].[hash].[ext]'
+		}, {
+  		test: /\.woff(\?v=\d+\.\d+\.\d+)?$/,
+  		loader: 'url-loader?limit=10000&mimetype=application/font-woff&name=[hash].[ext]&publicName=css/[hash].[ext]'
+		}, {
+  		test: /\.woff2(\?v=\d+\.\d+\.\d+)?$/,
+  		loader: 'url-loader?limit=10000&mimetype=application/font-woff&name=[hash].[ext]&publicName=css/[hash].[ext]'
+		}, {
+  		test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/,
+  		loader: 'url-loader?limit=10000&mimetype=application/octet-stream&name=[hash].[ext]&publicName=css/[hash].[ext]'
+		}, {
+  		test: /\.eot(\?v=\d+\.\d+\.\d+)?$/,
+  		loader: 'file-loader'
+		}, {
+  		test: /\.svg(\?v=\d+\.\d+\.\d+)?$/,
+  		loader: 'url-loader?limit=10000&mimetype=image/svg+xml'
+		}]
   },
   resolve: {
     modules: [
