@@ -4,7 +4,6 @@ defmodule Plum.Factory do
 
   alias Plum.Sales.{
     Ad,
-    Contact,
     Land,
   }
 
@@ -15,16 +14,7 @@ defmodule Plum.Factory do
 
   def ad_factory do
     %Ad{
-      active: true,
-      contacts: [build(:contact)],
-    }
-  end
-
-  def contact_factory do
-    %Contact{
-      name: "Noel Flantier",
-      email: "noel@flantier.com",
-      phone: sequence(:phone, &"78 12 43 #{&1}"),
+      active: true
     }
   end
 

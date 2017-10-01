@@ -3,67 +3,9 @@ defmodule Plum.SalesTest do
   alias Plum.Sales
   alias Plum.Sales.{
     Ad,
-    Contact,
     Land
   }
   import Plum.Factory
-
-  describe "contact" do
-
-    test "list_contact/0 returns all contact" do
-      land = insert(:land)
-      [contact|_] = land.ad.contacts
-      assert Sales.list_contact() |> Enum.map(& &1.id) == [contact.id]
-    end
-
-    test "get_contact!/1 returns the contact with given id" do
-      contact = insert(:contact)
-      assert Sales.get_contact!(contact.id) == contact
-    end
-
-    test "create_contact/1 with valid data creates a contact" do
-      land = insert(:land)
-      contact_params = params_for(:contact) |> Map.put(:ad_id, land.ad.id)
-      assert {:ok, %Contact{}} = Sales.create_contact(contact_params)
-    end
-
-    test "create_contact/1 with invalid data returns error changeset" do
-      land = insert(:land)
-      contact_params = params_for(:contact) |> Map.put(:ad_id, land.ad.id) |> Map.delete(:phone)
-      assert {:error, %Ecto.Changeset{}} = Sales.create_contact(contact_params)
-    end
-
-    test "update_contact/2 with valid data updates the contact" do
-      new_email = "coucou@lol.changed"
-      land = insert(:land)
-      [contact|_] = land.ad.contacts
-      contact_params = params_for(:contact) |> Map.put(:ad_id, land.ad.id) |> Map.put(:email, new_email)
-      assert {:ok, contact} = Sales.update_contact(contact, contact_params)
-      assert %Contact{} = contact
-      assert contact.email == new_email 
-    end
-
-    test "update_contact/2 with invalid data returns error changeset" do
-      land = insert(:land)
-      [contact|_] = land.ad.contacts
-      contact_params = params_for(:contact) |> Map.put(:ad_id, land.ad.id) |> Map.put(:email, nil)
-      assert {:error, %Ecto.Changeset{}} = Sales.update_contact(contact, contact_params)
-      assert contact == Sales.get_contact!(contact.id)
-    end
-
-    test "delete_contact/1 deletes the contact" do
-      land = insert(:land)
-      [contact|_] = land.ad.contacts
-      assert {:ok, %Contact{}} = Sales.delete_contact(contact)
-      assert_raise Ecto.NoResultsError, fn -> Sales.get_contact!(contact.id) end
-    end
-
-    test "change_contact/1 returns a contact changeset" do
-      land = insert(:land)
-      [contact|_] = land.ad.contacts
-      assert %Ecto.Changeset{} = Sales.change_contact(contact)
-    end
-  end
 
   describe "ad" do
 

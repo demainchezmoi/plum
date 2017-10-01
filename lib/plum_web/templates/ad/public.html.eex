@@ -137,22 +137,8 @@
     <div class="col-md-10">
       <h3 class="h3-responsive mb-3 font-bold dark-grey-text">L'ensemble maison + terrain</h3>
       <p>
-      Les Maisons Léo vous proposent cette annonce maison + terrain pour une valeur totale de <b><%= raw Number.Currency.number_to_currency(@ad.land.price + house_price) %></b>, hors frais d'adaptation au sol.<br />
-      Pour obtenir de plus amples informations, n'hésitez pas à remplir le formulaire ci-dessous. Nous vous contacterons dès que possible.
+      Les Maisons Léo vous proposent cette annonce maison + terrain pour une valeur totale de <b><%= raw Number.Currency.number_to_currency(@ad.land.price + house_price) %></b>, hors frais d'adaptation au sol.
       </p>
-    </div>
-  </div>
-</section>
-<!-- }}} -->
-
-<!-- {{{ Contact -->
-<section class="container mb-5">
-  <div class="row justify-content-center" style="margin-bottom: 300px">
-    <div class="col-md-10">
-      <h3 class="h3-responsive mb-3 font-bold dark-grey-text">Prendre contact</h3>
-      <div id="contact-form">
-        <%= Phoenix.View.render PlumWeb.ContactView, "form.html", changeset: @contact_changeset, conn: @conn, ad: @ad, action: contact_path(@conn, :create) %>
-      </div>
     </div>
   </div>
 </section>

@@ -60,9 +60,6 @@ defmodule PlumWeb.Router do
     get "/login", PageController, :login
     get "/merci", PageController, :merci
     get "/contact", PageController, :contact
-    resources "/contacts", ContactController, only: [:new, :create]
-    # resources "/ads", AdController, only: [:public]
-    # resources "/lands", LandController
     get "/maison-plus-terrain/:id", AdController, :public
   end
 

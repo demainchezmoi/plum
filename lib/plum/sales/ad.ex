@@ -3,7 +3,6 @@ defmodule Plum.Sales.Ad do
   import Ecto.Changeset
   alias Plum.Sales.{
     Ad,
-    Contact,
     Land
   }
 
@@ -11,7 +10,6 @@ defmodule Plum.Sales.Ad do
   schema "ads" do
     belongs_to :land, Land
     field :active, :boolean, default: true
-    has_many :contacts, Contact
     timestamps()
   end
 

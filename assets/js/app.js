@@ -13,8 +13,3 @@ jQuery.fn.extend({
     jQuery('html,body').animate({scrollTop: x}, 400);
   }
 });
-
-$("#interested-button").click(function() {
-  $("#contact-form").scrollToMe();
-});
-

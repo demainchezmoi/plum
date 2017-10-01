@@ -1,1 +1,0 @@
-<%= render "form.html", Map.put(assigns, :action, contact_path(@conn, :create)) %>
