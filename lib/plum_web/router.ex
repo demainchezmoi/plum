@@ -40,6 +40,7 @@ defmodule PlumWeb.Router do
 
   pipeline :admin_api do
     plug :accepts, ["json"]
+    plug PlumWeb.Plugs.TokenAuthentication
     plug PlumWeb.Plugs.RequireLogin, {:json, ["admin"]}
   end
 

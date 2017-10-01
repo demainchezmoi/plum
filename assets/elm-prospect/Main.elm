@@ -7,7 +7,7 @@ import Update exposing (..)
 import View exposing (view)
 import Navigation
 import Routing exposing (parse)
-import Commands exposing (getProject)
+import Project.Commands exposing (getProject)
 
 
 init : Flags -> Navigation.Location -> ( Model, Cmd Msg )

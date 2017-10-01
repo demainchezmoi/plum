@@ -2,9 +2,10 @@ module Update exposing (..)
 
 import Messages exposing (..)
 import Model exposing (..)
-import Routing exposing (Route(..), parse, toPath)
 import Navigation
-import Commands exposing (getProject)
+import Project.Commands exposing (getProject)
+import RemoteData exposing (..)
+import Routing exposing (Route(..), parse, toPath)
 
 
 update : Msg -> Model -> ( Model, Cmd Msg )

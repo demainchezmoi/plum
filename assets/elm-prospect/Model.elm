@@ -9,6 +9,14 @@ type alias ApiToken =
     String
 
 
+type alias Method =
+    String
+
+
+type alias Url =
+    String
+
+
 type alias Model =
     { project : WebData Project
     , error : Maybe String
