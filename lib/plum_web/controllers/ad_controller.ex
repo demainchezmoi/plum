@@ -19,8 +19,7 @@ defmodule PlumWeb.AdController do
 
     {:ok, project} = Sales.find_or_create_project(%{user_id: current_user.id, ad_id: id}) 
 
-    hash = "/#projets/#{project.id}"
-    path = page_path(conn, :prospect) <> hash
+    path = page_path(conn, :prospect, ["projets", to_string(project.id)])
     conn |> redirect(to: path)
   end
 end

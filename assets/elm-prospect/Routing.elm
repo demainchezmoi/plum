@@ -16,9 +16,14 @@ matchers =
         [ map ProjectRoute (s "projets" </> string) ]
 
 
+removePrefix : Navigation.Location -> Navigation.Location
+removePrefix location =
+    { location | pathname = location.pathname |> String.dropLeft 11 }
+
+
 parse : Navigation.Location -> Route
 parse location =
-    case UrlParser.parseHash matchers location of
+    case UrlParser.parsePath matchers (removePrefix location) of
         Just route ->
             route
 
