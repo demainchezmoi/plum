@@ -5,6 +5,7 @@ defmodule Plum.Factory do
   alias Plum.Sales.{
     Ad,
     Land,
+    Project,
   }
 
   alias Plum.Accounts.{
@@ -28,6 +29,10 @@ defmodule Plum.Factory do
       price: 42_000,
       surface: 396,
     }
+  end
+
+  def project_factory do
+    %Project{}
   end
 
   def session_factory do

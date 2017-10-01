@@ -123,4 +123,61 @@ defmodule Plum.SalesTest do
       assert %Ecto.Changeset{} = Sales.change_land(land)
     end
   end
+
+  describe "projects" do
+    alias Plum.Sales.Project
+
+    def project_fixture(_attrs \\ %{}) do
+      user = insert(:user)
+      ad = insert(:ad)
+      insert(:project, user_id: user.id, ad_id: ad.id)
+    end
+
+    test "list_projects/0 returns all projects" do
+      project = project_fixture()
+      assert Sales.list_projects() == [project]
+    end
+
+    test "get_project!/1 returns the project with given id" do
+      project = project_fixture()
+      assert Sales.get_project!(project.id) == project
+    end
+
+    test "create_project/1 with valid data creates a project" do
+      user = insert(:user)
+      ad = insert(:ad)
+      project_params = params_for(:project, user_id: user.id, ad_id: ad.id)
+      assert {:ok, %Project{}} = Sales.create_project(project_params)
+    end
+
+    test "create_project/1 with invalid data returns error changeset" do
+      project_params = params_for(:project)
+      assert {:error, %Ecto.Changeset{}} = Sales.create_project(project_params)
+    end
+
+    test "update_project/2 with valid data updates the project" do
+      project = project_fixture()
+      ad = insert(:ad)
+      project_params = %{ad_id: ad.id}
+      assert {:ok, project} = Sales.update_project(project, project_params)
+      assert %Project{} = project
+    end
+
+    test "update_project/2 with invalid data returns error changeset" do
+      project = project_fixture()
+      assert {:error, %Ecto.Changeset{}} = Sales.update_project(project, %{user_id: nil})
+      assert project == Sales.get_project!(project.id)
+    end
+
+    test "delete_project/1 deletes the project" do
+      project = project_fixture()
+      assert {:ok, %Project{}} = Sales.delete_project(project)
+      assert_raise Ecto.NoResultsError, fn -> Sales.get_project!(project.id) end
+    end
+
+    test "change_project/1 returns a project changeset" do
+      project = project_fixture()
+      assert %Ecto.Changeset{} = Sales.change_project(project)
+    end
+  end
 end

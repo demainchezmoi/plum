@@ -3,7 +3,7 @@ defmodule PlumWeb.Api.LandView do
   @attributes ~w(city department lat lng price surface)a
 
   def render("index.json", %{lands: lands}) do
-    render_many(lands, __MODULE__, "land.json")
+    %{data: render_many(lands, __MODULE__, "land.json")}
   end
 
   def render("land.json", %{land: land}) do
