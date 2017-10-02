@@ -86,3 +86,7 @@ config :plum, PlumWeb.Mailer,
   ssl: true,
   auth: :always,
   retries: 3
+
+config :ueberauth, Ueberauth.Strategy.Facebook.OAuth,
+  client_id: "${FACEBOOK_CLIENT_ID}",
+  client_secret: "${FACEBOOK_CLIENT_SECRET}"
