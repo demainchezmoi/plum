@@ -52,6 +52,17 @@ projectStepPageView projectStep projectId model =
             afterSalesView model projectId
 
 
+inLayout : Html Msg -> Html Msg
+inLayout elem =
+    div [ class "container" ]
+        [ div [ class "row justify-content-center" ]
+            [ div [ class "col-md-10 pr-0 pl-0" ]
+                [ elem
+                ]
+            ]
+        ]
+
+
 projectView : Model -> Project -> Html Msg
 projectView model project =
     div [ class (slidingClass model.projectAnimation) ]
@@ -60,18 +71,19 @@ projectView model project =
             ]
         , div []
             [ ul [ class "list-group" ]
-                [ stepIndexView ConfigureHouse model project.id "Configurer ma maison"
-                , stepIndexView CheckLand model project.id "Voir le terrain"
-                , stepIndexView EvaluateFunding model project.id "Évaluer mes capacités de financement"
-                , stepIndexView SendFundingDocs model project.id "Envoyer mes documents"
-                , stepIndexView ObtainFunding model project.id "Obtention du financement"
-                , stepIndexView SignContract model project.id "Signature du contrat"
-                , stepIndexView RequestBuildingPermit model project.id "Demande du permis de construire"
-                , stepIndexView ObtainBuildingPermit model project.id "Obtention du permis de construire"
-                , stepIndexView BuildingBegins model project.id "Début de la construction"
-                , stepIndexView ReceiveKeys model project.id "Réception des clefs"
-                , stepIndexView AfterSales model project.id "Service après-vente"
+                [ stepIndexView ConfigureHouse model project.id "Configurer ma maison" True
+                , stepIndexView CheckLand model project.id "Voir le terrain" True
+                , stepIndexView EvaluateFunding model project.id "Mes capacités" False
+                , stepIndexView SendFundingDocs model project.id "Mes documents" False
+                , stepIndexView ObtainFunding model project.id "Mon financement" False
+                , stepIndexView SignContract model project.id "Signature du contrat" False
+                , stepIndexView RequestBuildingPermit model project.id "Demande permis de construire" False
+                , stepIndexView ObtainBuildingPermit model project.id "Obtention permis de construire" False
+                , stepIndexView BuildingBegins model project.id "Début de la construction" False
+                , stepIndexView ReceiveKeys model project.id "Réception des clefs" False
+                , stepIndexView AfterSales model project.id "Service après-vente" False
                 ]
+                |> inLayout
             ]
         ]
 
@@ -89,10 +101,29 @@ slidingClass status =
             ""
 
 
-stepIndexView : ProjectStep -> Model -> ProjectId -> String -> Html Msg
-stepIndexView projectStep model projectId label =
+checkedIcon : Bool -> Html Msg
+checkedIcon checked =
+    case checked of
+        True ->
+            span [ class "fa-stack mr-1" ]
+                [ i [ class "fa fa-circle fa-stack-2x green-flash-text" ] []
+                , i [ class "fa fa-check fa-stack-1x fa-inverse" ] []
+                ]
+
+        False ->
+            span [ class "fa-stack mr-1" ]
+                [ i [ class "fa fa-circle fa-stack-2x" ] []
+                , i [ class "fa fa-check fa-stack-1x fa-inverse" ] []
+                ]
+
+
+stepIndexView : ProjectStep -> Model -> ProjectId -> String -> Bool -> Html Msg
+stepIndexView projectStep model projectId label checked =
     li [ "list-group-item" |> class ]
-        [ a [ onClick (ProjectToStep (ProjectStepRoute projectId projectStep)) ] [ text label ]
+        [ a [ onClick (ProjectToStep (ProjectStepRoute projectId projectStep)) ]
+            [ checkedIcon checked
+            , text label
+            ]
         ]
 
 

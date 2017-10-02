@@ -52,9 +52,9 @@ nav.navbar.green-flash-text a {
 }
 
 .intro-1 {
-  .full-bg-img { background-color: rgba(0, 0, 0, 0.5); }
+  .full-bg-img { background-color: rgba(0, 0, 0, 0); }
   height: 600px;
-  background: url("https://s3-eu-west-1.amazonaws.com/demainchezmoi/cloudfront_assets/images/maison_toit.jpg") no-repeat center center;
+  background: url("https://s3-eu-west-1.amazonaws.com/demainchezmoi/cloudfront_assets/images/maison_21.png") no-repeat center center;
   background-size: cover;
   @include media-breakpoint-up(xs) { height: 300px; }
   @include media-breakpoint-up(sm) { height: 380px; }
