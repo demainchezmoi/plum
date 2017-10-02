@@ -58,3 +58,7 @@ config :plum, Plum.Repo,
 
 config :plum, PlumWeb.Mailer,
   adapter: Swoosh.Adapters.Local
+
+config :ueberauth, Ueberauth.Strategy.Facebook.OAuth,
+  client_id: System.get_env("FACEBOOK_CLIENT_ID"),
+  client_secret: System.get_env("FACEBOOK_CLIENT_SECRET")
