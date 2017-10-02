@@ -15,15 +15,15 @@ config = {
   },
   module: {
     rules: [{
-      test: /.*elm-admin.*\.elm$/,
-      exclude: [/elm-stuff/, /node_modules/],
-      use: {
-        loader: 'elm-webpack-loader',
-        options: {
-          cwd: 'elm-admin'
-        }
-      }
-    }, {
+      // test: /.*elm-admin.*\.elm$/,
+      // exclude: [/elm-stuff/, /node_modules/],
+      // use: {
+        // loader: 'elm-webpack-loader',
+        // options: {
+          // cwd: 'elm-admin'
+        // }
+      // }
+    // }, {
       test: /.*elm-prospect.*\.elm$/,
       exclude: [/elm-stuff/, /node_modules/],
       use: {
@@ -68,13 +68,13 @@ config = {
   		loader: 'file-loader?name=assets/[name].[hash].[ext]'
 		}, {
   		test: /\.woff(\?v=\d+\.\d+\.\d+)?$/,
-  		loader: 'url-loader?limit=10000&mimetype=application/font-woff&name=[hash].[ext]&publicName=css/[hash].[ext]'
+  		loader: 'url-loader?limit=10000&mimetype=application/font-woff'
 		}, {
   		test: /\.woff2(\?v=\d+\.\d+\.\d+)?$/,
-  		loader: 'url-loader?limit=10000&mimetype=application/font-woff&name=[hash].[ext]&publicName=css/[hash].[ext]'
+  		loader: 'url-loader?limit=10000&mimetype=application/font-woff'
 		}, {
   		test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/,
-  		loader: 'url-loader?limit=10000&mimetype=application/octet-stream&name=[hash].[ext]&publicName=css/[hash].[ext]'
+  		loader: 'url-loader?limit=10000&mimetype=application/octet-stream'
 		}, {
   		test: /\.eot(\?v=\d+\.\d+\.\d+)?$/,
   		loader: 'file-loader'
