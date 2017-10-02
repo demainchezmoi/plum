@@ -54,12 +54,12 @@ projectStepPageView projectStep projectId model =
 
 projectView : Model -> Project -> Html Msg
 projectView model project =
-    let
-        listClass =
-            String.join " " [ "list-group", slidingClass model.projectAnimation ]
-    in
-        div []
-            [ ul [ class listClass ]
+    div [ class (slidingClass model.projectAnimation) ]
+        [ div [ class "intro-1" ]
+            [ div [ class "full-bg-img" ] []
+            ]
+        , div []
+            [ ul [ class "list-group" ]
                 [ stepIndexView ConfigureHouse model project.id "Configurer ma maison"
                 , stepIndexView CheckLand model project.id "Voir le terrain"
                 , stepIndexView EvaluateFunding model project.id "Évaluer mes capacités de financement"
@@ -73,6 +73,7 @@ projectView model project =
                 , stepIndexView AfterSales model project.id "Service après-vente"
                 ]
             ]
+        ]
 
 
 slidingClass : SlideAnimation -> String
@@ -99,22 +100,23 @@ stepView : Model -> ProjectId -> String -> Html Msg
 stepView model projectId txt =
     let
         stepClass =
-            String.join " " [ "list-group", slidingClass model.projectStepAnimation ]
+            String.join " " [ slidingClass model.projectStepAnimation ]
     in
         div [ class stepClass ]
             [ div []
-                [ a [ class "btn btn-default", onClick (StepToProject (ProjectRoute projectId)) ]
-                    [ i [ class "fa fa-chevron-left mr-1" ] []
-                    , text " Retour"
+                [ h1 [ class "h1-responsive" ]
+                    [ a [ class "btn btn-sm btn-default", onClick (StepToProject (ProjectRoute projectId)) ]
+                        [ i [ class "fa fa-chevron-left" ] []
+                        ]
+                    , text txt
                     ]
-                , div [] [ text txt ]
                 ]
             ]
 
 
 configureHouseView : Model -> ProjectId -> Html Msg
 configureHouseView model projectId =
-    stepView model projectId "configure house"
+    stepView model projectId "Configurer ma maison"
 
 
 checkLandView : Model -> ProjectId -> Html Msg
