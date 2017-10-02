@@ -33,7 +33,7 @@ update msg model =
         StepToProject route ->
             let
                 newModel =
-                    { model | projectStepAnimation = None, projectAnimation = EnterLeft }
+                    { model | projectStepAnimation = None, projectAnimation = None }
             in
                 update (NavigateTo route) newModel
 
