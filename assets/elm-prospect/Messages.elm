@@ -11,3 +11,5 @@ type Msg
     = UrlChange Navigation.Location
     | NavigateTo Route
     | ProjectResponse (WebData Project)
+    | ProjectToStep Route
+    | StepToProject Route

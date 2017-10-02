@@ -35,7 +35,7 @@ $fa-font-path: "../../assets/node_modules/font-awesome/fonts";
 @import "alert";
 // @import "progress";
 @import "media";
-// @import "list-group";
+@import "list-group";
 @import "close";
 // @import "modal";
 // @import "tooltip";
@@ -90,7 +90,7 @@ $input-focus-color: map-get($yellow-flash, "base");
 @import "mdb/free/forms-basic";
 @import "mdb/free/msc";
 // @import "mdb/free/footer";
-// @import "mdb/free/list-group";
+@import "mdb/free/list-group";
 // @import "mdb/free/tables";
 // @import "mdb/custom";
 
@@ -101,3 +101,4 @@ $input-focus-color: map-get($yellow-flash, "base");
  * =================
  */
 @import "custom";
+@import "animations";

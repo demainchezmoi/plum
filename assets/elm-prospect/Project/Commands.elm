@@ -12,7 +12,7 @@ getProject : ApiToken -> ProjectId -> Cmd Msg
 getProject apiToken projectId =
     let
         url =
-            "/api/projects/" ++ projectId
+            "/api/projects/" ++ (toString projectId)
     in
         authGet apiToken url projectDecoder
             |> RemoteData.sendRequest

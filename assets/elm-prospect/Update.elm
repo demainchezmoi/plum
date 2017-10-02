@@ -23,6 +23,20 @@ update msg model =
             in
                 urlUpdate { model | route = currentRoute }
 
+        ProjectToStep route ->
+            let
+                newModel =
+                    { model | projectStepAnimation = EnterRight, projectAnimation = None }
+            in
+                update (NavigateTo route) newModel
+
+        StepToProject route ->
+            let
+                newModel =
+                    { model | projectStepAnimation = None, projectAnimation = EnterLeft }
+            in
+                update (NavigateTo route) newModel
+
         NavigateTo route ->
             model ! [ Navigation.newUrl <| toPath route ]
 
@@ -31,6 +45,9 @@ urlUpdate : Model -> ( Model, Cmd Msg )
 urlUpdate model =
     case model.route of
         ProjectRoute projectId ->
+            ( model, getProject model.apiToken projectId )
+
+        ProjectStepRoute projectId projectStep ->
             ( model, getProject model.apiToken projectId )
 
         _ ->

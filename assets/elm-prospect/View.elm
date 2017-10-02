@@ -4,7 +4,7 @@ import Html exposing (..)
 import Html.Attributes exposing (..)
 import Messages exposing (..)
 import Model exposing (..)
-import Project.View exposing (projectPageView)
+import Project.View exposing (projectPageView, projectStepPageView)
 import Routing exposing (Route(..))
 import ViewHelpers exposing (notFoundView)
 
@@ -22,3 +22,6 @@ page model =
 
         ProjectRoute projectId ->
             projectPageView model
+
+        ProjectStepRoute projectId projectStep ->
+            projectStepPageView projectStep projectId model

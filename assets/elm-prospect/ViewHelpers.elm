@@ -4,6 +4,7 @@ import Html exposing (..)
 import Http exposing (Error(..))
 import Messages exposing (..)
 import RemoteData exposing (..)
+import Model exposing (..)
 
 
 notFoundView : Html Msg
@@ -67,11 +68,12 @@ failureView err =
                     errorView status
 
         BadPayload pay res ->
-            res |> toString |> text
+            ("Bad payload: " ++ toString res)
+                |> text
 
 
-remoteDataView : WebData a -> (a -> Html Msg) -> Html Msg
-remoteDataView data view =
+remoteDataView : Model -> WebData a -> (Model -> a -> Html Msg) -> Html Msg
+remoteDataView model data view =
     case data of
         Failure err ->
             failureView err
@@ -83,4 +85,4 @@ remoteDataView data view =
             loadingView
 
         Success data ->
-            view data
+            view model data

@@ -22,8 +22,16 @@ type alias Flags =
     }
 
 
+type SlideAnimation
+    = EnterRight
+    | EnterLeft
+    | None
+
+
 type alias Model =
     { project : WebData Project
+    , projectStepAnimation : SlideAnimation
+    , projectAnimation : SlideAnimation
     , error : Maybe String
     , apiToken : ApiToken
     , route : Route
@@ -33,6 +41,8 @@ type alias Model =
 initialModel : ApiToken -> Route -> Model
 initialModel apiToken route =
     { project = Loading
+    , projectStepAnimation = None
+    , projectAnimation = None
     , error = Nothing
     , apiToken = apiToken
     , route = route
