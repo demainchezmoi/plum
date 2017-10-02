@@ -36,7 +36,9 @@ defmodule PlumWeb.PageController do
   end
 
   def prospect(conn, _params) do
-    conn |> render("prospect.html")
+    conn
+    |> put_layout("elm.html")
+    |> render("prospect.html")
   end
 
   def login(conn, _params) do

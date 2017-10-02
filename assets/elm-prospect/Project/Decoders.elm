@@ -8,6 +8,7 @@ import Project.Model exposing (Project)
 
 projectDecoder : JD.Decoder Project
 projectDecoder =
-    succeed
-        Project
-        |: (field "landId" int)
+    JD.at [ "data" ] <|
+        succeed
+            Project
+            |: (field "id" int)

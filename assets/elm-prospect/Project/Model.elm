@@ -6,4 +6,5 @@ type alias ProjectId =
 
 
 type alias Project =
-    { landId : Int }
+    { id : Int
+    }
