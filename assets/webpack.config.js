@@ -91,7 +91,13 @@ config = {
   },
   plugins: [
     new ExtractTextPlugin({filename: 'css/app.css'}),
-    new CopyWebpackPlugin([{from: './static'}, {from: './node_modules/mdbootstrap/font/roboto', to: 'fonts'}]),
+    new CopyWebpackPlugin([{
+      from: './static'
+    }, {
+      from: './node_modules/mdbootstrap/font/roboto', to: 'fonts'
+    }, {
+      from: './node_modules/font-awesome/fonts', to: 'fonts'
+    }]),
     new webpack.ProvidePlugin({
 			'$': 'jquery',
 			'jQuery': 'jquery',
