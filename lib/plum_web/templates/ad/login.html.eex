@@ -1,0 +1,27 @@
+<section>
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col col-md-10 col-lg-8">
+
+        <h5 class="ml-header">
+          <i class="fa fa-home"></i>&nbsp;Maisons Léo
+        </h5>
+
+        <div class="alert alert-info">
+          Vous êtes intéressé(e) par une annonce maison + terrain à <%= @ad.land.city %> (<%= @ad.land.department %>).
+        </div>
+
+
+        <h2 class="responsive-h2 mt-4">Créez votre compte Maisons Léo&nbsp;!</h2>
+
+        <p class="">Créez votre espace et configurez votre maison Léo, puis passez toutes les étapes de la construction d'une maison ! Visitez votre terrain, obtenez votre financement, signez votre contrat ...</p>
+
+        <a class="btn btn-primary btn-lg ml-0 mt-4" href="<%= login_ad_cb(@ad) %>">
+          <i class="fa fa-facebook mr-2"></i>
+          Connexion avec facebook
+        </a>
+
+      </div>
+    </div>
+  </div>
+</section>
