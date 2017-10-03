@@ -13,10 +13,6 @@ nav.navbar.translucid {
   }
 }
 
-.img-thumbnail {
-  border-radius: 0;
-}
-
 .presentation-img {
   height: auto;
   @include media-breakpoint-up(xs) { width: 100%; }
@@ -69,6 +65,8 @@ nav.navbar.translucid {
 
 .badge { border: 0 !important; }
 
+.btn,
+.img-thumbnail,
 nav.navbar {
   border-radius: 0;
 }
