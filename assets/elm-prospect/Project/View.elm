@@ -7,7 +7,7 @@ import Messages exposing (..)
 import Model exposing (..)
 import Project.Model exposing (..)
 import Routing exposing (toPath, Route(..))
-import ViewHelpers exposing (remoteDataView)
+import ViewHelpers exposing (remoteDataView, inLayout)
 
 
 projectPageView : Model -> Html Msg
@@ -52,24 +52,19 @@ projectStepPageView projectStep projectId model =
             afterSalesView model projectId
 
 
-inLayout : Html Msg -> Html Msg
-inLayout elem =
-    div [ class "container" ]
-        [ div [ class "row justify-content-center" ]
-            [ div [ class "col-md-10 pr-0 pl-0" ]
-                [ elem
-                ]
-            ]
+header : Html Msg
+header =
+    h5 [ class "ml-header" ]
+        [ i [ class "fa fa-home" ] []
+        , text " Maisons Léo"
         ]
 
 
 projectView : Model -> Project -> Html Msg
 projectView model project =
     div [ class (slidingClass model.projectAnimation) ]
-        [ div [ class "intro-1" ]
-            [ div [ class "full-bg-img" ] []
-            ]
-        , div []
+        [ header
+        , div [ class "mt-3" ]
             [ ul [ class "list-group" ]
                 [ stepIndexView ConfigureHouse model project.id "Configurer ma maison" True
                 , stepIndexView CheckLand model project.id "Voir le terrain" True
@@ -83,9 +78,9 @@ projectView model project =
                 , stepIndexView ReceiveKeys model project.id "Réception des clefs" False
                 , stepIndexView AfterSales model project.id "Service après-vente" False
                 ]
-                |> inLayout
             ]
         ]
+        |> inLayout
 
 
 slidingClass : SlideAnimation -> String
@@ -105,13 +100,13 @@ checkedIcon : Bool -> Html Msg
 checkedIcon checked =
     case checked of
         True ->
-            span [ class "fa-stack mr-1" ]
-                [ i [ class "fa fa-circle fa-stack-2x green-flash-text" ] []
-                , i [ class "fa fa-check fa-stack-1x fa-inverse" ] []
+            span [ class "fa-stack mr-2" ]
+                [ i [ class "fa fa-circle fa-stack-2x yellow-flash-text black-bordered-icon" ] []
+                , i [ class "fa fa-check fa-stack-1x" ] []
                 ]
 
         False ->
-            span [ class "fa-stack mr-1" ]
+            span [ class "fa-stack mr-2" ]
                 [ i [ class "fa fa-circle fa-stack-2x" ] []
                 , i [ class "fa fa-check fa-stack-1x fa-inverse" ] []
                 ]
@@ -119,8 +114,8 @@ checkedIcon checked =
 
 stepIndexView : ProjectStep -> Model -> ProjectId -> String -> Bool -> Html Msg
 stepIndexView projectStep model projectId label checked =
-    li [ "list-group-item" |> class ]
-        [ a [ onClick (ProjectToStep (ProjectStepRoute projectId projectStep)) ]
+    li [ "list-group-item cp gray-hover" |> class, onClick (ProjectToStep (ProjectStepRoute projectId projectStep)) ]
+        [ a []
             [ checkedIcon checked
             , text label
             ]
@@ -133,16 +128,18 @@ stepView model projectId txt =
         stepClass =
             String.join " " [ slidingClass model.projectStepAnimation ]
     in
-        div [ class stepClass ]
-            [ div []
+        div []
+            [ header
+            , div [ class stepClass ]
                 [ h1 [ class "h1-responsive" ]
-                    [ a [ class "btn btn-sm btn-default", onClick (StepToProject (ProjectRoute projectId)) ]
+                    [ a [ class "btn btn-sm btn-yellow-flash", onClick (StepToProject (ProjectRoute projectId)) ]
                         [ i [ class "fa fa-chevron-left" ] []
                         ]
                     , text txt
                     ]
                 ]
             ]
+            |> inLayout
 
 
 configureHouseView : Model -> ProjectId -> Html Msg

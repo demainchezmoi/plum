@@ -2,6 +2,18 @@
 .text-shadow { text-shadow: 2px 2px 3px rgba(0,0,0,0.3); }
 
 
+.cp { cursor: pointer; }
+.gray-hover {
+  &:hover, &:focus {
+    background-color: $gray-100;
+  }
+}
+
+.ml-header {
+  @extend .h5-responsive, .text-center, .mt-3, .font-black, .light-bordered, .p-2, .gray-background, .white-text;
+}
+
+
 $base-yellow-flash: map-get($yellow-flash, base);
 
 @import url('https://fonts.googleapis.com/css?family=Roboto:900');
@@ -44,6 +56,10 @@ nav.navbar.translucid {
 
 .light-bordered {
   border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.black-bordered-icon {
+  text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
 }
 
 .intro-1 {

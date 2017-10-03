@@ -1,10 +1,22 @@
 module ViewHelpers exposing (..)
 
 import Html exposing (..)
+import Html.Attributes exposing (class)
 import Http exposing (Error(..))
 import Messages exposing (..)
 import RemoteData exposing (..)
 import Model exposing (..)
+
+
+inLayout : Html Msg -> Html Msg
+inLayout elem =
+    div [ class "container" ]
+        [ div [ class "row justify-content-center" ]
+            [ div [ class "col col-md-10 col-lg-8" ]
+                [ elem
+                ]
+            ]
+        ]
 
 
 notFoundView : Html Msg
