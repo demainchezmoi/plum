@@ -12,12 +12,12 @@
               <i class="fa fa-home"></i>&nbsp;Maisons Léo
             </h5>
 
-            <div class="light-bordered mt-3 pt-3">
+            <div class="light-bordered mt-3 pt-5 pb-5">
               <h3 class="responsive-h3 text-center font-black">
                 Devenez propriétaire à <%= @ad.land.city %>&nbsp;(<%= @ad.land.department %>)
               </h3>
 
-              <h1 class="text-center responsive-h1 font-thin mt-1">
+              <h1 class="text-center responsive-h1 font-thin mt-1 mb-0">
                 <span class=""><%= raw Number.Currency.number_to_currency(@ad.land.price + house_price) %></span>
               </h1>
             </div>
