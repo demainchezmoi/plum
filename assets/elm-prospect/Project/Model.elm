@@ -1,5 +1,7 @@
 module Project.Model exposing (..)
 
+import Ad.Model exposing (Ad)
+
 
 type alias ProjectId =
     Int
@@ -7,6 +9,7 @@ type alias ProjectId =
 
 type alias Project =
     { id : ProjectId
+    , ad : Ad
     }
 
 

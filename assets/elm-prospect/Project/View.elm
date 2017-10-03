@@ -1,8 +1,9 @@
 module Project.View exposing (..)
 
+import Ad.View as AdView
 import Html exposing (..)
-import Html.Events exposing (onClick)
 import Html.Attributes exposing (class)
+import Html.Events exposing (onClick)
 import Messages exposing (..)
 import Model exposing (..)
 import Project.Model exposing (..)
@@ -64,6 +65,7 @@ projectView : Model -> Project -> Html Msg
 projectView model project =
     div []
         [ header
+        , AdView.shortView project.ad
         , div [ class ("mt-3 mb-5 " ++ (slidingClass model.projectAnimation)) ]
             [ ul [ class "list-group" ]
                 [ stepIndexView ConfigureHouse model project.id "Configurer ma maison" True
