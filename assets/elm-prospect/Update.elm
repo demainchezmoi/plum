@@ -6,6 +6,7 @@ import Navigation
 import Project.Commands exposing (getProject)
 import RemoteData exposing (..)
 import Routing exposing (Route(..), parse, toPath)
+import Project.Model exposing (ProjectId)
 
 
 update : Msg -> Model -> ( Model, Cmd Msg )
@@ -45,10 +46,31 @@ urlUpdate : Model -> ( Model, Cmd Msg )
 urlUpdate model =
     case model.route of
         ProjectRoute projectId ->
-            ( model, getProject model.apiToken projectId )
+            ( model, ensureProject model projectId )
 
         ProjectStepRoute projectId projectStep ->
-            ( model, getProject model.apiToken projectId )
+            ( model, ensureProject model projectId )
 
         _ ->
             ( model, Cmd.none )
+
+
+ensureProject : Model -> ProjectId -> Cmd Msg
+ensureProject model projectId =
+    if projectIsLoaded model projectId then
+        Cmd.none
+    else
+        getProject model.apiToken projectId
+
+
+projectIsLoaded : Model -> ProjectId -> Bool
+projectIsLoaded model projectId =
+    case model.project of
+        Success project ->
+            if project.id == projectId then
+                True
+            else
+                False
+
+        _ ->
+            False

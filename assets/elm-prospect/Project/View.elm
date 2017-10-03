@@ -70,13 +70,13 @@ projectView model project =
             [ ul [ class "list-group" ]
                 [ stepIndexView ConfigureHouse model project.id "Configurer ma maison" True
                 , stepIndexView CheckLand model project.id "Voir le terrain" True
-                , stepIndexView EvaluateFunding model project.id "Capacité de financement" False
-                , stepIndexView SendFundingDocs model project.id "Documents" False
+                , stepIndexView EvaluateFunding model project.id "Ma capacité de financement" False
+                , stepIndexView SendFundingDocs model project.id "Mes Documents" False
                 , stepIndexView ObtainFunding model project.id "Obtention du financement" False
                 , stepIndexView SignContract model project.id "Signature du contrat" False
-                , stepIndexView RequestBuildingPermit model project.id "Demande permis de construire" False
+                , stepIndexView RequestBuildingPermit model project.id "Dépôt du permis de construire" False
                 , stepIndexView ObtainBuildingPermit model project.id "Obtention permis de construire" False
-                , stepIndexView BuildingBegins model project.id "Début de la construction" False
+                , stepIndexView BuildingBegins model project.id "Phase de la construction" False
                 , stepIndexView ReceiveKeys model project.id "Réception des clefs" False
                 , stepIndexView AfterSales model project.id "Service après-vente" False
                 ]
@@ -124,8 +124,8 @@ stepIndexView projectStep model projectId label checked =
         ]
 
 
-stepView : Model -> ProjectId -> String -> Html Msg
-stepView model projectId txt =
+stepView : Model -> ProjectId -> String -> Html Msg -> Html Msg
+stepView model projectId title view =
     let
         stepClass =
             String.join " " [ slidingClass model.projectStepAnimation ]
@@ -137,8 +137,9 @@ stepView model projectId txt =
                     [ a [ class "btn btn-sm btn-yellow-flash", onClick (StepToProject (ProjectRoute projectId)) ]
                         [ i [ class "fa fa-chevron-left" ] []
                         ]
-                    , text txt
+                    , text title
                     ]
+                , view
                 ]
             ]
             |> inLayout
@@ -146,54 +147,98 @@ stepView model projectId txt =
 
 configureHouseView : Model -> ProjectId -> Html Msg
 configureHouseView model projectId =
-    stepView model projectId "Configurer ma maison"
+    let
+        view =
+            div [] []
+    in
+        stepView model projectId "Configurer ma maison" view
 
 
 checkLandView : Model -> ProjectId -> Html Msg
 checkLandView model projectId =
-    stepView model projectId "checkLandView"
+    let
+        view =
+            div [] []
+    in
+        stepView model projectId "Consulter le terrain" view
 
 
 evaluateFundingView : Model -> ProjectId -> Html Msg
 evaluateFundingView model projectId =
-    stepView model projectId "evaluateFundingView"
+    let
+        view =
+            div [] []
+    in
+        stepView model projectId "Ma capacité de financement" view
 
 
 sendFundingDocsView : Model -> ProjectId -> Html Msg
 sendFundingDocsView model projectId =
-    stepView model projectId "sendFundingDocsView"
+    let
+        view =
+            div [] []
+    in
+        stepView model projectId "Mes documents de financement" view
 
 
 obtainFundingView : Model -> ProjectId -> Html Msg
 obtainFundingView model projectId =
-    stepView model projectId "obtainFundingView"
+    let
+        view =
+            div [] []
+    in
+        stepView model projectId "Obtention de mon financement" view
 
 
 signContractView : Model -> ProjectId -> Html Msg
 signContractView model projectId =
-    stepView model projectId "signContractView"
+    let
+        view =
+            div [] []
+    in
+        stepView model projectId "Signature du contrat" view
 
 
 requestBuildingPermitView : Model -> ProjectId -> Html Msg
 requestBuildingPermitView model projectId =
-    stepView model projectId "requestBuildingPermitView"
+    let
+        view =
+            div [] []
+    in
+        stepView model projectId "Dépot du permis de construire" view
 
 
 obtainBuildingPermitView : Model -> ProjectId -> Html Msg
 obtainBuildingPermitView model projectId =
-    stepView model projectId "obtainBuildingPermitView"
+    let
+        view =
+            div [] []
+    in
+        stepView model projectId "Obtebtion du permis de construire" view
 
 
 buildingBeginsView : Model -> ProjectId -> Html Msg
 buildingBeginsView model projectId =
-    stepView model projectId "buildingBeginsView"
+    let
+        view =
+            div [] []
+    in
+        stepView model projectId "Phase de construction" view
 
 
 receiveKeysView : Model -> ProjectId -> Html Msg
 receiveKeysView model projectId =
-    stepView model projectId "receiveKeysView"
+    let
+        view =
+            div [] []
+    in
+        stepView model projectId "Remise des clefs" view
 
 
 afterSalesView : Model -> ProjectId -> Html Msg
 afterSalesView model projectId =
-    stepView model projectId "afterSalesView"
+    let
+        view =
+            div [] []
+    in
+        stepView model projectId "Service après-vente" view
