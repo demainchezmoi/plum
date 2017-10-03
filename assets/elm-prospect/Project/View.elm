@@ -62,15 +62,15 @@ header =
 
 projectView : Model -> Project -> Html Msg
 projectView model project =
-    div [ class (slidingClass model.projectAnimation) ]
+    div []
         [ header
-        , div [ class "mt-3" ]
+        , div [ class ("mt-3 mb-5 " ++ (slidingClass model.projectAnimation)) ]
             [ ul [ class "list-group" ]
                 [ stepIndexView ConfigureHouse model project.id "Configurer ma maison" True
                 , stepIndexView CheckLand model project.id "Voir le terrain" True
-                , stepIndexView EvaluateFunding model project.id "Mes capacités" False
-                , stepIndexView SendFundingDocs model project.id "Mes documents" False
-                , stepIndexView ObtainFunding model project.id "Mon financement" False
+                , stepIndexView EvaluateFunding model project.id "Capacité de financement" False
+                , stepIndexView SendFundingDocs model project.id "Documents" False
+                , stepIndexView ObtainFunding model project.id "Obtention du financement" False
                 , stepIndexView SignContract model project.id "Signature du contrat" False
                 , stepIndexView RequestBuildingPermit model project.id "Demande permis de construire" False
                 , stepIndexView ObtainBuildingPermit model project.id "Obtention permis de construire" False

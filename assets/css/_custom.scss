@@ -4,8 +4,8 @@
 
 .cp { cursor: pointer; }
 .gray-hover {
-  &:hover, &:focus {
-    background-color: $gray-100;
+  &:hover, &:focus, &:active {
+    background-color: $gray-200;
   }
 }
 
