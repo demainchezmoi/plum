@@ -6,24 +6,26 @@
       <div class="row justify-content-center">
         <div class="col col-md-5 col-lg-4">
 
-          <h4 class="h4-responsive text-center mt-2 font-black text-secondary">
-            <i class="fa fa-home"></i>&nbsp;Maisons Léo
-          </h4>
+          <div class="upper-section mb-5">
+            <h4 class="h4-responsive text-center mt-2 font-black text-secondary">
+              <i class="fa fa-home"></i>&nbsp;Maisons Léo
+            </h4>
 
-          <h3 class="responsive-h3 text-center mt-5 dark-grey-text" style="font-weight: 900">
-            Devenez propriétaire à <%= @ad.land.city %>&nbsp;(<%= @ad.land.department %>)
-          </h3>
+            <h3 class="responsive-h3 text-center mt-5 dark-grey-text" style="font-weight: 900">
+              Devenez propriétaire à <%= @ad.land.city %>&nbsp;(<%= @ad.land.department %>)
+            </h3>
 
-          <div class="text-secondary text-center"><small>pour</small></div>
+            <div class="text-secondary text-center"><small>pour</small></div>
 
-          <h1 class="text-center responsive-h1 font-thin">
-            <span class=""><%= raw Number.Currency.number_to_currency(@ad.land.price + house_price) %></span>
-          </h1>
+            <h1 class="text-center responsive-h1 font-thin">
+              <span class=""><%= raw Number.Currency.number_to_currency(@ad.land.price + house_price) %></span>
+            </h1>
 
-      		<img class="d-block p-2 img-thumbnail mt-4" src="https://s3-eu-west-1.amazonaws.com/demainchezmoi/cloudfront_assets/images/maison_21.png" style="width: 100%">
-          <div class="text-secondary text-center">Maison familiale Léo</div>
+      		  <img class="d-block p-2 img-thumbnail mt-4" src="https://s3-eu-west-1.amazonaws.com/demainchezmoi/cloudfront_assets/images/maison_21.png" style="width: 100%">
+            <div class="text-secondary text-center">Maison familiale Léo</div>
+          </div>
 
-          <div class="bottom-section p-3">
+          <div class="bottom-section">
             <div class="row justify-content-between text-secondary font-black">
               <div class="col">
               T3 familial - 80m<sup>2</sup>
