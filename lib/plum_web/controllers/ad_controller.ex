@@ -24,7 +24,7 @@ defmodule PlumWeb.AdController do
     current_user = conn.assigns.current_user
     id = id |> String.to_integer
 
-    {:ok, project} = Sales.find_or_create_project(%{user_id: current_user.id, ad_id: id}) 
+    {:ok, project} = Sales.find_or_create_project(%{user_id: current_user.id, ad_id: id})
 
     path = page_path(conn, :prospect, ["projets", to_string(project.id)])
     conn |> redirect(to: path)

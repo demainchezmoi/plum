@@ -12,7 +12,7 @@
             <i class="fa fa-home"></i>&nbsp;Maisons Léo
           </h5>
 
-          <div class="light-bordered mt-3 pt-5 pb-5">
+          <div class="light-bordered mt-3 p-2 pt-5 pb-5">
             <h3 class="responsive-h3 text-center font-black">
               Devenez propriétaire à <%= @ad.land.city %>&nbsp;(<%= @ad.land.department %>)
             </h3>
@@ -23,7 +23,6 @@
           </div>
 
       		<img class="d-block p-2 img-thumbnail mt-3 img-fluid" src="https://s3-eu-west-1.amazonaws.com/demainchezmoi/cloudfront_assets/images/maison_21.png">
-          <div class="text-center">Maison Léo - Maison familiale.</div>
         </div>
 
         <div class="bottom-section">

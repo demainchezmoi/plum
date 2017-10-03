@@ -32,6 +32,15 @@ defmodule PlumWeb.Api.ProjectControllerTest do
         get conn, api_project_path(conn, :show, project)
       end
     end
+
+    @tag :logged_in
+    test "preloads the ad and land", %{conn: conn, current_user: current_user} do
+      land = insert(:land)
+      ad = insert(:ad, land_id: land.id)
+      project = insert(:project, ad_id: ad.id, user_id: current_user.id)
+      conn = get conn, api_project_path(conn, :show, project)
+      assert json_response(conn, 200)["data"]["ad"]["land"]["id"] == land.id
+    end
   end
 
   # describe "create project" do

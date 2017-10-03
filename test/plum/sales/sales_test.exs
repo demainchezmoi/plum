@@ -140,14 +140,30 @@ defmodule Plum.SalesTest do
 
     test "get_project!/1 returns the project with given id" do
       project = project_fixture()
-      assert Sales.get_project!(project.id) == project
+      assert Sales.get_project!(project.id).id == project.id
+    end
+
+    test "get_project!/1 preloads the ad -> land" do
+      land = insert(:land)
+      ad = insert(:ad, land: land)
+      user = insert(:user)
+      project = insert(:project, ad_id: ad.id, user_id: user.id)
+      assert Sales.get_project!(project.id).ad.land.id == land.id
     end
 
     test "get_project_by!/1 returns the project with given attributes" do
       user = insert(:user)
       ad = insert(:ad)
       project = insert(:project, user_id: user.id, ad_id: ad.id)
-      assert Sales.get_project_by!(%{id: project.id, user_id: user.id}) == project
+      assert Sales.get_project_by!(%{id: project.id, user_id: user.id}).id == project.id
+    end
+
+    test "get_project_by!/1 preloads the ad -> land" do
+      user = insert(:user)
+      land = insert(:land)
+      ad = insert(:ad, land: land)
+      project = insert(:project, user_id: user.id, ad_id: ad.id)
+      assert Sales.get_project_by!(%{id: project.id, user_id: user.id}).ad.land.id == land.id
     end
 
     test "get_project_by!/1 raises for unfound attributes" do
@@ -180,7 +196,7 @@ defmodule Plum.SalesTest do
     test "update_project/2 with invalid data returns error changeset" do
       project = project_fixture()
       assert {:error, %Ecto.Changeset{}} = Sales.update_project(project, %{user_id: nil})
-      assert project == Sales.get_project!(project.id)
+      assert project.user_id == Sales.get_project!(project.id).user_id
     end
 
     test "delete_project/1 deletes the project" do

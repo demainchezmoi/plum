@@ -231,7 +231,7 @@ defmodule Plum.Sales do
   end
 
   @doc """
-  Gets a single project.
+  Gets a single project, preloads ad -> land.
 
   Raises `Ecto.NoResultsError` if the Project does not exist.
 
@@ -244,7 +244,7 @@ defmodule Plum.Sales do
       ** (Ecto.NoResultsError)
 
   """
-  def get_project!(id), do: Repo.get!(Project, id)
+  def get_project!(id), do: Project |> preload([ad: :land]) |> Repo.get!(id) 
 
   @doc """
   Creates a project.
@@ -331,7 +331,7 @@ defmodule Plum.Sales do
 
 
   @doc """
-  Gets a single project by attributes.
+  Gets a single project by attributes, preloads ad -> land.
 
   Raises `Ecto.NoResultsError` if the Project does not exist.
 
@@ -344,5 +344,9 @@ defmodule Plum.Sales do
       ** (Ecto.NoResultsError)
 
   """
-  def get_project_by!(attrs), do: Repo.get_by!(Project, attrs)
+  def get_project_by!(attrs) do
+    Project
+    |> preload([ad: :land])
+    |> Repo.get_by!(attrs)
+  end
 end

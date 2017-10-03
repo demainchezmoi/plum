@@ -1,7 +1,12 @@
 defmodule PlumWeb.Api.ProjectView do
   use PlumWeb, :view
-  alias PlumWeb.Api.ProjectView
-  @attributes ~w(id)a
+  alias PlumWeb.Api.{
+    AdView,
+    ProjectView,
+  }
+  import PlumWeb.ViewHelpers
+
+  @attributes ~w(id ad)a
 
   def render("index.json", %{projects: projects}) do
     %{data: render_many(projects, ProjectView, "project.json")}
@@ -12,6 +17,8 @@ defmodule PlumWeb.Api.ProjectView do
   end
 
   def render("project.json", %{project: project}) do
-    project |> Map.take(@attributes)
+    project
+    |> Map.take(@attributes)
+    |> put_loaded_assoc({:ad, AdView, "ad.json", :ad})
   end
 end
