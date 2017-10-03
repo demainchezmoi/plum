@@ -18,7 +18,7 @@
               </h3>
 
               <h1 class="text-center responsive-h1 font-thin mt-1 mb-0">
-                <span class=""><%= raw Number.Currency.number_to_currency(@ad.land.price + house_price) %></span>
+                <span class=""><%= raw Number.Currency.number_to_currency(@ad.land.price + house_price) %> <span class="gray-text-500">*</span></span>
               </h1>
             </div>
 
@@ -27,7 +27,7 @@
           </div>
 
           <div class="bottom-section">
-            <div class="row justify-content-between text-secondary font-black">
+            <div class="row justify-content-between dark-gray-text font-black">
               <div class="col">
                 Maison T4 - 80m<sup>2</sup>
               </div>
@@ -42,6 +42,15 @@
               </div>
               <div class="col-auto text-right">
                 <%= raw Number.Currency.number_to_currency(@ad.land.price) %>
+              </div>
+            </div>
+
+            <div class="row justify-content-between text-secondary">
+              <div class="col">
+                * Adaptation sol
+              </div>
+              <div class="col-auto text-right">
+                Variable
               </div>
             </div>
 
