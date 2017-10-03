@@ -1,14 +1,14 @@
 .enterRight {
 	animation-name: enterRight;
-	-webkit-animation-name: enterRight;	
+	-webkit-animation-name: enterRight;
 
-	animation-duration: .5s;	
-	-webkit-animation-duration: .5s;
+	animation-duration: .3s;
+	-webkit-animation-duration: .3s;
 
 	animation-timing-function: ease;
 	-webkit-animation-timing-function: ease;
 
-	visibility: visible !important;	
+	visibility: visible !important;
 }
 
 @keyframes enterRight {
@@ -32,15 +32,15 @@
 
 .enterLeft {
 	animation-name: enterLeft;
-	-webkit-animation-name: enterLeft;	
+	-webkit-animation-name: enterLeft;
 
-	animation-duration: .5s;	
-	-webkit-animation-duration: .5s;
+	animation-duration: .3s;
+	-webkit-animation-duration: .3s;
 
 	animation-timing-function: ease;
 	-webkit-animation-timing-function: ease;
 
-	visibility: visible !important;	
+	visibility: visible !important;
 }
 
 @keyframes enterLeft {

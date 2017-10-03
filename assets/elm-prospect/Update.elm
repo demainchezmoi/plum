@@ -26,7 +26,7 @@ update msg model =
         ProjectToStep route ->
             let
                 newModel =
-                    { model | projectStepAnimation = EnterRight, projectAnimation = None }
+                    { model | projectStepAnimation = None, projectAnimation = None }
             in
                 update (NavigateTo route) newModel
 
