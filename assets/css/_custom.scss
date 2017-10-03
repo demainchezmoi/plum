@@ -9,7 +9,7 @@ $base-yellow-flash: map-get($yellow-flash, base);
 nav.navbar.translucid {
   background: rgba(0, 0, 0, 0.6);
   @include media-breakpoint-up(sm) {
-    background: rgba(0, 0, 0, 0.2);
+    background: rgba(0, 0, 0, 0.4);
   }
 }
 
@@ -38,30 +38,29 @@ nav.navbar.translucid {
   font-weight: 900;
 }
 
+.semi-gray-background {
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+.light-bordered {
+  border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
 .intro-1 {
-  .full-bg-img { background-color: rgba(0, 0, 0, 0.5); }
   height: 600px;
-  background-size: cover;
   @include media-breakpoint-up(xs) { height: 300px; }
   @include media-breakpoint-up(sm) { height: 380px; }
   @include media-breakpoint-up(md) { height: 460px; }
   @include media-breakpoint-up(lg) { height: 540px; }
   @include media-breakpoint-up(xl) { height: 620px; }
-  background: url("https://s3-eu-west-1.amazonaws.com/demainchezmoi/cloudfront_assets/images/maison_toit.jpg") no-repeat center center;
+  background: url("https://s3-eu-west-1.amazonaws.com/demainchezmoi/cloudfront_assets/images/maison_21.png") no-repeat center center;
+  background-size: cover;
 }
 
 .brand {
   @include media-breakpoint-up(md) { margin-bottom: map-get($spacers, 5); }
   @include media-breakpoint-down(xs) { font-size: small; }
   @extend .text-shadow;
-}
-
-.intro-1 {
-  .full-bg-img {
-    background-color: rgba(0, 0, 0, 0.5);
-  }
-  background: url("https://s3-eu-west-1.amazonaws.com/demainchezmoi/cloudfront_assets/images/maison_toit.jpg") no-repeat center center;
-  background-size: cover;
 }
 
 .badge { border: 0 !important; }

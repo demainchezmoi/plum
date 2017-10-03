@@ -4,31 +4,32 @@
   <div class="flex-center">
     <div class="container">
       <div class="row justify-content-center">
-        <div class="col col-md-5 col-lg-4">
+        <div class="col col-md-10 col-lg-8">
 
           <div class="upper-section">
-            <h4 class="h4-responsive text-center mt-2 font-black text-secondary">
+
+            <h5 class="h5-responsive text-center mt-3 font-light text-secondary">
               <i class="fa fa-home"></i>&nbsp;Maisons Léo
-            </h4>
+            </h5>
 
-            <h3 class="responsive-h3 text-center mt-5 dark-grey-text" style="font-weight: 900">
-              Devenez propriétaire à <%= @ad.land.city %>&nbsp;(<%= @ad.land.department %>)
-            </h3>
+            <div class="light-bordered mt-3 pt-3">
+              <h3 class="responsive-h3 text-center dark-grey-text font-black">
+                Devenez propriétaire à <%= @ad.land.city %>&nbsp;(<%= @ad.land.department %>)
+              </h3>
 
-            <div class="text-secondary text-center"><small>pour</small></div>
-
-            <h1 class="text-center responsive-h1 font-thin">
-              <span class=""><%= raw Number.Currency.number_to_currency(@ad.land.price + house_price) %></span>
-            </h1>
+              <h1 class="text-center responsive-h1 font-thin mt-1">
+                <span class=""><%= raw Number.Currency.number_to_currency(@ad.land.price + house_price) %></span>
+              </h1>
+            </div>
 
       		  <img class="d-block p-2 img-thumbnail mt-4 img-fluid" src="https://s3-eu-west-1.amazonaws.com/demainchezmoi/cloudfront_assets/images/maison_21.png">
-            <div class="text-secondary text-center">Maison familiale Léo</div>
+            <div class="text-secondary text-center">Maison Léo - Maison familiale</div>
           </div>
 
           <div class="bottom-section">
             <div class="row justify-content-between text-secondary font-black">
               <div class="col">
-              T3 familial - 80m<sup>2</sup>
+                Maison T4 - 80m<sup>2</sup>
               </div>
               <div class="col-auto text-right">
                 <%= raw Number.Currency.number_to_currency(house_price) %>
@@ -45,7 +46,7 @@
             </div>
 
       		  <div class="text-center mt-1">
-              <%= link "Me positionner sur l'annonce", to: interested_url(@ad, @conn.assigns[:current_user]), class: "btn btn-yellow-flash font-bold full-width mr-0 ml-0", id: "interested-button" %>
+              <%= link "Je suis intéressé", to: interested_url(@ad, @conn.assigns[:current_user]), class: "btn btn-yellow-flash font-bold full-width mr-0 ml-0", id: "interested-button" %>
             </div>
           </div>
 
