@@ -16,6 +16,8 @@ type alias ProjectStepStatus =
 type alias Project =
     { id : ProjectId
     , ad : Ad
+    , discover_house : Bool
+    , discover_land : Bool
     , steps : List ProjectStepStatus
     }
 

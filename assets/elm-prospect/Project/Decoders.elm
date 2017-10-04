@@ -37,4 +37,6 @@ projectDecoder =
             Project
             |: (field "id" int)
             |: (field "ad" adDecoder)
+            |: (field "discover_land" bool)
+            |: (field "discover_house" bool)
             |: (field "steps" (list projectStepStatusDecoder))

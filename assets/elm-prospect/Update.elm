@@ -17,8 +17,8 @@ update msg model =
             , Cmd.none
             )
 
-        UpdateProject project ->
-            model ! [ updateProject model.apiToken project.id project ]
+        UpdateProject projectId value ->
+            model ! [ updateProject model.apiToken projectId value ]
 
         UrlChange location ->
             let

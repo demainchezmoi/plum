@@ -11,6 +11,7 @@ import Project.Model exposing (..)
 import Routing exposing (toPath, Route(..))
 import ViewHelpers exposing (remoteDataView, inLayout)
 import RemoteData exposing (..)
+import Json.Encode
 
 
 projectPageView : Model -> Html Msg
@@ -214,10 +215,14 @@ nextStepButton action =
 discoverLandView : Model -> ProjectId -> String -> Html Msg
 discoverLandView model projectId title =
     let
+        getValue : Project -> Json.Encode.Value
+        getValue project =
+            Json.Encode.object [ ( "discover_land", Json.Encode.bool True ) ]
+
         view =
             case model.project of
                 Success project ->
-                    div [] [ UpdateProject project |> nextStepButton ]
+                    div [] [ UpdateProject projectId (getValue project) |> nextStepButton ]
 
                 _ ->
                     div [] []
@@ -228,8 +233,17 @@ discoverLandView model projectId title =
 discoverHouseView : Model -> ProjectId -> String -> Html Msg
 discoverHouseView model projectId title =
     let
+        getValue : Project -> Json.Encode.Value
+        getValue project =
+            Json.Encode.object [ ( "discover_house", Json.Encode.bool True ) ]
+
         view =
-            div [] []
+            case model.project of
+                Success project ->
+                    div [] [ UpdateProject projectId (getValue project) |> nextStepButton ]
+
+                _ ->
+                    div [] []
     in
         stepView model projectId title view
 

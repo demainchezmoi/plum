@@ -5,6 +5,7 @@ import Json.Encode exposing (..)
 import Messages exposing (Msg(..))
 import Model exposing (ApiToken)
 import Project.Decoders exposing (projectDecoder)
+import Project.Encoders exposing (projectEncoder)
 import Project.Model exposing (ProjectId, Project)
 import RemoteData exposing (..)
 
@@ -20,17 +21,14 @@ getProject apiToken projectId =
             |> Cmd.map ProjectResponse
 
 
-updateProject : ApiToken -> ProjectId -> Project -> Cmd Msg
-updateProject apiToken projectId project =
+updateProject : ApiToken -> ProjectId -> Value -> Cmd Msg
+updateProject apiToken projectId value =
     let
         url =
             "/api/projects/" ++ (toString projectId)
 
-        data =
-            object [ ( "discover_land", bool True ) ]
-
         project_data =
-            object [ ( "project", data ) ]
+            object [ ( "project", value ) ]
     in
         authPut apiToken url projectDecoder project_data
             |> RemoteData.sendRequest
