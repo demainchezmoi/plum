@@ -34,7 +34,7 @@ projectView : Model -> Project -> Html Msg
 projectView model project =
     div []
         [ adHeader project.ad
-        , photo
+        , photo "maison_21.png"
         , div [ class ("mt-3 mb-5 " ++ (slidingClass model.projectAnimation)) ]
             [ ul [ class "list-group" ]
                 (List.map (\dStep -> stepIndexView dStep.step model project dStep.label) displaySteps)
@@ -72,7 +72,7 @@ type alias DisplayStep =
 
 displaySteps : List DisplayStep
 displaySteps =
-    [ { step = DiscoverLand, view = discoverLandView, label = "Découvrir le terrain" }
+    [ { step = DiscoverLand, view = discoverLandView, label = "Découvrir le lieu" }
     , { step = DiscoverHouse, view = discoverHouseView, label = "Découvrir la maison" }
     , { step = ConfigureHouse, view = configureHouseView, label = "Ma configuration" }
     , { step = EvaluateFunding, view = evaluateFundingView, label = "Ma finançabilité" }
@@ -88,11 +88,11 @@ displaySteps =
     ]
 
 
-photo : Html Msg
-photo =
+photo : String -> Html Msg
+photo string =
     img
         [ class "d-block p-2 img-thumbnail mt-3 img-fluid"
-        , src "https://s3-eu-west-1.amazonaws.com/demainchezmoi/cloudfront_assets/images/maison_21.png"
+        , src ("https://s3-eu-west-1.amazonaws.com/demainchezmoi/cloudfront_assets/images/" ++ string)
         ]
         []
 
@@ -163,7 +163,7 @@ checkedIcon state =
         currentIcon =
             span [ class "fa-stack mr-2" ]
                 [ i [ class "fa fa-circle fa-stack-2x" ] []
-                , i [ class "fa fa-question fa-stack-1x fa-inverse" ] []
+                , i [ class "fa fa-arrow-right fa-stack-1x fa-inverse" ] []
                 ]
 
         notYetIcon =
@@ -230,7 +230,7 @@ discoverLandView model project title =
 
         getButton : Html Msg
         getButton =
-            UpdateProject project.id updateValue |> nextStepButton
+            ValidateDiscoverLand project.id updateValue |> nextStepButton
 
         button =
             case stepState project DiscoverLand of
@@ -257,7 +257,7 @@ discoverHouseView model project title =
 
         getButton : Html Msg
         getButton =
-            UpdateProject project.id updateValue |> nextStepButton
+            ValidateDiscoverHouse project.id updateValue |> nextStepButton
 
         button =
             case stepState project DiscoverHouse of
@@ -271,7 +271,11 @@ discoverHouseView model project title =
                     text ""
 
         view =
-            div [] [ button ]
+            div []
+                [ photo "maison_21_nuit.jpg"
+                , photo "maison-min.png"
+                , button
+                ]
     in
         stepView model project title view
 

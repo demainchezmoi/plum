@@ -15,3 +15,7 @@ type Msg
     | UpdateProject ProjectId Value
     | ProjectToStep Route
     | StepToProject Route
+    | ValidateDiscoverLand ProjectId Value
+    | ValidateDiscoverLandResponse (WebData Project)
+    | ValidateDiscoverHouse ProjectId Value
+    | ValidateDiscoverHouseResponse (WebData Project)

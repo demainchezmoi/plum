@@ -3,10 +3,10 @@ module Update exposing (..)
 import Messages exposing (..)
 import Model exposing (..)
 import Navigation
-import Project.Commands exposing (getProject, updateProject)
+import Project.Commands exposing (getProject, updateProject, updateProjectWithCallback)
 import RemoteData exposing (..)
 import Routing exposing (Route(..), parse, toPath)
-import Project.Model exposing (ProjectId)
+import Project.Model exposing (..)
 
 
 update : Msg -> Model -> ( Model, Cmd Msg )
@@ -41,6 +41,43 @@ update msg model =
 
         NavigateTo route ->
             model ! [ Navigation.newUrl <| toPath route ]
+
+        ValidateDiscoverLand projectId value ->
+            model ! [ updateProjectWithCallback model.apiToken projectId value ValidateDiscoverLandResponse ]
+
+        ValidateDiscoverLandResponse response ->
+            let
+                newModel =
+                    { model | project = response }
+            in
+                case response of
+                    Success project ->
+                        update (NavigateTo (ProjectStepRoute project.id DiscoverHouse)) newModel
+
+                    _ ->
+                        newModel ! []
+
+        ValidateDiscoverHouse projectId value ->
+            model ! [ updateProjectWithCallback model.apiToken projectId value ValidateDiscoverHouseResponse ]
+
+        ValidateDiscoverHouseResponse response ->
+            let
+                newModel =
+                    { model | project = response }
+            in
+                case response of
+                    Success project ->
+                        update (NavigateTo (ProjectStepRoute project.id ConfigureHouse)) newModel
+
+                    _ ->
+                        newModel ! []
+
+
+
+{--
+           - ValidateConfigureHouse
+           - ValidateConfigureHouseResponse
+           --}
 
 
 urlUpdate : Model -> ( Model, Cmd Msg )

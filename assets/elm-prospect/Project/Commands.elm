@@ -21,8 +21,8 @@ getProject apiToken projectId =
             |> Cmd.map ProjectResponse
 
 
-updateProject : ApiToken -> ProjectId -> Value -> Cmd Msg
-updateProject apiToken projectId value =
+updateProjectWithCallback : ApiToken -> ProjectId -> Value -> (WebData Project -> Msg) -> Cmd Msg
+updateProjectWithCallback apiToken projectId value callback =
     let
         url =
             "/api/projects/" ++ (toString projectId)
@@ -32,4 +32,9 @@ updateProject apiToken projectId value =
     in
         authPut apiToken url projectDecoder project_data
             |> RemoteData.sendRequest
-            |> Cmd.map ProjectResponse
+            |> Cmd.map callback
+
+
+updateProject : ApiToken -> ProjectId -> Value -> Cmd Msg
+updateProject apiToken projectId value =
+    updateProjectWithCallback apiToken projectId value ProjectResponse
