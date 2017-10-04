@@ -28,11 +28,16 @@ defmodule Plum.Factory do
       lng: 2.1201,
       price: 42_000,
       surface: 396,
+      images: ["test"],
+      description: sequence(:description, &"desc-#{&1}")
     }
   end
 
   def project_factory do
-    %Project{}
+    %Project{
+      discover_land: true,
+      discover_house: false
+    }
   end
 
   def session_factory do

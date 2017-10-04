@@ -1,6 +1,9 @@
 .full-width { width: 100% }
 .text-shadow { text-shadow: 2px 2px 3px rgba(0,0,0,0.3); }
 
+.default-color-text {
+  color: $default-color;
+}
 
 .cp { cursor: pointer; }
 .gray-hover {

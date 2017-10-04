@@ -11,13 +11,15 @@ defmodule Plum.Sales.Land do
     field :lng, :float
     field :price, :integer
     field :surface, :integer
+    field :images, {:array, :string}, default: []
+    field :description, :string, default: ""
 
     has_one :ad, Ad
 
     timestamps()
   end
 
-  @required_fields ~w(surface lat lng price city department)a
+  @required_fields ~w(surface lat lng price city department images description)a
   @optional_fields ~w()a
 
   @doc false

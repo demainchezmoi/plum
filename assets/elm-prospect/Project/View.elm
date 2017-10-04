@@ -72,9 +72,9 @@ type alias DisplayStep =
 
 displaySteps : List DisplayStep
 displaySteps =
-    [ { step = DiscoverLand, view = discoverLandView, label = "Découvrir le lieu" }
+    [ { step = DiscoverLand, view = discoverLandView, label = "Découvrir le terrain" }
     , { step = DiscoverHouse, view = discoverHouseView, label = "Découvrir la maison" }
-    , { step = ConfigureHouse, view = configureHouseView, label = "Ma configuration" }
+    , { step = ConfigureHouse, view = configureHouseView, label = "Mon choix de couleurs" }
     , { step = EvaluateFunding, view = evaluateFundingView, label = "Ma finançabilité" }
     , { step = PhoneCall, view = phoneCallView, label = "Premier contact" }
     , { step = Quotation, view = quotationView, label = "Mon devis" }
@@ -100,7 +100,7 @@ photo string =
 adHeader : Ad -> Html Msg
 adHeader ad =
     div [ class "mt-3 p-3 light-bordered text-center" ]
-        [ h4 [ class "font-black h4-responsive" ] [ text "Mon espace" ]
+        [ h4 [ class "font-black h4-responsive default-color-text" ] [ text "Mon espace" ]
         , p [ class "lead mb-0" ] [ AdView.shortView ad ]
         ]
 
@@ -222,6 +222,16 @@ nextStepButton action =
         [ text "Étape suivante" ]
 
 
+landImage : String -> Html Msg
+landImage source =
+    img [ class "d-block p-2 img-thumbnail mt-3 img-fluid", src source ] []
+
+
+projectLandImages : Project -> List (Html Msg)
+projectLandImages project =
+    List.map landImage project.ad.land.images
+
+
 discoverLandView : Model -> Project -> String -> Html Msg
 discoverLandView model project title =
     let
@@ -244,7 +254,12 @@ discoverLandView model project title =
                     text ""
 
         view =
-            div [] [ button ]
+            div []
+                ((projectLandImages project)
+                    ++ [ p [ class "mt-3 p-3 light-bordered" ] [ text project.ad.land.description ]
+                       , button
+                       ]
+                )
     in
         stepView model project title view
 

@@ -15,3 +15,5 @@ landDecoder =
         |: (field "lng" float)
         |: (field "price" int)
         |: (field "surface" int)
+        |: (field "description" string)
+        |: (field "images" (list string))

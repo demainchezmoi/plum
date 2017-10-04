@@ -8,4 +8,6 @@ type alias Land =
     , lng : Float
     , price : Int
     , surface : Int
+    , description : String
+    , images : List String
     }
