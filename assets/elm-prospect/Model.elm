@@ -2,7 +2,7 @@ module Model exposing (..)
 
 import Routing exposing (Route)
 import RemoteData exposing (..)
-import Project.Model exposing (Project)
+import Project.Model exposing (Project, ProjectId)
 
 
 type alias ApiToken =

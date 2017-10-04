@@ -24,4 +24,4 @@ page model =
             projectPageView model
 
         ProjectStepRoute projectId projectStep ->
-            projectStepPageView projectStep projectId model
+            projectStepPageView projectStep model

@@ -111,7 +111,6 @@ defmodule PlumWeb.Api.ProjectControllerTest do
       user = insert(:user)
       ad = insert(:ad)
       project = insert(:project, ad_id: ad.id, user_id: user.id)
-      id = project.id
 
       project_params = %{discover_land: true}
 

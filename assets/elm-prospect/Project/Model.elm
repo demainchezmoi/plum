@@ -9,7 +9,7 @@ type alias ProjectId =
 
 type alias ProjectStepStatus =
     { step : ProjectStep
-    , checked : Bool
+    , valid : Bool
     }
 
 

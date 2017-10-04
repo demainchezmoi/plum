@@ -8,12 +8,21 @@ import RemoteData exposing (..)
 import Model exposing (..)
 
 
+header : Html Msg
+header =
+    h5 [ class "ml-header" ]
+        [ i [ class "fa fa-home" ] []
+        , text " Maisons Léo"
+        ]
+
+
 inLayout : Html Msg -> Html Msg
 inLayout elem =
     div [ class "container" ]
         [ div [ class "row justify-content-center" ]
             [ div [ class "col col-md-10 col-lg-8" ]
-                [ elem
+                [ header
+                , elem
                 ]
             ]
         ]
@@ -82,19 +91,3 @@ failureView err =
         BadPayload pay res ->
             ("Bad payload: " ++ toString res)
                 |> text
-
-
-remoteDataView : Model -> WebData a -> (Model -> a -> Html Msg) -> Html Msg
-remoteDataView model data view =
-    case data of
-        Failure err ->
-            failureView err
-
-        NotAsked ->
-            notAskedView
-
-        Loading ->
-            loadingView
-
-        Success data ->
-            view model data

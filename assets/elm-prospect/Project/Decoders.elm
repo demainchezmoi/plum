@@ -27,7 +27,7 @@ projectStepStatusDecoder =
     succeed
         ProjectStepStatus
         |: (field "name" projectStepDecoder)
-        |: (field "checked" bool)
+        |: (field "valid" bool)
 
 
 projectDecoder : Decoder Project

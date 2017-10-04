@@ -13,9 +13,7 @@ update : Msg -> Model -> ( Model, Cmd Msg )
 update msg model =
     case msg of
         ProjectResponse response ->
-            ( { model | project = response }
-            , Cmd.none
-            )
+            { model | project = response } ! []
 
         UpdateProject projectId value ->
             model ! [ updateProject model.apiToken projectId value ]

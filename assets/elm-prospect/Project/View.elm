@@ -9,19 +9,63 @@ import Messages exposing (..)
 import Model exposing (..)
 import Project.Model exposing (..)
 import Routing exposing (toPath, Route(..))
-import ViewHelpers exposing (remoteDataView, inLayout)
+import ViewHelpers exposing (..)
 import RemoteData exposing (..)
 import Json.Encode
 
 
 projectPageView : Model -> Html Msg
 projectPageView model =
-    remoteDataView model model.project projectView
+    case model.project of
+        Failure err ->
+            failureView err |> inLayout
+
+        NotAsked ->
+            notAskedView |> inLayout
+
+        Loading ->
+            loadingView |> inLayout
+
+        Success project ->
+            projectView model project |> inLayout
+
+
+projectView : Model -> Project -> Html Msg
+projectView model project =
+    div []
+        [ adHeader project.ad
+        , photo
+        , div [ class ("mt-3 mb-5 " ++ (slidingClass model.projectAnimation)) ]
+            [ ul [ class "list-group" ]
+                (List.map (\dStep -> stepIndexView dStep.step model project dStep.label) displaySteps)
+            ]
+        ]
+
+
+projectStepPageView : ProjectStep -> Model -> Html Msg
+projectStepPageView projectStep model =
+    case model.project of
+        Failure err ->
+            failureView err |> inLayout
+
+        NotAsked ->
+            notAskedView |> inLayout
+
+        Loading ->
+            loadingView |> inLayout
+
+        Success project ->
+            case List.filter (\dStep -> dStep.step == projectStep) displaySteps of
+                dStep :: _ ->
+                    dStep.view model project dStep.label |> inLayout
+
+                _ ->
+                    text "Erreur" |> inLayout
 
 
 type alias DisplayStep =
     { step : ProjectStep
-    , view : Model -> ProjectId -> String -> Html Msg
+    , view : Model -> Project -> String -> Html Msg
     , label : String
     }
 
@@ -42,24 +86,6 @@ displaySteps =
     , { step = Keys, view = keysView, label = "Réception" }
     , { step = AfterSales, view = afterSalesView, label = "Après-vente" }
     ]
-
-
-projectStepPageView : ProjectStep -> ProjectId -> Model -> Html Msg
-projectStepPageView projectStep projectId model =
-    case (List.filter (\dStep -> dStep.step == projectStep) displaySteps) |> List.head of
-        Just dStep ->
-            dStep.view model projectId dStep.label
-
-        Nothing ->
-            text "Not Found"
-
-
-header : Html Msg
-header =
-    h5 [ class "ml-header" ]
-        [ i [ class "fa fa-home" ] []
-        , text " Maisons Léo"
-        ]
 
 
 photo : Html Msg
@@ -86,44 +112,30 @@ stepState project projectStep =
             List.indexedMap (,) project.steps
 
         stepIndex =
-            case (List.filter (\( i, s ) -> s.step == projectStep) indexedSteps) |> List.head of
-                Just ( i, s ) ->
+            case List.filter (\( i, s ) -> s.step == projectStep) indexedSteps of
+                ( i, s ) :: _ ->
                     i
 
-                Nothing ->
+                _ ->
                     10100
 
-        ( checked, unchecked ) =
-            List.partition (\( i, s ) -> s.checked == True) indexedSteps
+        ( valid, invalid ) =
+            List.partition (\( i, s ) -> s.valid == True) indexedSteps
 
-        firstUncheckedIndex =
-            case List.head unchecked of
-                Just ( i, s ) ->
+        firstInvalidIndex =
+            case invalid of
+                ( i, s ) :: _ ->
                     i
 
-                Nothing ->
+                _ ->
                     10000
     in
-        if stepIndex == firstUncheckedIndex then
+        if stepIndex == firstInvalidIndex then
             Current
-        else if stepIndex > firstUncheckedIndex then
+        else if stepIndex > firstInvalidIndex then
             NotYet
         else
             Checked
-
-
-projectView : Model -> Project -> Html Msg
-projectView model project =
-    div []
-        [ header
-        , adHeader project.ad
-        , photo
-        , div [ class ("mt-3 mb-5 " ++ (slidingClass model.projectAnimation)) ]
-            [ ul [ class "list-group" ]
-                (List.map (\dStep -> stepIndexView dStep.step model project dStep.label) displaySteps)
-            ]
-        ]
-        |> inLayout
 
 
 slidingClass : SlideAnimation -> String
@@ -140,7 +152,7 @@ slidingClass status =
 
 
 checkedIcon : ProjectStepState -> Html Msg
-checkedIcon checked =
+checkedIcon state =
     let
         checkedIcon =
             span [ class "fa-stack mr-2" ]
@@ -160,7 +172,7 @@ checkedIcon checked =
                 , i [ class "fa fa-question fa-stack-1x fa-inverse" ] []
                 ]
     in
-        case checked of
+        case state of
             Checked ->
                 checkedIcon
 
@@ -181,19 +193,18 @@ stepIndexView projectStep model project label =
         ]
 
 
-stepView : Model -> ProjectId -> String -> Html Msg -> Html Msg
-stepView model projectId title view =
+stepView : Model -> Project -> String -> Html Msg -> Html Msg
+stepView model project title view =
     let
         stepClass =
             String.join " " [ slidingClass model.projectStepAnimation ]
     in
         div []
-            [ header
-            , div [ class stepClass ]
+            [ div [ class stepClass ]
                 [ h1 [ class "h1-responsive" ]
                     [ a
                         [ class "btn btn-sm btn-yellow-flash"
-                        , onClick (StepToProject (ProjectRoute projectId))
+                        , onClick (StepToProject (ProjectRoute project.id))
                         ]
                         [ i [ class "fa fa-chevron-left" ] []
                         ]
@@ -202,7 +213,6 @@ stepView model projectId title view =
                 , view
                 ]
             ]
-            |> inLayout
 
 
 nextStepButton : Msg -> Html Msg
@@ -212,136 +222,154 @@ nextStepButton action =
         [ text "Étape suivante" ]
 
 
-discoverLandView : Model -> ProjectId -> String -> Html Msg
-discoverLandView model projectId title =
+discoverLandView : Model -> Project -> String -> Html Msg
+discoverLandView model project title =
     let
-        getValue : Project -> Json.Encode.Value
-        getValue project =
+        updateValue =
             Json.Encode.object [ ( "discover_land", Json.Encode.bool True ) ]
 
+        getButton : Html Msg
+        getButton =
+            UpdateProject project.id updateValue |> nextStepButton
+
+        button =
+            case stepState project DiscoverLand of
+                Checked ->
+                    getButton
+
+                Current ->
+                    getButton
+
+                NotYet ->
+                    text ""
+
         view =
-            case model.project of
-                Success project ->
-                    div [] [ UpdateProject projectId (getValue project) |> nextStepButton ]
-
-                _ ->
-                    div [] []
+            div [] [ button ]
     in
-        stepView model projectId title view
+        stepView model project title view
 
 
-discoverHouseView : Model -> ProjectId -> String -> Html Msg
-discoverHouseView model projectId title =
+discoverHouseView : Model -> Project -> String -> Html Msg
+discoverHouseView model project title =
     let
-        getValue : Project -> Json.Encode.Value
-        getValue project =
+        updateValue =
             Json.Encode.object [ ( "discover_house", Json.Encode.bool True ) ]
 
+        getButton : Html Msg
+        getButton =
+            UpdateProject project.id updateValue |> nextStepButton
+
+        button =
+            case stepState project DiscoverHouse of
+                Checked ->
+                    getButton
+
+                Current ->
+                    getButton
+
+                NotYet ->
+                    text ""
+
         view =
-            case model.project of
-                Success project ->
-                    div [] [ UpdateProject projectId (getValue project) |> nextStepButton ]
-
-                _ ->
-                    div [] []
+            div [] [ button ]
     in
-        stepView model projectId title view
+        stepView model project title view
 
 
-configureHouseView : Model -> ProjectId -> String -> Html Msg
-configureHouseView model projectId title =
+configureHouseView : Model -> Project -> String -> Html Msg
+configureHouseView model project title =
     let
         view =
             div [] []
     in
-        stepView model projectId title view
+        stepView model project title view
 
 
-evaluateFundingView : Model -> ProjectId -> String -> Html Msg
-evaluateFundingView model projectId title =
+evaluateFundingView : Model -> Project -> String -> Html Msg
+evaluateFundingView model project title =
     let
         view =
             div [] []
     in
-        stepView model projectId title view
+        stepView model project title view
 
 
-phoneCallView : Model -> ProjectId -> String -> Html Msg
-phoneCallView model projectId title =
+phoneCallView : Model -> Project -> String -> Html Msg
+phoneCallView model project title =
     let
         view =
             div [] []
     in
-        stepView model projectId title view
+        stepView model project title view
 
 
-quotationView : Model -> ProjectId -> String -> Html Msg
-quotationView model projectId title =
+quotationView : Model -> Project -> String -> Html Msg
+quotationView model project title =
     let
         view =
             div [] []
     in
-        stepView model projectId title view
+        stepView model project title view
 
 
-fundingView : Model -> ProjectId -> String -> Html Msg
-fundingView model projectId title =
+fundingView : Model -> Project -> String -> Html Msg
+fundingView model project title =
     let
         view =
             div [] []
     in
-        stepView model projectId title view
+        stepView model project title view
 
 
-visitLandView : Model -> ProjectId -> String -> Html Msg
-visitLandView model projectId title =
+visitLandView : Model -> Project -> String -> Html Msg
+visitLandView model project title =
     let
         view =
             div [] []
     in
-        stepView model projectId title view
+        stepView model project title view
 
 
-contractView : Model -> ProjectId -> String -> Html Msg
-contractView model projectId title =
+contractView : Model -> Project -> String -> Html Msg
+contractView model project title =
     let
         view =
             div [] []
     in
-        stepView model projectId title view
+        stepView model project title view
 
 
-permitView : Model -> ProjectId -> String -> Html Msg
-permitView model projectId title =
+permitView : Model -> Project -> String -> Html Msg
+permitView model project title =
     let
         view =
             div [] []
     in
-        stepView model projectId title view
+        stepView model project title view
 
 
-buildingView : Model -> ProjectId -> String -> Html Msg
-buildingView model projectId title =
+buildingView : Model -> Project -> String -> Html Msg
+buildingView model project title =
     let
         view =
             div [] []
     in
-        stepView model projectId title view
+        stepView model project title view
 
 
-keysView : Model -> ProjectId -> String -> Html Msg
-keysView model projectId title =
+keysView : Model -> Project -> String -> Html Msg
+keysView model project title =
     let
         view =
             div [] []
     in
-        stepView model projectId title view
+        stepView model project title view
 
 
-afterSalesView : Model -> ProjectId -> String -> Html Msg
-afterSalesView model projectId title =
+afterSalesView : Model -> Project -> String -> Html Msg
+afterSalesView model project title =
     let
         view =
             div [] []
     in
-        stepView model projectId title view
+        stepView model project title view

@@ -381,19 +381,36 @@ defmodule Plum.Sales do
       get_keys(project),
       get_after_sales(project),
     ]
+    # |> set_project_steps_display
   end
 
-  defp get_discover_land_step(p), do: %{name: "discover_land", checked: p.discover_land}
-  defp get_discover_house_step(p), do: %{name: "discover_house", checked: p.discover_house}
-  defp get_configure_house(project), do: %{name: "configure_house", checked: false}
-  defp get_evaluate_funding(project), do: %{name: "evaluate_funding", checked: false}
-  defp get_phone_call(project), do: %{name: "phone_call", checked: false}
-  defp get_quotation(project), do: %{name: "quotation", checked: false}
-  defp get_funding(project), do: %{name: "funding", checked: false}
-  defp get_visit_land(project), do: %{name: "visit_land", checked: false}
-  defp get_contract(project), do: %{name: "contract", checked: false}
-  defp get_permit(project), do: %{name: "permit", checked: false}
-  defp get_building(project), do: %{name: "building", checked: false}
-  defp get_keys(project), do: %{name: "keys", checked: false}
-  defp get_after_sales(project), do: %{name: "after_sales", checked: false}
+  defp get_discover_land_step(p), do: %{name: "discover_land", valid: p.discover_land}
+  defp get_discover_house_step(p), do: %{name: "discover_house", valid: p.discover_house}
+  defp get_configure_house(_project), do: %{name: "configure_house", valid: false}
+  defp get_evaluate_funding(_project), do: %{name: "evaluate_funding", valid: false}
+  defp get_phone_call(_project), do: %{name: "phone_call", valid: false}
+  defp get_quotation(_project), do: %{name: "quotation", valid: false}
+  defp get_funding(_project), do: %{name: "funding", valid: false}
+  defp get_visit_land(_project), do: %{name: "visit_land", valid: false}
+  defp get_contract(_project), do: %{name: "contract", valid: false}
+  defp get_permit(_project), do: %{name: "permit", valid: false}
+  defp get_building(_project), do: %{name: "building", valid: false}
+  defp get_keys(_project), do: %{name: "keys", valid: false}
+  defp get_after_sales(_project), do: %{name: "after_sales", valid: false}
+
+  # defp set_project_steps_display(steps, done_steps \\ [], over \\ false)
+  # defp set_project_steps_display([], done_steps, _over), do: done_steps
+  # defp set_project_steps_display([step|steps], done_steps, over) do
+    # step_display =
+      # cond do
+        # step.valid and not over -> "checked"
+        # not step.valid and not over -> "current"
+        # true -> "not_yet"
+      # end
+
+    # done_step = step |> Map.put(:display, step_display)
+    # over = step_display != "checked"
+        
+    # set_project_steps_display(steps, done_steps ++ [done_step], over)
+  # end
 end
