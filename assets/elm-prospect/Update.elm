@@ -3,7 +3,7 @@ module Update exposing (..)
 import Messages exposing (..)
 import Model exposing (..)
 import Navigation
-import Project.Commands exposing (getProject)
+import Project.Commands exposing (getProject, updateProject)
 import RemoteData exposing (..)
 import Routing exposing (Route(..), parse, toPath)
 import Project.Model exposing (ProjectId)
@@ -16,6 +16,9 @@ update msg model =
             ( { model | project = response }
             , Cmd.none
             )
+
+        UpdateProject project ->
+            model ! [ updateProject model.apiToken project.id project ]
 
         UrlChange location ->
             let

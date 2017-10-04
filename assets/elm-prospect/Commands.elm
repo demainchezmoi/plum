@@ -1,7 +1,8 @@
 module Commands exposing (..)
 
-import Http
+import Http exposing (..)
 import Json.Decode exposing (Decoder)
+import Json.Encode exposing (..)
 import List exposing ((::))
 import Messages exposing (Msg(..))
 import Model exposing (ApiToken, Method, Url)
@@ -14,24 +15,29 @@ getAuthorizationHeaderValue apiToken =
     "Token token=\"" ++ apiToken ++ "\""
 
 
-getAuthorizationHeader : String -> Http.Header
+getAuthorizationHeader : String -> Header
 getAuthorizationHeader apiToken =
-    Http.header "authorization" (getAuthorizationHeaderValue apiToken)
+    header "authorization" (getAuthorizationHeaderValue apiToken)
 
 
-authentifiedRequest : ApiToken -> Method -> Url -> Http.Body -> List Http.Header -> Decoder a -> Http.Request a
+authentifiedRequest : ApiToken -> Method -> Url -> Body -> List Header -> Decoder a -> Request a
 authentifiedRequest apiToken method url body headers decoder =
-    Http.request
+    request
         { method = method
         , headers = (getAuthorizationHeader apiToken) :: headers
         , url = url
         , body = body
-        , expect = Http.expectJson decoder
+        , expect = expectJson decoder
         , timeout = Nothing
         , withCredentials = False
         }
 
 
-authGet : ApiToken -> Url -> Decoder a -> Http.Request a
+authGet : ApiToken -> Url -> Decoder a -> Request a
 authGet apiToken url decoder =
-    authentifiedRequest apiToken "GET" url Http.emptyBody [] decoder
+    authentifiedRequest apiToken "GET" url emptyBody [] decoder
+
+
+authPut : ApiToken -> Url -> Decoder a -> Value -> Request a
+authPut apiToken url decoder value =
+    authentifiedRequest apiToken "PUT" url (jsonBody value) [] decoder

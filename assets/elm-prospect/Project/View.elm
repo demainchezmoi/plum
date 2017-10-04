@@ -10,6 +10,7 @@ import Model exposing (..)
 import Project.Model exposing (..)
 import Routing exposing (toPath, Route(..))
 import ViewHelpers exposing (remoteDataView, inLayout)
+import RemoteData exposing (..)
 
 
 projectPageView : Model -> Html Msg
@@ -189,7 +190,10 @@ stepView model projectId title view =
             [ header
             , div [ class stepClass ]
                 [ h1 [ class "h1-responsive" ]
-                    [ a [ class "btn btn-sm btn-yellow-flash", onClick (StepToProject (ProjectRoute projectId)) ]
+                    [ a
+                        [ class "btn btn-sm btn-yellow-flash"
+                        , onClick (StepToProject (ProjectRoute projectId))
+                        ]
                         [ i [ class "fa fa-chevron-left" ] []
                         ]
                     , text title
@@ -200,11 +204,23 @@ stepView model projectId title view =
             |> inLayout
 
 
+nextStepButton : Msg -> Html Msg
+nextStepButton action =
+    button
+        [ class "btn btn-default", onClick action ]
+        [ text "Étape suivante" ]
+
+
 discoverLandView : Model -> ProjectId -> String -> Html Msg
 discoverLandView model projectId title =
     let
         view =
-            div [] []
+            case model.project of
+                Success project ->
+                    div [] [ UpdateProject project |> nextStepButton ]
+
+                _ ->
+                    div [] []
     in
         stepView model projectId title view
 

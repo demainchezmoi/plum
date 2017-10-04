@@ -77,7 +77,7 @@ defmodule PlumWeb.Router do
 
   scope "/api", PlumWeb.Api do
     pipe_through :protected_api
-    resources "/projects", ProjectController, only: [:show], name: "api_project"
+    resources "/projects", ProjectController, only: [:show, :update], name: "api_project"
   end
 
   scope "/api", PlumWeb.Api do

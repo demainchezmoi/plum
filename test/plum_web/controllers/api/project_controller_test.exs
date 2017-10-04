@@ -2,7 +2,7 @@ defmodule PlumWeb.Api.ProjectControllerTest do
   use PlumWeb.ConnCase
 
   import Plum.Factory
-  alias Sales
+  alias Plum.Sales
 
   setup %{conn: conn} do
     {:ok, conn: put_req_header(conn, "accept", "application/json")}
@@ -74,23 +74,63 @@ defmodule PlumWeb.Api.ProjectControllerTest do
     # end
   # end
 
-  # describe "update project" do
-    # setup [:create_project]
+  describe "update project" do
 
-    # test "renders project when data is valid", %{conn: conn, project: %Project{id: id} = project} do
-      # conn = put conn, api_project_path(conn, :update, project), project: @update_attrs
-      # assert %{"id" => ^id} = json_response(conn, 200)["data"]
+    @tag :logged_in
+    test "renders project when data is valid", %{conn: conn, current_user: current_user} do
+      ad = insert(:ad)
+      project = insert(:project, ad_id: ad.id, user_id: current_user.id)
+      id = project.id
 
-      # conn = get conn, api_project_path(conn, :show, id)
-      # assert json_response(conn, 200)["data"] == %{
-        # "id" => id}
-    # end
+      project_params = %{discover_land: true}
 
-    # test "renders errors when data is invalid", %{conn: conn, project: project} do
-      # conn = put conn, api_project_path(conn, :update, project), project: @invalid_attrs
-      # assert json_response(conn, 422)["errors"] != %{}
-    # end
-  # end
+      conn1 = put conn, api_project_path(conn, :update, project), project: project_params 
+      assert %{"id" => ^id} = json_response(conn1, 200)["data"]
+
+      conn2 = get conn, api_project_path(conn, :show, id)
+      assert json_response(conn2, 200)["data"]["id"] == id
+    end
+
+    @tag :logged_in
+    test "doesnt update forbidden field", %{conn: conn, current_user: current_user} do
+      user = insert(:user)
+      ad = insert(:ad)
+      project = insert(:project, ad_id: ad.id, user_id: current_user.id)
+      id = project.id
+
+      project_params = %{user_id: user.id}
+
+      conn1 = put conn, api_project_path(conn, :update, project), project: project_params 
+      assert %{"id" => ^id} = json_response(conn1, 200)["data"]
+
+      assert Sales.get_project!(project.id).user_id == current_user.id
+    end
+
+    @tag :logged_in
+    test "doesnt update project I don't own", %{conn: conn} do
+      user = insert(:user)
+      ad = insert(:ad)
+      project = insert(:project, ad_id: ad.id, user_id: user.id)
+      id = project.id
+
+      project_params = %{discover_land: true}
+
+      assert_error_sent 404, fn ->
+        put conn, api_project_path(conn, :update, project), project: project_params
+      end
+    end
+
+    @tag :logged_in
+    test "renders errors when data is invalid", %{conn: conn, current_user: current_user} do
+      ad = insert(:ad)
+      project = insert(:project, ad_id: ad.id, user_id: current_user.id)
+
+      project_params = %{discover_land: 2}
+
+      conn = put conn, api_project_path(conn, :update, project), project: project_params
+      assert json_response(conn, 422)["errors"] != %{}
+    end
+  end
 
   # describe "delete project" do
     # setup [:create_project]

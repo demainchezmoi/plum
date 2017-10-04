@@ -6,6 +6,8 @@ defmodule PlumWeb.Api.ProjectController do
 
   action_fallback PlumWeb.FallbackController
 
+  @updatable_fields ~w(discover_house discover_land)
+
   # def index(conn, _params) do
     # projects = Sales.list_projects()
     # render(conn, "index.json", projects: projects)
@@ -28,13 +30,15 @@ defmodule PlumWeb.Api.ProjectController do
     render(conn, "show.json", project: project)
   end
 
-  # def update(conn, %{"id" => id, "project" => project_params}) do
-    # project = Sales.get_project!(id)
+  def update(conn, %{"id" => id, "project" => project_params}) do
+    current_user = conn.assigns.current_user
+    project = Sales.get_project_by!(%{id: id, user_id: current_user.id})
+    authorized_params = project_params |> Map.take(@updatable_fields)
 
-    # with {:ok, %Project{} = project} <- Sales.update_project(project, project_params) do
-      # render(conn, "show.json", project: project)
-    # end
-  # end
+    with {:ok, %Project{} = project} <- Sales.update_project(project, authorized_params) do
+      render(conn, "show.json", project: project |> Sales.set_project_steps)
+    end
+  end
 
   # def delete(conn, %{"id" => id}) do
     # project = Sales.get_project!(id)
