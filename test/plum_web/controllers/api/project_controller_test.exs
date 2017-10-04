@@ -2,6 +2,7 @@ defmodule PlumWeb.Api.ProjectControllerTest do
   use PlumWeb.ConnCase
 
   import Plum.Factory
+  alias Sales
 
   setup %{conn: conn} do
     {:ok, conn: put_req_header(conn, "accept", "application/json")}
@@ -40,6 +41,20 @@ defmodule PlumWeb.Api.ProjectControllerTest do
       project = insert(:project, ad_id: ad.id, user_id: current_user.id)
       conn = get conn, api_project_path(conn, :show, project)
       assert json_response(conn, 200)["data"]["ad"]["land"]["id"] == land.id
+    end
+
+    @tag :logged_in
+    test "load the steps", %{conn: conn, current_user: current_user} do
+      ad = insert(:ad)
+
+      project = insert :project,
+        ad_id: ad.id,
+        user_id: current_user.id,
+        discover_land: true,
+        discover_house: false
+
+      conn = get conn, api_project_path(conn, :show, project)
+      assert json_response(conn, 200)["data"]["steps"]
     end
   end
 

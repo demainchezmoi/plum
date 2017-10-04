@@ -7,9 +7,16 @@ type alias ProjectId =
     Int
 
 
+type alias ProjectStepStatus =
+    { step : ProjectStep
+    , checked : Bool
+    }
+
+
 type alias Project =
     { id : ProjectId
     , ad : Ad
+    , steps : List ProjectStepStatus
     }
 
 
@@ -29,14 +36,14 @@ type ProjectStep
     | Funding
     | VisitLand
     | Contract
-    | BuildingPermit
+    | Permit
     | Building
     | Keys
     | AfterSales
 
 
-stringToProjectStep : String -> Maybe ProjectStep
-stringToProjectStep str =
+urlToProjectStep : String -> Maybe ProjectStep
+urlToProjectStep str =
     case str of
         "terrain" ->
             Just DiscoverLand
@@ -66,7 +73,7 @@ stringToProjectStep str =
             Just Contract
 
         "permis-construire" ->
-            Just BuildingPermit
+            Just Permit
 
         "construction" ->
             Just Building
@@ -81,8 +88,54 @@ stringToProjectStep str =
             Nothing
 
 
-projectStepToString : ProjectStep -> String
-projectStepToString step =
+stringToProjectStep : String -> Maybe ProjectStep
+stringToProjectStep str =
+    case str of
+        "discover_land" ->
+            Just DiscoverLand
+
+        "discover_house" ->
+            Just DiscoverHouse
+
+        "configure_house" ->
+            Just ConfigureHouse
+
+        "evaluate_funding" ->
+            Just EvaluateFunding
+
+        "phone_call" ->
+            Just PhoneCall
+
+        "quotation" ->
+            Just Quotation
+
+        "funding" ->
+            Just Funding
+
+        "visit_land" ->
+            Just VisitLand
+
+        "contract" ->
+            Just Contract
+
+        "permit" ->
+            Just Permit
+
+        "building" ->
+            Just Building
+
+        "keys" ->
+            Just Keys
+
+        "after_sales" ->
+            Just AfterSales
+
+        _ ->
+            Nothing
+
+
+projectStepToUrl : ProjectStep -> String
+projectStepToUrl step =
     case step of
         DiscoverLand ->
             "terrain"
@@ -111,7 +164,7 @@ projectStepToString step =
         Contract ->
             "signature"
 
-        BuildingPermit ->
+        Permit ->
             "permis-construire"
 
         Building ->

@@ -2,7 +2,7 @@ module Routing exposing (..)
 
 import Navigation
 import UrlParser exposing (..)
-import Project.Model exposing (ProjectId, ProjectStep, stringToProjectStep, projectStepToString)
+import Project.Model exposing (ProjectId, ProjectStep, urlToProjectStep, projectStepToUrl)
 
 
 type Route
@@ -39,7 +39,7 @@ toPath route =
             String.join "/" [ "/mon-espace", "projets", toString projectId ]
 
         ProjectStepRoute projectId step ->
-            String.join "/" [ "/mon-espace", "projets", toString projectId, projectStepToString step ]
+            String.join "/" [ "/mon-espace", "projets", toString projectId, projectStepToUrl step ]
 
 
 removePrefix : Navigation.Location -> Navigation.Location
@@ -50,7 +50,7 @@ removePrefix location =
 projectStepMatcher : Parser (ProjectStep -> a) a
 projectStepMatcher =
     custom "PROJECT_STEP" <|
-        \segment -> segment |> stringToProjectStep |> maybeToResult "Project step not found"
+        \segment -> segment |> urlToProjectStep |> maybeToResult "Project step not found"
 
 
 projectIdMatcher : Parser (ProjectId -> a) a

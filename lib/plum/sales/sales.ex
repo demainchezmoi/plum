@@ -349,4 +349,51 @@ defmodule Plum.Sales do
     |> preload([ad: :land])
     |> Repo.get_by!(attrs)
   end
+
+
+  @doc """
+  Sets virtual field steps on project.
+
+  ## Examples
+
+    iex> %Project{} |> set_project_steps
+    %Project{steps: steps}
+
+  """
+
+  def set_project_steps(%Project{} = project) do
+    project |> Map.put(:steps, get_project_steps(project))
+  end
+
+  def get_project_steps(%Project{} = project) do
+    [
+      get_discover_land_step(project),
+      get_discover_house_step(project),
+      get_configure_house(project),
+      get_evaluate_funding(project),
+      get_phone_call(project),
+      get_quotation(project),
+      get_funding(project),
+      get_visit_land(project),
+      get_contract(project),
+      get_permit(project),
+      get_building(project),
+      get_keys(project),
+      get_after_sales(project),
+    ]
+  end
+
+  defp get_discover_land_step(p), do: %{name: "discover_land", checked: p.discover_land}
+  defp get_discover_house_step(p), do: %{name: "discover_house", checked: p.discover_house}
+  defp get_configure_house(project), do: %{name: "configure_house", checked: false}
+  defp get_evaluate_funding(project), do: %{name: "evaluate_funding", checked: false}
+  defp get_phone_call(project), do: %{name: "phone_call", checked: false}
+  defp get_quotation(project), do: %{name: "quotation", checked: false}
+  defp get_funding(project), do: %{name: "funding", checked: false}
+  defp get_visit_land(project), do: %{name: "visit_land", checked: false}
+  defp get_contract(project), do: %{name: "contract", checked: false}
+  defp get_permit(project), do: %{name: "permit", checked: false}
+  defp get_building(project), do: %{name: "building", checked: false}
+  defp get_keys(project), do: %{name: "keys", checked: false}
+  defp get_after_sales(project), do: %{name: "after_sales", checked: false}
 end

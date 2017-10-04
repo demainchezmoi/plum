@@ -22,7 +22,9 @@ defmodule PlumWeb.Api.ProjectController do
 
   def show(conn, %{"id" => id}) do
     current_user = conn.assigns.current_user
-    project = Sales.get_project_by!(%{id: id, user_id: current_user.id})
+    project =
+      Sales.get_project_by!(%{id: id, user_id: current_user.id})
+      |> Sales.set_project_steps
     render(conn, "show.json", project: project)
   end
 

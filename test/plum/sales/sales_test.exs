@@ -209,5 +209,26 @@ defmodule Plum.SalesTest do
       project = project_fixture()
       assert %Ecto.Changeset{} = Sales.change_project(project)
     end
+
+    test "set_project_steps/1 set the steps" do
+      user = insert(:user)
+      ad = insert(:ad)
+
+      project = insert :project,
+        user_id: user.id,
+        ad_id: ad.id,
+        discover_land: true,
+        discover_house: false
+
+      expected_steps = [%{
+        name: "discover_land",
+        checked: true
+      }, %{
+        name: "discover_house",
+        checked: false
+      }]
+
+      assert Sales.set_project_steps(project).steps == expected_steps
+    end
   end
 end

@@ -17,90 +17,39 @@ projectPageView model =
     remoteDataView model model.project projectView
 
 
+type alias DisplayStep =
+    { step : ProjectStep
+    , view : Model -> ProjectId -> String -> Html Msg
+    , label : String
+    }
+
+
+displaySteps : List DisplayStep
+displaySteps =
+    [ { step = DiscoverLand, view = discoverLandView, label = "Découvrir le terrain" }
+    , { step = DiscoverHouse, view = discoverHouseView, label = "Découvrir la maison" }
+    , { step = ConfigureHouse, view = configureHouseView, label = "Ma configuration" }
+    , { step = EvaluateFunding, view = evaluateFundingView, label = "Ma finançabilité" }
+    , { step = PhoneCall, view = phoneCallView, label = "Premier contact" }
+    , { step = Quotation, view = quotationView, label = "Mon devis" }
+    , { step = Funding, view = fundingView, label = "Mon financement" }
+    , { step = VisitLand, view = visitLandView, label = "Visite du terrain" }
+    , { step = Contract, view = contractView, label = "Signature du contrat" }
+    , { step = Permit, view = permitView, label = "Permis de construire" }
+    , { step = Building, view = buildingView, label = "Construction" }
+    , { step = Keys, view = keysView, label = "Réception" }
+    , { step = AfterSales, view = afterSalesView, label = "Après-vente" }
+    ]
+
+
 projectStepPageView : ProjectStep -> ProjectId -> Model -> Html Msg
 projectStepPageView projectStep projectId model =
-    case projectStep of
-        DiscoverLand ->
-            discoverLandView model projectId (stepTitle DiscoverLand)
+    case (List.filter (\dStep -> dStep.step == projectStep) displaySteps) |> List.head of
+        Just dStep ->
+            dStep.view model projectId dStep.label
 
-        DiscoverHouse ->
-            discoverHouseView model projectId (stepTitle DiscoverHouse)
-
-        ConfigureHouse ->
-            configureHouseView model projectId (stepTitle ConfigureHouse)
-
-        EvaluateFunding ->
-            evaluateFundingView model projectId (stepTitle EvaluateFunding)
-
-        PhoneCall ->
-            phoneCallView model projectId (stepTitle PhoneCall)
-
-        Quotation ->
-            quotationView model projectId (stepTitle Quotation)
-
-        Funding ->
-            fundingView model projectId (stepTitle Funding)
-
-        VisitLand ->
-            visitLandView model projectId (stepTitle VisitLand)
-
-        Contract ->
-            contractView model projectId (stepTitle Contract)
-
-        BuildingPermit ->
-            buildingPermitView model projectId (stepTitle BuildingPermit)
-
-        Building ->
-            buildingView model projectId (stepTitle Building)
-
-        Keys ->
-            keysView model projectId (stepTitle Keys)
-
-        AfterSales ->
-            afterSalesView model projectId (stepTitle AfterSales)
-
-
-stepTitle : ProjectStep -> String
-stepTitle projectStep =
-    case projectStep of
-        DiscoverLand ->
-            "Découvrir le terrain"
-
-        DiscoverHouse ->
-            "Découvrir la maison"
-
-        ConfigureHouse ->
-            "Ma configuration"
-
-        EvaluateFunding ->
-            "Ma finançabilité"
-
-        PhoneCall ->
-            "Premier contact"
-
-        Quotation ->
-            "Mon devis"
-
-        Funding ->
-            "Mon financement"
-
-        VisitLand ->
-            "Visite du terrain"
-
-        Contract ->
-            "Signature du contrat"
-
-        BuildingPermit ->
-            "Permis de construire"
-
-        Building ->
-            "Construction"
-
-        Keys ->
-            "Récéption"
-
-        AfterSales ->
-            "Service après-vente"
+        Nothing ->
+            text "Not Found"
 
 
 header : Html Msg
@@ -122,10 +71,43 @@ photo =
 
 adHeader : Ad -> Html Msg
 adHeader ad =
-    div [ class "mt-3 p-3 light-bordered" ]
-        [ h4 [ class "font-black text-center h4-responsive" ] [ text "Mon espace" ]
+    div [ class "mt-3 p-3 light-bordered text-center" ]
+        [ h4 [ class "font-black h4-responsive" ] [ text "Mon espace" ]
         , p [ class "lead mb-0" ] [ AdView.shortView ad ]
         ]
+
+
+stepState : Project -> ProjectStep -> ProjectStepState
+stepState project projectStep =
+    let
+        indexedSteps =
+            List.indexedMap (,) project.steps
+
+        stepIndex =
+            case (List.filter (\( i, s ) -> s.step == projectStep) indexedSteps) |> List.head of
+                Just ( i, s ) ->
+                    i
+
+                Nothing ->
+                    10100
+
+        ( checked, unchecked ) =
+            List.partition (\( i, s ) -> s.checked == True) indexedSteps
+
+        firstUncheckedIndex =
+            case List.head unchecked of
+                Just ( i, s ) ->
+                    i
+
+                Nothing ->
+                    10000
+    in
+        if stepIndex == firstUncheckedIndex then
+            Current
+        else if stepIndex > firstUncheckedIndex then
+            NotYet
+        else
+            Checked
 
 
 projectView : Model -> Project -> Html Msg
@@ -136,20 +118,7 @@ projectView model project =
         , photo
         , div [ class ("mt-3 mb-5 " ++ (slidingClass model.projectAnimation)) ]
             [ ul [ class "list-group" ]
-                [ stepIndexView DiscoverLand model project.id Checked
-                , stepIndexView DiscoverHouse model project.id Checked
-                , stepIndexView ConfigureHouse model project.id Current
-                , stepIndexView EvaluateFunding model project.id NotYet
-                , stepIndexView PhoneCall model project.id NotYet
-                , stepIndexView Quotation model project.id NotYet
-                , stepIndexView Funding model project.id NotYet
-                , stepIndexView VisitLand model project.id NotYet
-                , stepIndexView Contract model project.id NotYet
-                , stepIndexView BuildingPermit model project.id NotYet
-                , stepIndexView Building model project.id NotYet
-                , stepIndexView Keys model project.id NotYet
-                , stepIndexView AfterSales model project.id NotYet
-                ]
+                (List.map (\dStep -> stepIndexView dStep.step model project dStep.label) displaySteps)
             ]
         ]
         |> inLayout
@@ -200,12 +169,12 @@ checkedIcon checked =
                 notYetIcon
 
 
-stepIndexView : ProjectStep -> Model -> ProjectId -> ProjectStepState -> Html Msg
-stepIndexView projectStep model projectId projectStepState =
-    li [ "list-group-item cp gray-hover" |> class, onClick (ProjectToStep (ProjectStepRoute projectId projectStep)) ]
+stepIndexView : ProjectStep -> Model -> Project -> String -> Html Msg
+stepIndexView projectStep model project label =
+    li [ "list-group-item cp gray-hover" |> class, onClick (ProjectToStep (ProjectStepRoute project.id projectStep)) ]
         [ a []
-            [ checkedIcon projectStepState
-            , projectStep |> stepTitle |> text
+            [ checkedIcon (stepState project projectStep)
+            , label |> text
             ]
         ]
 
@@ -312,8 +281,8 @@ contractView model projectId title =
         stepView model projectId title view
 
 
-buildingPermitView : Model -> ProjectId -> String -> Html Msg
-buildingPermitView model projectId title =
+permitView : Model -> ProjectId -> String -> Html Msg
+permitView model projectId title =
     let
         view =
             div [] []
