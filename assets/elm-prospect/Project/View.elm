@@ -1,8 +1,9 @@
 module Project.View exposing (..)
 
+import Ad.Model exposing (Ad)
 import Ad.View as AdView
 import Html exposing (..)
-import Html.Attributes exposing (class)
+import Html.Attributes exposing (class, src)
 import Html.Events exposing (onClick)
 import Messages exposing (..)
 import Model exposing (..)
@@ -19,38 +20,87 @@ projectPageView model =
 projectStepPageView : ProjectStep -> ProjectId -> Model -> Html Msg
 projectStepPageView projectStep projectId model =
     case projectStep of
-        ConfigureHouse ->
-            configureHouseView model projectId
+        DiscoverLand ->
+            discoverLandView model projectId (stepTitle DiscoverLand)
 
-        CheckLand ->
-            checkLandView model projectId
+        DiscoverHouse ->
+            discoverHouseView model projectId (stepTitle DiscoverHouse)
+
+        ConfigureHouse ->
+            configureHouseView model projectId (stepTitle ConfigureHouse)
 
         EvaluateFunding ->
-            evaluateFundingView model projectId
+            evaluateFundingView model projectId (stepTitle EvaluateFunding)
 
-        SendFundingDocs ->
-            sendFundingDocsView model projectId
+        PhoneCall ->
+            phoneCallView model projectId (stepTitle PhoneCall)
 
-        ObtainFunding ->
-            obtainFundingView model projectId
+        Quotation ->
+            quotationView model projectId (stepTitle Quotation)
 
-        SignContract ->
-            signContractView model projectId
+        Funding ->
+            fundingView model projectId (stepTitle Funding)
 
-        RequestBuildingPermit ->
-            requestBuildingPermitView model projectId
+        VisitLand ->
+            visitLandView model projectId (stepTitle VisitLand)
 
-        ObtainBuildingPermit ->
-            obtainBuildingPermitView model projectId
+        Contract ->
+            contractView model projectId (stepTitle Contract)
 
-        BuildingBegins ->
-            buildingBeginsView model projectId
+        BuildingPermit ->
+            buildingPermitView model projectId (stepTitle BuildingPermit)
 
-        ReceiveKeys ->
-            receiveKeysView model projectId
+        Building ->
+            buildingView model projectId (stepTitle Building)
+
+        Keys ->
+            keysView model projectId (stepTitle Keys)
 
         AfterSales ->
-            afterSalesView model projectId
+            afterSalesView model projectId (stepTitle AfterSales)
+
+
+stepTitle : ProjectStep -> String
+stepTitle projectStep =
+    case projectStep of
+        DiscoverLand ->
+            "Découvrir le terrain"
+
+        DiscoverHouse ->
+            "Découvrir la maison"
+
+        ConfigureHouse ->
+            "Ma configuration"
+
+        EvaluateFunding ->
+            "Ma finançabilité"
+
+        PhoneCall ->
+            "Premier contact"
+
+        Quotation ->
+            "Mon devis"
+
+        Funding ->
+            "Mon financement"
+
+        VisitLand ->
+            "Visite du terrain"
+
+        Contract ->
+            "Signature du contrat"
+
+        BuildingPermit ->
+            "Permis de construire"
+
+        Building ->
+            "Construction"
+
+        Keys ->
+            "Récéption"
+
+        AfterSales ->
+            "Service après-vente"
 
 
 header : Html Msg
@@ -61,24 +111,44 @@ header =
         ]
 
 
+photo : Html Msg
+photo =
+    img
+        [ class "d-block p-2 img-thumbnail mt-3 img-fluid"
+        , src "https://s3-eu-west-1.amazonaws.com/demainchezmoi/cloudfront_assets/images/maison_21.png"
+        ]
+        []
+
+
+adHeader : Ad -> Html Msg
+adHeader ad =
+    div [ class "mt-3 p-3 light-bordered" ]
+        [ h4 [ class "font-black text-center h4-responsive" ] [ text "Mon espace" ]
+        , p [ class "lead mb-0" ] [ AdView.shortView ad ]
+        ]
+
+
 projectView : Model -> Project -> Html Msg
 projectView model project =
     div []
         [ header
-        , AdView.shortView project.ad
+        , adHeader project.ad
+        , photo
         , div [ class ("mt-3 mb-5 " ++ (slidingClass model.projectAnimation)) ]
             [ ul [ class "list-group" ]
-                [ stepIndexView ConfigureHouse model project.id "Configurer ma maison" True
-                , stepIndexView CheckLand model project.id "Voir le terrain" True
-                , stepIndexView EvaluateFunding model project.id "Ma capacité de financement" False
-                , stepIndexView SendFundingDocs model project.id "Mes Documents" False
-                , stepIndexView ObtainFunding model project.id "Obtention du financement" False
-                , stepIndexView SignContract model project.id "Signature du contrat" False
-                , stepIndexView RequestBuildingPermit model project.id "Dépôt du permis de construire" False
-                , stepIndexView ObtainBuildingPermit model project.id "Obtention permis de construire" False
-                , stepIndexView BuildingBegins model project.id "Phase de la construction" False
-                , stepIndexView ReceiveKeys model project.id "Réception des clefs" False
-                , stepIndexView AfterSales model project.id "Service après-vente" False
+                [ stepIndexView DiscoverLand model project.id Checked
+                , stepIndexView DiscoverHouse model project.id Checked
+                , stepIndexView ConfigureHouse model project.id Current
+                , stepIndexView EvaluateFunding model project.id NotYet
+                , stepIndexView PhoneCall model project.id NotYet
+                , stepIndexView Quotation model project.id NotYet
+                , stepIndexView Funding model project.id NotYet
+                , stepIndexView VisitLand model project.id NotYet
+                , stepIndexView Contract model project.id NotYet
+                , stepIndexView BuildingPermit model project.id NotYet
+                , stepIndexView Building model project.id NotYet
+                , stepIndexView Keys model project.id NotYet
+                , stepIndexView AfterSales model project.id NotYet
                 ]
             ]
         ]
@@ -98,28 +168,44 @@ slidingClass status =
             ""
 
 
-checkedIcon : Bool -> Html Msg
+checkedIcon : ProjectStepState -> Html Msg
 checkedIcon checked =
-    case checked of
-        True ->
+    let
+        checkedIcon =
             span [ class "fa-stack mr-2" ]
                 [ i [ class "fa fa-circle fa-stack-2x yellow-flash-text black-bordered-icon" ] []
                 , i [ class "fa fa-check fa-stack-1x" ] []
                 ]
 
-        False ->
+        currentIcon =
             span [ class "fa-stack mr-2" ]
                 [ i [ class "fa fa-circle fa-stack-2x" ] []
-                , i [ class "fa fa-check fa-stack-1x fa-inverse" ] []
+                , i [ class "fa fa-question fa-stack-1x fa-inverse" ] []
                 ]
 
+        notYetIcon =
+            span [ class "fa-stack mr-2 text-secondary" ]
+                [ i [ class "fa fa-circle fa-stack-2x" ] []
+                , i [ class "fa fa-question fa-stack-1x fa-inverse" ] []
+                ]
+    in
+        case checked of
+            Checked ->
+                checkedIcon
 
-stepIndexView : ProjectStep -> Model -> ProjectId -> String -> Bool -> Html Msg
-stepIndexView projectStep model projectId label checked =
+            Current ->
+                currentIcon
+
+            NotYet ->
+                notYetIcon
+
+
+stepIndexView : ProjectStep -> Model -> ProjectId -> ProjectStepState -> Html Msg
+stepIndexView projectStep model projectId projectStepState =
     li [ "list-group-item cp gray-hover" |> class, onClick (ProjectToStep (ProjectStepRoute projectId projectStep)) ]
         [ a []
-            [ checkedIcon checked
-            , text label
+            [ checkedIcon projectStepState
+            , projectStep |> stepTitle |> text
             ]
         ]
 
@@ -145,100 +231,118 @@ stepView model projectId title view =
             |> inLayout
 
 
-configureHouseView : Model -> ProjectId -> Html Msg
-configureHouseView model projectId =
+discoverLandView : Model -> ProjectId -> String -> Html Msg
+discoverLandView model projectId title =
     let
         view =
             div [] []
     in
-        stepView model projectId "Configurer ma maison" view
+        stepView model projectId title view
 
 
-checkLandView : Model -> ProjectId -> Html Msg
-checkLandView model projectId =
+discoverHouseView : Model -> ProjectId -> String -> Html Msg
+discoverHouseView model projectId title =
     let
         view =
             div [] []
     in
-        stepView model projectId "Consulter le terrain" view
+        stepView model projectId title view
 
 
-evaluateFundingView : Model -> ProjectId -> Html Msg
-evaluateFundingView model projectId =
+configureHouseView : Model -> ProjectId -> String -> Html Msg
+configureHouseView model projectId title =
     let
         view =
             div [] []
     in
-        stepView model projectId "Ma capacité de financement" view
+        stepView model projectId title view
 
 
-sendFundingDocsView : Model -> ProjectId -> Html Msg
-sendFundingDocsView model projectId =
+evaluateFundingView : Model -> ProjectId -> String -> Html Msg
+evaluateFundingView model projectId title =
     let
         view =
             div [] []
     in
-        stepView model projectId "Mes documents de financement" view
+        stepView model projectId title view
 
 
-obtainFundingView : Model -> ProjectId -> Html Msg
-obtainFundingView model projectId =
+phoneCallView : Model -> ProjectId -> String -> Html Msg
+phoneCallView model projectId title =
     let
         view =
             div [] []
     in
-        stepView model projectId "Obtention de mon financement" view
+        stepView model projectId title view
 
 
-signContractView : Model -> ProjectId -> Html Msg
-signContractView model projectId =
+quotationView : Model -> ProjectId -> String -> Html Msg
+quotationView model projectId title =
     let
         view =
             div [] []
     in
-        stepView model projectId "Signature du contrat" view
+        stepView model projectId title view
 
 
-requestBuildingPermitView : Model -> ProjectId -> Html Msg
-requestBuildingPermitView model projectId =
+fundingView : Model -> ProjectId -> String -> Html Msg
+fundingView model projectId title =
     let
         view =
             div [] []
     in
-        stepView model projectId "Dépot du permis de construire" view
+        stepView model projectId title view
 
 
-obtainBuildingPermitView : Model -> ProjectId -> Html Msg
-obtainBuildingPermitView model projectId =
+visitLandView : Model -> ProjectId -> String -> Html Msg
+visitLandView model projectId title =
     let
         view =
             div [] []
     in
-        stepView model projectId "Obtebtion du permis de construire" view
+        stepView model projectId title view
 
 
-buildingBeginsView : Model -> ProjectId -> Html Msg
-buildingBeginsView model projectId =
+contractView : Model -> ProjectId -> String -> Html Msg
+contractView model projectId title =
     let
         view =
             div [] []
     in
-        stepView model projectId "Phase de construction" view
+        stepView model projectId title view
 
 
-receiveKeysView : Model -> ProjectId -> Html Msg
-receiveKeysView model projectId =
+buildingPermitView : Model -> ProjectId -> String -> Html Msg
+buildingPermitView model projectId title =
     let
         view =
             div [] []
     in
-        stepView model projectId "Remise des clefs" view
+        stepView model projectId title view
 
 
-afterSalesView : Model -> ProjectId -> Html Msg
-afterSalesView model projectId =
+buildingView : Model -> ProjectId -> String -> Html Msg
+buildingView model projectId title =
     let
         view =
             div [] []
     in
-        stepView model projectId "Service après-vente" view
+        stepView model projectId title view
+
+
+keysView : Model -> ProjectId -> String -> Html Msg
+keysView model projectId title =
+    let
+        view =
+            div [] []
+    in
+        stepView model projectId title view
+
+
+afterSalesView : Model -> ProjectId -> String -> Html Msg
+afterSalesView model projectId title =
+    let
+        view =
+            div [] []
+    in
+        stepView model projectId title view

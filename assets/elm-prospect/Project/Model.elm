@@ -13,52 +13,66 @@ type alias Project =
     }
 
 
+type ProjectStepState
+    = Checked
+    | Current
+    | NotYet
+
+
 type ProjectStep
-    = ConfigureHouse
-    | CheckLand
+    = DiscoverLand
+    | DiscoverHouse
+    | ConfigureHouse
     | EvaluateFunding
-    | SendFundingDocs
-    | ObtainFunding
-    | SignContract
-    | RequestBuildingPermit
-    | ObtainBuildingPermit
-    | BuildingBegins
-    | ReceiveKeys
+    | PhoneCall
+    | Quotation
+    | Funding
+    | VisitLand
+    | Contract
+    | BuildingPermit
+    | Building
+    | Keys
     | AfterSales
 
 
 stringToProjectStep : String -> Maybe ProjectStep
 stringToProjectStep str =
     case str of
+        "terrain" ->
+            Just DiscoverLand
+
+        "la-maison" ->
+            Just DiscoverHouse
+
         "configurer" ->
             Just ConfigureHouse
 
-        "terrain" ->
-            Just CheckLand
-
-        "financement" ->
+        "capacite-financement" ->
             Just EvaluateFunding
 
-        "envoi-financement" ->
-            Just SendFundingDocs
+        "contact" ->
+            Just PhoneCall
 
-        "financement-valide" ->
-            Just ObtainFunding
+        "devis" ->
+            Just Quotation
+
+        "financement" ->
+            Just Funding
+
+        "visite" ->
+            Just VisitLand
 
         "signature" ->
-            Just SignContract
+            Just Contract
 
         "permis-construire" ->
-            Just RequestBuildingPermit
+            Just BuildingPermit
 
-        "permis-construire-obtenu" ->
-            Just ObtainBuildingPermit
-
-        "debut-construction" ->
-            Just BuildingBegins
+        "construction" ->
+            Just Building
 
         "reception" ->
-            Just ReceiveKeys
+            Just Keys
 
         "apres-vente" ->
             Just AfterSales
@@ -70,34 +84,40 @@ stringToProjectStep str =
 projectStepToString : ProjectStep -> String
 projectStepToString step =
     case step of
+        DiscoverLand ->
+            "terrain"
+
+        DiscoverHouse ->
+            "la-maison"
+
         ConfigureHouse ->
             "configurer"
 
-        CheckLand ->
-            "terrain"
-
         EvaluateFunding ->
+            "capacite-financement"
+
+        PhoneCall ->
+            "contact"
+
+        Quotation ->
+            "devis"
+
+        Funding ->
             "financement"
 
-        SendFundingDocs ->
-            "envoi-financement"
+        VisitLand ->
+            "visite"
 
-        ObtainFunding ->
-            "financement-valide"
-
-        SignContract ->
+        Contract ->
             "signature"
 
-        RequestBuildingPermit ->
+        BuildingPermit ->
             "permis-construire"
 
-        ObtainBuildingPermit ->
-            "permis-construire-obtenu"
+        Building ->
+            "construction"
 
-        BuildingBegins ->
-            "debut-construction"
-
-        ReceiveKeys ->
+        Keys ->
             "reception"
 
         AfterSales ->

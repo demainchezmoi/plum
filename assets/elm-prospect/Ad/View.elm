@@ -12,7 +12,7 @@ shortAddText : Ad -> String
 shortAddText ad =
     String.join
         " "
-        [ "Annonce maison plus terrain à"
+        [ "Maison plus terrain à"
         , ad.land.city
         , "("
         , ad.land.department
@@ -22,4 +22,4 @@ shortAddText ad =
 
 shortView : Ad -> Html Msg
 shortView ad =
-    p [ class "lead mt-3 p-3 light-bordered" ] [ ad |> shortAddText |> text ]
+    ad |> shortAddText |> text
