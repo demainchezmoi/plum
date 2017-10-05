@@ -4,7 +4,7 @@ import Json.Decode exposing (..)
 import Json.Decode.Extra exposing ((|:))
 import Model exposing (..)
 import Ad.Decoders exposing (adDecoder)
-import Project.Model exposing (Project, ProjectStepStatus, ProjectStep, stringToProjectStep)
+import Project.Model exposing (..)
 
 
 projectStepDecoder : Decoder ProjectStep
@@ -24,10 +24,26 @@ projectStepDecoder =
 
 projectStepStatusDecoder : Decoder ProjectStepStatus
 projectStepStatusDecoder =
+    let
+        convert : String -> Decoder ProjectStepStatus
+        convert raw =
+            case stringToProjectStepStatus raw of
+                Just stepStatus ->
+                    succeed stepStatus
+
+                Nothing ->
+                    fail "Not found"
+    in
+        string |> andThen convert
+
+
+projectStepInfoDecoder : Decoder ProjectStepInfo
+projectStepInfoDecoder =
     succeed
-        ProjectStepStatus
+        ProjectStepInfo
         |: (field "name" projectStepDecoder)
         |: (field "valid" bool)
+        |: (field "status" projectStepStatusDecoder)
 
 
 projectDecoder : Decoder Project
@@ -39,7 +55,7 @@ projectDecoder =
             |: (field "ad" adDecoder)
             |: (field "discover_land" bool)
             |: (field "discover_house" bool)
-            |: (field "steps" (list projectStepStatusDecoder))
+            |: (field "steps" (list projectStepInfoDecoder))
             |: (field "house_color_1" (maybe string))
             |: (field "house_color_2" (maybe string))
             |: (field "contribution" int)

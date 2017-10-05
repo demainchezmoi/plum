@@ -7,9 +7,10 @@ type alias ProjectId =
     Int
 
 
-type alias ProjectStepStatus =
+type alias ProjectStepInfo =
     { step : ProjectStep
     , valid : Bool
+    , status : ProjectStepStatus
     }
 
 
@@ -18,7 +19,7 @@ type alias Project =
     , ad : Ad
     , discover_house : Bool
     , discover_land : Bool
-    , steps : List ProjectStepStatus
+    , steps : List ProjectStepInfo
     , house_color_1 : Maybe String
     , house_color_2 : Maybe String
     , contribution : Int
@@ -27,7 +28,7 @@ type alias Project =
     }
 
 
-type ProjectStepState
+type ProjectStepStatus
     = Checked
     | Current
     | NotYet
@@ -47,6 +48,16 @@ type ProjectStep
     | Building
     | Keys
     | AfterSales
+
+
+stepState : Project -> ProjectStep -> ProjectStepStatus
+stepState project projectStep =
+    case List.filter (\s -> s.step == projectStep) project.steps of
+        { status } :: _ ->
+            status
+
+        _ ->
+            NotYet
 
 
 urlToProjectStep : String -> Maybe ProjectStep
@@ -136,6 +147,22 @@ stringToProjectStep str =
 
         "after_sales" ->
             Just AfterSales
+
+        _ ->
+            Nothing
+
+
+stringToProjectStepStatus : String -> Maybe ProjectStepStatus
+stringToProjectStepStatus str =
+    case str of
+        "checked" ->
+            Just Checked
+
+        "current" ->
+            Just Current
+
+        "not_yet" ->
+            Just NotYet
 
         _ ->
             Nothing

@@ -6,7 +6,12 @@ defmodule PlumWeb.Api.ProjectController do
 
   action_fallback PlumWeb.FallbackController
 
-  @updatable_fields ~w(discover_house discover_land)
+  @updatable_fields ~w(
+    discover_house
+    discover_land
+    house_color_1
+    house_color_2
+  )
 
   # def index(conn, _params) do
     # projects = Sales.list_projects()

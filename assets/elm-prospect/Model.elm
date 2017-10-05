@@ -30,18 +30,20 @@ type SlideAnimation
 
 type alias Model =
     { project : WebData Project
-    , houseColor : String
     , error : Maybe String
     , apiToken : ApiToken
     , route : Route
+    , houseColor1 : Maybe String
+    , houseColor2 : Maybe String
     }
 
 
 initialModel : ApiToken -> Route -> Model
 initialModel apiToken route =
     { project = Loading
-    , houseColor = "Maison-leo-configurateur-1.png"
     , error = Nothing
     , apiToken = apiToken
     , route = route
+    , houseColor1 = Nothing
+    , houseColor2 = Nothing
     }

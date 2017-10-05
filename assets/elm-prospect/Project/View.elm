@@ -96,40 +96,7 @@ adHeader ad =
         ]
 
 
-stepState : Project -> ProjectStep -> ProjectStepState
-stepState project projectStep =
-    let
-        indexedSteps =
-            List.indexedMap (,) project.steps
-
-        stepIndex =
-            case List.filter (\( i, s ) -> s.step == projectStep) indexedSteps of
-                ( i, s ) :: _ ->
-                    i
-
-                _ ->
-                    10100
-
-        ( valid, invalid ) =
-            List.partition (\( i, s ) -> s.valid == True) indexedSteps
-
-        firstInvalidIndex =
-            case invalid of
-                ( i, s ) :: _ ->
-                    i
-
-                _ ->
-                    10000
-    in
-        if stepIndex == firstInvalidIndex then
-            Current
-        else if stepIndex > firstInvalidIndex then
-            NotYet
-        else
-            Checked
-
-
-checkedIcon : ProjectStepState -> Html Msg
+checkedIcon : ProjectStepStatus -> Html Msg
 checkedIcon state =
     let
         checkedIcon =
@@ -163,12 +130,27 @@ checkedIcon state =
 
 stepIndexView : ProjectStep -> Model -> Project -> String -> Html Msg
 stepIndexView projectStep model project label =
-    li [ "list-group-item cp gray-hover" |> class, onClick (NavigateTo (ProjectStepRoute project.id projectStep)) ]
-        [ a []
-            [ checkedIcon (stepState project projectStep)
-            , label |> text
+    let
+        activeAttr =
+            [ onClick (NavigateTo (ProjectStepRoute project.id projectStep)), class "list-group-item cp gray-hover" ]
+
+        liAttr =
+            case stepState project projectStep of
+                Checked ->
+                    activeAttr
+
+                Current ->
+                    activeAttr
+
+                NotYet ->
+                    [ class "list-group-item disabled" ]
+    in
+        li liAttr
+            [ a []
+                [ checkedIcon (stepState project projectStep)
+                , label |> text
+                ]
             ]
-        ]
 
 
 stepView : Model -> Project -> String -> Html Msg -> Html Msg
@@ -190,8 +172,8 @@ stepView model project title view =
 nextStepButton : Msg -> Html Msg
 nextStepButton action =
     button
-        [ class "btn btn-default", onClick action ]
-        [ text "Étape suivante" ]
+        [ class "btn btn-default pull-right", onClick action ]
+        [ text "Suivant" ]
 
 
 landImage : String -> Html Msg
@@ -270,40 +252,104 @@ discoverHouseView model project title =
 configureHouseView : Model -> Project -> String -> Html Msg
 configureHouseView model project title =
     let
+        color1 =
+            "Maison-leo-configurateur-1.png"
+
+        color2 =
+            "Maison-leo-configurateur-2.png"
+
+        ( photo1, checked11, checked12 ) =
+            case ( model.houseColor1, project.house_color_1 ) of
+                ( Just house_color_1, _ ) ->
+                    ( [ photoClass house_color_1 "photo-stack" ], house_color_1 == color1, house_color_1 == color2 )
+
+                ( Nothing, Just house_color_1 ) ->
+                    ( [ photoClass house_color_1 "photo-stack" ], house_color_1 == color1, house_color_1 == color2 )
+
+                _ ->
+                    ( [], False, False )
+
+        ( photo2, checked21, checked22 ) =
+            case ( model.houseColor2, project.house_color_2 ) of
+                ( Just house_color_2, _ ) ->
+                    ( [ photoClass house_color_2 "photo-stack" ], house_color_2 == color1, house_color_2 == color2 )
+
+                ( Nothing, Just house_color_2 ) ->
+                    ( [ photoClass house_color_2 "photo-stack" ], house_color_2 == color1, house_color_2 == color2 )
+
+                _ ->
+                    ( [], False, False )
+
         view =
             div []
                 [ div [ class "position-relative" ]
-                    [ photo "Maison-leo-configurateur-0-min.png"
-                    , photoClass model.houseColor "photo-stack"
-                    ]
-                , div [ class "form-check" ]
-                    [ label [ class "form-check-label" ]
-                        [ input
-                            [ type_ "radio"
-                            , name "house-color"
-                            , value "Maison-leo-configurateur-1.png"
-                            , id "house-color-1"
-                            , class "form-check-input"
-                            , checked (model.houseColor == "Maison-leo-configurateur-1.png")
-                            , onClick (SetHouseColor "Maison-leo-configurateur-1.png")
+                    ([ photo "Maison-leo-configurateur-0-min.png" ] ++ photo1 ++ photo2)
+                , div [ class "row" ]
+                    [ div [ class "col-6" ]
+                        [ p [ class "font-bold" ] [ text "Choix 1" ]
+                        , div [ class "form-check" ]
+                            [ label [ class "form-check-label" ]
+                                [ input
+                                    [ type_ "radio"
+                                    , name "house-color-1"
+                                    , value color1
+                                    , id "house-color-11"
+                                    , class "form-check-input"
+                                    , checked checked11
+                                    , onClick (SetHouseColor1 color1)
+                                    ]
+                                    []
+                                , text "couleur-1"
+                                ]
                             ]
-                            []
-                        , text "couleur-1"
+                        , div [ class "form-check" ]
+                            [ label [ class "form-check-label" ]
+                                [ input
+                                    [ type_ "radio"
+                                    , name "house-color-1"
+                                    , value color2
+                                    , id "house-color-12"
+                                    , class "form-check-input"
+                                    , checked checked12
+                                    , onClick (SetHouseColor1 color2)
+                                    ]
+                                    []
+                                , text "couleur-2"
+                                ]
+                            ]
                         ]
-                    ]
-                , div [ class "form-check" ]
-                    [ label [ class "form-check-label" ]
-                        [ input
-                            [ type_ "radio"
-                            , name "house-color"
-                            , value "Maison-leo-configurateur-2.png"
-                            , id "house-color-2"
-                            , class "form-check-input"
-                            , checked (model.houseColor == "Maison-leo-configurateur-2.png")
-                            , onClick (SetHouseColor "Maison-leo-configurateur-2.png")
+                    , div [ class "col-6" ]
+                        [ p [ class "font-bold" ] [ text "Choix 2" ]
+                        , div [ class "form-check" ]
+                            [ label [ class "form-check-label" ]
+                                [ input
+                                    [ type_ "radio"
+                                    , name "house-color-2"
+                                    , value color1
+                                    , id "house-color-21"
+                                    , class "form-check-input"
+                                    , checked checked21
+                                    , onClick (SetHouseColor2 color1)
+                                    ]
+                                    []
+                                , text "couleur-1"
+                                ]
                             ]
-                            []
-                        , text "couleur-2"
+                        , div [ class "form-check" ]
+                            [ label [ class "form-check-label" ]
+                                [ input
+                                    [ type_ "radio"
+                                    , name "house-color-2"
+                                    , value color2
+                                    , id "house-color-22"
+                                    , class "form-check-input"
+                                    , checked checked22
+                                    , onClick (SetHouseColor2 color2)
+                                    ]
+                                    []
+                                , text "couleur-2"
+                                ]
+                            ]
                         ]
                     ]
                 , ValidateConfigureHouse project.id |> nextStepButton

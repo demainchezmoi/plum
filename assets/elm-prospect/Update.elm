@@ -7,6 +7,7 @@ import Project.Commands exposing (getProject, updateProject, updateProjectWithCa
 import RemoteData exposing (..)
 import Routing exposing (Route(..), parse, toPath)
 import Project.Model exposing (..)
+import Json.Encode as Encode
 
 
 update : Msg -> Model -> ( Model, Cmd Msg )
@@ -28,8 +29,11 @@ update msg model =
         NavigateTo route ->
             model ! [ Navigation.newUrl <| toPath route ]
 
-        SetHouseColor color ->
-            { model | houseColor = color } ! []
+        SetHouseColor1 color ->
+            { model | houseColor1 = Just color } ! []
+
+        SetHouseColor2 color ->
+            { model | houseColor2 = Just color } ! []
 
         ValidateDiscoverLand projectId value ->
             model ! [ updateProjectWithCallback model.apiToken projectId value ValidateDiscoverLandResponse ]
@@ -62,7 +66,40 @@ update msg model =
                         newModel ! []
 
         ValidateConfigureHouse projectId ->
-            update (NavigateTo (ProjectStepRoute projectId EvaluateFunding)) model
+            let
+                getValue : String -> Maybe String -> List ( String, Encode.Value )
+                getValue field maybeColor =
+                    case maybeColor of
+                        Just color ->
+                            [ ( field, Encode.string color ) ]
+
+                        Nothing ->
+                            []
+
+                fields =
+                    [] ++ (getValue "house_color_1" model.houseColor1) ++ (getValue "house_color_2" model.houseColor2)
+
+                value =
+                    Encode.object fields
+            in
+                model ! [ updateProjectWithCallback model.apiToken projectId value ValidateConfigureHouseResponse ]
+
+        ValidateConfigureHouseResponse response ->
+            let
+                newModel =
+                    { model | project = response, houseColor1 = Nothing, houseColor2 = Nothing }
+            in
+                case response of
+                    Success project ->
+                        case stepState project ConfigureHouse of
+                            Checked ->
+                                update (NavigateTo (ProjectStepRoute project.id EvaluateFunding)) newModel
+
+                            _ ->
+                                newModel ! []
+
+                    _ ->
+                        newModel ! []
 
 
 urlUpdate : Model -> ( Model, Cmd Msg )

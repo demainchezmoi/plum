@@ -220,8 +220,8 @@ defmodule Plum.SalesTest do
         discover_land: true,
         discover_house: false
 
-      expected_step_1 = %{valid: true, name: "discover_land", display: "checked"}
-      expected_step_2 = %{valid: false, name: "discover_house", display: "current"}
+      expected_step_1 = %{valid: true, name: "discover_land", status: "checked"}
+      expected_step_2 = %{valid: false, name: "discover_house", status: "current"}
 
       assert Sales.set_project_steps(project).steps |> Enum.at(0) == expected_step_1
       assert Sales.set_project_steps(project).steps |> Enum.at(1) == expected_step_2

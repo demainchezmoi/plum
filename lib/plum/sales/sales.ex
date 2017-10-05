@@ -381,7 +381,7 @@ defmodule Plum.Sales do
       get_keys(project),
       get_after_sales(project),
     ]
-    |> set_project_steps_display
+    |> set_project_steps_status
   end
 
   defp get_discover_land_step(p), do: %{name: "discover_land", valid: p.discover_land}
@@ -398,19 +398,19 @@ defmodule Plum.Sales do
   defp get_keys(_project), do: %{name: "keys", valid: false}
   defp get_after_sales(_project), do: %{name: "after_sales", valid: false}
 
-  defp set_project_steps_display(steps, done_steps \\ [], over \\ false)
-  defp set_project_steps_display([], done_steps, _over), do: done_steps
-  defp set_project_steps_display([step|steps], done_steps, over) do
-    step_display =
+  defp set_project_steps_status(steps, done_steps \\ [], over \\ false)
+  defp set_project_steps_status([], done_steps, _over), do: done_steps
+  defp set_project_steps_status([step|steps], done_steps, over) do
+    step_status =
       cond do
         step.valid and not over -> "checked"
         not step.valid and not over -> "current"
         true -> "not_yet"
       end
 
-    done_step = step |> Map.put(:display, step_display)
-    over = step_display != "checked"
+    done_step = step |> Map.put(:status, step_status)
+    over = step_status != "checked"
         
-    set_project_steps_display(steps, done_steps ++ [done_step], over)
+    set_project_steps_status(steps, done_steps ++ [done_step], over)
   end
 end
