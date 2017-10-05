@@ -10,6 +10,16 @@ import Project.Model exposing (ProjectId)
 import RemoteData exposing (..)
 
 
+getMaybeValue : String -> Maybe a -> (a -> Value) -> List ( String, Value )
+getMaybeValue label maybeValue encoder =
+    case maybeValue of
+        Just value ->
+            [ ( label, encoder value ) ]
+
+        _ ->
+            []
+
+
 getAuthorizationHeaderValue : String -> String
 getAuthorizationHeaderValue apiToken =
     "Token token=\"" ++ apiToken ++ "\""

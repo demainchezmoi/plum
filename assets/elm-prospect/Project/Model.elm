@@ -25,6 +25,7 @@ type alias Project =
     , contribution : Int
     , net_income : Maybe Int
     , phone_call : Bool
+    , phone_number : Maybe String
     }
 
 

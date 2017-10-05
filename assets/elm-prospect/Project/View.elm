@@ -3,8 +3,8 @@ module Project.View exposing (..)
 import Ad.Model exposing (Ad)
 import Ad.View as AdView
 import Html exposing (..)
-import Html.Attributes exposing (class, src, type_, name, value, id, checked)
-import Html.Events exposing (onClick)
+import Html.Attributes exposing (class, src, type_, name, value, id, checked, for, placeholder)
+import Html.Events exposing (onClick, onInput)
 import Messages exposing (..)
 import Model exposing (..)
 import Project.Model exposing (..)
@@ -171,9 +171,11 @@ stepView model project title view =
 
 nextStepButton : Msg -> Html Msg
 nextStepButton action =
-    button
-        [ class "btn btn-default pull-right", onClick action ]
-        [ text "Suivant" ]
+    div [ class "clearfix" ]
+        [ button
+            [ class "btn btn-default pull-right mr-0 mt-2", onClick action ]
+            [ text "Suivant" ]
+        ]
 
 
 landImage : String -> Html Msg
@@ -284,70 +286,72 @@ configureHouseView model project title =
             div []
                 [ div [ class "position-relative" ]
                     ([ photo "Maison-leo-configurateur-0-min.png" ] ++ photo1 ++ photo2)
-                , div [ class "row" ]
-                    [ div [ class "col-6" ]
-                        [ p [ class "font-bold" ] [ text "Choix 1" ]
-                        , div [ class "form-check" ]
-                            [ label [ class "form-check-label" ]
-                                [ input
-                                    [ type_ "radio"
-                                    , name "house-color-1"
-                                    , value color1
-                                    , id "house-color-11"
-                                    , class "form-check-input"
-                                    , checked checked11
-                                    , onClick (SetHouseColor1 color1)
+                , div [ class "light-bordered p-3 mt-2" ]
+                    [ div [ class "row" ]
+                        [ div [ class "col-6" ]
+                            [ p [ class "font-bold" ] [ text "Choix 1" ]
+                            , div [ class "form-check" ]
+                                [ label [ class "form-check-label" ]
+                                    [ input
+                                        [ type_ "radio"
+                                        , name "house-color-1"
+                                        , value color1
+                                        , id "house-color-11"
+                                        , class "form-check-input"
+                                        , checked checked11
+                                        , onClick (SetHouseColor1 color1)
+                                        ]
+                                        []
+                                    , text "couleur-1"
                                     ]
-                                    []
-                                , text "couleur-1"
+                                ]
+                            , div [ class "form-check" ]
+                                [ label [ class "form-check-label" ]
+                                    [ input
+                                        [ type_ "radio"
+                                        , name "house-color-1"
+                                        , value color2
+                                        , id "house-color-12"
+                                        , class "form-check-input"
+                                        , checked checked12
+                                        , onClick (SetHouseColor1 color2)
+                                        ]
+                                        []
+                                    , text "couleur-2"
+                                    ]
                                 ]
                             ]
-                        , div [ class "form-check" ]
-                            [ label [ class "form-check-label" ]
-                                [ input
-                                    [ type_ "radio"
-                                    , name "house-color-1"
-                                    , value color2
-                                    , id "house-color-12"
-                                    , class "form-check-input"
-                                    , checked checked12
-                                    , onClick (SetHouseColor1 color2)
+                        , div [ class "col-6" ]
+                            [ p [ class "font-bold" ] [ text "Choix 2" ]
+                            , div [ class "form-check" ]
+                                [ label [ class "form-check-label" ]
+                                    [ input
+                                        [ type_ "radio"
+                                        , name "house-color-2"
+                                        , value color1
+                                        , id "house-color-21"
+                                        , class "form-check-input"
+                                        , checked checked21
+                                        , onClick (SetHouseColor2 color1)
+                                        ]
+                                        []
+                                    , text "couleur-1"
                                     ]
-                                    []
-                                , text "couleur-2"
                                 ]
-                            ]
-                        ]
-                    , div [ class "col-6" ]
-                        [ p [ class "font-bold" ] [ text "Choix 2" ]
-                        , div [ class "form-check" ]
-                            [ label [ class "form-check-label" ]
-                                [ input
-                                    [ type_ "radio"
-                                    , name "house-color-2"
-                                    , value color1
-                                    , id "house-color-21"
-                                    , class "form-check-input"
-                                    , checked checked21
-                                    , onClick (SetHouseColor2 color1)
+                            , div [ class "form-check" ]
+                                [ label [ class "form-check-label" ]
+                                    [ input
+                                        [ type_ "radio"
+                                        , name "house-color-2"
+                                        , value color2
+                                        , id "house-color-22"
+                                        , class "form-check-input"
+                                        , checked checked22
+                                        , onClick (SetHouseColor2 color2)
+                                        ]
+                                        []
+                                    , text "couleur-2"
                                     ]
-                                    []
-                                , text "couleur-1"
-                                ]
-                            ]
-                        , div [ class "form-check" ]
-                            [ label [ class "form-check-label" ]
-                                [ input
-                                    [ type_ "radio"
-                                    , name "house-color-2"
-                                    , value color2
-                                    , id "house-color-22"
-                                    , class "form-check-input"
-                                    , checked checked22
-                                    , onClick (SetHouseColor2 color2)
-                                    ]
-                                    []
-                                , text "couleur-2"
                                 ]
                             ]
                         ]
@@ -361,8 +365,53 @@ configureHouseView model project title =
 evaluateFundingView : Model -> Project -> String -> Html Msg
 evaluateFundingView model project title =
     let
+        contributionValue =
+            case ( model.contribution, project.contribution ) of
+                ( Just contribution, _ ) ->
+                    toString contribution
+
+                ( Nothing, contribution ) ->
+                    toString contribution
+
+        netIncomeValue =
+            case ( model.netIncome, project.net_income ) of
+                ( Just contribution, _ ) ->
+                    toString contribution
+
+                ( Nothing, Just contribution ) ->
+                    toString contribution
+
+                _ ->
+                    ""
+
         view =
-            div [] []
+            div []
+                [ div [ class "p-1" ]
+                    [ div [ class "form-group" ]
+                        [ label [ for "contribution" ] [ text "Votre apport financier" ]
+                        , input
+                            [ type_ "number"
+                            , class "form-control"
+                            , id "contribution"
+                            , placeholder "ex : 2000"
+                            , onInput SetContribution
+                            ]
+                            []
+                        ]
+                    , div [ class "form-group" ]
+                        [ label [ for "netIncome" ] [ text "Revenu mensuel net de votre ménage" ]
+                        , input
+                            [ type_ "number"
+                            , class "form-control"
+                            , id "netIncome"
+                            , placeholder "ex : 1800"
+                            , onInput SetNetIncome
+                            ]
+                            []
+                        ]
+                    ]
+                , ValidateEvaluateFunding project.id |> nextStepButton
+                ]
     in
         stepView model project title view
 
@@ -371,7 +420,20 @@ phoneCallView : Model -> Project -> String -> Html Msg
 phoneCallView model project title =
     let
         view =
-            div [] []
+            div []
+                [ div [ class "form-group" ]
+                    [ label [ for "phoneNumber" ] [ text "Votre numéro de téléphone" ]
+                    , input
+                        [ type_ "text"
+                        , class "form-control"
+                        , id "phoneNumber"
+                        , placeholder "ex : 06 03 05 04 01"
+                        , onInput SetPhoneNumber
+                        ]
+                        []
+                    ]
+                , SubmitPhoneNumber project.id |> nextStepButton
+                ]
     in
         stepView model project title view
 

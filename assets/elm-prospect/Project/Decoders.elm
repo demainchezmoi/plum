@@ -61,3 +61,4 @@ projectDecoder =
             |: (field "contribution" int)
             |: (field "net_income" (maybe int))
             |: (field "phone_call" bool)
+            |: (field "phone_number" (maybe string))

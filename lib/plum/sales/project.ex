@@ -14,6 +14,7 @@ defmodule Plum.Sales.Project do
     field :contribution, :integer, default: 0
     field :net_income, :integer
     field :phone_call, :boolean, default: false
+    field :phone_number, :string
 
     field :steps, {:array, :map}, virtual: true
 
@@ -33,6 +34,7 @@ defmodule Plum.Sales.Project do
     house_color_1
     house_color_2
     net_income
+    phone_number
   )a
 
   @required_fields ~w(

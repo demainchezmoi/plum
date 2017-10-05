@@ -4,6 +4,7 @@ import Messages exposing (..)
 import Model exposing (..)
 import Navigation
 import Project.Commands exposing (getProject, updateProject, updateProjectWithCallback)
+import Commands exposing (getMaybeValue)
 import RemoteData exposing (..)
 import Routing exposing (Route(..), parse, toPath)
 import Project.Model exposing (..)
@@ -34,6 +35,25 @@ update msg model =
 
         SetHouseColor2 color ->
             { model | houseColor2 = Just color } ! []
+
+        SetContribution contribution ->
+            case String.toInt contribution of
+                Ok intContribution ->
+                    { model | contribution = Just intContribution } ! []
+
+                Err _ ->
+                    model ! []
+
+        SetNetIncome netIncome ->
+            case String.toInt netIncome of
+                Ok intNetIncome ->
+                    { model | netIncome = Just intNetIncome } ! []
+
+                Err _ ->
+                    model ! []
+
+        SetPhoneNumber phoneNumber ->
+            { model | phoneNumber = Just phoneNumber } ! []
 
         ValidateDiscoverLand projectId value ->
             model ! [ updateProjectWithCallback model.apiToken projectId value ValidateDiscoverLandResponse ]
@@ -67,20 +87,10 @@ update msg model =
 
         ValidateConfigureHouse projectId ->
             let
-                getValue : String -> Maybe String -> List ( String, Encode.Value )
-                getValue field maybeColor =
-                    case maybeColor of
-                        Just color ->
-                            [ ( field, Encode.string color ) ]
-
-                        Nothing ->
-                            []
-
-                fields =
-                    [] ++ (getValue "house_color_1" model.houseColor1) ++ (getValue "house_color_2" model.houseColor2)
-
                 value =
-                    Encode.object fields
+                    (getMaybeValue "house_color_1" model.houseColor1 Encode.string)
+                        ++ (getMaybeValue "house_color_2" model.houseColor2 Encode.string)
+                        |> Encode.object
             in
                 model ! [ updateProjectWithCallback model.apiToken projectId value ValidateConfigureHouseResponse ]
 
@@ -100,6 +110,48 @@ update msg model =
 
                     _ ->
                         newModel ! []
+
+        ValidateEvaluateFunding projectId ->
+            let
+                value =
+                    (getMaybeValue "contribution" model.contribution Encode.int)
+                        ++ (getMaybeValue "net_income" model.netIncome Encode.int)
+                        |> Encode.object
+            in
+                model ! [ updateProjectWithCallback model.apiToken projectId value ValidateEvaluateFundingResponse ]
+
+        ValidateEvaluateFundingResponse response ->
+            let
+                newModel =
+                    { model | project = response, contribution = Nothing, netIncome = Nothing }
+            in
+                case response of
+                    Success project ->
+                        case stepState project EvaluateFunding of
+                            Checked ->
+                                update (NavigateTo (ProjectStepRoute project.id PhoneCall)) newModel
+
+                            _ ->
+                                newModel ! []
+
+                    _ ->
+                        newModel ! []
+
+        SubmitPhoneNumber projectId ->
+            case model.phoneNumber of
+                Nothing ->
+                    model ! []
+
+                Just phoneNumber ->
+                    let
+                        value =
+                            (getMaybeValue "phone_number" model.phoneNumber Encode.string)
+                                |> Encode.object
+                    in
+                        model ! [ updateProjectWithCallback model.apiToken projectId value SubmitPhoneNumberResponse ]
+
+        SubmitPhoneNumberResponse response ->
+            { model | project = response, phoneNumber = Nothing } ! []
 
 
 urlUpdate : Model -> ( Model, Cmd Msg )

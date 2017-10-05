@@ -387,7 +387,7 @@ defmodule Plum.Sales do
   defp get_discover_land_step(p), do: %{name: "discover_land", valid: p.discover_land}
   defp get_discover_house_step(p), do: %{name: "discover_house", valid: p.discover_house}
   defp get_configure_house(p), do: %{name: "configure_house", valid: !!p.house_color_1 and !!p.house_color_2}
-  defp get_evaluate_funding(p), do: %{name: "evaluate_funding", valid: !!p.net_income}
+  defp get_evaluate_funding(p), do: %{name: "evaluate_funding", valid: (not is_nil p.net_income) and (not is_nil p.contribution)}
   defp get_phone_call(p), do: %{name: "phone_call", valid: p.phone_call}
   defp get_quotation(_project), do: %{name: "quotation", valid: false}
   defp get_funding(_project), do: %{name: "funding", valid: false}

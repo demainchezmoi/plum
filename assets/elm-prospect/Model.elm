@@ -35,6 +35,9 @@ type alias Model =
     , route : Route
     , houseColor1 : Maybe String
     , houseColor2 : Maybe String
+    , contribution : Maybe Int
+    , netIncome : Maybe Int
+    , phoneNumber : Maybe String
     }
 
 
@@ -46,4 +49,7 @@ initialModel apiToken route =
     , route = route
     , houseColor1 = Nothing
     , houseColor2 = Nothing
+    , contribution = Nothing
+    , netIncome = Nothing
+    , phoneNumber = Nothing
     }

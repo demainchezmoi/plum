@@ -41,6 +41,7 @@ defmodule Plum.Factory do
       contribution: 10_000,
       net_income: 1_800,
       phone_call: false,
+      phone_number: "123456",
     }
   end
 

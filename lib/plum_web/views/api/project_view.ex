@@ -16,6 +16,7 @@ defmodule PlumWeb.Api.ProjectView do
     id
     net_income
     phone_call
+    phone_number
     steps
   )a
 

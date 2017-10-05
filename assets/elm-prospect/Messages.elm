@@ -15,9 +15,16 @@ type Msg
     | UpdateProject ProjectId Value
     | SetHouseColor1 String
     | SetHouseColor2 String
+    | SetNetIncome String
+    | SetContribution String
+    | SetPhoneNumber String
     | ValidateDiscoverLand ProjectId Value
     | ValidateDiscoverLandResponse (WebData Project)
     | ValidateDiscoverHouse ProjectId Value
     | ValidateDiscoverHouseResponse (WebData Project)
     | ValidateConfigureHouse ProjectId
     | ValidateConfigureHouseResponse (WebData Project)
+    | ValidateEvaluateFunding ProjectId
+    | ValidateEvaluateFundingResponse (WebData Project)
+    | SubmitPhoneNumber ProjectId
+    | SubmitPhoneNumberResponse (WebData Project)
