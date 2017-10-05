@@ -25,7 +25,7 @@ defmodule Plum.Sales.Land do
   @doc false
   def changeset(%Land{} = land, attrs) do
     land
-    |> cast(attrs, @required_fields)
-    |> validate_required(@required_fields ++ @optional_fields)
+    |> cast(attrs, @required_fields ++ @optional_fields)
+    |> validate_required(@required_fields)
   end
 end
