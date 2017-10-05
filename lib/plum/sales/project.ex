@@ -3,25 +3,19 @@ defmodule Plum.Sales.Project do
   import Ecto.Changeset
   alias Plum.Sales.Project
 
-
   schema "projects" do
     belongs_to :user, Plum.Accounts.User
     belongs_to :ad, Plum.Sales.Ad
 
     field :discover_land, :boolean, default: false
     field :discover_house, :boolean, default: false
+    field :house_color_1, :string
+    field :house_color_2, :string
+    field :contribution, :integer, default: 0
+    field :net_income, :integer
+    field :phone_call, :boolean, default: false
 
     field :steps, {:array, :map}, virtual: true
-
-    # field :house_color_1, :string
-    # field :house_color_2, :string
-
-    # field :contribution, :float
-
-    # field :current_rent, :float -> on user
-    # field :net_income, :float -> on user
-
-    # field :phone_called
 
     # checked_quotation
     # checked_funding
@@ -35,8 +29,20 @@ defmodule Plum.Sales.Project do
     timestamps()
   end
 
-  @optional_fields ~w(discover_land discover_house)a
-  @required_fields ~w(user_id ad_id)a
+  @optional_fields ~w(
+    house_color_1
+    house_color_2
+    net_income
+  )a
+
+  @required_fields ~w(
+    ad_id
+    contribution
+    discover_house
+    discover_land
+    phone_call
+    user_id
+  )a
 
   @doc false
   def changeset(%Project{} = project, attrs) do

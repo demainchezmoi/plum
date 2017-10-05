@@ -36,7 +36,11 @@ defmodule Plum.Factory do
   def project_factory do
     %Project{
       discover_land: true,
-      discover_house: false
+      discover_house: false,
+      house_color_2: "1234",
+      contribution: 10_000,
+      net_income: 1_800,
+      phone_call: false,
     }
   end
 

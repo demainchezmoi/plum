@@ -19,6 +19,11 @@ type alias Project =
     , discover_house : Bool
     , discover_land : Bool
     , steps : List ProjectStepStatus
+    , house_color_1 : Maybe String
+    , house_color_2 : Maybe String
+    , contribution : Int
+    , net_income : Maybe Int
+    , phone_call : Bool
     }
 
 

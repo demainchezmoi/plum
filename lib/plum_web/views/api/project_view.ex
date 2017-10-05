@@ -6,7 +6,18 @@ defmodule PlumWeb.Api.ProjectView do
   }
   import PlumWeb.ViewHelpers
 
-  @attributes ~w(id ad steps discover_land discover_house)a
+  @attributes ~w(
+    ad
+    contribution
+    discover_house
+    discover_land
+    house_color_1
+    house_color_2
+    id
+    net_income
+    phone_call
+    steps
+  )a
 
   def render("index.json", %{projects: projects}) do
     %{data: render_many(projects, ProjectView, "project.json")}
