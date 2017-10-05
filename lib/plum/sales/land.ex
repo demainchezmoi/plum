@@ -19,8 +19,8 @@ defmodule Plum.Sales.Land do
     timestamps()
   end
 
-  @required_fields ~w(surface lat lng price city department images description)a
   @optional_fields ~w()a
+  @required_fields ~w(surface lat lng price city department images description)a
 
   @doc false
   def changeset(%Land{} = land, attrs) do
