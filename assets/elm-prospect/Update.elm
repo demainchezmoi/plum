@@ -25,12 +25,6 @@ update msg model =
             in
                 urlUpdate { model | route = currentRoute }
 
-        ProjectToStep route ->
-            update (NavigateTo route) model
-
-        StepToProject route ->
-            update (NavigateTo route) model
-
         NavigateTo route ->
             model ! [ Navigation.newUrl <| toPath route ]
 

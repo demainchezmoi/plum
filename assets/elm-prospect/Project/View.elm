@@ -163,7 +163,7 @@ checkedIcon state =
 
 stepIndexView : ProjectStep -> Model -> Project -> String -> Html Msg
 stepIndexView projectStep model project label =
-    li [ "list-group-item cp gray-hover" |> class, onClick (ProjectToStep (ProjectStepRoute project.id projectStep)) ]
+    li [ "list-group-item cp gray-hover" |> class, onClick (NavigateTo (ProjectStepRoute project.id projectStep)) ]
         [ a []
             [ checkedIcon (stepState project projectStep)
             , label |> text
@@ -177,7 +177,7 @@ stepView model project title view =
         [ h1 [ class "h1-responsive" ]
             [ a
                 [ class "btn btn-sm btn-yellow-flash"
-                , onClick (StepToProject (ProjectRoute project.id))
+                , onClick (NavigateTo (ProjectRoute project.id))
                 ]
                 [ i [ class "fa fa-chevron-left" ] []
                 ]

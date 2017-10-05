@@ -13,8 +13,6 @@ type Msg
     | NavigateTo Route
     | ProjectResponse (WebData Project)
     | UpdateProject ProjectId Value
-    | ProjectToStep Route
-    | StepToProject Route
     | SetHouseColor String
     | ValidateDiscoverLand ProjectId Value
     | ValidateDiscoverLandResponse (WebData Project)
