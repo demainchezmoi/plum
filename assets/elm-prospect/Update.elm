@@ -26,18 +26,10 @@ update msg model =
                 urlUpdate { model | route = currentRoute }
 
         ProjectToStep route ->
-            let
-                newModel =
-                    { model | projectStepAnimation = None, projectAnimation = None }
-            in
-                update (NavigateTo route) newModel
+            update (NavigateTo route) model
 
         StepToProject route ->
-            let
-                newModel =
-                    { model | projectStepAnimation = None, projectAnimation = None }
-            in
-                update (NavigateTo route) newModel
+            update (NavigateTo route) model
 
         NavigateTo route ->
             model ! [ Navigation.newUrl <| toPath route ]
@@ -75,12 +67,8 @@ update msg model =
                     _ ->
                         newModel ! []
 
-
-
-{--
-           - ValidateConfigureHouse
-           - ValidateConfigureHouseResponse
-           --}
+        ValidateConfigureHouse projectId ->
+            update (NavigateTo (ProjectStepRoute projectId EvaluateFunding)) model
 
 
 urlUpdate : Model -> ( Model, Cmd Msg )

@@ -15,8 +15,9 @@ type Msg
     | UpdateProject ProjectId Value
     | ProjectToStep Route
     | StepToProject Route
+    | SetHouseColor String
     | ValidateDiscoverLand ProjectId Value
     | ValidateDiscoverLandResponse (WebData Project)
     | ValidateDiscoverHouse ProjectId Value
     | ValidateDiscoverHouseResponse (WebData Project)
-    | SetHouseColor String
+    | ValidateConfigureHouse ProjectId

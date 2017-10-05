@@ -1,7 +1,7 @@
 module ViewHelpers exposing (..)
 
 import Html exposing (..)
-import Html.Attributes exposing (class)
+import Html.Attributes exposing (class, src)
 import Http exposing (Error(..))
 import Messages exposing (..)
 import RemoteData exposing (..)
@@ -91,3 +91,21 @@ failureView err =
         BadPayload pay res ->
             ("Bad payload: " ++ toString res)
                 |> text
+
+
+photo : String -> Html Msg
+photo string =
+    img
+        [ class "d-block p-2 img-thumbnail mt-3 img-fluid"
+        , src ("https://s3-eu-west-1.amazonaws.com/demainchezmoi/cloudfront_assets/images/" ++ string)
+        ]
+        []
+
+
+photoClass : String -> String -> Html Msg
+photoClass string c =
+    img
+        [ class (c ++ " d-block p-2 img-thumbnail mt-3 img-fluid")
+        , src ("https://s3-eu-west-1.amazonaws.com/demainchezmoi/cloudfront_assets/images/" ++ string)
+        ]
+        []

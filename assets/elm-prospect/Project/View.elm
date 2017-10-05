@@ -35,7 +35,7 @@ projectView model project =
     div []
         [ adHeader project.ad
         , photo "maison_21.png"
-        , div [ class ("mt-3 mb-5 " ++ (slidingClass model.projectAnimation)) ]
+        , div [ class "mt-3 mb-5" ]
             [ ul [ class "list-group" ]
                 (List.map (\dStep -> stepIndexView dStep.step model project dStep.label) displaySteps)
             ]
@@ -88,24 +88,6 @@ displaySteps =
     ]
 
 
-photo : String -> Html Msg
-photo string =
-    img
-        [ class "d-block p-2 img-thumbnail mt-3 img-fluid"
-        , src ("https://s3-eu-west-1.amazonaws.com/demainchezmoi/cloudfront_assets/images/" ++ string)
-        ]
-        []
-
-
-photoClass : String -> String -> Html Msg
-photoClass string c =
-    img
-        [ class (c ++ " d-block p-2 img-thumbnail mt-3 img-fluid")
-        , src ("https://s3-eu-west-1.amazonaws.com/demainchezmoi/cloudfront_assets/images/" ++ string)
-        ]
-        []
-
-
 adHeader : Ad -> Html Msg
 adHeader ad =
     div [ class "mt-3 p-3 light-bordered text-center" ]
@@ -145,19 +127,6 @@ stepState project projectStep =
             NotYet
         else
             Checked
-
-
-slidingClass : SlideAnimation -> String
-slidingClass status =
-    case status of
-        EnterRight ->
-            "enterRight"
-
-        EnterLeft ->
-            "enterLeft"
-
-        None ->
-            ""
 
 
 checkedIcon : ProjectStepState -> Html Msg
@@ -204,24 +173,18 @@ stepIndexView projectStep model project label =
 
 stepView : Model -> Project -> String -> Html Msg -> Html Msg
 stepView model project title view =
-    let
-        stepClass =
-            String.join " " [ slidingClass model.projectStepAnimation ]
-    in
-        div []
-            [ div [ class stepClass ]
-                [ h1 [ class "h1-responsive" ]
-                    [ a
-                        [ class "btn btn-sm btn-yellow-flash"
-                        , onClick (StepToProject (ProjectRoute project.id))
-                        ]
-                        [ i [ class "fa fa-chevron-left" ] []
-                        ]
-                    , text title
-                    ]
-                , view
+    div []
+        [ h1 [ class "h1-responsive" ]
+            [ a
+                [ class "btn btn-sm btn-yellow-flash"
+                , onClick (StepToProject (ProjectRoute project.id))
                 ]
+                [ i [ class "fa fa-chevron-left" ] []
+                ]
+            , text title
             ]
+        , view
+        ]
 
 
 nextStepButton : Msg -> Html Msg
@@ -343,6 +306,7 @@ configureHouseView model project title =
                         , text "couleur-2"
                         ]
                     ]
+                , ValidateConfigureHouse project.id |> nextStepButton
                 ]
     in
         stepView model project title view
