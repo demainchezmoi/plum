@@ -3,7 +3,7 @@ module Project.View exposing (..)
 import Ad.Model exposing (Ad)
 import Ad.View as AdView
 import Html exposing (..)
-import Html.Attributes exposing (class, src, type_, name, value, id, checked, for, placeholder)
+import Html.Attributes exposing (class, src, type_, name, value, id, checked, for, placeholder, style)
 import Html.Events exposing (onClick, onInput)
 import Messages exposing (..)
 import Model exposing (..)
@@ -30,11 +30,23 @@ projectPageView model =
             projectView model project |> inLayout
 
 
+projectHeader : Project -> Html Msg
+projectHeader project =
+    div [ class "media" ]
+        [ img [ class "d-flex mr-3 img-thumbnail", src "https://s3-eu-west-1.amazonaws.com/demainchezmoi/cloudfront_assets/images/maison_21.png", style [ ( "width", "100px" ) ] ] []
+        , div [ class "media-body" ]
+            [ h5 [ class "mt-0 default-color-text" ]
+                [ text "Mon espace"
+                ]
+            , AdView.shortView project.ad
+            ]
+        ]
+
+
 projectView : Model -> Project -> Html Msg
 projectView model project =
     div []
-        [ adHeader project.ad
-        , photo "maison_21.png"
+        [ projectHeader project
         , div [ class "mt-3 mb-5" ]
             [ ul [ class "list-group" ]
                 (List.map (\dStep -> stepIndexView dStep.step model project dStep.label) displaySteps)
@@ -86,14 +98,6 @@ displaySteps =
     , { step = Keys, view = keysView, label = "Réception" }
     , { step = AfterSales, view = afterSalesView, label = "Après-vente" }
     ]
-
-
-adHeader : Ad -> Html Msg
-adHeader ad =
-    div [ class "mt-3 p-3 light-bordered text-center" ]
-        [ h4 [ class "font-black h4-responsive default-color-text" ] [ text "Mon espace" ]
-        , p [ class "lead mb-0" ] [ AdView.shortView ad ]
-        ]
 
 
 checkedIcon : ProjectStepStatus -> Html Msg
@@ -153,6 +157,11 @@ stepIndexView projectStep model project label =
             ]
 
 
+stepInfo : String -> Html Msg
+stepInfo desc =
+    p [ class "text-secondary text-bold" ] [ text desc ]
+
+
 stepView : Model -> Project -> String -> Html Msg -> Html Msg
 stepView model project title view =
     div []
@@ -174,7 +183,7 @@ nextStepButton action =
     div [ class "clearfix" ]
         [ button
             [ class "btn btn-default pull-right mr-0 mt-2", onClick action ]
-            [ text "Suivant" ]
+            [ text "Valider" ]
         ]
 
 
@@ -211,7 +220,8 @@ discoverLandView model project title =
 
         view =
             div []
-                ((projectLandImages project)
+                ([ stepInfo "Découvrez voter terrain et ses environs." ]
+                    ++ (projectLandImages project)
                     ++ [ p [ class "mt-3 p-3 light-bordered" ] [ text project.ad.land.description ]
                        , button
                        ]
@@ -243,7 +253,8 @@ discoverHouseView model project title =
 
         view =
             div []
-                [ photo "maison_21_nuit.jpg"
+                [ stepInfo "Découvrez la maison Léo"
+                , photo "maison_21_nuit.jpg"
                 , photo "maison-min.png"
                 , button
                 ]
@@ -284,7 +295,8 @@ configureHouseView model project title =
 
         view =
             div []
-                [ div [ class "position-relative" ]
+                [ stepInfo "Choisissez les enduits de votre maison Léo, en une ou deux couleurs."
+                , div [ class "position-relative" ]
                     ([ photo "Maison-leo-configurateur-0-min.png" ] ++ photo1 ++ photo2)
                 , div [ class "light-bordered p-3 mt-2" ]
                     [ div [ class "row" ]
@@ -366,46 +378,46 @@ evaluateFundingView : Model -> Project -> String -> Html Msg
 evaluateFundingView model project title =
     let
         contributionValue =
-            case ( model.contribution, project.contribution ) of
-                ( Just contribution, _ ) ->
+            case model.contribution of
+                Just contribution ->
                     toString contribution
 
-                ( Nothing, contribution ) ->
-                    toString contribution
+                Nothing ->
+                    ""
 
         netIncomeValue =
-            case ( model.netIncome, project.net_income ) of
-                ( Just contribution, _ ) ->
-                    toString contribution
+            case model.netIncome of
+                Just netIncome ->
+                    toString netIncome
 
-                ( Nothing, Just contribution ) ->
-                    toString contribution
-
-                _ ->
+                Nothing ->
                     ""
 
         view =
             div []
-                [ div [ class "p-1" ]
+                [ stepInfo "Pour mener à bien votre projet de construction, évaluons ensemble votre capacité de financement."
+                , div [ class "p-1" ]
                     [ div [ class "form-group" ]
-                        [ label [ for "contribution" ] [ text "Votre apport financier" ]
+                        [ label [ for "contribution" ] [ text "Votre apport financier (€)" ]
                         , input
                             [ type_ "number"
                             , class "form-control"
                             , id "contribution"
-                            , placeholder "ex : 2000"
+                            , placeholder "ex : 7000"
                             , onInput SetContribution
+                            , value contributionValue
                             ]
                             []
                         ]
                     , div [ class "form-group" ]
-                        [ label [ for "netIncome" ] [ text "Revenu mensuel net de votre ménage" ]
+                        [ label [ for "netIncome" ] [ text "Revenu mensuel net de votre ménage (€)" ]
                         , input
                             [ type_ "number"
                             , class "form-control"
                             , id "netIncome"
                             , placeholder "ex : 1800"
                             , onInput SetNetIncome
+                            , value netIncomeValue
                             ]
                             []
                         ]
@@ -419,9 +431,18 @@ evaluateFundingView model project title =
 phoneCallView : Model -> Project -> String -> Html Msg
 phoneCallView model project title =
     let
+        phoneNumberValue =
+            case model.phoneNumber of
+                Just phoneNumber ->
+                    phoneNumber
+
+                Nothing ->
+                    ""
+
         view =
             div []
-                [ div [ class "form-group" ]
+                [ stepInfo "Discutons de votre project ! Indiquez-nous votre numéro de téléphone et nous prendrons contact avec vous pour vous accompagner."
+                , div [ class "form-group" ]
                     [ label [ for "phoneNumber" ] [ text "Votre numéro de téléphone" ]
                     , input
                         [ type_ "text"
@@ -429,6 +450,7 @@ phoneCallView model project title =
                         , id "phoneNumber"
                         , placeholder "ex : 06 03 05 04 01"
                         , onInput SetPhoneNumber
+                        , value phoneNumberValue
                         ]
                         []
                     ]

@@ -14,9 +14,7 @@ shortAddText ad =
         " "
         [ "Maison plus terrain à"
         , ad.land.city
-        , "("
-        , ad.land.department
-        , ")"
+        , "(" ++ ad.land.department ++ ")"
         ]
 
 

@@ -15,7 +15,7 @@ update : Msg -> Model -> ( Model, Cmd Msg )
 update msg model =
     case msg of
         ProjectResponse response ->
-            { model | project = response } ! []
+            setProject model response ! []
 
         UpdateProject projectId value ->
             model ! [ updateProject model.apiToken projectId value ]
@@ -42,7 +42,7 @@ update msg model =
                     { model | contribution = Just intContribution } ! []
 
                 Err _ ->
-                    model ! []
+                    { model | contribution = Nothing } ! []
 
         SetNetIncome netIncome ->
             case String.toInt netIncome of
@@ -50,7 +50,7 @@ update msg model =
                     { model | netIncome = Just intNetIncome } ! []
 
                 Err _ ->
-                    model ! []
+                    { model | netIncome = Nothing } ! []
 
         SetPhoneNumber phoneNumber ->
             { model | phoneNumber = Just phoneNumber } ! []
@@ -61,7 +61,7 @@ update msg model =
         ValidateDiscoverLandResponse response ->
             let
                 newModel =
-                    { model | project = response }
+                    setProject model response
             in
                 case response of
                     Success project ->
@@ -76,7 +76,7 @@ update msg model =
         ValidateDiscoverHouseResponse response ->
             let
                 newModel =
-                    { model | project = response }
+                    setProject model response
             in
                 case response of
                     Success project ->
@@ -96,8 +96,11 @@ update msg model =
 
         ValidateConfigureHouseResponse response ->
             let
+                newModelP =
+                    setProject model response
+
                 newModel =
-                    { model | project = response, houseColor1 = Nothing, houseColor2 = Nothing }
+                    { newModelP | houseColor1 = Nothing, houseColor2 = Nothing }
             in
                 case response of
                     Success project ->
@@ -123,7 +126,7 @@ update msg model =
         ValidateEvaluateFundingResponse response ->
             let
                 newModel =
-                    { model | project = response, contribution = Nothing, netIncome = Nothing }
+                    setProject model response
             in
                 case response of
                     Success project ->
@@ -151,7 +154,7 @@ update msg model =
                         model ! [ updateProjectWithCallback model.apiToken projectId value SubmitPhoneNumberResponse ]
 
         SubmitPhoneNumberResponse response ->
-            { model | project = response, phoneNumber = Nothing } ! []
+            setProject model response ! []
 
 
 urlUpdate : Model -> ( Model, Cmd Msg )
@@ -186,3 +189,18 @@ projectIsLoaded model projectId =
 
         _ ->
             False
+
+
+setProject : Model -> WebData Project -> Model
+setProject model response =
+    case response of
+        Success project ->
+            { model
+                | project = response
+                , netIncome = project.net_income
+                , contribution = Just project.contribution
+                , phoneNumber = project.phone_number
+            }
+
+        _ ->
+            { model | project = response }

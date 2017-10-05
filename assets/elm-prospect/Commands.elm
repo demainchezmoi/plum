@@ -20,6 +20,16 @@ getMaybeValue label maybeValue encoder =
             []
 
 
+getMaybeNullableValue : String -> Maybe a -> (a -> Value) -> List ( String, Value )
+getMaybeNullableValue label maybeValue encoder =
+    case maybeValue of
+        Just value ->
+            [ ( label, encoder value ) ]
+
+        _ ->
+            [ ( label, null ) ]
+
+
 getAuthorizationHeaderValue : String -> String
 getAuthorizationHeaderValue apiToken =
     "Token token=\"" ++ apiToken ++ "\""
