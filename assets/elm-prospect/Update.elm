@@ -42,6 +42,9 @@ update msg model =
         NavigateTo route ->
             model ! [ Navigation.newUrl <| toPath route ]
 
+        SetHouseColor color ->
+            { model | houseColor = color } ! []
+
         ValidateDiscoverLand projectId value ->
             model ! [ updateProjectWithCallback model.apiToken projectId value ValidateDiscoverLandResponse ]
 

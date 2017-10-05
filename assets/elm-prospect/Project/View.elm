@@ -3,7 +3,7 @@ module Project.View exposing (..)
 import Ad.Model exposing (Ad)
 import Ad.View as AdView
 import Html exposing (..)
-import Html.Attributes exposing (class, src)
+import Html.Attributes exposing (class, src, type_, name, value, id, checked)
 import Html.Events exposing (onClick)
 import Messages exposing (..)
 import Model exposing (..)
@@ -92,6 +92,15 @@ photo : String -> Html Msg
 photo string =
     img
         [ class "d-block p-2 img-thumbnail mt-3 img-fluid"
+        , src ("https://s3-eu-west-1.amazonaws.com/demainchezmoi/cloudfront_assets/images/" ++ string)
+        ]
+        []
+
+
+photoClass : String -> String -> Html Msg
+photoClass string c =
+    img
+        [ class (c ++ " d-block p-2 img-thumbnail mt-3 img-fluid")
         , src ("https://s3-eu-west-1.amazonaws.com/demainchezmoi/cloudfront_assets/images/" ++ string)
         ]
         []
@@ -299,7 +308,42 @@ configureHouseView : Model -> Project -> String -> Html Msg
 configureHouseView model project title =
     let
         view =
-            div [] []
+            div []
+                [ div [ class "position-relative" ]
+                    [ photo "Maison-leo-configurateur-0-min.png"
+                    , photoClass model.houseColor "photo-stack"
+                    ]
+                , div [ class "form-check" ]
+                    [ label [ class "form-check-label" ]
+                        [ input
+                            [ type_ "radio"
+                            , name "house-color"
+                            , value "Maison-leo-configurateur-1.png"
+                            , id "house-color-1"
+                            , class "form-check-input"
+                            , checked (model.houseColor == "Maison-leo-configurateur-1.png")
+                            , onClick (SetHouseColor "Maison-leo-configurateur-1.png")
+                            ]
+                            []
+                        , text "couleur-1"
+                        ]
+                    ]
+                , div [ class "form-check" ]
+                    [ label [ class "form-check-label" ]
+                        [ input
+                            [ type_ "radio"
+                            , name "house-color"
+                            , value "Maison-leo-configurateur-2.png"
+                            , id "house-color-2"
+                            , class "form-check-input"
+                            , checked (model.houseColor == "Maison-leo-configurateur-2.png")
+                            , onClick (SetHouseColor "Maison-leo-configurateur-2.png")
+                            ]
+                            []
+                        , text "couleur-2"
+                        ]
+                    ]
+                ]
     in
         stepView model project title view
 

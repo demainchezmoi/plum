@@ -87,7 +87,7 @@ defmodule Plum.SalesTest do
 
     test "create_land/1 with valid data creates a land" do
       land_params = params_for(:land)
-      assert {:ok, %Land{}} = Sales.create_land(land_params)
+      assert {:ok, %Land{description: _, images: _}} = Sales.create_land(land_params)
     end
 
     test "create_land/1 with invalid data returns error changeset" do

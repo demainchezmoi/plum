@@ -105,3 +105,11 @@ nav.navbar {
 .gray-background {
   background-color: $gray-700;
 }
+
+.photo-stack {
+  position: absolute;
+  top: 0; right: 0; left: 0; bottom: 0;
+  z-index: 1000;
+  margin-top: 0 !important;
+  background: transparent !important;
+}

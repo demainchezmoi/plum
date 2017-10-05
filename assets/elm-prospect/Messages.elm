@@ -19,3 +19,4 @@ type Msg
     | ValidateDiscoverLandResponse (WebData Project)
     | ValidateDiscoverHouse ProjectId Value
     | ValidateDiscoverHouseResponse (WebData Project)
+    | SetHouseColor String
