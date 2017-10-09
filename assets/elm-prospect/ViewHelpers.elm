@@ -8,6 +8,11 @@ import RemoteData exposing (..)
 import Model exposing (..)
 
 
+row : List (Html Msg) -> Html Msg
+row elements =
+    div [ class "row" ] elements
+
+
 header : Html Msg
 header =
     h5 [ class "ml-header" ]

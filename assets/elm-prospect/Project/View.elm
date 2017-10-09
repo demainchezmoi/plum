@@ -32,7 +32,7 @@ projectPageView model =
 
 projectHeader : Project -> Html Msg
 projectHeader project =
-    div [ class "media" ]
+    div [ class "media light-bordered p-3" ]
         [ img [ class "d-flex mr-3 img-thumbnail", src "https://s3-eu-west-1.amazonaws.com/demainchezmoi/cloudfront_assets/images/maison_21.png", style [ ( "width", "100px" ) ] ] []
         , div [ class "media-body" ]
             [ h5 [ class "mt-0 default-color-text" ]
@@ -299,7 +299,7 @@ configureHouseView model project title =
                 , div [ class "position-relative" ]
                     ([ photo "Maison-leo-configurateur-0-min.png" ] ++ photo1 ++ photo2)
                 , div [ class "light-bordered p-3 mt-2" ]
-                    [ div [ class "row" ]
+                    [ row
                         [ div [ class "col-6" ]
                             [ p [ class "font-bold" ] [ text "Choix 1" ]
                             , div [ class "form-check" ]
