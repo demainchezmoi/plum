@@ -24,8 +24,8 @@ defmodule PlumWeb.AuthController do
 
   def callback(%{assigns: %{ueberauth_auth: auth = %{provider: :facebook}}} = conn, params) do
     with attrs <- extract_fb_user(auth),
-         {:ok, user} <- Accounts.upsert_user_by(attrs, :email),
-         {:ok, session} <- Accounts.create_session(%{user_id: user.id}) # TODO : what if session already exists
+         {:ok, user} <- Accounts.upsert_user_by(attrs, :facebook_id),
+         {:ok, session} <- Accounts.create_session(%{user_id: user.id})
     do
         conn
         |> put_flash(:info, "Vous avez bien été authentifié")

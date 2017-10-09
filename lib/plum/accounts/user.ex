@@ -13,8 +13,8 @@ defmodule Plum.Accounts.User do
     timestamps()
   end
 
-  @optional_fields ~w(facebook_id roles)a
-  @required_fields ~w(email admin)a
+  @optional_fields ~w(email roles)a
+  @required_fields ~w(facebook_id admin)a
 
   @doc false
   def changeset(%User{} = user, attrs) do
