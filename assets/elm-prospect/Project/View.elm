@@ -165,13 +165,25 @@ stepIndexView projectStep model project label =
 
 stepInfo : String -> Html Msg
 stepInfo desc =
-    p [ class "text-secondary text-bold" ] [ text desc ]
+    p [ class "text-secondary text-bold pl-1" ] [ text desc ]
 
 
-stepView : Model -> Project -> String -> Html Msg -> Html Msg
-stepView model project title view =
+nextStepInfo : String -> Html Msg
+nextStepInfo txt =
+    div [ class "default-color-text pl-1 text-right small mb-0 mt-2" ]
+        [ text <| "Étape suivante : " ++ txt ]
+
+
+stepNum : Int -> Html Msg
+stepNum num =
+    div [ class "text-secondary small mb-2" ] [ text <| "Étape " ++ (toString num) ++ "/14" ]
+
+
+stepView : Model -> Project -> String -> Int -> Html Msg -> Html Msg
+stepView model project title num view =
     div []
-        [ h1 [ class "h1-responsive" ]
+        [ stepNum num
+        , h1 [ class "h1-responsive" ]
             [ a
                 [ class "btn btn-sm btn-yellow-flash"
                 , onClick (NavigateTo (ProjectRoute project.id))
@@ -181,15 +193,6 @@ stepView model project title view =
             , text title
             ]
         , view
-        ]
-
-
-nextStepButton : Msg -> Html Msg
-nextStepButton action =
-    div [ class "clearfix" ]
-        [ button
-            [ class "btn btn-default pull-right mr-0 mt-2", onClick action ]
-            [ text "Suivant" ]
         ]
 
 
@@ -208,6 +211,28 @@ landMap model =
     div [ class "light-bordered p-2 w-100 map mt-2" ] [ Maps.view model.landMap |> Maps.mapView MapsMsg ]
 
 
+nextStepButton : Msg -> Html Msg
+nextStepButton action =
+    div [ class "clearfix" ]
+        [ button
+            [ class "btn btn-default pull-right mr-0 mt-2", onClick action ]
+            [ text "Suivant" ]
+        ]
+
+
+stepButton : Project -> ProjectStep -> Html Msg -> Html Msg
+stepButton project step button =
+    case stepState project step of
+        Checked ->
+            button
+
+        Current ->
+            button
+
+        NotYet ->
+            text ""
+
+
 welcomeView : Model -> Project -> String -> Html Msg
 welcomeView model project title =
     let
@@ -224,20 +249,25 @@ welcomeView model project title =
                 ++ "."
 
         text3 =
-            "Passez les étapes pour découvrir le terrain, la maison, choisir vos couleurs ... et ainsi de suite jusqu'à l'obtention de vos clefs !"
+            "Passez les étapes pour découvrir le terrain, la maison, choisir vos couleurs ... jusqu'au suivi de la construction et l'obtention de vos clés !"
 
         button =
             (NavigateTo (ProjectStepRoute project.id DiscoverLand)) |> nextStepButton
 
         view =
             div []
-                [ p [] [ text text1 ]
-                , p [] [ text text2 ]
-                , p [] [ text text3 ]
+                [ stepInfo text1
+                , div [ class "light-bordered p-3" ]
+                    [ p [ class "font-bold mb-0" ] [ text "Gérez votre candidature" ]
+                    , p [] [ text text2 ]
+                    , p [ class "font-bold mb-0" ] [ text "Passez les étapes" ]
+                    , p [] [ text text3 ]
+                    ]
+                , nextStepInfo "Découvrir le terrain"
                 , button
                 ]
     in
-        stepView model project title view
+        stepView model project title 1 view
 
 
 discoverLandView : Model -> Project -> String -> Html Msg
@@ -246,20 +276,9 @@ discoverLandView model project title =
         updateValue =
             Json.Encode.object [ ( "discover_land", Json.Encode.bool True ) ]
 
-        getButton : Html Msg
-        getButton =
-            ValidateDiscoverLand project.id updateValue |> nextStepButton
-
+        button : Html Msg
         button =
-            case stepState project DiscoverLand of
-                Checked ->
-                    getButton
-
-                Current ->
-                    getButton
-
-                NotYet ->
-                    text ""
+            ValidateDiscoverLand project.id updateValue |> nextStepButton
 
         view =
             div []
@@ -267,11 +286,12 @@ discoverLandView model project title =
                     -- ++ (projectLandImages project)
                     ++ [ landMap model ]
                     ++ [ p [ class "mt-2 p-3 light-bordered" ] [ text project.ad.land.description ]
-                       , button
+                       , nextStepInfo "Découvrir la maison"
+                       , stepButton project DiscoverLand button
                        ]
                 )
     in
-        stepView model project title view
+        stepView model project title 2 view
 
 
 discoverHouseView : Model -> Project -> String -> Html Msg
@@ -280,30 +300,19 @@ discoverHouseView model project title =
         updateValue =
             Json.Encode.object [ ( "discover_house", Json.Encode.bool True ) ]
 
-        getButton : Html Msg
-        getButton =
-            ValidateDiscoverHouse project.id updateValue |> nextStepButton
-
         button =
-            case stepState project DiscoverHouse of
-                Checked ->
-                    getButton
-
-                Current ->
-                    getButton
-
-                NotYet ->
-                    text ""
+            ValidateDiscoverHouse project.id updateValue |> nextStepButton
 
         view =
             div []
                 [ stepInfo "Découvrez la maison Léo"
                 , photo "maison_21_nuit.jpg"
                 , photo "maison-min.png"
-                , button
+                , nextStepInfo "Choisir mes couleurs"
+                , stepButton project DiscoverHouse button
                 ]
     in
-        stepView model project title view
+        stepView model project title 3 view
 
 
 configureHouseView : Model -> Project -> String -> Html Msg
@@ -412,10 +421,11 @@ configureHouseView model project title =
                             ]
                         ]
                     ]
-                , ValidateConfigureHouse project.id |> nextStepButton
+                , nextStepInfo "Ma finançabilité"
+                , stepButton project ConfigureHouse (ValidateConfigureHouse project.id |> nextStepButton)
                 ]
     in
-        stepView model project title view
+        stepView model project title 4 view
 
 
 evaluateFundingView : Model -> Project -> String -> Html Msg
@@ -439,7 +449,7 @@ evaluateFundingView model project title =
 
         view =
             div []
-                [ stepInfo "Pour mener à bien votre projet de construction, nous allons vous aider à trouver un financement."
+                [ stepInfo "Pour mener à bien votre projet de construction, nous vous aidons à trouver un financement."
                 , div [ class "p-1" ]
                     [ div [ class "form-group" ]
                         [ label [ for "contribution" ] [ text "Votre apport financier (€)" ]
@@ -466,10 +476,11 @@ evaluateFundingView model project title =
                             []
                         ]
                     ]
-                , ValidateEvaluateFunding project.id |> nextStepButton
+                , nextStepInfo "Notre premier contact"
+                , stepButton project EvaluateFunding (ValidateEvaluateFunding project.id |> nextStepButton)
                 ]
     in
-        stepView model project title view
+        stepView model project title 5 view
 
 
 phoneCallView : Model -> Project -> String -> Html Msg
@@ -485,7 +496,7 @@ phoneCallView model project title =
 
         view =
             div []
-                [ stepInfo "Discutons de votre project ! Indiquez-nous votre numéro de téléphone et nous prendrons contact avec vous pour vous accompagner."
+                [ stepInfo "Discutons de votre project ! Indiquez-nous votre numéro de téléphone et nous prendrons contact avec vous pour un accompagment personnalisé."
                 , div [ class "form-group" ]
                     [ label [ for "phoneNumber" ] [ text "Votre numéro de téléphone" ]
                     , input
@@ -498,10 +509,10 @@ phoneCallView model project title =
                         ]
                         []
                     ]
-                , SubmitPhoneNumber project.id |> nextStepButton
+                , stepButton project PhoneCall (SubmitPhoneNumber project.id |> nextStepButton)
                 ]
     in
-        stepView model project title view
+        stepView model project title 6 view
 
 
 quotationView : Model -> Project -> String -> Html Msg
@@ -510,7 +521,7 @@ quotationView model project title =
         view =
             div [] []
     in
-        stepView model project title view
+        stepView model project title 7 view
 
 
 fundingView : Model -> Project -> String -> Html Msg
@@ -519,7 +530,7 @@ fundingView model project title =
         view =
             div [] []
     in
-        stepView model project title view
+        stepView model project title 8 view
 
 
 visitLandView : Model -> Project -> String -> Html Msg
@@ -528,7 +539,7 @@ visitLandView model project title =
         view =
             div [] []
     in
-        stepView model project title view
+        stepView model project title 9 view
 
 
 contractView : Model -> Project -> String -> Html Msg
@@ -537,7 +548,7 @@ contractView model project title =
         view =
             div [] []
     in
-        stepView model project title view
+        stepView model project title 10 view
 
 
 permitView : Model -> Project -> String -> Html Msg
@@ -546,7 +557,7 @@ permitView model project title =
         view =
             div [] []
     in
-        stepView model project title view
+        stepView model project title 11 view
 
 
 buildingView : Model -> Project -> String -> Html Msg
@@ -555,7 +566,7 @@ buildingView model project title =
         view =
             div [] []
     in
-        stepView model project title view
+        stepView model project title 12 view
 
 
 keysView : Model -> Project -> String -> Html Msg
@@ -564,7 +575,7 @@ keysView model project title =
         view =
             div [] []
     in
-        stepView model project title view
+        stepView model project title 13 view
 
 
 afterSalesView : Model -> Project -> String -> Html Msg
@@ -573,4 +584,4 @@ afterSalesView model project title =
         view =
             div [] []
     in
-        stepView model project title view
+        stepView model project title 14 view
