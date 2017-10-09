@@ -3,6 +3,8 @@ module Model exposing (..)
 import Routing exposing (Route)
 import RemoteData exposing (..)
 import Project.Model exposing (Project, ProjectId)
+import Messages exposing (Msg)
+import Maps
 
 
 type alias ApiToken =
@@ -30,6 +32,7 @@ type SlideAnimation
 
 type alias Model =
     { project : WebData Project
+    , landMap : Maps.Model Msg
     , error : Maybe String
     , apiToken : ApiToken
     , route : Route
@@ -44,6 +47,7 @@ type alias Model =
 initialModel : ApiToken -> Route -> Model
 initialModel apiToken route =
     { project = Loading
+    , landMap = Maps.defaultModel
     , error = Nothing
     , apiToken = apiToken
     , route = route

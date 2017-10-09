@@ -5,13 +5,18 @@ import Ad.View as AdView
 import Html exposing (..)
 import Html.Attributes exposing (class, src, type_, name, value, id, checked, for, placeholder, style)
 import Html.Events exposing (onClick, onInput)
+import Json.Encode
+import Land.Model exposing (Land)
+import Maps
+import Maps.Geo
+import Maps.Map as Map
+import Maps.Marker as Marker
 import Messages exposing (..)
 import Model exposing (..)
 import Project.Model exposing (..)
+import RemoteData exposing (..)
 import Routing exposing (toPath, Route(..))
 import ViewHelpers exposing (..)
-import RemoteData exposing (..)
-import Json.Encode
 
 
 projectPageView : Model -> Html Msg
@@ -197,6 +202,11 @@ projectLandImages project =
     List.map landImage project.ad.land.images
 
 
+landMap : Model -> Html Msg
+landMap model =
+    Maps.view model.landMap |> Maps.mapView MapsMsg
+
+
 discoverLandView : Model -> Project -> String -> Html Msg
 discoverLandView model project title =
     let
@@ -222,6 +232,7 @@ discoverLandView model project title =
             div []
                 ([ stepInfo "Découvrez voter terrain et ses environs." ]
                     ++ (projectLandImages project)
+                    ++ [ landMap model ]
                     ++ [ p [ class "mt-3 p-3 light-bordered" ] [ text project.ad.land.description ]
                        , button
                        ]
