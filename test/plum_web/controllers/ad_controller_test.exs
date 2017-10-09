@@ -48,7 +48,7 @@ defmodule PlumWeb.AdControllerTest do
     test "interested redirects to project path", %{conn: conn, current_user: current_user, ad: ad} do
       conn = get conn, ad_path(conn, :interested, ad.id)
       project = Sales.get_project_by!(%{user_id: current_user.id, ad_id: ad.id})
-      assert redirected_to(conn) == page_path(conn, :prospect, ["projets", to_string(project.id), "terrain"])
+      assert redirected_to(conn) == page_path(conn, :prospect, ["projets", to_string(project.id), "bienvenue"])
     end
   end
 
