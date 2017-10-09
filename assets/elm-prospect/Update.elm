@@ -13,16 +13,27 @@ import Project.Commands exposing (getProject, updateProject, updateProjectWithCa
 import Project.Model exposing (..)
 import RemoteData exposing (..)
 import Routing exposing (Route(..), parse, toPath)
+import Window
 
 
 update : Msg -> Model -> ( Model, Cmd Msg )
 update msg model =
     case msg of
+        NoOp ->
+            model ! []
+
         MapsMsg msg ->
             model.landMap
                 |> Maps.update msg
                 |> Tuple.mapFirst (\map -> { model | landMap = map })
                 |> Tuple.mapSecond (Cmd.map MapsMsg)
+
+        Resize size ->
+            { model
+                | windowSize = size
+                , landMap = resizeMap model.landMap size
+            }
+                ! []
 
         ProjectResponse response ->
             setProject model response ! []
@@ -167,6 +178,23 @@ update msg model =
             setProject model response ! []
 
 
+landMapHeight : Window.Size -> Float
+landMapHeight size =
+    250
+
+
+landMapWidth : Window.Size -> Float
+landMapWidth size =
+    size.width |> toFloat |> (\x -> min 490 (x - 65))
+
+
+resizeMap : Maps.Model Msg -> Window.Size -> Maps.Model Msg
+resizeMap map size =
+    map
+        |> Maps.updateMap (Map.setWidth <| landMapWidth <| size)
+        |> Maps.updateMap (Map.setHeight <| landMapHeight <| size)
+
+
 urlUpdate : Model -> ( Model, Cmd Msg )
 urlUpdate model =
     case model.route of
@@ -211,12 +239,12 @@ setProject model response =
 
                 landMap =
                     Maps.defaultModel
-                        |> Maps.updateMap (Map.setZoom 14 >> Map.moveTo latLng)
+                        |> Maps.updateMap (Map.viewBounds <| Maps.Geo.centeredBounds 12 latLng)
                         |> Maps.updateMarkers (\_ -> [ Marker.create latLng ])
             in
                 { model
                     | project = response
-                    , landMap = landMap
+                    , landMap = resizeMap landMap model.windowSize
                     , netIncome = project.net_income
                     , contribution = Just project.contribution
                     , phoneNumber = project.phone_number

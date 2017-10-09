@@ -7,26 +7,29 @@ import RemoteData exposing (..)
 import Project.Model exposing (Project, ProjectId)
 import Json.Encode exposing (Value)
 import Maps
+import Window
 
 
 type Msg
-    = UrlChange Navigation.Location
+    = MapsMsg (Maps.Msg Msg)
     | NavigateTo Route
+    | NoOp
     | ProjectResponse (WebData Project)
-    | UpdateProject ProjectId Value
+    | Resize Window.Size
+    | SetContribution String
     | SetHouseColor1 String
     | SetHouseColor2 String
     | SetNetIncome String
-    | SetContribution String
     | SetPhoneNumber String
-    | ValidateDiscoverLand ProjectId Value
-    | ValidateDiscoverLandResponse (WebData Project)
-    | ValidateDiscoverHouse ProjectId Value
-    | ValidateDiscoverHouseResponse (WebData Project)
-    | ValidateConfigureHouse ProjectId
-    | ValidateConfigureHouseResponse (WebData Project)
-    | ValidateEvaluateFunding ProjectId
-    | ValidateEvaluateFundingResponse (WebData Project)
     | SubmitPhoneNumber ProjectId
     | SubmitPhoneNumberResponse (WebData Project)
-    | MapsMsg (Maps.Msg Msg)
+    | UpdateProject ProjectId Value
+    | UrlChange Navigation.Location
+    | ValidateConfigureHouse ProjectId
+    | ValidateConfigureHouseResponse (WebData Project)
+    | ValidateDiscoverHouse ProjectId Value
+    | ValidateDiscoverHouseResponse (WebData Project)
+    | ValidateDiscoverLand ProjectId Value
+    | ValidateDiscoverLandResponse (WebData Project)
+    | ValidateEvaluateFunding ProjectId
+    | ValidateEvaluateFundingResponse (WebData Project)

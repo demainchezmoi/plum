@@ -194,7 +194,7 @@ nextStepButton action =
 
 landImage : String -> Html Msg
 landImage source =
-    img [ class "d-block p-2 img-thumbnail mt-3 img-fluid", src source ] []
+    img [ class "d-block p-2 img-thumbnail mt-3 img-fluid w-100", src source ] []
 
 
 projectLandImages : Project -> List (Html Msg)
@@ -204,7 +204,7 @@ projectLandImages project =
 
 landMap : Model -> Html Msg
 landMap model =
-    Maps.view model.landMap |> Maps.mapView MapsMsg
+    div [ class "light-bordered p-2 w-100 map" ] [ Maps.view model.landMap |> Maps.mapView MapsMsg ]
 
 
 discoverLandView : Model -> Project -> String -> Html Msg
