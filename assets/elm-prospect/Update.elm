@@ -3,19 +3,40 @@ module Update exposing (..)
 import Messages exposing (..)
 import Model exposing (..)
 import Navigation
-import Project.Commands exposing (getProject, updateProject, updateProjectWithCallback)
+import Project.Commands exposing (..)
+import Land.Model exposing (coordinatesFromLand)
 import Commands exposing (getMaybeValue)
 import RemoteData exposing (..)
 import Routing exposing (Route(..), parse, toPath)
 import Project.Model exposing (..)
 import Json.Encode as Encode
+import Ports exposing (gmap)
 
 
 update : Msg -> Model -> ( Model, Cmd Msg )
 update msg model =
     case msg of
+        NoOp ->
+            model ! []
+
         ProjectResponse response ->
             setProject model response ! []
+
+        DiscoverLandProjectResponse response ->
+            let
+                newModel =
+                    setProject model response
+            in
+                case response of
+                    Success project ->
+                        let
+                            coordinates =
+                                coordinatesFromLand project.ad.land
+                        in
+                            newModel ! [ gmap (toString coordinates) ]
+
+                    _ ->
+                        newModel ! []
 
         UpdateProject projectId value ->
             model ! [ updateProject model.apiToken projectId value ]
@@ -163,32 +184,14 @@ urlUpdate model =
         ProjectRoute projectId ->
             ( model, ensureProject model projectId )
 
+        ProjectStepRoute projectId DiscoverLand ->
+            ( model, ensureProjectWithCallback model projectId DiscoverLandProjectResponse )
+
         ProjectStepRoute projectId projectStep ->
             ( model, ensureProject model projectId )
 
         _ ->
             ( model, Cmd.none )
-
-
-ensureProject : Model -> ProjectId -> Cmd Msg
-ensureProject model projectId =
-    if projectIsLoaded model projectId then
-        Cmd.none
-    else
-        getProject model.apiToken projectId
-
-
-projectIsLoaded : Model -> ProjectId -> Bool
-projectIsLoaded model projectId =
-    case model.project of
-        Success project ->
-            if project.id == projectId then
-                True
-            else
-                False
-
-        _ ->
-            False
 
 
 setProject : Model -> WebData Project -> Model

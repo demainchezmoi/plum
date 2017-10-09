@@ -9,9 +9,11 @@ import Json.Encode exposing (Value)
 
 
 type Msg
-    = UrlChange Navigation.Location
+    = NoOp
+    | UrlChange Navigation.Location
     | NavigateTo Route
     | ProjectResponse (WebData Project)
+    | DiscoverLandProjectResponse (WebData Project)
     | UpdateProject ProjectId Value
     | SetHouseColor1 String
     | SetHouseColor2 String
