@@ -40,7 +40,7 @@ projectHeader project =
     div [ class "media light-bordered p-3" ]
         [ img [ class "d-flex mr-3 img-thumbnail", src "https://s3-eu-west-1.amazonaws.com/demainchezmoi/cloudfront_assets/images/maison_21.png", style [ ( "width", "100px" ) ] ] []
         , div [ class "media-body" ]
-            [ h5 [ class "mt-0 default-color-text" ]
+            [ h5 [ class "mt-0 h5-responsive" ]
                 [ text "Mon espace"
                 ]
             , AdView.shortView project.ad
@@ -110,22 +110,13 @@ checkedIcon : ProjectStepStatus -> Html Msg
 checkedIcon state =
     let
         checkedIcon =
-            span [ class "fa-stack mr-2" ]
-                [ i [ class "fa fa-circle fa-stack-2x yellow-flash-text black-bordered-icon" ] []
-                , i [ class "fa fa-check fa-stack-1x" ] []
-                ]
+            i [ class "fa fa-check fa-lg mr-2 default-color-text" ] []
 
         currentIcon =
-            span [ class "fa-stack mr-2" ]
-                [ i [ class "fa fa-circle fa-stack-2x" ] []
-                , i [ class "fa fa-arrow-right fa-stack-1x fa-inverse" ] []
-                ]
+            i [ class "fa fa-hand-o-right fa-lg mr-2 " ] []
 
         notYetIcon =
-            span [ class "fa-stack mr-2 text-secondary" ]
-                [ i [ class "fa fa-circle fa-stack-2x" ] []
-                , i [ class "fa fa-question fa-stack-1x fa-inverse" ] []
-                ]
+            i [ class "fa fa-check fa-lg mr-2 text-white" ] []
     in
         case state of
             Checked ->
@@ -165,7 +156,7 @@ stepIndexView projectStep model project label =
 
 stepInfo : String -> Html Msg
 stepInfo desc =
-    p [ class "text-secondary text-bold pl-1" ] [ text desc ]
+    p [ class "text-secondary text-bold p-1" ] [ text desc ]
 
 
 nextStepInfo : String -> Html Msg
@@ -249,7 +240,7 @@ welcomeView model project title =
                 ++ "."
 
         text3 =
-            "Passez les étapes pour découvrir le terrain, la maison, choisir vos couleurs ... jusqu'au suivi de la construction et l'obtention de vos clés !"
+            "Passez les étapes pour découvrir le terrain, la maison, choisir vos couleurs, jusqu'au suivi de la construction et l'obtention de vos clés et même le service après-vente."
 
         button =
             (NavigateTo (ProjectStepRoute project.id DiscoverLand)) |> nextStepButton
@@ -258,9 +249,9 @@ welcomeView model project title =
             div []
                 [ stepInfo text1
                 , div [ class "light-bordered p-3" ]
-                    [ p [ class "font-bold mb-0" ] [ text "Gérez votre candidature" ]
+                    [ p [ class "font-bold mb-0" ] [ text "Gérez votre candidature en un seul endroit" ]
                     , p [] [ text text2 ]
-                    , p [ class "font-bold mb-0" ] [ text "Passez les étapes" ]
+                    , p [ class "font-bold mb-0" ] [ text "Passez les étapes et faites construire votre maison" ]
                     , p [] [ text text3 ]
                     ]
                 , nextStepInfo "Découvrir le terrain"
@@ -303,11 +294,19 @@ discoverHouseView model project title =
         button =
             ValidateDiscoverHouse project.id updateValue |> nextStepButton
 
+        description1 =
+            "D'une surface de 80m2, munie de trois chambres et d'un vaste espace commun, la Maison Léo constitue le lieu de vie idéal d'une famille moderne."
+
+        description2 =
+            "Robustes et intégralement isolés, les murs de 20cm d'épaisseur de la Maison Léo protègent votre famille du monde extérieur."
+
         view =
             div []
-                [ stepInfo "Découvrez la maison Léo"
-                , photo "maison_21_nuit.jpg"
+                [ stepInfo "Découvrez la maison Léo, le T4 familial par excellence."
+                , div [ class "light-bordered p-3 mt-2" ] [ text description1 ]
                 , photo "maison-min.png"
+                , div [ class "light-bordered p-3 mt-2" ] [ text description2 ]
+                , photo "maison_21_nuit.jpg"
                 , nextStepInfo "Choisir mes couleurs"
                 , stepButton project DiscoverHouse button
                 ]
@@ -348,7 +347,7 @@ configureHouseView model project title =
 
         view =
             div []
-                [ stepInfo "Choisissez les enduits de votre maison Léo, en une ou deux couleurs."
+                [ stepInfo "Faites-vous plaisir : choisissez les enduits de votre maison Léo, en une ou deux couleurs."
                 , div [ class "position-relative" ]
                     ([ photo "Maison-leo-configurateur-0-min.png" ] ++ photo1 ++ photo2)
                 , div [ class "light-bordered p-3 mt-2" ]
@@ -496,7 +495,7 @@ phoneCallView model project title =
 
         view =
             div []
-                [ stepInfo "Discutons de votre project ! Indiquez-nous votre numéro de téléphone et nous prendrons contact avec vous pour un accompagment personnalisé."
+                [ stepInfo "Nous vous proposons un accompagment personnalisé. Renseignez votre numéro de téléphone et nous vous contacterons dès que possible."
                 , div [ class "form-group" ]
                     [ label [ for "phoneNumber" ] [ text "Votre numéro de téléphone" ]
                     , input

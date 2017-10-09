@@ -64,7 +64,7 @@ nav.navbar.translucid {
   border: 1px solid rgba(0, 0, 0, 0.1);
 }
 
-.black-bordered-icon {
+.black-bordered {
   text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
 }
 
@@ -101,9 +101,9 @@ nav.navbar {
   color: $gray-700;
 }
 
-.gray-text-500 {
-  color: $gray-500;
-}
+.gray-text-900 { color: $gray-900; }
+.gray-text-800 { color: $gray-800; }
+.gray-text-500 { color: $gray-500; }
 
 .gray-background {
   background-color: $gray-700;
