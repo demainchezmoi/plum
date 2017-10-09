@@ -52,7 +52,7 @@ projectView : Model -> Project -> Html Msg
 projectView model project =
     div []
         [ projectHeader project
-        , div [ class "mt-3 mb-5" ]
+        , div [ class "mt-2 mb-5" ]
             [ ul [ class "list-group" ]
                 (List.map (\dStep -> stepIndexView dStep.step model project dStep.label) displaySteps)
             ]
@@ -89,7 +89,8 @@ type alias DisplayStep =
 
 displaySteps : List DisplayStep
 displaySteps =
-    [ { step = DiscoverLand, view = discoverLandView, label = "Découvrir le terrain" }
+    [ { step = Welcome, view = welcomeView, label = "Bienvenue" }
+    , { step = DiscoverLand, view = discoverLandView, label = "Découvrir le terrain" }
     , { step = DiscoverHouse, view = discoverHouseView, label = "Découvrir la maison" }
     , { step = ConfigureHouse, view = configureHouseView, label = "Mon choix de couleurs" }
     , { step = EvaluateFunding, view = evaluateFundingView, label = "Ma finançabilité" }
@@ -188,13 +189,13 @@ nextStepButton action =
     div [ class "clearfix" ]
         [ button
             [ class "btn btn-default pull-right mr-0 mt-2", onClick action ]
-            [ text "Valider" ]
+            [ text "Suivant" ]
         ]
 
 
 landImage : String -> Html Msg
 landImage source =
-    img [ class "d-block p-2 img-thumbnail mt-3 img-fluid w-100", src source ] []
+    img [ class "d-block p-2 img-thumbnail mt-2 img-fluid w-100", src source ] []
 
 
 projectLandImages : Project -> List (Html Msg)
@@ -204,7 +205,39 @@ projectLandImages project =
 
 landMap : Model -> Html Msg
 landMap model =
-    div [ class "light-bordered p-2 w-100 map" ] [ Maps.view model.landMap |> Maps.mapView MapsMsg ]
+    div [ class "light-bordered p-2 w-100 map mt-2" ] [ Maps.view model.landMap |> Maps.mapView MapsMsg ]
+
+
+welcomeView : Model -> Project -> String -> Html Msg
+welcomeView model project title =
+    let
+        text1 =
+            "Bienvenue dans votre espace Maisons Léo."
+
+        text2 =
+            "Cet espace vous permet de gérer votre candidature pour l'annonce maison plus terrain à "
+                ++ project.ad.land.city
+                ++ " "
+                ++ "("
+                ++ project.ad.land.department
+                ++ ")"
+                ++ "."
+
+        text3 =
+            "Passez les étapes pour découvrir le terrain, la maison, choisir vos couleurs ... et ainsi de suite jusqu'à l'obtention de vos clefs !"
+
+        button =
+            (NavigateTo (ProjectStepRoute project.id DiscoverLand)) |> nextStepButton
+
+        view =
+            div []
+                [ p [] [ text text1 ]
+                , p [] [ text text2 ]
+                , p [] [ text text3 ]
+                , button
+                ]
+    in
+        stepView model project title view
 
 
 discoverLandView : Model -> Project -> String -> Html Msg
@@ -230,10 +263,10 @@ discoverLandView model project title =
 
         view =
             div []
-                ([ stepInfo "Découvrez voter terrain et ses environs." ]
-                    ++ (projectLandImages project)
+                ([ stepInfo "Découvrez le terrain et ses environs." ]
+                    -- ++ (projectLandImages project)
                     ++ [ landMap model ]
-                    ++ [ p [ class "mt-3 p-3 light-bordered" ] [ text project.ad.land.description ]
+                    ++ [ p [ class "mt-2 p-3 light-bordered" ] [ text project.ad.land.description ]
                        , button
                        ]
                 )
@@ -406,7 +439,7 @@ evaluateFundingView model project title =
 
         view =
             div []
-                [ stepInfo "Pour mener à bien votre projet de construction, évaluons ensemble votre capacité de financement."
+                [ stepInfo "Pour mener à bien votre projet de construction, nous allons vous aider à trouver un financement."
                 , div [ class "p-1" ]
                     [ div [ class "form-group" ]
                         [ label [ for "contribution" ] [ text "Votre apport financier (€)" ]

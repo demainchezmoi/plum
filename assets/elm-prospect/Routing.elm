@@ -33,13 +33,13 @@ toPath : Route -> String
 toPath route =
     case route of
         NotFoundRoute ->
-            String.join "/" [ "/mon-espace", "not-found" ]
+            String.join "/" [ "", "mon-espace", "not-found" ]
 
         ProjectRoute projectId ->
-            String.join "/" [ "/mon-espace", "projets", toString projectId ]
+            String.join "/" [ "", "mon-espace", "projets", toString projectId ]
 
         ProjectStepRoute projectId step ->
-            String.join "/" [ "/mon-espace", "projets", toString projectId, projectStepToUrl step ]
+            String.join "/" [ "", "mon-espace", "projets", toString projectId, projectStepToUrl step ]
 
 
 removePrefix : Navigation.Location -> Navigation.Location

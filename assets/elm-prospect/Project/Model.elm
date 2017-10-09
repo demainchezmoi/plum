@@ -36,7 +36,8 @@ type ProjectStepStatus
 
 
 type ProjectStep
-    = DiscoverLand
+    = Welcome
+    | DiscoverLand
     | DiscoverHouse
     | ConfigureHouse
     | EvaluateFunding
@@ -64,6 +65,9 @@ stepState project projectStep =
 urlToProjectStep : String -> Maybe ProjectStep
 urlToProjectStep str =
     case str of
+        "bienvenue" ->
+            Just Welcome
+
         "terrain" ->
             Just DiscoverLand
 
@@ -110,6 +114,9 @@ urlToProjectStep str =
 stringToProjectStep : String -> Maybe ProjectStep
 stringToProjectStep str =
     case str of
+        "welcome" ->
+            Just Welcome
+
         "discover_land" ->
             Just DiscoverLand
 
@@ -172,6 +179,9 @@ stringToProjectStepStatus str =
 projectStepToUrl : ProjectStep -> String
 projectStepToUrl step =
     case step of
+        Welcome ->
+            "bienvenue"
+
         DiscoverLand ->
             "terrain"
 

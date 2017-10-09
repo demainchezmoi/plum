@@ -101,7 +101,7 @@ failureView err =
 photo : String -> Html Msg
 photo string =
     img
-        [ class "d-block p-2 img-thumbnail mt-3 img-fluid"
+        [ class "d-block p-2 img-thumbnail mt-2 img-fluid"
         , src ("https://s3-eu-west-1.amazonaws.com/demainchezmoi/cloudfront_assets/images/" ++ string)
         ]
         []
@@ -110,7 +110,7 @@ photo string =
 photoClass : String -> String -> Html Msg
 photoClass string c =
     img
-        [ class (c ++ " d-block p-2 img-thumbnail mt-3 img-fluid")
+        [ class (c ++ " d-block p-2 img-thumbnail mt-2 img-fluid")
         , src ("https://s3-eu-west-1.amazonaws.com/demainchezmoi/cloudfront_assets/images/" ++ string)
         ]
         []

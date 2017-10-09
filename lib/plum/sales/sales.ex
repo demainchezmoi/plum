@@ -367,6 +367,7 @@ defmodule Plum.Sales do
 
   def get_project_steps(%Project{} = project) do
     [
+      get_welcome_step(project),
       get_discover_land_step(project),
       get_discover_house_step(project),
       get_configure_house(project),
@@ -384,6 +385,7 @@ defmodule Plum.Sales do
     |> set_project_steps_status
   end
 
+  defp get_welcome_step(p), do: %{name: "welcome", valid: true}
   defp get_discover_land_step(p), do: %{name: "discover_land", valid: p.discover_land}
   defp get_discover_house_step(p), do: %{name: "discover_house", valid: p.discover_house}
   defp get_configure_house(p), do: %{name: "configure_house", valid: !!p.house_color_1 and !!p.house_color_2}
