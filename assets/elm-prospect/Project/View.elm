@@ -19,6 +19,32 @@ import Routing exposing (toPath, Route(..))
 import ViewHelpers exposing (..)
 
 
+projectNav : ProjectId -> Html Msg
+projectNav projectId =
+    div [ class "" ]
+        [ h5 [ class "ml-header row justify-content-between" ]
+            [ div [ class "col" ]
+                [ i [ class "fa fa-home" ] []
+                , text " Maisons Léo"
+                ]
+            , div [ class "col-auto" ]
+                [ i [ class "fa fa-bars cp", onClick (NavigateTo (ProjectRoute projectId)) ] []
+                ]
+            ]
+        ]
+
+
+genericNav : Html Msg
+genericNav =
+    h5 [ class "ml-header row justify-content-between" ]
+        [ div [ class "col" ]
+            [ i [ class "fa fa-home" ] []
+            , text " Maisons Léo"
+            ]
+        , div [ class "col-auto" ] []
+        ]
+
+
 projectPageView : Model -> Html Msg
 projectPageView model =
     case model.project of
@@ -106,35 +132,9 @@ displaySteps =
     ]
 
 
-projectNav : ProjectId -> Html Msg
-projectNav projectId =
-    div [ class "container" ]
-        [ h5 [ class "ml-header row justify-content-between" ]
-            [ div [ class "col" ]
-                [ i [ class "fa fa-home" ] []
-                , text " Maisons Léo"
-                ]
-            , div [ class "col-auto" ]
-                [ i [ class "fa fa-bars cp", onClick (NavigateTo (ProjectRoute projectId)) ] []
-                ]
-            ]
-        ]
-
-
-genericNav : Html Msg
-genericNav =
-    h5 [ class "ml-header row justify-content-between" ]
-        [ div [ class "col" ]
-            [ i [ class "fa fa-home" ] []
-            , text " Maisons Léo"
-            ]
-        , div [ class "col-auto" ] []
-        ]
-
-
 inLayout : Html Msg -> Html Msg -> Html Msg
 inLayout nav elem =
-    div [ class "container mb-5" ]
+    div [ class "container mb-2" ]
         [ div [ class "row justify-content-center" ]
             [ div [ class "col col-md-10 col-lg-8" ]
                 [ nav
@@ -318,11 +318,11 @@ discoverLandView model project title =
 
         view =
             div []
-                [ stepInfo "Découvrez le terrain et ses environs."
+                [ stepInfo "Découvrez le terrain sur lequel nous vous proposons de construire une Maison Léo."
                 , div [ class "card mt-2" ]
                     [ landMap model
                     , div [ class "card-body" ]
-                        [ p [ class "card-title" ] [ project.ad.land |> landLocation |> text ]
+                        [ p [ class "card-title" ] [ "Terrain à " ++ (project.ad.land |> landLocation) |> text ]
                         , div [ class "card-text" ] [ text project.ad.land.description ]
                         ]
                     ]
@@ -350,7 +350,7 @@ discoverHouseView model project title =
 
         view =
             div []
-                [ stepInfo "Découvrez la maison Léo.."
+                [ stepInfo "Découvrez la maison Léo."
                 , div [ class "card mt-2" ]
                     [ cardPhoto "maison-min.png"
                     , div [ class "card-body" ]
