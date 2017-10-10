@@ -19,7 +19,7 @@ inLayout : Html Msg -> Html Msg -> Html Msg
 inLayout nav elem =
     div [ class "container mb-2" ]
         [ div [ class "row justify-content-center" ]
-            [ div [ class "col col-md-10 col-lg-8 layout-col" ]
+            [ div [ class "col col-md-10 col-lg-8" ]
                 [ nav
                 , elem
                 ]
@@ -30,7 +30,7 @@ inLayout nav elem =
 projectNav : ProjectId -> Html Msg
 projectNav projectId =
     div [ class "" ]
-        [ h5 [ class "ml-header row justify-content-between" ]
+        [ h5 [ class "mb-0 ml-header row justify-content-between" ]
             [ div [ class "col font-black" ]
                 [ i [ class "fa fa-home" ] []
                 , text " Maisons Léo"
@@ -71,7 +71,7 @@ projectPageView model =
 
 projectHeader : Project -> Html Msg
 projectHeader project =
-    div [ class "media light-bordered p-2" ]
+    div [ class "media pt-3 pb-3" ]
         [ img [ class "d-flex mr-2 img-thumbnail", src "https://s3-eu-west-1.amazonaws.com/demainchezmoi/cloudfront_assets/images/maison_21.png", style [ ( "width", "100px" ), ( "height", "56.25px" ) ] ] []
         , div [ class "media-body" ]
             [ p [ class "mt-0 mb-0" ]
@@ -85,10 +85,11 @@ projectHeader project =
 projectView : Model -> Project -> Html Msg
 projectView model project =
     div []
-        [ projectHeader project
-        , div [ class "mt-2 mb-5" ]
-            [ ul [ class "list-group" ]
-                (List.map (\dStep -> stepIndexView dStep.step model project dStep.label) displaySteps)
+        [ div [ class "mt-0 mb-5" ]
+            [ ul [ class "list-group", style [ ( "margin-right", "-15px" ), ( "margin-left", "-15px" ) ] ]
+                (li [ class "list-group-item" ] [ projectHeader project ]
+                    :: (List.map (\dStep -> stepIndexView dStep.step model project dStep.label) displaySteps)
+                )
             ]
         ]
 
@@ -203,7 +204,7 @@ stepNum num =
 
 stepView : Model -> Project -> String -> Int -> Route -> Html Msg -> Html Msg
 stepView model project title num route view =
-    div []
+    div [ class "mt-2" ]
         [ stepNum num
         , h1 [ class "h1-responsive mb-0" ]
             [ a
