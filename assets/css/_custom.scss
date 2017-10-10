@@ -3,6 +3,13 @@
 
 .default-color-text {
   color: $default-color;
+
+}
+
+.layout-col {
+  @include media-breakpoint-up(sm) {
+    border: 1px solid $gray-700;
+  }
 }
 
 .cp { cursor: pointer; }

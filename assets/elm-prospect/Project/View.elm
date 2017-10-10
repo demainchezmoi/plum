@@ -15,6 +15,18 @@ import Routing exposing (toPath, Route(..))
 import ViewHelpers exposing (..)
 
 
+inLayout : Html Msg -> Html Msg -> Html Msg
+inLayout nav elem =
+    div [ class "container mb-2" ]
+        [ div [ class "row justify-content-center" ]
+            [ div [ class "col col-md-10 col-lg-8 layout-col" ]
+                [ nav
+                , elem
+                ]
+            ]
+        ]
+
+
 projectNav : ProjectId -> Html Msg
 projectNav projectId =
     div [ class "" ]
@@ -59,8 +71,8 @@ projectPageView model =
 
 projectHeader : Project -> Html Msg
 projectHeader project =
-    div [ class "media light-bordered pr-3 pl-3 pb-2 pt-2" ]
-        [ img [ class "d-flex mr-3 img-thumbnail", src "https://s3-eu-west-1.amazonaws.com/demainchezmoi/cloudfront_assets/images/maison_21.png", style [ ( "width", "100px" ) ] ] []
+    div [ class "media light-bordered p-2" ]
+        [ img [ class "d-flex mr-2 img-thumbnail", src "https://s3-eu-west-1.amazonaws.com/demainchezmoi/cloudfront_assets/images/maison_21.png", style [ ( "width", "100px" ) ] ] []
         , div [ class "media-body" ]
             [ p [ class "mt-0 mb-0" ]
                 [ span [ class "font-bold" ] [ text "Mon espace" ]
@@ -126,18 +138,6 @@ displaySteps =
     , { step = Keys, view = keysView, label = "Réception" }
     , { step = AfterSales, view = afterSalesView, label = "Après-vente" }
     ]
-
-
-inLayout : Html Msg -> Html Msg -> Html Msg
-inLayout nav elem =
-    div [ class "container mb-2" ]
-        [ div [ class "row justify-content-center" ]
-            [ div [ class "col col-md-10 col-lg-8" ]
-                [ nav
-                , elem
-                ]
-            ]
-        ]
 
 
 checkedIcon : ProjectStepStatus -> Html Msg
