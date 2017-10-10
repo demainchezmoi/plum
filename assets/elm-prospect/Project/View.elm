@@ -549,6 +549,14 @@ phoneCallView model project title =
         nextButton =
             stepButton project PhoneCall (nextStepButton <| NavigateTo <| ProjectStepRoute project.id Quotation)
 
+        alert =
+            \phone_number ->
+                p [ class "alert alert-info" ]
+                    [ text "Nous allons vous appeler au numéro suivant : "
+                    , br [] []
+                    , span [ class "font-bold" ] [ text phone_number ]
+                    ]
+
         button =
             case ( project.phone_call, project.phone_number, project.phone_number == model.phoneNumber ) of
                 ( True, _, _ ) ->
@@ -559,12 +567,12 @@ phoneCallView model project title =
 
                 ( False, Just phone_number, False ) ->
                     div []
-                        [ p [ class "alert alert-info" ] [ "Nous allons vous appeler au numéro suivant : " ++ phone_number |> text ]
+                        [ alert phone_number
                         , customButton "Changer" (SubmitPhoneNumber project.id)
                         ]
 
                 ( False, Just phone_number, True ) ->
-                    div [] [ p [ class "alert alert-info" ] [ "Nous allons vous appeler au numéro suivant : " ++ phone_number |> text ] ]
+                    alert phone_number
 
         view =
             div []
