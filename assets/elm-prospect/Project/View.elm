@@ -281,7 +281,7 @@ welcomeView model project title =
                     [ div [ class "card-body" ]
                         [ p [ class "card-title" ]
                             [ i [ class "fa fa-home mr-2" ] []
-                            , text "Gérez votre construction en un seul endroit."
+                            , text "Gérez votre projet de construction en un seul endroit."
                             ]
                         , div [ class "card-text" ] [ text text2 ]
                         ]
@@ -289,7 +289,7 @@ welcomeView model project title =
                     , div [ class "card-body" ]
                         [ p [ class "card-title" ]
                             [ i [ class "fa fa-rocket mr-2" ] []
-                            , text "Passez les étapes jusqu'à la réception votre maison."
+                            , text "Passez les étapes une à une jusqu'à la réception vos clés."
                             ]
                         , div [ class "card-text" ] [ text text3 ]
                         ]
