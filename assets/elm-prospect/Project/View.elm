@@ -72,7 +72,7 @@ projectPageView model =
 projectHeader : Project -> Html Msg
 projectHeader project =
     div [ class "media light-bordered p-2" ]
-        [ img [ class "d-flex mr-2 img-thumbnail", src "https://s3-eu-west-1.amazonaws.com/demainchezmoi/cloudfront_assets/images/maison_21.png", style [ ( "width", "100px" ) ] ] []
+        [ img [ class "d-flex mr-2 img-thumbnail", src "https://s3-eu-west-1.amazonaws.com/demainchezmoi/cloudfront_assets/images/maison_21.png", style [ ( "width", "100px" ), ( "height", "56.25px" ) ] ] []
         , div [ class "media-body" ]
             [ p [ class "mt-0 mb-0" ]
                 [ span [ class "font-bold" ] [ text "Mon espace" ]
@@ -333,14 +333,14 @@ discoverHouseView model project title =
             div []
                 [ stepInfo "Découvrez la maison Léo."
                 , div [ class "card mt-2" ]
-                    [ cardPhoto "maison-min.png"
+                    [ div [ class "plum-image-holder" ] [ img [ src <| photoSrc <| "maison-min.png" ] [] ]
                     , div [ class "card-body" ]
                         [ p [ class "card-title" ] [ text "Le T4 familial par excellence." ]
                         , div [ class "card-text" ] [ text description1 ]
                         ]
                     ]
                 , div [ class "card mt-2" ]
-                    [ cardPhoto "maison_21_nuit.jpg"
+                    [ div [ class "plum-image-holder" ] [ img [ src <| photoSrc <| "maison_21_nuit.jpg" ] [] ]
                     , div [ class "card-body" ]
                         [ p [ class "card-title" ] [ text "Un gage de qualité." ]
                         , div [ class "card-text" ] [ text description2 ]
@@ -357,7 +357,7 @@ configureHouseView : Model -> Project -> String -> Html Msg
 configureHouseView model project title =
     let
         photo0 =
-            img [ src (photoSrc "Maison-leo-configurateur-0.png"), class "img-fluid d-block position-relative" ] []
+            img [ src (photoSrc "Maison-leo-configurateur-0.png") ] []
 
         color1 =
             "Maison-leo-configurateur-1.png"
@@ -391,7 +391,7 @@ configureHouseView model project title =
             div []
                 [ stepInfo "Faites-vous plaisir : choisissez les enduits de votre maison Léo, en une ou deux couleurs."
                 , div [ class "card mt-2" ]
-                    [ div [ class "position-relative" ] [ photo0, photo1, photo2 ]
+                    [ div [ class "plum-image-holder" ] [ photo0, photo1, photo2 ]
                     , div [ class "card-body" ]
                         [ p [ class "card-title" ] [ text "Choisissez vos couleurs." ]
                         , div [ class "row card-text" ]
