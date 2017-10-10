@@ -1,6 +1,3 @@
-<% house_price = 68_000 %>
-<% adaptation_price = 15_000 %>
-
 <section>
   <div class="container">
     <div class="row justify-content-center">
@@ -18,7 +15,7 @@
             </h3>
 
             <h1 class="text-center responsive-h1 font-thin mt-1 mb-0">
-              <span class=""><%= raw Number.Currency.number_to_currency(@ad.land.price + house_price + adaptation_price) %></span>
+              <span class=""><%= raw Number.Currency.number_to_currency(@ad.land.price + @ad.house_price + @ad.land_adaptation_price) %></span>
             </h1>
           </div>
 
@@ -30,7 +27,7 @@
               Maison T4 - 80m<sup>2</sup>
             </div>
             <div class="col-auto text-right">
-              <%= raw Number.Currency.number_to_currency(house_price) %>
+              <%= raw Number.Currency.number_to_currency(@ad.house_price) %>
             </div>
           </div>
 
@@ -48,7 +45,7 @@
               Adaptation au sol
             </div>
             <div class="col-auto text-right">
-              ~ <%= raw Number.Currency.number_to_currency(adaptation_price) %>
+              ~ <%= raw Number.Currency.number_to_currency(@ad.land_adaptation_price) %>
             </div>
           </div>
           </div>

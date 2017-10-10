@@ -6,7 +6,13 @@ defmodule PlumWeb.Api.AdView do
   }
   import PlumWeb.ViewHelpers
 
-  @attributes ~w(id active land)a
+  @attributes ~w(
+    id
+    active
+    land
+    house_price
+    land_adaptation_price
+  )a
 
   def render("index.json", %{ads: ads}) do
     %{data: render_many(ads, AdView, "ad.json")}
