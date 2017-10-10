@@ -554,6 +554,7 @@ phoneCallView model project title =
                 p [ class "alert alert-info" ]
                     [ text "Nous allons vous appeler au numéro suivant : "
                     , br [] []
+                    , i [ class "fa fa-phone-square mr-1" ] []
                     , span [ class "font-bold" ] [ text phone_number ]
                     ]
 
