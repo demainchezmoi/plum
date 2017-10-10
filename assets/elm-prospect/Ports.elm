@@ -4,4 +4,7 @@ import Land.Model exposing (Coordinates)
 import Messages exposing (..)
 
 
-port gmap : String -> Cmd msg
+port landMap : Coordinates -> Cmd msg
+
+
+port removeLandMap : () -> Cmd msg

@@ -299,10 +299,10 @@ discoverLandView model project title =
 
         view =
             div []
-                [ div [ id "map", style [ ( "height", "200px" ) ], class "img-flex" ] []
-                , stepInfo "Découvrez le terrain sur lequel nous vous proposons de construire une Maison Léo."
+                [ stepInfo "Découvrez le terrain sur lequel nous vous proposons de construire une Maison Léo."
                 , div [ class "card mt-2" ]
-                    [ div [ class "card-body" ]
+                    [ div [ id "map", style [ ( "height", "200px" ) ], class "img-flex" ] []
+                    , div [ class "card-body" ]
                         [ p [ class "card-title" ] [ "Terrain à " ++ (project.ad.land |> landLocation) |> text ]
                         , div [ class "card-text" ] [ text project.ad.land.description ]
                         ]

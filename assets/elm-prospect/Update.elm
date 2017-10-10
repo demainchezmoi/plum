@@ -10,7 +10,7 @@ import RemoteData exposing (..)
 import Routing exposing (Route(..), parse, toPath)
 import Project.Model exposing (..)
 import Json.Encode as Encode
-import Ports exposing (gmap)
+import Ports exposing (landMap, removeLandMap)
 
 
 update : Msg -> Model -> ( Model, Cmd Msg )
@@ -33,7 +33,7 @@ update msg model =
                             coordinates =
                                 coordinatesFromLand project.ad.land
                         in
-                            newModel ! [ gmap (toString coordinates) ]
+                            newModel ! [ landMap coordinates ]
 
                     _ ->
                         newModel ! []
@@ -49,7 +49,7 @@ update msg model =
                 urlUpdate { model | route = currentRoute }
 
         NavigateTo route ->
-            model ! [ Navigation.newUrl <| toPath route ]
+            model ! [ removeLandMap (), Navigation.newUrl <| toPath route ]
 
         SetHouseColor1 color ->
             { model | houseColor1 = Just color } ! []
