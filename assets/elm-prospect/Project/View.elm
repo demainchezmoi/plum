@@ -259,6 +259,11 @@ stepButton project step button =
             text ""
 
 
+landImage : String -> Html Msg
+landImage source =
+    img [ class "d-block p-2 img-thumbnail mt-3 img-fluid", src source ] []
+
+
 welcomeView : Model -> Project -> String -> Html Msg
 welcomeView model project title =
     let

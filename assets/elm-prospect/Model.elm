@@ -1,11 +1,10 @@
 module Model exposing (..)
 
-import Maps
-import Messages exposing (Msg)
-import Project.Model exposing (Project, ProjectId)
-import RemoteData exposing (..)
 import Routing exposing (Route)
-import Window
+import RemoteData exposing (..)
+import Project.Model exposing (Project, ProjectId)
+import Messages exposing (Msg)
+import Maps
 
 
 type alias ApiToken =
@@ -33,7 +32,6 @@ type SlideAnimation
 
 type alias Model =
     { project : WebData Project
-    , windowSize : Window.Size
     , landMap : Maps.Model Msg
     , error : Maybe String
     , apiToken : ApiToken
@@ -49,7 +47,6 @@ type alias Model =
 initialModel : ApiToken -> Route -> Model
 initialModel apiToken route =
     { project = Loading
-    , windowSize = Window.Size 500 500
     , landMap = Maps.defaultModel
     , error = Nothing
     , apiToken = apiToken
