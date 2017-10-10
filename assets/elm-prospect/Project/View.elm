@@ -227,6 +227,15 @@ nextStepButton action =
         ]
 
 
+customButton : String -> Msg -> Html Msg
+customButton label action =
+    div [ class "clearfix" ]
+        [ button
+            [ class "btn btn-default pull-right mr-0 mt-2", onClick action ]
+            [ text label ]
+        ]
+
+
 stepButton : Project -> ProjectStep -> Html Msg -> Html Msg
 stepButton project step button =
     case stepState project step of
@@ -396,7 +405,7 @@ configureHouseView model project title =
                         [ p [ class "card-title" ] [ text "Choisissez vos couleurs." ]
                         , div [ class "row card-text" ]
                             [ div [ class "col-6" ]
-                                [ p [ class "font-bold" ] [ text "Choix 1" ]
+                                [ p [ class "font-bold" ] [ text "Couleur 2" ]
                                 , div [ class "form-check" ]
                                     [ label [ class "form-check-label" ]
                                         [ input
@@ -429,7 +438,7 @@ configureHouseView model project title =
                                     ]
                                 ]
                             , div [ class "col-6" ]
-                                [ p [ class "font-bold" ] [ text "Choix 2" ]
+                                [ p [ class "font-bold" ] [ text "Couleur 1" ]
                                 , div [ class "form-check" ]
                                     [ label [ class "form-check-label" ]
                                         [ input
@@ -537,6 +546,26 @@ phoneCallView model project title =
                 Nothing ->
                     ""
 
+        nextButton =
+            stepButton project PhoneCall (nextStepButton <| NavigateTo <| ProjectStepRoute project.id Quotation)
+
+        button =
+            case ( project.phone_call, project.phone_number, project.phone_number == model.phoneNumber ) of
+                ( True, _, _ ) ->
+                    nextButton
+
+                ( False, Nothing, _ ) ->
+                    customButton "Valider" (SubmitPhoneNumber project.id)
+
+                ( False, Just phone_number, False ) ->
+                    div []
+                        [ p [ class "alert alert-info" ] [ "Nous allons vous appeler au numéro suivant : " ++ phone_number |> text ]
+                        , customButton "Changer" (SubmitPhoneNumber project.id)
+                        ]
+
+                ( False, Just phone_number, True ) ->
+                    div [] [ p [ class "alert alert-info" ] [ "Nous allons vous appeler au numéro suivant : " ++ phone_number |> text ] ]
+
         view =
             div []
                 [ stepInfo "Nous vous proposons un accompagment personnalisé. Renseignez votre numéro de téléphone et nous vous contacterons dès que possible."
@@ -552,7 +581,7 @@ phoneCallView model project title =
                         ]
                         []
                     ]
-                , stepButton project PhoneCall (SubmitPhoneNumber project.id |> nextStepButton)
+                , button
                 ]
     in
         stepView model project title 6 (ProjectStepRoute project.id EvaluateFunding) view
