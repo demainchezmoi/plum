@@ -5,18 +5,13 @@ import Ad.View as AdView
 import Html exposing (..)
 import Html.Attributes exposing (class, src, type_, name, value, id, checked, for, placeholder, style)
 import Html.Events exposing (onClick, onInput)
-import Json.Encode
-import Land.Model exposing (Land)
-import Maps
-import Maps.Geo
-import Maps.Map as Map
-import Maps.Marker as Marker
 import Messages exposing (..)
 import Model exposing (..)
 import Project.Model exposing (..)
-import RemoteData exposing (..)
 import Routing exposing (toPath, Route(..))
 import ViewHelpers exposing (..)
+import RemoteData exposing (..)
+import Json.Encode
 
 
 projectNav : ProjectId -> Html Msg

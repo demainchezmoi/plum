@@ -6,7 +6,6 @@ import Routing exposing (Route)
 import RemoteData exposing (..)
 import Project.Model exposing (Project, ProjectId)
 import Json.Encode exposing (Value)
-import Maps
 
 
 type Msg
@@ -29,4 +28,3 @@ type Msg
     | ValidateEvaluateFundingResponse (WebData Project)
     | SubmitPhoneNumber ProjectId
     | SubmitPhoneNumberResponse (WebData Project)
-    | MapsMsg (Maps.Msg Msg)

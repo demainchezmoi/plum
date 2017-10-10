@@ -1,29 +1,19 @@
 module Update exposing (..)
 
-import Commands exposing (getMaybeValue)
-import Json.Encode as Encode
-import Maps
-import Maps.Geo
-import Maps.Map as Map
-import Maps.Marker as Marker
 import Messages exposing (..)
 import Model exposing (..)
 import Navigation
 import Project.Commands exposing (getProject, updateProject, updateProjectWithCallback)
-import Project.Model exposing (..)
+import Commands exposing (getMaybeValue)
 import RemoteData exposing (..)
 import Routing exposing (Route(..), parse, toPath)
+import Project.Model exposing (..)
+import Json.Encode as Encode
 
 
 update : Msg -> Model -> ( Model, Cmd Msg )
 update msg model =
     case msg of
-        MapsMsg msg ->
-            model.landMap
-                |> Maps.update msg
-                |> Tuple.mapFirst (\map -> { model | landMap = map })
-                |> Tuple.mapSecond (Cmd.map MapsMsg)
-
         ProjectResponse response ->
             setProject model response ! []
 
@@ -205,22 +195,12 @@ setProject : Model -> WebData Project -> Model
 setProject model response =
     case response of
         Success project ->
-            let
-                latLng =
-                    Maps.Geo.latLng project.ad.land.lat project.ad.land.lng
-
-                landMap =
-                    Maps.defaultModel
-                        |> Maps.updateMap (Map.setZoom 14 >> Map.moveTo latLng)
-                        |> Maps.updateMarkers (\_ -> [ Marker.create latLng ])
-            in
-                { model
-                    | project = response
-                    , landMap = landMap
-                    , netIncome = project.net_income
-                    , contribution = Just project.contribution
-                    , phoneNumber = project.phone_number
-                }
+            { model
+                | project = response
+                , netIncome = project.net_income
+                , contribution = Just project.contribution
+                , phoneNumber = project.phone_number
+            }
 
         _ ->
             { model | project = response }
