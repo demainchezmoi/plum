@@ -5,13 +5,14 @@ import Ad.View as AdView
 import Html exposing (..)
 import Html.Attributes exposing (class, src, type_, name, value, id, checked, for, placeholder, style)
 import Html.Events exposing (onClick, onInput)
+import Json.Encode
+import Land.Model exposing (Land)
 import Messages exposing (..)
 import Model exposing (..)
 import Project.Model exposing (..)
+import RemoteData exposing (..)
 import Routing exposing (toPath, Route(..))
 import ViewHelpers exposing (..)
-import RemoteData exposing (..)
-import Json.Encode
 
 
 projectNav : ProjectId -> Html Msg
@@ -217,21 +218,6 @@ stepView model project title num route view =
         ]
 
 
-landImage : String -> Html Msg
-landImage source =
-    img [ class "d-block p-2 img-thumbnail mt-2 img-fluid w-100", src source ] []
-
-
-projectLandImages : Project -> List (Html Msg)
-projectLandImages project =
-    List.map landImage project.ad.land.images
-
-
-landMap : Model -> Html Msg
-landMap model =
-    div [ class "img-fluid map" ] [ Maps.view model.landMap |> Maps.mapView MapsMsg ]
-
-
 nextStepButton : Msg -> Html Msg
 nextStepButton action =
     div [ class "clearfix" ]
@@ -252,11 +238,6 @@ stepButton project step button =
 
         NotYet ->
             text ""
-
-
-landImage : String -> Html Msg
-landImage source =
-    img [ class "d-block p-2 img-thumbnail mt-3 img-fluid", src source ] []
 
 
 welcomeView : Model -> Project -> String -> Html Msg
@@ -318,10 +299,10 @@ discoverLandView model project title =
 
         view =
             div []
-                [ stepInfo "Découvrez le terrain sur lequel nous vous proposons de construire une Maison Léo."
+                [ div [ id "map", class "img-flex" ] []
+                , stepInfo "Découvrez le terrain sur lequel nous vous proposons de construire une Maison Léo."
                 , div [ class "card mt-2" ]
-                    [ landMap model
-                    , div [ class "card-body" ]
+                    [ div [ class "card-body" ]
                         [ p [ class "card-title" ] [ "Terrain à " ++ (project.ad.land |> landLocation) |> text ]
                         , div [ class "card-text" ] [ text project.ad.land.description ]
                         ]
