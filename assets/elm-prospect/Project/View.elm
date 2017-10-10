@@ -249,7 +249,7 @@ welcomeView model project title =
             div []
                 [ stepInfo text1
                 , div [ class "light-bordered p-3" ]
-                    [ p [ class "font-bold mb-0" ] [ text "Gérez votre candidature en un seul endroit" ]
+                    [ p [ class "font-bold mb-0" ] [ text "Gérez votre construction en un seul endroit" ]
                     , p [] [ text text2 ]
                     , p [ class "font-bold mb-0" ] [ text "Passez les étapes et faites construire votre maison" ]
                     , p [] [ text text3 ]
