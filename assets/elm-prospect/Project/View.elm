@@ -23,25 +23,25 @@ projectPageView : Model -> Html Msg
 projectPageView model =
     case model.project of
         Failure err ->
-            failureView err |> inLayout
+            inLayout genericNav (failureView err)
 
         NotAsked ->
-            notAskedView |> inLayout
+            inLayout genericNav notAskedView
 
         Loading ->
-            loadingView |> inLayout
+            inLayout genericNav loadingView
 
         Success project ->
-            projectView model project |> inLayout
+            inLayout (projectNav project.id) (projectView model project)
 
 
 projectHeader : Project -> Html Msg
 projectHeader project =
-    div [ class "media light-bordered p-3" ]
+    div [ class "media light-bordered pr-3 pl-3 pb-2 pt-2" ]
         [ img [ class "d-flex mr-3 img-thumbnail", src "https://s3-eu-west-1.amazonaws.com/demainchezmoi/cloudfront_assets/images/maison_21.png", style [ ( "width", "100px" ) ] ] []
         , div [ class "media-body" ]
-            [ h5 [ class "mt-0 h5-responsive" ]
-                [ text "Mon espace"
+            [ p [ class "mt-0 mb-0" ]
+                [ span [ class "font-bold" ] [ text "Mon espace" ]
                 ]
             , AdView.shortView project.ad
             ]
@@ -63,21 +63,21 @@ projectStepPageView : ProjectStep -> Model -> Html Msg
 projectStepPageView projectStep model =
     case model.project of
         Failure err ->
-            failureView err |> inLayout
+            inLayout genericNav (failureView err)
 
         NotAsked ->
-            notAskedView |> inLayout
+            inLayout genericNav notAskedView
 
         Loading ->
-            loadingView |> inLayout
+            inLayout genericNav loadingView
 
         Success project ->
             case List.filter (\dStep -> dStep.step == projectStep) displaySteps of
                 dStep :: _ ->
-                    dStep.view model project dStep.label |> inLayout
+                    inLayout (projectNav project.id) (dStep.view model project dStep.label)
 
                 _ ->
-                    text "Erreur" |> inLayout
+                    inLayout genericNav (text "Erreur")
 
 
 type alias DisplayStep =
@@ -106,6 +106,44 @@ displaySteps =
     ]
 
 
+projectNav : ProjectId -> Html Msg
+projectNav projectId =
+    div [ class "container" ]
+        [ h5 [ class "ml-header row justify-content-between" ]
+            [ div [ class "col" ]
+                [ i [ class "fa fa-home" ] []
+                , text " Maisons Léo"
+                ]
+            , div [ class "col-auto" ]
+                [ i [ class "fa fa-bars cp", onClick (NavigateTo (ProjectRoute projectId)) ] []
+                ]
+            ]
+        ]
+
+
+genericNav : Html Msg
+genericNav =
+    h5 [ class "ml-header row justify-content-between" ]
+        [ div [ class "col" ]
+            [ i [ class "fa fa-home" ] []
+            , text " Maisons Léo"
+            ]
+        , div [ class "col-auto" ] []
+        ]
+
+
+inLayout : Html Msg -> Html Msg -> Html Msg
+inLayout nav elem =
+    div [ class "container mb-5" ]
+        [ div [ class "row justify-content-center" ]
+            [ div [ class "col col-md-10 col-lg-8" ]
+                [ nav
+                , elem
+                ]
+            ]
+        ]
+
+
 checkedIcon : ProjectStepStatus -> Html Msg
 checkedIcon state =
     let
@@ -113,7 +151,7 @@ checkedIcon state =
             i [ class "fa fa-check fa-lg mr-2 default-color-text" ] []
 
         currentIcon =
-            i [ class "fa fa-hand-o-right fa-lg mr-2 " ] []
+            i [ class "fa fa-hand-o-right fa-lg mr-2 default-color-text" ] []
 
         notYetIcon =
             i [ class "fa fa-check fa-lg mr-2 text-white" ] []
@@ -132,16 +170,13 @@ checkedIcon state =
 stepIndexView : ProjectStep -> Model -> Project -> String -> Html Msg
 stepIndexView projectStep model project label =
     let
-        activeAttr =
-            [ onClick (NavigateTo (ProjectStepRoute project.id projectStep)), class "list-group-item cp gray-hover" ]
-
         liAttr =
             case stepState project projectStep of
                 Checked ->
-                    activeAttr
+                    [ onClick (NavigateTo (ProjectStepRoute project.id projectStep)), class "list-group-item cp gray-hover" ]
 
                 Current ->
-                    activeAttr
+                    [ onClick (NavigateTo (ProjectStepRoute project.id projectStep)), class "list-group-item cp font-bold" ]
 
                 NotYet ->
                     [ class "list-group-item disabled" ]
@@ -170,14 +205,14 @@ stepNum num =
     div [ class "text-secondary small mb-2" ] [ text <| "Étape " ++ (toString num) ++ "/14" ]
 
 
-stepView : Model -> Project -> String -> Int -> Html Msg -> Html Msg
-stepView model project title num view =
+stepView : Model -> Project -> String -> Int -> Route -> Html Msg -> Html Msg
+stepView model project title num route view =
     div []
         [ stepNum num
-        , h1 [ class "h1-responsive" ]
+        , h1 [ class "h1-responsive mb-0" ]
             [ a
-                [ class "btn btn-sm btn-yellow-flash"
-                , onClick (NavigateTo (ProjectRoute project.id))
+                [ class "btn btn-sm btn-yellow-flash pr-3 pl-3"
+                , onClick (NavigateTo route)
                 ]
                 [ i [ class "fa fa-chevron-left" ] []
                 ]
@@ -240,7 +275,7 @@ welcomeView model project title =
                 ++ "."
 
         text3 =
-            "Passez les étapes pour découvrir le terrain, la maison, choisir vos couleurs, jusqu'au suivi de la construction et l'obtention de vos clés et même le service après-vente."
+            "Passez les étapes pour découvrir le terrain, la maison, choisir vos couleurs, jusqu'au suivi de la construction et l'obtention de vos clés."
 
         button =
             (NavigateTo (ProjectStepRoute project.id DiscoverLand)) |> nextStepButton
@@ -248,17 +283,23 @@ welcomeView model project title =
         view =
             div []
                 [ stepInfo text1
-                , div [ class "light-bordered p-3" ]
-                    [ p [ class "font-bold mb-0" ] [ text "Gérez votre construction en un seul endroit" ]
+                , div [ class "pr-2 pl-2" ]
+                    [ p [ class "font-bold mb-1" ]
+                        [ i [ class "fa fa-home mr-2" ] []
+                        , text "Gérez votre construction en un seul endroit."
+                        ]
                     , p [] [ text text2 ]
-                    , p [ class "font-bold mb-0" ] [ text "Passez les étapes et faites construire votre maison" ]
+                    , p [ class "font-bold mb-1" ]
+                        [ i [ class "fa fa-rocket mr-2" ] []
+                        , text "Passez les étapes jusqu'à faire construire votre maison."
+                        ]
                     , p [] [ text text3 ]
                     ]
                 , nextStepInfo "Découvrir le terrain"
                 , button
                 ]
     in
-        stepView model project title 1 view
+        stepView model project title 1 (ProjectRoute project.id) view
 
 
 discoverLandView : Model -> Project -> String -> Html Msg
@@ -282,7 +323,7 @@ discoverLandView model project title =
                        ]
                 )
     in
-        stepView model project title 2 view
+        stepView model project title 2 (ProjectStepRoute project.id Welcome) view
 
 
 discoverHouseView : Model -> Project -> String -> Html Msg
@@ -302,16 +343,22 @@ discoverHouseView model project title =
 
         view =
             div []
-                [ stepInfo "Découvrez la maison Léo, le T4 familial par excellence."
-                , div [ class "light-bordered p-3 mt-2" ] [ text description1 ]
+                [ stepInfo "Découvrez la maison Léo.."
+                , div [ class "light-bordered p-3 mt-2" ]
+                    [ p [ class "font-bold mb-0" ] [ text "Le T4 familial par excellence." ]
+                    , text description1
+                    ]
                 , photo "maison-min.png"
-                , div [ class "light-bordered p-3 mt-2" ] [ text description2 ]
+                , div [ class "light-bordered p-3 mt-2" ]
+                    [ p [ class "font-bold mb-0" ] [ text "La maison Léo mise sur la qualité." ]
+                    , text description2
+                    ]
                 , photo "maison_21_nuit.jpg"
                 , nextStepInfo "Choisir mes couleurs"
                 , stepButton project DiscoverHouse button
                 ]
     in
-        stepView model project title 3 view
+        stepView model project title 3 (ProjectStepRoute project.id DiscoverLand) view
 
 
 configureHouseView : Model -> Project -> String -> Html Msg
@@ -424,7 +471,7 @@ configureHouseView model project title =
                 , stepButton project ConfigureHouse (ValidateConfigureHouse project.id |> nextStepButton)
                 ]
     in
-        stepView model project title 4 view
+        stepView model project title 4 (ProjectStepRoute project.id DiscoverHouse) view
 
 
 evaluateFundingView : Model -> Project -> String -> Html Msg
@@ -479,7 +526,7 @@ evaluateFundingView model project title =
                 , stepButton project EvaluateFunding (ValidateEvaluateFunding project.id |> nextStepButton)
                 ]
     in
-        stepView model project title 5 view
+        stepView model project title 5 (ProjectStepRoute project.id ConfigureHouse) view
 
 
 phoneCallView : Model -> Project -> String -> Html Msg
@@ -511,7 +558,7 @@ phoneCallView model project title =
                 , stepButton project PhoneCall (SubmitPhoneNumber project.id |> nextStepButton)
                 ]
     in
-        stepView model project title 6 view
+        stepView model project title 6 (ProjectStepRoute project.id EvaluateFunding) view
 
 
 quotationView : Model -> Project -> String -> Html Msg
@@ -520,7 +567,7 @@ quotationView model project title =
         view =
             div [] []
     in
-        stepView model project title 7 view
+        stepView model project title 7 (ProjectStepRoute project.id PhoneCall) view
 
 
 fundingView : Model -> Project -> String -> Html Msg
@@ -529,7 +576,7 @@ fundingView model project title =
         view =
             div [] []
     in
-        stepView model project title 8 view
+        stepView model project title 8 (ProjectStepRoute project.id Quotation) view
 
 
 visitLandView : Model -> Project -> String -> Html Msg
@@ -538,7 +585,7 @@ visitLandView model project title =
         view =
             div [] []
     in
-        stepView model project title 9 view
+        stepView model project title 9 (ProjectStepRoute project.id Funding) view
 
 
 contractView : Model -> Project -> String -> Html Msg
@@ -547,7 +594,7 @@ contractView model project title =
         view =
             div [] []
     in
-        stepView model project title 10 view
+        stepView model project title 10 (ProjectStepRoute project.id VisitLand) view
 
 
 permitView : Model -> Project -> String -> Html Msg
@@ -556,7 +603,7 @@ permitView model project title =
         view =
             div [] []
     in
-        stepView model project title 11 view
+        stepView model project title 11 (ProjectStepRoute project.id Contract) view
 
 
 buildingView : Model -> Project -> String -> Html Msg
@@ -565,7 +612,7 @@ buildingView model project title =
         view =
             div [] []
     in
-        stepView model project title 12 view
+        stepView model project title 12 (ProjectStepRoute project.id Permit) view
 
 
 keysView : Model -> Project -> String -> Html Msg
@@ -574,7 +621,7 @@ keysView model project title =
         view =
             div [] []
     in
-        stepView model project title 13 view
+        stepView model project title 13 (ProjectStepRoute project.id Building) view
 
 
 afterSalesView : Model -> Project -> String -> Html Msg
@@ -583,4 +630,4 @@ afterSalesView model project title =
         view =
             div [] []
     in
-        stepView model project title 14 view
+        stepView model project title 14 (ProjectStepRoute project.id Keys) view

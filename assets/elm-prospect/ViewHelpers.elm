@@ -2,6 +2,7 @@ module ViewHelpers exposing (..)
 
 import Html exposing (..)
 import Html.Attributes exposing (class, src)
+import Html.Events exposing (onClick)
 import Http exposing (Error(..))
 import Messages exposing (..)
 import RemoteData exposing (..)
@@ -11,26 +12,6 @@ import Model exposing (..)
 row : List (Html Msg) -> Html Msg
 row elements =
     div [ class "row" ] elements
-
-
-header : Html Msg
-header =
-    h5 [ class "ml-header" ]
-        [ i [ class "fa fa-home" ] []
-        , text " Maisons Léo"
-        ]
-
-
-inLayout : Html Msg -> Html Msg
-inLayout elem =
-    div [ class "container" ]
-        [ div [ class "row justify-content-center" ]
-            [ div [ class "col col-md-10 col-lg-8" ]
-                [ header
-                , elem
-                ]
-            ]
-        ]
 
 
 notFoundView : Html Msg
