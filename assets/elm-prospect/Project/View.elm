@@ -31,7 +31,7 @@ projectNav : ProjectId -> Html Msg
 projectNav projectId =
     div [ class "" ]
         [ h5 [ class "ml-header row justify-content-between" ]
-            [ div [ class "col" ]
+            [ div [ class "col font-black" ]
                 [ i [ class "fa fa-home" ] []
                 , text " Maisons Léo"
                 ]
@@ -136,7 +136,7 @@ displaySteps =
     , { step = Permit, view = permitView, label = "Permis de construire" }
     , { step = Building, view = buildingView, label = "Construction" }
     , { step = Keys, view = keysView, label = "Réception" }
-    , { step = AfterSales, view = afterSalesView, label = "Après-vente" }
+    , { step = AfterSales, view = afterSalesView, label = "Service après-vente" }
     ]
 
 
