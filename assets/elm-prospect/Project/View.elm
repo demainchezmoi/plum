@@ -234,7 +234,7 @@ projectLandImages project =
 
 landMap : Model -> Html Msg
 landMap model =
-    div [ class "light-bordered p-2 w-100 map mt-2" ] [ Maps.view model.landMap |> Maps.mapView MapsMsg ]
+    div [ class "img-fluid map" ] [ Maps.view model.landMap |> Maps.mapView MapsMsg ]
 
 
 nextStepButton : Msg -> Html Msg
@@ -266,13 +266,7 @@ welcomeView model project title =
             "Bienvenue dans votre espace Maisons Léo."
 
         text2 =
-            "Cet espace vous permet de gérer votre candidature pour l'annonce maison plus terrain à "
-                ++ project.ad.land.city
-                ++ " "
-                ++ "("
-                ++ project.ad.land.department
-                ++ ")"
-                ++ "."
+            "Cet espace vous permet de gérer votre candidature pour l'annonce maison plus terrain à " ++ (landLocation project.ad.land) ++ "."
 
         text3 =
             "Passez les étapes pour découvrir le terrain, la maison, choisir vos couleurs, jusqu'au suivi de la construction et l'obtention de vos clés."
@@ -283,23 +277,33 @@ welcomeView model project title =
         view =
             div []
                 [ stepInfo text1
-                , div [ class "pr-2 pl-2" ]
-                    [ p [ class "font-bold mb-1" ]
-                        [ i [ class "fa fa-home mr-2" ] []
-                        , text "Gérez votre construction en un seul endroit."
+                , div [ class "card mt-2" ]
+                    [ div [ class "card-body" ]
+                        [ p [ class "card-title" ]
+                            [ i [ class "fa fa-home mr-2" ] []
+                            , text "Gérez votre construction en un seul endroit."
+                            ]
+                        , div [ class "card-text" ] [ text text2 ]
                         ]
-                    , p [] [ text text2 ]
-                    , p [ class "font-bold mb-1" ]
-                        [ i [ class "fa fa-rocket mr-2" ] []
-                        , text "Passez les étapes jusqu'à faire construire votre maison."
+                    , hr [ class "mt-1 mb-1" ] []
+                    , div [ class "card-body" ]
+                        [ p [ class "card-title" ]
+                            [ i [ class "fa fa-rocket mr-2" ] []
+                            , text "Passez les étapes jusqu'à la réception votre maison."
+                            ]
+                        , div [ class "card-text" ] [ text text3 ]
                         ]
-                    , p [] [ text text3 ]
                     ]
                 , nextStepInfo "Découvrir le terrain"
                 , button
                 ]
     in
         stepView model project title 1 (ProjectRoute project.id) view
+
+
+landLocation : Land -> String
+landLocation land =
+    String.join "" [ land.city, " ", "(", land.department, ")" ]
 
 
 discoverLandView : Model -> Project -> String -> Html Msg
@@ -314,14 +318,17 @@ discoverLandView model project title =
 
         view =
             div []
-                ([ stepInfo "Découvrez le terrain et ses environs." ]
-                    -- ++ (projectLandImages project)
-                    ++ [ landMap model ]
-                    ++ [ p [ class "mt-2 p-3 light-bordered" ] [ text project.ad.land.description ]
-                       , nextStepInfo "Découvrir la maison"
-                       , stepButton project DiscoverLand button
-                       ]
-                )
+                [ stepInfo "Découvrez le terrain et ses environs."
+                , div [ class "card mt-2" ]
+                    [ landMap model
+                    , div [ class "card-body" ]
+                        [ p [ class "card-title" ] [ project.ad.land |> landLocation |> text ]
+                        , div [ class "card-text" ] [ text project.ad.land.description ]
+                        ]
+                    ]
+                , nextStepInfo "Découvrir la maison"
+                , stepButton project DiscoverLand button
+                ]
     in
         stepView model project title 2 (ProjectStepRoute project.id Welcome) view
 
@@ -344,16 +351,20 @@ discoverHouseView model project title =
         view =
             div []
                 [ stepInfo "Découvrez la maison Léo.."
-                , div [ class "light-bordered p-3 mt-2" ]
-                    [ p [ class "font-bold mb-0" ] [ text "Le T4 familial par excellence." ]
-                    , text description1
+                , div [ class "card mt-2" ]
+                    [ cardPhoto "maison-min.png"
+                    , div [ class "card-body" ]
+                        [ p [ class "card-title" ] [ text "Le T4 familial par excellence." ]
+                        , div [ class "card-text" ] [ text description1 ]
+                        ]
                     ]
-                , photo "maison-min.png"
-                , div [ class "light-bordered p-3 mt-2" ]
-                    [ p [ class "font-bold mb-0" ] [ text "La maison Léo mise sur la qualité." ]
-                    , text description2
+                , div [ class "card mt-2" ]
+                    [ cardPhoto "maison_21_nuit.jpg"
+                    , div [ class "card-body" ]
+                        [ p [ class "card-title" ] [ text "Un gage de qualité." ]
+                        , div [ class "card-text" ] [ text description2 ]
+                        ]
                     ]
-                , photo "maison_21_nuit.jpg"
                 , nextStepInfo "Choisir mes couleurs"
                 , stepButton project DiscoverHouse button
                 ]
@@ -364,6 +375,9 @@ discoverHouseView model project title =
 configureHouseView : Model -> Project -> String -> Html Msg
 configureHouseView model project title =
     let
+        photo0 =
+            img [ src (photoSrc "Maison-leo-configurateur-0.png"), class "img-fluid d-block position-relative" ] []
+
         color1 =
             "Maison-leo-configurateur-1.png"
 
@@ -373,95 +387,97 @@ configureHouseView model project title =
         ( photo1, checked11, checked12 ) =
             case ( model.houseColor1, project.house_color_1 ) of
                 ( Just house_color_1, _ ) ->
-                    ( [ photoClass house_color_1 "photo-stack" ], house_color_1 == color1, house_color_1 == color2 )
+                    ( img [ class "photo-stack img-fluid", src <| photoSrc <| house_color_1 ] [], house_color_1 == color1, house_color_1 == color2 )
 
                 ( Nothing, Just house_color_1 ) ->
-                    ( [ photoClass house_color_1 "photo-stack" ], house_color_1 == color1, house_color_1 == color2 )
+                    ( img [ class "photo-stack img-fluid", src <| photoSrc <| house_color_1 ] [], house_color_1 == color1, house_color_1 == color2 )
 
                 _ ->
-                    ( [], False, False )
+                    ( span [] [], False, False )
 
         ( photo2, checked21, checked22 ) =
             case ( model.houseColor2, project.house_color_2 ) of
                 ( Just house_color_2, _ ) ->
-                    ( [ photoClass house_color_2 "photo-stack" ], house_color_2 == color1, house_color_2 == color2 )
+                    ( img [ class "photo-stack img-fluid", src <| photoSrc <| house_color_2 ] [], house_color_2 == color1, house_color_2 == color2 )
 
                 ( Nothing, Just house_color_2 ) ->
-                    ( [ photoClass house_color_2 "photo-stack" ], house_color_2 == color1, house_color_2 == color2 )
+                    ( img [ class "photo-stack img-fluid", src <| photoSrc <| house_color_2 ] [], house_color_2 == color1, house_color_2 == color2 )
 
                 _ ->
-                    ( [], False, False )
+                    ( span [] [], False, False )
 
         view =
             div []
                 [ stepInfo "Faites-vous plaisir : choisissez les enduits de votre maison Léo, en une ou deux couleurs."
-                , div [ class "position-relative" ]
-                    ([ photo "Maison-leo-configurateur-0-min.png" ] ++ photo1 ++ photo2)
-                , div [ class "light-bordered p-3 mt-2" ]
-                    [ row
-                        [ div [ class "col-6" ]
-                            [ p [ class "font-bold" ] [ text "Choix 1" ]
-                            , div [ class "form-check" ]
-                                [ label [ class "form-check-label" ]
-                                    [ input
-                                        [ type_ "radio"
-                                        , name "house-color-1"
-                                        , value color1
-                                        , id "house-color-11"
-                                        , class "form-check-input"
-                                        , checked checked11
-                                        , onClick (SetHouseColor1 color1)
+                , div [ class "card mt-2" ]
+                    [ div [ class "position-relative" ] [ photo0, photo1, photo2 ]
+                    , div [ class "card-body" ]
+                        [ p [ class "card-title" ] [ text "Choisissez vos couleurs." ]
+                        , div [ class "row card-text" ]
+                            [ div [ class "col-6" ]
+                                [ p [ class "font-bold" ] [ text "Choix 1" ]
+                                , div [ class "form-check" ]
+                                    [ label [ class "form-check-label" ]
+                                        [ input
+                                            [ type_ "radio"
+                                            , name "house-color-1"
+                                            , value color1
+                                            , id "house-color-11"
+                                            , class "form-check-input"
+                                            , checked checked11
+                                            , onClick (SetHouseColor1 color1)
+                                            ]
+                                            []
+                                        , text "couleur-1"
                                         ]
-                                        []
-                                    , text "couleur-1"
+                                    ]
+                                , div [ class "form-check" ]
+                                    [ label [ class "form-check-label" ]
+                                        [ input
+                                            [ type_ "radio"
+                                            , name "house-color-1"
+                                            , value color2
+                                            , id "house-color-12"
+                                            , class "form-check-input"
+                                            , checked checked12
+                                            , onClick (SetHouseColor1 color2)
+                                            ]
+                                            []
+                                        , text "couleur-2"
+                                        ]
                                     ]
                                 ]
-                            , div [ class "form-check" ]
-                                [ label [ class "form-check-label" ]
-                                    [ input
-                                        [ type_ "radio"
-                                        , name "house-color-1"
-                                        , value color2
-                                        , id "house-color-12"
-                                        , class "form-check-input"
-                                        , checked checked12
-                                        , onClick (SetHouseColor1 color2)
+                            , div [ class "col-6" ]
+                                [ p [ class "font-bold" ] [ text "Choix 2" ]
+                                , div [ class "form-check" ]
+                                    [ label [ class "form-check-label" ]
+                                        [ input
+                                            [ type_ "radio"
+                                            , name "house-color-2"
+                                            , value color1
+                                            , id "house-color-21"
+                                            , class "form-check-input"
+                                            , checked checked21
+                                            , onClick (SetHouseColor2 color1)
+                                            ]
+                                            []
+                                        , text "couleur-1"
                                         ]
-                                        []
-                                    , text "couleur-2"
                                     ]
-                                ]
-                            ]
-                        , div [ class "col-6" ]
-                            [ p [ class "font-bold" ] [ text "Choix 2" ]
-                            , div [ class "form-check" ]
-                                [ label [ class "form-check-label" ]
-                                    [ input
-                                        [ type_ "radio"
-                                        , name "house-color-2"
-                                        , value color1
-                                        , id "house-color-21"
-                                        , class "form-check-input"
-                                        , checked checked21
-                                        , onClick (SetHouseColor2 color1)
+                                , div [ class "form-check" ]
+                                    [ label [ class "form-check-label" ]
+                                        [ input
+                                            [ type_ "radio"
+                                            , name "house-color-2"
+                                            , value color2
+                                            , id "house-color-22"
+                                            , class "form-check-input"
+                                            , checked checked22
+                                            , onClick (SetHouseColor2 color2)
+                                            ]
+                                            []
+                                        , text "couleur-2"
                                         ]
-                                        []
-                                    , text "couleur-1"
-                                    ]
-                                ]
-                            , div [ class "form-check" ]
-                                [ label [ class "form-check-label" ]
-                                    [ input
-                                        [ type_ "radio"
-                                        , name "house-color-2"
-                                        , value color2
-                                        , id "house-color-22"
-                                        , class "form-check-input"
-                                        , checked checked22
-                                        , onClick (SetHouseColor2 color2)
-                                        ]
-                                        []
-                                    , text "couleur-2"
                                     ]
                                 ]
                             ]

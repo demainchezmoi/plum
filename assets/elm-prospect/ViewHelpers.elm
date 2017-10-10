@@ -79,13 +79,19 @@ failureView err =
                 |> text
 
 
+photoSrc : String -> String
+photoSrc s =
+    "https://s3-eu-west-1.amazonaws.com/demainchezmoi/cloudfront_assets/images/" ++ s
+
+
+cardPhoto : String -> Html Msg
+cardPhoto s =
+    img [ class "img-fluid", src <| photoSrc <| s ] []
+
+
 photo : String -> Html Msg
-photo string =
-    img
-        [ class "d-block p-2 img-thumbnail mt-2 img-fluid"
-        , src ("https://s3-eu-west-1.amazonaws.com/demainchezmoi/cloudfront_assets/images/" ++ string)
-        ]
-        []
+photo s =
+    img [ class "d-block p-2 img-thumbnail mt-2 img-fluid", src <| photoSrc <| s ] []
 
 
 photoClass : String -> String -> Html Msg

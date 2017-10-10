@@ -10,9 +10,14 @@
   }
 }
 
-.map > div {
-  margin-right: auto;
-  margin-left: auto;
+hr {width: 100%;}
+
+.map {
+  background-color: $gray-300;
+  & > div {
+    margin-right: auto;
+    margin-left: auto;
+  }
 }
 
 .ml-header {
