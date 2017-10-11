@@ -124,7 +124,7 @@ type alias DisplayStep =
 
 displaySteps : List DisplayStep
 displaySteps =
-    [ { step = Welcome, view = welcomeView, label = "Bienvenue" }
+    [ { step = Welcome, view = welcomeView, label = "Bienvenue dans votre espace" }
     , { step = DiscoverLand, view = discoverLandView, label = "Découvrir le terrain" }
     , { step = DiscoverHouse, view = discoverHouseView, label = "Découvrir la maison" }
     , { step = ConfigureHouse, view = configureHouseView, label = "Mon choix de couleurs" }
@@ -260,6 +260,9 @@ welcomeView model project title =
             "Cet espace vous permet de gérer votre candidature pour l'annonce maison plus terrain à " ++ (landLocation project.ad.land) ++ "."
 
         text3 =
+            "Nous vous accompagnons tout au long du processus de construction de maison."
+
+        text4 =
             "Passez les étapes pour découvrir le terrain, la maison, choisir vos couleurs, jusqu'au suivi de la construction et l'obtention de vos clés."
 
         button =
@@ -272,9 +275,17 @@ welcomeView model project title =
                     [ div [ class "card-body" ]
                         [ p [ class "card-title" ]
                             [ i [ class "fa fa-home mr-2" ] []
-                            , text "Gérez votre projet de construction en un seul endroit."
+                            , text "Gérez tout votre projet de construction en un seul endroit."
                             ]
                         , div [ class "card-text" ] [ text text2 ]
+                        ]
+                    , hr [ class "mt-1 mb-1" ] []
+                    , div [ class "card-body" ]
+                        [ p [ class "card-title" ]
+                            [ i [ class "fa fa-handshake-o mr-2" ] []
+                            , text "Recevez un accompagnement personalisé."
+                            ]
+                        , div [ class "card-text" ] [ text text3 ]
                         ]
                     , hr [ class "mt-1 mb-1" ] []
                     , div [ class "card-body" ]
@@ -282,7 +293,7 @@ welcomeView model project title =
                             [ i [ class "fa fa-rocket mr-2" ] []
                             , text "Passez les étapes une à une jusqu'à la réception vos clés."
                             ]
-                        , div [ class "card-text" ] [ text text3 ]
+                        , div [ class "card-text" ] [ text text4 ]
                         ]
                     ]
                 , nextStepInfo "Découvrir le terrain"
@@ -570,7 +581,7 @@ phoneCallView model project title =
                 ( False, Just phone_number, False ) ->
                     div []
                         [ alert phone_number
-                        , customButton "Changer" (SubmitPhoneNumber project.id)
+                        , customButton "Mettre à jour" (SubmitPhoneNumber project.id)
                         ]
 
                 ( False, Just phone_number, True ) ->
