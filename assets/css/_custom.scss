@@ -31,12 +31,14 @@ hr { width: 100%; }
   @extend
   .h5-responsive,
   .mt-0,
-  .light-bordered,
+  .mb-0,
   .pt-3,
   .pb-3,
   .pr-2,
   .pl-2,
+  .light-bordered,
   .gray-background,
+  .font-black,
   .white-text;
 }
 

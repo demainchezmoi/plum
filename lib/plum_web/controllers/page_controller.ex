@@ -42,6 +42,8 @@ defmodule PlumWeb.PageController do
   end
 
   def login(conn, _params) do
-    conn |> render("login.html")
+    conn
+    |> put_layout("landing.html")
+    |> render("login.html", query_params: conn.query_params)
   end
 end

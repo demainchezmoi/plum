@@ -1,19 +1,25 @@
+<nav>
+  <h5 class="ml-header">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col col-md-10 col-lg-8">
+          <i class="fa fa-home"></i>&nbsp;Maisons Léo
+        </div>
+      </div>
+    </div>
+  </h5>
+</nav>
+
 <section>
   <div class="container">
     <div class="row justify-content-center">
       <div class="col col-md-10 col-lg-8">
-
         <div class="upper-section">
-
-          <h5 class="ml-header">
-            <i class="fa fa-home"></i>&nbsp;Maisons Léo
-          </h5>
 
           <div class="light-bordered mt-2 p-2 pt-4 pb-4">
             <h3 class="responsive-h3 text-center font-black">
               Devenez propriétaire à <%= @ad.land.city %>&nbsp;(<%= @ad.land.department %>)
             </h3>
-
             <h1 class="text-center responsive-h1 font-thin mt-1 mb-0">
               <span class=""><%= raw Number.Currency.number_to_currency(@ad.land.price + @ad.house_price + @ad.land_adaptation_price) %></span>
             </h1>
@@ -22,32 +28,32 @@
       		<img class="d-block p-2 img-thumbnail mt-2 img-fluid" src="https://s3-eu-west-1.amazonaws.com/demainchezmoi/cloudfront_assets/images/maison_21.png">
 
           <div class="p-2">
-          <div class="row justify-content-between dark-gray-text font-black">
-            <div class="col">
-              Maison T4 - 80m<sup>2</sup>
+            <div class="row justify-content-between dark-gray-text font-black">
+              <div class="col">
+                Maison T4 - 80m<sup>2</sup>
+              </div>
+              <div class="col-auto text-right">
+                <%= raw Number.Currency.number_to_currency(@ad.house_price) %>
+              </div>
             </div>
-            <div class="col-auto text-right">
-              <%= raw Number.Currency.number_to_currency(@ad.house_price) %>
-            </div>
-          </div>
 
-          <div class="row justify-content-between dark-gray-text font-black">
-            <div class="col">
-              Terrain - <%= @ad.land.surface %>&nbsp;m<sup>2</sup>
+            <div class="row justify-content-between dark-gray-text font-black">
+              <div class="col">
+                Terrain - <%= @ad.land.surface %>&nbsp;m<sup>2</sup>
+              </div>
+              <div class="col-auto text-right">
+                <%= raw Number.Currency.number_to_currency(@ad.land.price) %>
+              </div>
             </div>
-            <div class="col-auto text-right">
-              <%= raw Number.Currency.number_to_currency(@ad.land.price) %>
-            </div>
-          </div>
 
-          <div class="row justify-content-between dark-gray-text font-black">
-            <div class="col">
-              Adaptation au sol
+            <div class="row justify-content-between dark-gray-text font-black">
+              <div class="col">
+                Adaptation au sol
+              </div>
+              <div class="col-auto text-right">
+                ~ <%= raw Number.Currency.number_to_currency(@ad.land_adaptation_price) %>
+              </div>
             </div>
-            <div class="col-auto text-right">
-              ~ <%= raw Number.Currency.number_to_currency(@ad.land_adaptation_price) %>
-            </div>
-          </div>
           </div>
 
         </div>

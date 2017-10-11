@@ -1,4 +1,29 @@
-<a class="btn btn-primary btn-lg" href="/auth/facebook">
-  <i class="fa fa-facebook"></i>
-  Sign in with Facebook
-</a>
+<nav>
+  <h5 class="ml-header">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col col-md-10 col-lg-8">
+          <i class="fa fa-home"></i>&nbsp;Maisons Léo
+        </div>
+      </div>
+    </div>
+  </h5>
+</nav>
+<section>
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col col-md-10 col-lg-8">
+
+        <h5 class="h5-responsive mt-4">Veuillez vous identifier</h4>
+
+        <p class="text-secondary">Identifiez-vous au moyen de votre compte Facebook pour accéder à la page demandée.</p>
+
+        <a class="btn btn-primary" href="<%= login_cb(@query_params) %>">
+          <i class="fa fa-facebook mr-2"></i>
+          Connexion avec facebook
+        </a>
+
+      </div>
+    </div>
+  </div>
+</section>

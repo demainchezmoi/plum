@@ -37,7 +37,7 @@ defmodule PlumWeb.Plugs.RequireLogin do
 
   defp unauthorized(conn, :html) do
     conn
-    |> redirect(to: Routes.page_path(conn, :login))
+    |> redirect(to: Routes.page_path(conn, :login, %{redirect: conn.request_path}))
     |> halt()
   end
 
