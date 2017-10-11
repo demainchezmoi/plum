@@ -26,7 +26,7 @@ defmodule PlumWeb.AdControllerTest do
 
     test "interested sends 401 when not logged in", %{conn: conn, ad: ad} do
       conn = get conn, ad_path(conn, :interested, ad)
-      assert redirected_to(conn) == page_path(conn, :login)
+      assert redirected_to(conn) == page_path(conn, :login, %{redirect: ad_path(conn, :interested, ad)})
     end
 
     @tag :logged_in

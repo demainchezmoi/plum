@@ -5,7 +5,7 @@ defmodule PlumWeb.Plugs.RequireLoginTest do
   describe "html case" do
     test "redirects when not logged id", %{conn: conn} do
       conn = conn |> RequireLogin.call({:html, []})
-      assert redirected_to(conn) == page_path(conn, :login)
+      assert redirected_to(conn) == page_path(conn, :login, %{redirect: "/"})
       assert conn.halted
     end
 
