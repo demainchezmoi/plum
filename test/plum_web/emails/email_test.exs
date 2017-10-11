@@ -1,3 +1,10 @@
 defmodule PlumWeb.EmailTest do
-  use ExUnit.Case, async: true
+  use PlumWeb.ConnCase
+  import Plum.Factory
+  alias PlumWeb.Email
+
+  test "renders welcome email" do
+    user = insert(:user)
+    assert Email.welcome(user)
+  end
 end
