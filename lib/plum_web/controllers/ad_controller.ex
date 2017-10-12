@@ -3,8 +3,8 @@ defmodule PlumWeb.AdController do
 
   alias Plum.Repo
   alias Plum.Sales
-  alias PlumWeb.Email
   alias PlumWeb.Mailer
+  alias PlumWeb.Email
 
   plug PlumWeb.Plugs.RequireLogin, {:html, []} when action in [:interested]
 
@@ -28,7 +28,7 @@ defmodule PlumWeb.AdController do
     {status, project} =  Sales.find_or_create_project(%{user_id: current_user.id, ad_id: id})
 
     if status == :created and not is_nil current_user.email do
-      Email.new_project(current_user, project) |> Mailer.deliver
+      Email.new_project_email(current_user, project) |> Mailer.deliver
     end
 
     path = page_path(conn, :prospect, ["projets", to_string(project.id), "bienvenue"])

@@ -56,8 +56,19 @@ config :plum, Plum.Repo,
   hostname: System.get_env("DATABASE_HOST") || "localhost",
   pool_size: 10
 
+# config :plum, PlumWeb.Mailer,
+  # adapter: Swoosh.Adapters.Local
+
 config :plum, PlumWeb.Mailer,
-  adapter: Swoosh.Adapters.Local
+  adapter: Swoosh.Adapters.SMTP,
+  relay: "email-smtp.eu-west-1.amazonaws.com",
+  port: 465,
+  username: System.get_env("SMTP_USERNAME"),
+  password: System.get_env("SMTP_PASSWORD"),
+  tls: :if_available,
+  ssl: true,
+  auth: :always,
+  retries: 3
 
 config :ueberauth, Ueberauth.Strategy.Facebook.OAuth,
   client_id: System.get_env("FACEBOOK_CLIENT_ID"),

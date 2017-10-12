@@ -5,12 +5,12 @@ defmodule PlumWeb.EmailTest do
 
   test "renders welcome email" do
     user = insert(:user)
-    assert Email.welcome(user)
+    assert Email.welcome_email(user)
   end
 
   test "renders new_project email" do
     user = insert(:user)
     project = insert(:project)
-    assert Email.new_project(user, project)
+    assert Email.new_project_email(user, project)
   end
 end

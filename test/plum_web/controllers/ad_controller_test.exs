@@ -38,7 +38,7 @@ defmodule PlumWeb.AdControllerTest do
       path = ad_path(conn, :interested, ad)
       get conn, path 
       assert project = Sales.get_project_by!(%{user_id: current_user.id, ad_id: ad.id})
-      assert_email_sent Email.new_project(current_user, project)
+      assert_email_sent Email.new_project_email(current_user, project)
     end
 
     @tag :logged_in
@@ -47,7 +47,7 @@ defmodule PlumWeb.AdControllerTest do
       path = ad_path(conn, :interested, ad)
       get conn, path 
       assert project = Project |> Repo.get_by(%{ad_id: ad.id, user_id: current_user.id})
-      assert_email_not_sent Email.new_project(current_user, project)
+      assert_email_not_sent Email.new_project_email(current_user, project)
     end
 
     @tag :logged_in
