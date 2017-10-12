@@ -317,7 +317,10 @@ defmodule Plum.Sales do
   ## Examples
 
       iex> find_or_create_project(%{user_id: user_id, ad_id: ad_id})
-      {:ok, %User{email: email}}
+      {:created, %Project{}}
+
+      iex> find_or_create_project(%{user_id: user_id, ad_id: ad_id})
+      {:found, %Project{}}
 
   """
   def find_or_create_project(attrs) do
@@ -326,7 +329,15 @@ defmodule Plum.Sales do
         f when is_binary(f) -> f |> String.to_atom
         f when is_atom(f) -> f
       end)
-    Project |> struct(attrs) |> find_or_create_by(fields)
+
+    Project |> struct(attrs) |> find_by(fields) |> case do
+      {:found, found} -> {:found, found}
+      {:not_found, struct} ->
+        case struct |> Repo.insert do
+          {:ok, project} -> {:created, project}
+          {:error, error} -> {:error, error}
+        end
+    end
   end
 
 
@@ -385,7 +396,7 @@ defmodule Plum.Sales do
     |> set_project_steps_status
   end
 
-  defp get_welcome_step(p), do: %{name: "welcome", valid: true}
+  defp get_welcome_step(_p), do: %{name: "welcome", valid: true}
   defp get_discover_land_step(p), do: %{name: "discover_land", valid: p.discover_land}
   defp get_discover_house_step(p), do: %{name: "discover_house", valid: p.discover_house}
   defp get_configure_house(p), do: %{name: "configure_house", valid: !!p.house_color_1 and !!p.house_color_2}

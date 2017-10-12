@@ -1,7 +1,6 @@
 defmodule PlumWeb.Plugs.RequireLogin do
   import Plug.Conn
   import Phoenix.Controller
-  alias Phoenix.Controller
   alias PlumWeb.Router.Helpers, as: Routes
 
   def init({type, roles}), do: {type, roles}

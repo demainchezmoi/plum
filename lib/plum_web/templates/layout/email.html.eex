@@ -1,8 +1,49 @@
-<html>
-  <head>
-    <title><%= @email.subject %></title>
-  </head>
-  <body>
-    <%= render @view_module, @view_template, assigns %>
-  </body>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <style type="text/css">
+    @media screen and (min-width: 581px) {
+      .container {
+        width: 580px !important;
+      }
+    }
+    td {
+      color: red !important;
+    }
+  </style>
+</head>
+<body>
+  <table class="body-wrap">
+    <tr>
+      <td class="container">
+        <table>
+          <tr>
+            <td align="center" class="masthead">
+              <h1><%= @email.subject %></h1>
+            </td>
+          </tr>
+          <tr>
+            <td class="content">
+              {content}
+            </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+    <tr>
+      <td class="container">
+        <table>
+          <tr>
+            <td class="content footer" align="center">
+              <p>Sent by <a href="http://www.acme.com">Acme</a></p>
+              <p><a href="mailto:hello@acme.com">hello@acme.com</a></p>
+            </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+</body>
 </html>

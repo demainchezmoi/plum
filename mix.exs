@@ -50,6 +50,7 @@ defmodule Plum.Mixfile do
       {:phoenix_swoosh, "~> 0.2"},
       {:postgrex, ">= 0.0.0"},
       {:secure_random, "~> 0.5"},
+      {:smoothie, "~> 3.0"},
       {:ueberauth, "~> 0.4"},
       {:ueberauth_facebook, "~> 0.7"},
     ]

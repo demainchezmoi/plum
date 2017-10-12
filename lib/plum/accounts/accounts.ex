@@ -132,10 +132,7 @@ defmodule Plum.Accounts do
   ## Examples
 
       iex> upsert_user_by(%{email: new_email}, :email)
-      {:ok, %User{email: email}}
-
-      iex> update_user(user, %{email: existing_email, admin: admin}, :email)
-      {:ok, %User{email: email, admin: admin}}
+      {:ok, %User{email: new_email}}
 
   """
   def upsert_user_by(attrs, field) do

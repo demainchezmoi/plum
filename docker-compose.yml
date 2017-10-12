@@ -18,7 +18,7 @@ services:
         SECRET_KEY_BASE: "1234"
     volumes:
       - .:/opt/app
-      - /var/lib/docker/overlay2:/var/lib/docker/overlay2
+      - /var/lib/docker/aufs:/var/lib/docker/aufs
       - /var/lib/docker/images:/var/lib/docker/images
       - /var/lib/docker/image:/var/lib/docker/image
     privileged: true

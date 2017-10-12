@@ -80,11 +80,15 @@ RUN \
     mix local.rebar --force && \
     cd $HOME && \
 
+    apk add -U --repository http://dl-cdn.alpinelinux.org/alpine/edge/testing aufs-util && \
+
    	rm -rf /tmp/elixir-build && \
     apk del .elixir-build && \
 		rm -rf /var/cache/apk/*
 
 WORKDIR ${HOME}
+
+
 
 # Install Elm
 RUN npm install --global \
@@ -109,6 +113,7 @@ COPY . .
 RUN cd ./assets \
     && ./node_modules/.bin/webpack \
     && cd .. \
-    && mix phx.digest
+    && mix phx.digest \
+		&& mix smoothie.compile
 
 CMD ["mix", "phoenix.server"]

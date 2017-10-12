@@ -56,9 +56,12 @@ RUN \
     mix local.rebar --force && \
     cd $HOME && \
 
+    apk add -U --repository http://dl-cdn.alpinelinux.org/alpine/edge/testing aufs-util && \
+
    	rm -rf /tmp/elixir-build && \
     apk del .elixir-build && \
 		rm -rf /var/cache/apk/*
+
 
 WORKDIR ${HOME}
 
@@ -87,9 +90,11 @@ RUN cd ./assets && npm install
 
 COPY . .
 
-RUN cd ./assets && \
-    ./node_modules/.bin/webpack -p && \
-		cd .. && \
-    mix phx.digest
+RUN cd ./assets \
+    && ./node_modules/.bin/webpack -p \
+    && cd .. \
+    && mix phx.digest \
+		&& mix compile \
+		&& mix smoothie.compile
 
 RUN mix release --env=prod --verbose

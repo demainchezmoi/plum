@@ -1,9 +1,13 @@
 defmodule PlumWeb.AdControllerTest do
   use PlumWeb.ConnCase
+
   import Plum.Factory
+  import Swoosh.TestAssertions
+
+  alias Plum.Repo
   alias Plum.Sales
   alias Plum.Sales.Project
-  alias Plum.Repo
+  alias PlumWeb.Email
 
   describe "public ad" do
     setup [:create_ad]
@@ -33,7 +37,8 @@ defmodule PlumWeb.AdControllerTest do
     test "interested creates project for user if not exists", %{conn: conn, current_user: current_user, ad: ad} do
       path = ad_path(conn, :interested, ad)
       get conn, path 
-      assert Sales.get_project_by!(%{user_id: current_user.id, ad_id: ad.id})
+      assert project = Sales.get_project_by!(%{user_id: current_user.id, ad_id: ad.id})
+      assert_email_sent Email.new_project(current_user, project)
     end
 
     @tag :logged_in
@@ -41,7 +46,8 @@ defmodule PlumWeb.AdControllerTest do
       insert(:project, ad_id: ad.id, user_id: current_user.id)
       path = ad_path(conn, :interested, ad)
       get conn, path 
-      assert Project |> Repo.get_by(%{ad_id: ad.id, user_id: current_user.id})
+      assert project = Project |> Repo.get_by(%{ad_id: ad.id, user_id: current_user.id})
+      assert_email_not_sent Email.new_project(current_user, project)
     end
 
     @tag :logged_in

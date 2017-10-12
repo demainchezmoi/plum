@@ -28,7 +28,6 @@ defmodule PlumWeb.AuthController do
          {:ok, session} <- Accounts.create_session(%{user_id: user.id})
     do
         conn
-        |> put_flash(:info, "Vous avez bien été authentifié")
         |> put_session(@session_key, session.token)
         |> redirect(to: params["state"] || "/")
     else
@@ -38,7 +37,7 @@ defmodule PlumWeb.AuthController do
         |> redirect(to: "/")
       _ ->
         conn
-        |> put_flash(:error, "Erreur")
+        |> put_flash(:error, "Une erreur est survenue.")
         |> redirect(to: "/")
     end
   end
