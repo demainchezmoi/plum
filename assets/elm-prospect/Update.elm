@@ -189,11 +189,13 @@ urlUpdate model =
         ProjectStepRoute projectId DiscoverLand ->
             model
                 ! [ ensureProjectWithCallback model projectId DiscoverLandProjectResponse
+                  , mixpanel ( "PROJECT_STEP", Encode.object [ ( "step", DiscoverLand |> toString |> Encode.string ) ] )
                   ]
 
         ProjectStepRoute projectId projectStep ->
             model
                 ! [ ensureProject model projectId
+                  , mixpanel ( "PROJECT_STEP", Encode.object [ ( "step", projectStep |> toString |> Encode.string ) ] )
                   ]
 
         _ ->
