@@ -3,12 +3,26 @@ import Elm from '../elm-prospect/Main.elm';
 const elmDiv = document.querySelector('#elm_target');
 var map;
 
+const identify = () => {
+  if (typeof mixpanel !== 'undefined' && typeof current_user !== 'undefined') {
+    try {
+      mixpanel.identify(current_user.data.id);
+    } catch(e) {
+      console.log("mixpanel identify failed", e);
+    }
+  }
+}
+
 if (elmDiv) {
   var app = Elm.Main.embed(elmDiv, { apiToken: getToken() });
 
   app.ports.landMap.subscribe(function({lat, lng}) {
     const test = () => document.getElementById('map') !== null;
     tryFunction(test, () => loadMap({lat, lng}));
+  });
+
+  app.ports.mixpanel.subscribe(function([event, data]) {
+    mixpanel.track(event, data);
   });
 
   app.ports.removeLandMap.subscribe(removeLandMap);
@@ -48,3 +62,9 @@ function tryFunction(test, fun, count = 0) {
     setTimeout(() => tryFunction(test, fun, count + 1), 20);
   }
 }
+
+function handleDOMContentLoaded() {
+  identify();
+}
+
+window.addEventListener('DOMContentLoaded', handleDOMContentLoaded, false);

@@ -10,7 +10,7 @@ import RemoteData exposing (..)
 import Routing exposing (Route(..), parse, toPath)
 import Project.Model exposing (..)
 import Json.Encode as Encode
-import Ports exposing (landMap, removeLandMap)
+import Ports exposing (landMap, removeLandMap, mixpanel)
 
 
 update : Msg -> Model -> ( Model, Cmd Msg )
@@ -20,12 +20,12 @@ update msg model =
             model ! []
 
         ProjectResponse response ->
-            setProject model response ! []
+            setProject response model ! []
 
         DiscoverLandProjectResponse response ->
             let
                 newModel =
-                    setProject model response
+                    model |> setProject response
             in
                 case response of
                     Success project ->
@@ -82,7 +82,7 @@ update msg model =
         ValidateDiscoverLandResponse response ->
             let
                 newModel =
-                    setProject model response
+                    model |> setProject response
             in
                 case response of
                     Success project ->
@@ -97,7 +97,7 @@ update msg model =
         ValidateDiscoverHouseResponse response ->
             let
                 newModel =
-                    setProject model response
+                    model |> setProject response
             in
                 case response of
                     Success project ->
@@ -117,11 +117,10 @@ update msg model =
 
         ValidateConfigureHouseResponse response ->
             let
-                newModelP =
-                    setProject model response
-
                 newModel =
-                    { newModelP | houseColor1 = Nothing, houseColor2 = Nothing }
+                    model
+                        |> setProject response
+                        |> setHouseColors Nothing Nothing
             in
                 case response of
                     Success project ->
@@ -147,7 +146,7 @@ update msg model =
         ValidateEvaluateFundingResponse response ->
             let
                 newModel =
-                    setProject model response
+                    model |> setProject response
             in
                 case response of
                     Success project ->
@@ -175,27 +174,34 @@ update msg model =
                         model ! [ updateProjectWithCallback model.apiToken projectId value SubmitPhoneNumberResponse ]
 
         SubmitPhoneNumberResponse response ->
-            setProject model response ! []
+            setProject response model ! []
 
 
 urlUpdate : Model -> ( Model, Cmd Msg )
 urlUpdate model =
     case model.route of
         ProjectRoute projectId ->
-            ( model, ensureProject model projectId )
+            model
+                ! [ ensureProject model projectId
+                  , mixpanel ( "PROJECT", Encode.object [ ( "id", projectId |> toString |> Encode.string ) ] )
+                  ]
 
         ProjectStepRoute projectId DiscoverLand ->
-            ( model, ensureProjectWithCallback model projectId DiscoverLandProjectResponse )
+            model
+                ! [ ensureProjectWithCallback model projectId DiscoverLandProjectResponse
+                  ]
 
         ProjectStepRoute projectId projectStep ->
-            ( model, ensureProject model projectId )
+            model
+                ! [ ensureProject model projectId
+                  ]
 
         _ ->
-            ( model, Cmd.none )
+            model ! [ Cmd.none ]
 
 
-setProject : Model -> WebData Project -> Model
-setProject model response =
+setProject : WebData Project -> Model -> Model
+setProject response model =
     case response of
         Success project ->
             { model
@@ -207,3 +213,8 @@ setProject model response =
 
         _ ->
             { model | project = response }
+
+
+setHouseColors : Maybe String -> Maybe String -> Model -> Model
+setHouseColors color1 color2 model =
+    { model | houseColor1 = color1, houseColor2 = color2 }

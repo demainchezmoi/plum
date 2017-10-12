@@ -90,3 +90,6 @@ config :plum, PlumWeb.Mailer,
 config :ueberauth, Ueberauth.Strategy.Facebook.OAuth,
   client_id: "${FACEBOOK_CLIENT_ID}",
   client_secret: "${FACEBOOK_CLIENT_SECRET}"
+
+config :plum,
+  mixpanel_token: "${MIXPANEL_TOKEN}"
