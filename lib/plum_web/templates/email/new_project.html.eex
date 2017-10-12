@@ -1,5 +1,6 @@
-<p>Hi there,</p>
-<p>Sometimes you just want to send a simple HTML email with a simple design and clear call to action. This is it.</p>
+<p>Bonjour,</p>
+<p>Merci de votre intérêt pour l'oportunité maison plus terrain Maisons Léo à <%= @project.ad.land.city %> (<%= @project.ad.land.department %>).</p>
+<p>Pour faire construire votre maison, passez les étapes sur votre espace maisons-leo.fr jusqu'à la réception de vos clés !</p>
 <table border="0" cellpadding="0" cellspacing="0" class="btn btn-primary">
   <tbody>
     <tr>
@@ -7,7 +8,7 @@
         <table border="0" cellpadding="0" cellspacing="0">
           <tbody>
             <tr>
-              <td> <a href="http://htmlemail.io" target="_blank">Call To Action</a> </td>
+              <td><%= link "Accéder à mon espace", to: page_url(PlumWeb.Endpoint, :prospect, ["projets", to_string(@project.id), "bienvenue"]), target: "_blank" %></td>
             </tr>
           </tbody>
         </table>
@@ -15,5 +16,8 @@
     </tr>
   </tbody>
 </table>
-<p>This is a really simple email template. Its sole purpose is to get the recipient to click the button with no distractions.</p>
-<p>Good luck! Hope it works.</p>
+<p>
+  Attention : premier arrivé premier servi.
+  <br />
+  Passez les étapes au plus vite et augmentez vos chance de faire construire votre maison !
+</p>
