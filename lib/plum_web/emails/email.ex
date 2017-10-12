@@ -2,8 +2,11 @@ defmodule PlumWeb.Email do
 
   alias Plum.Accounts.User
   alias Plum.Sales.Project
-  import Swoosh.Email
 
+  import Swoosh.Email
+  import PlumWeb.Router.Helpers
+
+  use Phoenix.HTML
   use Smoothie,
     template_dir: Path.join(["..", "templates", "email"]),
     layout_file: Path.join(["..", "templates", "layout", "email.html.eex"])
