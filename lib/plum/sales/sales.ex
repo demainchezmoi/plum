@@ -324,19 +324,13 @@ defmodule Plum.Sales do
 
   """
   def find_or_create_project(attrs) do
-    fields =
-      attrs |> Map.keys |> Enum.map(fn
-        f when is_binary(f) -> f |> String.to_atom
-        f when is_atom(f) -> f
-      end)
-
-    Project |> struct(attrs) |> find_by(fields) |> case do
-      {:found, found} -> {:found, found}
-      {:not_found, struct} ->
-        case struct |> Repo.insert do
-          {:ok, project} -> {:created, project}
+    Project |> preload([ad: :land]) |> Repo.get_by(attrs) |> case do
+      nil ->
+        case create_project(attrs) do
+          {:ok, project} -> {:created, project |> Repo.preload([ad: :land])}
           {:error, error} -> {:error, error}
         end
+      project -> {:found, project}
     end
   end
 

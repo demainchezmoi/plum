@@ -233,20 +233,24 @@ defmodule Plum.SalesTest do
 
   test "find_or_create_project creates project" do
     %{id: user_id} = insert(:user)
-    %{id: ad_id} = insert(:ad)
+    %{id: land_id} = insert(:land)
+    %{id: ad_id} = insert(:ad, land_id: land_id)
 
     params = %{user_id: user_id, ad_id: ad_id}
-    assert {:created, %Project{user_id: ^user_id, ad_id: ^ad_id}} = Sales.find_or_create_project(params)
+    assert {:created, project = %Project{user_id: ^user_id, ad_id: ^ad_id}} = Sales.find_or_create_project(params)
+    assert project.ad.land.id
     assert Sales.get_project_by!(params)
   end
 
   test "find_or_create_project finds project" do
     %{id: user_id} = insert(:user)
-    %{id: ad_id} = insert(:ad)
+    %{id: land_id} = insert(:land)
+    %{id: ad_id} = insert(:ad, land_id: land_id)
     %{id: project_id} = insert(:project, user_id: user_id, ad_id: ad_id)
 
     params = %{user_id: user_id, ad_id: ad_id}
-    assert {:found, %Project{id: _project_id}} = Sales.find_or_create_project(params)
+    assert {:found, project = %Project{id: _project_id}} = Sales.find_or_create_project(params)
+    assert project.ad.land.id
     assert Sales.get_project_by!(params)
   end
 end

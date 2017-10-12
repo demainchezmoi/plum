@@ -3,6 +3,7 @@ defmodule PlumWeb.AdControllerTest do
 
   import Plum.Factory
   import Swoosh.TestAssertions
+  import Ecto.Query
 
   alias Plum.Repo
   alias Plum.Sales
@@ -28,13 +29,13 @@ defmodule PlumWeb.AdControllerTest do
   describe "interested"do
     setup [:create_ad]
 
-    test "interested sends 401 when not logged in", %{conn: conn, ad: ad} do
+    test "sends 401 when not logged in", %{conn: conn, ad: ad} do
       conn = get conn, ad_path(conn, :interested, ad)
       assert redirected_to(conn) == page_path(conn, :login, %{redirect: ad_path(conn, :interested, ad)})
     end
 
     @tag :logged_in
-    test "interested creates project for user if not exists", %{conn: conn, current_user: current_user, ad: ad} do
+    test "creates project for user if not exists", %{conn: conn, current_user: current_user, ad: ad} do
       path = ad_path(conn, :interested, ad)
       get conn, path 
       assert project = Sales.get_project_by!(%{user_id: current_user.id, ad_id: ad.id})
@@ -42,16 +43,16 @@ defmodule PlumWeb.AdControllerTest do
     end
 
     @tag :logged_in
-    test "interested doesnt create project for user if already exists", %{conn: conn, current_user: current_user, ad: ad} do
+    test "doesnt create project for user if already exists", %{conn: conn, current_user: current_user, ad: ad} do
       insert(:project, ad_id: ad.id, user_id: current_user.id)
       path = ad_path(conn, :interested, ad)
       get conn, path 
-      assert project = Project |> Repo.get_by(%{ad_id: ad.id, user_id: current_user.id})
+      assert project = Project |> preload([ad: :land])|> Repo.get_by(%{ad_id: ad.id, user_id: current_user.id})
       assert_email_not_sent Email.new_project_email(current_user, project)
     end
 
     @tag :logged_in
-    test "interested redirects to project path", %{conn: conn, current_user: current_user, ad: ad} do
+    test "redirects to project path", %{conn: conn, current_user: current_user, ad: ad} do
       conn = get conn, ad_path(conn, :interested, ad.id)
       project = Sales.get_project_by!(%{user_id: current_user.id, ad_id: ad.id})
       assert redirected_to(conn) == page_path(conn, :prospect, ["projets", to_string(project.id), "bienvenue"])

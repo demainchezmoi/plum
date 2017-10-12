@@ -114,6 +114,7 @@ RUN cd ./assets \
     && ./node_modules/.bin/webpack \
     && cd .. \
     && mix phx.digest \
+		&& mix clean \
 		&& mix compile \
 		&& mix smoothie.compile
 

@@ -1,11 +1,15 @@
-<%= @title %> Hi there,
+<%= @title %> Bonjour,
 
-Sometimes you just want to send a simple HTML email with a simple design and
-clear call to action. This is it.
+Merci de votre intérêt pour l'oportunité maison plus terrain Maisons Léo à
+<%= @project.ad.land.city %>
+(<%= @project.ad.land.department %>).
 
-Call To Action [http://htmlemail.io] This is a really simple email template. Its
-sole purpose is to get the recipient to click the button with no distractions.
+Pour faire construire votre maison, passez les étapes sur votre espace
+maisons-leo.fr jusqu'à la réception de vos clés !
 
-Good luck! Hope it works.
+Accéder à mon espace [<%= @project_href %>] Attention : premier arrivé
+premier servi. 
+Passez les étapes au plus vite et augmentez vos chance de faire construire votre
+maison !
 
 Demainchezmoi SAS, 41 rue Laure Diebold, 69009 Lyon

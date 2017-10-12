@@ -2,6 +2,7 @@ defmodule PlumWeb.EmailTest do
   use PlumWeb.ConnCase
   import Plum.Factory
   alias PlumWeb.Email
+  alias Plum.Repo
 
   test "renders welcome email" do
     user = insert(:user)
@@ -10,7 +11,8 @@ defmodule PlumWeb.EmailTest do
 
   test "renders new_project email" do
     user = insert(:user)
-    project = insert(:project)
+    ad = insert(:ad, land: insert(:land))
+    project = insert(:project, user: user, ad: ad)
     assert Email.new_project_email(user, project)
   end
 end
