@@ -5,6 +5,7 @@ import Html.Attributes exposing (..)
 import Messages exposing (..)
 import Model exposing (..)
 import LandList.View exposing (landListView)
+import Dashboard.View exposing (dashboardView)
 import Routing exposing (Route(..))
 
 
@@ -16,6 +17,9 @@ view model =
 page : Model -> Html Msg
 page model =
     case model.route of
+        DashboardRoute ->
+            dashboardView model
+
         LandListRoute ->
             landListView model
 

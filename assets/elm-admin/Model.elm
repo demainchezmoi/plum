@@ -9,16 +9,24 @@ type alias ApiToken =
     String
 
 
+type alias Method =
+    String
+
+
+type alias Url =
+    String
+
+
+type alias Flags =
+    { apiToken : ApiToken
+    }
+
+
 type alias Model =
     { landList : WebData LandList
     , error : Maybe String
     , apiToken : ApiToken
     , route : Route
-    }
-
-
-type alias Flags =
-    { apiToken : ApiToken
     }
 
 

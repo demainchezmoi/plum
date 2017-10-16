@@ -1,6 +1,6 @@
 module Main exposing (..)
 
-import Commands exposing (getLandList)
+import LandList.Commands exposing (getLandList)
 import Html
 import Messages exposing (Msg(..))
 import Model exposing (..)
