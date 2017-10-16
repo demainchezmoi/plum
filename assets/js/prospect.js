@@ -45,12 +45,12 @@ function getToken() {
 }
 
 function loadMap({lat, lng}) {
-  map = L.map('map').setView([lat, lng], 11)
+  map = L.map('map').setView([lat, lng], 12)
 
   L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png').addTo(map)
   map.panTo(new L.LatLng(lat, lng))
 
-  new L.marker([lat, lng]).addTo(map)
+  new L.circle([lat, lng], 1000).addTo(map)
 }
 
 function tryFunction(test, fun, count = 0) {

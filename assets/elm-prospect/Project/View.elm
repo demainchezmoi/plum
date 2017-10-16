@@ -1,9 +1,9 @@
 module Project.View exposing (..)
 
-import Ad.Model exposing (Ad)
+import Ad.Model as AdModel exposing (Ad)
 import Ad.View as AdView
 import Html exposing (..)
-import Html.Attributes exposing (class, src, type_, name, value, id, checked, for, placeholder, style)
+import Html.Attributes exposing (..)
 import Html.Events exposing (onClick, onInput)
 import Json.Encode
 import Land.Model exposing (Land)
@@ -13,6 +13,8 @@ import Project.Model exposing (..)
 import RemoteData exposing (..)
 import Routing exposing (toPath, Route(..))
 import ViewHelpers exposing (..)
+import FormatNumber exposing (format)
+import FormatNumber.Locales exposing (frenchLocale)
 
 
 inLayout : Html Msg -> Html Msg -> Html Msg
@@ -77,7 +79,13 @@ projectHeader project =
             [ p [ class "mt-0 mb-0" ]
                 [ span [ class "font-bold" ] [ text "Mon espace" ]
                 ]
-            , AdView.shortView project.ad
+            , p []
+                [ "Passez toutes les étapes et faites construire votre maison à "
+                    ++ (AdView.shortAddText project.ad)
+                    ++ " pour "
+                    ++ (AdView.totalPrice project.ad)
+                    |> text
+                ]
             ]
         ]
 
@@ -258,12 +266,12 @@ welcomeView model project title =
 
         view =
             div []
-                [ stepInfo "Bienvenue dans votre espace Maisons Léo."
+                [ stepInfo ("Bienvenue dans votre espace Maisons Léo pour l'annonce maison plus terrain à " ++ AdView.shortAddText project.ad ++ ".")
                 , div [ class "card mt-2" ]
                     [ div [ class "card-body" ]
                         [ p [ class "card-title" ]
                             [ i [ class "fa fa-home mr-2" ] []
-                            , text "Passez toutes les étapes jusqu'à la construction et la réception de vos clés."
+                            , text "Passez toutes les étapes jusqu'à la livraison de votre maison !"
                             ]
                         , div [ class "card-text" ] [ text "Attention, premier arrivé premier servi. Les annonces ne restent pas longtemps en ligne : soyez les premiers à passer les étapes et profitez de l'opportunité !" ]
                         ]
@@ -296,7 +304,8 @@ discoverLandView model project title =
                 , div [ class "card mt-2" ]
                     [ div [ id "map", class "img-flex" ] []
                     , div [ class "card-body" ]
-                        [ p [ class "card-title" ] [ "Terrain à " ++ (project.ad.land |> landLocation) |> text ]
+                        [ span [ class "pull-right" ] [ project.ad.land.price |> toFloat >> (format { frenchLocale | decimals = 0 }) >> (\p -> p ++ " €") |> text ]
+                        , p [ class "card-title" ] [ "Terrain à " ++ (project.ad.land |> landLocation) |> text ]
                         , div [ class "card-text" ] [ text project.ad.land.description ]
                         ]
                     ]
@@ -325,18 +334,20 @@ discoverHouseView model project title =
         view =
             div []
                 [ stepInfo "Découvrez la maison Léo."
-                , div [ class "card mt-2" ]
-                    [ cardPhoto "maison-min.png"
-                    , div [ class "card-body" ]
-                        [ p [ class "card-title" ] [ text "Le T4 familial par excellence." ]
-                        , div [ class "card-text" ] [ text description1 ]
+                , div [ class "carousel" ]
+                    [ div [ class "card mt-2" ]
+                        [ img [ "maison-min.png" |> photoSrc |> src, class "img-fluid" ] []
+                        , div [ class "card-body" ]
+                            [ p [ class "card-title" ] [ text "Le T4 familial par excellence." ]
+                            , p [ class "card-text" ] [ text description1 ]
+                            ]
                         ]
-                    ]
-                , div [ class "card mt-2" ]
-                    [ cardPhoto "maison_21_nuit.jpg"
-                    , div [ class "card-body" ]
-                        [ p [ class "card-title" ] [ text "Un gage de qualité." ]
-                        , div [ class "card-text" ] [ text description2 ]
+                    , div [ class "card mt-2" ]
+                        [ img [ "maison_21_nuit.jpg" |> photoSrc |> src, class "img-fluid" ] []
+                        , div [ class "card-body" ]
+                            [ p [ class "card-title" ] [ text "Un gage de qualité." ]
+                            , p [ class "card-text" ] [ text description2 ]
+                            ]
                         ]
                     ]
                 , nextStepInfo "Choisir mes couleurs"

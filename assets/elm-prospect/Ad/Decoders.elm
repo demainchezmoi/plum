@@ -12,3 +12,5 @@ adDecoder =
         Ad
         |: (field "active" bool)
         |: (field "land" landDecoder)
+        |: (field "house_price" int)
+        |: (field "land_adaptation_price" int)

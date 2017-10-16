@@ -10,7 +10,7 @@ import RemoteData exposing (..)
 import Routing exposing (Route(..), parse, toPath)
 import Project.Model exposing (..)
 import Json.Encode as Encode
-import Ports exposing (landMap, removeLandMap, mixpanel)
+import Ports exposing (..)
 
 
 update : Msg -> Model -> ( Model, Cmd Msg )
@@ -21,6 +21,18 @@ update msg model =
 
         ProjectResponse response ->
             setProject response model ! []
+
+        DiscoverHouseProjectResponse response ->
+            let
+                newModel =
+                    model |> setProject response
+            in
+                case response of
+                    Success project ->
+                        newModel ! [ loadCarousel () ]
+
+                    _ ->
+                        newModel ! []
 
         DiscoverLandProjectResponse response ->
             let
@@ -184,6 +196,12 @@ urlUpdate model =
             model
                 ! [ ensureProject model projectId
                   , mixpanel ( "PROJECT", Encode.object [ ( "id", projectId |> toString |> Encode.string ) ] )
+                  ]
+
+        ProjectStepRoute projectId DiscoverHouse ->
+            model
+                ! [ ensureProjectWithCallback model projectId DiscoverHouseProjectResponse
+                  , mixpanel ( "PROJECT_STEP", Encode.object [ ( "step", DiscoverHouse |> toString |> Encode.string ) ] )
                   ]
 
         ProjectStepRoute projectId DiscoverLand ->

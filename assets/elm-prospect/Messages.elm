@@ -14,6 +14,7 @@ type Msg
     | NavigateTo Route
     | ProjectResponse (WebData Project)
     | DiscoverLandProjectResponse (WebData Project)
+    | DiscoverHouseProjectResponse (WebData Project)
     | UpdateProject ProjectId Value
     | SetHouseColor1 String
     | SetHouseColor2 String

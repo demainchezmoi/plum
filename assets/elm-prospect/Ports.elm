@@ -12,3 +12,6 @@ port removeLandMap : () -> Cmd msg
 
 
 port mixpanel : ( String, Value ) -> Cmd msg
+
+
+port loadCarousel : () -> Cmd msg
