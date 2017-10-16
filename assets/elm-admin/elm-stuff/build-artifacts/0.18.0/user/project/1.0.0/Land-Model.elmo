@@ -1,4 +1,0 @@
-var _user$project$Land_Model$Land = F6(
-	function (a, b, c, d, e, f) {
-		return {city: a, department: b, lat: c, lng: d, price: e, surface: f};
-	});
