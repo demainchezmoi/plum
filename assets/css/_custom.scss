@@ -58,6 +58,12 @@ nav.navbar.translucid {
   font-weight: 100;
 }
 
+#map {
+  height: 200px;
+  @include media-breakpoint-up(sm) { height: 300px; }
+  @include media-breakpoint-up(md) { height: 400px; }
+}
+
 .font-light {
   font-weight: 300;
 }

@@ -253,47 +253,19 @@ stepButton project step button =
 welcomeView : Model -> Project -> String -> Html Msg
 welcomeView model project title =
     let
-        text1 =
-            "Bienvenue dans votre espace Maisons Léo."
-
-        text2 =
-            "Cet espace vous permet de gérer votre candidature pour l'annonce maison plus terrain à " ++ (landLocation project.ad.land) ++ "."
-
-        text3 =
-            "Nous vous accompagnons tout au long du processus de construction de maison."
-
-        text4 =
-            "Passez les étapes pour découvrir le terrain, la maison, choisir vos couleurs, jusqu'au suivi de la construction et l'obtention de vos clés."
-
         button =
             (NavigateTo (ProjectStepRoute project.id DiscoverLand)) |> nextStepButton
 
         view =
             div []
-                [ stepInfo text1
+                [ stepInfo "Bienvenue dans votre espace Maisons Léo."
                 , div [ class "card mt-2" ]
                     [ div [ class "card-body" ]
                         [ p [ class "card-title" ]
                             [ i [ class "fa fa-home mr-2" ] []
-                            , text "Gérez tout votre projet de construction en un seul endroit."
+                            , text "Passez toutes les étapes jusqu'à la construction et la réception de vos clés."
                             ]
-                        , div [ class "card-text" ] [ text text2 ]
-                        ]
-                    , hr [ class "mt-1 mb-1" ] []
-                    , div [ class "card-body" ]
-                        [ p [ class "card-title" ]
-                            [ i [ class "fa fa-handshake-o mr-2" ] []
-                            , text "Recevez un accompagnement personalisé."
-                            ]
-                        , div [ class "card-text" ] [ text text3 ]
-                        ]
-                    , hr [ class "mt-1 mb-1" ] []
-                    , div [ class "card-body" ]
-                        [ p [ class "card-title" ]
-                            [ i [ class "fa fa-rocket mr-2" ] []
-                            , text "Passez les étapes une à une jusqu'à la réception vos clés."
-                            ]
-                        , div [ class "card-text" ] [ text text4 ]
+                        , div [ class "card-text" ] [ text "Attention, premier arrivé premier servi. Les annonces ne restent pas longtemps en ligne : soyez les premiers à passer les étapes et profitez de l'opportunité !" ]
                         ]
                     ]
                 , nextStepInfo "Découvrir le terrain"
@@ -320,9 +292,9 @@ discoverLandView model project title =
 
         view =
             div []
-                [ stepInfo "Découvrez le terrain sur lequel nous vous proposons de construire une Maison Léo."
+                [ stepInfo "Voici l'opportunité de terrain sur lequel nous vous proposons de construire une Maison Léo."
                 , div [ class "card mt-2" ]
-                    [ div [ id "map", style [ ( "height", "200px" ) ], class "img-flex" ] []
+                    [ div [ id "map", class "img-flex" ] []
                     , div [ class "card-body" ]
                         [ p [ class "card-title" ] [ "Terrain à " ++ (project.ad.land |> landLocation) |> text ]
                         , div [ class "card-text" ] [ text project.ad.land.description ]
