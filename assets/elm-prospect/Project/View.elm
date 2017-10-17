@@ -75,19 +75,16 @@ projectPageView model =
 
 projectHeader : Project -> Html Msg
 projectHeader project =
-    div [ class "media pt-3 pb-3" ]
-        [ img [ class "d-flex mr-2 img-thumbnail", src "https://s3-eu-west-1.amazonaws.com/demainchezmoi/cloudfront_assets/images/maison_21.png", style [ ( "width", "100px" ), ( "height", "56.25px" ) ] ] []
-        , div [ class "media-body" ]
-            [ p [ class "mt-0 mb-0" ]
-                [ span [ class "font-bold" ] [ text "Mon espace" ]
-                ]
-            , p []
-                [ "Passez toutes les étapes et faites construire votre maison à "
-                    ++ (AdView.shortAddText project.ad)
-                    ++ " pour "
-                    ++ (AdView.totalPrice project.ad)
-                    |> text
-                ]
+    div [ class "mb-2 mt-2" ]
+        [ p [ class "mb-1" ]
+            [ span [ class "font-bold" ] [ text "Mon espace" ]
+            ]
+        , p [ class "mb-0" ]
+            [ "Passez toutes les étapes et faites construire votre maison à "
+                ++ (AdView.shortAddText project.ad)
+                ++ " pour "
+                ++ (AdView.totalPrice project.ad)
+                |> text
             ]
         ]
 
