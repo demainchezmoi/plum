@@ -30,9 +30,18 @@
   background-color: rgba(0, 0, 0, 0.3);
 }
 
-.slider-card-body {
-  min-height: 205px;
+.slider-card {
+  // margin-bottom: 35px !important;
+  .slider-card-body {
+    height: 205px;
+    overflow-y: scroll;
+  }
 }
+
+ol.carousel-indicators {
+  // margin-bottom: 0;
+}
+
 
 hr { width: 100%; }
 

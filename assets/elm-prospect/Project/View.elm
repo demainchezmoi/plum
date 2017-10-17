@@ -37,8 +37,7 @@ projectNav projectId =
     div [ class "" ]
         [ h5 [ class "mb-0 ml-header row justify-content-between" ]
             [ div [ class "col font-black" ]
-                [ i [ class "fa fa-home" ] []
-                , text " Maisons Léo"
+                [ text " Maisons Léo"
                 ]
             , div [ class "col-auto" ]
                 [ i [ class "fa fa-bars cp", onClick (NavigateTo (ProjectRoute projectId)) ] []
@@ -138,7 +137,7 @@ displaySteps =
     [ { step = Welcome, view = welcomeView, label = "Bienvenue dans votre espace" }
     , { step = DiscoverLand, view = discoverLandView, label = "Découvrir le terrain" }
     , { step = DiscoverHouse, view = discoverHouseView, label = "Découvrir la maison" }
-    , { step = ConfigureHouse, view = configureHouseView, label = "Mon choix de couleurs" }
+    , { step = ConfigureHouse, view = configureHouseView, label = "Mon choix d'enduits" }
     , { step = EvaluateFunding, view = evaluateFundingView, label = "Ma finançabilité" }
     , { step = PhoneCall, view = phoneCallView, label = "Premier contact" }
     , { step = Quotation, view = quotationView, label = "Mon devis" }
@@ -274,9 +273,12 @@ welcomeView model project title =
                     [ div [ class "card-body" ]
                         [ p [ class "card-title" ]
                             [ i [ class "fa fa-home mr-2" ] []
-                            , text "Passez toutes les étapes jusqu'à la livraison de votre maison !"
+                            , text <| "Passez toutes les étapes et faites construire votre maison à " ++ AdView.shortAddText project.ad ++ "."
                             ]
-                        , div [ class "card-text" ] [ text "Attention, premier arrivé premier servi. Les annonces ne restent pas longtemps en ligne : soyez les premiers à passer les étapes et profitez de l'opportunité !" ]
+                        , div [ class "card-text" ]
+                            [ p [] [ text "De la découverte du terrain à la signature du contrat nous avons organisé votre projet de construction Maison Léo en étapes." ]
+                            , p [] [ text "Les annonces ne restent pas longtemps en ligne : soyez les premiers à passer les étapes et profitez de l'opportunité !" ]
+                            ]
                         ]
                     ]
                 , nextStepInfo "Découvrir le terrain"
@@ -303,7 +305,7 @@ discoverLandView model project title =
 
         view =
             div []
-                [ stepInfo "Voici l'opportunité de terrain sur lequel nous vous proposons de construire une Maison Léo."
+                [ stepInfo "Voici l'opportunité de terrain que nous vous proposons."
                 , div [ class "card mt-2" ]
                     [ div [ id "map", class "img-flex" ] []
                     , div [ class "card-body" ]
@@ -345,7 +347,7 @@ discoverHouseView model project title =
                 Slide.config []
                     (Slide.customContent
                         (div
-                            [ class "card m-1 mb-2" ]
+                            [ class "card m-1 slider-card" ]
                             [ img [ photo |> photoSrc |> src, class "img-fluid" ] []
                             , div [ class "card-body slider-card-body" ]
                                 [ p [ class "card-title" ] [ text title ]
@@ -376,113 +378,102 @@ discoverHouseView model project title =
         stepView model project title 3 (ProjectStepRoute project.id DiscoverLand) view
 
 
+type alias ColorChoices =
+    List ( String, String, String )
+
+
+colorRadio : String -> String -> Bool -> (String -> Msg) -> String -> Html Msg
+colorRadio inputName inputValue inputChecked action inputLabel =
+    div [ class "form-check" ]
+        [ label [ class "form-check-label" ]
+            [ input
+                [ type_ "radio"
+                , name inputName
+                , value inputValue
+                , id (inputName ++ "_" ++ inputValue)
+                , class "form-check-input"
+                , checked inputChecked
+                , onClick (action inputValue)
+                ]
+                []
+            , text inputLabel
+            ]
+        ]
+
+
+colorRadios : ColorChoices -> (String -> Msg) -> Maybe String -> Maybe String -> List (Html Msg)
+colorRadios colorChoices act modelField projectField =
+    let
+        inputChecked =
+            \iC ->
+                case ( modelField, projectField ) of
+                    ( Just c, _ ) ->
+                        c == iC
+
+                    ( _, Just c ) ->
+                        c == iC
+
+                    _ ->
+                        False
+
+        mapper =
+            \( iSrc, iLabel, iName ) -> (colorRadio iName iSrc (inputChecked iSrc) act iLabel)
+    in
+        colorChoices |> List.map mapper
+
+
+colorImage : Maybe String -> Maybe String -> Html Msg
+colorImage modelField projectField =
+    case ( modelField, projectField ) of
+        ( Just c, _ ) ->
+            img [ class "photo-stack img-fluid", ("house_colors/" ++ c ++ ".png") |> photoSrc |> src ] []
+
+        ( _, Just c ) ->
+            img [ class "photo-stack img-fluid", ("house_colors/" ++ c ++ ".png") |> photoSrc |> src ] []
+
+        _ ->
+            span [] []
+
+
 configureHouseView : Model -> Project -> String -> Html Msg
 configureHouseView model project title =
     let
+        backgroundColors =
+            [ ( "rotterdam", "Rotterdam", "color-1" )
+            , ( "bogotta", "Bogotta", "color-1" )
+            , ( "barcelona", "Barcelone", "color-1" )
+            ]
+
+        patternColors =
+            [ ( "rotterdam-neo", "Rotterdam", "color-2" )
+            , ( "bogotta-neo", "Bogotta", "color-2" )
+            , ( "barcelona-neo", "Barcelone", "color-2" )
+            ]
+
         photo0 =
             img [ src (photoSrc "Maison-leo-configurateur-0.png"), class "img-fluid" ] []
 
-        color1 =
-            "Maison-leo-configurateur-1.png"
+        photo1 =
+            colorImage model.houseColor1 project.house_color_1
 
-        color2 =
-            "Maison-leo-configurateur-2.png"
-
-        ( photo1, checked11, checked12 ) =
-            case ( model.houseColor1, project.house_color_1 ) of
-                ( Just house_color_1, _ ) ->
-                    ( img [ class "photo-stack img-fluid", src <| photoSrc <| house_color_1 ] [], house_color_1 == color1, house_color_1 == color2 )
-
-                ( Nothing, Just house_color_1 ) ->
-                    ( img [ class "photo-stack img-fluid", src <| photoSrc <| house_color_1 ] [], house_color_1 == color1, house_color_1 == color2 )
-
-                _ ->
-                    ( span [] [], False, False )
-
-        ( photo2, checked21, checked22 ) =
-            case ( model.houseColor2, project.house_color_2 ) of
-                ( Just house_color_2, _ ) ->
-                    ( img [ class "photo-stack img-fluid", src <| photoSrc <| house_color_2 ] [], house_color_2 == color1, house_color_2 == color2 )
-
-                ( Nothing, Just house_color_2 ) ->
-                    ( img [ class "photo-stack img-fluid", src <| photoSrc <| house_color_2 ] [], house_color_2 == color1, house_color_2 == color2 )
-
-                _ ->
-                    ( span [] [], False, False )
+        photo2 =
+            colorImage model.houseColor2 project.house_color_2
 
         view =
             div []
-                [ stepInfo "Faites-vous plaisir : choisissez les enduits de votre maison Léo, en une ou deux couleurs."
+                [ stepInfo "Faites-vous plaisir : choisissez les enduits de votre maison Léo, en une ou deux couleurs. Vous pourrez toujours changer d'avis !"
                 , div [ class "card mt-2" ]
                     [ div [ class "position-relative" ] [ photo0, photo1, photo2 ]
                     , div [ class "card-body" ]
-                        [ p [ class "card-title" ] [ text "Choisissez vos couleurs." ]
+                        [ p [ class "card-title" ] [ text "Choisissez vos couleurs d'enduits." ]
                         , div [ class "row card-text" ]
                             [ div [ class "col-6" ]
-                                [ p [ class "font-bold" ] [ text "Couleur 2" ]
-                                , div [ class "form-check" ]
-                                    [ label [ class "form-check-label" ]
-                                        [ input
-                                            [ type_ "radio"
-                                            , name "house-color-1"
-                                            , value color1
-                                            , id "house-color-11"
-                                            , class "form-check-input"
-                                            , checked checked11
-                                            , onClick (SetHouseColor1 color1)
-                                            ]
-                                            []
-                                        , text "couleur-1"
-                                        ]
-                                    ]
-                                , div [ class "form-check" ]
-                                    [ label [ class "form-check-label" ]
-                                        [ input
-                                            [ type_ "radio"
-                                            , name "house-color-1"
-                                            , value color2
-                                            , id "house-color-12"
-                                            , class "form-check-input"
-                                            , checked checked12
-                                            , onClick (SetHouseColor1 color2)
-                                            ]
-                                            []
-                                        , text "couleur-2"
-                                        ]
-                                    ]
+                                [ p [ class "font-bold" ] [ text "Fond" ]
+                                , div [] <| colorRadios backgroundColors SetHouseColor1 model.houseColor1 project.house_color_1
                                 ]
                             , div [ class "col-6" ]
-                                [ p [ class "font-bold" ] [ text "Couleur 1" ]
-                                , div [ class "form-check" ]
-                                    [ label [ class "form-check-label" ]
-                                        [ input
-                                            [ type_ "radio"
-                                            , name "house-color-2"
-                                            , value color1
-                                            , id "house-color-21"
-                                            , class "form-check-input"
-                                            , checked checked21
-                                            , onClick (SetHouseColor2 color1)
-                                            ]
-                                            []
-                                        , text "couleur-1"
-                                        ]
-                                    ]
-                                , div [ class "form-check" ]
-                                    [ label [ class "form-check-label" ]
-                                        [ input
-                                            [ type_ "radio"
-                                            , name "house-color-2"
-                                            , value color2
-                                            , id "house-color-22"
-                                            , class "form-check-input"
-                                            , checked checked22
-                                            , onClick (SetHouseColor2 color2)
-                                            ]
-                                            []
-                                        , text "couleur-2"
-                                        ]
-                                    ]
+                                [ p [ class "font-bold" ] [ text "Motif" ]
+                                , div [] <| colorRadios patternColors SetHouseColor2 model.houseColor2 project.house_color_2
                                 ]
                             ]
                         ]
