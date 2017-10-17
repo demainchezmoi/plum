@@ -6,6 +6,7 @@ import Routing exposing (Route)
 import RemoteData exposing (..)
 import Project.Model exposing (Project, ProjectId)
 import Json.Encode exposing (Value)
+import Bootstrap.Carousel as Carousel
 
 
 type Msg
@@ -31,3 +32,4 @@ type Msg
     | ValidateEvaluateFundingResponse (WebData Project)
     | SubmitPhoneNumber ProjectId
     | SubmitPhoneNumberResponse (WebData Project)
+    | CarouselMsg Carousel.Msg

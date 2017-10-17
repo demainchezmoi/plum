@@ -8,6 +8,7 @@ import View exposing (view)
 import Navigation
 import Routing exposing (parse)
 import Project.Commands exposing (getProject)
+import Bootstrap.Carousel as Carousel
 
 
 init : Flags -> Navigation.Location -> ( Model, Cmd Msg )
@@ -31,5 +32,10 @@ main =
         { init = init
         , view = view
         , update = update
-        , subscriptions = always <| Sub.none
+        , subscriptions = subscriptions
         }
+
+
+subscriptions : Model -> Sub Msg
+subscriptions model =
+    Carousel.subscriptions model.discoverHouseCarouselState CarouselMsg

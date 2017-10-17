@@ -1,16 +1,17 @@
 module Update exposing (..)
 
+import Bootstrap.Carousel as Carousel
+import Commands exposing (getMaybeValue)
+import Json.Encode as Encode
+import Land.Model exposing (coordinatesFromLand)
 import Messages exposing (..)
 import Model exposing (..)
 import Navigation
+import Ports exposing (..)
 import Project.Commands exposing (..)
-import Land.Model exposing (coordinatesFromLand)
-import Commands exposing (getMaybeValue)
+import Project.Model exposing (..)
 import RemoteData exposing (..)
 import Routing exposing (Route(..), parse, toPath)
-import Project.Model exposing (..)
-import Json.Encode as Encode
-import Ports exposing (..)
 
 
 update : Msg -> Model -> ( Model, Cmd Msg )
@@ -187,6 +188,9 @@ update msg model =
 
         SubmitPhoneNumberResponse response ->
             setProject response model ! []
+
+        CarouselMsg subMsg ->
+            { model | discoverHouseCarouselState = Carousel.update subMsg model.discoverHouseCarouselState } ! []
 
 
 urlUpdate : Model -> ( Model, Cmd Msg )

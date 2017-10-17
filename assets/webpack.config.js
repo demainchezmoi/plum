@@ -96,6 +96,8 @@ config = {
     }, {
       from: './node_modules/mdbootstrap/font/roboto', to: 'fonts'
     }, {
+      from: './node_modules/mdbootstrap/img/svg', to: 'images/svg'
+    }, {
       from: './node_modules/font-awesome/fonts', to: 'fonts'
     }]),
     new webpack.ProvidePlugin({

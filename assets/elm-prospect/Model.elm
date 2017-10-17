@@ -3,6 +3,7 @@ module Model exposing (..)
 import Routing exposing (Route)
 import RemoteData exposing (..)
 import Project.Model exposing (Project, ProjectId)
+import Bootstrap.Carousel as Carousel exposing (defaultStateOptions)
 
 
 type alias ApiToken =
@@ -38,6 +39,7 @@ type alias Model =
     , contribution : Maybe Int
     , netIncome : Maybe Int
     , phoneNumber : Maybe String
+    , discoverHouseCarouselState : Carousel.State
     }
 
 
@@ -52,4 +54,9 @@ initialModel apiToken route =
     , contribution = Nothing
     , netIncome = Nothing
     , phoneNumber = Nothing
+    , discoverHouseCarouselState =
+        Carousel.initialStateWithOptions
+            { defaultStateOptions
+                | interval = Nothing
+            }
     }

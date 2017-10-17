@@ -2,6 +2,11 @@ module Project.View exposing (..)
 
 import Ad.Model as AdModel exposing (Ad)
 import Ad.View as AdView
+import Bootstrap.Card as Card
+import Bootstrap.Carousel as Carousel
+import Bootstrap.Carousel.Slide as Slide
+import FormatNumber exposing (format)
+import FormatNumber.Locales exposing (frenchLocale)
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (onClick, onInput)
@@ -13,8 +18,6 @@ import Project.Model exposing (..)
 import RemoteData exposing (..)
 import Routing exposing (toPath, Route(..))
 import ViewHelpers exposing (..)
-import FormatNumber exposing (format)
-import FormatNumber.Locales exposing (frenchLocale)
 
 
 inLayout : Html Msg -> Html Msg -> Html Msg
@@ -325,31 +328,47 @@ discoverHouseView model project title =
         button =
             ValidateDiscoverHouse project.id updateValue |> nextStepButton
 
+        title1 =
+            "Le T4 familial par excellence"
+
         description1 =
             "D'une surface de 80m2, munie de trois chambres et d'un vaste espace commun, la Maison Léo constitue le lieu de vie idéal d'une famille moderne."
+
+        title2 =
+            "Un gage de qualité"
 
         description2 =
             "Robustes et intégralement isolés, les murs de 20cm d'épaisseur de la Maison Léo protègent votre famille du monde extérieur."
 
+        cardSlide =
+            \photo title description ->
+                Slide.config []
+                    (Slide.customContent
+                        (div
+                            [ class "card m-1 mb-2" ]
+                            [ img [ photo |> photoSrc |> src, class "img-fluid" ] []
+                            , div [ class "card-body slider-card-body" ]
+                                [ p [ class "card-title" ] [ text title ]
+                                , p [ class "card-text" ] [ text description ]
+                                ]
+                            ]
+                        )
+                    )
+
+        carousel =
+            Carousel.config CarouselMsg []
+                |> Carousel.withControls
+                |> Carousel.withIndicators
+                |> Carousel.slides
+                    [ cardSlide "maison-min.png" title1 description1
+                    , cardSlide "maison_21_nuit.jpg" title2 description2
+                    ]
+                |> Carousel.view model.discoverHouseCarouselState
+
         view =
             div []
                 [ stepInfo "Découvrez la maison Léo."
-                , div [ class "carousel" ]
-                    [ div [ class "card mt-2" ]
-                        [ img [ "maison-min.png" |> photoSrc |> src, class "img-fluid" ] []
-                        , div [ class "card-body" ]
-                            [ p [ class "card-title" ] [ text "Le T4 familial par excellence." ]
-                            , p [ class "card-text" ] [ text description1 ]
-                            ]
-                        ]
-                    , div [ class "card mt-2" ]
-                        [ img [ "maison_21_nuit.jpg" |> photoSrc |> src, class "img-fluid" ] []
-                        , div [ class "card-body" ]
-                            [ p [ class "card-title" ] [ text "Un gage de qualité." ]
-                            , p [ class "card-text" ] [ text description2 ]
-                            ]
-                        ]
-                    ]
+                , carousel
                 , nextStepInfo "Choisir mes couleurs"
                 , stepButton project DiscoverHouse button
                 ]
