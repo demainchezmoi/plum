@@ -1,3 +1,9 @@
+<%= if not @ad.active do %>
+  <div class="deactivated-ad">
+    <div class="deactivated-text">Vendu</div>
+  </div>
+<% end %>
+
 <nav>
   <h5 class="ml-header">
     <div class="container">
@@ -58,11 +64,13 @@
 
         </div>
 
-        <div class="bottom-section">
-      		<div class="text-center mt-1">
-            <%= link "Je suis intéressé(e)", to: interested_url(@ad, @conn.assigns[:current_user]), class: "btn btn-yellow-flash font-bold full-width mr-0 ml-0 z-depth-1-half", id: "interested-button" %>
+        <%= if @ad.active do %>
+          <div class="bottom-section">
+      		  <div class="text-center mt-1">
+              <%= link "Je suis intéressé(e)", to: interested_url(@ad, @conn.assigns[:current_user]), class: "btn btn-yellow-flash font-bold full-width mr-0 ml-0 z-depth-1-half", id: "interested-button" %>
+            </div>
           </div>
-        </div>
+        <% end %>
       </div>
     </div>
   </div>

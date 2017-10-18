@@ -5,6 +5,27 @@
   color: $default-color;
 }
 
+.deactivated-ad {
+  position: fixed;
+  top: 0; right: 0; bottom: 0; left: 0;
+  background-color: rgba(0, 0, 0, 0.3);
+  z-index: 2000;
+  $rotation: 7deg;
+  @extend .d-flex, .justify-content-center, .align-items-center;
+  & .deactivated-text {
+    padding: 30px;
+    background-color: rgba(0, 0, 0, 0.7);
+    color: white;
+    text-decoration: underline;
+    text-decoration-color: red;
+    font-size: 80px;
+    font-weight: 900;
+    -ms-transform: rotate($rotation); /* IE 9 */
+    -webkit-transform: rotate($rotation); /* Chrome, Safari, Opera */
+    transform: rotate($rotation);
+  }
+}
+
 .cp { cursor: pointer; }
 .gray-hover {
   &:hover, &:focus, &:active {

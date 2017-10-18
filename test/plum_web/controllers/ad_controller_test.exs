@@ -20,9 +20,9 @@ defmodule PlumWeb.AdControllerTest do
 
     test "doesn't show deactivated add", %{conn: conn, ad: ad} do
       Plum.Sales.update_ad(ad, %{active: false})
-      assert_error_sent 404, fn ->
-        get conn, ad_path(conn, :public, ad)
-      end
+      conn = get conn, ad_path(conn, :public, ad)
+      res = html_response(conn, 200)
+      assert res |> String.downcase =~ ~S(class="deactivated-ad") 
     end
   end
 
@@ -35,18 +35,25 @@ defmodule PlumWeb.AdControllerTest do
     end
 
     @tag :logged_in
-    test "creates project for user if not exists", %{conn: conn, current_user: current_user, ad: ad} do
+    test "creates project for user if it doesnt exist", %{conn: conn, current_user: current_user, ad: ad} do
       path = ad_path(conn, :interested, ad)
-      get conn, path 
+      conn = get conn, path
       assert project = Sales.get_project_by!(%{user_id: current_user.id, ad_id: ad.id})
       assert_email_sent Email.new_project_email(current_user, project)
+    end
+
+    @tag :logged_in
+    test "doesn't create project for deactivated ad", %{conn: conn, current_user: current_user, ad: ad} do
+      Plum.Sales.update_ad(ad, %{active: false})
+      assert_error_sent 404, fn -> get conn, ad_path(conn, :interested, ad) end
+      assert_raise Ecto.NoResultsError, fn -> Sales.get_project_by!(%{user_id: current_user.id, ad_id: ad.id}) end
     end
 
     @tag :logged_in
     test "doesnt create project for user if already exists", %{conn: conn, current_user: current_user, ad: ad} do
       insert(:project, ad_id: ad.id, user_id: current_user.id)
       path = ad_path(conn, :interested, ad)
-      get conn, path 
+      get conn, path
       assert project = Project |> preload([ad: :land])|> Repo.get_by(%{ad_id: ad.id, user_id: current_user.id})
       assert_email_not_sent Email.new_project_email(current_user, project)
     end
