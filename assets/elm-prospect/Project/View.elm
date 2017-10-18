@@ -32,15 +32,15 @@ inLayout nav elem =
         ]
 
 
-projectNav : ProjectId -> Html Msg
-projectNav projectId =
+projectNav : Project -> Html Msg
+projectNav project =
     div [ class "" ]
         [ h5 [ class "mb-0 ml-header row justify-content-between" ]
             [ div [ class "col font-black" ]
                 [ text " Maisons Léo"
                 ]
             , div [ class "col-auto" ]
-                [ i [ class "fa fa-bars cp", onClick (NavigateTo (ProjectRoute projectId)) ] []
+                [ i [ class "fa fa-bars cp", onClick (NavigateTo (ProjectRoute project.id)) ] []
                 ]
             ]
         ]
@@ -57,20 +57,45 @@ genericNav =
         ]
 
 
+deactivatedView : Project -> Html Msg
+deactivatedView project =
+    div []
+        [ p [ class "alert alert-warning mt-2" ]
+            [ text "L'annonce auquelle correspondait votre projet a été désactivée. Restez à l'affût pour de nouvelles opportunités !"
+            ]
+        ]
+        |> inLayout genericNav
+
+
+maybeDeactivated : Project -> Html Msg -> Html Msg
+maybeDeactivated project view =
+    case project.ad.active of
+        True ->
+            view
+
+        False ->
+            deactivatedView project
+
+
 projectPageView : Model -> Html Msg
 projectPageView model =
     case model.project of
         Failure err ->
-            inLayout genericNav (failureView err)
+            failureView err
+                |> inLayout genericNav
 
         NotAsked ->
-            inLayout genericNav notAskedView
+            notAskedView
+                |> inLayout genericNav
 
         Loading ->
-            inLayout genericNav loadingView
+            loadingView
+                |> inLayout genericNav
 
         Success project ->
-            inLayout (projectNav project.id) (projectView model project)
+            projectView model project
+                |> inLayout (projectNav project)
+                |> maybeDeactivated project
 
 
 projectHeader : Project -> Html Msg
@@ -116,7 +141,9 @@ projectStepPageView projectStep model =
         Success project ->
             case List.filter (\dStep -> dStep.step == projectStep) displaySteps of
                 dStep :: _ ->
-                    inLayout (projectNav project.id) (dStep.view model project dStep.label)
+                    dStep.view model project dStep.label
+                        |> inLayout (projectNav project)
+                        |> maybeDeactivated project
 
                 _ ->
                     inLayout genericNav (text "Erreur")

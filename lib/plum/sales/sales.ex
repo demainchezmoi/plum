@@ -45,14 +45,14 @@ defmodule Plum.Sales do
 
   ## Examples
 
-      iex> get_ad_where!(123, %{active: true})
+      iex> get_ad_by!(%{id: 123, active: true})
       %Ad{}
 
-      iex> get_ad_where!(123, %{active: false})
+      iex> get_ad_where!(%{id: 123, active: false})
       ** (Ecto.NoResultsError)
 
   """
-  def get_ad_where!(id, params), do: Repo.get_by!(Ad, Map.put(params, :id, id))
+  def get_ad_by!(params), do: Repo.get_by!(Ad, params)
 
   @doc """
   Creates a ad.

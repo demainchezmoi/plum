@@ -110,8 +110,19 @@ defmodule PlumWeb.Api.ProjectControllerTest do
     test "doesnt update project I don't own", %{conn: conn} do
       user = insert(:user)
       ad = insert(:ad)
-      project = insert(:project, ad_id: ad.id, user_id: user.id)
+      project = insert(:project, ad: ad, user: user)
 
+      project_params = %{discover_land: true}
+
+      assert_error_sent 404, fn ->
+        put conn, api_project_path(conn, :update, project), project: project_params
+      end
+    end
+
+    @tag :logged_in
+    test "doesnt update project which ad is deactivated", %{conn: conn, current_user: current_user} do
+      ad = insert(:ad, active: false)
+      project = insert(:project, ad: ad, user: current_user)
       project_params = %{discover_land: true}
 
       assert_error_sent 404, fn ->

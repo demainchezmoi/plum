@@ -42,6 +42,8 @@ defmodule PlumWeb.Api.ProjectController do
   def update(conn, %{"id" => id, "project" => project_params}) do
     current_user = conn.assigns.current_user
     project = Sales.get_project_by!(%{id: id, user_id: current_user.id})
+    Sales.get_ad_by!(%{id: project.ad.id, active: true})
+
     authorized_params = project_params |> Map.take(@updatable_fields)
 
     with {:ok, %Project{} = project} <- Sales.update_project(project, authorized_params) do
