@@ -14,11 +14,11 @@ defmodule Plum.Sales do
 
   ## Examples
 
-      iex> list_ad()
+      iex> list_ads()
       [%Ad{}, ...]
 
   """
-  def list_ad do
+  def list_ads do
     Repo.all(Ad)
   end
 

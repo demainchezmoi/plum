@@ -9,9 +9,9 @@ defmodule Plum.SalesTest do
   import Plum.Factory
 
   describe "ad" do
-    test "list_ad/0 returns all ad" do
+    test "list_ads/0 returns all ad" do
       land = insert(:land)
-      assert Sales.list_ad() |> Enum.map(& &1.id) == [land.ad.id]
+      assert Sales.list_ads() |> Enum.map(& &1.id) == [land.ad.id]
     end
 
     test "get_ad!/1 returns the ad with given id" do

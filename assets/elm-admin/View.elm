@@ -1,11 +1,12 @@
 module View exposing (..)
 
+import Dashboard.View exposing (dashboardView)
 import Html exposing (..)
 import Html.Attributes exposing (..)
+import Land.View exposing (landNewView, landShowView)
+import LandList.View exposing (landListView)
 import Messages exposing (..)
 import Model exposing (..)
-import LandList.View exposing (landListView)
-import Dashboard.View exposing (dashboardView)
 import Routing exposing (Route(..))
 
 
@@ -22,6 +23,12 @@ page model =
 
         LandListRoute ->
             landListView model
+
+        LandNewRoute ->
+            landNewView model
+
+        LandShowRoute landId ->
+            landShowView model
 
         NotFoundRoute ->
             notFoundView

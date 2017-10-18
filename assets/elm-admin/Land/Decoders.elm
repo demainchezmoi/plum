@@ -5,6 +5,11 @@ import Json.Decode.Extra exposing ((|:))
 import Land.Model exposing (Land)
 
 
+landShowDecoder : JD.Decoder Land
+landShowDecoder =
+    at [ "data" ] <| landDecoder
+
+
 landDecoder : JD.Decoder Land
 landDecoder =
     succeed
@@ -17,3 +22,4 @@ landDecoder =
         |: (field "surface" int)
         |: (field "description" string)
         |: (field "images" (list string))
+        |: (field "id" int)

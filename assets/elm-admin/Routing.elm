@@ -6,6 +6,8 @@ import UrlParser exposing (..)
 
 type Route
     = LandListRoute
+    | LandNewRoute
+    | LandShowRoute Int
     | NotFoundRoute
     | DashboardRoute
 
@@ -14,6 +16,8 @@ matchers : Parser (Route -> a) a
 matchers =
     oneOf
         [ map LandListRoute (s "lands")
+        , map LandNewRoute (s "lands" </> s "new")
+        , map LandShowRoute (s "lands" </> int)
         , map DashboardRoute (s "dashboard")
         ]
 
@@ -38,6 +42,12 @@ toPath route =
     case route of
         LandListRoute ->
             String.join "/" [ "", "lands" ]
+
+        LandNewRoute ->
+            String.join "/" [ "", "lands", "new" ]
+
+        LandShowRoute landId ->
+            String.join "/" [ "", "lands", toString landId ]
 
         DashboardRoute ->
             String.join "/" [ "", "dashboard" ]

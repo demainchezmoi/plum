@@ -1,6 +1,5 @@
 module Main exposing (..)
 
-import LandList.Commands exposing (getLandList)
 import Html
 import Messages exposing (Msg(..))
 import Model exposing (..)
@@ -22,7 +21,7 @@ init flags location =
         ( model, urlCmd ) =
             urlUpdate (initialModel apiToken currentRoute)
     in
-        model ! [ urlCmd, getLandList apiToken ]
+        model ! [ urlCmd ]
 
 
 main : Program Flags Model Msg
