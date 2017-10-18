@@ -36,8 +36,7 @@ defmodule PlumWeb.AdControllerTest do
 
     @tag :logged_in
     test "creates project for user if it doesnt exist", %{conn: conn, current_user: current_user, ad: ad} do
-      path = ad_path(conn, :interested, ad)
-      conn = get conn, path
+      get conn, ad_path(conn, :interested, ad)
       assert project = Sales.get_project_by!(%{user_id: current_user.id, ad_id: ad.id})
       assert_email_sent Email.new_project_email(current_user, project)
     end

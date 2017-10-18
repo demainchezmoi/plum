@@ -82,6 +82,6 @@ defmodule PlumWeb.Router do
 
   scope "/api", PlumWeb.Api do
     pipe_through :admin_api
-    resources "/lands", LandController, only: [:index], name: "api_land"
+    resources "/lands", LandController, only: [:index, :create, :show], name: "api_land"
   end
 end

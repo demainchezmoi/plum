@@ -6,6 +6,10 @@ defmodule PlumWeb.Api.LandView do
     %{data: render_many(lands, __MODULE__, "land.json")}
   end
 
+  def render("show.json", %{land: land}) do
+    %{data: render_one(land, __MODULE__, "land.json")}
+  end
+
   def render("land.json", %{land: land}) do
     land |> Map.take(@attributes)
   end

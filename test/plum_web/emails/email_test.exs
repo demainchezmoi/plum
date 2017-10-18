@@ -2,7 +2,6 @@ defmodule PlumWeb.EmailTest do
   use PlumWeb.ConnCase
   import Plum.Factory
   alias PlumWeb.Email
-  alias Plum.Repo
 
   test "renders welcome email" do
     user = insert(:user)

@@ -151,6 +151,22 @@ defmodule Plum.Sales do
   def get_land!(id), do: Repo.get!(Land, id)
 
   @doc """
+  Gets a single land by attributes.
+
+  Raises `Ecto.NoResultsError` if the Ad does not exist with those attributes.
+
+  ## Examples
+
+      iex> get_land_by!(%{id: 123, active: true})
+      %Ad{}
+
+      iex> get_land_where!(%{id: 123, active: false})
+      ** (Ecto.NoResultsError)
+
+  """
+  def get_land_by!(params), do: Repo.get_by!(Land, params)
+
+  @doc """
   Creates a land.
 
   ## Examples

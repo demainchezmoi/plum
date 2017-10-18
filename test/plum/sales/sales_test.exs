@@ -9,7 +9,6 @@ defmodule Plum.SalesTest do
   import Plum.Factory
 
   describe "ad" do
-
     test "list_ad/0 returns all ad" do
       land = insert(:land)
       assert Sales.list_ad() |> Enum.map(& &1.id) == [land.ad.id]
@@ -75,7 +74,6 @@ defmodule Plum.SalesTest do
   end
 
   describe "lands" do
-
     test "list_lands/0 returns all lands" do
       land = insert(:land)
       assert Sales.list_lands() |> Enum.map(& &1.id) == [land.id]
@@ -84,6 +82,16 @@ defmodule Plum.SalesTest do
     test "get_land!/1 returns the land with given id" do
       land = insert(:land)
       assert Sales.get_land!(land.id).id == land.id
+    end
+
+    test "get_land_by!/2 returns the land with given id" do
+      land = insert(:land)
+      assert Sales.get_land_by!(%{id: land.id}).id == land.id
+    end
+
+    test "get_land_by!/2 raises when ad doesn't match" do
+      land = insert(:land)
+      assert_raise Ecto.NoResultsError, fn -> Sales.get_land_by!(%{id: land.id, surface: -1}) end
     end
 
     test "create_land/1 with valid data creates a land" do
@@ -246,7 +254,7 @@ defmodule Plum.SalesTest do
     %{id: user_id} = insert(:user)
     %{id: land_id} = insert(:land)
     %{id: ad_id} = insert(:ad, land_id: land_id)
-    %{id: project_id} = insert(:project, user_id: user_id, ad_id: ad_id)
+    %{id: _project_id} = insert(:project, user_id: user_id, ad_id: ad_id)
 
     params = %{user_id: user_id, ad_id: ad_id}
     assert {:found, project = %Project{id: _project_id}} = Sales.find_or_create_project(params)
