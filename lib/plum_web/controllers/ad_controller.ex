@@ -15,9 +15,7 @@ defmodule PlumWeb.AdController do
 
   def login(conn, %{"id" => id}) do
     ad = Sales.get_ad_by!(%{id: id, active: true}) |> Repo.preload(:land)
-    conn
-    |> put_layout("landing.html")
-    |> render("login.html", ad: ad)
+    conn |> render("login.html", ad: ad)
   end
 
   def interested(conn, %{"id" => id}) do

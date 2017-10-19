@@ -1,12 +1,10 @@
-<%= Phoenix.View.render PlumWeb.SharedView, "navbar-landing.html", active: nil %>
-
 <!-- {{{ Header -->
 <header class="">
   <section class="intro-1" style="max-height: 550px;">
     <div class="full-bg-img flex-center">
       <div class="container">
         <ul>
-          <li><h1 class="font-bold" style="color: white">Politique de confidentialité</h1></li>
+          <li><h1 class="font-bold text-shadow white-text">Politique de confidentialité</h1></li>
         </ul>
       </div>
     </div>
@@ -22,4 +20,3 @@
   </div>
 </section>
 <!-- }}} -->
-

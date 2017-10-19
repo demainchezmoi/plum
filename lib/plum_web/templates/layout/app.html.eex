@@ -9,33 +9,12 @@
 
     <title>Maisons Léo</title>
     <link rel="stylesheet" href="<%= static_path(@conn, "/css/app.css") %>">
-    <%= if current_user = @conn.assigns[:current_user] do %>
-      <%= tag :meta, name: "token", content: Phoenix.Token.sign(@conn, "user", current_user.id) %>
-    <% end %>
   </head>
 
   <body>
-
-    <%= if get_flash(@conn, :info) do %>
-      <div class="alert alert-main alert-primary alert-dismissible" role="alert">
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-        <%= get_flash(@conn, :info) %>
-      </div>
-    <% end %>
-
-    <%= if get_flash(@conn, :error) do %>
-      <div class="alert alert-main alert-danger alert-dismissible" role="alert">
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-        <%= get_flash(@conn, :error) %>
-      </div>
-    <% end %>
-
-    <%= render @view_module, @view_template, assigns %>
-
+    <main role="main">
+      <%= render @view_module, @view_template, assigns %>
+    </main>
     <script src="<%= static_path(@conn, "/js/app.js") %>"></script>
   </body>
 </html>
