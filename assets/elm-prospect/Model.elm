@@ -34,8 +34,6 @@ type alias Model =
     , error : Maybe String
     , apiToken : ApiToken
     , route : Route
-    , houseColor1 : Maybe String
-    , houseColor2 : Maybe String
     , contribution : Maybe Int
     , netIncome : Maybe Int
     , phoneNumber : Maybe String
@@ -49,8 +47,6 @@ initialModel apiToken route =
     , error = Nothing
     , apiToken = apiToken
     , route = route
-    , houseColor1 = Nothing
-    , houseColor2 = Nothing
     , contribution = Nothing
     , netIncome = Nothing
     , phoneNumber = Nothing

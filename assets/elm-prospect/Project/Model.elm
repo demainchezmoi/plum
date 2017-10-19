@@ -20,8 +20,6 @@ type alias Project =
     , discover_house : Bool
     , discover_land : Bool
     , steps : List ProjectStepInfo
-    , house_color_1 : Maybe String
-    , house_color_2 : Maybe String
     , contribution : Int
     , net_income : Maybe Int
     , phone_call : Bool
@@ -36,10 +34,8 @@ type ProjectStepStatus
 
 
 type ProjectStep
-    = Welcome
-    | DiscoverLand
+    = DiscoverLand
     | DiscoverHouse
-    | ConfigureHouse
     | EvaluateFunding
     | PhoneCall
     | Quotation
@@ -65,17 +61,11 @@ stepState project projectStep =
 urlToProjectStep : String -> Maybe ProjectStep
 urlToProjectStep str =
     case str of
-        "bienvenue" ->
-            Just Welcome
-
         "terrain" ->
             Just DiscoverLand
 
         "la-maison" ->
             Just DiscoverHouse
-
-        "configurer" ->
-            Just ConfigureHouse
 
         "capacite-financement" ->
             Just EvaluateFunding
@@ -114,17 +104,11 @@ urlToProjectStep str =
 stringToProjectStep : String -> Maybe ProjectStep
 stringToProjectStep str =
     case str of
-        "welcome" ->
-            Just Welcome
-
         "discover_land" ->
             Just DiscoverLand
 
         "discover_house" ->
             Just DiscoverHouse
-
-        "configure_house" ->
-            Just ConfigureHouse
 
         "evaluate_funding" ->
             Just EvaluateFunding
@@ -179,17 +163,11 @@ stringToProjectStepStatus str =
 projectStepToUrl : ProjectStep -> String
 projectStepToUrl step =
     case step of
-        Welcome ->
-            "bienvenue"
-
         DiscoverLand ->
             "terrain"
 
         DiscoverHouse ->
             "la-maison"
-
-        ConfigureHouse ->
-            "configurer"
 
         EvaluateFunding ->
             "capacite-financement"

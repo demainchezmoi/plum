@@ -48,7 +48,6 @@ genericNav : Html Msg
 genericNav =
     h5 [ class "ml-header row justify-content-between" ]
         [ div [ class "col" ] [ text " Maisons Léo" ]
-        , div [ class "col-auto" ] []
         ]
 
 
@@ -89,7 +88,7 @@ projectPageView model =
 
         Success project ->
             projectView model project
-                |> inLayout (projectNav project)
+                |> inLayout genericNav
                 |> maybeDeactivated project
 
 
@@ -134,29 +133,31 @@ projectStepPageView projectStep model =
             inLayout genericNav loadingView
 
         Success project ->
-            case List.filter (\dStep -> dStep.step == projectStep) displaySteps of
-                dStep :: _ ->
-                    dStep.view model project dStep.label
-                        |> inLayout (projectNav project)
-                        |> maybeDeactivated project
+            let
+                stepsWithIndex =
+                    List.indexedMap (,) displaySteps
+            in
+                case List.filter (\( _, dStep ) -> dStep.step == projectStep) stepsWithIndex of
+                    ( i, dStep ) :: _ ->
+                        dStep.view model project dStep.label (i + 1)
+                            |> inLayout (projectNav project)
+                            |> maybeDeactivated project
 
-                _ ->
-                    inLayout genericNav (text "Erreur")
+                    _ ->
+                        inLayout genericNav (text "Erreur")
 
 
 type alias DisplayStep =
     { step : ProjectStep
-    , view : Model -> Project -> String -> Html Msg
+    , view : Model -> Project -> String -> Int -> Html Msg
     , label : String
     }
 
 
 displaySteps : List DisplayStep
 displaySteps =
-    [ { step = Welcome, view = welcomeView, label = "Bienvenue dans votre espace" }
+    [ { step = DiscoverHouse, view = discoverHouseView, label = "Découvrir la maison" }
     , { step = DiscoverLand, view = discoverLandView, label = "Découvrir le terrain" }
-    , { step = DiscoverHouse, view = discoverHouseView, label = "Découvrir la maison" }
-    , { step = ConfigureHouse, view = configureHouseView, label = "Mon choix d'enduits" }
     , { step = EvaluateFunding, view = evaluateFundingView, label = "Ma finançabilité" }
     , { step = PhoneCall, view = phoneCallView, label = "Premier contact" }
     , { step = Quotation, view = quotationView, label = "Mon devis" }
@@ -228,7 +229,7 @@ nextStepInfo txt =
 
 stepNum : Int -> Html Msg
 stepNum num =
-    div [ class "text-secondary small mb-2" ] [ text <| "Étape " ++ (toString num) ++ "/14" ]
+    div [ class "text-secondary small mb-2" ] [ text <| "Étape " ++ (toString num) ++ "/12" ]
 
 
 stepView : Model -> Project -> String -> Int -> Route -> Html Msg -> Html Msg
@@ -279,69 +280,13 @@ stepButton project step button =
             text ""
 
 
-welcomeView : Model -> Project -> String -> Html Msg
-welcomeView model project title =
-    let
-        button =
-            (NavigateTo (ProjectStepRoute project.id DiscoverLand)) |> nextStepButton
-
-        view =
-            div []
-                [ stepInfo ("Bienvenue dans votre espace Maisons Léo pour l'annonce maison plus terrain à " ++ AdView.shortAddText project.ad ++ ".")
-                , div [ class "card mt-2" ]
-                    [ div [ class "card-body" ]
-                        [ p [ class "card-title" ]
-                            [ i [ class "fa fa-home mr-2" ] []
-                            , text <| "Passez toutes les étapes et faites construire votre maison à " ++ AdView.shortAddText project.ad ++ "."
-                            ]
-                        , div [ class "card-text" ]
-                            [ p [] [ text "De la découverte du terrain à la signature du contrat nous avons organisé votre projet de construction Maison Léo en étapes." ]
-                            , p [] [ text "Les annonces ne restent pas longtemps en ligne : soyez les premiers à passer les étapes et profitez de l'opportunité !" ]
-                            ]
-                        ]
-                    ]
-                , nextStepInfo "Découvrir le terrain"
-                , button
-                ]
-    in
-        stepView model project title 1 (ProjectRoute project.id) view
-
-
 landLocation : Land -> String
 landLocation land =
     String.join "" [ land.city, " ", "(", land.department, ")" ]
 
 
-discoverLandView : Model -> Project -> String -> Html Msg
-discoverLandView model project title =
-    let
-        updateValue =
-            Json.Encode.object [ ( "discover_land", Json.Encode.bool True ) ]
-
-        button : Html Msg
-        button =
-            ValidateDiscoverLand project.id updateValue |> nextStepButton
-
-        view =
-            div []
-                [ stepInfo "Voici l'opportunité de terrain que nous vous proposons."
-                , div [ class "card mt-2" ]
-                    [ div [ id "map", class "img-flex" ] []
-                    , div [ class "card-body" ]
-                        [ span [ class "pull-right" ] [ project.ad.land.price |> toFloat >> (format { frenchLocale | decimals = 0 }) >> (\p -> p ++ " €") |> text ]
-                        , p [ class "card-title" ] [ "Terrain à " ++ (project.ad.land |> landLocation) |> text ]
-                        , div [ class "card-text" ] [ text project.ad.land.description ]
-                        ]
-                    ]
-                , nextStepInfo "Découvrir la maison"
-                , stepButton project DiscoverLand button
-                ]
-    in
-        stepView model project title 2 (ProjectStepRoute project.id Welcome) view
-
-
-discoverHouseView : Model -> Project -> String -> Html Msg
-discoverHouseView model project title =
+discoverHouseView : Model -> Project -> String -> Int -> Html Msg
+discoverHouseView model project title step =
     let
         updateValue =
             Json.Encode.object [ ( "discover_house", Json.Encode.bool True ) ]
@@ -394,118 +339,39 @@ discoverHouseView model project title =
                 , stepButton project DiscoverHouse button
                 ]
     in
-        stepView model project title 3 (ProjectStepRoute project.id DiscoverLand) view
+        stepView model project title step (ProjectRoute project.id) view
 
 
-type alias ColorChoices =
-    List ( String, String, String )
-
-
-colorRadio : String -> String -> Bool -> (String -> Msg) -> String -> Html Msg
-colorRadio inputName inputValue inputChecked action inputLabel =
-    div [ class "form-check" ]
-        [ label [ class "form-check-label" ]
-            [ input
-                [ type_ "radio"
-                , name inputName
-                , value inputValue
-                , id (inputName ++ "_" ++ inputValue)
-                , class "form-check-input"
-                , checked inputChecked
-                , onClick (action inputValue)
-                ]
-                []
-            , text inputLabel
-            ]
-        ]
-
-
-colorRadios : ColorChoices -> (String -> Msg) -> Maybe String -> Maybe String -> List (Html Msg)
-colorRadios colorChoices act modelField projectField =
+discoverLandView : Model -> Project -> String -> Int -> Html Msg
+discoverLandView model project title step =
     let
-        inputChecked =
-            \iC ->
-                case ( modelField, projectField ) of
-                    ( Just c, _ ) ->
-                        c == iC
+        updateValue =
+            Json.Encode.object [ ( "discover_land", Json.Encode.bool True ) ]
 
-                    ( _, Just c ) ->
-                        c == iC
-
-                    _ ->
-                        False
-
-        mapper =
-            \( iSrc, iLabel, iName ) -> (colorRadio iName iSrc (inputChecked iSrc) act iLabel)
-    in
-        colorChoices |> List.map mapper
-
-
-colorImage : Maybe String -> Maybe String -> Html Msg
-colorImage modelField projectField =
-    case ( modelField, projectField ) of
-        ( Just c, _ ) ->
-            img [ class "photo-stack img-fluid", ("house_colors/" ++ c ++ ".png") |> photoSrc |> src ] []
-
-        ( _, Just c ) ->
-            img [ class "photo-stack img-fluid", ("house_colors/" ++ c ++ ".png") |> photoSrc |> src ] []
-
-        _ ->
-            span [] []
-
-
-configureHouseView : Model -> Project -> String -> Html Msg
-configureHouseView model project title =
-    let
-        backgroundColors =
-            [ ( "rotterdam", "Rotterdam", "color-1" )
-            , ( "bogotta", "Bogotta", "color-1" )
-            , ( "barcelona", "Barcelone", "color-1" )
-            ]
-
-        patternColors =
-            [ ( "rotterdam-neo", "Rotterdam", "color-2" )
-            , ( "bogotta-neo", "Bogotta", "color-2" )
-            , ( "barcelona-neo", "Barcelone", "color-2" )
-            ]
-
-        photo0 =
-            img [ src (photoSrc "Maison-leo-configurateur-0.png"), class "img-fluid" ] []
-
-        photo1 =
-            colorImage model.houseColor1 project.house_color_1
-
-        photo2 =
-            colorImage model.houseColor2 project.house_color_2
+        button : Html Msg
+        button =
+            ValidateDiscoverLand project.id updateValue |> nextStepButton
 
         view =
             div []
-                [ stepInfo "Faites-vous plaisir : choisissez les enduits de votre maison Léo, en une ou deux couleurs. Vous pourrez toujours changer d'avis !"
+                [ stepInfo "Voici l'opportunité de terrain que nous vous proposons."
                 , div [ class "card mt-2" ]
-                    [ div [ class "position-relative" ] [ photo0, photo1, photo2 ]
+                    [ div [ id "map", class "img-flex" ] []
                     , div [ class "card-body" ]
-                        [ p [ class "card-title" ] [ text "Choisissez vos couleurs d'enduits." ]
-                        , div [ class "row card-text" ]
-                            [ div [ class "col-6" ]
-                                [ p [ class "font-bold" ] [ text "Fond" ]
-                                , div [] <| colorRadios backgroundColors SetHouseColor1 model.houseColor1 project.house_color_1
-                                ]
-                            , div [ class "col-6" ]
-                                [ p [ class "font-bold" ] [ text "Motif" ]
-                                , div [] <| colorRadios patternColors SetHouseColor2 model.houseColor2 project.house_color_2
-                                ]
-                            ]
+                        [ span [ class "pull-right" ] [ project.ad.land.price |> toFloat >> (format { frenchLocale | decimals = 0 }) >> (\p -> p ++ " €") |> text ]
+                        , p [ class "card-title" ] [ "Terrain à " ++ (project.ad.land |> landLocation) |> text ]
+                        , div [ class "card-text" ] [ text project.ad.land.description ]
                         ]
                     ]
-                , nextStepInfo "Ma finançabilité"
-                , stepButton project ConfigureHouse (ValidateConfigureHouse project.id |> nextStepButton)
+                , nextStepInfo "Découvrir la maison"
+                , stepButton project DiscoverLand button
                 ]
     in
-        stepView model project title 4 (ProjectStepRoute project.id DiscoverHouse) view
+        stepView model project title step (ProjectStepRoute project.id EvaluateFunding) view
 
 
-evaluateFundingView : Model -> Project -> String -> Html Msg
-evaluateFundingView model project title =
+evaluateFundingView : Model -> Project -> String -> Int -> Html Msg
+evaluateFundingView model project title step =
     let
         contributionValue =
             case model.contribution of
@@ -556,11 +422,11 @@ evaluateFundingView model project title =
                 , stepButton project EvaluateFunding (ValidateEvaluateFunding project.id |> nextStepButton)
                 ]
     in
-        stepView model project title 5 (ProjectStepRoute project.id ConfigureHouse) view
+        stepView model project title step (ProjectStepRoute project.id PhoneCall) view
 
 
-phoneCallView : Model -> Project -> String -> Html Msg
-phoneCallView model project title =
+phoneCallView : Model -> Project -> String -> Int -> Html Msg
+phoneCallView model project title step =
     let
         phoneNumberValue =
             case model.phoneNumber of
@@ -619,76 +485,76 @@ phoneCallView model project title =
                 , button
                 ]
     in
-        stepView model project title 6 (ProjectStepRoute project.id EvaluateFunding) view
+        stepView model project title step (ProjectStepRoute project.id EvaluateFunding) view
 
 
-quotationView : Model -> Project -> String -> Html Msg
-quotationView model project title =
+quotationView : Model -> Project -> String -> Int -> Html Msg
+quotationView model project title step =
     let
         view =
             div [] []
     in
-        stepView model project title 7 (ProjectStepRoute project.id PhoneCall) view
+        stepView model project title step (ProjectStepRoute project.id PhoneCall) view
 
 
-fundingView : Model -> Project -> String -> Html Msg
-fundingView model project title =
+fundingView : Model -> Project -> String -> Int -> Html Msg
+fundingView model project title step =
     let
         view =
             div [] []
     in
-        stepView model project title 8 (ProjectStepRoute project.id Quotation) view
+        stepView model project title step (ProjectStepRoute project.id Quotation) view
 
 
-visitLandView : Model -> Project -> String -> Html Msg
-visitLandView model project title =
+visitLandView : Model -> Project -> String -> Int -> Html Msg
+visitLandView model project title step =
     let
         view =
             div [] []
     in
-        stepView model project title 9 (ProjectStepRoute project.id Funding) view
+        stepView model project title step (ProjectStepRoute project.id Funding) view
 
 
-contractView : Model -> Project -> String -> Html Msg
-contractView model project title =
+contractView : Model -> Project -> String -> Int -> Html Msg
+contractView model project title step =
     let
         view =
             div [] []
     in
-        stepView model project title 10 (ProjectStepRoute project.id VisitLand) view
+        stepView model project title step (ProjectStepRoute project.id VisitLand) view
 
 
-permitView : Model -> Project -> String -> Html Msg
-permitView model project title =
+permitView : Model -> Project -> String -> Int -> Html Msg
+permitView model project title step =
     let
         view =
             div [] []
     in
-        stepView model project title 11 (ProjectStepRoute project.id Contract) view
+        stepView model project title step (ProjectStepRoute project.id Contract) view
 
 
-buildingView : Model -> Project -> String -> Html Msg
-buildingView model project title =
+buildingView : Model -> Project -> String -> Int -> Html Msg
+buildingView model project title step =
     let
         view =
             div [] []
     in
-        stepView model project title 12 (ProjectStepRoute project.id Permit) view
+        stepView model project title step (ProjectStepRoute project.id Permit) view
 
 
-keysView : Model -> Project -> String -> Html Msg
-keysView model project title =
+keysView : Model -> Project -> String -> Int -> Html Msg
+keysView model project title step =
     let
         view =
             div [] []
     in
-        stepView model project title 13 (ProjectStepRoute project.id Building) view
+        stepView model project title step (ProjectStepRoute project.id Building) view
 
 
-afterSalesView : Model -> Project -> String -> Html Msg
-afterSalesView model project title =
+afterSalesView : Model -> Project -> String -> Int -> Html Msg
+afterSalesView model project title step =
     let
         view =
             div [] []
     in
-        stepView model project title 14 (ProjectStepRoute project.id Keys) view
+        stepView model project title step (ProjectStepRoute project.id Keys) view

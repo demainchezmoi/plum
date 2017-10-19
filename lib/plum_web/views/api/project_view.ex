@@ -11,8 +11,6 @@ defmodule PlumWeb.Api.ProjectView do
     contribution
     discover_house
     discover_land
-    house_color_1
-    house_color_2
     id
     net_income
     phone_call

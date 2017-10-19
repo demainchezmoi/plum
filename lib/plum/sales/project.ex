@@ -9,8 +9,6 @@ defmodule Plum.Sales.Project do
 
     field :discover_land, :boolean, default: false
     field :discover_house, :boolean, default: false
-    field :house_color_1, :string
-    field :house_color_2, :string
     field :contribution, :integer, default: 0
     field :net_income, :integer
     field :phone_call, :boolean, default: false
@@ -31,8 +29,6 @@ defmodule Plum.Sales.Project do
   end
 
   @optional_fields ~w(
-    house_color_1
-    house_color_2
     net_income
     phone_number
   )a

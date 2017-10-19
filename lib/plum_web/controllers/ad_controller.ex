@@ -31,7 +31,7 @@ defmodule PlumWeb.AdController do
       Email.new_project_email(current_user, project) |> Mailer.deliver
     end
 
-    path = page_path(conn, :prospect, ["projets", to_string(project.id), "bienvenue"])
+    path = page_path(conn, :prospect, ["projets", to_string(project.id), "la-maison"])
     conn |> redirect(to: path)
   end
 end

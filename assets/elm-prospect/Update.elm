@@ -64,12 +64,6 @@ update msg model =
         NavigateTo route ->
             model ! [ removeLandMap (), Navigation.newUrl <| toPath route ]
 
-        SetHouseColor1 color ->
-            { model | houseColor1 = Just color } ! []
-
-        SetHouseColor2 color ->
-            { model | houseColor2 = Just color } ! []
-
         SetContribution contribution ->
             case String.toInt contribution of
                 Ok intContribution ->
@@ -89,23 +83,14 @@ update msg model =
         SetPhoneNumber phoneNumber ->
             { model | phoneNumber = Just phoneNumber } ! []
 
-        ValidateDiscoverLand projectId value ->
-            model ! [ updateProjectWithCallback model.apiToken projectId value ValidateDiscoverLandResponse ]
-
-        ValidateDiscoverLandResponse response ->
-            let
-                newModel =
-                    model |> setProject response
-            in
-                case response of
-                    Success project ->
-                        update (NavigateTo (ProjectStepRoute project.id DiscoverHouse)) newModel
-
-                    _ ->
-                        newModel ! []
-
         ValidateDiscoverHouse projectId value ->
-            model ! [ updateProjectWithCallback model.apiToken projectId value ValidateDiscoverHouseResponse ]
+            model
+                ! [ updateProjectWithCallback
+                        model.apiToken
+                        projectId
+                        value
+                        ValidateDiscoverHouseResponse
+                  ]
 
         ValidateDiscoverHouseResponse response ->
             let
@@ -114,35 +99,36 @@ update msg model =
             in
                 case response of
                     Success project ->
-                        update (NavigateTo (ProjectStepRoute project.id ConfigureHouse)) newModel
+                        update
+                            (NavigateTo
+                                (ProjectStepRoute project.id DiscoverLand)
+                            )
+                            newModel
 
                     _ ->
                         newModel ! []
 
-        ValidateConfigureHouse projectId ->
-            let
-                value =
-                    (getMaybeValue "house_color_1" model.houseColor1 Encode.string)
-                        ++ (getMaybeValue "house_color_2" model.houseColor2 Encode.string)
-                        |> Encode.object
-            in
-                model ! [ updateProjectWithCallback model.apiToken projectId value ValidateConfigureHouseResponse ]
+        ValidateDiscoverLand projectId value ->
+            model
+                ! [ updateProjectWithCallback
+                        model.apiToken
+                        projectId
+                        value
+                        ValidateDiscoverLandResponse
+                  ]
 
-        ValidateConfigureHouseResponse response ->
+        ValidateDiscoverLandResponse response ->
             let
                 newModel =
-                    model
-                        |> setProject response
-                        |> setHouseColors Nothing Nothing
+                    model |> setProject response
             in
                 case response of
                     Success project ->
-                        case stepState project ConfigureHouse of
-                            Checked ->
-                                update (NavigateTo (ProjectStepRoute project.id EvaluateFunding)) newModel
-
-                            _ ->
-                                newModel ! []
+                        update
+                            (NavigateTo
+                                (ProjectStepRoute project.id EvaluateFunding)
+                            )
+                            newModel
 
                     _ ->
                         newModel ! []
@@ -154,7 +140,13 @@ update msg model =
                         ++ (getMaybeValue "net_income" model.netIncome Encode.int)
                         |> Encode.object
             in
-                model ! [ updateProjectWithCallback model.apiToken projectId value ValidateEvaluateFundingResponse ]
+                model
+                    ! [ updateProjectWithCallback
+                            model.apiToken
+                            projectId
+                            value
+                            ValidateEvaluateFundingResponse
+                      ]
 
         ValidateEvaluateFundingResponse response ->
             let
@@ -165,7 +157,11 @@ update msg model =
                     Success project ->
                         case stepState project EvaluateFunding of
                             Checked ->
-                                update (NavigateTo (ProjectStepRoute project.id PhoneCall)) newModel
+                                update
+                                    (NavigateTo
+                                        (ProjectStepRoute project.id PhoneCall)
+                                    )
+                                    newModel
 
                             _ ->
                                 newModel ! []
@@ -184,13 +180,23 @@ update msg model =
                             (getMaybeValue "phone_number" model.phoneNumber Encode.string)
                                 |> Encode.object
                     in
-                        model ! [ updateProjectWithCallback model.apiToken projectId value SubmitPhoneNumberResponse ]
+                        model
+                            ! [ updateProjectWithCallback
+                                    model.apiToken
+                                    projectId
+                                    value
+                                    SubmitPhoneNumberResponse
+                              ]
 
         SubmitPhoneNumberResponse response ->
             setProject response model ! []
 
         CarouselMsg subMsg ->
-            { model | discoverHouseCarouselState = Carousel.update subMsg model.discoverHouseCarouselState } ! []
+            { model
+                | discoverHouseCarouselState =
+                    Carousel.update subMsg model.discoverHouseCarouselState
+            }
+                ! []
 
 
 urlUpdate : Model -> ( Model, Cmd Msg )
@@ -199,25 +205,37 @@ urlUpdate model =
         ProjectRoute projectId ->
             model
                 ! [ ensureProject model projectId
-                  , mixpanel ( "PROJECT", Encode.object [ ( "id", projectId |> toString |> Encode.string ) ] )
+                  , mixpanel
+                        ( "PROJECT"
+                        , Encode.object [ ( "id", projectId |> toString |> Encode.string ) ]
+                        )
                   ]
 
         ProjectStepRoute projectId DiscoverHouse ->
             model
                 ! [ ensureProjectWithCallback model projectId DiscoverHouseProjectResponse
-                  , mixpanel ( "PROJECT_STEP", Encode.object [ ( "step", DiscoverHouse |> toString |> Encode.string ) ] )
+                  , mixpanel
+                        ( "PROJECT_STEP"
+                        , Encode.object [ ( "step", DiscoverHouse |> toString |> Encode.string ) ]
+                        )
                   ]
 
         ProjectStepRoute projectId DiscoverLand ->
             model
                 ! [ ensureProjectWithCallback model projectId DiscoverLandProjectResponse
-                  , mixpanel ( "PROJECT_STEP", Encode.object [ ( "step", DiscoverLand |> toString |> Encode.string ) ] )
+                  , mixpanel
+                        ( "PROJECT_STEP"
+                        , Encode.object [ ( "step", DiscoverLand |> toString |> Encode.string ) ]
+                        )
                   ]
 
         ProjectStepRoute projectId projectStep ->
             model
                 ! [ ensureProject model projectId
-                  , mixpanel ( "PROJECT_STEP", Encode.object [ ( "step", projectStep |> toString |> Encode.string ) ] )
+                  , mixpanel
+                        ( "PROJECT_STEP"
+                        , Encode.object [ ( "step", projectStep |> toString |> Encode.string ) ]
+                        )
                   ]
 
         _ ->
@@ -237,8 +255,3 @@ setProject response model =
 
         _ ->
             { model | project = response }
-
-
-setHouseColors : Maybe String -> Maybe String -> Model -> Model
-setHouseColors color1 color2 model =
-    { model | houseColor1 = color1, houseColor2 = color2 }

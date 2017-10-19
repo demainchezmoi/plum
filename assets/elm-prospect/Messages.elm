@@ -17,8 +17,6 @@ type Msg
     | DiscoverLandProjectResponse (WebData Project)
     | DiscoverHouseProjectResponse (WebData Project)
     | UpdateProject ProjectId Value
-    | SetHouseColor1 String
-    | SetHouseColor2 String
     | SetNetIncome String
     | SetContribution String
     | SetPhoneNumber String
@@ -26,8 +24,6 @@ type Msg
     | ValidateDiscoverLandResponse (WebData Project)
     | ValidateDiscoverHouse ProjectId Value
     | ValidateDiscoverHouseResponse (WebData Project)
-    | ValidateConfigureHouse ProjectId
-    | ValidateConfigureHouseResponse (WebData Project)
     | ValidateEvaluateFunding ProjectId
     | ValidateEvaluateFundingResponse (WebData Project)
     | SubmitPhoneNumber ProjectId

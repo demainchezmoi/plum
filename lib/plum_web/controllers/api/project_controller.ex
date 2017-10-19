@@ -10,8 +10,6 @@ defmodule PlumWeb.Api.ProjectController do
     contribution
     discover_house
     discover_land
-    house_color_1
-    house_color_2
     net_income
     phone_call
     phone_number
