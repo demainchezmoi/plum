@@ -249,7 +249,7 @@ setProject response model =
             { model
                 | project = response
                 , netIncome = project.net_income
-                , contribution = Just project.contribution
+                , contribution = project.contribution
                 , phoneNumber = project.phone_number
             }
 

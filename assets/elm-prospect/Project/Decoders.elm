@@ -56,7 +56,7 @@ projectDecoder =
             |: (field "discover_land" bool)
             |: (field "discover_house" bool)
             |: (field "steps" (list projectStepInfoDecoder))
-            |: (field "contribution" int)
+            |: (field "contribution" (maybe int))
             |: (field "net_income" (maybe int))
             |: (field "phone_call" bool)
             |: (field "phone_number" (maybe string))

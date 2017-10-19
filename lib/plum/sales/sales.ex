@@ -388,8 +388,8 @@ defmodule Plum.Sales do
 
   def get_project_steps(%Project{} = project) do
     [
-      get_discover_land_step(project),
       get_discover_house_step(project),
+      get_discover_land_step(project),
       get_evaluate_funding(project),
       get_phone_call(project),
       get_quotation(project),
@@ -404,8 +404,8 @@ defmodule Plum.Sales do
     |> set_project_steps_status
   end
 
-  defp get_discover_land_step(p), do: %{name: "discover_land", valid: p.discover_land}
   defp get_discover_house_step(p), do: %{name: "discover_house", valid: p.discover_house}
+  defp get_discover_land_step(p), do: %{name: "discover_land", valid: p.discover_land}
   defp get_evaluate_funding(p), do: %{name: "evaluate_funding", valid: (not is_nil p.net_income) and (not is_nil p.contribution)}
   defp get_phone_call(p), do: %{name: "phone_call", valid: p.phone_call}
   defp get_quotation(_project), do: %{name: "quotation", valid: false}

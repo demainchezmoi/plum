@@ -9,7 +9,7 @@ defmodule Plum.Sales.Project do
 
     field :discover_land, :boolean, default: false
     field :discover_house, :boolean, default: false
-    field :contribution, :integer, default: 0
+    field :contribution, :integer
     field :net_income, :integer
     field :phone_call, :boolean, default: false
     field :phone_number, :string
@@ -30,12 +30,12 @@ defmodule Plum.Sales.Project do
 
   @optional_fields ~w(
     net_income
+    contribution
     phone_number
   )a
 
   @required_fields ~w(
     ad_id
-    contribution
     discover_house
     discover_land
     phone_call

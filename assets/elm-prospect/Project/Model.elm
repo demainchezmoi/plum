@@ -20,7 +20,7 @@ type alias Project =
     , discover_house : Bool
     , discover_land : Bool
     , steps : List ProjectStepInfo
-    , contribution : Int
+    , contribution : Maybe Int
     , net_income : Maybe Int
     , phone_call : Bool
     , phone_number : Maybe String
