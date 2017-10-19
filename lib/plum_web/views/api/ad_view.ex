@@ -11,7 +11,6 @@ defmodule PlumWeb.Api.AdView do
     active
     land
     house_price
-    land_adaptation_price
   )a
 
   def render("index.json", %{ads: ads}) do

@@ -17,7 +17,6 @@ defmodule Plum.Factory do
     %Ad{
       active: true,
       house_price: 89_000,
-      land_adaptation_price: 15_000,
     }
   end
 

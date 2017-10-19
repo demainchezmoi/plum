@@ -9,7 +9,7 @@
     <div class="container">
       <div class="row justify-content-center">
         <div class="col col-md-10 col-lg-8">
-          <i class="fa fa-home"></i>&nbsp;Maisons Léo
+          Maisons Léo
         </div>
       </div>
     </div>
@@ -27,7 +27,7 @@
               Devenez propriétaire à <%= @ad.land.city %>&nbsp;(<%= @ad.land.department %>)
             </h3>
             <h1 class="text-center responsive-h1 font-thin mt-1 mb-0">
-              <span class=""><%= raw Number.Currency.number_to_currency(@ad.land.price + @ad.house_price + @ad.land_adaptation_price) %></span>
+              <span class=""><%= raw Number.Currency.number_to_currency(@ad.land.price + @ad.house_price) %><sup class="hors-frais">hors frais</sup></span>
             </h1>
           </div>
 
@@ -49,15 +49,6 @@
               </div>
               <div class="col-auto text-right">
                 <%= raw Number.Currency.number_to_currency(@ad.land.price) %>
-              </div>
-            </div>
-
-            <div class="row justify-content-between dark-gray-text font-black">
-              <div class="col">
-                Adaptation au sol
-              </div>
-              <div class="col-auto text-right">
-                ~ <%= raw Number.Currency.number_to_currency(@ad.land_adaptation_price) %>
               </div>
             </div>
           </div>
