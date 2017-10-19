@@ -6,6 +6,7 @@ import Routing exposing (Route)
 import RemoteData exposing (..)
 import LandList.Model exposing (LandList)
 import Land.Model exposing (Land)
+import Form exposing (Form)
 
 
 type Msg
@@ -13,3 +14,4 @@ type Msg
     | UrlChange Navigation.Location
     | NavigateTo Route
     | LandResponse (WebData Land)
+    | FormMsg Form.Msg

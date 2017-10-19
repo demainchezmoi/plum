@@ -5,8 +5,11 @@ import Model exposing (..)
 import Routing exposing (Route(..), parse, toPath)
 import Navigation
 import Land.Commands exposing (ensureLand)
+import Land.Model exposing (validation)
 import LandList.Commands exposing (getLandList)
 import RemoteData exposing (..)
+import Form exposing (Form)
+import Form.Validate as Validate exposing (..)
 
 
 update : Msg -> Model -> ( Model, Cmd Msg )
@@ -29,6 +32,9 @@ update msg model =
 
         NavigateTo route ->
             model ! [ Navigation.newUrl <| toPath route ]
+
+        FormMsg formMsg ->
+            ( { model | landForm = Form.update validation formMsg model.landForm }, Cmd.none )
 
 
 urlUpdate : Model -> ( Model, Cmd Msg )

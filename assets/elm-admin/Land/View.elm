@@ -1,12 +1,17 @@
 module Land.View exposing (..)
 
+import Form exposing (Form)
+import Form.Error exposing (Error)
+import Form.Input as Input
+import Form.Validate as Validate exposing (..)
 import Html exposing (..)
 import Html.Attributes exposing (..)
-import Land.Model exposing (Land)
+import Html.Events exposing (..)
+import Land.Model exposing (Land, LandForm)
 import Messages exposing (..)
 import Model exposing (..)
-import String exposing (join, concat)
 import RemoteData exposing (..)
+import String exposing (join, concat)
 import ViewHelpers exposing (..)
 
 
@@ -30,9 +35,50 @@ landItemView land =
             ]
 
 
+errorFor : Form.FieldState () String -> Html Form.Msg
+errorFor field =
+    case field.liveError of
+        Just error ->
+            -- replace toString with your own translations
+            div [ class "error" ] [ text (toString error) ]
+
+        Nothing ->
+            text ""
+
+
+textInput : String -> String -> Form () a -> Html Form.Msg
+textInput iField iLabel form =
+    let
+        f =
+            Form.getFieldAsString iField form
+    in
+        div [ class "form-group" ]
+            [ label [] [ text iLabel ]
+            , Input.textInput f [ class "form-control" ]
+            , p [ class "text-danger" ]
+                [ errorFor f
+                ]
+            ]
+
+
+landFormView : Form () LandForm -> Html Form.Msg
+landFormView form =
+    let
+        -- fields states
+        city =
+            Form.getFieldAsString "city" form
+    in
+        div []
+            [ textInput "city" "Ville" form
+            , button
+                [ onClick Form.Submit, class "btn btn-default" ]
+                [ text "Valider" ]
+            ]
+
+
 landNewView : Model -> Html Msg
 landNewView model =
-    div [] [ text "land new" ]
+    Html.map FormMsg (landFormView model.landForm)
 
 
 landShowView : Model -> Html Msg

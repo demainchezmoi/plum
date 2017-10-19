@@ -36,9 +36,7 @@ projectNav : Project -> Html Msg
 projectNav project =
     div [ class "" ]
         [ h5 [ class "mb-0 ml-header row justify-content-between" ]
-            [ div [ class "col font-black" ]
-                [ text " Maisons Léo"
-                ]
+            [ div [ class "col font-black" ] [ text " Maisons Léo" ]
             , div [ class "col-auto" ]
                 [ i [ class "fa fa-bars cp", onClick (NavigateTo (ProjectRoute project.id)) ] []
                 ]
@@ -49,10 +47,7 @@ projectNav project =
 genericNav : Html Msg
 genericNav =
     h5 [ class "ml-header row justify-content-between" ]
-        [ div [ class "col" ]
-            [ i [ class "fa fa-home" ] []
-            , text " Maisons Léo"
-            ]
+        [ div [ class "col" ] [ text " Maisons Léo" ]
         , div [ class "col-auto" ] []
         ]
 
