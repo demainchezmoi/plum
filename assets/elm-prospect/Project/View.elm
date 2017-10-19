@@ -354,7 +354,7 @@ discoverLandView model project title step =
 
         view =
             div []
-                [ stepInfo "Voici l'opportunité de terrain que nous vous proposons."
+                [ stepInfo "Découvrez l'opportunité de terrain que nous vous proposons."
                 , div [ class "card mt-2" ]
                     [ div [ id "map", class "img-flex" ] []
                     , div [ class "card-body" ]
