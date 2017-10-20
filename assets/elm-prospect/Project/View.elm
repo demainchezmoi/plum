@@ -22,7 +22,7 @@ import ViewHelpers exposing (..)
 
 inLayout : Html Msg -> Html Msg -> Html Msg
 inLayout nav elem =
-    div [ class "container mb-2" ]
+    div [ class "container", style [ ( "margin-bottom", "70px" ) ] ]
         [ div [ class "row justify-content-center" ]
             [ div [ class "col col-md-10 col-lg-8" ]
                 [ nav
@@ -222,7 +222,7 @@ nextStepInfo txt =
 
         _ ->
             div [ class "default-color-text pr-1 text-right small mr-1", style [ ( "line-height", "15px" ) ] ]
-                [ text <| "Étape suivante:"
+                [ text <| "Étape suivante"
                 , br [] []
                 , text txt
                 ]
@@ -561,7 +561,7 @@ phoneCallView model project title step =
         sumUp =
             \phone_number ->
                 p [ class "mt-2 p-3 light-bordered" ]
-                    [ p [] [ text "Merci !" ]
+                    [ p [ class "mb-1" ] [ text "Merci !" ]
                     , p [] [ text "Nous allons vous appeler à ce numéro pour faire le point sur votre projet et votre financement :" ]
                     , div [ class "row align-items-center" ]
                         [ span [ class "col font-bold" ] [ text phone_number ]
