@@ -28,6 +28,7 @@ type Msg
     | ValidateEvaluateFundingResponse (WebData Project)
     | SubmitPhoneNumber ProjectId
     | SubmitPhoneNumberResponse (WebData Project)
-    | CarouselMsg Carousel.Msg
+    | CarouselHouseMsg Carousel.Msg
+    | CarouselLandMsg Carousel.Msg
     | SetHouseColor String
     | ChangePhone

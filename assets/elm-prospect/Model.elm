@@ -39,6 +39,7 @@ type alias Model =
     , phoneNumber : Maybe String
     , discoverHouseCarouselState : Carousel.State
     , houseColor : String
+    , discoverLandCarouselState : Carousel.State
     , changePhone : Bool
     }
 
@@ -58,5 +59,10 @@ initialModel apiToken route =
                 | interval = Nothing
             }
     , houseColor = "house_colors/rotterdam.png"
+    , discoverLandCarouselState =
+        Carousel.initialStateWithOptions
+            { defaultStateOptions
+                | interval = Nothing
+            }
     , changePhone = False
     }

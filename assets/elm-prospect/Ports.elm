@@ -1,11 +1,11 @@
 port module Ports exposing (..)
 
-import Land.Model exposing (Coordinates)
+import Land.Model exposing (Location)
 import Messages exposing (..)
 import Json.Encode exposing (Value)
 
 
-port landMap : Coordinates -> Cmd msg
+port landMap : Location -> Cmd msg
 
 
 port removeLandMap : () -> Cmd msg

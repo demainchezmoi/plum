@@ -14,6 +14,9 @@ defmodule PlumWeb.Api.LandViewTest do
 
   describe "land.json" do
     land = build(:land)
-    assert LandView.render "land.json", %{land: land}
+    rendered = LandView.render "land.json", %{land: land}
+    assert rendered
+    assert rendered.location.lat == land.location.lat
+    assert rendered.location.lng == land.location.lng
   end
 end

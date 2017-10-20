@@ -1,9 +1,8 @@
 module Update exposing (..)
 
-import Bootstrap.Carousel as Carousel
+import Bootstrap.Carousel as Carousel exposing (defaultStateOptions)
 import Commands exposing (getMaybeValue)
 import Json.Encode as Encode
-import Land.Model exposing (coordinatesFromLand)
 import Messages exposing (..)
 import Model exposing (..)
 import Navigation
@@ -48,11 +47,12 @@ update msg model =
             in
                 case response of
                     Success project ->
-                        let
-                            coordinates =
-                                coordinatesFromLand project.ad.land
-                        in
-                            newModel ! [ landMap coordinates ]
+                        case project.ad.land.location of
+                            Just location ->
+                                newModel ! [ landMap location ]
+
+                            Nothing ->
+                                newModel ! []
 
                     _ ->
                         newModel ! []
@@ -204,10 +204,17 @@ update msg model =
             in
                 { newModel | changePhone = False } ! []
 
-        CarouselMsg subMsg ->
+        CarouselHouseMsg subMsg ->
             { model
                 | discoverHouseCarouselState =
                     Carousel.update subMsg model.discoverHouseCarouselState
+            }
+                ! []
+
+        CarouselLandMsg subMsg ->
+            { model
+                | discoverLandCarouselState =
+                    Carousel.update subMsg model.discoverLandCarouselState
             }
                 ! []
 
@@ -234,13 +241,20 @@ urlUpdate model =
                   ]
 
         ProjectStepRoute projectId DiscoverLand ->
-            model
-                ! [ ensureProjectWithCallback model projectId DiscoverLandProjectResponse
-                  , mixpanel
-                        ( "PROJECT_STEP"
-                        , Encode.object [ ( "step", DiscoverLand |> toString |> Encode.string ) ]
-                        )
-                  ]
+            let
+                carouselState =
+                    Carousel.initialStateWithOptions
+                        { defaultStateOptions
+                            | interval = Nothing
+                        }
+            in
+                { model | discoverLandCarouselState = carouselState }
+                    ! [ ensureProjectWithCallback model projectId DiscoverLandProjectResponse
+                      , mixpanel
+                            ( "PROJECT_STEP"
+                            , Encode.object [ ( "step", DiscoverLand |> toString |> Encode.string ) ]
+                            )
+                      ]
 
         ProjectStepRoute projectId projectStep ->
             model

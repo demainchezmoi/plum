@@ -7,8 +7,7 @@ defmodule Plum.Sales.Land do
   schema "lands" do
     field :city, :string
     field :department, :string
-    field :lat, :float
-    field :lng, :float
+    field :location, :map
     field :price, :integer
     field :surface, :integer
     field :images, {:array, :string}, default: []
@@ -19,8 +18,8 @@ defmodule Plum.Sales.Land do
     timestamps()
   end
 
-  @optional_fields ~w()a
-  @required_fields ~w(surface lat lng price city department images description)a
+  @optional_fields ~w(location)a
+  @required_fields ~w(surface price city department images description)a
 
   @doc false
   def changeset(%Land{} = land, attrs) do

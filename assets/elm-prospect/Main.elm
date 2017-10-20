@@ -38,4 +38,7 @@ main =
 
 subscriptions : Model -> Sub Msg
 subscriptions model =
-    Carousel.subscriptions model.discoverHouseCarouselState CarouselMsg
+    Sub.batch
+        [ Carousel.subscriptions model.discoverHouseCarouselState CarouselHouseMsg
+        , Carousel.subscriptions model.discoverLandCarouselState CarouselLandMsg
+        ]

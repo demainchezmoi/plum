@@ -7,11 +7,16 @@ type alias LandId =
     Int
 
 
+type alias Location =
+    { lat : Float
+    , lng : Float
+    }
+
+
 type alias Land =
     { city : String
     , department : String
-    , lat : Float
-    , lng : Float
+    , location : Maybe Location
     , price : Int
     , surface : Int
     , description : String

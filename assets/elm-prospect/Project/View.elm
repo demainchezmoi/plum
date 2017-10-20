@@ -304,6 +304,21 @@ colorRadio inputName inputValue inputChecked action inputLabel =
         ]
 
 
+cardSlide : String -> String -> String -> Slide.Config Msg
+cardSlide photo title description =
+    Slide.config []
+        (Slide.customContent
+            (div [ class "card m-2 slider-card" ]
+                [ img [ photo |> photoSrc |> src, class "img-fluid" ] []
+                , div [ class "card-body" ]
+                    [ p [ class "card-title" ] [ text title ]
+                    , p [ class "card-text" ] [ text description ]
+                    ]
+                ]
+            )
+        )
+
+
 discoverHouseView : Model -> Project -> String -> Int -> Html Msg
 discoverHouseView model project title step =
     let
@@ -331,29 +346,13 @@ discoverHouseView model project title step =
             , ( "barcelona", "house_colors/barcelona.png", "Barcelona" )
             ]
 
-        cardSlide =
-            \photo title description ->
-                Slide.config []
-                    (Slide.customContent
-                        (div [ class "card m-1 slider-card" ]
-                            [ img [ photo |> photoSrc |> src, class "img-fluid" ] []
-                            , div [ class "card-body slider-card-body" ]
-                                [ p [ class "card-title" ] [ text title ]
-                                , p [ class "card-text" ]
-                                    [ text description
-                                    ]
-                                ]
-                            ]
-                        )
-                    )
-
         colorsSlide =
             Slide.config []
                 (Slide.customContent
-                    (div [ class "card m-1 slider-card" ]
+                    (div [ class "card m-2 slider-card" ]
                         [ img [ model.houseColor |> photoSrc |> src, class "img-fluid" ] []
-                        , div [ class "card-body slider-card-body" ]
-                            [ p [ class "card-title" ] [ text "Une maison multicolore !" ]
+                        , div [ class "card-body" ]
+                            [ p [ class "card-title" ] [ text "Faites changer les couleurs !" ]
                             , p [ class "card-text" ]
                                 (colors
                                     |> List.map
@@ -372,7 +371,7 @@ discoverHouseView model project title step =
                 )
 
         carousel =
-            Carousel.config CarouselMsg []
+            Carousel.config CarouselHouseMsg []
                 |> Carousel.withControls
                 |> Carousel.withIndicators
                 |> Carousel.slides
@@ -403,17 +402,60 @@ discoverLandView model project title step =
         button =
             ValidateDiscoverLand project.id updateValue |> nextStepButton
 
+        landPhoto =
+            case project.ad.land.images of
+                photo :: _ ->
+                    photo
+
+                _ ->
+                    "grass.png"
+
+        landPrice =
+            project.ad.land.price
+                |> toFloat
+                >> (format { frenchLocale | decimals = 0 })
+                >> (\p -> p ++ " €")
+
+        title =
+            "Description"
+
+        description =
+            project.ad.land.description
+
+        landSlide =
+            [ cardSlide landPhoto title description ]
+
+        mapSlide =
+            case project.ad.land.location of
+                Nothing ->
+                    []
+
+                Just _ ->
+                    [ Slide.config []
+                        (Slide.customContent
+                            (div
+                                [ class "card m-2 slider-card" ]
+                                [ div [ id "map", class "img-flex" ] []
+                                , div [ class "card-body" ]
+                                    [ p [ class "card-title" ] [ text "Localisation" ]
+                                    , p [ class "card-text" ] [ text "Visualisez la zone dans laquelle se trouve votre terrain." ]
+                                    ]
+                                ]
+                            )
+                        )
+                    ]
+
+        carousel =
+            Carousel.config CarouselLandMsg []
+                |> Carousel.withControls
+                |> Carousel.withIndicators
+                |> Carousel.slides (mapSlide ++ landSlide)
+                |> Carousel.view model.discoverLandCarouselState
+
         view =
             div []
                 [ stepInfo "Découvrez l'opportunité de terrain que nous vous proposons."
-                , div [ class "card mt-2" ]
-                    [ div [ id "map", class "img-flex" ] []
-                    , div [ class "card-body" ]
-                        [ span [ class "pull-right" ] [ project.ad.land.price |> toFloat >> (format { frenchLocale | decimals = 0 }) >> (\p -> p ++ " €") |> text ]
-                        , p [ class "card-title" ] [ "Terrain à " ++ (project.ad.land |> landLocation) |> text ]
-                        , div [ class "card-text" ] [ text project.ad.land.description ]
-                        ]
-                    ]
+                , carousel
                 , nextStepInfo "Découvrir la maison"
                 , stepButton project DiscoverLand button
                 ]

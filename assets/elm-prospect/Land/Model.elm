@@ -1,7 +1,7 @@
 module Land.Model exposing (..)
 
 
-type alias Coordinates =
+type alias Location =
     { lat : Float
     , lng : Float
     }
@@ -10,15 +10,9 @@ type alias Coordinates =
 type alias Land =
     { city : String
     , department : String
-    , lat : Float
-    , lng : Float
+    , location : Maybe Location
     , price : Int
     , surface : Int
     , description : String
     , images : List String
     }
-
-
-coordinatesFromLand : Land -> Coordinates
-coordinatesFromLand land =
-    Coordinates land.lat land.lng
