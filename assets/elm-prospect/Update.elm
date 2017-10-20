@@ -191,11 +191,8 @@ update msg model =
                     Success project ->
                         case stepState project EvaluateFunding of
                             Checked ->
-                                update
-                                    (NavigateTo
-                                        (ProjectStepRoute project.id PhoneCall)
-                                    )
-                                    newModel
+                                newModel
+                                    |> update (NavigateTo (ProjectStepRoute project.id EvaluateFunding))
 
                             _ ->
                                 newModel ! []

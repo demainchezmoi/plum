@@ -473,51 +473,99 @@ discoverLandView model project title step =
         stepView model project title step (ProjectStepRoute project.id DiscoverHouse) view
 
 
+
+-- Evaluate Funding
+
+
+isFundable : Project -> Maybe Bool
+isFundable project =
+    case ( project.net_income, project.contribution ) of
+        ( Just net_income, Just contribution ) ->
+            Just (contribution >= project.ad.land.notary_fees && net_income >= 1500)
+
+        _ ->
+            Nothing
+
+
+projectFundingValuesAreSet : Project -> Bool
+projectFundingValuesAreSet project =
+    case ( project.net_income, project.contribution ) of
+        ( Just _, Just _ ) ->
+            True
+
+        _ ->
+            False
+
+
+modelFundingValuesAreSet : Model -> Bool
+modelFundingValuesAreSet model =
+    case ( model.netIncome, model.contribution ) of
+        ( Just _, Just _ ) ->
+            True
+
+        _ ->
+            False
+
+
+contributionValue : Model -> String
+contributionValue model =
+    case model.contribution of
+        Just contribution ->
+            toString contribution
+
+        Nothing ->
+            ""
+
+
+netIncomeValue : Model -> String
+netIncomeValue model =
+    case model.netIncome of
+        Just netIncome ->
+            toString netIncome
+
+        Nothing ->
+            ""
+
+
+fundableView : Html Msg
+fundableView =
+    div [ class "p-3 light-bordered" ]
+        [ p [ class "default-color-text font-bold" ] [ text "Félicitations, votre projet semble pouvoir être finançable !" ]
+        , text "Passez à l'étape suivante et renseignez votre numéro de téléphone pour que nous puissions entrer en contact."
+        ]
+
+
+notFundableView : Html Msg
+notFundableView =
+    div [ class "alert alert-warning" ]
+        [ p [] [ text "Désolé, votre projet ne semble malheureusement pas finançable." ]
+        , text "Restez vigilants et revenez postuler si une offre Maison Léo moins chère apparaît !"
+        ]
+
+
+fundableInfosView : Project -> Html Msg
+fundableInfosView project =
+    case isFundable project of
+        Nothing ->
+            div [] []
+
+        Just True ->
+            fundableView
+
+        Just False ->
+            notFundableView
+
+
 evaluateFundingView : Model -> Project -> String -> Int -> Html Msg
 evaluateFundingView model project title step =
     let
-        contributionValue =
-            case model.contribution of
-                Just contribution ->
-                    toString contribution
-
-                Nothing ->
-                    ""
-
-        netIncomeValue =
-            case model.netIncome of
-                Just netIncome ->
-                    toString netIncome
-
-                Nothing ->
-                    ""
-
-        ( buttonClass, buttonAttr ) =
+        ( modalButtonClass, modalButtonAttr ) =
             case ( model.evaluateFundingConfirm1, model.evaluateFundingConfirm2 ) of
                 ( True, True ) ->
                     ( "", [ onClick (ValidateEvaluateFunding project.id) ] )
 
                 _ ->
                     ( "disabled", [] )
-
-        valuesAreSet =
-            case ( project.net_income, project.contribution ) of
-                ( Just _, Just _ ) ->
-                    True
-
-                _ ->
-                    False
-
-        ( nextStepAction, nextStepClass ) =
-            case ( valuesAreSet, model.netIncome, model.contribution ) of
-                ( True, _, _ ) ->
-                    ( NavigateTo (ProjectStepRoute project.id PhoneCall), "" )
-
-                ( False, Just _, Just _ ) ->
-                    ( EvaluateFundingModalMsg Modal.visibleState, "" )
-
-                _ ->
-                    ( NoOp, "disabled" )
 
         formView =
             div []
@@ -533,7 +581,7 @@ evaluateFundingView model project title step =
                         , id "contribution"
                         , placeholder "ex : 7000"
                         , onInput SetContribution
-                        , value contributionValue
+                        , value <| contributionValue model
                         ]
                         []
                     ]
@@ -545,78 +593,104 @@ evaluateFundingView model project title step =
                         , id "netIncome"
                         , placeholder "ex : 1800"
                         , onInput SetNetIncome
-                        , value netIncomeValue
+                        , value <| netIncomeValue model
                         ]
                         []
                     ]
                 ]
 
-        setValuesView =
+        decalredValuesView =
             div [ class "p-3 light-bordered mb-2" ]
                 [ dl [ class "row mb-0" ]
                     [ dt [ class "col" ] [ text "Apport financier :" ]
-                    , dd [ class "col-auto" ] [ text (contributionValue ++ " €") ]
+                    , dd [ class "col-auto" ] [ text (contributionValue model ++ " €") ]
                     ]
                 , dl [ class "row mb-0" ]
                     [ dt [ class "col" ] [ text "Revenu mensuel net :" ]
-                    , dd [ class "col-auto" ] [ text (netIncomeValue ++ " €") ]
+                    , dd [ class "col-auto" ] [ text (netIncomeValue model ++ " €") ]
                     ]
                 ]
 
-        body =
-            case valuesAreSet of
+        setValuesView =
+            div []
+                [ decalredValuesView
+                , fundableInfosView project
+                ]
+
+        mainView =
+            case projectFundingValuesAreSet project of
                 True ->
                     setValuesView
 
                 False ->
                     formView
 
+        modalView =
+            Modal.config EvaluateFundingModalMsg
+                |> Modal.small
+                |> Modal.h3 [] [ text "Confirmation" ]
+                |> Modal.body []
+                    [ decalredValuesView
+                    , div [ class "form-check p-3 light-bordered" ]
+                        [ label [ class "form-check-label" ]
+                            [ input
+                                [ type_ "checkbox"
+                                , class "form-check-input"
+                                , onClick ToggleEvaluateFundingConfirm1
+                                , checked model.evaluateFundingConfirm1
+                                ]
+                                []
+                            , text "Je confirme l'exactitude des informations renseignées."
+                            ]
+                        , br [] []
+                        , br [] []
+                        , label [ class "form-check-label" ]
+                            [ input
+                                [ type_ "checkbox"
+                                , class "form-check-input"
+                                , onClick ToggleEvaluateFundingConfirm2
+                                , checked model.evaluateFundingConfirm2
+                                ]
+                                []
+                            , text "Je comprends que je ne pourrai plus changer ces informations par la suite et que des informations erronées compromettraient les chances de réussite de mon projet."
+                            ]
+                        ]
+                    , button ([ class ("btn btn-danger " ++ modalButtonClass) ] ++ modalButtonAttr) [ text "confirmer" ]
+                    ]
+                |> Modal.view model.evaluateFundingModal
+
+        footerView =
+            case isFundable project of
+                Just True ->
+                    nextStepFooter "Prenons contact"
+                        (stepButton
+                            project
+                            EvaluateFunding
+                            (nextStepButton (NavigateTo (ProjectStepRoute project.id PhoneCall)))
+                        )
+
+                Just False ->
+                    div [] []
+
+                Nothing ->
+                    if model |> modelFundingValuesAreSet then
+                        nextStepFooter "" (customButton "Valider" "" (EvaluateFundingModalMsg Modal.visibleState))
+                    else
+                        nextStepFooter "" (customButton "Valider" "disabled" NoOp)
+
         view =
             div []
                 [ stepInfo "Pour mener à bien votre projet de construction, nous vous aidons à trouver un financement."
-                , div [ class "p-1" ]
-                    [ body ]
-                , nextStepFooter "Prenons contact"
-                    (stepButton
-                        project
-                        EvaluateFunding
-                        (customButton "Suivant" nextStepClass nextStepAction)
-                    )
-                , Modal.config EvaluateFundingModalMsg
-                    |> Modal.small
-                    |> Modal.h3 [] [ text "Confirmation" ]
-                    |> Modal.body []
-                        [ setValuesView
-                        , div [ class "form-check p-3 light-bordered" ]
-                            [ label [ class "form-check-label" ]
-                                [ input
-                                    [ type_ "checkbox"
-                                    , class "form-check-input"
-                                    , onClick ToggleEvaluateFundingConfirm1
-                                    , checked model.evaluateFundingConfirm1
-                                    ]
-                                    []
-                                , text "Je confirme l'exactitude des informations renseignées."
-                                ]
-                            , br [] []
-                            , br [] []
-                            , label [ class "form-check-label" ]
-                                [ input
-                                    [ type_ "checkbox"
-                                    , class "form-check-input"
-                                    , onClick ToggleEvaluateFundingConfirm2
-                                    , checked model.evaluateFundingConfirm2
-                                    ]
-                                    []
-                                , text "Je comprends que je ne pourrai plus changer ces informations par la suite et que des informations erronées compromettraient les chances de réussite de mon projet."
-                                ]
-                            ]
-                        , button ([ class ("btn btn-danger " ++ buttonClass) ] ++ buttonAttr) [ text "confirmer" ]
-                        ]
-                    |> Modal.view model.evaluateFundingModal
+                , div [ class "p-1" ] [ mainView ]
+                , footerView
+                , modalView
                 ]
     in
         stepView model project title step (ProjectStepRoute project.id DiscoverLand) view
+
+
+
+-- PhoneCall
 
 
 phoneCallView : Model -> Project -> String -> Int -> Html Msg
@@ -649,11 +723,10 @@ phoneCallView model project title step =
         sumUp =
             \phone_number ->
                 p [ class "mt-2 p-3 light-bordered" ]
-                    [ p [ class "mb-1 font-bold default-color-text" ] [ text "Bravo !" ]
-                    , p [] [ text "Nous allons vous appeler à ce numéro pour faire le point sur votre projet et votre financement :" ]
+                    [ p [] [ text "Nous allons vous appeler à ce numéro pour faire le point sur votre projet et votre financement :" ]
                     , div [ class "row align-items-center" ]
                         [ span [ class "col font-bold" ] [ text phone_number ]
-                        , i [ onClick ChangePhone, class "fa fa-pencil ml-2 text-info col-auto" ] []
+                        , a [ onClick ChangePhone, class "text-info col-auto" ] [ text "modifier" ]
                         ]
                     ]
 
