@@ -29,3 +29,5 @@ type Msg
     | SubmitPhoneNumber ProjectId
     | SubmitPhoneNumberResponse (WebData Project)
     | CarouselMsg Carousel.Msg
+    | SetHouseColor String
+    | ChangePhone

@@ -38,6 +38,8 @@ type alias Model =
     , netIncome : Maybe Int
     , phoneNumber : Maybe String
     , discoverHouseCarouselState : Carousel.State
+    , houseColor : String
+    , changePhone : Bool
     }
 
 
@@ -55,4 +57,6 @@ initialModel apiToken route =
             { defaultStateOptions
                 | interval = Nothing
             }
+    , houseColor = "house_colors/rotterdam.png"
+    , changePhone = False
     }

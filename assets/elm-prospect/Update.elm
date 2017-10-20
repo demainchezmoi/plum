@@ -20,8 +20,14 @@ update msg model =
         NoOp ->
             model ! []
 
+        ChangePhone ->
+            { model | changePhone = True } ! []
+
         ProjectResponse response ->
             setProject response model ! []
+
+        SetHouseColor color ->
+            { model | houseColor = color } ! []
 
         DiscoverHouseProjectResponse response ->
             let
@@ -81,7 +87,10 @@ update msg model =
                     { model | netIncome = Nothing } ! []
 
         SetPhoneNumber phoneNumber ->
-            { model | phoneNumber = Just phoneNumber } ! []
+            { model
+                | phoneNumber = Just phoneNumber
+            }
+                ! []
 
         ValidateDiscoverHouse projectId value ->
             model
@@ -189,7 +198,11 @@ update msg model =
                               ]
 
         SubmitPhoneNumberResponse response ->
-            setProject response model ! []
+            let
+                newModel =
+                    setProject response model
+            in
+                { newModel | changePhone = False } ! []
 
         CarouselMsg subMsg ->
             { model

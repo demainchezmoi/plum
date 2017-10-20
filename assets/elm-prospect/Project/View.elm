@@ -285,6 +285,25 @@ landLocation land =
     String.join "" [ land.city, " ", "(", land.department, ")" ]
 
 
+colorRadio : String -> String -> Bool -> (String -> Msg) -> String -> Html Msg
+colorRadio inputName inputValue inputChecked action inputLabel =
+    div [ class "form-check" ]
+        [ label [ class "form-check-label" ]
+            [ input
+                [ type_ "radio"
+                , name inputName
+                , value inputValue
+                , id (inputName ++ "_" ++ inputValue)
+                , class "form-check-input"
+                , checked inputChecked
+                , onClick (action inputValue)
+                ]
+                []
+            , text inputLabel
+            ]
+        ]
+
+
 discoverHouseView : Model -> Project -> String -> Int -> Html Msg
 discoverHouseView model project title step =
     let
@@ -306,20 +325,51 @@ discoverHouseView model project title step =
         description2 =
             "Robustes et intégralement isolés, les murs de 20cm d'épaisseur de la Maison Léo protègent votre famille du monde extérieur."
 
+        colors =
+            [ ( "rotterdam", "house_colors/rotterdam.png", "Rotterdam" )
+            , ( "bogotta", "house_colors/bogotta.png", "Bogotta" )
+            , ( "barcelona", "house_colors/barcelona.png", "Barcelona" )
+            ]
+
         cardSlide =
             \photo title description ->
                 Slide.config []
                     (Slide.customContent
-                        (div
-                            [ class "card m-1 slider-card" ]
+                        (div [ class "card m-1 slider-card" ]
                             [ img [ photo |> photoSrc |> src, class "img-fluid" ] []
                             , div [ class "card-body slider-card-body" ]
                                 [ p [ class "card-title" ] [ text title ]
-                                , p [ class "card-text" ] [ text description ]
+                                , p [ class "card-text" ]
+                                    [ text description
+                                    ]
                                 ]
                             ]
                         )
                     )
+
+        colorsSlide =
+            Slide.config []
+                (Slide.customContent
+                    (div [ class "card m-1 slider-card" ]
+                        [ img [ model.houseColor |> photoSrc |> src, class "img-fluid" ] []
+                        , div [ class "card-body slider-card-body" ]
+                            [ p [ class "card-title" ] [ text "Une maison multicolore !" ]
+                            , p [ class "card-text" ]
+                                (colors
+                                    |> List.map
+                                        (\( name, val, label ) ->
+                                            colorRadio
+                                                name
+                                                val
+                                                (model.houseColor == val)
+                                                SetHouseColor
+                                                label
+                                        )
+                                )
+                            ]
+                        ]
+                    )
+                )
 
         carousel =
             Carousel.config CarouselMsg []
@@ -328,6 +378,7 @@ discoverHouseView model project title step =
                 |> Carousel.slides
                     [ cardSlide "maison-min.png" title1 description1
                     , cardSlide "maison_21_nuit.jpg" title2 description2
+                    , colorsSlide
                     ]
                 |> Carousel.view model.discoverHouseCarouselState
 
@@ -367,7 +418,7 @@ discoverLandView model project title step =
                 , stepButton project DiscoverLand button
                 ]
     in
-        stepView model project title step (ProjectStepRoute project.id EvaluateFunding) view
+        stepView model project title step (ProjectStepRoute project.id DiscoverHouse) view
 
 
 evaluateFundingView : Model -> Project -> String -> Int -> Html Msg
@@ -422,7 +473,7 @@ evaluateFundingView model project title step =
                 , stepButton project EvaluateFunding (ValidateEvaluateFunding project.id |> nextStepButton)
                 ]
     in
-        stepView model project title step (ProjectStepRoute project.id PhoneCall) view
+        stepView model project title step (ProjectStepRoute project.id DiscoverLand) view
 
 
 phoneCallView : Model -> Project -> String -> Int -> Html Msg
@@ -439,51 +490,74 @@ phoneCallView model project title step =
         nextButton =
             stepButton project PhoneCall (nextStepButton <| NavigateTo <| ProjectStepRoute project.id Quotation)
 
-        alert =
+        docs =
+            p []
+                [ p [ class "pr-2 pl-2" ] [ text "Afin de préparer votre dossier de financement, préparez les documents suivants :" ]
+                , ul [ class "list-group" ]
+                    [ li [ class "list-group-item" ] [ text "Vos trois derniers bulletins de salaire" ]
+                    , li [ class "list-group-item" ] [ text "Votre bulletin de salaire de décembre" ]
+                    , li [ class "list-group-item" ] [ text "Votre dernier avis d'imposition" ]
+                    , li [ class "list-group-item" ] [ text "Les trois derniers relevés de chacun de vos comptes en banque" ]
+                    , li [ class "list-group-item" ] [ text "Vos encours de crédits" ]
+                    , li [ class "list-group-item" ] [ text "Une photocopie de votre CNI ou passeport" ]
+                    ]
+                ]
+
+        sumUp =
             \phone_number ->
-                p [ class "alert alert-info" ]
+                p [ class "mt-2 p-3 light-bordered" ]
                     [ text "Merci !"
                     , br [] []
-                    , text "Nous allons vous appeler au numéro suivant : "
+                    , text "Nous allons vous appeler au numéro suivant:"
                     , br [] []
-                    , i [ class "fa fa-phone-square mr-1" ] []
-                    , span [ class "font-bold" ] [ text phone_number ]
+                    , div [ class "row align-items-center" ]
+                        [ span [ class "col font-bold" ] [ text phone_number ]
+                        , i [ onClick ChangePhone, class "fa fa-pencil ml-2 text-info col-auto" ] []
+                        ]
                     ]
 
-        button =
-            case ( project.phone_call, project.phone_number, project.phone_number == model.phoneNumber ) of
-                ( True, _, _ ) ->
-                    nextButton
-
-                ( False, Nothing, _ ) ->
-                    customButton "Valider" (SubmitPhoneNumber project.id)
-
-                ( False, Just phone_number, False ) ->
-                    div []
-                        [ alert phone_number
-                        , customButton "Mettre à jour" (SubmitPhoneNumber project.id)
+        setPhoneView =
+            \button ->
+                div []
+                    [ stepInfo "Nous vous proposons un accompagment personnalisé. Renseignez votre numéro de téléphone et nous vous contacterons dès que possible."
+                    , div [ class "form-group" ]
+                        [ label [ for "phoneNumber" ] [ text "Votre numéro de téléphone" ]
+                        , input
+                            [ type_ "text"
+                            , class "form-control"
+                            , id "phoneNumber"
+                            , placeholder "ex : 06 03 05 04 01"
+                            , onInput SetPhoneNumber
+                            , value phoneNumberValue
+                            ]
+                            []
                         ]
+                    , button
+                    ]
 
-                ( False, Just phone_number, True ) ->
-                    alert phone_number
+        phoneSetView =
+            \phone_number ->
+                div []
+                    [ sumUp phone_number
+                    , docs
+                    ]
 
         view =
-            div []
-                [ stepInfo "Nous vous proposons un accompagment personnalisé. Renseignez votre numéro de téléphone et nous vous contacterons dès que possible."
-                , div [ class "form-group" ]
-                    [ label [ for "phoneNumber" ] [ text "Votre numéro de téléphone" ]
-                    , input
-                        [ type_ "text"
-                        , class "form-control"
-                        , id "phoneNumber"
-                        , placeholder "ex : 06 03 05 04 01"
-                        , onInput SetPhoneNumber
-                        , value phoneNumberValue
-                        ]
-                        []
-                    ]
-                , button
-                ]
+            case ( project.phone_call, project.phone_number, model.changePhone ) of
+                ( True, Just phone_number, _ ) ->
+                    phoneSetView phone_number
+
+                ( True, Nothing, _ ) ->
+                    setPhoneView (customButton "Valider" (SubmitPhoneNumber project.id))
+
+                ( _, Nothing, _ ) ->
+                    setPhoneView (customButton "Valider" (SubmitPhoneNumber project.id))
+
+                ( _, Just phone_number, True ) ->
+                    setPhoneView (customButton "Mettre à jour" (SubmitPhoneNumber project.id))
+
+                ( _, Just phone_number, False ) ->
+                    phoneSetView phone_number
     in
         stepView model project title step (ProjectStepRoute project.id EvaluateFunding) view
 

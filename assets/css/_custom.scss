@@ -6,7 +6,7 @@
 }
 
 .hors-frais {
-  padding-left: 10px;
+  padding-left: 4px;
   font-size: 12px;
   top: 10px;
   vertical-align: top;
@@ -63,6 +63,8 @@
   .slider-card-body {
     height: 205px;
     overflow-y: scroll;
+    position: relative;
+    z-index: 10000;
   }
 }
 
