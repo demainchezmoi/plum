@@ -4,6 +4,7 @@ import Routing exposing (Route)
 import RemoteData exposing (..)
 import Project.Model exposing (Project, ProjectId)
 import Bootstrap.Carousel as Carousel exposing (defaultStateOptions)
+import Bootstrap.Modal as Modal
 
 
 type alias ApiToken =
@@ -42,6 +43,9 @@ type alias Model =
     , houseColor : String
     , discoverLandCarouselState : Carousel.State
     , changePhone : Bool
+    , evaluateFundingModal : Modal.State
+    , evaluateFundingConfirm1 : Bool
+    , evaluateFundingConfirm2 : Bool
     }
 
 
@@ -67,4 +71,7 @@ initialModel apiToken route =
                 | interval = Nothing
             }
     , changePhone = False
+    , evaluateFundingModal = Modal.hiddenState
+    , evaluateFundingConfirm1 = False
+    , evaluateFundingConfirm2 = False
     }

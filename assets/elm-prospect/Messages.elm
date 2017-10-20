@@ -7,6 +7,7 @@ import RemoteData exposing (..)
 import Project.Model exposing (Project, ProjectId)
 import Json.Encode exposing (Value)
 import Bootstrap.Carousel as Carousel
+import Bootstrap.Modal as Modal
 
 
 type Msg
@@ -34,3 +35,6 @@ type Msg
     | CarouselLandMsg Carousel.Msg
     | SetHouseColor String
     | ChangePhone
+    | EvaluateFundingModalMsg Modal.State
+    | ToggleEvaluateFundingConfirm1
+    | ToggleEvaluateFundingConfirm2

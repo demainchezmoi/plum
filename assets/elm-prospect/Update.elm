@@ -1,6 +1,7 @@
 module Update exposing (..)
 
 import Bootstrap.Carousel as Carousel exposing (defaultStateOptions)
+import Bootstrap.Modal as Modal
 import Commands exposing (getMaybeValue)
 import Json.Encode as Encode
 import Messages exposing (..)
@@ -18,6 +19,15 @@ update msg model =
     case msg of
         NoOp ->
             model ! []
+
+        ToggleEvaluateFundingConfirm1 ->
+            { model | evaluateFundingConfirm1 = not model.evaluateFundingConfirm1 } ! []
+
+        ToggleEvaluateFundingConfirm2 ->
+            { model | evaluateFundingConfirm2 = not model.evaluateFundingConfirm2 } ! []
+
+        EvaluateFundingModalMsg state ->
+            { model | evaluateFundingModal = state } ! []
 
         StartLoading ->
             (model |> stopLoading) ! []
@@ -158,8 +168,11 @@ update msg model =
                     (getMaybeValue "contribution" model.contribution Encode.int)
                         ++ (getMaybeValue "net_income" model.netIncome Encode.int)
                         |> Encode.object
+
+                ( newModel, _ ) =
+                    update (EvaluateFundingModalMsg Modal.hiddenState) model
             in
-                startLoading model
+                startLoading newModel
                     ! [ updateProjectWithCallback
                             model.apiToken
                             projectId

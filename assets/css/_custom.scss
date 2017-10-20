@@ -1,22 +1,25 @@
 .full-width { width: 100% }
 .text-shadow { text-shadow: 2px 2px 3px rgba(0,0,0,0.3); }
 
+.modal-dialog, .modal-content {
+  max-height: 90%;
+  overflow: auto;
+}
+
 .loading-overlay {
   position: fixed;
   top: 0; right: 0; left: 0; bottom: 0;
   z-index: 20000;
   background-color: rgba(0, 0, 0, 0.5);
   @extend .d-flex, .justify-content-center, .align-items-center;
-  i {
-    font-size: 70px;
-  }
+  i { font-size: 70px; }
 }
 
 .next-step-footer {
   position: fixed;
   bottom: 0; right: 0; left: 0;
   background-color: white;
-  z-index: 2000;
+  z-index: 1040;
   // box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
   border-top: 1px solid rgba(0, 0, 0, 0.07);
   .next-step-footer-content {
@@ -95,6 +98,7 @@
     height: 205px;
     overflow-y: scroll;
   }
+  @extend .mt-1, .mb-2, .mr-1, .ml-1;
 }
 
 ol.carousel-indicators {

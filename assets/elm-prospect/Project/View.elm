@@ -5,6 +5,7 @@ import Ad.View as AdView
 import Bootstrap.Card as Card
 import Bootstrap.Carousel as Carousel
 import Bootstrap.Carousel.Slide as Slide
+import Bootstrap.Modal as Modal
 import FormatNumber exposing (format)
 import FormatNumber.Locales exposing (frenchLocale)
 import Html exposing (..)
@@ -252,13 +253,13 @@ stepView model project title num route view =
 
 nextStepButton : Msg -> Html Msg
 nextStepButton action =
-    customButton "Suivant" action
+    customButton "Suivant" "" action
 
 
-customButton : String -> Msg -> Html Msg
-customButton label action =
+customButton : String -> String -> Msg -> Html Msg
+customButton label cClass action =
     button
-        [ class "btn btn-default m-0 pr-3 pl-3", onClick action ]
+        [ class ("btn btn-default m-0 pr-3 pl-3 " ++ cClass), onClick action ]
         [ text label ]
 
 
@@ -319,7 +320,7 @@ cardSlide : String -> String -> String -> Slide.Config Msg
 cardSlide photo title description =
     Slide.config []
         (Slide.customContent
-            (div [ class "card m-2 slider-card" ]
+            (div [ class "card slider-card" ]
                 [ img [ photo |> photoSrc |> src, class "img-fluid" ] []
                 , div [ class "card-body" ]
                     [ p [ class "card-title" ] [ text title ]
@@ -360,7 +361,7 @@ discoverHouseView model project title step =
         colorsSlide =
             Slide.config []
                 (Slide.customContent
-                    (div [ class "card m-2 slider-card" ]
+                    (div [ class "card slider-card" ]
                         [ img [ model.houseColor |> photoSrc |> src, class "img-fluid" ] []
                         , div [ class "card-body" ]
                             [ p [ class "card-title" ] [ text "Faites la changer de couleur !" ]
@@ -444,7 +445,7 @@ discoverLandView model project title step =
                     [ Slide.config []
                         (Slide.customContent
                             (div
-                                [ class "card m-2 slider-card" ]
+                                [ class "card slider-card" ]
                                 [ div [ id "map", class "img-flex" ] []
                                 , div [ class "card-body" ]
                                     [ p [ class "card-title" ] [ text "L'emplacement" ]
@@ -491,42 +492,128 @@ evaluateFundingView model project title step =
                 Nothing ->
                     ""
 
+        ( buttonClass, buttonAttr ) =
+            case ( model.evaluateFundingConfirm1, model.evaluateFundingConfirm2 ) of
+                ( True, True ) ->
+                    ( "", [ onClick (ValidateEvaluateFunding project.id) ] )
+
+                _ ->
+                    ( "disabled", [] )
+
+        valuesAreSet =
+            case ( project.net_income, project.contribution ) of
+                ( Just _, Just _ ) ->
+                    True
+
+                _ ->
+                    False
+
+        ( nextStepAction, nextStepClass ) =
+            case ( valuesAreSet, model.netIncome, model.contribution ) of
+                ( True, _, _ ) ->
+                    ( NavigateTo (ProjectStepRoute project.id PhoneCall), "" )
+
+                ( False, Just _, Just _ ) ->
+                    ( EvaluateFundingModalMsg Modal.visibleState, "" )
+
+                _ ->
+                    ( NoOp, "disabled" )
+
+        formView =
+            div []
+                [ div [ class "alert alert-warning" ]
+                    [ text "Attention : vous ne pourrez plus changer les montants déclarés par la suite. Renseignez des informations exactes."
+                    , br [] []
+                    ]
+                , div [ class "form-group" ]
+                    [ label [ for "contribution" ] [ text "Votre apport financier (€)" ]
+                    , input
+                        [ type_ "number"
+                        , class "form-control"
+                        , id "contribution"
+                        , placeholder "ex : 7000"
+                        , onInput SetContribution
+                        , value contributionValue
+                        ]
+                        []
+                    ]
+                , div [ class "form-group" ]
+                    [ label [ for "netIncome" ] [ text "Revenu mensuel net de votre ménage (€)" ]
+                    , input
+                        [ type_ "number"
+                        , class "form-control"
+                        , id "netIncome"
+                        , placeholder "ex : 1800"
+                        , onInput SetNetIncome
+                        , value netIncomeValue
+                        ]
+                        []
+                    ]
+                ]
+
+        setValuesView =
+            div [ class "p-3 light-bordered mb-2" ]
+                [ dl [ class "row mb-0" ]
+                    [ dt [ class "col" ] [ text "Apport financier :" ]
+                    , dd [ class "col-auto" ] [ text (contributionValue ++ " €") ]
+                    ]
+                , dl [ class "row mb-0" ]
+                    [ dt [ class "col" ] [ text "Revenu mensuel net :" ]
+                    , dd [ class "col-auto" ] [ text (netIncomeValue ++ " €") ]
+                    ]
+                ]
+
+        body =
+            case valuesAreSet of
+                True ->
+                    setValuesView
+
+                False ->
+                    formView
+
         view =
             div []
                 [ stepInfo "Pour mener à bien votre projet de construction, nous vous aidons à trouver un financement."
                 , div [ class "p-1" ]
-                    [ p [ class "font-bold default-color-text" ] [ text "Merci de renseigner les informations suivantes:" ]
-                    , div [ class "form-group" ]
-                        [ label [ for "contribution" ] [ text "Votre apport financier (€)" ]
-                        , input
-                            [ type_ "number"
-                            , class "form-control"
-                            , id "contribution"
-                            , placeholder "ex : 7000"
-                            , onInput SetContribution
-                            , value contributionValue
-                            ]
-                            []
-                        ]
-                    , div [ class "form-group" ]
-                        [ label [ for "netIncome" ] [ text "Revenu mensuel net de votre ménage (€)" ]
-                        , input
-                            [ type_ "number"
-                            , class "form-control"
-                            , id "netIncome"
-                            , placeholder "ex : 1800"
-                            , onInput SetNetIncome
-                            , value netIncomeValue
-                            ]
-                            []
-                        ]
-                    ]
+                    [ body ]
                 , nextStepFooter "Prenons contact"
                     (stepButton
                         project
                         EvaluateFunding
-                        (ValidateEvaluateFunding project.id |> nextStepButton)
+                        (customButton "Suivant" nextStepClass nextStepAction)
                     )
+                , Modal.config EvaluateFundingModalMsg
+                    |> Modal.small
+                    |> Modal.h3 [] [ text "Confirmation" ]
+                    |> Modal.body []
+                        [ setValuesView
+                        , div [ class "form-check p-3 light-bordered" ]
+                            [ label [ class "form-check-label" ]
+                                [ input
+                                    [ type_ "checkbox"
+                                    , class "form-check-input"
+                                    , onClick ToggleEvaluateFundingConfirm1
+                                    , checked model.evaluateFundingConfirm1
+                                    ]
+                                    []
+                                , text "Je confirme l'exactitude des informations renseignées."
+                                ]
+                            , br [] []
+                            , br [] []
+                            , label [ class "form-check-label" ]
+                                [ input
+                                    [ type_ "checkbox"
+                                    , class "form-check-input"
+                                    , onClick ToggleEvaluateFundingConfirm2
+                                    , checked model.evaluateFundingConfirm2
+                                    ]
+                                    []
+                                , text "Je comprends que je ne pourrai plus changer ces informations par la suite et que des informations erronées compromettraient les chances de réussite de mon projet."
+                                ]
+                            ]
+                        , button ([ class ("btn btn-danger " ++ buttonClass) ] ++ buttonAttr) [ text "confirmer" ]
+                        ]
+                    |> Modal.view model.evaluateFundingModal
                 ]
     in
         stepView model project title step (ProjectStepRoute project.id DiscoverLand) view
@@ -562,7 +649,7 @@ phoneCallView model project title step =
         sumUp =
             \phone_number ->
                 p [ class "mt-2 p-3 light-bordered" ]
-                    [ p [ class "mb-1" ] [ text "Merci !" ]
+                    [ p [ class "mb-1 font-bold default-color-text" ] [ text "Bravo !" ]
                     , p [] [ text "Nous allons vous appeler à ce numéro pour faire le point sur votre projet et votre financement :" ]
                     , div [ class "row align-items-center" ]
                         [ span [ class "col font-bold" ] [ text phone_number ]
@@ -602,13 +689,13 @@ phoneCallView model project title step =
                     phoneSetView phone_number
 
                 ( True, Nothing, _ ) ->
-                    setPhoneView (customButton "Valider" (SubmitPhoneNumber project.id))
+                    setPhoneView (customButton "Valider" "" (SubmitPhoneNumber project.id))
 
                 ( _, Nothing, _ ) ->
-                    setPhoneView (customButton "Valider" (SubmitPhoneNumber project.id))
+                    setPhoneView (customButton "Valider" "" (SubmitPhoneNumber project.id))
 
                 ( _, Just phone_number, True ) ->
-                    setPhoneView (customButton "Mettre à jour" (SubmitPhoneNumber project.id))
+                    setPhoneView (customButton "Mettre à jour" "" (SubmitPhoneNumber project.id))
 
                 ( _, Just phone_number, False ) ->
                     phoneSetView phone_number
