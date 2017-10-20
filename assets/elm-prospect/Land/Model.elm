@@ -15,4 +15,5 @@ type alias Land =
     , surface : Int
     , description : String
     , images : List String
+    , notary_fees : Int
     }

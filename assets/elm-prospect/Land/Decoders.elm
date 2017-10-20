@@ -24,3 +24,4 @@ landDecoder =
         |: (field "surface" int)
         |: (field "description" string)
         |: (field "images" (list string))
+        |: (field "notary_fees" int)

@@ -216,8 +216,16 @@ stepInfo desc =
 
 nextStepInfo : String -> Html Msg
 nextStepInfo txt =
-    div [ class "default-color-text pl-1 text-right small mb-0 mt-2" ]
-        [ text <| "Étape suivante : " ++ txt ]
+    case txt of
+        "" ->
+            div [] []
+
+        _ ->
+            div [ class "default-color-text pr-1 text-right small mr-1", style [ ( "line-height", "15px" ) ] ]
+                [ text <| "Étape suivante:"
+                , br [] []
+                , text txt
+                ]
 
 
 stepNum : Int -> Html Msg
@@ -244,19 +252,29 @@ stepView model project title num route view =
 
 nextStepButton : Msg -> Html Msg
 nextStepButton action =
-    div [ class "clearfix" ]
-        [ button
-            [ class "btn btn-default pull-right mr-0 mt-2", onClick action ]
-            [ text "Suivant" ]
-        ]
+    customButton "Suivant" action
 
 
 customButton : String -> Msg -> Html Msg
 customButton label action =
-    div [ class "clearfix" ]
-        [ button
-            [ class "btn btn-default pull-right mr-0 mt-2", onClick action ]
-            [ text label ]
+    button
+        [ class "btn btn-default pull-right m-0 pr-3 pl-3", onClick action ]
+        [ text label ]
+
+
+nextStepFooter : String -> Html Msg -> Html Msg
+nextStepFooter bText button =
+    div [ class "next-step-footer" ]
+        [ div [ class "container" ]
+            [ div [ class "row justify-content-center" ]
+                [ div [ class "col col-md-10 col-lg-8" ]
+                    [ div [ class "next-step-footer-content" ]
+                        [ nextStepInfo bText
+                        , button
+                        ]
+                    ]
+                ]
+            ]
         ]
 
 
@@ -378,8 +396,7 @@ discoverHouseView model project title step =
             div []
                 [ stepInfo "Découvrez la maison Léo."
                 , carousel
-                , nextStepInfo "Choisir mes couleurs"
-                , stepButton project DiscoverHouse button
+                , nextStepFooter "Découvrir le terrain" (stepButton project DiscoverHouse button)
                 ]
     in
         stepView model project title step (ProjectRoute project.id) view
@@ -412,8 +429,11 @@ discoverLandView model project title step =
         description =
             project.ad.land.description
 
+        landTitle =
+            "Le terrain - " ++ landPrice
+
         landSlide =
-            [ cardSlide landPhoto "Déscription" description ]
+            [ cardSlide landPhoto landTitle description ]
 
         mapSlide =
             case project.ad.land.location of
@@ -427,7 +447,7 @@ discoverLandView model project title step =
                                 [ class "card m-2 slider-card" ]
                                 [ div [ id "map", class "img-flex" ] []
                                 , div [ class "card-body" ]
-                                    [ p [ class "card-title" ] [ text "Emplacement" ]
+                                    [ p [ class "card-title" ] [ text "L'emplacement" ]
                                     , p [ class "card-text" ] [ text "Visualisez la zone dans laquelle se trouve votre terrain." ]
                                     ]
                                 ]
@@ -446,8 +466,7 @@ discoverLandView model project title step =
             div []
                 [ stepInfo "Découvrez l'opportunité de terrain que nous vous proposons."
                 , carousel
-                , nextStepInfo "Découvrir la Maison Léo"
-                , stepButton project DiscoverLand button
+                , nextStepFooter "Découvrir la Maison Léo" (stepButton project DiscoverLand button)
                 ]
     in
         stepView model project title step (ProjectStepRoute project.id DiscoverHouse) view
@@ -501,8 +520,12 @@ evaluateFundingView model project title step =
                             []
                         ]
                     ]
-                , nextStepInfo "Notre prenonts contact"
-                , stepButton project EvaluateFunding (ValidateEvaluateFunding project.id |> nextStepButton)
+                , nextStepFooter "Prenons contact"
+                    (stepButton
+                        project
+                        EvaluateFunding
+                        (ValidateEvaluateFunding project.id |> nextStepButton)
+                    )
                 ]
     in
         stepView model project title step (ProjectStepRoute project.id DiscoverLand) view
@@ -563,7 +586,7 @@ phoneCallView model project title step =
                             ]
                             []
                         ]
-                    , button
+                    , nextStepFooter "" button
                     ]
 
         phoneSetView =

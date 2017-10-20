@@ -12,6 +12,17 @@
   }
 }
 
+.next-step-footer {
+  position: fixed;
+  bottom: 0; right: 0; left: 0;
+  background-color: white;
+  z-index: 2000;
+  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+  .next-step-footer-content {
+    @extend .d-flex, .justify-content-end, .align-items-center, .pt-2, .pb-2;
+  }
+}
+
 .default-color-text {
   color: $default-color;
 }
