@@ -99,6 +99,12 @@ defmodule Plum.SalesTest do
       assert {:ok, %Land{description: _, images: _}} = Sales.create_land(land_params)
     end
 
+    test "create_land/1 sets notary_fees" do
+      land_params = params_for(:land) |> Map.delete(:notary_fees)
+      assert {:ok, land} = Sales.create_land(land_params)
+      assert land.notary_fees == Plum.Helpers.NotaryFees.notary_fees(land_params.price)
+    end
+
     test "create_land/1 with invalid data returns error changeset" do
       land_params = params_for(:land) |> Map.delete(:price)
       assert {:error, %Ecto.Changeset{}} = Sales.create_land(land_params)

@@ -20,7 +20,6 @@ defmodule PlumWeb.Api.AdController do
   end
 
   def show(conn, %{"id" => id}) do
-    current_user = conn.assigns.current_user
     ad = Sales.get_ad!(id)
     render(conn, "show.json", ad: ad)
   end

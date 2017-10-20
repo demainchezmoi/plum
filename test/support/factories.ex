@@ -29,7 +29,8 @@ defmodule Plum.Factory do
       price: 42_000,
       surface: 396,
       images: ["test"],
-      description: sequence(:description, &"desc-#{&1}")
+      description: sequence(:description, &"desc-#{&1}"),
+      notary_fees: 1234
     }
   end
 
