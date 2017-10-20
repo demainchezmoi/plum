@@ -495,7 +495,8 @@ evaluateFundingView model project title step =
             div []
                 [ stepInfo "Pour mener à bien votre projet de construction, nous vous aidons à trouver un financement."
                 , div [ class "p-1" ]
-                    [ div [ class "form-group" ]
+                    [ p [ class "font-bold default-color-text" ] [ text "Merci de renseigner les informations suivantes:" ]
+                    , div [ class "form-group" ]
                         [ label [ for "contribution" ] [ text "Votre apport financier (€)" ]
                         , input
                             [ type_ "number"
