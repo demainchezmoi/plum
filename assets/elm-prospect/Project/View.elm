@@ -352,7 +352,7 @@ discoverHouseView model project title step =
                     (div [ class "card m-2 slider-card" ]
                         [ img [ model.houseColor |> photoSrc |> src, class "img-fluid" ] []
                         , div [ class "card-body" ]
-                            [ p [ class "card-title" ] [ text "Faites changer les couleurs !" ]
+                            [ p [ class "card-title" ] [ text "Faites la changer de couleur !" ]
                             , p [ class "card-text" ]
                                 (colors
                                     |> List.map
@@ -437,7 +437,7 @@ discoverLandView model project title step =
                                 [ class "card m-2 slider-card" ]
                                 [ div [ id "map", class "img-flex" ] []
                                 , div [ class "card-body" ]
-                                    [ p [ class "card-title" ] [ text "Localisation" ]
+                                    [ p [ class "card-title" ] [ text "Emplacement" ]
                                     , p [ class "card-text" ] [ text "Visualisez la zone dans laquelle se trouve votre terrain." ]
                                     ]
                                 ]
@@ -533,7 +533,7 @@ phoneCallView model project title step =
             stepButton project PhoneCall (nextStepButton <| NavigateTo <| ProjectStepRoute project.id Quotation)
 
         docs =
-            p [ class "p-3 light-bordered" ]
+            p [ class "p-3 alert alert-info" ]
                 [ p [ class "text-underline" ] [ text "Afin de préparer votre dossier de financement, préparez les documents suivants :" ]
                 , ul [ class "mb-0", style [ ( "padding-left", "20px" ) ] ]
                     [ li [ class "" ] [ text "Vos trois derniers bulletins de salaire" ]
@@ -548,7 +548,7 @@ phoneCallView model project title step =
         sumUp =
             \phone_number ->
                 p [ class "mt-2 p-3 light-bordered" ]
-                    [ text "Nous allons vous appeler au numéro suivant:"
+                    [ text "Nous allons vous appeler au numéro suivant pour faire le point sur votre projet et votre possible financement :"
                     , br [] []
                     , div [ class "row align-items-center" ]
                         [ span [ class "col font-bold" ] [ text phone_number ]
