@@ -491,24 +491,22 @@ phoneCallView model project title step =
             stepButton project PhoneCall (nextStepButton <| NavigateTo <| ProjectStepRoute project.id Quotation)
 
         docs =
-            p []
-                [ p [ class "pr-2 pl-2" ] [ text "Afin de préparer votre dossier de financement, préparez les documents suivants :" ]
-                , ul [ class "list-group" ]
-                    [ li [ class "list-group-item" ] [ text "Vos trois derniers bulletins de salaire" ]
-                    , li [ class "list-group-item" ] [ text "Votre bulletin de salaire de décembre" ]
-                    , li [ class "list-group-item" ] [ text "Votre dernier avis d'imposition" ]
-                    , li [ class "list-group-item" ] [ text "Les trois derniers relevés de chacun de vos comptes en banque" ]
-                    , li [ class "list-group-item" ] [ text "Vos encours de crédits" ]
-                    , li [ class "list-group-item" ] [ text "Une photocopie de votre CNI ou passeport" ]
+            p [ class "p-3 light-bordered" ]
+                [ p [ class "text-underline" ] [ text "Afin de préparer votre dossier de financement, préparez les documents suivants :" ]
+                , ul [ class "mb-0", style [ ( "padding-left", "20px" ) ] ]
+                    [ li [ class "" ] [ text "Vos trois derniers bulletins de salaire" ]
+                    , li [ class "" ] [ text "Votre bulletin de salaire de décembre" ]
+                    , li [ class "" ] [ text "Votre dernier avis d'imposition" ]
+                    , li [ class "" ] [ text "Les trois derniers relevés de chacun de vos comptes en banque" ]
+                    , li [ class "" ] [ text "Vos encours de crédits" ]
+                    , li [ class "" ] [ text "Une photocopie de votre CNI ou passeport" ]
                     ]
                 ]
 
         sumUp =
             \phone_number ->
                 p [ class "mt-2 p-3 light-bordered" ]
-                    [ text "Merci !"
-                    , br [] []
-                    , text "Nous allons vous appeler au numéro suivant:"
+                    [ text "Nous allons vous appeler au numéro suivant:"
                     , br [] []
                     , div [ class "row align-items-center" ]
                         [ span [ class "col font-bold" ] [ text phone_number ]
