@@ -258,7 +258,7 @@ nextStepButton action =
 customButton : String -> Msg -> Html Msg
 customButton label action =
     button
-        [ class "btn btn-default pull-right m-0 pr-3 pl-3", onClick action ]
+        [ class "btn btn-default m-0 pr-3 pl-3", onClick action ]
         [ text label ]
 
 
@@ -562,8 +562,7 @@ phoneCallView model project title step =
             \phone_number ->
                 p [ class "mt-2 p-3 light-bordered" ]
                     [ p [] [ text "Merci !" ]
-                    , text "Nous allons vous appeler au numéro suivant pour faire le point sur votre projet et votre financement :"
-                    , br [] []
+                    , p [] [ text "Nous allons vous appeler à ce numéro pour faire le point sur votre projet et votre financement :" ]
                     , div [ class "row align-items-center" ]
                         [ span [ class "col font-bold" ] [ text phone_number ]
                         , i [ onClick ChangePhone, class "fa fa-pencil ml-2 text-info col-auto" ] []
