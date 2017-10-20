@@ -12,6 +12,8 @@ import Bootstrap.Carousel as Carousel
 type Msg
     = NoOp
     | UrlChange Navigation.Location
+    | StartLoading
+    | StopLoading
     | NavigateTo Route
     | ProjectResponse (WebData Project)
     | DiscoverLandProjectResponse (WebData Project)

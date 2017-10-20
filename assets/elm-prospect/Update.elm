@@ -19,8 +19,14 @@ update msg model =
         NoOp ->
             model ! []
 
+        StartLoading ->
+            (model |> stopLoading) ! []
+
+        StopLoading ->
+            (model |> stopLoading) ! []
+
         ChangePhone ->
-            { model | changePhone = True } ! []
+            (model |> changePhone) ! []
 
         ProjectResponse response ->
             setProject response model ! []
@@ -93,7 +99,7 @@ update msg model =
                 ! []
 
         ValidateDiscoverHouse projectId value ->
-            model
+            startLoading model
                 ! [ updateProjectWithCallback
                         model.apiToken
                         projectId
@@ -104,7 +110,9 @@ update msg model =
         ValidateDiscoverHouseResponse response ->
             let
                 newModel =
-                    model |> setProject response
+                    model
+                        |> setProject response
+                        |> stopLoading
             in
                 case response of
                     Success project ->
@@ -118,7 +126,7 @@ update msg model =
                         newModel ! []
 
         ValidateDiscoverLand projectId value ->
-            model
+            startLoading model
                 ! [ updateProjectWithCallback
                         model.apiToken
                         projectId
@@ -129,7 +137,9 @@ update msg model =
         ValidateDiscoverLandResponse response ->
             let
                 newModel =
-                    model |> setProject response
+                    model
+                        |> setProject response
+                        |> stopLoading
             in
                 case response of
                     Success project ->
@@ -149,7 +159,7 @@ update msg model =
                         ++ (getMaybeValue "net_income" model.netIncome Encode.int)
                         |> Encode.object
             in
-                model
+                startLoading model
                     ! [ updateProjectWithCallback
                             model.apiToken
                             projectId
@@ -160,7 +170,9 @@ update msg model =
         ValidateEvaluateFundingResponse response ->
             let
                 newModel =
-                    model |> setProject response
+                    model
+                        |> setProject response
+                        |> stopLoading
             in
                 case response of
                     Success project ->
@@ -189,7 +201,7 @@ update msg model =
                             (getMaybeValue "phone_number" model.phoneNumber Encode.string)
                                 |> Encode.object
                     in
-                        model
+                        startLoading model
                             ! [ updateProjectWithCallback
                                     model.apiToken
                                     projectId
@@ -198,11 +210,12 @@ update msg model =
                               ]
 
         SubmitPhoneNumberResponse response ->
-            let
-                newModel =
-                    setProject response model
-            in
-                { newModel | changePhone = False } ! []
+            (model
+                |> setProject response
+                |> stopLoading
+                |> noChangePhone
+            )
+                ! []
 
         CarouselHouseMsg subMsg ->
             { model
@@ -267,6 +280,26 @@ urlUpdate model =
 
         _ ->
             model ! [ Cmd.none ]
+
+
+changePhone : Model -> Model
+changePhone model =
+    { model | changePhone = True }
+
+
+noChangePhone : Model -> Model
+noChangePhone model =
+    { model | changePhone = False }
+
+
+stopLoading : Model -> Model
+stopLoading model =
+    { model | loading = False }
+
+
+startLoading : Model -> Model
+startLoading model =
+    { model | loading = True }
 
 
 setProject : WebData Project -> Model -> Model

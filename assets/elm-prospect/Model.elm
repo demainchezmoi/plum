@@ -32,6 +32,7 @@ type SlideAnimation
 type alias Model =
     { project : WebData Project
     , error : Maybe String
+    , loading : Bool
     , apiToken : ApiToken
     , route : Route
     , contribution : Maybe Int
@@ -48,6 +49,7 @@ initialModel : ApiToken -> Route -> Model
 initialModel apiToken route =
     { project = Loading
     , error = Nothing
+    , loading = False
     , apiToken = apiToken
     , route = route
     , contribution = Nothing

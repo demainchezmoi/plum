@@ -44,13 +44,6 @@ projectNav project =
         ]
 
 
-genericNav : Html Msg
-genericNav =
-    h5 [ class "ml-header row justify-content-between" ]
-        [ div [ class "col" ] [ text " Maisons Léo" ]
-        ]
-
-
 deactivatedView : Project -> Html Msg
 deactivatedView project =
     div []
@@ -159,7 +152,7 @@ displaySteps =
     [ { step = DiscoverHouse, view = discoverHouseView, label = "Découvrir la maison" }
     , { step = DiscoverLand, view = discoverLandView, label = "Découvrir le terrain" }
     , { step = EvaluateFunding, view = evaluateFundingView, label = "Ma finançabilité" }
-    , { step = PhoneCall, view = phoneCallView, label = "Premier contact" }
+    , { step = PhoneCall, view = phoneCallView, label = "Prenons contact" }
     , { step = Quotation, view = quotationView, label = "Mon devis" }
     , { step = Funding, view = fundingView, label = "Mon financement" }
     , { step = VisitLand, view = visitLandView, label = "Visite du terrain" }
@@ -416,14 +409,11 @@ discoverLandView model project title step =
                 >> (format { frenchLocale | decimals = 0 })
                 >> (\p -> p ++ " €")
 
-        title =
-            "Description"
-
         description =
             project.ad.land.description
 
         landSlide =
-            [ cardSlide landPhoto title description ]
+            [ cardSlide landPhoto "Déscription" description ]
 
         mapSlide =
             case project.ad.land.location of
@@ -456,7 +446,7 @@ discoverLandView model project title step =
             div []
                 [ stepInfo "Découvrez l'opportunité de terrain que nous vous proposons."
                 , carousel
-                , nextStepInfo "Découvrir la maison"
+                , nextStepInfo "Découvrir la Maison Léo"
                 , stepButton project DiscoverLand button
                 ]
     in
@@ -511,7 +501,7 @@ evaluateFundingView model project title step =
                             []
                         ]
                     ]
-                , nextStepInfo "Notre premier contact"
+                , nextStepInfo "Notre prenonts contact"
                 , stepButton project EvaluateFunding (ValidateEvaluateFunding project.id |> nextStepButton)
                 ]
     in
@@ -548,7 +538,8 @@ phoneCallView model project title step =
         sumUp =
             \phone_number ->
                 p [ class "mt-2 p-3 light-bordered" ]
-                    [ text "Nous allons vous appeler au numéro suivant pour faire le point sur votre projet et votre possible financement :"
+                    [ p [] [ text "Merci !" ]
+                    , text "Nous allons vous appeler au numéro suivant pour faire le point sur votre projet et votre financement :"
                     , br [] []
                     , div [ class "row align-items-center" ]
                         [ span [ class "col font-bold" ] [ text phone_number ]

@@ -9,6 +9,20 @@ import RemoteData exposing (..)
 import Model exposing (..)
 
 
+loader : Html Msg
+loader =
+    div [ class "loading-overlay" ]
+        [ i [ class "fa fa-spinner fa-spin text-white" ] []
+        ]
+
+
+genericNav : Html Msg
+genericNav =
+    h5 [ class "ml-header row justify-content-between" ]
+        [ div [ class "col" ] [ text " Maisons Léo" ]
+        ]
+
+
 row : List (Html Msg) -> Html Msg
 row elements =
     div [ class "row" ] elements
