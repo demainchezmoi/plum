@@ -27,10 +27,29 @@ type alias Land =
 
 type alias LandForm =
     { city : String
+    , department : String
+    , location : Maybe Location
+    , price : Int
+    , surface : Int
+    , description : String
+    , images : List String
     }
 
 
-validation : Validation () LandForm
-validation =
-    map LandForm
-        (field "city" string)
+locationValidation : Validation () Location
+locationValidation =
+    succeed Location
+        |> andMap (field "lat" float)
+        |> andMap (field "lng" float)
+
+
+landFormValidation : Validation () LandForm
+landFormValidation =
+    succeed LandForm
+        |> andMap (field "city" string)
+        |> andMap (field "department" string)
+        |> andMap (field "location" (maybe locationValidation))
+        |> andMap (field "price" int)
+        |> andMap (field "surface" int)
+        |> andMap (field "description" string)
+        |> andMap (field "images" (list string))

@@ -4,9 +4,10 @@ import Messages exposing (..)
 import Model exposing (..)
 import Routing exposing (Route(..), parse, toPath)
 import Navigation
-import Land.Commands exposing (ensureLand)
-import Land.Model exposing (validation)
-import LandList.Commands exposing (getLandList)
+import Land.Commands exposing (..)
+import Land.Model exposing (..)
+import LandList.Commands exposing (..)
+import Land.Encoders exposing (..)
 import RemoteData exposing (..)
 import Form exposing (Form)
 import Form.Validate as Validate exposing (..)
@@ -15,6 +16,9 @@ import Form.Validate as Validate exposing (..)
 update : Msg -> Model -> ( Model, Cmd Msg )
 update msg model =
     case msg of
+        NoOp ->
+            model ! []
+
         LandResponse response ->
             { model | land = response } ! []
 
@@ -33,8 +37,26 @@ update msg model =
         NavigateTo route ->
             model ! [ Navigation.newUrl <| toPath route ]
 
-        FormMsg formMsg ->
-            ( { model | landForm = Form.update validation formMsg model.landForm }, Cmd.none )
+        LandFormMsg formMsg ->
+            let
+                landForm =
+                    Form.update landFormValidation formMsg model.landForm
+
+                newModel =
+                    { model | landForm = landForm }
+
+                cmd =
+                    case ( formMsg, Form.getOutput landForm ) of
+                        ( Form.Submit, Just landForm ) ->
+                            [ createLand model.apiToken (landFormEncoder landForm) ]
+
+                        _ ->
+                            []
+            in
+                newModel ! cmd
+
+        CreateLandResponse response ->
+            model ! []
 
 
 urlUpdate : Model -> ( Model, Cmd Msg )

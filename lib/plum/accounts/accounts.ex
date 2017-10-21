@@ -136,7 +136,13 @@ defmodule Plum.Accounts do
 
   """
   def upsert_user_by(attrs, field) do
-    User |> struct(attrs) |> upsert_by(field)
+    case User |> Repo.get_by(%{field => attrs[field]}) do
+      nil ->
+       attrs |> create_user
+
+      user ->
+        user |> update_user(attrs)
+    end
   end
 
 

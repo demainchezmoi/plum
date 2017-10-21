@@ -75,9 +75,12 @@ defmodule Plum.AccountsTest do
     end
 
     test "upsert_user_by/2 updates a User" do
-      %{email: email, id: id} = insert(:user, admin: false)
-      user_params = params_for(:user, admin: true, email: email)
-      assert {:ok, %User{id: ^id, email: ^email, admin: true}} = Accounts.upsert_user_by(user_params, :email)
+      roles = ["admin"]
+      email = "new_email"
+      user = insert(:user, roles: roles)
+      id = user.id
+      params = %{email: email, facebook_id: user.facebook_id}
+      assert {:ok, %User{id: ^id, email: ^email, roles: ^roles}} = Accounts.upsert_user_by(params, :facebook_id)
     end
   end
 

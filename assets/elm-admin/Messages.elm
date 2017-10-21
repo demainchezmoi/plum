@@ -10,8 +10,10 @@ import Form exposing (Form)
 
 
 type Msg
-    = LandListResponse (WebData LandList)
+    = NoOp
+    | LandListResponse (WebData LandList)
     | UrlChange Navigation.Location
     | NavigateTo Route
     | LandResponse (WebData Land)
-    | FormMsg Form.Msg
+    | LandFormMsg Form.Msg
+    | CreateLandResponse (WebData Land)

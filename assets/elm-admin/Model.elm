@@ -2,9 +2,10 @@ module Model exposing (..)
 
 import Routing exposing (Route)
 import RemoteData exposing (..)
-import Land.Model exposing (Land, LandForm, validation)
+import Land.Model exposing (Land, LandForm, landFormValidation)
 import LandList.Model exposing (LandList)
 import Form exposing (Form)
+import Form.Field as Field
 import Form.Validate as Validate exposing (..)
 
 
@@ -39,7 +40,11 @@ initialModel : ApiToken -> Route -> Model
 initialModel apiToken route =
     { landList = NotAsked
     , land = NotAsked
-    , landForm = Form.initial [] validation
+    , landForm =
+        Form.initial
+            [ ( "images", Field.list [ (Field.string "") ] )
+            ]
+            landFormValidation
     , error = Nothing
     , apiToken = apiToken
     , route = route

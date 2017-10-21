@@ -1,6 +1,6 @@
 module Land.Commands exposing (..)
 
-import Commands exposing (authGet)
+import Commands exposing (..)
 import Json.Encode exposing (..)
 import Messages exposing (Msg(..))
 import Model exposing (..)
@@ -24,6 +24,25 @@ getLandWithCallback apiToken landId callback =
 getLand : ApiToken -> LandId -> Cmd Msg
 getLand apiToken landId =
     getLandWithCallback apiToken landId LandResponse
+
+
+createLandWithCallback : ApiToken -> Value -> (WebData Land -> Msg) -> Cmd Msg
+createLandWithCallback apiToken landFormValue callback =
+    let
+        url =
+            "/api/lands"
+
+        land_data =
+            object [ ( "land", landFormValue ) ]
+    in
+        authPost apiToken url landDecoder land_data
+            |> RemoteData.sendRequest
+            |> Cmd.map callback
+
+
+createLand : ApiToken -> Value -> Cmd Msg
+createLand apiToken landFormValue =
+    createLandWithCallback apiToken landFormValue CreateLandResponse
 
 
 ensureLandWithCallback : Model -> LandId -> (WebData Land -> Msg) -> Cmd Msg

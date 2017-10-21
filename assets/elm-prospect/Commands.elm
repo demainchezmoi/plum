@@ -61,3 +61,8 @@ authGet apiToken url decoder =
 authPut : ApiToken -> Url -> Decoder a -> Value -> Request a
 authPut apiToken url decoder value =
     authentifiedRequest apiToken "PUT" url (jsonBody value) [] decoder
+
+
+authPost : ApiToken -> Url -> Decoder a -> Value -> Request a
+authPost apiToken url decoder value =
+    authentifiedRequest apiToken "POST" url (jsonBody value) [] decoder

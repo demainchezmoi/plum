@@ -530,7 +530,7 @@ netIncomeValue model =
 fundableView : Html Msg
 fundableView =
     div [ class "p-3 light-bordered" ]
-        [ p [ class "default-color-text font-bold" ] [ text "Félicitations, votre projet semble pouvoir être finançable !" ]
+        [ p [ class "default-color-text font-bold" ] [ text "Félicitations, votre projet semble être finançable !" ]
         , text "Passez à l'étape suivante et renseignez votre numéro de téléphone pour que nous puissions entrer en contact."
         ]
 
@@ -601,13 +601,13 @@ evaluateFundingView model project title step =
 
         decalredValuesView =
             div [ class "p-3 light-bordered mb-2" ]
-                [ dl [ class "row mb-0" ]
-                    [ dt [ class "col" ] [ text "Apport financier :" ]
-                    , dd [ class "col-auto" ] [ text (contributionValue model ++ " €") ]
+                [ dl [ class "row mb-1" ]
+                    [ dt [ class "col" ] [ text "Apport financier" ]
+                    , dd [ class "col-auto pl-0 mb-0" ] [ text (contributionValue model ++ " €") ]
                     ]
                 , dl [ class "row mb-0" ]
-                    [ dt [ class "col" ] [ text "Revenu mensuel net :" ]
-                    , dd [ class "col-auto" ] [ text (netIncomeValue model ++ " €") ]
+                    [ dt [ class "col" ] [ text "Revenu mensuel net" ]
+                    , dd [ class "col-auto pl-0 mb-0" ] [ text (netIncomeValue model ++ " €") ]
                     ]
                 ]
 

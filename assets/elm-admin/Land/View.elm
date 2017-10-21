@@ -61,24 +61,53 @@ textInput iField iLabel form =
             ]
 
 
+textArea : String -> String -> Form () a -> Html Form.Msg
+textArea iField iLabel form =
+    let
+        f =
+            Form.getFieldAsString iField form
+    in
+        div [ class "form-group" ]
+            [ label [] [ text iLabel ]
+            , Input.textArea f [ class "form-control" ]
+            , p [ class "text-danger" ]
+                [ errorFor f
+                ]
+            ]
+
+
+imageView : Form () LandForm -> Int -> Html Form.Msg
+imageView form i =
+    div
+        [ class "p-3 light-bordered" ]
+        [ textInput ("images." ++ (toString i)) ("Image " ++ (toString (i + 1))) form
+        , a [ class "", onClick (Form.RemoveItem "images" i) ] [ text "supprimer" ]
+        ]
+
+
 landFormView : Form () LandForm -> Html Form.Msg
 landFormView form =
-    let
-        -- fields states
-        city =
-            Form.getFieldAsString "city" form
-    in
-        div []
-            [ textInput "city" "Ville" form
-            , button
-                [ onClick Form.Submit, class "btn btn-default" ]
-                [ text "Valider" ]
+    Html.form
+        [ onSubmit Form.Submit ]
+        [ textInput "city" "Ville" form
+        , textInput "department" "Département" form
+        , textInput "location.lat" "Latitude" form
+        , textInput "location.lng" "Longitude" form
+        , textInput "price" "Prix" form
+        , textInput "surface" "Surface" form
+        , textArea "description" "Description" form
+        , div [] <| List.map (imageView form) (Form.getListIndexes "images" form)
+        , button
+            [ type_ "submit"
+            , class "btn btn-default"
             ]
+            [ text "Valider" ]
+        ]
 
 
 landNewView : Model -> Html Msg
 landNewView model =
-    Html.map FormMsg (landFormView model.landForm)
+    Html.map LandFormMsg (landFormView model.landForm)
 
 
 landShowView : Model -> Html Msg
