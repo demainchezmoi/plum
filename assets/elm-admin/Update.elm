@@ -7,6 +7,7 @@ import Navigation
 import Land.Commands exposing (..)
 import Land.Model exposing (..)
 import LandList.Commands exposing (..)
+import LandList.Model exposing (..)
 import Land.Encoders exposing (..)
 import RemoteData exposing (..)
 import Form exposing (Form)
@@ -20,19 +21,33 @@ update msg model =
             model ! []
 
         LandResponse response ->
-            { model | land = response } ! []
+            (model
+                |> setLand response
+            )
+                ! []
 
         LandListResponse response ->
-            ( { model | landList = response }
-            , Cmd.none
+            (model
+                |> setLandList response
             )
+                ! []
+
+        LandCreateResponse response ->
+            case response of
+                Success land ->
+                    (model
+                        |> setLand response
+                        |> setRoute (LandShowRoute land.id)
+                    )
+                        ! []
+
+                _ ->
+                    model ! []
 
         UrlChange location ->
-            let
-                currentRoute =
-                    parse location
-            in
-                urlUpdate { model | route = currentRoute }
+            model
+                |> setRoute (parse location)
+                |> urlUpdate
 
         NavigateTo route ->
             model ! [ Navigation.newUrl <| toPath route ]
@@ -55,9 +70,6 @@ update msg model =
             in
                 newModel ! cmd
 
-        CreateLandResponse response ->
-            model ! []
-
 
 urlUpdate : Model -> ( Model, Cmd Msg )
 urlUpdate model =
@@ -70,3 +82,18 @@ urlUpdate model =
 
         _ ->
             ( model, Cmd.none )
+
+
+setRoute : Route -> Model -> Model
+setRoute route model =
+    { model | route = route }
+
+
+setLand : WebData Land -> Model -> Model
+setLand response model =
+    { model | land = response }
+
+
+setLandList : WebData LandList -> Model -> Model
+setLandList response model =
+    { model | landList = response }

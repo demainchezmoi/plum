@@ -35,14 +35,14 @@ createLandWithCallback apiToken landFormValue callback =
         land_data =
             object [ ( "land", landFormValue ) ]
     in
-        authPost apiToken url landDecoder land_data
+        authPost apiToken url landShowDecoder land_data
             |> RemoteData.sendRequest
             |> Cmd.map callback
 
 
 createLand : ApiToken -> Value -> Cmd Msg
 createLand apiToken landFormValue =
-    createLandWithCallback apiToken landFormValue CreateLandResponse
+    createLandWithCallback apiToken landFormValue LandCreateResponse
 
 
 ensureLandWithCallback : Model -> LandId -> (WebData Land -> Msg) -> Cmd Msg

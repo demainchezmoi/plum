@@ -11,9 +11,9 @@ import Form exposing (Form)
 
 type Msg
     = NoOp
-    | LandListResponse (WebData LandList)
-    | UrlChange Navigation.Location
-    | NavigateTo Route
-    | LandResponse (WebData Land)
+    | LandCreateResponse (WebData Land)
     | LandFormMsg Form.Msg
-    | CreateLandResponse (WebData Land)
+    | LandListResponse (WebData LandList)
+    | LandResponse (WebData Land)
+    | NavigateTo Route
+    | UrlChange Navigation.Location
