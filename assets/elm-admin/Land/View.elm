@@ -21,7 +21,7 @@ imageItemView : String -> Form () LandForm -> Int -> Html Form.Msg
 imageItemView prefix form i =
     li
         [ class "list-group-item" ]
-        [ textInput (prefix ++ "." ++ (toString i)) ("Image " ++ (toString (i + 1))) form
+        [ textInput (prefix ++ "." ++ (toString i)) ("Image url " ++ (toString (i + 1))) form
         , a [ class "text-danger", onClick (Form.RemoveItem "images" i) ] [ text "supprimer" ]
         ]
 
@@ -30,28 +30,33 @@ landFormView : Form () LandForm -> Html Form.Msg
 landFormView form =
     Html.form
         [ onSubmit Form.Submit ]
-        [ textInput "city" "Ville" form
+        [ h4 [ class "h4-responsive mt-3 font-bold" ] [ text "Terrain" ]
+        , textInput "city" "Ville" form
         , textInput "department" "Département" form
         , textInput "location.lat" "Latitude" form
         , textInput "location.lng" "Longitude" form
         , textInput "price" "Prix" form
         , textInput "surface" "Surface" form
         , textArea "description" "Description" form
-        , div [ class "row align-items-center" ]
-            [ h4 [ class "h4-responsive mt-3 font-bold col" ] [ text "Photos" ]
-            , a [ class "col-auto default-color-text", onClick (Form.Append "images") ] [ text "Ajouter" ]
+        , div [ class "mt-3" ]
+            [ div [ class "row" ]
+                [ h4 [ class "h4-responsive font-bold col" ] [ text "Photos" ]
+                , a [ class "col-auto default-color-text", onClick (Form.Append "images") ] [ text "Ajouter" ]
+                ]
+            , ul [ class "list-group" ] <|
+                List.map (imageItemView "images" form) (Form.getListIndexes "images" form)
             ]
-        , ul [ class "list-group" ] <|
-            List.map (imageItemView "images" form) (Form.getListIndexes "images" form)
-        , div [ class "row align-items-center" ]
-            [ h4 [ class "h4-responsive mt-3 font-bold col" ] [ text "Annonces" ]
-            , a [ class "col-auto default-color-text", onClick (Form.Append "ads") ] [ text "Ajouter" ]
+        , div [ class "mt-3" ]
+            [ div [ class "row" ]
+                [ h4 [ class "h4-responsive font-bold col" ] [ text "Annonces associées" ]
+                , a [ class "col-auto default-color-text", onClick (Form.Append "ads") ] [ text "Ajouter" ]
+                ]
+            , ul [ class "list-group" ] <|
+                List.map (adItemFormView "ads" form) (Form.getListIndexes "ads" form)
             ]
-        , ul [ class "list-group" ] <|
-            List.map (adItemFormView "ads" form) (Form.getListIndexes "ads" form)
         , button
             [ type_ "submit"
-            , class "btn btn-default"
+            , class "btn btn-default mt-3"
             ]
             [ text "Valider" ]
         ]
@@ -60,8 +65,7 @@ landFormView form =
 landNewView : Model -> Html Msg
 landNewView model =
     div []
-        [ h1 [ class "h1-responsive" ] [ text "Nouveau terrain" ]
-        , Html.map LandFormMsg (landFormView model.landForm)
+        [ Html.map LandFormMsg (landFormView model.landForm)
         , a [ class "default-color-text", onClick (NavigateTo LandListRoute) ] [ text "Retour" ]
         ]
 
