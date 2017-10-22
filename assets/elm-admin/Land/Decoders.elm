@@ -1,9 +1,15 @@
 module Land.Decoders exposing (..)
 
+import Ad.Model exposing (..)
 import Json.Decode as JD exposing (..)
 import Json.Decode.Extra exposing ((|:))
 import Land.Model exposing (..)
 import Location.Model exposing (..)
+
+
+idDecoder : JD.Decoder Int
+idDecoder =
+    at [ "id" ] <| int
 
 
 location : JD.Decoder Location
@@ -12,11 +18,6 @@ location =
         Location
         |: (field "lat" float)
         |: (field "lng" float)
-
-
-landShowDecoder : JD.Decoder Land
-landShowDecoder =
-    at [ "data" ] <| landDecoder
 
 
 landDecoder : JD.Decoder Land
@@ -31,9 +32,4 @@ landDecoder =
         |: (field "description" string)
         |: (field "images" (list string))
         |: (field "id" int)
-
-
-landListDecoder : JD.Decoder (List Land)
-landListDecoder =
-    at [ "data" ] <|
-        JD.list landDecoder
+        |: oneOf [ field "ads" (list idDecoder), succeed [] ]

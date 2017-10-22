@@ -1,5 +1,7 @@
 module Update exposing (..)
 
+import Ad.Model exposing (..)
+import DecodedTypes exposing (..)
 import Dict
 import Messages exposing (..)
 import Model exposing (..)
@@ -21,21 +23,10 @@ update msg model =
             model ! []
 
         LandResponse landId response ->
-            (model
-                |> setLand landId response
-            )
-                ! []
+            (model |> setDecodedLandWD landId response) ! []
 
         LandListResponse response ->
-            case response of
-                Success lands ->
-                    (model
-                        |> setLands lands
-                    )
-                        ! []
-
-                _ ->
-                    model ! []
+            (model |> setDecodedLandsWD response) ! []
 
         LandFormMsg formMsg ->
             let
@@ -56,14 +47,18 @@ update msg model =
                 newModel ! cmd
 
         LandCreateResponse response ->
-            case response of
-                Success land ->
-                    model
-                        |> setLand land.id response
-                        |> navigateTo (LandShowRoute land.id)
+            let
+                landResponse =
+                    response |> RemoteData.map (\decodedLand -> decodedLand.land)
+            in
+                case response of
+                    Success decodedLand ->
+                        model
+                            |> setLandWD decodedLand.land.id landResponse
+                            |> navigateTo (LandShowRoute decodedLand.land.id)
 
-                _ ->
-                    model ! []
+                    _ ->
+                        model ! []
 
         UrlChange location ->
             model
@@ -75,12 +70,16 @@ update msg model =
                 |> navigateTo route
 
 
+
+-- Navigation
+
+
 urlUpdate : Model -> ( Model, Cmd Msg )
 urlUpdate model =
     case model.route of
         LandShowRoute landId ->
             (model
-                |> setLand landId Loading
+                |> setLandWD landId Loading
             )
                 ! [ ensureLand landId model ]
 
@@ -101,9 +100,61 @@ setRoute route model =
     { model | route = route }
 
 
-setLand : Int -> WebData Land -> Model -> Model
-setLand landId response model =
-    { model | lands = Dict.insert landId response model.lands }
+
+-- Decoded Lands
+
+
+setDecodedLandWD : Int -> WebData DecodedLand -> Model -> Model
+setDecodedLandWD landId response model =
+    let
+        landResponse =
+            response |> RemoteData.map (\decodedLand -> decodedLand.land)
+
+        ads =
+            case response of
+                Success decodedLand ->
+                    decodedLand.ads
+
+                _ ->
+                    []
+    in
+        model
+            |> setLandWD landId landResponse
+            |> setAds ads
+
+
+setDecodedLandsWD : WebData (List DecodedLand) -> Model -> Model
+setDecodedLandsWD decodedLandsWD model =
+    case decodedLandsWD of
+        Success decodedLands ->
+            model |> setDecodedLands decodedLands
+
+        _ ->
+            model
+
+
+setDecodedLands : List DecodedLand -> Model -> Model
+setDecodedLands decodedLands model =
+    case decodedLands of
+        [] ->
+            model
+
+        decodedLand :: rest ->
+            setDecodedLands rest (model |> setDecodedLandWD decodedLand.land.id (Success decodedLand))
+
+
+
+-- Lands
+
+
+setLandWD : Int -> WebData Land -> Model -> Model
+setLandWD landId response model =
+    { model | lands = model.lands |> Dict.insert landId response }
+
+
+setLand : Int -> Land -> Model -> Model
+setLand landId land model =
+    model |> setLandWD land.id (RemoteData.succeed land)
 
 
 setLands : List Land -> Model -> Model
@@ -113,4 +164,28 @@ setLands lands model =
             model
 
         land :: rest ->
-            setLands rest (setLand land.id (Success land) model)
+            setLands rest (setLand land.id land model)
+
+
+
+-- Ads
+
+
+setAdWD : Int -> WebData Ad -> Model -> Model
+setAdWD adId response model =
+    { model | ads = model.ads |> Dict.insert adId response }
+
+
+setAd : Int -> Ad -> Model -> Model
+setAd adId ad model =
+    model |> setAdWD ad.id (RemoteData.succeed ad)
+
+
+setAds : List Ad -> Model -> Model
+setAds ads model =
+    case ads of
+        [] ->
+            model
+
+        ad :: rest ->
+            setAds rest (setAdWD ad.id (RemoteData.succeed ad) model)

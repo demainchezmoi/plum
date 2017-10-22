@@ -11,8 +11,7 @@ type alias Ads =
 
 type alias Ad =
     { active : Bool
-    , land : Land
     , house_price : Int
-
-    -- , land : Maybe Int
+    , land_id : Int
+    , id : Int
     }

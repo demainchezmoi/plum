@@ -20,6 +20,5 @@ type alias Land =
     , description : String
     , images : List String
     , id : Int
-
-    -- , ads : List Int
+    , ads : List Int
     }

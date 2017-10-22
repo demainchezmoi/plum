@@ -2,6 +2,7 @@ module Land.View exposing (..)
 
 import Dict
 import Ad.Form exposing (..)
+import Ad.Model exposing (..)
 import Form exposing (Form)
 import Form.Error exposing (Error)
 import Form.Input as Input
@@ -93,8 +94,25 @@ landShowView landId model =
             notAskedView
 
 
-landShowDetailView : Land -> Html Msg
-landShowDetailView land =
+landAdWdView : WebData Ad -> Html Msg
+landAdWdView adWD =
+    case adWD of
+        Success ad ->
+            ad |> landAdView
+
+        _ ->
+            text ""
+
+
+landAdView : Ad -> Html Msg
+landAdView ad =
+    div [ class "" ]
+        [ a [ class "default-color-text" ] [ text <| ("Annonce " ++ (toString ad.id)) ]
+        ]
+
+
+landShowDetailView : Land -> Model -> Html Msg
+landShowDetailView land model =
     let
         infos =
             String.join " - "
@@ -105,11 +123,16 @@ landShowDetailView land =
         title =
             String.join "" [ land.city, " (", land.department, ")" ]
     in
-        div [ class "list-group-item" ]
+        div [ class "" ]
             [ div [ class "row" ]
                 [ div [ class "col" ]
                     [ div [ class "font-bold" ] [ text title ]
                     , div [ class "" ] [ text infos ]
+                    , div []
+                        (land.ads
+                            |> L.filterMap (\adId -> model.ads |> Dict.get adId)
+                            |> L.map landAdWdView
+                        )
                     ]
                 ]
             ]
@@ -118,8 +141,8 @@ landShowDetailView land =
 landShowSuccessView : Model -> Land -> Html Msg
 landShowSuccessView model land =
     div []
-        [ landShowDetailView land
-        , a [ class "default-color-text", onClick (NavigateTo LandListRoute) ] [ text "Retour" ]
+        [ landShowDetailView land model
+        , div [ class "mt-3" ] [ a [ class "default-color-text", onClick (NavigateTo LandListRoute) ] [ text "Retour" ] ]
         ]
 
 
