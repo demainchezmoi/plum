@@ -1,5 +1,6 @@
 module Land.View exposing (..)
 
+import Dict
 import Ad.Form exposing (..)
 import Form exposing (Form)
 import Form.Error exposing (Error)
@@ -10,6 +11,7 @@ import Html.Attributes exposing (..)
 import Html.Events exposing (..)
 import Land.Form exposing (..)
 import Land.Model exposing (..)
+import List as L
 import Messages exposing (..)
 import Model exposing (..)
 import RemoteData exposing (..)
@@ -44,7 +46,7 @@ landFormView form =
                 , a [ class "col-auto default-color-text", onClick (Form.Append "images") ] [ text "Ajouter" ]
                 ]
             , ul [ class "list-group" ] <|
-                List.map (imageItemView "images" form) (Form.getListIndexes "images" form)
+                L.map (imageItemView "images" form) (Form.getListIndexes "images" form)
             ]
         , div [ class "mt-3" ]
             [ div [ class "row" ]
@@ -52,7 +54,7 @@ landFormView form =
                 , a [ class "col-auto default-color-text", onClick (Form.Append "ads") ] [ text "Ajouter" ]
                 ]
             , ul [ class "list-group" ] <|
-                List.map (adItemFormView "ads" form) (Form.getListIndexes "ads" form)
+                L.map (adItemFormView "ads" form) (Form.getListIndexes "ads" form)
             ]
         , button
             [ type_ "submit"
@@ -70,20 +72,25 @@ landNewView model =
         ]
 
 
-landShowView : Model -> Html Msg
-landShowView model =
-    case model.land of
-        Failure err ->
-            failureView err
+landShowView : Int -> Model -> Html Msg
+landShowView landId model =
+    case model.lands |> Dict.get landId of
+        Just landWebData ->
+            case landWebData of
+                Failure err ->
+                    failureView err
 
-        NotAsked ->
+                NotAsked ->
+                    notAskedView
+
+                Loading ->
+                    loadingView
+
+                Success land ->
+                    landShowSuccessView model land
+
+        Nothing ->
             notAskedView
-
-        Loading ->
-            loadingView
-
-        Success land ->
-            landShowSuccessView model land
 
 
 landShowDetailView : Land -> Html Msg
@@ -116,36 +123,40 @@ landShowSuccessView model land =
         ]
 
 
+loadedLand : WebData Land -> Maybe Land
+loadedLand landWebData =
+    case landWebData of
+        Success land ->
+            Just land
+
+        _ ->
+            Nothing
+
+
 landListView : Model -> Html Msg
 landListView model =
-    case model.landList of
-        NotAsked ->
-            text "Initialising."
-
-        Loading ->
-            text "Loading."
-
-        Failure err ->
-            text ("Error: " ++ toString err)
-
-        Success landList ->
-            div []
-                [ h1 [ class "h1-responsive" ] [ text "Terrains" ]
-                , p []
-                    [ a
-                        [ class "default-color-text"
-                        , onClick (NavigateTo LandNewRoute)
+    model.lands
+        |> Dict.values
+        |> L.filterMap loadedLand
+        |> (\landList ->
+                div []
+                    [ h1 [ class "h1-responsive" ] [ text "Terrains" ]
+                    , p []
+                        [ a
+                            [ class "default-color-text"
+                            , onClick (NavigateTo LandNewRoute)
+                            ]
+                            [ text "Ajouter" ]
                         ]
-                        [ text "Ajouter" ]
+                    , renderLandList landList
                     ]
-                , renderLandList landList
-                ]
+           )
 
 
-renderLandList : LandList -> Html Msg
-renderLandList landList =
-    landList
-        |> List.map landItemView
+renderLandList : List Land -> Html Msg
+renderLandList lands =
+    lands
+        |> L.map landItemView
         |> ul [ class "list-group" ]
 
 

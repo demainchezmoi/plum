@@ -12,7 +12,7 @@ type Msg
     = NoOp
     | LandCreateResponse (WebData Land)
     | LandFormMsg Form.Msg
-    | LandListResponse (WebData LandList)
-    | LandResponse (WebData Land)
+    | LandListResponse (WebData (List Land))
+    | LandResponse Int (WebData Land)
     | NavigateTo Route
     | UrlChange Navigation.Location

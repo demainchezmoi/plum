@@ -33,7 +33,7 @@ landDecoder =
         |: (field "id" int)
 
 
-landListDecoder : JD.Decoder LandList
+landListDecoder : JD.Decoder (List Land)
 landListDecoder =
     at [ "data" ] <|
         JD.list landDecoder

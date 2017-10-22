@@ -1,12 +1,14 @@
 module Land.Model exposing (..)
 
 import Ad.Form exposing (..)
+import Dict exposing (Dict)
 import Land.Form exposing (..)
 import Location.Model exposing (..)
+import RemoteData exposing (..)
 
 
-type alias LandId =
-    Int
+type alias Lands =
+    Dict Int (WebData Land)
 
 
 type alias Land =
@@ -17,9 +19,7 @@ type alias Land =
     , surface : Int
     , description : String
     , images : List String
-    , id : LandId
+    , id : Int
+
+    -- , ads : List Int
     }
-
-
-type alias LandList =
-    List Land

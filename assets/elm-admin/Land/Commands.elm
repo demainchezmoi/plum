@@ -1,16 +1,17 @@
 module Land.Commands exposing (..)
 
 import Commands exposing (..)
+import Dict
 import Json.Encode exposing (..)
-import Messages exposing (Msg(..))
-import Model exposing (..)
 import Land.Decoders exposing (..)
 import Land.Model exposing (..)
+import Messages exposing (Msg(..))
+import Model exposing (..)
 import RemoteData exposing (..)
 import Task
 
 
-getLandWithCallback : ApiToken -> LandId -> (WebData Land -> Msg) -> Cmd Msg
+getLandWithCallback : ApiToken -> Int -> (Int -> WebData Land -> Msg) -> Cmd Msg
 getLandWithCallback apiToken landId callback =
     let
         url =
@@ -18,10 +19,10 @@ getLandWithCallback apiToken landId callback =
     in
         authGet apiToken url landShowDecoder
             |> RemoteData.sendRequest
-            |> Cmd.map callback
+            |> Cmd.map (callback landId)
 
 
-getLand : ApiToken -> LandId -> Cmd Msg
+getLand : ApiToken -> Int -> Cmd Msg
 getLand apiToken landId =
     getLandWithCallback apiToken landId LandResponse
 
@@ -56,28 +57,16 @@ createLand apiToken landFormValue =
     createLandWithCallback apiToken landFormValue LandCreateResponse
 
 
-ensureLandWithCallback : Model -> LandId -> (WebData Land -> Msg) -> Cmd Msg
-ensureLandWithCallback model landId callback =
-    if landIsLoaded model landId then
-        Task.succeed (callback model.land)
-            |> Task.perform identity
-    else
-        getLandWithCallback model.apiToken landId callback
-
-
-ensureLand : Model -> LandId -> Cmd Msg
-ensureLand model landId =
-    ensureLandWithCallback model landId LandResponse
-
-
-landIsLoaded : Model -> LandId -> Bool
-landIsLoaded model landId =
-    case model.land of
-        Success land ->
-            if land.id == landId then
-                True
-            else
-                False
+ensureLandWithCallback : Int -> Model -> (Int -> WebData Land -> Msg) -> Cmd Msg
+ensureLandWithCallback landId model callback =
+    case model.lands |> Dict.get landId of
+        Just (Success land) ->
+            Task.succeed (callback landId (Success land)) |> Task.perform identity
 
         _ ->
-            False
+            getLandWithCallback model.apiToken landId callback
+
+
+ensureLand : Int -> Model -> Cmd Msg
+ensureLand landId model =
+    ensureLandWithCallback landId model LandResponse

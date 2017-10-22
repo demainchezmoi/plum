@@ -43,7 +43,7 @@ page model =
                     landNewView model
 
                 LandShowRoute landId ->
-                    landShowView model
+                    landShowView landId model
 
                 NotFoundRoute ->
                     notFoundView

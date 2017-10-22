@@ -1,13 +1,16 @@
 module Model exposing (..)
 
+import Ad.Form exposing (..)
+import Ad.Model exposing (..)
+import Dict exposing (Dict)
 import Form exposing (Form)
 import Form.Field as Field
 import Form.Validate as Validate exposing (..)
 import Land.Form exposing (..)
 import Land.Model exposing (..)
+import List as L
 import RemoteData exposing (..)
 import Routing exposing (Route)
-import Ad.Form exposing (..)
 
 
 type alias ApiToken =
@@ -28,10 +31,9 @@ type alias Flags =
 
 
 type alias Model =
-    { landList : WebData LandList
-    , land : WebData Land
+    { lands : Lands
+    , ads : Ads
     , landForm : Form () LandForm
-    , error : Maybe String
     , apiToken : ApiToken
     , route : Route
     }
@@ -39,15 +41,14 @@ type alias Model =
 
 initialModel : ApiToken -> Route -> Model
 initialModel apiToken route =
-    { landList = NotAsked
-    , land = NotAsked
+    { lands = Dict.empty
+    , ads = Dict.empty
     , landForm =
         Form.initial
             [ ( "images", Field.list [ Field.string "" ] )
             , ( "ads", Field.list [ initialAdItemField ] )
             ]
             landFormValidation
-    , error = Nothing
     , apiToken = apiToken
     , route = route
     }

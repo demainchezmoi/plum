@@ -5,18 +5,18 @@ import UrlParser exposing (..)
 
 
 type Route
-    = LandListRoute
-    | LandNewRoute
+    = LandNewRoute
     | LandShowRoute Int
     | NotFoundRoute
+    | LandListRoute
 
 
 matchers : Parser (Route -> a) a
 matchers =
     oneOf
-        [ map LandListRoute (s "admin" </> s "lands")
-        , map LandNewRoute (s "admin" </> s "lands" </> s "new")
+        [ map LandNewRoute (s "admin" </> s "lands" </> s "new")
         , map LandShowRoute (s "admin" </> s "lands" </> int)
+        , map LandListRoute (s "admin" </> s "lands")
         ]
 
 

@@ -1,5 +1,6 @@
 module Update exposing (..)
 
+import Dict
 import Messages exposing (..)
 import Model exposing (..)
 import Routing exposing (Route(..), parse, toPath)
@@ -19,17 +20,22 @@ update msg model =
         NoOp ->
             model ! []
 
-        LandResponse response ->
+        LandResponse landId response ->
             (model
-                |> setLand response
+                |> setLand landId response
             )
                 ! []
 
         LandListResponse response ->
-            (model
-                |> setLandList response
-            )
-                ! []
+            case response of
+                Success lands ->
+                    (model
+                        |> setLands lands
+                    )
+                        ! []
+
+                _ ->
+                    model ! []
 
         LandFormMsg formMsg ->
             let
@@ -53,7 +59,7 @@ update msg model =
             case response of
                 Success land ->
                     model
-                        |> setLand response
+                        |> setLand land.id response
                         |> navigateTo (LandShowRoute land.id)
 
                 _ ->
@@ -73,10 +79,13 @@ urlUpdate : Model -> ( Model, Cmd Msg )
 urlUpdate model =
     case model.route of
         LandShowRoute landId ->
-            { model | land = Loading } ! [ ensureLand model landId ]
+            (model
+                |> setLand landId Loading
+            )
+                ! [ ensureLand landId model ]
 
         LandListRoute ->
-            { model | landList = Loading } ! [ getLandList model ]
+            model ! [ getLandList model ]
 
         _ ->
             ( model, Cmd.none )
@@ -92,11 +101,16 @@ setRoute route model =
     { model | route = route }
 
 
-setLand : WebData Land -> Model -> Model
-setLand response model =
-    { model | land = response }
+setLand : Int -> WebData Land -> Model -> Model
+setLand landId response model =
+    { model | lands = Dict.insert landId response model.lands }
 
 
-setLandList : WebData LandList -> Model -> Model
-setLandList response model =
-    { model | landList = response }
+setLands : List Land -> Model -> Model
+setLands lands model =
+    case lands of
+        [] ->
+            model
+
+        land :: rest ->
+            setLands rest (setLand land.id (Success land) model)
