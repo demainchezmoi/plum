@@ -2,7 +2,8 @@ module Land.Decoders exposing (..)
 
 import Json.Decode as JD exposing (..)
 import Json.Decode.Extra exposing ((|:))
-import Land.Model exposing (Land, Location)
+import Land.Model exposing (..)
+import Location.Model exposing (..)
 
 
 location : JD.Decoder Location
@@ -30,3 +31,9 @@ landDecoder =
         |: (field "description" string)
         |: (field "images" (list string))
         |: (field "id" int)
+
+
+landListDecoder : JD.Decoder LandList
+landListDecoder =
+    at [ "data" ] <|
+        JD.list landDecoder

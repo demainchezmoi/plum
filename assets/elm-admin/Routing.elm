@@ -9,27 +9,20 @@ type Route
     | LandNewRoute
     | LandShowRoute Int
     | NotFoundRoute
-    | DashboardRoute
 
 
 matchers : Parser (Route -> a) a
 matchers =
     oneOf
-        [ map LandListRoute (s "lands")
-        , map LandNewRoute (s "lands" </> s "new")
-        , map LandShowRoute (s "lands" </> int)
-        , map DashboardRoute (s "dashboard")
+        [ map LandListRoute (s "admin" </> s "lands")
+        , map LandNewRoute (s "admin" </> s "lands" </> s "new")
+        , map LandShowRoute (s "admin" </> s "lands" </> int)
         ]
-
-
-removePrefix : Navigation.Location -> Navigation.Location
-removePrefix location =
-    { location | pathname = location.pathname |> String.dropLeft 6 }
 
 
 parse : Navigation.Location -> Route
 parse location =
-    case UrlParser.parsePath matchers <| removePrefix location of
+    case UrlParser.parsePath matchers location of
         Just route ->
             route
 
@@ -41,16 +34,13 @@ toPath : Route -> String
 toPath route =
     case route of
         LandListRoute ->
-            String.join "/" [ "", "lands" ]
+            String.join "/" [ "", "admin", "lands" ]
 
         LandNewRoute ->
-            String.join "/" [ "", "lands", "new" ]
+            String.join "/" [ "", "admin", "lands", "new" ]
 
         LandShowRoute landId ->
-            String.join "/" [ "", "lands", toString landId ]
-
-        DashboardRoute ->
-            String.join "/" [ "", "dashboard" ]
+            String.join "/" [ "", "admin", "lands", toString landId ]
 
         NotFoundRoute ->
-            String.join "/" [ "", "not-found" ]
+            String.join "/" [ "", "admin", "not-found" ]

@@ -14,14 +14,14 @@ type Route
 matchers : Parser (Route -> a) a
 matchers =
     oneOf
-        [ map ProjectRoute (s "projets" </> projectIdMatcher)
-        , map ProjectStepRoute (s "projets" </> projectIdMatcher </> projectStepMatcher)
+        [ map ProjectRoute (s "mon-espace" </> s "projets" </> projectIdMatcher)
+        , map ProjectStepRoute (s "mon-espace" </> s "projets" </> projectIdMatcher </> projectStepMatcher)
         ]
 
 
 parse : Navigation.Location -> Route
 parse location =
-    case UrlParser.parsePath matchers (removePrefix location) of
+    case UrlParser.parsePath matchers location of
         Just route ->
             route
 
@@ -40,11 +40,6 @@ toPath route =
 
         ProjectStepRoute projectId step ->
             String.join "/" [ "", "mon-espace", "projets", toString projectId, projectStepToUrl step ]
-
-
-removePrefix : Navigation.Location -> Navigation.Location
-removePrefix location =
-    { location | pathname = location.pathname |> String.dropLeft 11 }
 
 
 projectStepMatcher : Parser (ProjectStep -> a) a

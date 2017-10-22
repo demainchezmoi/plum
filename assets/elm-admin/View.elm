@@ -1,10 +1,8 @@
 module View exposing (..)
 
-import Dashboard.View exposing (dashboardView)
 import Html exposing (..)
 import Html.Attributes exposing (..)
-import Land.View exposing (landNewView, landShowView)
-import LandList.View exposing (landListView)
+import Land.View exposing (..)
 import Messages exposing (..)
 import Model exposing (..)
 import Routing exposing (Route(..))
@@ -38,9 +36,6 @@ page model =
     let
         view =
             case model.route of
-                DashboardRoute ->
-                    dashboardView model
-
                 LandListRoute ->
                     landListView model
 

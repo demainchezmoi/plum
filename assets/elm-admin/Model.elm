@@ -1,12 +1,13 @@
 module Model exposing (..)
 
-import Routing exposing (Route)
-import RemoteData exposing (..)
-import Land.Model exposing (Land, LandForm, landFormValidation)
-import LandList.Model exposing (LandList)
 import Form exposing (Form)
 import Form.Field as Field
 import Form.Validate as Validate exposing (..)
+import Land.Form exposing (..)
+import Land.Model exposing (..)
+import RemoteData exposing (..)
+import Routing exposing (Route)
+import Ad.Form exposing (..)
 
 
 type alias ApiToken =
@@ -42,7 +43,8 @@ initialModel apiToken route =
     , land = NotAsked
     , landForm =
         Form.initial
-            [ ( "images", Field.list [ (Field.string "") ] )
+            [ ( "images", Field.list [ Field.string "" ] )
+            , ( "ads", Field.list [ initialAdItemField ] )
             ]
             landFormValidation
     , error = Nothing

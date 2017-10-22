@@ -4,8 +4,8 @@ import Commands exposing (..)
 import Json.Encode exposing (..)
 import Messages exposing (Msg(..))
 import Model exposing (..)
-import Land.Decoders exposing (landDecoder, landShowDecoder)
-import Land.Model exposing (Land, LandId)
+import Land.Decoders exposing (..)
+import Land.Model exposing (..)
 import RemoteData exposing (..)
 import Task
 
@@ -24,6 +24,17 @@ getLandWithCallback apiToken landId callback =
 getLand : ApiToken -> LandId -> Cmd Msg
 getLand apiToken landId =
     getLandWithCallback apiToken landId LandResponse
+
+
+getLandList : Model -> Cmd Msg
+getLandList model =
+    let
+        url =
+            String.concat [ "/api/lands" ]
+    in
+        authGet model.apiToken url landListDecoder
+            |> RemoteData.sendRequest
+            |> Cmd.map LandListResponse
 
 
 createLandWithCallback : ApiToken -> Value -> (WebData Land -> Msg) -> Cmd Msg

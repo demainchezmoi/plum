@@ -1,5 +1,6 @@
 module Land.View exposing (..)
 
+import Ad.Form exposing (..)
 import Form exposing (Form)
 import Form.Error exposing (Error)
 import Form.Input as Input
@@ -7,81 +8,21 @@ import Form.Validate as Validate exposing (..)
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
-import Land.Model exposing (Land, LandForm)
+import Land.Form exposing (..)
+import Land.Model exposing (..)
 import Messages exposing (..)
 import Model exposing (..)
 import RemoteData exposing (..)
-import String exposing (join, concat)
+import Routing exposing (..)
 import ViewHelpers exposing (..)
 
 
-landItemView : Land -> Html Msg
-landItemView land =
-    let
-        infos =
-            join " - "
-                [ concat [ toString land.price, " euros" ]
-                , concat [ toString land.surface, " m2" ]
-                ]
-
-        title =
-            String.join "" [ "Terrain à ", land.city, " (", land.department, ")" ]
-    in
-        div [ class "card mb-2" ]
-            [ div [ class "card-body" ]
-                [ div [ class "card-title" ] [ text title ]
-                , div [ class "card-text" ] [ text infos ]
-                ]
-            ]
-
-
-errorFor : Form.FieldState () String -> Html Form.Msg
-errorFor field =
-    case field.liveError of
-        Just error ->
-            -- replace toString with your own translations
-            div [ class "error" ] [ text (toString error) ]
-
-        Nothing ->
-            text ""
-
-
-textInput : String -> String -> Form () a -> Html Form.Msg
-textInput iField iLabel form =
-    let
-        f =
-            Form.getFieldAsString iField form
-    in
-        div [ class "form-group" ]
-            [ label [] [ text iLabel ]
-            , Input.textInput f [ class "form-control" ]
-            , p [ class "text-danger" ]
-                [ errorFor f
-                ]
-            ]
-
-
-textArea : String -> String -> Form () a -> Html Form.Msg
-textArea iField iLabel form =
-    let
-        f =
-            Form.getFieldAsString iField form
-    in
-        div [ class "form-group" ]
-            [ label [] [ text iLabel ]
-            , Input.textArea f [ class "form-control" ]
-            , p [ class "text-danger" ]
-                [ errorFor f
-                ]
-            ]
-
-
-imageView : Form () LandForm -> Int -> Html Form.Msg
-imageView form i =
-    div
-        [ class "p-3 light-bordered" ]
-        [ textInput ("images." ++ (toString i)) ("Image " ++ (toString (i + 1))) form
-        , a [ class "", onClick (Form.RemoveItem "images" i) ] [ text "supprimer" ]
+imageItemView : String -> Form () LandForm -> Int -> Html Form.Msg
+imageItemView prefix form i =
+    li
+        [ class "list-group-item" ]
+        [ textInput (prefix ++ "." ++ (toString i)) ("Image " ++ (toString (i + 1))) form
+        , a [ class "text-danger", onClick (Form.RemoveItem "images" i) ] [ text "supprimer" ]
         ]
 
 
@@ -96,7 +37,18 @@ landFormView form =
         , textInput "price" "Prix" form
         , textInput "surface" "Surface" form
         , textArea "description" "Description" form
-        , div [] <| List.map (imageView form) (Form.getListIndexes "images" form)
+        , div [ class "row align-items-center" ]
+            [ h4 [ class "h4-responsive mt-3 font-bold col" ] [ text "Photos" ]
+            , a [ class "col-auto default-color-text", onClick (Form.Append "images") ] [ text "Ajouter" ]
+            ]
+        , ul [ class "list-group" ] <|
+            List.map (imageItemView "images" form) (Form.getListIndexes "images" form)
+        , div [ class "row align-items-center" ]
+            [ h4 [ class "h4-responsive mt-3 font-bold col" ] [ text "Annonces" ]
+            , a [ class "col-auto default-color-text", onClick (Form.Append "ads") ] [ text "Ajouter" ]
+            ]
+        , ul [ class "list-group" ] <|
+            List.map (adItemFormView "ads" form) (Form.getListIndexes "ads" form)
         , button
             [ type_ "submit"
             , class "btn btn-default"
@@ -107,7 +59,11 @@ landFormView form =
 
 landNewView : Model -> Html Msg
 landNewView model =
-    Html.map LandFormMsg (landFormView model.landForm)
+    div []
+        [ h1 [ class "h1-responsive" ] [ text "Nouveau terrain" ]
+        , Html.map LandFormMsg (landFormView model.landForm)
+        , a [ class "default-color-text", onClick (NavigateTo LandListRoute) ] [ text "Retour" ]
+        ]
 
 
 landShowView : Model -> Html Msg
@@ -126,6 +82,93 @@ landShowView model =
             landShowSuccessView model land
 
 
+landShowDetailView : Land -> Html Msg
+landShowDetailView land =
+    let
+        infos =
+            String.join " - "
+                [ String.concat [ toString land.price, " euros" ]
+                , String.concat [ toString land.surface, " m2" ]
+                ]
+
+        title =
+            String.join "" [ land.city, " (", land.department, ")" ]
+    in
+        div [ class "list-group-item" ]
+            [ div [ class "row" ]
+                [ div [ class "col" ]
+                    [ div [ class "font-bold" ] [ text title ]
+                    , div [ class "" ] [ text infos ]
+                    ]
+                ]
+            ]
+
+
 landShowSuccessView : Model -> Land -> Html Msg
 landShowSuccessView model land =
-    landItemView land
+    div []
+        [ landShowDetailView land
+        , a [ class "default-color-text", onClick (NavigateTo LandListRoute) ] [ text "Retour" ]
+        ]
+
+
+landListView : Model -> Html Msg
+landListView model =
+    case model.landList of
+        NotAsked ->
+            text "Initialising."
+
+        Loading ->
+            text "Loading."
+
+        Failure err ->
+            text ("Error: " ++ toString err)
+
+        Success landList ->
+            div []
+                [ h1 [ class "h1-responsive" ] [ text "Terrains" ]
+                , p []
+                    [ a
+                        [ class "default-color-text"
+                        , onClick (NavigateTo LandNewRoute)
+                        ]
+                        [ text "Ajouter" ]
+                    ]
+                , renderLandList landList
+                ]
+
+
+renderLandList : LandList -> Html Msg
+renderLandList landList =
+    landList
+        |> List.map landItemView
+        |> ul [ class "list-group" ]
+
+
+landItemView : Land -> Html Msg
+landItemView land =
+    let
+        infos =
+            String.join " - "
+                [ String.concat [ toString land.price, " euros" ]
+                , String.concat [ toString land.surface, " m2" ]
+                ]
+
+        title =
+            String.join "" [ land.city, " (", land.department, ")" ]
+    in
+        div [ class "list-group-item" ]
+            [ div [ class "row" ]
+                [ div [ class "col" ]
+                    [ div [ class "font-bold" ] [ text title ]
+                    , div [ class "" ] [ text infos ]
+                    ]
+                , div [ class "col-auto" ]
+                    [ a
+                        [ class "default-color-text"
+                        , onClick (NavigateTo (LandShowRoute land.id))
+                        ]
+                        [ text "Détail" ]
+                    ]
+                ]
+            ]
