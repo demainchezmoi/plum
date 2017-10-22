@@ -4,10 +4,13 @@ defmodule Plum.Sales do
   """
 
   import Ecto.Query, warn: false
+
   alias Plum.Repo
+  alias Ecto.Changeset
+  alias Plum.Sales.Ad
+
   use EctoConditionals, repo: Plum.Repo
 
-  alias Plum.Sales.Ad
 
   @doc """
   Returns the list of ad.
@@ -148,7 +151,7 @@ defmodule Plum.Sales do
       ** (Ecto.NoResultsError)
 
   """
-  def get_land!(id), do: Repo.get!(Land, id)
+  def get_land!(id), do: Land |> preload(:ads) |> Repo.get!(id)
 
   @doc """
   Gets a single land by attributes.
@@ -164,7 +167,7 @@ defmodule Plum.Sales do
       ** (Ecto.NoResultsError)
 
   """
-  def get_land_by!(params), do: Repo.get_by!(Land, params)
+  def get_land_by!(params), do: Land |> preload(:ads) |> Repo.get_by!(params)
 
   @doc """
   Creates a land.
@@ -179,9 +182,17 @@ defmodule Plum.Sales do
 
   """
   def create_land(attrs \\ %{}) do
-    %Land{}
-    |> Land.changeset(attrs)
-    |> Repo.insert()
+    changeset =
+      %Land{} |> Land.changeset(attrs)
+
+    changeset =
+      case (Map.get(attrs, "ads") || Map.get(attrs, :ads)) do
+        ads when is_list(ads) and length(ads) > 0 ->
+          changeset |> Changeset.put_assoc(:ads, Enum.map(ads, &Ad.changeset(%Ad{}, &1)))
+        _ -> changeset
+      end
+        
+    changeset |> Repo.insert()
   end
 
   @doc """

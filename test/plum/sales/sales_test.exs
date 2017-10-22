@@ -11,12 +11,14 @@ defmodule Plum.SalesTest do
   describe "ad" do
     test "list_ads/0 returns all ad" do
       land = insert(:land)
-      assert Sales.list_ads() |> Enum.map(& &1.id) == [land.ad.id]
+      ad = land.ads |> List.first
+      assert Sales.list_ads() |> Enum.map(& &1.id) == [ad.id]
     end
 
     test "get_ad!/1 returns the ad with given id" do
       land = insert(:land)
-      assert Sales.get_ad!(land.ad.id).id == land.ad.id
+      ad = land.ads |> List.first
+      assert Sales.get_ad!(ad.id)
     end
 
     test "get_ad_by!/2 returns the ad with given id" do
@@ -40,13 +42,13 @@ defmodule Plum.SalesTest do
 
     test "create_ad/1 with invalid data returns error changeset" do
       insert(:land)
-      ad_params = params_for(:ad) # missing land_id
+      ad_params = params_for(:ad) |> Map.put(:active, "string")
       assert {:error, %Ecto.Changeset{}} = Sales.create_ad(ad_params)
     end
 
     test "update_ad/2 with valid data updates the ad" do
       land = insert(:land)
-      ad = land.ad
+      ad = land.ads |> List.first
       ad_params = params_for(:ad) |> Map.put(:land_id, land.id) |> Map.put(:active, false)
       assert {:ok, ad} = Sales.update_ad(ad, ad_params)
       assert %Ad{} = ad
@@ -55,7 +57,7 @@ defmodule Plum.SalesTest do
 
     test "update_ad/2 with invalid data returns error changeset" do
       land = insert(:land)
-      ad = land.ad
+      ad = land.ads |> List.first
       ad_params = params_for(:ad) |> Map.put(:active, "astring") 
       assert {:error, %Ecto.Changeset{}} = Sales.update_ad(ad, ad_params)
       assert ad.active == Sales.get_ad!(ad.id).active
@@ -63,13 +65,15 @@ defmodule Plum.SalesTest do
 
     test "delete_ad/1 deletes the ad" do
       land = insert(:land)
-      assert {:ok, %Ad{}} = Sales.delete_ad(land.ad)
-      assert_raise Ecto.NoResultsError, fn -> Sales.get_ad!(land.ad.id) end
+      ad = land.ads |> List.first
+      assert {:ok, %Ad{}} = Sales.delete_ad(ad)
+      assert_raise Ecto.NoResultsError, fn -> Sales.get_ad!(ad.id) end
     end
 
     test "change_ad/1 returns a ad changeset" do
       land = insert(:land)
-      assert %Ecto.Changeset{} = Sales.change_ad(land.ad)
+      ad = land.ads |> List.first
+      assert %Ecto.Changeset{} = Sales.change_ad(ad)
     end
   end
 
@@ -84,9 +88,19 @@ defmodule Plum.SalesTest do
       assert Sales.get_land!(land.id).id == land.id
     end
 
+    test "get_land!/1 preloads the ads" do
+      land = insert(:land)
+      assert length(Sales.get_land!(land.id).ads) > 0 
+    end
+
     test "get_land_by!/2 returns the land with given id" do
       land = insert(:land)
       assert Sales.get_land_by!(%{id: land.id}).id == land.id
+    end
+
+    test "get_land_by!/2 preloads the ads" do
+      land = insert(:land)
+      assert length(Sales.get_land_by!(%{id: land.id}).ads) > 0 
     end
 
     test "get_land_by!/2 raises when ad doesn't match" do
@@ -97,6 +111,12 @@ defmodule Plum.SalesTest do
     test "create_land/1 with valid data creates a land" do
       land_params = params_for(:land)
       assert {:ok, %Land{description: _, images: _}} = Sales.create_land(land_params)
+    end
+
+    test "create_land/1 with valid data creates associated ads" do
+      land_params = params_for(:land)
+      assert {:ok, %Land{description: _, images: _, ads: ads, id: id}} = Sales.create_land(land_params)
+      assert ads |> List.first |> Map.get(:land_id) == id
     end
 
     test "create_land/1 sets notary_fees" do

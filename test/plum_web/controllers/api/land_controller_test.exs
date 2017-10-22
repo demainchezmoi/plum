@@ -39,6 +39,13 @@ defmodule PlumWeb.Api.LandControllerTest do
       conn = get conn, api_land_path(conn, :show, land)
       assert json_response(conn, 200)["data"]["id"] == land.id
     end
+
+    @tag logged_in: ["admin"]
+    test "preloads the ads", %{conn: conn} do
+      land = insert(:land)
+      conn = get conn, api_land_path(conn, :show, land)
+      assert json_response(conn, 200)["data"]["ads"] |> length > 0
+    end
   end
 
 
@@ -47,7 +54,7 @@ defmodule PlumWeb.Api.LandControllerTest do
       land_attrs = params_for(:land)
       conn1 = post conn, api_land_path(conn, :create), land: land_attrs 
       assert json_response(conn1, 401)
-      assert_raise Ecto.NoResultsError, fn -> Sales.get_land_by!(land_attrs |> Map.delete(:ad)) end
+      assert_raise Ecto.NoResultsError, fn -> Sales.get_land_by!(land_attrs |> Map.delete(:ads)) end
     end
 
     @tag :logged_in
@@ -55,7 +62,7 @@ defmodule PlumWeb.Api.LandControllerTest do
       land_attrs = params_for(:land) 
       conn1 = post conn, api_land_path(conn, :create), land: land_attrs 
       assert json_response(conn1, 403)
-      assert_raise Ecto.NoResultsError, fn -> Sales.get_land_by!(land_attrs |> Map.delete(:ad)) end
+      assert_raise Ecto.NoResultsError, fn -> Sales.get_land_by!(land_attrs |> Map.delete(:ads)) end
     end
 
     @tag logged_in: ["admin"]
@@ -66,6 +73,14 @@ defmodule PlumWeb.Api.LandControllerTest do
 
       conn2 = get conn, api_land_path(conn, :show, id)
       assert %{"id" => ^id} = json_response(conn2, 200)["data"]
+    end
+
+    @tag logged_in: ["admin"]
+    test "creates associated ads", %{conn: conn} do
+      land_attrs = params_for(:land)
+      conn1 = post conn, api_land_path(conn, :create), land: land_attrs 
+      assert %{"ads" => ads} = json_response(conn1, 201)["data"]
+      assert length(ads) > 0
     end
 
     @tag logged_in: ["admin"]

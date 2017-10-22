@@ -1,6 +1,10 @@
 defmodule PlumWeb.Api.LandView do
   use PlumWeb, :view
-  @attributes ~w(id city department location price surface description images notary_fees)a
+  import PlumWeb.ViewHelpers
+  alias PlumWeb.Api.{
+    AdView,
+  }
+  @attributes ~w(id city department location price surface description images notary_fees ads)a
 
   def render("index.json", %{lands: lands}) do
     %{data: render_many(lands, __MODULE__, "land.json")}
@@ -11,6 +15,8 @@ defmodule PlumWeb.Api.LandView do
   end
 
   def render("land.json", %{land: land}) do
-    land |> Map.take(@attributes)
+    land
+    |> Map.take(@attributes)
+    |> put_loaded_assoc({:ads, AdView, "ads.json", :ads})
   end
 end

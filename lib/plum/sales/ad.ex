@@ -14,8 +14,8 @@ defmodule Plum.Sales.Ad do
     timestamps()
   end
 
-  @required_fields ~w(land_id house_price active)a
-  @optional_fields ~w()a
+  @required_fields ~w(house_price active)a
+  @optional_fields ~w(land_id)a
 
   @doc false
   def changeset(%Ad{} = ad, attrs) do

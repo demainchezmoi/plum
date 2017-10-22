@@ -71,7 +71,7 @@ defmodule PlumWeb.Api.AdControllerTest do
 
     @tag logged_in: ["admin"]
     test "renders errors when data is invalid", %{conn: conn} do
-      ad_attrs = params_for(:ad)
+      ad_attrs = params_for(:ad) |> Map.put(:active, "string")
       conn = post conn, api_ad_path(conn, :create), ad: ad_attrs
       assert json_response(conn, 422)["errors"] != %{}
     end

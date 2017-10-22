@@ -22,7 +22,7 @@ defmodule Plum.Factory do
 
   def land_factory do
     %Land{
-      ad: build(:ad),
+      ads: [build(:ad)],
       city: "Blaru",
       department: "27",
       location: %{lat: 48.01, lng: 2.12},

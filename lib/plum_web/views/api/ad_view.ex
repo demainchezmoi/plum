@@ -21,6 +21,10 @@ defmodule PlumWeb.Api.AdView do
     %{data: render_one(ad, AdView, "ad.json")}
   end
 
+  def render("ads.json", %{ads: ads}) do
+    render_many(ads, AdView, "ad.json")
+  end
+
   def render("ad.json", %{ad: ad}) do
     ad
     |> Map.take(@attributes)

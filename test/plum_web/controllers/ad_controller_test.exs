@@ -67,7 +67,7 @@ defmodule PlumWeb.AdControllerTest do
 
   defp create_ad(_) do
     land = insert(:land)
-    ad = land.ad
+    ad = land.ads |> List.first
     {:ok, ad: ad, land: land}
   end
 end

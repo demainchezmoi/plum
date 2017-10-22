@@ -15,12 +15,15 @@ defmodule Plum.Sales.Land do
     field :price, :integer
     field :surface, :integer
 
-    has_one :ad, Ad
+    has_many :ads, Ad
 
     timestamps()
   end
 
-  @optional_fields ~w(location)a
+  @optional_fields ~w(
+    location
+  )a
+
   @required_fields ~w(
     city
     department
