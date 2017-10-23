@@ -21,3 +21,5 @@ config :plum, Plum.Repo,
 config :plum, PlumWeb.Mailer,
   adapter: Swoosh.Adapters.Test
 
+config :mixpanel,
+  token: "570aa0ff2af04cf1609e778c6a5eda10"
