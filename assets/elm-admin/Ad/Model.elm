@@ -15,3 +15,14 @@ type alias Ad =
     , land_id : Int
     , id : Int
     }
+
+
+
+{--
+  - adToAdForm : Ad -> AdForm
+  - adToAdForm ad =
+  -     AdForm
+  -         ad.active
+  -         ad.house_price
+  -         ad.land_id
+  --}

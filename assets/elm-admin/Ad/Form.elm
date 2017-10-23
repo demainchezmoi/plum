@@ -2,7 +2,7 @@ module Ad.Form exposing (..)
 
 import Form exposing (Form)
 import Form.Error exposing (Error)
-import Form.Field as Field
+import Form.Field as Field exposing (Field)
 import Form.Input as Input
 import Form.Validate as Validate exposing (..)
 import Html exposing (..)
@@ -32,7 +32,7 @@ adItemFormView prefix form i =
         ]
 
 
-initialAdItemField : Field.Field
+initialAdItemField : Field
 initialAdItemField =
     Field.group
         [ ( "active", Field.bool True )

@@ -8,9 +8,9 @@ import Model exposing (..)
 import Routing exposing (Route(..), parse, toPath)
 import Navigation
 import Land.Commands exposing (..)
-import Land.Model exposing (..)
 import Land.Encoders exposing (..)
 import Land.Form exposing (..)
+import Land.Model exposing (..)
 import RemoteData exposing (..)
 import Form exposing (Form)
 import Form.Validate as Validate exposing (..)
@@ -28,23 +28,12 @@ update msg model =
         LandListResponse response ->
             (model |> setDecodedLandsWD response) ! []
 
-        LandFormMsg formMsg ->
-            let
-                landForm =
-                    Form.update landFormValidation formMsg model.landForm
-
-                newModel =
-                    { model | landForm = landForm }
-
-                cmd =
-                    case ( formMsg, Form.getOutput landForm ) of
-                        ( Form.Submit, Just landForm ) ->
-                            [ createLand model.apiToken (landFormEncoder landForm) ]
-
-                        _ ->
-                            []
-            in
-                newModel ! cmd
+        LandEditResponse landId response ->
+            (model
+                |> setDecodedLandWD landId response
+                |> initLandFormWD response
+            )
+                ! []
 
         LandCreateResponse response ->
             let
@@ -59,6 +48,38 @@ update msg model =
 
                     _ ->
                         model ! []
+
+        LandUpdateResponse landId response ->
+            case response of
+                Success _ ->
+                    (model
+                        |> setDecodedLandWD landId response
+                    )
+                        |> navigateTo (LandShowRoute landId)
+
+                _ ->
+                    model ! []
+
+        LandFormMsg action formMsg ->
+            let
+                landForm =
+                    Form.update landFormValidation formMsg model.landForm
+
+                newModel =
+                    { model | landForm = landForm }
+
+                cmd =
+                    case ( action, formMsg, Form.getOutput landForm ) of
+                        ( Create, Form.Submit, Just landForm ) ->
+                            [ createLand model.apiToken (landFormEncoder landForm) ]
+
+                        ( Update landId, Form.Submit, Just landForm ) ->
+                            [ updateLand model.apiToken landId (landFormEncoder landForm) ]
+
+                        _ ->
+                            []
+            in
+                newModel ! cmd
 
         UrlChange location ->
             model
@@ -85,6 +106,12 @@ urlUpdate model =
 
         LandListRoute ->
             model ! [ getLandList model ]
+
+        LandEditRoute landId ->
+            (model
+                |> setLandWD landId Loading
+            )
+                ! [ ensureLandWithCallback landId model LandEditResponse ]
 
         _ ->
             ( model, Cmd.none )
@@ -141,6 +168,33 @@ setDecodedLands decodedLands model =
 
         decodedLand :: rest ->
             setDecodedLands rest (model |> setDecodedLandWD decodedLand.land.id (Success decodedLand))
+
+
+
+-- Land Form
+
+
+initLandFormWD : WebData DecodedLand -> Model -> Model
+initLandFormWD response model =
+    case response of
+        Success decodedLand ->
+            initLandForm decodedLand model
+
+        _ ->
+            model
+
+
+initLandForm : DecodedLand -> Model -> Model
+initLandForm decodedLand model =
+    { model
+        | landForm =
+            Form.initial
+                (decodedLand.land
+                    |> landToLandForm
+                    |> landFormToGroup
+                )
+                landFormValidation
+    }
 
 
 

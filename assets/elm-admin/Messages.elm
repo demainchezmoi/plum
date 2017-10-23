@@ -10,10 +10,17 @@ import Form exposing (Form)
 import Json.Decode
 
 
+type FormAction
+    = Create
+    | Update Int
+
+
 type Msg
     = NoOp
     | LandCreateResponse (WebData DecodedLand)
-    | LandFormMsg Form.Msg
+    | LandFormMsg FormAction Form.Msg
+    | LandEditResponse Int (WebData DecodedLand)
+    | LandUpdateResponse Int (WebData DecodedLand)
     | LandListResponse (WebData (List DecodedLand))
     | LandResponse Int (WebData DecodedLand)
     | NavigateTo Route

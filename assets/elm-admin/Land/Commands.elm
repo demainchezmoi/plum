@@ -14,6 +14,9 @@ import RemoteData exposing (..)
 import Task
 
 
+-- GET
+
+
 getLandWithCallback : ApiToken -> Int -> (Int -> WebData DecodedLand -> Msg) -> Cmd Msg
 getLandWithCallback apiToken landId callback =
     let
@@ -39,6 +42,10 @@ getLandList model =
         authGet model.apiToken url landListResponseDecoder
             |> RemoteData.sendRequest
             |> Cmd.map LandListResponse
+
+
+
+-- CREATE
 
 
 createLandWithCallback : ApiToken -> Value -> (WebData DecodedLand -> Msg) -> Cmd Msg
@@ -71,6 +78,33 @@ createLandWithCallback apiToken landFormValue callback =
 createLand : ApiToken -> Value -> Cmd Msg
 createLand apiToken landFormValue =
     createLandWithCallback apiToken landFormValue LandCreateResponse
+
+
+
+-- UPDATE
+
+
+updateLandWithCallback : ApiToken -> Int -> Value -> (WebData DecodedLand -> Msg) -> Cmd Msg
+updateLandWithCallback apiToken landId value callback =
+    let
+        url =
+            "/api/lands/" ++ (toString landId)
+
+        landData =
+            object [ ( "land", value ) ]
+    in
+        authPut apiToken url landShowResponseDecoder landData
+            |> RemoteData.sendRequest
+            |> Cmd.map callback
+
+
+updateLand : ApiToken -> Int -> Value -> Cmd Msg
+updateLand apiToken landId value =
+    updateLandWithCallback apiToken landId value (LandUpdateResponse landId)
+
+
+
+-- ENSURE
 
 
 ensureLandWithCallback : Int -> Model -> (Int -> WebData DecodedLand -> Msg) -> Cmd Msg

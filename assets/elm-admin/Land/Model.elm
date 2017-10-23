@@ -22,3 +22,16 @@ type alias Land =
     , id : Int
     , ads : List Int
     }
+
+
+landToLandForm : Land -> LandForm
+landToLandForm land =
+    LandForm
+        land.city
+        land.department
+        land.location
+        land.price
+        land.surface
+        land.description
+        land.images
+        []

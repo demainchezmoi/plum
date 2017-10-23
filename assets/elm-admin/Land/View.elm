@@ -67,10 +67,26 @@ landFormView form =
 
 landNewView : Model -> Html Msg
 landNewView model =
-    div []
-        [ Html.map LandFormMsg (landFormView model.landForm)
-        , a [ class "default-color-text", onClick (NavigateTo LandListRoute) ] [ text "Retour" ]
-        ]
+    let
+        action =
+            Create
+    in
+        div []
+            [ Html.map (LandFormMsg action) (landFormView model.landForm)
+            , a [ class "default-color-text", onClick (NavigateTo LandListRoute) ] [ text "Retour" ]
+            ]
+
+
+landEditView : Int -> Model -> Html Msg
+landEditView landId model =
+    let
+        action =
+            Update landId
+    in
+        div []
+            [ Html.map (LandFormMsg action) (landFormView model.landForm)
+            , a [ class "default-color-text", onClick <| NavigateTo <| LandShowRoute landId ] [ text "Retour" ]
+            ]
 
 
 landShowView : Int -> Model -> Html Msg
@@ -107,7 +123,7 @@ landAdWdView adWD =
 landAdView : Ad -> Html Msg
 landAdView ad =
     div [ class "" ]
-        [ a [ class "default-color-text" ] [ text <| ("Annonce " ++ (toString ad.id)) ]
+        [ a [ class "" ] [ text <| ("Annonce " ++ (toString ad.id)) ]
         ]
 
 
@@ -142,6 +158,7 @@ landShowSuccessView : Model -> Land -> Html Msg
 landShowSuccessView model land =
     div []
         [ landShowDetailView land model
+        , a [ class "default-color-text", onClick (NavigateTo <| LandEditRoute land.id) ] [ text "Modifier" ]
         , div [ class "mt-3" ] [ a [ class "default-color-text", onClick (NavigateTo LandListRoute) ] [ text "Retour" ] ]
         ]
 

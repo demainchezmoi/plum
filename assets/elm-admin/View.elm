@@ -45,6 +45,9 @@ page model =
                 LandShowRoute landId ->
                     landShowView landId model
 
+                LandEditRoute landId ->
+                    landEditView landId model
+
                 NotFoundRoute ->
                     notFoundView
     in
