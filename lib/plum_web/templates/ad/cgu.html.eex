@@ -1,0 +1,31 @@
+<nav>
+  <h5 class="ml-header">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col col-md-10 col-lg-8">
+          Maisons Léo
+        </div>
+      </div>
+    </div>
+  </h5>
+</nav>
+
+<section>
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col col-md-10 col-lg-8">
+        <h3 class="h3-responsive mt-2">Conditions generales annonces maisons + terrain</h3>
+
+        <ul>
+	        <li>Prix du terrain frais d’acquisition non inclus.</li>
+	        <li>Nos offres de terrains constructibles sont proposées en collaboration avec nos partenaires fonciers, selon disponibilité, pour la construction de maisons neuves, avec un contrat de construction de maison individuelle, dans le cadre de la loi du 19/12/1990.</li>
+	        <li>Prix net, hors frais notariés, d’enregistrement et de publicité foncière.</li>
+	        <li>Visuels non-contractuels</li>
+	        <!--
+	         - <li>Ce montant est donné à titre d’information éditoriale sur la base des habitudes de consommation et des taux généralement pratiqués : un emprunt sur 300 mois, sans apport, hors frais de notaire, un taux nominal de 2.97% et taux d’assurance de 0.36%, hors frais annexes. Cette mention ne constitue en aucun cas une offre de prêt de la part de Meilleurtaux.com ni de ses éventuels partenaires bancaires.</li>
+	        -->
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>

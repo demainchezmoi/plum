@@ -60,6 +60,7 @@ defmodule PlumWeb.Router do
     get "/merci", PageController, :merci
     get "/maison-plus-terrain/:id", AdController, :public
     get "/maison-plus-terrain/:id/login", AdController, :login
+    get "/maison-plus-terrain/:id/cgu", AdController, :cgu
   end
 
   scope "/", PlumWeb do

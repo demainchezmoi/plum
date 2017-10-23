@@ -18,6 +18,11 @@ defmodule PlumWeb.AdController do
     conn |> render("login.html", ad: ad)
   end
 
+  def cgu(conn, %{"id" => id}) do
+    ad = Sales.get_ad!(id) |> Repo.preload(:land)
+    conn |> render("cgu.html", ad: ad)
+  end
+
   def interested(conn, %{"id" => id}) do
     current_user = conn.assigns.current_user
     id = id |> String.to_integer
