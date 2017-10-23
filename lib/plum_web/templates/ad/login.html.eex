@@ -15,7 +15,7 @@
       <div class="col col-md-10 col-lg-8">
 
         <h1 class="h1-responsive mt-4 mb-2">Votre compte Maisons Léo.</h1>
-        <p class="text-secondary">Créez votre compte Maisons Léo et accédez à votre espace personnalisé pour l'annonce maison plus terrain à <%= "#{@ad.land.city} (#{@ad.land.department})" %>.</p>
+        <p class="text-secondary">Créez votre compte Maisons Léo et soyez candidat pour l'annonce maison plus terrain à <%= "#{@ad.land.city} (#{@ad.land.department})" %>.</p>
         <ol>
           <li>Découvrez les photos</li>
           <li>Suivez votre dosser</li>
