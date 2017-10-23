@@ -16,28 +16,15 @@
 
         <h1 class="h1-responsive mt-4 mb-2">Votre compte Maisons Léo.</h1>
         <p class="text-secondary">Créez votre compte Maisons Léo et accédez à votre espace personnalisé pour l'annonce maison plus terrain à <%= "#{@ad.land.city} (#{@ad.land.department})" %>.</p>
-
-        <div class="card">
-          <div class="card-body">
-            <p class="card-title">
-              <i class="fa fa-home mr-2"></i>
-              Gérez tout votre project de construction en ligne 
-            </p>
-            <div class="card-text">Une interface simple et intuitive vous guide tout au long de votre projet de construction.<br /> Passez toutes les étapes jusqu'à la réception de vos clés !</div>
-          </div>
-          <hr class="mt-1 mb-1" />
-          <div class="card-body">
-            <p class="card-title">
-              <i class="fa fa-handshake-o mr-2"></i>
-              Recevez un accompagnement personnalisé
-            </p>
-            <div class="card-text">Nous intervenons aux moments clés de votre projet pour vous fournir une aide personnalisée.</div>
-          </div>
-        </div>
+        <ol>
+          <li>Découvrez les photos</li>
+          <li>Suivez votre dosser</li>
+          <li>Posez des questions</li>
+        </ol>
 
         <a class="btn btn-primary btn-lg ml-0 mt-4" href="<%= login_ad_cb(@ad) %>">
           <i class="fa fa-facebook mr-2"></i>
-          Me connecter avec Facebook
+          Connexion avec Facebook
         </a>
 
       </div>
