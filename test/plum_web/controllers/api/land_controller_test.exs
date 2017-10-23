@@ -91,6 +91,24 @@ defmodule PlumWeb.Api.LandControllerTest do
     end
   end
 
+  describe "update land" do
+    setup [:create_land]
+
+    @tag logged_in: ["admin"]
+    test "updates land with valid data", %{conn: conn, land: land} do
+      land_attrs = %{"surface" => 2}
+      conn = put conn, api_land_path(conn, :update, land), land: land_attrs
+      assert %{"data" => %{"surface" => 2}} = json_response(conn, 200) 
+    end
+
+    @tag logged_in: ["admin"]
+    test "sends error with invalid data", %{conn: conn, land: land} do
+      land_attrs = %{"surface" => nil}
+      conn = put conn, api_land_path(conn, :update, land), land: land_attrs
+      assert json_response(conn, 422)["errors"] != %{}
+    end
+  end
+
   defp create_land(_) do
     land = insert(:land)
     {:ok, land: land}
