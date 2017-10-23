@@ -1,6 +1,7 @@
 module Commands exposing (..)
 
 import Http exposing (..)
+import Json.Decode as JD
 import Json.Decode exposing (Decoder)
 import Json.Encode exposing (..)
 import List exposing ((::))
@@ -45,3 +46,8 @@ authPut apiToken url decoder value =
 authPost : ApiToken -> Url -> Decoder a -> Value -> Request a
 authPost apiToken url decoder value =
     authentifiedRequest apiToken "POST" url (jsonBody value) [] decoder
+
+
+authDelete : ApiToken -> Url -> Decoder a -> Request a
+authDelete apiToken url decoder =
+    authentifiedRequest apiToken "DELETE" url emptyBody [] decoder

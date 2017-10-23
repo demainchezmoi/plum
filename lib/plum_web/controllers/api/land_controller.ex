@@ -33,4 +33,11 @@ defmodule PlumWeb.Api.LandController do
       render(conn, "show.json", land: land)
     end
   end
+
+  def delete(conn, %{"id" => id}) do
+    land = Sales.get_land!(id)
+    with {:ok, %Land{}} <- Sales.delete_land(land) do
+      conn |> render(PlumWeb.Api.SuccessView, "deleted.json")
+    end
+  end
 end

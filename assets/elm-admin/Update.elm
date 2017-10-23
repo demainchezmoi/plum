@@ -60,6 +60,21 @@ update msg model =
                 _ ->
                     model ! []
 
+        LandDelete landId ->
+            model ! [ deleteLand model.apiToken landId ]
+
+        LandDeleteResponse landId response ->
+            case Debug.log "debug" response of
+                Success _ ->
+                    { model
+                        | lands =
+                            model.lands |> Dict.remove landId
+                    }
+                        |> navigateTo LandListRoute
+
+                _ ->
+                    model ! []
+
         LandFormMsg action formMsg ->
             let
                 landForm =

@@ -5,6 +5,7 @@ import Form exposing (Form)
 import Form.Field as Field exposing (Field)
 import Form.Validate as Validate exposing (..)
 import List as L
+import Location.Form exposing (..)
 import Location.Model exposing (..)
 
 
@@ -31,19 +32,6 @@ landFormValidation =
         |> andMap (field "description" string)
         |> andMap (field "images" (list string))
         |> andMap (field "ads" (list adFormValidation))
-
-
-locationField : Maybe Location -> Field
-locationField maybeLocation =
-    case maybeLocation of
-        Just location ->
-            Field.group
-                [ ( "lat", Field.string <| toString <| location.lat )
-                , ( "lng", Field.string <| toString <| location.lng )
-                ]
-
-        Nothing ->
-            Field.value Field.EmptyField
 
 
 landFormToGroup : LandForm -> List ( String, Field )

@@ -157,9 +157,10 @@ landShowDetailView land model =
 landShowSuccessView : Model -> Land -> Html Msg
 landShowSuccessView model land =
     div []
-        [ landShowDetailView land model
-        , a [ class "default-color-text", onClick (NavigateTo <| LandEditRoute land.id) ] [ text "Modifier" ]
-        , div [ class "mt-3" ] [ a [ class "default-color-text", onClick (NavigateTo LandListRoute) ] [ text "Retour" ] ]
+        [ div [ class "" ] [ a [ class "text-danger pull-right", onClick (LandDelete land.id) ] [ text "Supprimer" ] ]
+        , landShowDetailView land model
+        , div [ class "" ] [ a [ class "default-color-text", onClick (NavigateTo <| LandEditRoute land.id) ] [ text "Modifier" ] ]
+        , div [ class "mt-5" ] [ a [ class "default-color-text", onClick (NavigateTo LandListRoute) ] [ text "Retour" ] ]
         ]
 
 

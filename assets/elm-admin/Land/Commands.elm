@@ -3,7 +3,7 @@ module Land.Commands exposing (..)
 import Commands exposing (..)
 import DecodedTypes exposing (..)
 import Dict
-import Json.Decode
+import Json.Decode as JD
 import Json.Encode exposing (..)
 import Land.Model exposing (..)
 import Ad.Model exposing (..)
@@ -60,19 +60,6 @@ createLandWithCallback apiToken landFormValue callback =
         authPost apiToken url landShowResponseDecoder land_data
             |> RemoteData.sendRequest
             |> Cmd.map callback
-
-
-
-{--
-  - successAds : WebData Ad -> Maybe Ad
-  - successAds adWD =
-  -     case adWD of
-  -         Success ad ->
-  -             Just ad
-  -
-  -         _ ->
-  -             Nothing
-  --}
 
 
 createLand : ApiToken -> Value -> Cmd Msg
@@ -136,3 +123,23 @@ ensureLandWithCallback landId model callback =
 ensureLand : Int -> Model -> Cmd Msg
 ensureLand landId model =
     ensureLandWithCallback landId model LandResponse
+
+
+
+-- DELETE
+
+
+deleteLandWithCallback : ApiToken -> Int -> (Int -> WebData Bool -> Msg) -> Cmd Msg
+deleteLandWithCallback apiToken landId callback =
+    let
+        url =
+            "/api/lands/" ++ (toString landId)
+    in
+        authDelete apiToken url (JD.succeed True)
+            |> RemoteData.sendRequest
+            |> Cmd.map (callback landId)
+
+
+deleteLand : ApiToken -> Int -> Cmd Msg
+deleteLand apiToken landId =
+    deleteLandWithCallback apiToken landId LandDeleteResponse

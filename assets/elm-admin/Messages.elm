@@ -7,7 +7,6 @@ import Routing exposing (Route)
 import RemoteData exposing (..)
 import Land.Model exposing (..)
 import Form exposing (Form)
-import Json.Decode
 
 
 type FormAction
@@ -21,6 +20,8 @@ type Msg
     | LandFormMsg FormAction Form.Msg
     | LandEditResponse Int (WebData DecodedLand)
     | LandUpdateResponse Int (WebData DecodedLand)
+    | LandDelete Int
+    | LandDeleteResponse Int (WebData Bool)
     | LandListResponse (WebData (List DecodedLand))
     | LandResponse Int (WebData DecodedLand)
     | NavigateTo Route

@@ -109,6 +109,19 @@ defmodule PlumWeb.Api.LandControllerTest do
     end
   end
 
+  describe "delete land" do
+    setup [:create_land]
+
+    @tag logged_in: ["admin"]
+    test "deletes chosen land", %{conn: conn, land: land} do
+      conn1 = delete conn, api_land_path(conn, :delete, land)
+      assert json_response(conn1, 200)
+      assert_error_sent 404, fn ->
+        get conn, api_land_path(conn, :show, land)
+      end
+    end
+  end
+
   defp create_land(_) do
     land = insert(:land)
     {:ok, land: land}
