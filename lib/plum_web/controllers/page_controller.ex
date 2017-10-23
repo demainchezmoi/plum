@@ -15,13 +15,13 @@ defmodule PlumWeb.PageController do
 
   def admin(conn, _params) do
     conn
-    |> put_layout("elm.html")
+    |> put_layout("elm-admin.html")
     |> render("admin.html")
   end
 
   def prospect(conn, _params) do
     conn
-    |> put_layout("elm.html")
+    |> put_layout("elm-prospect.html")
     |> render("prospect.html")
   end
 
