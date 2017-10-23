@@ -6,6 +6,8 @@ import Dict
 import Json.Decode
 import Json.Encode exposing (..)
 import Land.Model exposing (..)
+import Ad.Model exposing (..)
+import List as L
 import Messages exposing (Msg(..))
 import Model exposing (..)
 import RemoteData exposing (..)
@@ -53,6 +55,19 @@ createLandWithCallback apiToken landFormValue callback =
             |> Cmd.map callback
 
 
+
+{--
+  - successAds : WebData Ad -> Maybe Ad
+  - successAds adWD =
+  -     case adWD of
+  -         Success ad ->
+  -             Just ad
+  -
+  -         _ ->
+  -             Nothing
+  --}
+
+
 createLand : ApiToken -> Value -> Cmd Msg
 createLand apiToken landFormValue =
     createLandWithCallback apiToken landFormValue LandCreateResponse
@@ -60,10 +75,27 @@ createLand apiToken landFormValue =
 
 ensureLandWithCallback : Int -> Model -> (Int -> WebData DecodedLand -> Msg) -> Cmd Msg
 ensureLandWithCallback landId model callback =
-    -- case model.lands |> Dict.get landId of
-    -- Just (Success land) ->
-    -- Task.succeed (callback landId (Success land)) |> Task.perform identity
-    -- _ ->
+    {--
+  -     let
+  -         makeDecodedLand =
+  -             \land ->
+  -                 (DecodedLand
+  -                     land
+  -                     (land.ads
+  -                         -- Error prone, ads could be out of sync
+  -                         -- Better check if land is loaded along with its ads
+  -                         |> L.filterMap (\adId -> model.ads |> Dict.get adId)
+  -                         |> L.filterMap successAds
+  -                     )
+  -                 )
+  -                     |> RemoteData.succeed
+  -     in
+  -         case model.lands |> Dict.get landId of
+  -             Just (Success land) ->
+  -                 Task.succeed (callback landId (makeDecodedLand land)) |> Task.perform identity
+  -
+  -             _ ->
+  --}
     getLandWithCallback model.apiToken landId callback
 
 
