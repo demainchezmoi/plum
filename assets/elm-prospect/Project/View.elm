@@ -321,7 +321,7 @@ cardSlide photo title description =
     Slide.config []
         (Slide.customContent
             (div [ class "card slider-card" ]
-                [ img [ photo |> photoSrc |> src, class "img-fluid" ] []
+                [ img [ photo |> src, class "img-fluid" ] []
                 , div [ class "card-body" ]
                     [ p [ class "card-title" ] [ text title ]
                     , p [ class "card-text" ] [ text description ]
@@ -387,8 +387,8 @@ discoverHouseView model project title step =
                 |> Carousel.withControls
                 |> Carousel.withIndicators
                 |> Carousel.slides
-                    [ cardSlide "maison-min.png" title1 description1
-                    , cardSlide "maison_21_nuit.jpg" title2 description2
+                    [ cardSlide (photoSrc "maison-min.png") title1 description1
+                    , cardSlide (photoSrc "maison_21_nuit.jpg") title2 description2
                     , colorsSlide
                     ]
                 |> Carousel.view model.discoverHouseCarouselState
@@ -419,7 +419,7 @@ discoverLandView model project title step =
                     photo
 
                 _ ->
-                    "grass.png"
+                    photoSrc "grass.png"
 
         landPrice =
             project.ad.land.price
