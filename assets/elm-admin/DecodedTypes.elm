@@ -19,7 +19,10 @@ landResponseDecoder =
     succeed
         DecodedLand
         |: landDecoder
-        |: oneOf [ at [ "ads" ] <| list adDecoder, succeed [] ]
+        |: oneOf
+            [ at [ "ads" ] <| list adDecoder
+            , succeed []
+            ]
 
 
 landShowResponseDecoder : JD.Decoder DecodedLand

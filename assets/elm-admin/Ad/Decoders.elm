@@ -13,3 +13,4 @@ adDecoder =
         |: (field "house_price" int)
         |: (field "land_id" int)
         |: (field "id" int)
+        |: (field "link" string)

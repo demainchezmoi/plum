@@ -1,5 +1,5 @@
 defmodule PlumWeb.Api.LandViewTest do
-  use PlumWeb.ConnCase, async: true
+  use PlumWeb.ConnCase
   alias PlumWeb.Api.LandView
   import Plum.Factory
 
@@ -13,10 +13,12 @@ defmodule PlumWeb.Api.LandViewTest do
   end
 
   describe "land.json" do
-    land = build(:land)
-    rendered = LandView.render "land.json", %{land: land}
-    assert rendered
-    assert rendered.location.lat == land.location.lat
-    assert rendered.location.lng == land.location.lng
+    test "renders a land" do
+      land = insert(:land)
+      rendered = LandView.render "land.json", %{land: land}
+      assert rendered
+      assert rendered.location.lat == land.location.lat
+      assert rendered.location.lng == land.location.lng
+    end
   end
 end

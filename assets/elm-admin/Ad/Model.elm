@@ -14,6 +14,7 @@ type alias Ad =
     , house_price : Int
     , land_id : Int
     , id : Int
+    , link : String
     }
 
 

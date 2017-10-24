@@ -83,6 +83,11 @@ defmodule Plum.SalesTest do
       assert Sales.list_lands() |> Enum.map(& &1.id) == [land.id]
     end
 
+    test "list_lands/0 preload ads" do
+      land = insert(:land)
+      assert Sales.list_lands() |> List.first |> Map.get(:ads) |> length > 0 
+    end
+
     test "get_land!/1 returns the land with given id" do
       land = insert(:land)
       assert Sales.get_land!(land.id).id == land.id

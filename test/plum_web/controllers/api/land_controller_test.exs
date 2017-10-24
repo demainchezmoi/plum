@@ -12,6 +12,12 @@ defmodule PlumWeb.Api.LandControllerTest do
       assert json_response(conn, 200)
     end
 
+    @tag logged_in: ["admin"]
+    test "preload ads", %{conn: conn, token: token} do
+      conn = get conn, api_land_path(conn, :index), token: token
+      assert not is_nil(json_response(conn, 200)["data"] |> List.first |> Map.get("ads"))
+    end
+
     @tag :logged_in
     test "doesn't list all lands when not admin", %{conn: conn} do
       conn = get conn, api_land_path(conn, :index)

@@ -120,10 +120,25 @@ landAdWdView adWD =
             text ""
 
 
+activeText : Ad -> String
+activeText ad =
+    if ad.active then
+        "active"
+    else
+        "désactivée"
+
+
 landAdView : Ad -> Html Msg
 landAdView ad =
     div [ class "" ]
-        [ a [ class "" ] [ text <| ("Annonce " ++ (toString ad.id)) ]
+        [ a [ class "", href ad.link ]
+            [ text <|
+                "Annonce "
+                    ++ (toString ad.id)
+                    ++ " ("
+                    ++ activeText ad
+                    ++ ")"
+            ]
         ]
 
 
@@ -159,8 +174,8 @@ landShowSuccessView model land =
     div []
         [ div [ class "" ] [ a [ class "text-danger pull-right", onClick (LandDelete land.id) ] [ text "Supprimer" ] ]
         , landShowDetailView land model
-        , div [ class "" ] [ a [ class "default-color-text", onClick (NavigateTo <| LandEditRoute land.id) ] [ text "Modifier" ] ]
-        , div [ class "mt-5" ] [ a [ class "default-color-text", onClick (NavigateTo LandListRoute) ] [ text "Retour" ] ]
+        , div [ class "mt-5" ] [ a [ class "default-color-text", onClick (NavigateTo <| LandEditRoute land.id) ] [ text "Modifier" ] ]
+        , div [ class "mt-1" ] [ a [ class "default-color-text", onClick (NavigateTo LandListRoute) ] [ text "Retour" ] ]
         ]
 
 
@@ -210,21 +225,26 @@ landItemView land =
                 , String.concat [ toString land.surface, " m2" ]
                 ]
 
+        adsCount =
+            L.length <| land.ads
+
         title =
             String.join "" [ land.city, " (", land.department, ")" ]
     in
         div [ class "list-group-item" ]
             [ div [ class "row" ]
                 [ div [ class "col" ]
-                    [ div [ class "font-bold" ] [ text title ]
-                    , div [ class "" ] [ text infos ]
-                    ]
-                , div [ class "col-auto" ]
-                    [ a
-                        [ class "default-color-text"
-                        , onClick (NavigateTo (LandShowRoute land.id))
+                    [ div [ class "font-bold" ]
+                        [ a
+                            [ class "default-color-text"
+                            , onClick (NavigateTo (LandShowRoute land.id))
+                            ]
+                            [ text title ]
                         ]
-                        [ text "Détail" ]
+                    , div [] [ text infos ]
+                    , div []
+                        [ toString adsCount ++ " annonce(s)" |> text
+                        ]
                     ]
                 ]
             ]

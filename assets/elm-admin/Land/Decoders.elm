@@ -32,4 +32,7 @@ landDecoder =
         |: (field "description" string)
         |: (field "images" (list string))
         |: (field "id" int)
-        |: oneOf [ field "ads" (list idDecoder), succeed [] ]
+        |: oneOf
+            [ field "ads" (list idDecoder)
+            , succeed []
+            ]

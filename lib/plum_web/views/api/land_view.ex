@@ -4,7 +4,18 @@ defmodule PlumWeb.Api.LandView do
   alias PlumWeb.Api.{
     AdView,
   }
-  @attributes ~w(id city department location price surface description images notary_fees ads)a
+  @attributes ~w(
+    ads
+    city
+    department
+    description
+    id
+    images
+    location
+    notary_fees
+    price
+    surface
+  )a
 
   def render("index.json", %{lands: lands}) do
     %{data: render_many(lands, __MODULE__, "land.json")}

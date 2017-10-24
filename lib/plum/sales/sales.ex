@@ -134,7 +134,7 @@ defmodule Plum.Sales do
 
   """
   def list_lands do
-    Repo.all(Land)
+    Land |> preload(:ads) |> Repo.all
   end
 
   @doc """

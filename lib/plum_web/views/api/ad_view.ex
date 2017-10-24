@@ -12,6 +12,7 @@ defmodule PlumWeb.Api.AdView do
     land
     house_price
     land_id
+    link
   )a
 
   def render("index.json", %{ads: ads}) do
@@ -28,6 +29,7 @@ defmodule PlumWeb.Api.AdView do
 
   def render("ad.json", %{ad: ad}) do
     ad
+    |> Map.put(:link, ad_url(PlumWeb.Endpoint, :public, ad))
     |> Map.take(@attributes)
     |> put_loaded_assoc({:land, LandView, "land.json", :land})
   end
