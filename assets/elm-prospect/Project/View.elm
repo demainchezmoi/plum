@@ -583,9 +583,8 @@ evaluateFundingView model project title step =
 
         formView =
             div []
-                [ div [ class "alert alert-warning" ]
+                [ p [ class "text-warning" ]
                     [ text "Attention : vous ne pourrez plus changer les montants déclarés par la suite. Renseignez des informations exactes."
-                    , br [] []
                     ]
                 , div [ class "form-group" ]
                     [ label [ for "contribution" ] [ text "Votre apport financier (€)" ]
