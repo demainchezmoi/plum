@@ -36,7 +36,7 @@
           <div class="p-2">
             <div class="row justify-content-between dark-gray-text font-black">
               <div class="col">
-                Maison T4 - 80m<sup>2</sup>
+                Maison T4 - 87m<sup>2</sup>
               </div>
               <div class="col-auto text-right">
                 <%= raw Number.Currency.number_to_currency(@ad.house_price) %>
