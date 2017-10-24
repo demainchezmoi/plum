@@ -44,3 +44,12 @@ landFormToGroup landForm =
     , ( "description", Field.string landForm.description )
     , ( "images", Field.list (landForm.images |> L.map Field.string) )
     ]
+
+
+initialLandForm : Form () LandForm
+initialLandForm =
+    Form.initial
+        [ ( "images", Field.list [ Field.string "" ] )
+        , ( "ads", Field.list [ initialAdItemField ] )
+        ]
+        landFormValidation

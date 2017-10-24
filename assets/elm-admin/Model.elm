@@ -43,12 +43,7 @@ initialModel : ApiToken -> Route -> Model
 initialModel apiToken route =
     { lands = Dict.empty
     , ads = Dict.empty
-    , landForm =
-        Form.initial
-            [ ( "images", Field.list [ Field.string "" ] )
-            , ( "ads", Field.list [ initialAdItemField ] )
-            ]
-            landFormValidation
+    , landForm = initialLandForm
     , apiToken = apiToken
     , route = route
     }

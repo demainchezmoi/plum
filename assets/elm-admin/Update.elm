@@ -31,7 +31,7 @@ update msg model =
         LandEditResponse landId response ->
             (model
                 |> setDecodedLandWD landId response
-                |> initLandFormWD response
+                |> setLandFormWD response
             )
                 ! []
 
@@ -44,6 +44,7 @@ update msg model =
                     Success decodedLand ->
                         model
                             |> setLandWD decodedLand.land.id landResponse
+                            |> resetLandForm
                             |> navigateTo (LandShowRoute decodedLand.land.id)
 
                     _ ->
@@ -189,18 +190,18 @@ setDecodedLands decodedLands model =
 -- Land Form
 
 
-initLandFormWD : WebData DecodedLand -> Model -> Model
-initLandFormWD response model =
+setLandFormWD : WebData DecodedLand -> Model -> Model
+setLandFormWD response model =
     case response of
         Success decodedLand ->
-            initLandForm decodedLand model
+            setLandForm decodedLand model
 
         _ ->
             model
 
 
-initLandForm : DecodedLand -> Model -> Model
-initLandForm decodedLand model =
+setLandForm : DecodedLand -> Model -> Model
+setLandForm decodedLand model =
     { model
         | landForm =
             Form.initial
@@ -210,6 +211,11 @@ initLandForm decodedLand model =
                 )
                 landFormValidation
     }
+
+
+resetLandForm : Model -> Model
+resetLandForm model =
+    { model | landForm = initialLandForm }
 
 
 
