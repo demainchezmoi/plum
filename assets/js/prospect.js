@@ -64,9 +64,20 @@ function tryFunction(test, fun, count = 0) {
 }
 
 function identify() {
+  console.log('identify');
   if (typeof mixpanel !== 'undefined' && typeof current_user !== 'undefined') {
     try {
-      mixpanel.identify(current_user.data.id);
+      const user = current_user.data;
+      console.log('user', user);
+
+      mixpanel.identify(user.id);
+
+      mixpanel.people.set({
+        $email: user.email,
+        $first_name: user.first_name,
+        $last_name: user.last_name
+      });
+
     } catch(e) {
       console.log("mixpanel identify failed", e);
     }

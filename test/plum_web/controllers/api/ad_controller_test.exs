@@ -47,7 +47,7 @@ defmodule PlumWeb.Api.AdControllerTest do
       ad_attrs = params_for(:ad)
       conn1 = post conn, api_ad_path(conn, :create), ad: ad_attrs 
       assert json_response(conn1, 401)
-      assert_raise Ecto.NoResultsError, fn -> Sales.get_ad_by!(ad_attrs |> Map.delete(:ad)) end
+      assert_raise Ecto.NoResultsError, fn -> Sales.get_ad_by!(ad_attrs) end
     end
 
     @tag :logged_in
@@ -55,7 +55,7 @@ defmodule PlumWeb.Api.AdControllerTest do
       ad_attrs = params_for(:ad) 
       conn1 = post conn, api_ad_path(conn, :create), ad: ad_attrs 
       assert json_response(conn1, 403)
-      assert_raise Ecto.NoResultsError, fn -> Sales.get_ad_by!(ad_attrs |> Map.delete(:ad)) end
+      assert_raise Ecto.NoResultsError, fn -> Sales.get_ad_by!(ad_attrs) end
     end
 
     @tag logged_in: ["admin"]

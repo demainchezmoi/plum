@@ -5,6 +5,8 @@ defmodule Plum.Accounts.User do
 
 
   schema "users" do
+    field :first_name, :string
+    field :last_name, :string
     field :admin, :boolean, default: false
     field :email, :string
     field :facebook_id, :string
@@ -13,8 +15,17 @@ defmodule Plum.Accounts.User do
     timestamps()
   end
 
-  @optional_fields ~w(email roles)a
-  @required_fields ~w(facebook_id admin)a
+  @optional_fields ~w(
+    email
+    roles
+    first_name
+    last_name
+  )a
+
+  @required_fields ~w(
+    facebook_id
+    admin
+  )a
 
   @doc false
   def changeset(%User{} = user, attrs) do

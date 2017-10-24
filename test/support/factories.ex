@@ -53,6 +53,8 @@ defmodule Plum.Factory do
 
   def user_factory do
     %User{
+      first_name: "Polo",
+      last_name: nil,
       admin: true,
       email: sequence(:email, &"hubert@bonnisseur#{&1}.com"),
       facebook_id: sequence(:facebook_id, &"fbid-#{&1}"),

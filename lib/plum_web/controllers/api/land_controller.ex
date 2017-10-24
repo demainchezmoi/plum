@@ -20,15 +20,12 @@ defmodule PlumWeb.Api.LandController do
   end
 
   def show(conn, %{"id" => id}) do
-    current_user = conn.assigns.current_user
     land = Sales.get_land!(id)
     render(conn, "show.json", land: land)
   end
 
   def update(conn, %{"id" => id, "land" => land_params}) do
-    current_user = conn.assigns.current_user
     land = Sales.get_land!(id)
-
     with {:ok, %Land{} = land} <- Sales.update_land(land, land_params) do
       render(conn, "show.json", land: land)
     end

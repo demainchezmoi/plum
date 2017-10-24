@@ -54,8 +54,13 @@ defmodule PlumWeb.AuthController do
     |> redirect(to: "/")
   end
 
-  defp extract_fb_user(%{info: %{email: email, name: name}, uid: uid}) do
-    %{email: email, name: name, facebook_id: uid}
+  defp extract_fb_user(%{info: info, uid: uid}) do
+    %{
+      email: info |> Map.get(:email),
+      facebook_id: uid,
+      first_name: info |> Map.get(:first_name),
+      last_name: info |> Map.get(:last_name),
+    }
   end
 
   defp extract_fb_user(_), do: {:error, "Profil incomplet"}

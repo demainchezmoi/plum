@@ -3,10 +3,12 @@ defmodule PlumWeb.Api.UserView do
   alias PlumWeb.Api.{
     UserView
   }
-  import PlumWeb.ViewHelpers
 
   @attributes ~w(
+    email
+    first_name
     id
+    last_name
   )a
 
   def render("index.json", %{users: users}) do
@@ -18,8 +20,7 @@ defmodule PlumWeb.Api.UserView do
   end
 
   def render("user.json", %{user: user}) do
-    user
-    |> Map.take(@attributes)
+    user |> Map.take(@attributes)
   end
 end
 
