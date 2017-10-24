@@ -13,7 +13,7 @@ module.exports = class View extends MainView {
 
   trackPage() {
     const path_elements = window.location.pathname.split('/');
-    const ad = path_elements[path_elements.length - 1];
+    const ad = path_elements[path_elements.length - 2];
     track("VISIT_LOGIN", {ad: ad})
   }
 }
