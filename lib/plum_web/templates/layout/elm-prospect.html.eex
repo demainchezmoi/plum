@@ -43,4 +43,7 @@
     <script type="text/javascript">current_user=<%= raw Poison.encode!(render PlumWeb.Api.UserView, "show.json", %{user: current_user}) %></script>
   <% end %>
 
+  <%= if just_inserted = @conn.assigns |> Map.get(:user_just_inserted) do %>
+    <script type="text/javascript">just_inserted=<%= raw Poison.encode!(true) %></script>
+  <% end %>
 </html>

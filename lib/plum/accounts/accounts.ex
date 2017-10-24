@@ -138,13 +138,19 @@ defmodule Plum.Accounts do
   def upsert_user_by(attrs, field) do
     case User |> Repo.get_by(%{field => attrs[field]}) do
       nil ->
-       attrs |> create_user
+        attrs
+        |> create_user
+        |> map_succes_to(:inserted)
 
       user ->
-        user |> update_user(attrs)
+        user
+        |> update_user(attrs)
+        |> map_succes_to(:updated)
     end
   end
 
+  defp map_succes_to({:ok, struct}, to), do: {to, struct}
+  defp map_succes_to(r = {:error, _struct}, _to), do: r 
 
   # ===============
   # Sessions

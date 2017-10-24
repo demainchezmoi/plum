@@ -1,4 +1,5 @@
 import Elm from '../elm-prospect/Main.elm';
+import {track, identify} from './helpers/mixpanel';
 
 const elmDiv = document.querySelector('#elm_target');
 var map;
@@ -8,9 +9,9 @@ var map;
 if (elmDiv) {
   const app = Elm.Main.embed(elmDiv, { apiToken: getToken() });
 
-  app.ports.landMap.subscribe(landMap);
-  app.ports.mixpanel.subscribe(track);
-  app.ports.removeLandMap.subscribe(removeLandMap);
+  app.ports.landMap.subscribe(landMapPort);
+  app.ports.mixpanel.subscribe(trackPort);
+  app.ports.removeLandMap.subscribe(removeLandMapPort);
 }
 
 window.addEventListener('DOMContentLoaded', handleDOMContentLoaded, false);
@@ -18,16 +19,16 @@ window.addEventListener('DOMContentLoaded', handleDOMContentLoaded, false);
 
 // Functions
 
-function landMap({lat, lng}) {
+function landMapPort({lat, lng}) {
   const test = () => document.getElementById('map') !== null;
   tryFunction(test, () => loadMap({lat, lng}));
 }
 
-function track([event, data]) {
-  mixpanel.track(event, data);
+function trackPort([event, data]) {
+  track(event, data);
 }
 
-function removeLandMap() {
+function removeLandMapPort() {
   if (!!map && !!map.remove) {
     try {
       map.remove();
@@ -63,25 +64,6 @@ function tryFunction(test, fun, count = 0) {
   }
 }
 
-function identify() {
-  if (typeof mixpanel !== 'undefined' && typeof current_user !== 'undefined') {
-    try {
-      const user = current_user.data;
-
-      mixpanel.identify(user.id);
-
-      mixpanel.people.set({
-        $email: user.email,
-        $first_name: user.first_name,
-        $last_name: user.last_name
-      });
-
-    } catch(e) {
-      console.log("mixpanel identify failed", e);
-    }
-  }
-}
-
 function handleDOMContentLoaded() {
-  identify();
+  typeof current_user !== 'undefined' && identify(current_user.data);
 }

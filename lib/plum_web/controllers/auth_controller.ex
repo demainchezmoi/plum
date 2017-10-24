@@ -5,6 +5,7 @@ defmodule PlumWeb.AuthController do
 
   use PlumWeb, :controller
   alias Plum.Accounts
+  alias Plum.Accounts.User
   plug Ueberauth
 
   alias Ueberauth.Strategy.Helpers
@@ -24,11 +25,12 @@ defmodule PlumWeb.AuthController do
 
   def callback(%{assigns: %{ueberauth_auth: auth = %{provider: :facebook}}} = conn, params) do
     with attrs <- extract_fb_user(auth),
-         {:ok, user} <- Accounts.upsert_user_by(attrs, :facebook_id),
+         {status, user = %User{}} <- Accounts.upsert_user_by(attrs, :facebook_id),
          {:ok, session} <- Accounts.create_session(%{user_id: user.id})
     do
         conn
         |> put_session(@session_key, session.token)
+        |> put_session(:_plum_user_status, status)
         |> redirect(to: params["state"] || "/")
     else
       {:error, reason} ->
