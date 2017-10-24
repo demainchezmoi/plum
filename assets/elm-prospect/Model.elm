@@ -64,7 +64,7 @@ initialModel apiToken route =
             { defaultStateOptions
                 | interval = Nothing
             }
-    , houseColor = "house_colors/rotterdam.png"
+    , houseColor = "house_colors/Maison-leo-uni-withe.png"
     , discoverLandCarouselState =
         Carousel.initialStateWithOptions
             { defaultStateOptions

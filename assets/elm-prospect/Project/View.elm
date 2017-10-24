@@ -316,15 +316,15 @@ colorRadio inputName inputValue inputChecked action inputLabel =
         ]
 
 
-cardSlide : String -> String -> String -> Slide.Config Msg
-cardSlide photo title description =
+cardSlide : String -> String -> Html Msg -> Slide.Config Msg
+cardSlide photo title body =
     Slide.config []
         (Slide.customContent
             (div [ class "card slider-card" ]
                 [ img [ photo |> src, class "img-fluid" ] []
                 , div [ class "card-body" ]
                     [ p [ class "card-title" ] [ text title ]
-                    , p [ class "card-text" ] [ text description ]
+                    , p [ class "card-text" ] [ body ]
                     ]
                 ]
             )
@@ -341,21 +341,35 @@ discoverHouseView model project title step =
             ValidateDiscoverHouse project.id updateValue |> nextStepButton
 
         title1 =
-            "Le T4 familial par excellence"
+            "87 m2 pour familles heureuses"
 
         description1 =
-            "D'une surface de 80m2, munie de trois chambres et d'un vaste espace commun, la Maison Léo constitue le lieu de vie idéal d'une famille moderne."
+            div []
+                [ ul [ class "list-unstyled" ]
+                    [ li [] [ text "Isolées par des cloisons épaisses, les trois chambres garantissent à chacun un espace au calme." ]
+                    , li [] [ text "Le séjour cuisine de 48m2 vous permet de partager repas et bons films tous ensemble et les deux grandes baies vitrées vous invitent profiter du soleil, de l'air frais et du jardin." ]
+                    , li [] []
+                    , li [] [ text "Laissez-vous tenter par des après-midis balançoire, football, cabane et soirées plancha dans le jardin !" ]
+                    ]
+                ]
 
         title2 =
-            "Un gage de qualité"
+            "La maison LÉO, une maison de qualité !"
 
         description2 =
-            "Robustes et intégralement isolés, les murs de 20cm d'épaisseur de la Maison Léo protègent votre famille du monde extérieur."
+            div []
+                [ text "Nous fabriquons la maison Léo d'après des plans uniques et optimisés pour garantir une prestation hors pair au meilleur prix."
+                , br [] []
+                , text "La maison Léo est fabriquée près de chez vous, à l'aide de matériaux robustes et de solutions techniques éprouvées."
+                , br [] []
+                , br [] []
+                , text "Garantie 0% gadget, la maison Léo offre tout le confort moderne: isolation par l'extérieur, prises internet dans chaque pièce, 5m2 de panneaux solaires, ventilation simple flux."
+                ]
 
         colors =
-            [ ( "rotterdam", "house_colors/rotterdam.png", "Rotterdam" )
-            , ( "bogotta", "house_colors/bogotta.png", "Bogotta" )
-            , ( "barcelona", "house_colors/barcelona.png", "Barcelona" )
+            [ ( "1", "house_colors/Maison-leo-uni-withe.png", "Blanc" )
+            , ( "2", "house_colors/Maison-leo-uni-withe-new-york.png", "Blanc / New York" )
+            , ( "3", "house_colors/Maison-leo-uni-newyork.png", "New York" )
             ]
 
         colorsSlide =
@@ -387,7 +401,7 @@ discoverHouseView model project title step =
                 |> Carousel.withControls
                 |> Carousel.withIndicators
                 |> Carousel.slides
-                    [ cardSlide (photoSrc "maison-min.png") title1 description1
+                    [ cardSlide (photoSrc "distribution_commercial_maison_leo_sd.png") title1 description1
                     , cardSlide (photoSrc "maison_21_nuit.jpg") title2 description2
                     , colorsSlide
                     ]
@@ -434,7 +448,7 @@ discoverLandView model project title step =
             "Le terrain - " ++ landPrice
 
         landSlide =
-            [ cardSlide landPhoto landTitle description ]
+            [ cardSlide landPhoto landTitle (text description) ]
 
         mapSlide =
             case project.ad.land.location of
