@@ -10,7 +10,6 @@ defmodule PlumWeb.Router do
     plug :protect_from_forgery
     plug :put_secure_browser_headers
     plug PlumWeb.Plugs.SessionAuthentication
-    plug PlumWeb.Plugs.JustInsertedUser
   end
 
   pipeline :protected_browser do
@@ -21,7 +20,6 @@ defmodule PlumWeb.Router do
     plug :put_secure_browser_headers
     plug PlumWeb.Plugs.SessionAuthentication
     plug PlumWeb.Plugs.RequireLogin, {:html, []}
-    plug PlumWeb.Plugs.JustInsertedUser
   end
 
   pipeline :admin_browser do
@@ -32,7 +30,6 @@ defmodule PlumWeb.Router do
     plug :put_secure_browser_headers
     plug PlumWeb.Plugs.SessionAuthentication
     plug PlumWeb.Plugs.RequireLogin, {:html, ["admin"]}
-    plug PlumWeb.Plugs.JustInsertedUser
   end
 
   pipeline :protected_api do

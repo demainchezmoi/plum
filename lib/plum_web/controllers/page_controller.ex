@@ -1,6 +1,8 @@
 defmodule PlumWeb.PageController do
   use PlumWeb, :controller
 
+  plug PlumWeb.Plugs.JustInsertedUser when action in [:prospect]
+
   def index(conn, _params) do
     conn |> render("index.html")
   end

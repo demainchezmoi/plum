@@ -1,7 +1,7 @@
 export function identify(user) {
   if (typeof mixpanel !== 'undefined') {
 
-    if (typeof just_inserted !== 'undefined' && just_inserted === true) {
+    if (typeof user_just_inserted !== 'undefined' && user_just_inserted === true) {
       mixpanel.alias(user.id)
     } else {
       mixpanel.identify(user.id);
