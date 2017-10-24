@@ -2,10 +2,8 @@ export function identify(user) {
   if (typeof mixpanel !== 'undefined') {
 
     if (typeof just_inserted !== 'undefined' && just_inserted === true) {
-      console.log('alias');
       mixpanel.alias(user.id)
     } else {
-      console.log('identify');
       mixpanel.identify(user.id);
     }
 
