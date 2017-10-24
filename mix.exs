@@ -37,6 +37,7 @@ defmodule Plum.Mixfile do
       {:dialyxir, "~> 0.5", only: [:dev], runtime: false},
       {:ecto_conditionals, "~> 0.1.0"},
       {:ex_machina, "~> 2.1", only: [:test]},
+      {:facebook, "~> 0.15.0"},
       {:gen_smtp, "~> 0.12.0"},
       {:gettext, "~> 0.11"},
       {:mix_docker, "~> 0.5.0"},
