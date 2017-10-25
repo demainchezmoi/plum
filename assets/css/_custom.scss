@@ -105,6 +105,12 @@ a.default-color-text {
   background-color: rgba(0, 0, 0, 0.3);
 }
 
+a.carousel-control-prev,
+a.carousel-control-next {
+  height: 100px;
+  top: 130px;
+}
+
 .slider-card {
   // margin-bottom: 35px !important;
   .card-body {
