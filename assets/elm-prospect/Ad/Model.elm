@@ -12,4 +12,4 @@ type alias Ad =
 
 totalPrice : Ad -> Int
 totalPrice ad =
-    ad.land.price + ad.house_price + ad.land.notary_fees
+    ad.land.price + ad.house_price
