@@ -76,3 +76,7 @@ config :ueberauth, Ueberauth.Strategy.Facebook.OAuth,
 
 config :plum,
   mixpanel_token: "570aa0ff2af04cf1609e778c6a5eda10"
+
+config :plum,
+  facebook_app_id: System.get_env("FACEBOOK_CLIENT_ID"),
+  facebook_page_id: System.get_env("FACEBOOK_PAGE_ID")

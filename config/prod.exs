@@ -93,3 +93,7 @@ config :ueberauth, Ueberauth.Strategy.Facebook.OAuth,
 
 config :plum,
   mixpanel_token: "${MIXPANEL_TOKEN}"
+
+config :plum,
+  facebook_app_id: "${FACEBOOK_CLIENT_ID}",
+  facebook_page_id: "${FACEBOOK_PAGE_ID}"
