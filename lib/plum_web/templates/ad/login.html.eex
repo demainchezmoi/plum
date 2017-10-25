@@ -21,7 +21,7 @@
               <div class="row align-items-center">
                 <div class="col-auto"><i class="fa fa-2x fa-home" style="width: 32px;"></i></div>
                 <div class="col text-secondary pl-0" style="">
-                  Découvrez la maison et le terrain à <%= raw Number.Currency.number_to_currency(@ad.land.price + @ad.house_price + @ad.land.notary_fees) %>
+                  Découvrez la maison et le terrain à <b class="font-black"><%= raw Number.Currency.number_to_currency(@ad.land.price + @ad.house_price + @ad.land.notary_fees) %></b>
                 </div>
               </div>
             </li>
