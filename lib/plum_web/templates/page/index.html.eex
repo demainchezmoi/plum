@@ -7,7 +7,7 @@
           <div class="semi-gray-background mr-auto ml-auto text-center pt-3 pb-3 pr-5 pl-5">
             <h1 class="font-bold text-shadow" style="color: white">Maison Léo</h1>
             <p class="lead text-shadow font-bold white-text">
-            <%= link "Retrouvez-nous sur Facebook", to: "https://www.facebook.com/maisonsleo", class: "white-text" %>
+            Pour la famille
             </p>
           </div>
         </div>
@@ -15,4 +15,49 @@
     </div>
   </section>
 </header>
+<!-- }}} -->
+
+<!-- {{{ Content -->
+<section class="mb-5">
+  <div class="container">
+    <div class="row">
+      <div class="col-12 col-lg-10 position-relative mr-auto ml-auto">
+        <article>
+
+          <div class="row align-items-center mt-2">
+            <div class="col-12 col-md-5">
+              <h2 class="text-secondary font-bold">Un habitat familial</h2>
+              <p class="text-justify">D'une surface de 80m<sup>2</sup>, munie de trois chambres et d'un vaste espace commun, la Maison Léo constitue le lieu de vie idéal d'une famille moderne.</p>
+            </div>
+            <div class="col-12 col-md-7">
+      		    <img class="d-block p-2 img-thumbnail" src="https://s3-eu-west-1.amazonaws.com/demainchezmoi/cloudfront_assets/images/maison.png" style="width: 100%">
+            </div>
+      		</div>
+
+          <div class="row align-items-center mt-2">
+            <div class="col-12 col-md-5">
+              <h2 class="text-secondary font-bold">À l'abri des éléments</h2>
+              <p class="text-justify">Robustes et intégralement isolés, les murs de 20cm d'épaisseur de la Maison Léo protègent votre famille du monde extérieur.</p>
+            </div>
+            <div class="col-12 col-md-7">
+      		    <img class="d-block p-2 img-thumbnail" src="https://s3-eu-west-1.amazonaws.com/demainchezmoi/cloudfront_assets/images/maison_21_nuit.jpg" style="width: 100%">
+      		  </div>
+      		</div>
+
+
+          <div class="row align-items-center mt-2">
+            <div class="col-12 col-md-5">
+              <h2 class="text-secondary font-bold">Une garantie de qualité</h2>
+              <p class="text-justify">Garantie de parfait achèvement, garantie décénale et processus de fabrication maîtrisé vous garantissent une qualité sans équivoque.</p>
+            </div>
+            <div class="col-12 col-md-7">
+      		    <img class="d-block p-2 img-thumbnail" src="https://s3-eu-west-1.amazonaws.com/demainchezmoi/cloudfront_assets/images/maison_21.png" style="width: 100%">
+      		  </div>
+      		</div>
+
+      	</article>
+      </div>
+    </div>
+  </div>
+</section>
 <!-- }}} -->
