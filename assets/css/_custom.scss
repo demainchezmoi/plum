@@ -11,6 +11,11 @@
   }
 }
 
+.input-group-addon.primary {
+  color: white;
+  background-color: #007bff;
+}
+
 .full-width { width: 100% }
 .text-shadow { text-shadow: 2px 2px 3px rgba(0,0,0,0.3); }
 
@@ -188,13 +193,6 @@ nav.navbar.translucid {
   font-weight: 900;
 }
 
-.title-1 {
-  @extend .h1-responsive, .font-bold;
-  @include media-breakpoint-up(xs) { font-size: 250%; }
-  @include media-breakpoint-up(sm) { font-size: 300%; }
-  @include media-breakpoint-up(md) { font-size: 400%; }
-}
-
 .semi-gray-background {
   background-color: rgba(0, 0, 0, 0.4);
 }
@@ -207,14 +205,36 @@ nav.navbar.translucid {
   text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
 }
 
+html, body, main {
+  height: 100%;
+  position: relative;
+}
+
+.content-1 {
+  position: relative;
+  top: 100%;
+}
+
+.infos-1 {
+  position: absolute;
+  bottom: 0;
+}
+
+.title-1 {
+  @extend .h1-responsive, .font-bold;
+  @include media-breakpoint-up(xs) { font-size: 250%; }
+  @include media-breakpoint-up(sm) { font-size: 400%; }
+  @include media-breakpoint-up(md) { font-size: 500%; }
+}
 
 .intro-1 {
-  height: 600px;
-  @include media-breakpoint-up(xs) { height: 300px; }
-  @include media-breakpoint-up(sm) { height: 380px; }
-  @include media-breakpoint-up(md) { height: 460px; }
-  @include media-breakpoint-up(lg) { height: 540px; }
-  @include media-breakpoint-up(xl) { height: 620px; }
+  position: absolute;
+  top: 0; right: 0; left: 0; bottom: 0;
+  // @include media-breakpoint-up(xs) { height: 300px; }
+  // @include media-breakpoint-up(sm) { height: 380px; }
+  // @include media-breakpoint-up(md) { height: 460px; }
+  // @include media-breakpoint-up(lg) { height: 540px; }
+  // @include media-breakpoint-up(xl) { height: 620px; }
   background: url("https://s3-eu-west-1.amazonaws.com/demainchezmoi/cloudfront_assets/images/maison_toit.jpg") no-repeat center center;
   background-size: cover;
 }
@@ -227,7 +247,6 @@ nav.navbar.translucid {
 
 .badge { border: 0 !important; }
 
-.btn,
 .img-thumbnail,
 nav.navbar {
   border-radius: 0;
@@ -249,6 +268,11 @@ nav.navbar {
 .gray-background {
   background-color: $gray-700;
 }
+
+footer {
+  background-color: #eaeaea;
+}
+
 
 .photo-stack {
   position: absolute;

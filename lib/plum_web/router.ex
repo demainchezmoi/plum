@@ -54,7 +54,9 @@ defmodule PlumWeb.Router do
 
   scope "/", PlumWeb do
     pipe_through :browser
+
     get "/", PageController, :index
+    post "/contact", PageController, :contact
     get "/confidentialite", PageController, :confidentialite
     get "/login", PageController, :login
     get "/merci", PageController, :merci

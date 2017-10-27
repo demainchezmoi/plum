@@ -1,5 +1,7 @@
 defmodule PlumWeb.PageController do
   use PlumWeb, :controller
+  alias PlumWeb.Email
+  alias PlumWeb.Mailer
 
   plug PlumWeb.Plugs.JustInsertedUser when action in [:prospect]
 
@@ -29,5 +31,12 @@ defmodule PlumWeb.PageController do
 
   def login(conn, _params) do
     conn |> render("login.html", query_params: conn.query_params)
+  end
+
+  def contact(conn, %{"contact" => contact_params}) do
+    Email.contact_email(contact_params) |> Mailer.deliver
+    conn
+    |> put_flash(:info, "Votre demande a bien été prise en compte")
+    |> render("index.html")
   end
 end
