@@ -4,10 +4,10 @@
     <div class="full-bg-img flex-center">
       <div class="container">
         <div class="row">
-          <div class="semi-gray-background mr-auto ml-auto text-center pt-3 pb-3 pr-5 pl-5">
-            <h1 class="font-bold text-shadow" style="color: white">Maison Léo</h1>
+          <div class="mr-auto ml-auto text-center pt-3 pb-3 pr-5 pl-5">
+            <h1 class="title-1 text-shadow text-white">La Maison Léo</h1>
             <p class="lead text-shadow font-bold white-text">
-            Pour la famille
+            87 m<sup>2</sup> pour familles heureuses
             </p>
           </div>
         </div>
@@ -21,40 +21,36 @@
 <section class="mb-5">
   <div class="container">
     <div class="row">
-      <div class="col-12 col-lg-10 position-relative mr-auto ml-auto">
+      <div class="col position-relative mr-auto ml-auto">
         <article>
 
           <div class="row align-items-center mt-2">
             <div class="col-12 col-md-5">
-              <h2 class="text-secondary font-bold">Un habitat familial</h2>
-              <p class="text-justify">D'une surface de 80m<sup>2</sup>, munie de trois chambres et d'un vaste espace commun, la Maison Léo constitue le lieu de vie idéal d'une famille moderne.</p>
+              <div class="p-3">
+              <h2 class="text-secondary font-bold h2-responsive">Un habitat familial</h2>
+              <p class="text-justify">Les trois chambres garantissent à chacun un espace au calme, isolé par des cloisons épaisses, alors que le séjour cuisine de 48m2 vous permet de partager repas et bons films tous ensemble. La journée, les deux grandes baies vitrées vous invitent profiter du soleil, de l'air frais et du jardin.</p>
+              <p>Laissez-vous tenter par des après-midis balançoire, football, cabane et soirées plancha dans le jardin !</p>
+              </p>
+            </div>
             </div>
             <div class="col-12 col-md-7">
-      		    <img class="d-block p-2 img-thumbnail" src="https://s3-eu-west-1.amazonaws.com/demainchezmoi/cloudfront_assets/images/maison.png" style="width: 100%">
+      		    <img class="d-block p-2 img-thumbnail" src="https://s3-eu-west-1.amazonaws.com/demainchezmoi/cloudfront_assets/images/distribution_commercial_maison_leo_sd.png" style="width: 100%">
             </div>
       		</div>
 
           <div class="row align-items-center mt-2">
             <div class="col-12 col-md-5">
-              <h2 class="text-secondary font-bold">À l'abri des éléments</h2>
-              <p class="text-justify">Robustes et intégralement isolés, les murs de 20cm d'épaisseur de la Maison Léo protègent votre famille du monde extérieur.</p>
+              <div class="p-3">
+                <h2 class="text-secondary font-bold h2-responsive">Une maison de qualité</h2>
+                <p class="text-justify">Nous fabriquons la maison Léo d'après des plans uniques et optimisés pour garantir une prestation de qualité au meilleur prix.</p>
+                <p class="text-justify">La maison Léo est fabriquée près de chez vous, à l'aide de matériaux robustes et de solutions techniques éprouvées.</p>
+                <p class="text-justify">Garantie 0% gadget, elle offre tout le confort moderne&nbsp;: isolation par l'extérieur, prises internet dans chaque pièce, 5m2 de panneaux solaires, ventilation simple flux.</p>
+              </div>
             </div>
             <div class="col-12 col-md-7">
       		    <img class="d-block p-2 img-thumbnail" src="https://s3-eu-west-1.amazonaws.com/demainchezmoi/cloudfront_assets/images/maison_21_nuit.jpg" style="width: 100%">
       		  </div>
       		</div>
-
-
-          <div class="row align-items-center mt-2">
-            <div class="col-12 col-md-5">
-              <h2 class="text-secondary font-bold">Une garantie de qualité</h2>
-              <p class="text-justify">Garantie de parfait achèvement, garantie décénale et processus de fabrication maîtrisé vous garantissent une qualité sans équivoque.</p>
-            </div>
-            <div class="col-12 col-md-7">
-      		    <img class="d-block p-2 img-thumbnail" src="https://s3-eu-west-1.amazonaws.com/demainchezmoi/cloudfront_assets/images/maison_21.png" style="width: 100%">
-      		  </div>
-      		</div>
-
       	</article>
       </div>
     </div>
