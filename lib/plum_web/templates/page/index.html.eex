@@ -5,7 +5,7 @@
     <div class="col-md-12 col-lg-6">
       <h5 class="h5-responsive mt-5 mb-0 text-center font-black">Maison&nbsp;Léo&nbsp;</h5>
       <h1 class="h1-responsive mt-0 text-center font-thin">Chez vous en famille</h1>
-      <p class="mb-0 mt-4 open-sans slight-gray-text text-center">Trois chambres, un grand salon et votre propriété pour 87&nbsp;900&nbsp;&euro;</p>
+      <p class="mb-0 mt-4 open-sans slight-gray-text text-center">Devenez propriétaire d'un T4 pour 87&nbsp;900&nbsp;&euro;</p>
     </div>
     <div class="col-md-12 col-lg-6">
       <div class="mr-auto ml-auto z-depth-1 p-4 mt-5" style="background-color: white;">
@@ -42,6 +42,29 @@
 
 
 <div class="container">
+  <div class="row mb-5 text-center text-white gray-background py-2 z-depth-2">
+    <div class="col-sm-4 col-xs-12 py-3">
+      <i class="fa-stack fa-2x">
+        <i class="fa fa-certificate fa-stack-2x"></i>
+        <i class="fa fa-calendar-check-o fa-stack-1x gray-text-700"></i>
+      </i>
+      <div class="mt-2">Livraison 4 mois après obtention du permis de construire</div>
+    </div>
+    <div class="col-sm-4 col-xs-12 py-3">
+      <i class="fa-stack fa-2x">
+        <i class="fa fa-certificate fa-stack-2x"></i>
+        <i class="fa fa-check fa-stack-1x gray-text-700"></i>
+      </i>
+      <div class="mt-2">Garantie de parfait achèvement</div>
+    </div>
+    <div class="col-sm-4 col-xs-12 py-3">
+      <i class="fa-stack fa-2x">
+        <i class="fa fa-certificate fa-stack-2x"></i>
+        <i class="fa fa-file-text-o fa-stack-1x gray-text-700"></i>
+      </i>
+      <div class="mt-2">Assurance dommage d'ouvrage incluse</div>
+    </div>
+  </div>
 
   <div class="row align-items-center justify-content-center mb-5">
     <div class="col-12 col-md-6 col-lg-5">
@@ -73,11 +96,11 @@
           </tr>
           <tr>
             <th>Chauffage</th>
-            <td>Pompe chaleur</td>
+            <td>Pompe chaleur air air</td>
           </tr>
           <tr>
             <th>Structure</th>
-            <td>Bois</td>
+            <td>Ossature bois</td>
           </tr>
         </tbody>
       </table>
@@ -94,12 +117,12 @@
             <td>Roulants PVC</td>
           </tr>
           <tr>
-            <th>Chambres</th>
-            <td>3</td>
+            <th>Pièces</th>
+            <td>4</td>
           </tr>
           <tr>
             <th>Énergie / GES</th>
-            <td>A / A</td>
+            <td>Classe A / Classe A</td>
           </tr>
         </tbody>
       </table>
