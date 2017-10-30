@@ -6,8 +6,8 @@ var webpack = require('webpack');
 config = {
   entry: {
     app: './js/app.js',
-    admin: './js/admin.js',
-    prospect: './js/prospect.js'
+    // admin: './js/admin.js',
+    // prospect: './js/prospect.js'
   },
   output: {
     path: path.join(__dirname, '..', 'priv', 'static'),

@@ -40,12 +40,12 @@ defmodule PlumWeb.Email do
     |> text_body(welcome_text(assigns))
   end
 
-  def contact_email(%{"email" => email}) do
+  def contact_email(params) do
     new()
     |> to("contact@demainchezmoi.fr")
     |> from({"Alexandre Hervé", "aherve@demainchezmoi.fr"})
     |> subject("Nouveau contact")
-    |> html_body("<div>Nouveau contact : #{email}</div>")
-    |> text_body("Nouveau contact : #{email}")
+    |> html_body("<div>Nouveau contact : #{params["first_name"]} #{params["last_name"]} - #{params["phone"]}</div>")
+    |> text_body("Nouveau contact : #{params["first_name"]} #{params["last_name"]} - #{params["phone"]}")
   end
 end

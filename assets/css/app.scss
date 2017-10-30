@@ -10,6 +10,17 @@ $fa-font-path: "/fonts/";
  */
 @import "functions";
 @import "variables";
+$spacer: 1rem;
+$spacers: (
+  0: 0,
+  1: ($spacer * .25),
+  2: ($spacer * .5),
+  3: $spacer,
+  4: ($spacer * 1.5),
+  5: ($spacer * 3),
+  6: ($spacer * 5),
+  7: ($spacer * 8)
+);
 @import "mixins";
 @import "print";
 @import "reboot";
@@ -17,7 +28,7 @@ $fa-font-path: "/fonts/";
 @import "images";
 // @import "code";
 @import "grid";
-// @import "tables";
+@import "tables";
 @import "forms";
 @import "buttons";
 @import "transitions";
@@ -70,28 +81,28 @@ $image-path: "/images";
 $input-focus-color: map-get($yellow-flash, "base");
 
 @import "mdb/free/global";
-@import "mdb/free/animations";
+// @import "mdb/free/animations";
 @import "mdb/free/helpers";
 @import "mdb/free/typography";
-// @import "mdb/free/buttons";
+@import "mdb/free/buttons";
 @import "mdb/free/cards-basic";
-@import "mdb/free/dropdowns";
-@import "mdb/free/navbar";
+// @import "mdb/free/dropdowns";
+// @import "mdb/free/navbar";
 // @import "mdb/free/pagination";
-@import "mdb/free/badge";
+// @import "mdb/free/badge";
 // @import "mdb/free/breadcrumb";
 @import "mdb/free/modals";
 // @import "mdb/free/progress";
-@import "mdb/free/carousel-basic";
-@import "mdb/free/collapse";
+// @import "mdb/free/carousel-basic";
+// @import "mdb/free/collapse";
 // @import "mdb/free/jumbotron";
 // @import "mdb/free/masks";
-@import "mdb/free/waves";
+// @import "mdb/free/waves";
 // @import "mdb/free/forms-basic";
-@import "mdb/free/msc";
+// @import "mdb/free/msc";
 // @import "mdb/free/footer";
-@import "mdb/free/list-group";
-// @import "mdb/free/tables";
+// @import "mdb/free/list-group";
+@import "mdb/free/tables";
 // @import "mdb/custom";
 
 

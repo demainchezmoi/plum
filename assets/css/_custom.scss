@@ -1,3 +1,36 @@
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:400,700');
+
+.open-sans {
+  font-family: "Open Sans";
+}
+
+.slight-gray-text {
+  color: #5d5d5d;
+}
+
+.large-right-space {
+  @include media-breakpoint-up(lg) { margin-right: 48px; }
+}
+.large-left-space {
+  @include media-breakpoint-up(lg) { margin-left: 48px; }
+}
+
+.paragraph {
+  line-height: 1.35;
+  font-size: 0.95rem;
+  @include media-breakpoint-down(md) { font-size: 0.85rem; }
+}
+
+p.paragraph {
+  @extend .mb-2;
+}
+
+.blur-pic-bg {
+  background-image: url("https://s3-eu-west-1.amazonaws.com/demainchezmoi/cloudfront_assets/images/Maison-leo-configurateur-flou.png");
+  background-size: cover;
+  min-height: 300px;
+}
+
 .ad-login {
   position: absolute;
   top: 56px; right: 0; left: 0; bottom: 0;
@@ -205,38 +238,59 @@ nav.navbar.translucid {
   text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
 }
 
+body {
+  background-color: #fafafa;
+}
+
 html, body, main {
   height: 100%;
   position: relative;
 }
 
 .content-1 {
-  position: relative;
-  top: 100%;
+  // position: relative;
+  // top: 100%;
 }
 
-.infos-1 {
-  position: absolute;
-  bottom: 0;
-}
+// .infos-1 {
+  // position: absolute;
+  // bottom: 0; right: 0; left: 0;
+  // @extend .d-flex, .justify-content-center;
+  // .infos-1-content {
+    // background-color: #fafafa;
+    // border-top-right-radius: 10px;
+    // border-top-left-radius: 10px;
+  // }
+// }
 
 .title-1 {
-  @extend .h1-responsive, .font-bold;
-  @include media-breakpoint-up(xs) { font-size: 250%; }
-  @include media-breakpoint-up(sm) { font-size: 400%; }
-  @include media-breakpoint-up(md) { font-size: 500%; }
+  @extend .h1-responsive, .font-light;
+  // @include media-breakpoint-up(xs) { font-size: 250%; }
+  // @include media-breakpoint-up(sm) { font-size: 400%; }
+  // @include media-breakpoint-up(md) { font-size: 500%; }
 }
 
 .intro-1 {
-  position: absolute;
-  top: 0; right: 0; left: 0; bottom: 0;
-  // @include media-breakpoint-up(xs) { height: 300px; }
-  // @include media-breakpoint-up(sm) { height: 380px; }
-  // @include media-breakpoint-up(md) { height: 460px; }
-  // @include media-breakpoint-up(lg) { height: 540px; }
-  // @include media-breakpoint-up(xl) { height: 620px; }
+  width: 100%;
+  @include media-breakpoint-up(xs) { height: 150px; }
+  @include media-breakpoint-up(sm) { height: 200px; }
+  @include media-breakpoint-up(md) { height: 300px; }
+  @include media-breakpoint-up(lg) { height: 350px; }
+  @include media-breakpoint-up(xl) { height: 400px; }
   background: url("https://s3-eu-west-1.amazonaws.com/demainchezmoi/cloudfront_assets/images/maison_toit.jpg") no-repeat center center;
   background-size: cover;
+}
+
+// .intro-1-content {
+  // background-color: rgba(0, 0, 0, 0.1);
+// }
+
+.certificates {
+  background-color: rgba(255, 255, 255, 0.88);
+  border-radius: 20px;
+  // color: black;
+  // background-color: blue;
+  // color: white;
 }
 
 .brand {
@@ -261,6 +315,7 @@ nav.navbar {
 }
 
 .gray-text-500 { color: $gray-500; }
+.gray-text-600 { color: $gray-600; }
 .gray-text-700 { color: $gray-700; }
 .gray-text-800 { color: $gray-800; }
 .gray-text-900 { color: $gray-900; }
