@@ -21,14 +21,6 @@
   @include media-breakpoint-down(md) { font-size: 0.85rem; }
 }
 
-.green-flash-underline {
-  border-bottom: 5px solid map-get($green-flash, base);
-}
-
-.pink-background {
-  background-color: #e91e63;
-}
-
 .pink-border-left {
 	border-left: 5px solid map-get($pink, base);
 }

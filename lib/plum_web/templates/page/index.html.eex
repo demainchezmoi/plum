@@ -3,7 +3,7 @@
 <div class="container mb-5 mt-4">
   <div class="row justify-content-center align-items-center">
     <div class="col">
-      <h5 class="h5-responsive mt-4 mb-0 text-center font-black pink-text">Maison&nbsp;Léo&nbsp;</h5>
+      <h5 class="h5-responsive mt-4 mb-0 text-center font-black blue-text">Maison&nbsp;Léo&nbsp;</h5>
       <div class="row justify-content-center">
         <div class="col-auto">
           <h1 class="h1-responsive mt-0 text-center font-thin green-flash-underline">Une maison pour votre famille</h1>
@@ -11,7 +11,7 @@
       </div>
       <div style="max-width: 500px; font-weight: 800;" class="mr-auto ml-auto open-sans gray-text-700 text-center mt-4">
         <p class="mb-0">Devenez propriétaire d'un T4 pour 87&nbsp;900&nbsp;&euro;</p>
-        <p class="mb-0">Emménagez chez vous en famille dans huit mois et dites au revoir aux loyers !</p>
+        <p class="mb-0">Emménagez dans votre maison et dites au revoir aux loyers dans moins de huit mois&nbsp;!</p>
       </div>
     </div>
   </div>
@@ -21,24 +21,26 @@
 <div class="container">
   <div class="mx-1">
     <div class="row mb-5 text-center text-white">
-      <div class="col py-3 pink-background z-depth-2 my-2">
+      <div class="col py-3 blue z-depth-2 my-2">
         <i class="fa-stack fa-lg">
           <i class="fa fa-certificate fa-stack-2x"></i>
-          <i class="fa fa-check fa-stack-1x pink-text"></i>
+          <i class="fa fa-check fa-stack-1x blue-text"></i>
         </i>
         <div class="mt-1" style="line-height: 1"><small>Garantie de parfait achèvement</small></div>
       </div>
-      <div class="col py-3 pink-background z-depth-3" style="z-index: 1;">
-        <i class="fa-stack fa-lg">
-          <i class="fa fa-certificate fa-stack-2x"></i>
-          <i class="fa fa-calendar-check-o fa-stack-1x pink-text"></i>
-        </i>
-        <div class="mt-1" style="line-height: 1"><small>Construction ultra rapide 4 mois après PC</small></div>
+      <div class="col py-3 blue z-depth-3 d-flex align-items-center justify-content-center" style="z-index: 1;">
+				<div>
+        	<i class="fa-stack fa-lg">
+          	<i class="fa fa-certificate fa-stack-2x"></i>
+          	<i class="fa fa-calendar-check-o fa-stack-1x blue-text"></i>
+        	</i>
+        	<div class="mt-1" style="line-height: 1"><small>Construction ultra rapide 4 mois après PC</small></div>
+				</div>
       </div>
-      <div class="col py-3 pink-background z-depth-2 my-2">
+      <div class="col py-3 blue z-depth-2 my-2">
         <i class="fa-stack fa-lg">
           <i class="fa fa-certificate fa-stack-2x"></i>
-          <i class="fa fa-file-text-o fa-stack-1x pink-text"></i>
+          <i class="fa fa-file-text-o fa-stack-1x blue-text"></i>
         </i>
         <div class="mt-1" style="line-height: 1"><small>Assurance dommage d'ouvrage</small></div>
       </div>
@@ -141,7 +143,7 @@
           <dd>Demainchezmoi SAS <br />41 rue Laure Diebold <br />69009 Lyon</dd>
           <dt>Réseaux sociaux</dt>
           <dd>
-          <a href="https://www.facebook.com/lamaisonleo" target="_blank" class="pink-text">
+          <a href="https://www.facebook.com/lamaisonleo" target="_blank" class="blue-text">
             <i class="fa-stack">
               <i class="fa fa-circle fa-stack-2x"></i>
               <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
@@ -153,7 +155,7 @@
       <div class="col-md-12 col-lg-6">
         <div class="z-depth-1 p-4" style="background-color: white;">
           <%= form_for @conn, page_path(@conn, :contact), [as: "contact"], fn f-> %>
-            <p class="text-secondary">Prendre contact</p>
+            <p class="blue-text">Prendre contact</p>
             <div class="form-group row">
               <label class="col-sm-3 col-form-label">Prénom</label>
               <div class="col-sm-9">
@@ -174,7 +176,7 @@
             </div>
             <div class="clearfix">
               <div class="pull-right">
-                <button type="submit" class="btn btn-green-flash mr-0 mb-0"><i class="fa fa-paper-plane mr-2"></i> Prendre contact</button>
+                <button type="submit" class="btn btn-blue mr-0 mb-0"><i class="fa fa-paper-plane mr-2"></i> Prendre contact</button>
               </div>
             </div>
           <% end %>
