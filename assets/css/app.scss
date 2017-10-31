@@ -75,7 +75,8 @@ $spacers: (
 @import "mdb/free/data/prefixer";
 @import "mdb/free/data/mixins";
 @import "_colors"; // CUSTOMIZED FILE
-@import "mdb/free/data/variables";
+@import "_mdb_variables"; // CUSTOMIZED FILE
+// @import "mdb/free/data/variables";
 
 $image-path: "/images";
 $input-focus-color: map-get($yellow-flash, "base");

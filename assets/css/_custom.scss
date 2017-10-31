@@ -273,12 +273,16 @@ html, body, main {
 .intro-1 {
   width: 100%;
   @include media-breakpoint-up(xs) { height: 150px; }
-  @include media-breakpoint-up(sm) { height: 200px; }
-  @include media-breakpoint-up(md) { height: 300px; }
-  @include media-breakpoint-up(lg) { height: 350px; }
+  @include media-breakpoint-up(sm) { height: 180px; }
+  @include media-breakpoint-up(md) { height: 200px; }
+  @include media-breakpoint-up(lg) { height: 300px; }
   @include media-breakpoint-up(xl) { height: 400px; }
   background: url("https://s3-eu-west-1.amazonaws.com/demainchezmoi/cloudfront_assets/images/maison_toit.jpg") no-repeat center center;
   background-size: cover;
+}
+
+.primary-background {
+  background-color: #007bff;
 }
 
 // .intro-1-content {
