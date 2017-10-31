@@ -1,80 +1,48 @@
 <div class="intro-1"></div>
 
-<div class="container mb-5">
+<div class="container mb-5 mt-4">
   <div class="row justify-content-center align-items-center">
-    <div class="col-md-12 col-lg-6">
-      <h5 class="h5-responsive mt-5 mb-0 text-center font-black">Maison&nbsp;Léo&nbsp;</h5>
-      <h1 class="h1-responsive mt-0 text-center font-thin">Chez vous en famille</h1>
+    <div class="col">
+      <h5 class="h5-responsive mt-4 mb-0 text-center font-black gray-text-800">Maison&nbsp;Léo&nbsp;</h5>
+      <h1 class="h1-responsive mt-0 text-center font-thin">Une maison pour votre famille</h1>
       <p class="mb-0 mt-4 open-sans slight-gray-text text-center">Devenez propriétaire d'un T4 pour 87&nbsp;900&nbsp;&euro;</p>
-    </div>
-    <div class="col-md-12 col-lg-6">
-      <div class="mr-auto ml-auto z-depth-1 p-4 mt-5" style="background-color: white;">
-        <%= form_for @conn, page_path(@conn, :contact), [as: "contact"], fn f-> %>
-          <p class="text-secondary">Prenez contact</p>
-          <div class="form-group row">
-            <label class="col-sm-2 col-form-label">Prénom&nbsp;:</label>
-            <div class="col-sm-10">
-              <%= text_input f, :first_name, placeholder: "Marie", class: "form-control" %>
-            </div>
-          </div>
-          <div class="form-group row">
-            <label class="col-sm-2 col-form-label">Nom&nbsp;:</label>
-            <div class="col-sm-10">
-              <%= text_input f, :last_name, placeholder: "Dupont", class: "form-control" %>
-            </div>
-          </div>
-          <div class="form-group row">
-            <label class="col-sm-2 col-form-label">Portable&nbsp;:</label>
-            <div class="col-sm-10">
-              <%= text_input f, :phone, placeholder: "06 12 34 56 78", class: "form-control" %>
-            </div>
-          </div>
-          <div class="clearfix">
-            <div class="pull-right">
-              <button type="submit" class="btn btn-primary mr-0 mb-0"><i class="fa fa-paper-plane mr-2"></i> Prendre contact</button>
-            </div>
-          </div>
-        <% end %>
-      </div>
     </div>
   </div>
 </div>
 
 
 <div class="container">
-  <div class="row mb-5 text-center text-white gray-background py-2 z-depth-2">
-    <div class="col-sm-4 col-xs-12 py-3">
-      <i class="fa-stack fa-2x">
+  <div class="row mb-5 text-center text-white gray-background py-1 z-depth-3">
+    <div class="col py-3">
+      <i class="fa-stack fa-lg">
         <i class="fa fa-certificate fa-stack-2x"></i>
         <i class="fa fa-calendar-check-o fa-stack-1x gray-text-700"></i>
       </i>
-      <div class="mt-2">Livraison 4 mois après obtention du permis de construire</div>
+      <div class="mt-1" style="line-height: 1"><small>Construction en 4 mois après PC</small></div>
     </div>
-    <div class="col-sm-4 col-xs-12 py-3">
-      <i class="fa-stack fa-2x">
+    <div class="col py-3">
+      <i class="fa-stack fa-lg">
         <i class="fa fa-certificate fa-stack-2x"></i>
         <i class="fa fa-check fa-stack-1x gray-text-700"></i>
       </i>
-      <div class="mt-2">Garantie de parfait achèvement</div>
+      <div class="mt-1" style="line-height: 1"><small>Garantie de parfait achèvement</small></div>
     </div>
-    <div class="col-sm-4 col-xs-12 py-3">
-      <i class="fa-stack fa-2x">
+    <div class="col py-3">
+      <i class="fa-stack fa-lg">
         <i class="fa fa-certificate fa-stack-2x"></i>
         <i class="fa fa-file-text-o fa-stack-1x gray-text-700"></i>
       </i>
-      <div class="mt-2">Assurance dommage d'ouvrage incluse</div>
+      <div class="mt-1" style="line-height: 1"><small>Assurance dommage d'ouvrage</small></div>
     </div>
   </div>
 
   <div class="row align-items-center justify-content-center mb-5">
-    <div class="col-12 col-md-6 col-lg-5">
-      <div class="large-left-space">
-      	<img class="d-block p-2 img-thumbnail" src="https://s3-eu-west-1.amazonaws.com/demainchezmoi/cloudfront_assets/images/distribution_commercial_maison_leo_sd.png" style="width: 100%">
-      </div>
+    <div class="col-12 col-md-6 col-lg-4">
+      <img class="d-block p-2 img-thumbnail" src="https://s3-eu-west-1.amazonaws.com/demainchezmoi/cloudfront_assets/images/distribution_commercial_maison_leo_sd.png" style="width: 100%">
     </div>
-    <div class="col-12 col-md-6 col-lg-5">
-      <div class="large-right-space p-3">
-        <p class="font-bold">Un espace de vie sur mesure</p>
+    <div class="col-12 col-md-6 col-lg-4">
+      <div class="p-3">
+        <p class="font-bold gray-text-800">Un espace de vie sur mesure</p>
         <p class="open-sans slight-gray-text paragraph">Les trois chambres bien isolées garantissent à chacun un espace au calme, et le séjour cuisine de 48&nbsp;m<sup>2</sup> vous permet de partager repas et bons films tous ensemble. La journée, les deux grandes baies vitrées vous font profiter du soleil, de l'air frais et du jardin.</p>
         <p class="open-sans slight-gray-text paragraph">Laissez-vous tenter par des après-midis balançoire, football, cabane et soirées plancha dans le jardin !</p>
         </p>
@@ -83,7 +51,7 @@
   </div>
 
   <div class="row justify-content-center mb-5">
-    <div class="col-sm-6 col-lg-4 col-xs-12">
+    <div class="col-sm-6 col-lg-5 col-xs-12">
       <table class="table table-striped table-bordered table-sm mt-3">
         <tbody>
           <tr>
@@ -91,12 +59,12 @@
             <td>87&nbsp;m<sup>2</sup></td>
           </tr>
           <tr>
-            <th>Vitres</th>
+            <th>Surface vitrée</th>
             <td>16&nbsp;m<sup>2</sup></td>
           </tr>
           <tr>
             <th>Chauffage</th>
-            <td>Pompe chaleur air air</td>
+            <td>Pompe à chaleur air air</td>
           </tr>
           <tr>
             <th>Structure</th>
@@ -105,7 +73,7 @@
         </tbody>
       </table>
     </div>
-    <div class="col-sm-6 col-lg-4 col-xs-12">
+    <div class="col-sm-6 col-lg-5 col-xs-12">
       <table class="table table-striped table-bordered table-sm mt-3">
         <tbody>
           <tr>
@@ -130,14 +98,12 @@
   </div>
 
   <div class="row align-items-center justify-content-center mb-5">
-    <div class="col-12 col-md-6 col-lg-5">
-      <div class="large-left-space">
-      	<img class="d-block p-2 img-thumbnail" src="https://s3-eu-west-1.amazonaws.com/demainchezmoi/cloudfront_assets/images/maison_21_nuit.jpg" style="width: 100%">
-      </div>
+    <div class="col-12 col-md-6 col-lg-4">
+      <img class="d-block p-2 img-thumbnail" src="https://s3-eu-west-1.amazonaws.com/demainchezmoi/cloudfront_assets/images/maison_21_nuit.jpg" style="width: 100%">
     </div>
-    <div class="col-12 col-md-6 col-lg-5">
-      <div class="large-right-space p-3">
-        <p class="font-bold">Un produit de qualité</p>
+    <div class="col-12 col-md-6 col-lg-4">
+      <div class="p-3">
+        <p class="font-bold gray-text-800">Un produit de qualité</p>
         <p class="open-sans slight-gray-text paragraph">La maison Léo est fabriquée près de chez vous avec des matériaux robustes et des solutions techniques éprouvées. Elle concillie prix compétitif et qualité irréprochable.</p>
         <p class="open-sans slight-gray-text paragraph">Garantie 0% gadget, elle offre tout le confort moderne&nbsp;: isolation par l'extérieur, prises internet dans chaque pièce, 5m2 de panneaux solaires, ventilation simple flux.</p>
       </div>
@@ -149,9 +115,9 @@
   <div class="container">
     <div class="row justify-content-center">
       <div class="col">
-        <dl>
+        <dl class="p-1">
           <dt>Contact</dt>
-          <dd>contact@demainchezmoi.fr</dd>
+          <dd>Email&nbsp;: contact@demainchezmoi.fr <br /> Tél&nbsp;: 06 63 74 25 35</dd>
           <dt>Editeur</dt>
           <dd>Demainchezmoi SAS <br />41 rue Laure Diebold <br />69009 Lyon</dd>
           <dt>Réseaux sociaux</dt>
@@ -168,22 +134,22 @@
       <div class="col-md-12 col-lg-6">
         <div class="z-depth-1 p-4" style="background-color: white;">
           <%= form_for @conn, page_path(@conn, :contact), [as: "contact"], fn f-> %>
-            <p class="text-secondary">Prenez contact</p>
+            <p class="text-secondary">En savoir plus</p>
             <div class="form-group row">
-              <label class="col-sm-2 col-form-label">Prénom&nbsp;:</label>
-              <div class="col-sm-10">
+              <label class="col-sm-3 col-form-label">Prénom</label>
+              <div class="col-sm-9">
                 <%= text_input f, :first_name, placeholder: "Marie", class: "form-control" %>
               </div>
             </div>
             <div class="form-group row">
-              <label class="col-sm-2 col-form-label">Nom&nbsp;:</label>
-              <div class="col-sm-10">
+              <label class="col-sm-3 col-form-label">Nom</label>
+              <div class="col-sm-9">
                 <%= text_input f, :last_name, placeholder: "Dupont", class: "form-control" %>
               </div>
             </div>
             <div class="form-group row">
-              <label class="col-sm-2 col-form-label">Portable&nbsp;:</label>
-              <div class="col-sm-10">
+              <label class="col-sm-3 col-form-label">Téléphone</label>
+              <div class="col-sm-9">
                 <%= text_input f, :phone, placeholder: "06 12 34 56 78", class: "form-control" %>
               </div>
             </div>
