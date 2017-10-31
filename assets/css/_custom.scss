@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css?family=Open+Sans:400,700');
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:400,800');
 
 .open-sans {
   font-family: "Open Sans";
@@ -19,6 +19,18 @@
   line-height: 1.35;
   font-size: 0.95rem;
   @include media-breakpoint-down(md) { font-size: 0.85rem; }
+}
+
+.green-flash-underline {
+  border-bottom: 5px solid map-get($green-flash, base);
+}
+
+.pink-background {
+  background-color: #e91e63;
+}
+
+.pink-border-left {
+	border-left: 5px solid map-get($pink, base);
 }
 
 p.paragraph {
