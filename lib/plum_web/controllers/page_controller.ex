@@ -34,11 +34,11 @@ defmodule PlumWeb.PageController do
   end
 
   def contact(conn, %{"contact" => contact_params}) do
-    if contact_params["phone"] != "" do
+    if contact_params["phone"] != "" or contact_params["email"] != "" do
       Email.contact_email(contact_params) |> Mailer.deliver
       conn |> put_flash(:info, "Votre demande de contact a bien été prise en compte.")
     else
-      conn |> put_flash(:error, "Merci de renseigner votre numéro de téléphone pour prendre contact.")
+      conn |> put_flash(:error, "Merci de renseigner votre numéro de téléphone ou votre email pour prendre contact.")
     end
     |> render("index.html")
   end

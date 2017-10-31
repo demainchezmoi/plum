@@ -11,7 +11,7 @@
       </div>
       <div style="max-width: 500px; font-weight: 800;" class="mr-auto ml-auto open-sans gray-text-700 text-center mt-4">
         <p class="mb-0">Devenez propriétaire d'un T4 pour 87&nbsp;900&nbsp;&euro;</p>
-        <p class="mb-0">Emménagez dans votre maison et dites au revoir aux loyers dans moins de huit mois&nbsp;!</p>
+        <p class="mb-0">Emménagez dans votre maison et dites au revoir aux loyers en moins de huit mois&nbsp;!</p>
       </div>
     </div>
   </div>
@@ -50,7 +50,7 @@
   <div class="row justify-content-center mb-5">
     <div class="col-12 col-lg-10">
 			<div class="mb-2">
-      	<p class="pb-1 d-inline font-bold gray-text-700 green-flash-underline">Caractéristiques de la Maison&nbsp;Léo</p>
+      	<p class="pb-1 d-inline font-bold gray-text-700 green-flash-underline">Les caractéristiques de la Maison&nbsp;Léo</p>
 			</div>
     </div>
     <div class="col-sm-6 col-lg-5 col-xs-12">
@@ -130,6 +130,53 @@
     </div>
   </div>
 
+  <div class="row align-items-center justify-content-center mb-5">
+    <div class="col-12 col-md-6 col-lg-5">
+        <div class="z-depth-1 p-4 white m-1">
+          <%= form_for @conn, page_path(@conn, :contact), [as: "contact"], fn f-> %>
+            <div class="form-group row">
+              <label class="col-sm-3 col-form-label">Prénom</label>
+              <div class="col-sm-9">
+                <%= text_input f, :first_name, placeholder: "Marie", class: "form-control" %>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-sm-3 col-form-label">Nom</label>
+              <div class="col-sm-9">
+                <%= text_input f, :last_name, placeholder: "Dupont", class: "form-control" %>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-sm-3 col-form-label">Téléphone</label>
+              <div class="col-sm-9">
+                <%= text_input f, :phone, placeholder: "06 12 34 56 78", class: "form-control" %>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-sm-3 col-form-label">Email</label>
+              <div class="col-sm-9">
+                <%= text_input f, :email, placeholder: "marie.dupont@email.com", class: "form-control" %>
+              </div>
+            </div>
+            <div class="clearfix">
+              <div class="pull-right">
+                <button type="submit" class="btn btn-blue mr-0 mb-0"><i class="fa fa-paper-plane mr-2"></i> Prendre contact</button>
+              </div>
+            </div>
+          <% end %>
+        </div>
+    </div>
+    <div class="col-12 col-md-6 col-lg-5">
+      <div class="p-3">
+				<div class="mb-3">
+        	<p class="pb-1 d-inline green-flash-underline font-bold gray-text-800">Nous sommes à votre disposition</p>
+				</div>
+        <p class="open-sans gray-text-700 paragraph">Nous serions ravis de répondre à toute demande d'information.</p>
+				<p class="open-sans gray-text-700 paragraph">N'hésitez-pas à remplir le formulaire pour que nous vous contactions, ou à nous joindre directement au numéro suivant&nbsp;:</p>
+				<p class="open-sans lead font-bold blue-text">06 63 74 25 35</p>
+      </div>
+    </div>
+  </div>
 </div>
 
 <footer class="py-5">
@@ -153,34 +200,6 @@
         </dl>
       </div>
       <div class="col-md-12 col-lg-6">
-        <div class="z-depth-1 p-4" style="background-color: white;">
-          <%= form_for @conn, page_path(@conn, :contact), [as: "contact"], fn f-> %>
-            <p class="blue-text">Prendre contact</p>
-            <div class="form-group row">
-              <label class="col-sm-3 col-form-label">Prénom</label>
-              <div class="col-sm-9">
-                <%= text_input f, :first_name, placeholder: "Marie", class: "form-control" %>
-              </div>
-            </div>
-            <div class="form-group row">
-              <label class="col-sm-3 col-form-label">Nom</label>
-              <div class="col-sm-9">
-                <%= text_input f, :last_name, placeholder: "Dupont", class: "form-control" %>
-              </div>
-            </div>
-            <div class="form-group row">
-              <label class="col-sm-3 col-form-label">Téléphone</label>
-              <div class="col-sm-9">
-                <%= text_input f, :phone, placeholder: "06 12 34 56 78", class: "form-control" %>
-              </div>
-            </div>
-            <div class="clearfix">
-              <div class="pull-right">
-                <button type="submit" class="btn btn-blue mr-0 mb-0"><i class="fa fa-paper-plane mr-2"></i> Prendre contact</button>
-              </div>
-            </div>
-          <% end %>
-        </div>
       </div>
     </div>
   </div>

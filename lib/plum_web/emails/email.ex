@@ -45,7 +45,7 @@ defmodule PlumWeb.Email do
     |> to("contact@demainchezmoi.fr")
     |> from({"Alexandre Hervé", "aherve@demainchezmoi.fr"})
     |> subject("Nouveau contact")
-    |> html_body("<div>Nouveau contact : #{params["first_name"]} #{params["last_name"]} - #{params["phone"]}</div>")
-    |> text_body("Nouveau contact : #{params["first_name"]} #{params["last_name"]} - #{params["phone"]}")
+    |> html_body("<div>Nouveau contact : #{params["first_name"]} #{params["last_name"]} - #{params["phone"]} - #{params["email"]}</div>")
+    |> text_body("Nouveau contact : #{params["first_name"]} #{params["last_name"]} - #{params["phone"]} - #{params["email"]}")
   end
 end
