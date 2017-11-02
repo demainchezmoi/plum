@@ -4,6 +4,18 @@
   font-family: "Open Sans";
 }
 
+.mt-resp {
+  @include media-breakpoint-up(xs) { margin-top: 24px; }
+  @include media-breakpoint-up(sm) { margin-top: 48px; }
+  @include media-breakpoint-up(md) { margin-top: 48px; }
+  @include media-breakpoint-up(lg) { margin-top: 64px; }
+  @include media-breakpoint-up(xl) { margin-top: 64px; }
+}
+
+.gray-th {
+  @extend .white-text, .gray-700;
+}
+
 .slight-gray-text {
   color: #5d5d5d;
 }
@@ -64,6 +76,12 @@ p.paragraph {
   background-color: rgba(0, 0, 0, 0.5);
   @extend .d-flex, .justify-content-center, .align-items-center;
   i { font-size: 70px; }
+}
+
+.small-xs {
+  @include media-breakpoint-down(xs) {
+    font-size: small;
+  }
 }
 
 .next-step-footer {
@@ -238,28 +256,47 @@ nav.navbar.translucid {
   text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
 }
 
-body {
+.light-gray {
   background-color: #fafafa;
 }
 
-html, body, main {
-  height: 100%;
-  position: relative;
+body {
+  @extend .light-gray;
 }
 
 .title-1 {
   @extend .h1-responsive, .font-light;
 }
 
+$intro-1-height: (
+  "xs": 100px,
+  "sm": 120px,
+  "md": 150px,
+  "lg": 200px,
+  "xl": 250px
+);
+
 .intro-1 {
   width: 100%;
-  @include media-breakpoint-up(xs) { height: 150px; }
-  @include media-breakpoint-up(sm) { height: 180px; }
-  @include media-breakpoint-up(md) { height: 200px; }
-  @include media-breakpoint-up(lg) { height: 300px; }
-  @include media-breakpoint-up(xl) { height: 400px; }
+  // position: absolute;
+  // top: 0;
+  @include media-breakpoint-up(xs) { height: map-get($intro-1-height, xs); }
+  @include media-breakpoint-up(sm) { height: map-get($intro-1-height, sm); }
+  @include media-breakpoint-up(md) { height: map-get($intro-1-height, md); }
+  @include media-breakpoint-up(lg) { height: map-get($intro-1-height, lg); }
+  @include media-breakpoint-up(xl) { height: map-get($intro-1-height, xl); }
   background: url("https://s3-eu-west-1.amazonaws.com/demainchezmoi/cloudfront_assets/images/pano-ete-jour-min.png") no-repeat center center;
   background-size: cover;
+}
+
+.content-1 {
+  // position: relative;
+  // $offset: 60px;
+  // @include media-breakpoint-up(xs) { top: map-get($intro-1-height, xs) - $offset; }
+  // @include media-breakpoint-up(sm) { top: map-get($intro-1-height, sm) - $offset; }
+  // @include media-breakpoint-up(md) { top: map-get($intro-1-height, md) - $offset; }
+  // @include media-breakpoint-up(lg) { top: map-get($intro-1-height, lg) - $offset; }
+  // @include media-breakpoint-up(xl) { top: map-get($intro-1-height, xl) - $offset; }
 }
 
 .primary-background {
@@ -297,6 +334,9 @@ nav.navbar {
 .gray-text-700 { color: $gray-700; }
 .gray-text-800 { color: $gray-800; }
 .gray-text-900 { color: $gray-900; }
+
+.gray-700 { background-color: $gray-700; }
+.gray-600 { background-color: $gray-600; }
 
 .gray-background {
   background-color: $gray-700;

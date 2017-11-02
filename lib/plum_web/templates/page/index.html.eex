@@ -1,136 +1,143 @@
 <div class="intro-1"></div>
 
-<div class="container mb-5 mt-4">
-  <div class="row justify-content-center align-items-center">
-    <div class="col">
-      <h5 class="h5-responsive mt-4 mb-0 text-center font-black blue-text">Maison&nbsp;Léo&nbsp;</h5>
-      <div class="row justify-content-center">
-        <h1 class="h1-responsive mt-0 text-center font-thin">Une maison pour votre famille</h1>
-      </div>
-      <div style="max-width: 500px;" class="mr-auto ml-auto open-sans gray-text-700 text-center mt-4">
-        <p class="mb-0">Devenez propriétaire d'un T4 pour 87&nbsp;900&nbsp;&euro;</p>
-        <p class="mb-0" style="line-height: 1">-</p>
-        <p class="mb-0">Emménagez dans votre maison et dites adieu aux loyers en moins de huit mois&nbsp;!</p>
-      </div>
-    </div>
-  </div>
-</div>
-
-
-<div class="container">
-  <div class="mx-1">
-    <div class="row mb-5 text-center text-white">
-      <div class="col py-3 blue z-depth-2 my-2">
-        <i class="fa-stack fa-lg">
-          <i class="fa fa-certificate fa-stack-2x"></i>
-          <i class="fa fa-check fa-stack-1x blue-text"></i>
-        </i>
-        <div class="mt-1" style="line-height: 1"><small>Garantie de parfait achèvement</small></div>
-      </div>
-      <div class="col py-3 blue z-depth-3 d-flex align-items-center justify-content-center" style="z-index: 1;">
-				<div>
-        	<i class="fa-stack fa-lg">
-          	<i class="fa fa-certificate fa-stack-2x"></i>
-          	<i class="fa fa-calendar-check-o fa-stack-1x blue-text"></i>
-        	</i>
-        	<div class="mt-1" style="line-height: 1"><small>Construction ultra rapide 4 mois après PC</small></div>
-				</div>
-      </div>
-      <div class="col py-3 blue z-depth-2 my-2">
-        <i class="fa-stack fa-lg">
-          <i class="fa fa-certificate fa-stack-2x"></i>
-          <i class="fa fa-file-text-o fa-stack-1x blue-text"></i>
-        </i>
-        <div class="mt-1" style="line-height: 1"><small>Assurance dommage d'ouvrage</small></div>
+<div class="content-1">
+  <div class="container mb-4 mt-resp">
+    <div class="row justify-content-center align-items-center">
+      <div class="col">
+        <h5 class="h5-responsive my-0 text-center font-black blue-text col-auto light-gray">Maison&nbsp;Léo&nbsp;</h5>
+        <h1 class="h1-responsive mt-0 text-center font-thin">La maison pour votre famille</h1>
+        <div class="mr-auto ml-auto open-sans gray-text-700 text-center mt-4 mb-3">
+          <p class="mb-0 small-xs">Devenez propriétaire d'un T4 moderne pour 87&nbsp;900&nbsp;&euro;</p>
+          <p class="mb-0 small-xs">Emménagez chez vous, sur votre terrain 
+          <p class="mb-0 small-xs">Et dites adieu aux loyers en moins de huit mois&nbsp;!</p>
+        </div>
       </div>
     </div>
   </div>
 
-  <div class="row justify-content-center mb-5">
-    <div class="col-12 col-lg-10">
-			<div class="mb-2">
-      	<p class="pb-1 d-inline font-bold gray-text-700 green-flash-underline">Les caractéristiques de la Maison&nbsp;Léo</p>
-			</div>
-    </div>
-    <div class="col-sm-6 col-lg-5 col-xs-12">
-      <table class="table table-striped table-sm mt-3 open-sans">
-        <tbody>
-          <tr>
-            <th>Surface</th>
-            <td>87&nbsp;m<sup>2</sup></td>
-          </tr>
-          <tr>
-            <th>Surface vitrée</th>
-            <td>16&nbsp;m<sup>2</sup></td>
-          </tr>
-          <tr>
-            <th>Chauffage</th>
-            <td>Pompe à chaleur air air</td>
-          </tr>
-          <tr>
-            <th>Structure</th>
-            <td>Ossature bois</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-    <div class="col-sm-6 col-lg-5 col-xs-12">
-      <table class="table table-striped table-sm mt-3 open-sans">
-        <tbody>
-          <tr>
-            <th>Prix</th>
-            <td>87&nbsp;900&nbsp;&euro;</td>
-          </tr>
-          <tr>
-            <th>Volets</th>
-            <td>Roulants PVC</td>
-          </tr>
-          <tr>
-            <th>Pièces</th>
-            <td>4</td>
-          </tr>
-          <tr>
-            <th>Énergie / GES</th>
-            <td>Classe A / Classe A</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  </div>
 
-  <div class="row align-items-center justify-content-center mb-5">
-    <div class="col-12 col-md-6 col-lg-5">
-      <img class="d-block p-2 img-thumbnail" src="https://s3-eu-west-1.amazonaws.com/demainchezmoi/cloudfront_assets/images/distribution_commercial_maison_leo_sd.png" style="width: 100%">
-    </div>
-    <div class="col-12 col-md-6 col-lg-5">
-      <div class="p-3">
-				<div class="mb-3">
-        	<p class="pb-1 d-inline green-flash-underline font-bold gray-text-800">Un espace de vie pensé avec soin</p>
-				</div>
-        <p class="open-sans gray-text-700 paragraph">Le plan de la Maison Léo est optimal pour vivre ensemble. Ses trois chambres garantissent à chacun un espace au calme, et le séjour cuisine de 48&nbsp;m<sup>2</sup> avec deux grandes baies vitrées vous permet de partager repas et bons films tous ensemble, tout comme de l'air frais et du jardin.</p>
-        <p class="open-sans gray-text-700 paragraph">Laissez-vous tenter par des après-midis balançoire, football, cabane et soirées plancha dans le jardin !</p>
-        </p>
+  <div class="container">
+    <div class="mx-1">
+      <div class="row mb-6 text-center text-white">
+        <div class="col py-3 blue z-depth-2 my-2">
+          <i class="fa-stack fa-2x">
+            <i class="fa fa-certificate fa-stack-2x"></i>
+            <i class="fa fa-check fa-stack-1x blue-text"></i>
+          </i>
+          <div class="mt-1" style="line-height: 1"><span class="small-xs">Garantie de parfait achèvement</span></div>
+        </div>
+        <div class="col py-3 blue z-depth-3 d-flex align-items-center justify-content-center" style="z-index: 1;">
+				  <div>
+        	  <i class="fa-stack fa-2x">
+          	  <i class="fa fa-certificate fa-stack-2x"></i>
+          	  <i class="fa fa-calendar-check-o fa-stack-1x blue-text"></i>
+        	  </i>
+        	  <div class="mt-1" style="line-height: 1"><span class="small-xs">Construction ultra rapide 4 mois après PC</span></div>
+				  </div>
+        </div>
+        <div class="col py-3 blue z-depth-2 my-2">
+          <i class="fa-stack fa-2x">
+            <i class="fa fa-certificate fa-stack-2x"></i>
+            <i class="fa fa-file-text-o fa-stack-1x blue-text"></i>
+          </i>
+          <div class="mt-1" style="line-height: 1"><span class="small-xs">Assurance dommage d'ouvrage</span></div>
+        </div>
       </div>
     </div>
-  </div>
 
-  <div class="row align-items-center justify-content-center mb-5">
-    <div class="col-12 col-md-6 col-lg-5 order-lg-2">
-      <img class="d-block p-2 img-thumbnail" src="https://s3-eu-west-1.amazonaws.com/demainchezmoi/cloudfront_assets/images/ete-jour-nuage-min.png" style="width: 100%">
-    </div>
-    <div class="col-12 col-md-6 col-lg-5">
-      <div class="p-3">
-				<div class="mb-3">
-        	<p class="pb-1 d-inline green-flash-underline font-bold gray-text-800">Un produit qualitatif</p>
-				</div>
-        <p class="open-sans gray-text-700 paragraph">La maison Léo est fabriquée près de chez vous avec des matériaux robustes et des solutions techniques éprouvées. Elle concillie prix compétitif et qualité irréprochable.</p>
-        <p class="open-sans gray-text-700 paragraph">Garantie 0% gadget, elle offre tout le confort moderne&nbsp;: isolation par l'extérieur, prises internet dans chaque pièce, 5m2 de panneaux solaires, ventilation simple flux.</p>
+    <div class="row justify-content-center mb-5">
+      <div class="col-12 col-lg-10">
+			  <div class="mb-2">
+      	  <p class="pb-1 d-inline font-bold gray-text-700 green-flash-underline">Les caractéristiques de la Maison&nbsp;Léo</p>
+			  </div>
+      </div>
+      <div class="col-sm-6 col-lg-5 col-xs-12">
+        <table class="table table-striped mt-3 open-sans">
+          <tbody>
+            <tr>
+              <th class="col-auto text-center gray-th"><i class="fa fa-arrows-alt"></i></th>
+              <th class="col-auto gray-th pl-0">Surface</th>
+              <td class="col">87&nbsp;m<sup>2</sup></td>
+            </tr>
+            <tr>
+              <th class="col-auto text-center gray-th"><i class="fa fa-image"></i></th>
+              <th class="col-auto gray-th pl-0">Surface&nbsp;vitrée</th>
+              <td class="col">16&nbsp;m<sup>2</sup></td>
+            </tr>
+            <tr>
+              <th class="col-auto text-center gray-th"><i class="fa fa-thermometer"></i></th>
+              <th class="col-auto gray-th pl-0">Chauffage</th>
+              <td class="col">Pompe chaleur air / air</td>
+            </tr>
+            <tr>
+              <th class="col-auto text-center gray-th"><i class="fa fa-cube"></i></th>
+              <th class="col-auto gray-th pl-0">Structure</th>
+              <td class="col">Ossature bois</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="col-sm-6 col-lg-5 col-xs-12">
+        <table class="table table-striped mt-3 open-sans">
+          <tbody>
+            <tr>
+              <th class="col-auto text-center gray-th"><i class="fa fa-euro"></i></th>
+              <th class="col-auto gray-th pl-0">Prix</th>
+              <td class="col">87&nbsp;900&nbsp;&euro;</td>
+            </tr>
+            <tr>
+              <th class="col-auto text-center gray-th"><i class="fa fa-clone"></i></th>
+              <th class="col-auto gray-th pl-0"> Volets </th>
+              <td class="col">Roulants&nbsp;PVC</td>
+            </tr>
+            <tr>
+              <th class="col-auto text-center gray-th"><i class="fa fa-cubes"></i></th>
+              <th class="col-auto gray-th pl-0">Pièces</th>
+              <td class="col">4</td>
+            </tr>
+            <tr>
+              <th class="col-auto text-center gray-th"><i class="fa fa-bolt"></i></th>
+              <th class="col-auto gray-th pl-0">Énergie&nbsp;/&nbsp;GES</th>
+              <td class="col">Classes A / A</td>
+            </tr>
+          </tbody>
+        </table>
       </div>
     </div>
-  </div>
 
-  <div class="row align-items-center justify-content-center mb-5">
-    <div class="col-12 col-md-6 col-lg-5">
+    <div class="row align-items-center justify-content-center mb-5">
+      <div class="col-12 col-md-6 col-lg-5">
+        <img class="d-block p-2 img-thumbnail" src="https://s3-eu-west-1.amazonaws.com/demainchezmoi/cloudfront_assets/images/distribution_commercial_maison_leo_sd.png" style="width: 100%">
+      </div>
+      <div class="col-12 col-md-6 col-lg-5">
+        <div class="p-3">
+				  <div class="mb-3">
+        	  <p class="pb-1 d-inline green-flash-underline font-bold gray-text-800">Un espace de vie pensé avec soin</p>
+				  </div>
+          <p class="open-sans gray-text-700 paragraph">Le plan de la Maison Léo est optimal pour vivre ensemble. Ses trois chambres garantissent à chacun un espace au calme, et le séjour cuisine de 48&nbsp;m<sup>2</sup> avec deux grandes baies vitrées vous permet de partager repas et bons films tous ensemble, tout comme de l'air frais et du jardin.</p>
+          <p class="open-sans gray-text-700 paragraph">Laissez-vous tenter par des après-midis balançoire, football, cabane et soirées plancha dans le jardin !</p>
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="row align-items-center justify-content-center mb-5">
+      <div class="col-12 col-md-6 col-lg-5 order-lg-2">
+        <img class="d-block p-2 img-thumbnail" src="https://s3-eu-west-1.amazonaws.com/demainchezmoi/cloudfront_assets/images/ete-jour-nuage-min.png" style="width: 100%">
+      </div>
+      <div class="col-12 col-md-6 col-lg-5">
+        <div class="p-3">
+				  <div class="mb-3">
+        	  <p class="pb-1 d-inline green-flash-underline font-bold gray-text-800">Un produit qualitatif</p>
+				  </div>
+          <p class="open-sans gray-text-700 paragraph">La maison Léo est fabriquée près de chez vous avec des matériaux robustes et des solutions techniques éprouvées. Elle concillie prix compétitif et qualité irréprochable.</p>
+          <p class="open-sans gray-text-700 paragraph">Garantie 0% gadget, elle offre tout le confort moderne&nbsp;: isolation par l'extérieur, prises internet dans chaque pièce, 5m2 de panneaux solaires, ventilation simple flux.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="row align-items-center justify-content-center mb-5">
+      <div class="col-12 col-md-6 col-lg-5">
         <div class="z-depth-1 p-4 white m-1">
           <p class="text-secondary">Contact</p>
           <%= form_for @conn, page_path(@conn, :contact), [as: "contact"], fn f-> %>
@@ -165,42 +172,43 @@
             </div>
           <% end %>
         </div>
-    </div>
-    <div class="col-12 col-md-6 col-lg-5">
-      <div class="p-3">
-				<div class="mb-3">
-        	<p class="pb-1 d-inline green-flash-underline font-bold gray-text-800">Nous sommes à votre disposition</p>
-				</div>
-        <p class="open-sans gray-text-700 paragraph">Nous serions ravis de répondre à toute demande d'information.</p>
-				<p class="open-sans gray-text-700 paragraph">N'hésitez-pas à remplir le formulaire pour que nous vous contactions, ou à nous joindre directement au numéro suivant&nbsp;:</p>
-				<p class="open-sans lead font-bold blue-text">06 63 74 25 35</p>
+      </div>
+      <div class="col-12 col-md-6 col-lg-5">
+        <div class="p-3">
+				  <div class="mb-3">
+        	  <p class="pb-1 d-inline green-flash-underline font-bold gray-text-800">Nous sommes à votre disposition</p>
+				  </div>
+          <p class="open-sans gray-text-700 paragraph">Nous serions ravis de répondre à toute demande d'information.</p>
+				  <p class="open-sans gray-text-700 paragraph">N'hésitez-pas à remplir le formulaire pour que nous vous contactions, ou à nous joindre directement au numéro suivant&nbsp;:</p>
+				  <p class="open-sans lead font-bold blue-text">06 63 74 25 35</p>
+        </div>
       </div>
     </div>
   </div>
-</div>
 
-<footer class="py-5">
-  <div class="container">
-    <div class="row justify-content-center">
-      <div class="col">
-        <dl class="p-1">
-          <dt>Contact</dt>
-          <dd>Email&nbsp;: contact@demainchezmoi.fr <br /> Tél&nbsp;: 06 63 74 25 35</dd>
-          <dt>Editeur</dt>
-          <dd>Demainchezmoi SAS <br />41 rue Laure Diebold <br />69009 Lyon</dd>
-          <dt>Réseaux sociaux</dt>
-          <dd>
-          <a href="https://www.facebook.com/lamaisonleo" target="_blank" class="blue-text">
-            <i class="fa-stack">
-              <i class="fa fa-circle fa-stack-2x"></i>
-              <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
-            </i>
-          </a>
-          </dd>
-        </dl>
-      </div>
-      <div class="col-md-12 col-lg-6">
+  <footer class="py-5">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col">
+          <dl class="p-1">
+            <dt>Contact</dt>
+            <dd>Email&nbsp;: contact@demainchezmoi.fr <br /> Tél&nbsp;: 06 63 74 25 35</dd>
+            <dt>Editeur</dt>
+            <dd>Demainchezmoi SAS <br />41 rue Laure Diebold <br />69009 Lyon</dd>
+            <dt>Réseaux sociaux</dt>
+            <dd>
+            <a href="https://www.facebook.com/lamaisonleo" target="_blank" class="blue-text">
+              <i class="fa-stack">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
+              </i>
+            </a>
+            </dd>
+          </dl>
+        </div>
+        <div class="col-md-12 col-lg-6">
+        </div>
       </div>
     </div>
-  </div>
-</footer>
+  </footer>
+</div>
