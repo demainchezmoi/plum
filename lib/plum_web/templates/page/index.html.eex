@@ -5,13 +5,12 @@
     <div class="col">
       <h5 class="h5-responsive mt-4 mb-0 text-center font-black blue-text">Maison&nbsp;Léo&nbsp;</h5>
       <div class="row justify-content-center">
-        <div class="col-auto">
-          <h1 class="h1-responsive mt-0 text-center font-thin green-flash-underline">Une maison pour votre famille</h1>
-        </div>
+        <h1 class="h1-responsive mt-0 text-center font-thin">Une maison pour votre famille</h1>
       </div>
-      <div style="max-width: 500px; font-weight: 800;" class="mr-auto ml-auto open-sans gray-text-700 text-center mt-4">
+      <div style="max-width: 500px;" class="mr-auto ml-auto open-sans gray-text-700 text-center mt-4">
         <p class="mb-0">Devenez propriétaire d'un T4 pour 87&nbsp;900&nbsp;&euro;</p>
-        <p class="mb-0">Emménagez dans votre maison et dites au revoir aux loyers en moins de huit mois&nbsp;!</p>
+        <p class="mb-0" style="line-height: 1">-</p>
+        <p class="mb-0">Emménagez dans votre maison et dites adieu aux loyers en moins de huit mois&nbsp;!</p>
       </div>
     </div>
   </div>
@@ -117,7 +116,7 @@
 
   <div class="row align-items-center justify-content-center mb-5">
     <div class="col-12 col-md-6 col-lg-5 order-lg-2">
-      <img class="d-block p-2 img-thumbnail" src="https://s3-eu-west-1.amazonaws.com/demainchezmoi/cloudfront_assets/images/maison_21_nuit.jpg" style="width: 100%">
+      <img class="d-block p-2 img-thumbnail" src="https://s3-eu-west-1.amazonaws.com/demainchezmoi/cloudfront_assets/images/ete-jour-nuage-min.png" style="width: 100%">
     </div>
     <div class="col-12 col-md-6 col-lg-5">
       <div class="p-3">
@@ -133,6 +132,7 @@
   <div class="row align-items-center justify-content-center mb-5">
     <div class="col-12 col-md-6 col-lg-5">
         <div class="z-depth-1 p-4 white m-1">
+          <p class="text-secondary">Contact</p>
           <%= form_for @conn, page_path(@conn, :contact), [as: "contact"], fn f-> %>
             <div class="form-group row">
               <label class="col-sm-3 col-form-label">Prénom</label>

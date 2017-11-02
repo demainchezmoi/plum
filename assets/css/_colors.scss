@@ -34,6 +34,23 @@ $green-flash: (
 	"accent-4":rgb(185, 255, 166)
 );
 
+$teal-flash: (
+	"lighten-5": rgb(224, 250, 247),
+	"lighten-4": rgb(179, 242, 236),
+	"lighten-3": rgb(128, 233, 223),
+	"lighten-2": rgb(77, 224, 210),
+	"lighten-1": rgb(38, 218, 201),
+	"base": rgb(0, 211, 191),
+	"darken-1": rgb(0, 206, 185),
+	"darken-2": rgb(0, 200, 177),
+	"darken-3": rgb(0, 194, 169),
+	"darken-4": rgb(0, 183, 155),
+	"accent-1": rgb(224, 255, 250),
+	"accent-2": rgb(173, 255, 240),
+	"accent-3": rgb(122, 255, 231),
+	"accent-4": rgb(97, 255, 227)
+);
+
 $mdb-color: (
   "lighten-5":  #D0D6E2,
   "lighten-4":  #B1BACE,
@@ -367,6 +384,7 @@ $shades: (
 $colors: (
   "yellow-flash": $yellow-flash,
   "green-flash": $green-flash,
+  "teal-flash": $teal-flash,
   "mdb-color": $mdb-color,
   "red": $red,
   "pink": $pink,
@@ -941,12 +959,13 @@ $material-colors: (
     "light-blue": map-get($blue, accent-1),
     "cyan": map-get($cyan, base),
     "teal": map-get($teal, darken-2),
+    "teal-flash": map-get($teal-flash, darken-2),
     "green": map-get($green, darken-2),
+    "green-flash": map-get($green-flash, darken-2),
     "light-green": map-get($light-green, base),
     "lime": map-get($lime, darken-2),
     "yellow": map-get($yellow, darken-2),
     "yellow-flash": map-get($yellow-flash, darken-2),
-    "green-flash": map-get($green-flash, darken-2),
     "amber": map-get($amber, darken-2),
     "orange": map-get($orange, darken-2),
     "deep-orange": map-get($deep-orange, lighten-1),
