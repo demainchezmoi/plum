@@ -4,6 +4,13 @@
   font-family: "Open Sans";
 }
 
+.logo-svg {
+  width: 35px;
+  height: 35px;
+  & g { stroke-width: 6px; }
+  @extend .m-1;
+}
+
 .mt-resp {
   @include media-breakpoint-up(xs) { margin-top: 24px; }
   @include media-breakpoint-up(sm) { margin-top: 48px; }

@@ -4,7 +4,12 @@
   <div class="container mb-4 mt-resp">
     <div class="row justify-content-center align-items-center">
       <div class="col">
-        <h5 class="h5-responsive my-0 text-center font-black blue-text col-auto light-gray">Maison&nbsp;Léo&nbsp;</h5>
+        <h5 class="h5-responsive my-0 font-black blue-text col-auto d-flex justify-content-center">
+          <div class="d-flex justify-content-center align-items-center">
+            <%= PhoenixInlineSvg.Helpers.svg_image(@conn, "logo") %>
+            Maison&nbsp;Léo&nbsp;
+          </div>
+        </h5>
         <h1 class="h1-responsive mt-0 text-center font-thin">La maison pour votre famille</h1>
         <div class="mr-auto ml-auto open-sans gray-text-700 text-center mt-4 mb-3">
           <p class="mb-0 small-xs">Devenez propriétaire d'un T4 moderne pour 87&nbsp;900&nbsp;&euro;</p>
