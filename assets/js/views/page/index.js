@@ -36,7 +36,7 @@ module.exports = class View extends MainView {
     const next = this.techImgs[nextIndex]
     this.setTechImg(next);
     if (this.techHandToggled == false) {
-      this.techImgTimeout = setTimeout(this.switchTechImg, 2000);
+      this.techImgTimeout = setTimeout(this.switchTechImg, 3000);
     }
   }
 
