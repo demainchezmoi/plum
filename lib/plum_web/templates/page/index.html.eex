@@ -4,7 +4,7 @@
 
 
 <div class="content-1">
-  <div class="container mb-4 mt-resp">
+  <div class="container mb-5 mt-resp">
     <div class="row justify-content-center align-items-center">
       <div class="col">
         <h3 class="h3-responsive my-0 font-black blue-text col-auto d-flex justify-content-center">
@@ -13,9 +13,9 @@
             Maison&nbsp;Léo&nbsp;
           </div>
         </h3>
-        <h1 class="h1-responsive mt-0 text-center font-thin">La maison pour votre famille</h1>
+        <h1 class="h1-responsive mt-0 text-center font-thin mb-4">Votre maison familiale</h1>
         <div class="mr-auto ml-auto open-sans gray-text-700 text-center mt-4 mb-3" style="max-width: 500px;">
-          <p class="mb-0 small-xs">Faites construire votre T4 moderne pour 87&nbsp;900&nbsp;&euro; et dites adieu aux loyers en moins de huit mois.</p>
+          <p class="mb-0 small-xs">Faites construire votre T4 moderne pour 87&nbsp;900&nbsp;&euro;. Emménagez et dites adieu aux loyers en moins de huit mois.</p>
         </div>
       </div>
     </div>
@@ -24,15 +24,15 @@
 
   <div class="container">
     <div class="mx-1">
-      <div class="row mb-6 text-center text-white">
-        <div class="col py-3 blue z-depth-1-half my-2">
+      <div class="row mb-spacer text-center text-white">
+        <div class="col py-2 blue z-depth-1-half my-2">
           <i class="fa-stack fa-2x">
             <i class="fa fa-square fa-stack-2x"></i>
             <i class="fa fa-thumbs-up fa-stack-1x blue-text"></i>
           </i>
           <div class="mt-1" style="line-height: 1"><span class="small-xs">Garantie de parfait achèvement</span></div>
         </div>
-        <div class="col py-3 blue z-depth-2 d-flex align-items-center justify-content-center" style="z-index: 1;">
+        <div class="col py-2 blue z-depth-2 d-flex align-items-center justify-content-center" style="z-index: 1;">
 				  <div>
         	  <i class="fa-stack fa-2x">
           	  <i class="fa fa-square fa-stack-2x"></i>
@@ -41,7 +41,7 @@
         	  <div class="mt-1" style="line-height: 1"><span class="small-xs">Construction ultra rapide 4 mois après PC</span></div>
 				  </div>
         </div>
-        <div class="col py-3 blue z-depth-1-half my-2">
+        <div class="col py-2 blue z-depth-1-half my-2">
           <i class="fa-stack fa-2x">
             <i class="fa fa-square fa-stack-2x"></i>
             <i class="fa fa-file-text-o fa-stack-1x blue-text"></i>
@@ -51,22 +51,29 @@
       </div>
     </div>
 
-    <div class="row align-items-center justify-content-center mb-6">
-      <div class="col col-lg-6 col-md-6 col-sm-8">
-        <p class="font-bold gray-text-800 text-center">Qu'est-ce que la Maison&nbsp;Léo ?</p>
-        <p class="open-sans gray-text-700 paragraph text-center">
-        </p>
+    <div class="row align-items-center justify-content-center mb-spacer">
+      <div class="col col-lg-8 col-md-10 col-sm-10">
+        <div class="media">
+          <img class="mr-3 rounded-circle z-depth-1 responsive-avatar" src="https://media-exp1.licdn.com/media/AAEAAQAAAAAAAAo7AAAAJGY2ZGQ1NDMyLWI0YTctNDQ4MC05NTVhLTQwM2U1ODc4MWU0Nw.jpg" alt="">
+          <div class="media-body text-justify">
+            <p class="font-bold gray-text-799">La Maison&nbsp;Léo&nbsp;: un concept fort pour une maison de choix.</p>
+            <p class="open-sans gray-text-700 paragraph">Contrairement aux autres maisons, la Maison&nbsp;Léo n'est pas une maison sur mesure&nbsp;: elle dispose d'un plan unique, optimisé pour la vie familiale.</p>
+            <p class="open-sans gray-text-700 paragraph">Ce choix fort fournit le double avantage de réduire les coûts de fabrication de la maison et d'en augmenter la qualité. Parce que moins de changements conduisent à moins d'erreurs, et parce que les économies sur la fabrication nous permettent d'investir dans des matériaux de qualité supérieure, la Maison&nbsp;Léo propose un rapport qualité prix au-delà de toute concurrence.</p>
+            <p class="open-sans gray-text-700 paragraph">Je vous propose de découvrir votre Maison&nbsp;Léo. À vous de jouer&nbsp;!</p>
+            <p class="open-sans gray-text-700 paragraph text-right mb-0">Xavier Jaffray</p>
+          </div>
+        </div>
       </div>
     </div>
 
 
     <div class="row justify-content-center">
-      <div class="col-12 col-lg-8">
+      <div class="col-12">
       	<p class="font-bold gray-text-700">Les caractéristiques de votre Maison&nbsp;Léo</p>
       </div>
     </div>
-    <div class="row justify-content-center mb-6">
-      <div class="col-sm-6 col-lg-4 col-xs-12">
+    <div class="row justify-content-center mb-spacer">
+      <div class="col-sm-6 col-lg-6 col-xs-12">
         <table class="table table-striped mt-3 open-sans z-depth-1">
           <tbody>
             <tr>
@@ -92,7 +99,7 @@
           </tbody>
         </table>
       </div>
-      <div class="col-sm-6 col-lg-4 col-xs-12">
+      <div class="col-sm-6 col-lg-6 col-xs-12">
         <table class="table table-striped mt-3 open-sans z-depth-1">
           <tbody>
             <tr>
@@ -120,8 +127,8 @@
       </div>
     </div>
 
-    <div class="row align-items-center justify-content-center mb-6">
-      <div class="col-12 col-md-5 col-lg-4">
+    <div class="row align-items-center justify-content-center mb-spacer">
+      <div class="col-12 col-md-5 col-lg-5">
         <div class="p-3">
         	<p class="font-bold gray-text-800">Un espace optimisé pour vivre ensemble</p>
           <p class="open-sans gray-text-700 paragraph">Les trois chambres de votre Maison&nbsp;Léo garantissent à chacun un espace au calme, et le séjour cuisine de 48&nbsp;m<sup>2</sup> avec deux grandes baies vitrées vous permet de partager repas et bons films tous ensemble, ainsi que lumière et air frais.</p>
@@ -139,10 +146,10 @@
 
     </div>
 
-    <div class="row align-items-center justify-content-center mb-6">
-      <div class="col-12 col-md-5 col-lg-4 order-lg-2 order-md-2">
+    <div class="row align-items-center justify-content-center mb-spacer">
+      <div class="col-12 col-md-5 col-lg-5 order-lg-2 order-md-2">
         <div class="p-3">
-        	<p class="font-bold gray-text-800">Un produit de qualité <span class="open-sans">++</span></p>
+        	<p class="font-bold gray-text-800">Une exigeance de qualité</p>
           <p class="open-sans gray-text-700 paragraph">La maison Léo est fabriquée près de chez vous avec des matériaux robustes et des solutions techniques éprouvées pour concillier prix compétitif et qualité irréprochable.</p>
           <p class="open-sans gray-text-700 paragraph">Garantie 0% gadget, elle offre tout le confort moderne&nbsp;: isolation par l'extérieur, prises internet dans chaque pièce, 5m2 de panneaux solaires, ventilation simple flux.</p>
         </div>
@@ -155,12 +162,12 @@
       </div>
     </div>
 
-    <div class="row justify-content-center align-items-center mb-6">
+    <div class="row justify-content-center align-items-center mb-spacer">
       <div class="col mb-2">
         <div class="p-3">
-          <p class="font-bold gray-text-800">Tout savoir sur la Maison</p>
-          <p class="open-sans gray-text-700 paragraph">La Maison&nbsp;Léo est garantie sans mauvaise surprise. Structures et réseaux de votre maison sont définis à l'avance et optimisés pour assurer une qualité optimale en rédusant les coûts.</p>
-          <p class="open-sans gray-text-700 paragraph">Voyez par vous-même&nbsp;!</p>
+          <p class="font-bold gray-text-800">Découvrez votre maison aux rayons X</p>
+          <p class="open-sans gray-text-700 paragraph">La Maison&nbsp;Léo est garantie sans mauvaise surprise. Structures et réseaux sont optimisés pour assurer une qualité de fonctionnement optimale et une maîtrise des coûts.</p>
+          <p class="open-sans gray-text-700 paragraph">Découvrez les entrailles techniques de votre maison&nbsp;!</p>
         </div>
         <ul class="list-group list-group-inline">
           <li class="list-group-item cp active" data-action="change-tech-image" data-target="elec1">Prises électriques</li>
@@ -194,12 +201,12 @@
       </div>
     </div>
 
-    <div class="row align-items-center justify-content-center mb-6">
+    <div class="row align-items-center justify-content-center mb-spacer">
       <div class="col-12 col-md-6 col-lg-5 order-lg-2 order-md-2">
         <div class="p-3">
-        	<p class="font-bold gray-text-800">Prenez contact</p>
-          <p class="open-sans gray-text-700 paragraph">Nous serions ravis de répondre à toute demande d'information.</p>
-				  <p class="open-sans gray-text-700 paragraph">N'hésitez-pas à remplir le formulaire pour que nous vous contactions, ou à nous joindre directement au numéro suivant&nbsp;:</p>
+        	<p class="font-bold gray-text-800">Prenons contact</p>
+          <p class="open-sans gray-text-700 paragraph">Nous serions ravis de répondre à toute demande de renseignement ou suggestion.</p>
+				  <p class="open-sans gray-text-700 paragraph">N'hésitez-pas à remplir le formulaire ou à nous joindre au numéro suivant&nbsp;:</p>
 				  <p class="open-sans lead font-bold blue-text">06 63 74 25 35</p>
         </div>
       </div>

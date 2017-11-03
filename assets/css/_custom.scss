@@ -4,6 +4,12 @@
   font-family: "Open Sans";
 }
 
+.responsive-avatar {
+  @include media-breakpoint-up(xs) { width: 50px; }
+  @include media-breakpoint-up(sm) { width: 70px; }
+  @include media-breakpoint-up(lg) { width: 85px; }
+}
+
 button.img-modal-close {
   $width: 25px;
   opacity: 0.88;
@@ -51,14 +57,6 @@ img.flip {
   top: 0; right: 0; left: 0; bottom: 0;
   height: 100%;
   width: 100%;
-}
-
-.mt-resp {
-  @include media-breakpoint-up(xs) { margin-top: -15px; }
-  @include media-breakpoint-up(sm) { margin-top: -15px; }
-  @include media-breakpoint-up(md) { margin-top: -20px; }
-  @include media-breakpoint-up(lg) { margin-top: -30px; }
-  @include media-breakpoint-up(xl) { margin-top: -30px; }
 }
 
 .gray-th {
@@ -318,12 +316,20 @@ body {
 }
 
 $intro-1-height: (
-  "xs": 150px,
-  "sm": 150px,
-  "md": 200px,
-  "lg": 250px,
-  "xl": 350px
+  "xs": 200px,
+  "sm": 250px,
+  "md": 300px,
+  "lg": 400px,
+  "xl": 450px
 );
+
+.mb-spacer {
+  @include media-breakpoint-up(xs) { margin-bottom: 4rem; }
+  @include media-breakpoint-up(sm) { margin-bottom: 4rem; }
+  @include media-breakpoint-up(md) { margin-bottom: 5rem; }
+  @include media-breakpoint-up(lg) { margin-bottom: 6rem; }
+  @include media-breakpoint-up(xl) { margin-bottom: 7rem; }
+}
 
 .intro-1 {
   width: 100%;
@@ -338,14 +344,12 @@ $intro-1-height: (
   background-size: cover;
 }
 
-.content-1 {
-  // position: relative;
-  // $offset: 60px;
-  // @include media-breakpoint-up(xs) { top: map-get($intro-1-height, xs) - $offset; }
-  // @include media-breakpoint-up(sm) { top: map-get($intro-1-height, sm) - $offset; }
-  // @include media-breakpoint-up(md) { top: map-get($intro-1-height, md) - $offset; }
-  // @include media-breakpoint-up(lg) { top: map-get($intro-1-height, lg) - $offset; }
-  // @include media-breakpoint-up(xl) { top: map-get($intro-1-height, xl) - $offset; }
+.mt-resp {
+  @include media-breakpoint-up(xs) { margin-top: - map-get($intro-1-height, xs) / 6; }
+  @include media-breakpoint-up(sm) { margin-top: - map-get($intro-1-height, sm) / 6; }
+  @include media-breakpoint-up(md) { margin-top: - map-get($intro-1-height, md) / 6; }
+  @include media-breakpoint-up(lg) { margin-top: - map-get($intro-1-height, lg) / 6; }
+  @include media-breakpoint-up(xl) { margin-top: - map-get($intro-1-height, xl) / 6; }
 }
 
 .ellipse-svg {
@@ -373,6 +377,36 @@ $intro-1-height: (
   @include media-breakpoint-up(xl) {
     $shift: map-get($intro-1-height, xl) / 1.95;
     bottom: - $shift / 2;
+    height: $shift;
+  }
+}
+
+.triangle-svg {
+  width: 100%;
+  position: absolute;
+	bottom: 0;
+  & polygon { fill: #fafafa; }
+  @include media-breakpoint-up(xs) {
+    // bottom: - map-get($intro-1-height, xs) / 4;
+    height: map-get($intro-1-height, xs) / 2;
+  }
+  @include media-breakpoint-up(sm) {
+    // bottom: - map-get($intro-1-height, sm) / 4;
+    height: map-get($intro-1-height, sm) / 2;
+  }
+  @include media-breakpoint-up(md) {
+    $shift: map-get($intro-1-height, md) / 2;
+    // bottom: - $shift / 2;
+    height: $shift;
+  }
+  @include media-breakpoint-up(lg) {
+    $shift: map-get($intro-1-height, lg) / 1.95;
+    // bottom: - $shift / 2;
+    height: $shift;
+  }
+  @include media-breakpoint-up(xl) {
+    $shift: map-get($intro-1-height, xl) / 1.95;
+    // bottom: - $shift / 2;
     height: $shift;
   }
 }
