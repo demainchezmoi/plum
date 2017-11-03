@@ -54,11 +54,11 @@ img.flip {
 }
 
 .mt-resp {
-  // @include media-breakpoint-up(xs) { margin-top: 24px; }
-  // @include media-breakpoint-up(sm) { margin-top: 48px; }
-  // @include media-breakpoint-up(md) { margin-top: 48px; }
-  // @include media-breakpoint-up(lg) { margin-top: 64px; }
-  // @include media-breakpoint-up(xl) { margin-top: 64px; }
+  @include media-breakpoint-up(xs) { margin-top: -15px; }
+  @include media-breakpoint-up(sm) { margin-top: -15px; }
+  @include media-breakpoint-up(md) { margin-top: -20px; }
+  @include media-breakpoint-up(lg) { margin-top: -30px; }
+  @include media-breakpoint-up(xl) { margin-top: -30px; }
 }
 
 .gray-th {
@@ -322,12 +322,13 @@ $intro-1-height: (
   "sm": 150px,
   "md": 200px,
   "lg": 250px,
-  "xl": 300px
+  "xl": 350px
 );
 
 .intro-1 {
   width: 100%;
   position: relative;
+  @extend .d-flex, .justify-content-center;
   @include media-breakpoint-up(xs) { height: map-get($intro-1-height, xs); }
   @include media-breakpoint-up(sm) { height: map-get($intro-1-height, sm); }
   @include media-breakpoint-up(md) { height: map-get($intro-1-height, md); }
@@ -352,24 +353,27 @@ $intro-1-height: (
   position: absolute;
   & ellipse { fill: #fafafa; }
   @include media-breakpoint-up(xs) {
-    bottom: - map-get($intro-1-height, xs) / 4 !important;
-    height: map-get($intro-1-height, xs) / 2 !important;
+    bottom: - map-get($intro-1-height, xs) / 4;
+    height: map-get($intro-1-height, xs) / 2;
   }
   @include media-breakpoint-up(sm) {
     bottom: - map-get($intro-1-height, sm) / 4;
     height: map-get($intro-1-height, sm) / 2;
   }
   @include media-breakpoint-up(md) {
-    bottom: - map-get($intro-1-height, md) / 4;
-    height: map-get($intro-1-height, md) / 2;
+    $shift: map-get($intro-1-height, md) / 2;
+    bottom: - $shift / 2;
+    height: $shift;
   }
   @include media-breakpoint-up(lg) {
-    bottom: - map-get($intro-1-height, lg) / 4;
-    height: map-get($intro-1-height, lg) / 2;
+    $shift: map-get($intro-1-height, lg) / 1.95;
+    bottom: - $shift / 2;
+    height: $shift;
   }
   @include media-breakpoint-up(xl) {
-    bottom: - map-get($intro-1-height, xl) / 4;
-    height: map-get($intro-1-height, xl) / 2;
+    $shift: map-get($intro-1-height, xl) / 1.95;
+    bottom: - $shift / 2;
+    height: $shift;
   }
 }
 

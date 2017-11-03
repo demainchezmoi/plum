@@ -13,7 +13,7 @@
             Maison&nbsp;Léo&nbsp;
           </div>
         </h3>
-        <h1 class="h1-responsive mt-0 text-center font-thin">La maison pour la famille</h1>
+        <h1 class="h1-responsive mt-0 text-center font-thin">La maison pour votre famille</h1>
         <div class="mr-auto ml-auto open-sans gray-text-700 text-center mt-4 mb-3" style="max-width: 500px;">
           <p class="mb-0 small-xs">Faites construire votre T4 moderne pour 87&nbsp;900&nbsp;&euro; et dites adieu aux loyers en moins de huit mois.</p>
         </div>
@@ -142,7 +142,7 @@
     <div class="row align-items-center justify-content-center mb-6">
       <div class="col-12 col-md-5 col-lg-4 order-lg-2 order-md-2">
         <div class="p-3">
-        	<p class="font-bold gray-text-800">Un produit de qualité</p>
+        	<p class="font-bold gray-text-800">Un produit de qualité <span class="open-sans">++</span></p>
           <p class="open-sans gray-text-700 paragraph">La maison Léo est fabriquée près de chez vous avec des matériaux robustes et des solutions techniques éprouvées pour concillier prix compétitif et qualité irréprochable.</p>
           <p class="open-sans gray-text-700 paragraph">Garantie 0% gadget, elle offre tout le confort moderne&nbsp;: isolation par l'extérieur, prises internet dans chaque pièce, 5m2 de panneaux solaires, ventilation simple flux.</p>
         </div>
@@ -160,6 +160,7 @@
         <div class="p-3">
           <p class="font-bold gray-text-800">Tout savoir sur la Maison</p>
           <p class="open-sans gray-text-700 paragraph">La Maison&nbsp;Léo est garantie sans mauvaise surprise. Structures et réseaux de votre maison sont définis à l'avance et optimisés pour assurer une qualité optimale en rédusant les coûts.</p>
+          <p class="open-sans gray-text-700 paragraph">Voyez par vous-même&nbsp;!</p>
         </div>
         <ul class="list-group list-group-inline">
           <li class="list-group-item cp active" data-action="change-tech-image" data-target="elec1">Prises électriques</li>
