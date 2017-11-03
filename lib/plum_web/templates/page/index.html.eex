@@ -1,4 +1,7 @@
-<div class="intro-1"></div>
+<div class="intro-1">
+  <%= PhoenixInlineSvg.Helpers.svg_image(@conn, "ellipse") %>
+</div>
+
 
 <div class="content-1">
   <div class="container mb-4 mt-resp">
@@ -48,6 +51,15 @@
       </div>
     </div>
 
+    <div class="row align-items-center justify-content-center mb-6">
+      <div class="col col-lg-6 col-md-6 col-sm-8">
+        <p class="font-bold gray-text-800 text-center">Qu'est-ce que la Maison&nbsp;Léo ?</p>
+        <p class="open-sans gray-text-700 paragraph text-center">
+        </p>
+      </div>
+    </div>
+
+
     <div class="row justify-content-center">
       <div class="col-12 col-lg-8">
       	<p class="font-bold gray-text-700">Les caractéristiques de votre Maison&nbsp;Léo</p>
@@ -84,7 +96,7 @@
         <table class="table table-striped mt-3 open-sans z-depth-1">
           <tbody>
             <tr>
-              <th class="col-auto text-center gray-th"><i class="fa fa-euro"></i></th>
+              <th class="col-auto text-center gray-th"><i class="fa fa-money"></i></th>
               <th class="col-auto gray-th pl-0">Prix</th>
               <td class="col">87&nbsp;900&nbsp;&euro;</td>
             </tr>
@@ -99,7 +111,7 @@
               <td class="col">4</td>
             </tr>
             <tr>
-              <th class="col-auto text-center gray-th"><i class="fa fa-bolt"></i></th>
+              <th class="col-auto text-center gray-th"><i class="fa fa-fire"></i></th>
               <th class="col-auto gray-th pl-0">Énergie&nbsp;/&nbsp;GES</th>
               <td class="col">Classes A / A</td>
             </tr>
@@ -109,7 +121,7 @@
     </div>
 
     <div class="row align-items-center justify-content-center mb-6">
-      <div class="col-12 col-md-6 col-lg-4">
+      <div class="col-12 col-md-5 col-lg-4">
         <div class="p-3">
         	<p class="font-bold gray-text-800">Un espace optimisé pour vivre ensemble</p>
           <p class="open-sans gray-text-700 paragraph">Les trois chambres de votre Maison&nbsp;Léo garantissent à chacun un espace au calme, et le séjour cuisine de 48&nbsp;m<sup>2</sup> avec deux grandes baies vitrées vous permet de partager repas et bons films tous ensemble, ainsi que lumière et air frais.</p>
@@ -118,111 +130,68 @@
         </div>
       </div>
 
-      <div class="col-12 col-md-6 col-lg-6">
+      <div class="col-12 col-md-7 col-lg-7">
         <img
-           data-toggle="modal"
-           data-target="#img1Modal"
-           class="cp z-depth-1 d-block p-2"
+           class="z-depth-1 d-block p-2"
            src="https://s3-eu-west-1.amazonaws.com/demainchezmoi/cloudfront_assets/images/distribution_commercial_maison_leo_sd.png"
            style="width: 100%">
-
-        <div class="modal" tabindex="-1" role="dialog" id="img1Modal">
-          <div class="modal-dialog modal-lg" role="document">
-            <div class="container">
-              <div class="row">
-                <div class="col">
-                  <div class="modal-content">
-                    <button type="button" class="close img-modal-close d-flex justify-content-center align-items-center" data-dismiss="modal" aria-label="Close">
-                      <span aria-hidden="true">&times;</span>
-                    </button>
-                    <img
-                       class="d-block img-fluid"
-                       src="https://s3-eu-west-1.amazonaws.com/demainchezmoi/cloudfront_assets/images/distribution_commercial_maison_leo_sd.png"
-                       style="width: 100%">
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
       </div>
 
     </div>
 
     <div class="row align-items-center justify-content-center mb-6">
-      <div class="col-12 col-md-6 col-lg-4 order-lg-2 order-md-2">
+      <div class="col-12 col-md-5 col-lg-4 order-lg-2 order-md-2">
         <div class="p-3">
         	<p class="font-bold gray-text-800">Un produit de qualité</p>
           <p class="open-sans gray-text-700 paragraph">La maison Léo est fabriquée près de chez vous avec des matériaux robustes et des solutions techniques éprouvées pour concillier prix compétitif et qualité irréprochable.</p>
           <p class="open-sans gray-text-700 paragraph">Garantie 0% gadget, elle offre tout le confort moderne&nbsp;: isolation par l'extérieur, prises internet dans chaque pièce, 5m2 de panneaux solaires, ventilation simple flux.</p>
         </div>
       </div>
-      <div class="col-12 col-md-6 col-lg-6">
+      <div class="col-12 col-md-7 col-lg-7">
         <img
-           data-toggle="modal"
-           data-target="#img2Modal"
-           class="cp z-depth-1 d-block p-2"
+           class="z-depth-1 d-block p-2"
            src="https://s3-eu-west-1.amazonaws.com/demainchezmoi/cloudfront_assets/images/ete-jour-nuage-min.png"
            style="width: 100%">
-        <div class="modal" tabindex="-1" role="dialog" id="img2Modal">
-          <div class="modal-dialog modal-lg" role="document">
-            <div class="container">
-              <div class="row">
-                <div class="col">
-                  <div class="modal-content">
-                    <button type="button" class="close img-modal-close d-flex justify-content-center align-items-center" data-dismiss="modal" aria-label="Close">
-                      <span aria-hidden="true">&times;</span>
-                    </button>
-                    <img
-                       class="d-block img-fluid flip"
-                       src="https://s3-eu-west-1.amazonaws.com/demainchezmoi/cloudfront_assets/images/ete-jour-nuage-min.png"
-                       style="width: 100%">
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
       </div>
     </div>
 
-      <div class="row justify-content-center align-items-center mb-6">
-        <div class="col mb-2">
+    <div class="row justify-content-center align-items-center mb-6">
+      <div class="col mb-2">
         <div class="p-3">
-          <p class="font-bold gray-text-800">Visualisez les réseaux</p>
+          <p class="font-bold gray-text-800">Tout savoir sur la Maison</p>
           <p class="open-sans gray-text-700 paragraph">La Maison&nbsp;Léo est garantie sans mauvaise surprise. Structures et réseaux de votre maison sont définis à l'avance et optimisés pour assurer une qualité optimale en rédusant les coûts.</p>
         </div>
         <ul class="list-group list-group-inline">
           <li class="list-group-item cp active" data-action="change-tech-image" data-target="elec1">Prises électriques</li>
           <li class="list-group-item cp" data-action="change-tech-image" data-target="elec3">Éclairages et interrupteurs</li>
-          <li class="list-group-item cp" data-action="change-tech-image" data-target="elec4">Système d'aération</li>
+          <li class="list-group-item cp" data-action="change-tech-image" data-target="elec4">Système de ventilation</li>
         </ul>
-        </div>
-        <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12">
-          <div class="relative d-block">
-            <div class="z-depth-1">
-              <img
-                 class="img-fluid w-100"
-                 data-role="tech-img"
-                 data-value="elec1"
-                 style="display: none"
-                 src="https://s3-eu-west-1.amazonaws.com/demainchezmoi/cloudfront_assets/images/elec_1-min.png">
-              <img
-                 class="img-fluid w-100"
-                 data-role="tech-img"
-                 data-value="elec3"
-                 style="display: none"
-                 src="https://s3-eu-west-1.amazonaws.com/demainchezmoi/cloudfront_assets/images/elec_3-min.png">
-              <img
-                 class="img-fluid w-100"
-                 data-role="tech-img"
-                 data-value="elec4"
-                 style="display: none"
-                 src="https://s3-eu-west-1.amazonaws.com/demainchezmoi/cloudfront_assets/images/elec_4-min.png">
-            </div>
+      </div>
+      <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12">
+        <div class="relative d-block">
+          <div class="z-depth-1">
+            <img
+               class="img-fluid w-100"
+               data-role="tech-img"
+               data-value="elec1"
+               style="display: none"
+               src="https://s3-eu-west-1.amazonaws.com/demainchezmoi/cloudfront_assets/images/elec_1-min.png">
+            <img
+               class="img-fluid w-100"
+               data-role="tech-img"
+               data-value="elec3"
+               style="display: none"
+               src="https://s3-eu-west-1.amazonaws.com/demainchezmoi/cloudfront_assets/images/elec_3-min.png">
+            <img
+               class="img-fluid w-100"
+               data-role="tech-img"
+               data-value="elec4"
+               style="display: none"
+               src="https://s3-eu-west-1.amazonaws.com/demainchezmoi/cloudfront_assets/images/elec_4-min.png">
           </div>
         </div>
       </div>
+    </div>
 
     <div class="row align-items-center justify-content-center mb-6">
       <div class="col-12 col-md-6 col-lg-5 order-lg-2 order-md-2">
@@ -269,7 +238,6 @@
           <% end %>
         </div>
       </div>
-
     </div>
   </div>
 
@@ -299,4 +267,3 @@
     </div>
   </footer>
 </div>
-

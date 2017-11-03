@@ -6,8 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
+    <meta name="google-site-verification" content="lAglJoUYSBB4sKtd6nWcHbvYwtkh4UqvcPGS7X2Tr3k" />
 
-    <title>Maisons Léo</title>
+    <title>Maison Léo - Maison individuelle pour la famille</title>
     <link rel="stylesheet" href="<%= static_path(@conn, "/css/app.css") %>">
 
 		<!-- Facebook Pixel Code -->

@@ -54,11 +54,11 @@ img.flip {
 }
 
 .mt-resp {
-  @include media-breakpoint-up(xs) { margin-top: 24px; }
-  @include media-breakpoint-up(sm) { margin-top: 48px; }
-  @include media-breakpoint-up(md) { margin-top: 48px; }
-  @include media-breakpoint-up(lg) { margin-top: 64px; }
-  @include media-breakpoint-up(xl) { margin-top: 64px; }
+  // @include media-breakpoint-up(xs) { margin-top: 24px; }
+  // @include media-breakpoint-up(sm) { margin-top: 48px; }
+  // @include media-breakpoint-up(md) { margin-top: 48px; }
+  // @include media-breakpoint-up(lg) { margin-top: 64px; }
+  // @include media-breakpoint-up(xl) { margin-top: 64px; }
 }
 
 .gray-th {
@@ -318,17 +318,16 @@ body {
 }
 
 $intro-1-height: (
-  "xs": 100px,
-  "sm": 120px,
-  "md": 150px,
-  "lg": 200px,
-  "xl": 200px
+  "xs": 150px,
+  "sm": 150px,
+  "md": 200px,
+  "lg": 250px,
+  "xl": 300px
 );
 
 .intro-1 {
   width: 100%;
-  // position: absolute;
-  // top: 0;
+  position: relative;
   @include media-breakpoint-up(xs) { height: map-get($intro-1-height, xs); }
   @include media-breakpoint-up(sm) { height: map-get($intro-1-height, sm); }
   @include media-breakpoint-up(md) { height: map-get($intro-1-height, md); }
@@ -347,6 +346,33 @@ $intro-1-height: (
   // @include media-breakpoint-up(lg) { top: map-get($intro-1-height, lg) - $offset; }
   // @include media-breakpoint-up(xl) { top: map-get($intro-1-height, xl) - $offset; }
 }
+
+.ellipse-svg {
+  width: 100%;
+  position: absolute;
+  & ellipse { fill: #fafafa; }
+  @include media-breakpoint-up(xs) {
+    bottom: - map-get($intro-1-height, xs) / 4 !important;
+    height: map-get($intro-1-height, xs) / 2 !important;
+  }
+  @include media-breakpoint-up(sm) {
+    bottom: - map-get($intro-1-height, sm) / 4;
+    height: map-get($intro-1-height, sm) / 2;
+  }
+  @include media-breakpoint-up(md) {
+    bottom: - map-get($intro-1-height, md) / 4;
+    height: map-get($intro-1-height, md) / 2;
+  }
+  @include media-breakpoint-up(lg) {
+    bottom: - map-get($intro-1-height, lg) / 4;
+    height: map-get($intro-1-height, lg) / 2;
+  }
+  @include media-breakpoint-up(xl) {
+    bottom: - map-get($intro-1-height, xl) / 4;
+    height: map-get($intro-1-height, xl) / 2;
+  }
+}
+
 
 .primary-background {
   background-color: #007bff;
