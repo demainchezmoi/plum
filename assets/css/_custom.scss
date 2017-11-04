@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css?family=Open+Sans:400,800');
 
 $intro-1-height: (
-  "xs": 200px,
+  "xs": 250px,
   "sm": 250px,
   "md": 300px,
   "lg": 400px,
@@ -42,13 +42,16 @@ button.img-modal-close {
   border-radius: 0 !important;
 }
 
-.absolute {
-  position: absolute;
+.navbar.fixed {
+  top: 0;
+  right: 0;
+  left: 0;
+  z-index: 10;
 }
 
-.relative {
-  position: relative;
-}
+.fixed { position: fixed; }
+.absolute { position: absolute; }
+.relative { position: relative; }
 
 .hide {
   display: none !important;
@@ -64,8 +67,8 @@ img.flip {
 }
 
 .logo-svg {
-  width: 35px;
-  height: 35px;
+  width: 30px;
+  height: 30px;
   & g { stroke-width: 6px; }
   @extend .m-1;
 }

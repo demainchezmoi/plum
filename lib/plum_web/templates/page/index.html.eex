@@ -1,7 +1,41 @@
+<!--Navbar-->
+<nav class="navbar navbar-expand-lg navbar-dark indigo fixed">
+
+  <!-- Navbar brand -->
+  <a class="navbar-brand d-flex justify-content-center align-items-center small-xs" href="#">
+    <%= PhoenixInlineSvg.Helpers.svg_image(@conn, "logo") %>
+    Maison&nbsp;Léo
+  </a>
+
+    <!-- Links -->
+    <ul class="navbar-nav ml-auto d-flex flex-row">
+      <li class="nav-item active small-xs mr-2">
+        <a class="nav-link d-flex flex-column flex-sm-row align-items-center" href="#contact">
+          <i class="fa-stack mr-2">
+            <i class="fa fa-stack-2x fa-circle pink-text"></i>
+            <i class="fa fa-phone fa-stack-1x white-text"></i>
+          </i>
+          Appelez moi
+        </a>
+      </li>
+      <li class="nav-item active small-xs">
+        <a class="nav-link d-flex flex-column flex-sm-row align-items-center" href="#">
+          <i class="fa-stack mr-2">
+            <i class="fa fa-stack-2x fa-circle pink-text"></i>
+            <i class="fa fa-home fa-stack-1x white-text"></i>
+          </i>
+          Voir les offres
+        </a>
+      </li>
+    </ul>
+    <!-- Links -->
+
+</nav>
+<!--/.Navbar-->
+
 <div class="intro-1"> </div>
 
 <div class="content-1 relative">
-
   <div class="relative white">
     <div class="transition-triangle white top">
       <%= PhoenixInlineSvg.Helpers.svg_image(@conn, "triangle") %>
@@ -32,26 +66,26 @@
     <div class="container spacer">
       <div class="mx-1">
         <div class="row text-center text-white">
-          <div class="col py-2 blue z-depth-1-half my-2">
+          <div class="col py-2 indigo z-depth-1-half my-2">
             <i class="fa-stack fa-2x">
               <i class="fa fa-square fa-stack-2x"></i>
-              <i class="fa fa-thumbs-up fa-stack-1x blue-text"></i>
+              <i class="fa fa-thumbs-up fa-stack-1x indigo-text"></i>
             </i>
             <div class="mt-1" style="line-height: 1"><span class="small-xs">Garantie de parfait achèvement</span></div>
           </div>
-          <div class="col py-2 blue z-depth-2 d-flex align-items-center justify-content-center" style="z-index: 1;">
+          <div class="col py-2 indigo z-depth-2 d-flex align-items-center justify-content-center" style="z-index: 2;">
 				    <div>
         	    <i class="fa-stack fa-2x">
           	    <i class="fa fa-square fa-stack-2x"></i>
-          	    <i class="fa fa-calendar-check-o fa-stack-1x blue-text" style="margin-left: 1px;"></i>
+          	    <i class="fa fa-calendar-check-o fa-stack-1x indigo-text" style="margin-left: 1px;"></i>
         	    </i>
         	    <div class="mt-1" style="line-height: 1"><span class="small-xs">Construction ultra rapide 4 mois après PC</span></div>
 				    </div>
           </div>
-          <div class="col py-2 blue z-depth-1-half my-2">
+          <div class="col py-2 indigo z-depth-1-half my-2">
             <i class="fa-stack fa-2x">
               <i class="fa fa-square fa-stack-2x"></i>
-              <i class="fa fa-file-text-o fa-stack-1x blue-text"></i>
+              <i class="fa fa-file-text-o fa-stack-1x indigo-text"></i>
             </i>
             <div class="mt-1" style="line-height: 1"><span class="small-xs">Assurance dommage d'ouvrage</span></div>
           </div>
@@ -249,7 +283,7 @@
     <div class="transition-triangle light-gray top">
       <%= PhoenixInlineSvg.Helpers.svg_image(@conn, "triangle") %>
     </div>
-    <div class="container spacer">
+    <div class="container spacer" id="contact">
       <div class="row align-items-center justify-content-center">
         <div class="col-12 col-md-6 col-lg-5 order-lg-2 order-md-2">
           <div class="p-3">
@@ -297,13 +331,13 @@
         </div>
       </div>
     </div>
-    <div class="transition-triangle light-gray bottom v-flip">
+    <div class="transition-triangle light-gray bottom flip">
       <%= PhoenixInlineSvg.Helpers.svg_image(@conn, "triangle") %>
     </div>
   </div>
 
-  <footer class="gray relative">
-    <div class="transition-triangle gray top h-flip">
+  <footer class="gray relative pt-4">
+    <div class="transition-triangle gray top">
       <%= PhoenixInlineSvg.Helpers.svg_image(@conn, "triangle") %>
     </div>
     <div class="container">
