@@ -1,5 +1,23 @@
 @import url('https://fonts.googleapis.com/css?family=Open+Sans:400,800');
 
+$intro-1-height: (
+  "xs": 200px,
+  "sm": 250px,
+  "md": 300px,
+  "lg": 400px,
+  "xl": 450px
+);
+
+$spacers: (
+  "xs": 4rem,
+  "sm": 6rem,
+  "md": 8rem,
+  "lg": 9rem,
+  "xl": 10rem
+);
+
+$spacer-ratio: 1;
+
 .open-sans {
   font-family: "Open Sans";
 }
@@ -304,31 +322,24 @@ nav.navbar.translucid {
 }
 
 .light-gray {
-  background-color: #fafafa;
+  background-color: #f8f8f8;
 }
 
 body {
-  @extend .light-gray;
+  // @extend .light-gray;
 }
 
 .title-1 {
   @extend .h1-responsive, .font-light;
 }
 
-$intro-1-height: (
-  "xs": 200px,
-  "sm": 250px,
-  "md": 300px,
-  "lg": 400px,
-  "xl": 450px
-);
-
-.mb-spacer {
-  @include media-breakpoint-up(xs) { margin-bottom: 4rem; }
-  @include media-breakpoint-up(sm) { margin-bottom: 4rem; }
-  @include media-breakpoint-up(md) { margin-bottom: 5rem; }
-  @include media-breakpoint-up(lg) { margin-bottom: 6rem; }
-  @include media-breakpoint-up(xl) { margin-bottom: 7rem; }
+.spacer {
+  @extend .py-4;
+  @include media-breakpoint-up(xs) { margin-bottom: map-get($spacers, xs) }
+  @include media-breakpoint-up(sm) { margin-bottom: map-get($spacers, sm) }
+  @include media-breakpoint-up(md) { margin-bottom: map-get($spacers, md) }
+  @include media-breakpoint-up(lg) { margin-bottom: map-get($spacers, lg) }
+  @include media-breakpoint-up(xl) { margin-bottom: map-get($spacers, xl) }
 }
 
 .intro-1 {
@@ -344,18 +355,10 @@ $intro-1-height: (
   background-size: cover;
 }
 
-.mt-resp {
-  @include media-breakpoint-up(xs) { margin-top: - map-get($intro-1-height, xs) / 6; }
-  @include media-breakpoint-up(sm) { margin-top: - map-get($intro-1-height, sm) / 6; }
-  @include media-breakpoint-up(md) { margin-top: - map-get($intro-1-height, md) / 6; }
-  @include media-breakpoint-up(lg) { margin-top: - map-get($intro-1-height, lg) / 6; }
-  @include media-breakpoint-up(xl) { margin-top: - map-get($intro-1-height, xl) / 6; }
-}
-
 .ellipse-svg {
   width: 100%;
   position: absolute;
-  & ellipse { fill: #fafafa; }
+  & ellipse { fill: #f8f8f8; }
   @include media-breakpoint-up(xs) {
     bottom: - map-get($intro-1-height, xs) / 4;
     height: map-get($intro-1-height, xs) / 2;
@@ -381,33 +384,99 @@ $intro-1-height: (
   }
 }
 
-.triangle-svg {
-  width: 100%;
-  position: absolute;
-	bottom: 0;
-  & polygon { fill: #fafafa; }
-  @include media-breakpoint-up(xs) {
-    // bottom: - map-get($intro-1-height, xs) / 4;
-    height: map-get($intro-1-height, xs) / 2;
+.row, .col, div[class^="col-"] {
+  z-index: 1;
+}
+
+.transition-triangle.white svg polygon { fill: white; }
+.transition-triangle.light-gray svg polygon { fill: #f8f8f8; }
+.transition-triangle.gray svg polygon { fill: #eaeaea; }
+
+.transition-triangle {
+  &.flip {
+    -moz-transform: scale(-1, -1);
+    -o-transform: scale(-1, -1);
+    -webkit-transform: scale(-1, -1);
+    transform: scale(-1, -1);
+    filter: FlipV FlipH;
+    -ms-filter: "FlipV FlipH";
   }
-  @include media-breakpoint-up(sm) {
-    // bottom: - map-get($intro-1-height, sm) / 4;
-    height: map-get($intro-1-height, sm) / 2;
+  &.v-flip {
+    -moz-transform: scaleY(-1);
+    -o-transform: scaleY(-1);
+    -webkit-transform: scaleY(-1);
+    transform: scaleY(-1);
+    filter: FlipV;
+    -ms-filter: "FlipV";
   }
-  @include media-breakpoint-up(md) {
-    $shift: map-get($intro-1-height, md) / 2;
-    // bottom: - $shift / 2;
-    height: $shift;
+  &.h-flip {
+    -moz-transform: scaleX(-1);
+    -o-transform: scaleX(-1);
+    -webkit-transform: scaleX(-1);
+    transform: scaleX(-1);
+    filter: FlipH;
+    -ms-filter: "FlipH";
   }
-  @include media-breakpoint-up(lg) {
-    $shift: map-get($intro-1-height, lg) / 1.95;
-    // bottom: - $shift / 2;
-    height: $shift;
+  .triangle-svg {
+    width: 100%;
+    position: absolute;
+    & polygon { position: relative; }
   }
-  @include media-breakpoint-up(xl) {
-    $shift: map-get($intro-1-height, xl) / 1.95;
-    // bottom: - $shift / 2;
-    height: $shift;
+
+  &.top .triangle-svg {
+    @include media-breakpoint-up(xs) {
+      $shift: map-get($spacers, xs) / $spacer-ratio;
+      height: $shift;
+      top: -$shift;
+    }
+    @include media-breakpoint-up(sm) {
+      $shift: map-get($spacers, sm) / $spacer-ratio;
+      height: $shift;
+      top: -$shift;
+    }
+    @include media-breakpoint-up(md) {
+      $shift: map-get($spacers, md) / $spacer-ratio;
+      height: $shift;
+      top: -$shift;
+    }
+    @include media-breakpoint-up(lg) {
+      $shift: map-get($spacers, lg) / $spacer-ratio;
+      height: $shift;
+      top: -$shift;
+    }
+    @include media-breakpoint-up(xl) {
+      $shift: map-get($spacers, xl) / $spacer-ratio;
+      height: $shift;
+      top: -$shift;
+    }
+  }
+
+  &.bottom .triangle-svg {
+    @include media-breakpoint-up(xs) {
+      $shift: map-get($spacers, xs);
+      height: $shift / $spacer-ratio;
+      bottom: -$shift;
+    }
+    @include media-breakpoint-up(sm) {
+      $shift: map-get($spacers, sm);
+      height: $shift / $spacer-ratio;
+      bottom: -$shift;
+    }
+    @include media-breakpoint-up(md) {
+      $shift: map-get($spacers, md);
+      height: $shift / $spacer-ratio;
+      bottom: -$shift;
+    }
+    @include media-breakpoint-up(lg) {
+      $shift: map-get($spacers, lg);
+      height: $shift / $spacer-ratio;
+      bottom: -$shift;
+    }
+    @include media-breakpoint-up(xl) {
+      $shift: map-get($spacers, xl);
+      height: $shift / $spacer-ratio;
+      bottom: -$shift;
+    }
   }
 }
 

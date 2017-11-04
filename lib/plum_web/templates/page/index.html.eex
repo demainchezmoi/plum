@@ -1,255 +1,311 @@
-<div class="intro-1">
-  <%= PhoenixInlineSvg.Helpers.svg_image(@conn, "ellipse") %>
-</div>
+<div class="intro-1"> </div>
 
+<div class="content-1 relative">
 
-<div class="content-1">
-  <div class="container mb-5 mt-resp">
-    <div class="row justify-content-center align-items-center">
-      <div class="col">
-        <h3 class="h3-responsive my-0 font-black blue-text col-auto d-flex justify-content-center">
-          <div class="d-flex justify-content-center align-items-center">
-            <%= PhoenixInlineSvg.Helpers.svg_image(@conn, "logo") %>
-            Maison&nbsp;Léo&nbsp;
+  <div class="relative white">
+    <div class="transition-triangle white top">
+      <%= PhoenixInlineSvg.Helpers.svg_image(@conn, "triangle") %>
+    </div>
+    <div class="container spacer">
+      <div class="row justify-content-center align-items-center">
+        <div class="col">
+          <h3 class="h3-responsive my-0 font-black blue-text col-auto d-flex justify-content-center">
+            <div class="d-flex justify-content-center align-items-center">
+              <%= PhoenixInlineSvg.Helpers.svg_image(@conn, "logo") %>
+              Maison&nbsp;Léo&nbsp;
+            </div>
+          </h3>
+          <h1 class="h1-responsive mt-0 text-center font-thin mb-4">Votre maison familiale</h1>
+          <div class="mr-auto ml-auto open-sans gray-text-700 text-center mt-4 mb-3" style="max-width: 500px;">
+            <p class="mb-0 small-xs">Faites construire votre T4 moderne pour 87&nbsp;900&nbsp;&euro;. Emménagez et dites adieu aux loyers en moins de huit mois.</p>
           </div>
-        </h3>
-        <h1 class="h1-responsive mt-0 text-center font-thin mb-4">Votre maison familiale</h1>
-        <div class="mr-auto ml-auto open-sans gray-text-700 text-center mt-4 mb-3" style="max-width: 500px;">
-          <p class="mb-0 small-xs">Faites construire votre T4 moderne pour 87&nbsp;900&nbsp;&euro;. Emménagez et dites adieu aux loyers en moins de huit mois.</p>
         </div>
       </div>
     </div>
   </div>
 
 
-  <div class="container">
-    <div class="mx-1">
-      <div class="row mb-spacer text-center text-white">
-        <div class="col py-2 blue z-depth-1-half my-2">
-          <i class="fa-stack fa-2x">
-            <i class="fa fa-square fa-stack-2x"></i>
-            <i class="fa fa-thumbs-up fa-stack-1x blue-text"></i>
-          </i>
-          <div class="mt-1" style="line-height: 1"><span class="small-xs">Garantie de parfait achèvement</span></div>
-        </div>
-        <div class="col py-2 blue z-depth-2 d-flex align-items-center justify-content-center" style="z-index: 1;">
-				  <div>
-        	  <i class="fa-stack fa-2x">
-          	  <i class="fa fa-square fa-stack-2x"></i>
-          	  <i class="fa fa-calendar-check-o fa-stack-1x blue-text" style="margin-left: 1px;"></i>
-        	  </i>
-        	  <div class="mt-1" style="line-height: 1"><span class="small-xs">Construction ultra rapide 4 mois après PC</span></div>
-				  </div>
-        </div>
-        <div class="col py-2 blue z-depth-1-half my-2">
-          <i class="fa-stack fa-2x">
-            <i class="fa fa-square fa-stack-2x"></i>
-            <i class="fa fa-file-text-o fa-stack-1x blue-text"></i>
-          </i>
-          <div class="mt-1" style="line-height: 1"><span class="small-xs">Assurance dommage d'ouvrage</span></div>
-        </div>
-      </div>
+  <div class="relative light-gray">
+    <div class="transition-triangle light-gray top">
+      <%= PhoenixInlineSvg.Helpers.svg_image(@conn, "triangle") %>
     </div>
-
-    <div class="row align-items-center justify-content-center mb-spacer">
-      <div class="col col-lg-8 col-md-10 col-sm-10">
-        <div class="media">
-          <img class="mr-3 rounded-circle z-depth-1 responsive-avatar" src="https://media-exp1.licdn.com/media/AAEAAQAAAAAAAAo7AAAAJGY2ZGQ1NDMyLWI0YTctNDQ4MC05NTVhLTQwM2U1ODc4MWU0Nw.jpg" alt="">
-          <div class="media-body text-justify">
-            <p class="font-bold gray-text-799">La Maison&nbsp;Léo&nbsp;: un concept fort pour une maison de choix.</p>
-            <p class="open-sans gray-text-700 paragraph">Contrairement aux autres maisons, la Maison&nbsp;Léo n'est pas une maison sur mesure&nbsp;: elle dispose d'un plan unique, optimisé pour la vie familiale.</p>
-            <p class="open-sans gray-text-700 paragraph">Ce choix fort fournit le double avantage de réduire les coûts de fabrication de la maison et d'en augmenter la qualité. Parce que moins de changements conduisent à moins d'erreurs, et parce que les économies sur la fabrication nous permettent d'investir dans des matériaux de qualité supérieure, la Maison&nbsp;Léo propose un rapport qualité prix au-delà de toute concurrence.</p>
-            <p class="open-sans gray-text-700 paragraph">Je vous propose de découvrir votre Maison&nbsp;Léo. À vous de jouer&nbsp;!</p>
-            <p class="open-sans gray-text-700 paragraph text-right mb-0">Xavier Jaffray</p>
+    <div class="container spacer">
+      <div class="mx-1">
+        <div class="row text-center text-white">
+          <div class="col py-2 blue z-depth-1-half my-2">
+            <i class="fa-stack fa-2x">
+              <i class="fa fa-square fa-stack-2x"></i>
+              <i class="fa fa-thumbs-up fa-stack-1x blue-text"></i>
+            </i>
+            <div class="mt-1" style="line-height: 1"><span class="small-xs">Garantie de parfait achèvement</span></div>
+          </div>
+          <div class="col py-2 blue z-depth-2 d-flex align-items-center justify-content-center" style="z-index: 1;">
+				    <div>
+        	    <i class="fa-stack fa-2x">
+          	    <i class="fa fa-square fa-stack-2x"></i>
+          	    <i class="fa fa-calendar-check-o fa-stack-1x blue-text" style="margin-left: 1px;"></i>
+        	    </i>
+        	    <div class="mt-1" style="line-height: 1"><span class="small-xs">Construction ultra rapide 4 mois après PC</span></div>
+				    </div>
+          </div>
+          <div class="col py-2 blue z-depth-1-half my-2">
+            <i class="fa-stack fa-2x">
+              <i class="fa fa-square fa-stack-2x"></i>
+              <i class="fa fa-file-text-o fa-stack-1x blue-text"></i>
+            </i>
+            <div class="mt-1" style="line-height: 1"><span class="small-xs">Assurance dommage d'ouvrage</span></div>
           </div>
         </div>
       </div>
     </div>
-
-
-    <div class="row justify-content-center">
-      <div class="col-12">
-      	<p class="font-bold gray-text-700">Les caractéristiques de votre Maison&nbsp;Léo</p>
-      </div>
+    <div class="transition-triangle light-gray bottom flip">
+      <%= PhoenixInlineSvg.Helpers.svg_image(@conn, "triangle") %>
     </div>
-    <div class="row justify-content-center mb-spacer">
-      <div class="col-sm-6 col-lg-6 col-xs-12">
-        <table class="table table-striped mt-3 open-sans z-depth-1">
-          <tbody>
-            <tr>
-              <th class="col-auto text-center gray-th"><i class="fa fa-arrows-alt"></i></th>
-              <th class="col-auto gray-th pl-0">Surface</th>
-              <td class="col">87&nbsp;m<sup>2</sup></td>
-            </tr>
-            <tr>
-              <th class="col-auto text-center gray-th"><i class="fa fa-image"></i></th>
-              <th class="col-auto gray-th pl-0">Surface&nbsp;vitrée</th>
-              <td class="col">16&nbsp;m<sup>2</sup></td>
-            </tr>
-            <tr>
-              <th class="col-auto text-center gray-th"><i class="fa fa-thermometer"></i></th>
-              <th class="col-auto gray-th pl-0">Chauffage</th>
-              <td class="col">Pompe chaleur air / air</td>
-            </tr>
-            <tr>
-              <th class="col-auto text-center gray-th"><i class="fa fa-cube"></i></th>
-              <th class="col-auto gray-th pl-0">Structure</th>
-              <td class="col">Ossature bois</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-      <div class="col-sm-6 col-lg-6 col-xs-12">
-        <table class="table table-striped mt-3 open-sans z-depth-1">
-          <tbody>
-            <tr>
-              <th class="col-auto text-center gray-th"><i class="fa fa-money"></i></th>
-              <th class="col-auto gray-th pl-0">Prix</th>
-              <td class="col">87&nbsp;900&nbsp;&euro;</td>
-            </tr>
-            <tr>
-              <th class="col-auto text-center gray-th"><i class="fa fa-clone"></i></th>
-              <th class="col-auto gray-th pl-0"> Volets </th>
-              <td class="col">Roulants&nbsp;PVC</td>
-            </tr>
-            <tr>
-              <th class="col-auto text-center gray-th"><i class="fa fa-cubes"></i></th>
-              <th class="col-auto gray-th pl-0">Pièces</th>
-              <td class="col">4</td>
-            </tr>
-            <tr>
-              <th class="col-auto text-center gray-th"><i class="fa fa-fire"></i></th>
-              <th class="col-auto gray-th pl-0">Énergie&nbsp;/&nbsp;GES</th>
-              <td class="col">Classes A / A</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
+  </div>
 
-    <div class="row align-items-center justify-content-center mb-spacer">
-      <div class="col-12 col-md-5 col-lg-5">
-        <div class="p-3">
-        	<p class="font-bold gray-text-800">Un espace optimisé pour vivre ensemble</p>
-          <p class="open-sans gray-text-700 paragraph">Les trois chambres de votre Maison&nbsp;Léo garantissent à chacun un espace au calme, et le séjour cuisine de 48&nbsp;m<sup>2</sup> avec deux grandes baies vitrées vous permet de partager repas et bons films tous ensemble, ainsi que lumière et air frais.</p>
-          <p class="open-sans gray-text-700 paragraph">Laissez-vous tenter par des après-midis balançoire, football, cabane et soirées plancha dans le jardin !</p>
-          </p>
-        </div>
-      </div>
-
-      <div class="col-12 col-md-7 col-lg-7">
-        <img
-           class="z-depth-1 d-block p-2"
-           src="https://s3-eu-west-1.amazonaws.com/demainchezmoi/cloudfront_assets/images/distribution_commercial_maison_leo_sd.png"
-           style="width: 100%">
-      </div>
-
-    </div>
-
-    <div class="row align-items-center justify-content-center mb-spacer">
-      <div class="col-12 col-md-5 col-lg-5 order-lg-2 order-md-2">
-        <div class="p-3">
-        	<p class="font-bold gray-text-800">Une exigeance de qualité</p>
-          <p class="open-sans gray-text-700 paragraph">La maison Léo est fabriquée près de chez vous avec des matériaux robustes et des solutions techniques éprouvées pour concillier prix compétitif et qualité irréprochable.</p>
-          <p class="open-sans gray-text-700 paragraph">Garantie 0% gadget, elle offre tout le confort moderne&nbsp;: isolation par l'extérieur, prises internet dans chaque pièce, 5m2 de panneaux solaires, ventilation simple flux.</p>
-        </div>
-      </div>
-      <div class="col-12 col-md-7 col-lg-7">
-        <img
-           class="z-depth-1 d-block p-2"
-           src="https://s3-eu-west-1.amazonaws.com/demainchezmoi/cloudfront_assets/images/ete-jour-nuage-min.png"
-           style="width: 100%">
-      </div>
-    </div>
-
-    <div class="row justify-content-center align-items-center mb-spacer">
-      <div class="col mb-2">
-        <div class="p-3">
-          <p class="font-bold gray-text-800">Découvrez votre maison aux rayons X</p>
-          <p class="open-sans gray-text-700 paragraph">La Maison&nbsp;Léo est garantie sans mauvaise surprise. Structures et réseaux sont optimisés pour assurer une qualité de fonctionnement optimale et une maîtrise des coûts.</p>
-          <p class="open-sans gray-text-700 paragraph">Découvrez les entrailles techniques de votre maison&nbsp;!</p>
-        </div>
-        <ul class="list-group list-group-inline">
-          <li class="list-group-item cp active" data-action="change-tech-image" data-target="elec1">Prises électriques</li>
-          <li class="list-group-item cp" data-action="change-tech-image" data-target="elec3">Éclairages et interrupteurs</li>
-          <li class="list-group-item cp" data-action="change-tech-image" data-target="elec4">Système de ventilation</li>
-        </ul>
-      </div>
-      <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12">
-        <div class="relative d-block">
-          <div class="z-depth-1">
-            <img
-               class="img-fluid w-100"
-               data-role="tech-img"
-               data-value="elec1"
-               style="display: none"
-               src="https://s3-eu-west-1.amazonaws.com/demainchezmoi/cloudfront_assets/images/elec_1-min.png">
-            <img
-               class="img-fluid w-100"
-               data-role="tech-img"
-               data-value="elec3"
-               style="display: none"
-               src="https://s3-eu-west-1.amazonaws.com/demainchezmoi/cloudfront_assets/images/elec_3-min.png">
-            <img
-               class="img-fluid w-100"
-               data-role="tech-img"
-               data-value="elec4"
-               style="display: none"
-               src="https://s3-eu-west-1.amazonaws.com/demainchezmoi/cloudfront_assets/images/elec_4-min.png">
+  <div class="relative white">
+    <div class="container spacer">
+      <div class="row align-items-center justify-content-center">
+        <div class="col col-lg-8 col-md-10 col-sm-10">
+          <div class="media">
+            <img class="mr-3 rounded-circle z-depth-1 responsive-avatar" src="https://media-exp1.licdn.com/media/AAEAAQAAAAAAAAo7AAAAJGY2ZGQ1NDMyLWI0YTctNDQ4MC05NTVhLTQwM2U1ODc4MWU0Nw.jpg" alt="">
+            <div class="media-body text-justify">
+              <p class="font-bold gray-text-799">La Maison&nbsp;Léo&nbsp;: un concept fort pour une maison de choix.</p>
+              <p class="open-sans gray-text-700 paragraph">Contrairement aux autres maisons, la Maison&nbsp;Léo n'est pas une maison sur mesure&nbsp;: elle dispose d'un plan unique, optimisé pour la vie familiale.</p>
+              <p class="open-sans gray-text-700 paragraph">Ce choix fort fournit le double avantage de réduire les coûts de fabrication de la maison et d'en augmenter la qualité. Parce que moins de changements conduisent à moins d'erreurs, et parce que les économies sur la fabrication nous permettent d'investir dans des matériaux de qualité supérieure, la Maison&nbsp;Léo propose un rapport qualité prix au-delà de toute concurrence.</p>
+              <p class="open-sans gray-text-700 paragraph">Je vous propose de découvrir votre Maison&nbsp;Léo. À vous de jouer&nbsp;!</p>
+              <p class="open-sans gray-text-700 paragraph text-right mb-0">Xavier Jaffray</p>
+            </div>
           </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="row align-items-center justify-content-center mb-spacer">
-      <div class="col-12 col-md-6 col-lg-5 order-lg-2 order-md-2">
-        <div class="p-3">
-        	<p class="font-bold gray-text-800">Prenons contact</p>
-          <p class="open-sans gray-text-700 paragraph">Nous serions ravis de répondre à toute demande de renseignement ou suggestion.</p>
-				  <p class="open-sans gray-text-700 paragraph">N'hésitez-pas à remplir le formulaire ou à nous joindre au numéro suivant&nbsp;:</p>
-				  <p class="open-sans lead font-bold blue-text">06 63 74 25 35</p>
-        </div>
-      </div>
-      <div class="col-12 col-md-6 col-lg-5">
-        <div class="z-depth-1 p-4 white m-1">
-          <p class="blue-text">Contact</p>
-          <%= form_for @conn, page_path(@conn, :contact), [as: "contact"], fn f-> %>
-            <div class="form-group row">
-              <label class="col-sm-3 col-form-label">Prénom</label>
-              <div class="col-sm-9">
-                <%= text_input f, :first_name, placeholder: "Marie", class: "form-control" %>
-              </div>
-            </div>
-            <div class="form-group row">
-              <label class="col-sm-3 col-form-label">Nom</label>
-              <div class="col-sm-9">
-                <%= text_input f, :last_name, placeholder: "Dupont", class: "form-control" %>
-              </div>
-            </div>
-            <div class="form-group row">
-              <label class="col-sm-3 col-form-label">Téléphone</label>
-              <div class="col-sm-9">
-                <%= text_input f, :phone, placeholder: "06 12 34 56 78", class: "form-control" %>
-              </div>
-            </div>
-            <div class="form-group row">
-              <label class="col-sm-3 col-form-label">Email</label>
-              <div class="col-sm-9">
-                <%= text_input f, :email, placeholder: "marie.dupont@email.com", class: "form-control" %>
-              </div>
-            </div>
-            <div class="clearfix">
-              <div class="pull-right">
-                <button type="submit" class="btn btn-blue mr-0 mb-0"><i class="fa fa-paper-plane mr-2"></i> Prendre contact</button>
-              </div>
-            </div>
-          <% end %>
         </div>
       </div>
     </div>
   </div>
 
-  <footer class="py-5">
+
+  <div class="relative light-gray">
+    <div class="transition-triangle light-gray top">
+      <%= PhoenixInlineSvg.Helpers.svg_image(@conn, "triangle") %>
+    </div>
+    <div class="container spacer">
+      <div class="row justify-content-center">
+        <div class="col-12">
+      	  <p class="font-bold gray-text-700">Les caractéristiques de votre Maison&nbsp;Léo</p>
+        </div>
+      </div>
+      <div class="row justify-content-center">
+        <div class="col-sm-6 col-lg-6 col-xs-12">
+          <table class="table table-striped mt-3 open-sans z-depth-1">
+            <tbody>
+              <tr>
+                <th class="col-auto text-center gray-th"><i class="fa fa-arrows-alt"></i></th>
+                <th class="col-auto gray-th pl-0">Surface</th>
+                <td class="col">87&nbsp;m<sup>2</sup></td>
+              </tr>
+              <tr>
+                <th class="col-auto text-center gray-th"><i class="fa fa-image"></i></th>
+                <th class="col-auto gray-th pl-0">Surface&nbsp;vitrée</th>
+                <td class="col">16&nbsp;m<sup>2</sup></td>
+              </tr>
+              <tr>
+                <th class="col-auto text-center gray-th"><i class="fa fa-thermometer"></i></th>
+                <th class="col-auto gray-th pl-0">Chauffage</th>
+                <td class="col">Pompe chaleur air / air</td>
+              </tr>
+              <tr>
+                <th class="col-auto text-center gray-th"><i class="fa fa-cube"></i></th>
+                <th class="col-auto gray-th pl-0">Structure</th>
+                <td class="col">Ossature bois</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="col-sm-6 col-lg-6 col-xs-12">
+          <table class="table table-striped mt-3 open-sans z-depth-1">
+            <tbody>
+              <tr>
+                <th class="col-auto text-center gray-th"><i class="fa fa-money"></i></th>
+                <th class="col-auto gray-th pl-0">Prix</th>
+                <td class="col">87&nbsp;900&nbsp;&euro;</td>
+              </tr>
+              <tr>
+                <th class="col-auto text-center gray-th"><i class="fa fa-clone"></i></th>
+                <th class="col-auto gray-th pl-0"> Volets </th>
+                <td class="col">Roulants&nbsp;PVC</td>
+              </tr>
+              <tr>
+                <th class="col-auto text-center gray-th"><i class="fa fa-cubes"></i></th>
+                <th class="col-auto gray-th pl-0">Pièces</th>
+                <td class="col">4</td>
+              </tr>
+              <tr>
+                <th class="col-auto text-center gray-th"><i class="fa fa-fire"></i></th>
+                <th class="col-auto gray-th pl-0">Énergie&nbsp;/&nbsp;GES</th>
+                <td class="col">Classes A / A</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div class="transition-triangle light-gray bottom flip">
+      <%= PhoenixInlineSvg.Helpers.svg_image(@conn, "triangle") %>
+    </div>
+  </div>
+
+  <div class="relative white">
+    <div class="container spacer">
+      <div class="row align-items-center justify-content-center">
+        <div class="col-12 col-md-5 col-lg-5">
+          <div class="p-3">
+        	  <p class="font-bold gray-text-800">Un espace optimisé pour vivre ensemble</p>
+            <p class="open-sans gray-text-700 paragraph">Les trois chambres de votre Maison&nbsp;Léo garantissent à chacun un espace au calme, et le séjour cuisine de 48&nbsp;m<sup>2</sup> avec deux grandes baies vitrées vous permet de partager repas et bons films tous ensemble, ainsi que lumière et air frais.</p>
+            <p class="open-sans gray-text-700 paragraph">Laissez-vous tenter par des après-midis balançoire, football, cabane et soirées plancha dans le jardin !</p>
+            </p>
+          </div>
+        </div>
+
+        <div class="col-12 col-md-7 col-lg-7">
+          <img
+             class="z-depth-1 d-block p-2"
+             src="https://s3-eu-west-1.amazonaws.com/demainchezmoi/cloudfront_assets/images/distribution_commercial_maison_leo_sd.png"
+             style="width: 100%">
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <div class="relative light-gray">
+    <div class="transition-triangle light-gray top">
+      <%= PhoenixInlineSvg.Helpers.svg_image(@conn, "triangle") %>
+    </div>
+    <div class="container spacer">
+      <div class="row align-items-center justify-content-center">
+        <div class="col-12 col-md-5 col-lg-5 order-lg-2 order-md-2">
+          <div class="p-3">
+        	  <p class="font-bold gray-text-800">Une exigeance de qualité</p>
+            <p class="open-sans gray-text-700 paragraph">La maison Léo est fabriquée près de chez vous avec des matériaux robustes et des solutions techniques éprouvées pour concillier prix compétitif et qualité irréprochable.</p>
+            <p class="open-sans gray-text-700 paragraph">Garantie 0% gadget, elle offre tout le confort moderne&nbsp;: isolation par l'extérieur, prises internet dans chaque pièce, 5m2 de panneaux solaires, ventilation simple flux.</p>
+          </div>
+        </div>
+        <div class="col-12 col-md-7 col-lg-7">
+          <img
+             class="z-depth-1 d-block p-2"
+             src="https://s3-eu-west-1.amazonaws.com/demainchezmoi/cloudfront_assets/images/ete-jour-nuage-min.png"
+             style="width: 100%">
+        </div>
+      </div>
+    </div>
+    <div class="transition-triangle light-gray bottom flip">
+      <%= PhoenixInlineSvg.Helpers.svg_image(@conn, "triangle") %>
+    </div>
+  </div>
+
+  <div class="relative white">
+    <div class="container spacer">
+      <div class="row justify-content-center align-items-center">
+        <div class="col mb-2">
+          <div class="p-3">
+            <p class="font-bold gray-text-800">Découvrez votre maison aux rayons X</p>
+            <p class="open-sans gray-text-700 paragraph">La Maison&nbsp;Léo est garantie sans mauvaise surprise. Structures et réseaux sont optimisés pour assurer une qualité de fonctionnement optimale et une maîtrise des coûts.</p>
+            <p class="open-sans gray-text-700 paragraph">Découvrez les entrailles techniques de votre maison&nbsp;!</p>
+          </div>
+          <ul class="list-group list-group-inline">
+            <li class="list-group-item cp active" data-action="change-tech-image" data-target="elec1">Prises électriques</li>
+            <li class="list-group-item cp" data-action="change-tech-image" data-target="elec3">Éclairages et interrupteurs</li>
+            <li class="list-group-item cp" data-action="change-tech-image" data-target="elec4">Système de ventilation</li>
+          </ul>
+        </div>
+        <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12">
+          <div class="relative d-block">
+            <div class="z-depth-1">
+              <img
+                 class="img-fluid w-100"
+                 data-role="tech-img"
+                 data-value="elec1"
+                 style="display: none"
+                 src="https://s3-eu-west-1.amazonaws.com/demainchezmoi/cloudfront_assets/images/elec_1-min.png">
+              <img
+                 class="img-fluid w-100"
+                 data-role="tech-img"
+                 data-value="elec3"
+                 style="display: none"
+                 src="https://s3-eu-west-1.amazonaws.com/demainchezmoi/cloudfront_assets/images/elec_3-min.png">
+              <img
+                 class="img-fluid w-100"
+                 data-role="tech-img"
+                 data-value="elec4"
+                 style="display: none"
+                 src="https://s3-eu-west-1.amazonaws.com/demainchezmoi/cloudfront_assets/images/elec_4-min.png">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="relative light-gray">
+    <div class="transition-triangle light-gray top">
+      <%= PhoenixInlineSvg.Helpers.svg_image(@conn, "triangle") %>
+    </div>
+    <div class="container spacer">
+      <div class="row align-items-center justify-content-center">
+        <div class="col-12 col-md-6 col-lg-5 order-lg-2 order-md-2">
+          <div class="p-3">
+        	  <p class="font-bold gray-text-800">Prenons contact</p>
+            <p class="open-sans gray-text-700 paragraph">Nous serions ravis de répondre à toute demande de renseignement ou suggestion.</p>
+				    <p class="open-sans gray-text-700 paragraph">N'hésitez-pas à remplir le formulaire ou à nous joindre au numéro suivant&nbsp;:</p>
+				    <p class="open-sans lead font-bold blue-text">06 63 74 25 35</p>
+          </div>
+        </div>
+        <div class="col-12 col-md-6 col-lg-5">
+          <div class="z-depth-1 p-4 white m-1">
+            <p class="blue-text">Contact</p>
+            <%= form_for @conn, page_path(@conn, :contact), [as: "contact"], fn f-> %>
+              <div class="form-group row">
+                <label class="col-sm-3 col-form-label">Prénom</label>
+                <div class="col-sm-9">
+                  <%= text_input f, :first_name, placeholder: "Marie", class: "form-control" %>
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-sm-3 col-form-label">Nom</label>
+                <div class="col-sm-9">
+                  <%= text_input f, :last_name, placeholder: "Dupont", class: "form-control" %>
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-sm-3 col-form-label">Téléphone</label>
+                <div class="col-sm-9">
+                  <%= text_input f, :phone, placeholder: "06 12 34 56 78", class: "form-control" %>
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-sm-3 col-form-label">Email</label>
+                <div class="col-sm-9">
+                  <%= text_input f, :email, placeholder: "marie.dupont@email.com", class: "form-control" %>
+                </div>
+              </div>
+              <div class="clearfix">
+                <div class="pull-right">
+                  <button type="submit" class="btn btn-blue mr-0 mb-0"><i class="fa fa-paper-plane mr-2"></i> Prendre contact</button>
+                </div>
+              </div>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="transition-triangle light-gray bottom v-flip">
+      <%= PhoenixInlineSvg.Helpers.svg_image(@conn, "triangle") %>
+    </div>
+  </div>
+
+  <footer class="gray relative">
+    <div class="transition-triangle gray top h-flip">
+      <%= PhoenixInlineSvg.Helpers.svg_image(@conn, "triangle") %>
+    </div>
     <div class="container">
       <div class="row justify-content-center">
         <div class="col">
