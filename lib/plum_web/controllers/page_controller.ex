@@ -34,12 +34,16 @@ defmodule PlumWeb.PageController do
   end
 
   def contact(conn, %{"contact" => contact_params}) do
-    if contact_params["phone"] != "" or contact_params["email"] != "" do
+    if not (is_undef(contact_params, "email") and is_undef(contact_params, "phone")) do
       Email.contact_email(contact_params) |> Mailer.deliver
       conn |> put_flash(:info, "Votre demande de contact a bien été prise en compte.")
     else
       conn |> put_flash(:error, "Merci de renseigner votre numéro de téléphone ou votre email pour prendre contact.")
     end
     |> render("index.html")
+  end
+
+  def is_undef(params, field) do
+    params[field] == "" or is_nil(params[field])
   end
 end

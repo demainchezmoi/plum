@@ -1,75 +1,42 @@
-<%= if not @ad.active do %>
-  <div class="deactivated-ad">
-    <div class="deactivated-text">Vendu</div>
-  </div>
-<% end %>
+<%= raw Number.Currency.number_to_currency(@ad.land.price + @ad.house_price) %>
 
-<nav>
-  <h5 class="ml-header">
-    <div class="container">
-      <div class="row justify-content-center">
-        <div class="col col-md-10 col-lg-8">
-          Maisons Léo
-        </div>
-      </div>
-    </div>
-  </h5>
+<%= raw Number.Currency.number_to_currency(@ad.house_price) %>
+<%= raw Number.Currency.number_to_currency(@ad.land.price) %>
+<%= link "conditions", to: ad_path(@conn, :cgu, @ad), class: "text-secondary" %>
+
+<div class="intro-2"></div>
+
+<nav class="navbar navbar-expand-lg navbar-dark indigo fixed">
+  <a class="navbar-brand d-flex justify-content-center align-items-center small-xs" href="/">
+    <%= PhoenixInlineSvg.Helpers.svg_image(@conn, "logo") %>
+    Maison&nbsp;Léo
+  </a>
+  <!-- Links -->
+  <ul class="navbar-nav ml-auto d-flex flex-row">
+    <li class="nav-item active tiny-xs mr-2">
+      <a class="nav-link d-flex flex-column flex-sm-row align-items-center" href="#contact">
+        <i class="fa-stack mr-1">
+          <i class="fa fa-stack-2x fa-circle pink-text"></i>
+          <i class="fa fa-phone fa-stack-1x white-text"></i>
+        </i>
+        <span class="open-sans">Appelez moi</span>
+      </a>
+    </li>
+    <li class="nav-item active tiny-xs">
+      <a class="nav-link d-flex flex-column flex-sm-row align-items-center" href="#">
+        <i class="fa-stack mr-1">
+          <i class="fa fa-stack-2x fa-circle pink-text"></i>
+          <i class="fa fa-home fa-stack-1x white-text"></i>
+        </i>
+        <span class="open-sans">Offres + terrains</span>
+      </a>
+    </li>
+  </ul>
 </nav>
 
-<section>
-  <div class="container">
-    <div class="row justify-content-center">
-      <div class="col col-md-10 col-lg-8">
-        <div class="upper-section">
-
-          <div class="light-bordered mt-2 p-2 pt-4 pb-4">
-            <h3 class="responsive-h3 text-center font-black">
-              Devenez propriétaire à <%= @ad.land.city %>&nbsp;(<%= @ad.land.department %>)
-            </h3>
-            <h1 class="text-center responsive-h1 font-thin mt-1 mb-0">
-              <span class=""><%= raw Number.Currency.number_to_currency(@ad.land.price + @ad.house_price) %><sup class="hors-frais">hors frais</sup></span>
-            </h1>
-          </div>
-
-      		<img class="d-block p-2 img-thumbnail mt-2 img-fluid" src="https://s3-eu-west-1.amazonaws.com/demainchezmoi/cloudfront_assets/images/maison_21.png">
-
-          <div class="p-2">
-            <div class="row justify-content-between dark-gray-text font-black">
-              <div class="col">
-                Maison T4 - 87m<sup>2</sup>
-              </div>
-              <div class="col-auto text-right">
-                <%= raw Number.Currency.number_to_currency(@ad.house_price) %>
-              </div>
-            </div>
-
-            <div class="row justify-content-between dark-gray-text font-black">
-              <div class="col">
-                Terrain - <%= @ad.land.surface %>&nbsp;m<sup>2</sup>
-              </div>
-              <div class="col-auto text-right">
-                <%= raw Number.Currency.number_to_currency(@ad.land.price) %>
-              </div>
-            </div>
-
-            <div class="row dark-gray-text font-black">
-              <div class="col"></div>
-              <div class="col-auto">
-                <small><%= link "conditions", to: ad_path(@conn, :cgu, @ad), class: "text-secondary" %></small>
-              </div>
-            </div>
-          </div>
-
-        </div>
-
-        <%= if @ad.active do %>
-          <div class="bottom-section">
-      		  <div class="text-center mt-1">
-              <%= link "Je suis intéressé(e)", to: interested_url(@ad, @conn.assigns[:current_user]), class: "btn btn-yellow-flash font-bold full-width mr-0 ml-0 z-depth-1-half", id: "interested-button" %>
-            </div>
-          </div>
-        <% end %>
-      </div>
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col">
     </div>
   </div>
-</section>
+</div>

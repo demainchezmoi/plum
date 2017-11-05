@@ -1,10 +1,10 @@
 @import url('https://fonts.googleapis.com/css?family=Open+Sans:400,800');
 
 $intro-1-height: (
-  "xs": 250px,
-  "sm": 250px,
-  "md": 300px,
-  "lg": 400px,
+  "xs": 270px,
+  "sm": 300px,
+  "md": 400px,
+  "lg": 450px,
   "xl": 450px
 );
 
@@ -17,6 +17,15 @@ $spacers: (
 );
 
 $spacer-ratio: 1;
+
+$light-gray: #F5F5F5;
+
+.alert-main {
+  border-radius: 0;
+  top: 80px;
+  position: fixed;
+  z-index: 100;
+}
 
 .open-sans {
   font-family: "Open Sans";
@@ -80,12 +89,8 @@ img.flip {
   width: 100%;
 }
 
-.gray-th {
-  @extend .white-text, .gray-700;
-}
-
-.slight-gray-text {
-  color: #5d5d5d;
+.lead-th {
+  @extend .white-text, .indigo;
 }
 
 .large-right-space {
@@ -144,6 +149,12 @@ p.paragraph {
   background-color: rgba(0, 0, 0, 0.5);
   @extend .d-flex, .justify-content-center, .align-items-center;
   i { font-size: 70px; }
+}
+
+.tiny-xs {
+  @include media-breakpoint-down(xs) {
+    font-size: 70%;
+  }
 }
 
 .small-xs {
@@ -325,11 +336,11 @@ nav.navbar.translucid {
 }
 
 .light-gray {
-  background-color: #f8f8f8;
+  background-color: $light-gray;
 }
 
-body {
-  // @extend .light-gray;
+html, body, main {
+  height: 100%;
 }
 
 .title-1 {
@@ -348,6 +359,7 @@ body {
 .intro-1 {
   width: 100%;
   position: relative;
+  top: 0;
   @extend .d-flex, .justify-content-center;
   @include media-breakpoint-up(xs) { height: map-get($intro-1-height, xs); }
   @include media-breakpoint-up(sm) { height: map-get($intro-1-height, sm); }
@@ -358,10 +370,23 @@ body {
   background-size: cover;
 }
 
+.intro-2 {
+  position: fixed;
+  top: 0; right: 0; bottom: 0; left: 0;
+  display: block;
+  // background-color: map-get($blue, base);
+  &::after {
+    content: "";
+    background: url("https://s3-eu-west-1.amazonaws.com/demainchezmoi/cloudfront_assets/images/ete-jour-nuage-min.png") no-repeat center center;
+    position: absolute;
+    top: 0; right: 0; bottom: 0; left: 0;
+    // opacity: 0.5;
+  }
+}
 .ellipse-svg {
   width: 100%;
   position: absolute;
-  & ellipse { fill: #f8f8f8; }
+  & ellipse { fill: $light-gray; }
   @include media-breakpoint-up(xs) {
     bottom: - map-get($intro-1-height, xs) / 4;
     height: map-get($intro-1-height, xs) / 2;
@@ -392,7 +417,7 @@ body {
 }
 
 .transition-triangle.white svg polygon { fill: white; }
-.transition-triangle.light-gray svg polygon { fill: #f8f8f8; }
+.transition-triangle.light-gray svg polygon { fill: $light-gray; }
 .transition-triangle.gray svg polygon { fill: #eaeaea; }
 
 .transition-triangle {

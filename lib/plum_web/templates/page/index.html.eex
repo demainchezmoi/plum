@@ -7,28 +7,28 @@
     Maison&nbsp;Léo
   </a>
 
-    <!-- Links -->
-    <ul class="navbar-nav ml-auto d-flex flex-row">
-      <li class="nav-item active small-xs mr-2">
-        <a class="nav-link d-flex flex-column flex-sm-row align-items-center" href="#contact">
-          <i class="fa-stack mr-2">
-            <i class="fa fa-stack-2x fa-circle pink-text"></i>
-            <i class="fa fa-phone fa-stack-1x white-text"></i>
-          </i>
-          Appelez moi
-        </a>
-      </li>
-      <li class="nav-item active small-xs">
-        <a class="nav-link d-flex flex-column flex-sm-row align-items-center" href="#">
-          <i class="fa-stack mr-2">
-            <i class="fa fa-stack-2x fa-circle pink-text"></i>
-            <i class="fa fa-home fa-stack-1x white-text"></i>
-          </i>
-          Voir les offres
-        </a>
-      </li>
-    </ul>
-    <!-- Links -->
+  <!-- Links -->
+  <ul class="navbar-nav ml-auto d-flex flex-row">
+    <li class="nav-item active small-xs mr-2">
+      <a class="nav-link d-flex flex-column flex-sm-row align-items-center" data-toggle="modal" data-target="#contactModal">
+        <i class="fa-stack mr-2">
+          <i class="fa fa-stack-2x fa-circle pink-text"></i>
+          <i class="fa fa-phone fa-stack-1x white-text"></i>
+        </i>
+        Appelez-moi
+      </a>
+    </li>
+    <li class="nav-item active small-xs">
+      <a class="nav-link d-flex flex-column flex-sm-row align-items-center" href="#">
+        <i class="fa-stack mr-2">
+          <i class="fa fa-stack-2x fa-circle pink-text"></i>
+          <i class="fa fa-home fa-stack-1x white-text"></i>
+        </i>
+        Voir les offres
+      </a>
+    </li>
+  </ul>
+  <!-- Links -->
 
 </nav>
 <!--/.Navbar-->
@@ -69,7 +69,7 @@
           <div class="col py-2 indigo z-depth-1-half my-2">
             <i class="fa-stack fa-2x">
               <i class="fa fa-square fa-stack-2x"></i>
-              <i class="fa fa-thumbs-up fa-stack-1x indigo-text"></i>
+              <i class="fa fa-thumbs-up fa-stack-1x blue-text"></i>
             </i>
             <div class="mt-1" style="line-height: 1"><span class="small-xs">Garantie de parfait achèvement</span></div>
           </div>
@@ -77,7 +77,7 @@
 				    <div>
         	    <i class="fa-stack fa-2x">
           	    <i class="fa fa-square fa-stack-2x"></i>
-          	    <i class="fa fa-calendar-check-o fa-stack-1x indigo-text" style="margin-left: 1px;"></i>
+          	    <i class="fa fa-calendar-check-o fa-stack-1x blue-text" style="margin-left: 1px;"></i>
         	    </i>
         	    <div class="mt-1" style="line-height: 1"><span class="small-xs">Construction ultra rapide 4 mois après PC</span></div>
 				    </div>
@@ -85,7 +85,7 @@
           <div class="col py-2 indigo z-depth-1-half my-2">
             <i class="fa-stack fa-2x">
               <i class="fa fa-square fa-stack-2x"></i>
-              <i class="fa fa-file-text-o fa-stack-1x indigo-text"></i>
+              <i class="fa fa-file-text-o fa-stack-1x blue-text"></i>
             </i>
             <div class="mt-1" style="line-height: 1"><span class="small-xs">Assurance dommage d'ouvrage</span></div>
           </div>
@@ -105,7 +105,7 @@
             <img class="mr-3 rounded-circle z-depth-1 responsive-avatar" src="https://media-exp1.licdn.com/media/AAEAAQAAAAAAAAo7AAAAJGY2ZGQ1NDMyLWI0YTctNDQ4MC05NTVhLTQwM2U1ODc4MWU0Nw.jpg" alt="">
             <div class="media-body text-justify">
               <p class="font-bold gray-text-799">La Maison&nbsp;Léo&nbsp;: un concept fort pour une maison de choix.</p>
-              <p class="open-sans gray-text-700 paragraph">Contrairement aux autres maisons, la Maison&nbsp;Léo n'est pas une maison sur mesure&nbsp;: elle dispose d'un plan unique, optimisé pour la vie familiale.</p>
+              <p class="open-sans gray-text-700 paragraph">La Maison&nbsp;Léo a la particularité de ne pas être une maison sur mesure&nbsp;: elle dispose d'un plan unique, optimisé pour la vie familiale.</p>
               <p class="open-sans gray-text-700 paragraph">Ce choix fort fournit le double avantage de réduire les coûts de fabrication de la maison et d'en augmenter la qualité. Parce que moins de changements conduisent à moins d'erreurs, et parce que les économies sur la fabrication nous permettent d'investir dans des matériaux de qualité supérieure, la Maison&nbsp;Léo propose un rapport qualité prix au-delà de toute concurrence.</p>
               <p class="open-sans gray-text-700 paragraph">Je vous propose de découvrir votre Maison&nbsp;Léo. À vous de jouer&nbsp;!</p>
               <p class="open-sans gray-text-700 paragraph text-right mb-0">Xavier Jaffray</p>
@@ -132,23 +132,23 @@
           <table class="table table-striped mt-3 open-sans z-depth-1">
             <tbody>
               <tr>
-                <th class="col-auto text-center gray-th"><i class="fa fa-arrows-alt"></i></th>
-                <th class="col-auto gray-th pl-0">Surface</th>
+                <th class="col-auto text-center lead-th"><i class="fa fa-arrows-alt"></i></th>
+                <th class="col-auto lead-th pl-0">Surface</th>
                 <td class="col">87&nbsp;m<sup>2</sup></td>
               </tr>
               <tr>
-                <th class="col-auto text-center gray-th"><i class="fa fa-image"></i></th>
-                <th class="col-auto gray-th pl-0">Surface&nbsp;vitrée</th>
+                <th class="col-auto text-center lead-th"><i class="fa fa-image"></i></th>
+                <th class="col-auto lead-th pl-0">Surface&nbsp;vitrée</th>
                 <td class="col">16&nbsp;m<sup>2</sup></td>
               </tr>
               <tr>
-                <th class="col-auto text-center gray-th"><i class="fa fa-thermometer"></i></th>
-                <th class="col-auto gray-th pl-0">Chauffage</th>
+                <th class="col-auto text-center lead-th"><i class="fa fa-thermometer"></i></th>
+                <th class="col-auto lead-th pl-0">Chauffage</th>
                 <td class="col">Pompe chaleur air / air</td>
               </tr>
               <tr>
-                <th class="col-auto text-center gray-th"><i class="fa fa-cube"></i></th>
-                <th class="col-auto gray-th pl-0">Structure</th>
+                <th class="col-auto text-center lead-th"><i class="fa fa-cube"></i></th>
+                <th class="col-auto lead-th pl-0">Structure</th>
                 <td class="col">Ossature bois</td>
               </tr>
             </tbody>
@@ -158,23 +158,23 @@
           <table class="table table-striped mt-3 open-sans z-depth-1">
             <tbody>
               <tr>
-                <th class="col-auto text-center gray-th"><i class="fa fa-money"></i></th>
-                <th class="col-auto gray-th pl-0">Prix</th>
+                <th class="col-auto text-center lead-th"><i class="fa fa-money"></i></th>
+                <th class="col-auto lead-th pl-0">Prix</th>
                 <td class="col">87&nbsp;900&nbsp;&euro;</td>
               </tr>
               <tr>
-                <th class="col-auto text-center gray-th"><i class="fa fa-clone"></i></th>
-                <th class="col-auto gray-th pl-0"> Volets </th>
+                <th class="col-auto text-center lead-th"><i class="fa fa-clone"></i></th>
+                <th class="col-auto lead-th pl-0"> Volets </th>
                 <td class="col">Roulants&nbsp;PVC</td>
               </tr>
               <tr>
-                <th class="col-auto text-center gray-th"><i class="fa fa-cubes"></i></th>
-                <th class="col-auto gray-th pl-0">Pièces</th>
+                <th class="col-auto text-center lead-th"><i class="fa fa-cubes"></i></th>
+                <th class="col-auto lead-th pl-0">Pièces</th>
                 <td class="col">4</td>
               </tr>
               <tr>
-                <th class="col-auto text-center gray-th"><i class="fa fa-fire"></i></th>
-                <th class="col-auto gray-th pl-0">Énergie&nbsp;/&nbsp;GES</th>
+                <th class="col-auto text-center lead-th"><i class="fa fa-fire"></i></th>
+                <th class="col-auto lead-th pl-0">Énergie&nbsp;/&nbsp;GES</th>
                 <td class="col">Classes A / A</td>
               </tr>
             </tbody>
@@ -279,11 +279,11 @@
     </div>
   </div>
 
-  <div class="relative light-gray">
+  <div class="relative light-gray" id="contact">
     <div class="transition-triangle light-gray top">
       <%= PhoenixInlineSvg.Helpers.svg_image(@conn, "triangle") %>
     </div>
-    <div class="container spacer" id="contact">
+    <div class="container spacer">
       <div class="row align-items-center justify-content-center">
         <div class="col-12 col-md-6 col-lg-5 order-lg-2 order-md-2">
           <div class="p-3">
@@ -364,4 +364,45 @@
       </div>
     </div>
   </footer>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="contactModal" tabindex="-1" role="dialog" aria-labelledby="contactModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title blue-text" id="contactModalLabel">Contact</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <%= form_for @conn, page_path(@conn, :contact), [as: "contact"], fn f-> %>
+          <div class="form-group row">
+            <label class="col-sm-3 col-form-label">Prénom</label>
+            <div class="col-sm-9">
+              <%= text_input f, :first_name, placeholder: "Marie", class: "form-control" %>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-sm-3 col-form-label">Nom</label>
+            <div class="col-sm-9">
+              <%= text_input f, :last_name, placeholder: "Dupont", class: "form-control" %>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-sm-3 col-form-label">Téléphone</label>
+            <div class="col-sm-9">
+              <%= text_input f, :phone, placeholder: "06 12 34 56 78", class: "form-control" %>
+            </div>
+          </div>
+          <div class="clearfix">
+            <div class="pull-right">
+              <button type="submit" class="btn btn-blue mr-0 mb-0"><i class="fa fa-paper-plane mr-2"></i> Appelez-moi</button>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
 </div>
