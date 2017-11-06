@@ -61,6 +61,7 @@ defmodule PlumWeb.Router do
     get "/login", PageController, :login
     get "/merci", PageController, :merci
     get "/maison-plus-terrain/:id", AdController, :public
+    get "/annonces-maison-plus-terrain", AdController, :public_index
     get "/maison-plus-terrain/:id/login", AdController, :login
     get "/maison-plus-terrain/:id/cgu", AdController, :cgu
   end

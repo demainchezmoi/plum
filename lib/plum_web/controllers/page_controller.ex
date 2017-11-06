@@ -2,6 +2,8 @@ defmodule PlumWeb.PageController do
   use PlumWeb, :controller
   alias PlumWeb.Email
   alias PlumWeb.Mailer
+  alias Plum.Sales
+  alias Plum.Repo
 
   plug PlumWeb.Plugs.JustInsertedUser when action in [:prospect]
 
@@ -34,13 +36,19 @@ defmodule PlumWeb.PageController do
   end
 
   def contact(conn, %{"contact" => contact_params}) do
-    if not (is_undef(contact_params, "email") and is_undef(contact_params, "phone")) do
-      Email.contact_email(contact_params) |> Mailer.deliver
-      conn |> put_flash(:info, "Votre demande de contact a bien été prise en compte.")
+    conn =
+      if not (is_undef(contact_params, "email") and is_undef(contact_params, "phone")) do
+        Email.contact_email(contact_params) |> Mailer.deliver
+        conn |> put_flash(:info, "Votre demande de contact a bien été prise en compte.")
+      else
+        conn |> put_flash(:error, "Merci de renseigner votre numéro de téléphone ou votre email pour prendre contact.")
+      end
+    if not is_nil(ad = contact_params["ad"]) do
+      ad = Sales.get_ad!(ad) |> Repo.preload(:land)
+      render conn, PlumWeb.AdView, "public.html", %{ad: ad}
     else
-      conn |> put_flash(:error, "Merci de renseigner votre numéro de téléphone ou votre email pour prendre contact.")
+      conn |> render("index.html")
     end
-    |> render("index.html")
   end
 
   def is_undef(params, field) do

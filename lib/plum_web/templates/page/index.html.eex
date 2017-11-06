@@ -8,24 +8,24 @@
   </a>
 
   <!-- Links -->
-  <ul class="navbar-nav ml-auto d-flex flex-row">
-    <li class="nav-item active small-xs mr-2">
-      <a class="nav-link d-flex flex-column flex-sm-row align-items-center" data-toggle="modal" data-target="#contactModal">
-        <i class="fa-stack mr-2">
-          <i class="fa fa-stack-2x fa-circle pink-text"></i>
-          <i class="fa fa-phone fa-stack-1x white-text"></i>
-        </i>
-        Contactez-moi
-      </a>
-    </li>
-    <li class="nav-item active small-xs">
-      <a class="nav-link d-flex flex-column flex-sm-row align-items-center" href="#">
-        <i class="fa-stack mr-2">
+  <ul class="navbar-nav ml-auto d-flex flex-row align-items-center">
+    <li class="nav-item active mr-2">
+      <a class="small nav-link d-flex flex-column flex-sm-row align-items-center" href="<%= ad_path(@conn, :public_index) %>">
+        <i class="fa-stack mr-2 d-none d-sm-inline-block">
           <i class="fa fa-stack-2x fa-circle pink-text"></i>
           <i class="fa fa-home fa-stack-1x white-text"></i>
         </i>
-        Voir les offres
+        <span><span class="d-none d-sm-inline">Les o</span><span class="d-sm-none">O</span>ffres</span>
       </a>
+    </li>
+    <li class="nav-item active small-xs">
+      <div class="media mt-0 small white-text d-flex align-items-center flex-row">
+        <img class="mr-2 rounded-circle z-depth-1 tiny-avatar" src="http://adebeo.co.in/wp-content/uploads/2015/04/denis_bolomier_india.jpg" alt="">
+        <div class="media-body">
+          <p class="my-0">Denis Bolomier</p>
+          <a href="tel:0663742535" class="font-bold pink white-text p-0 my-0 d-inline-block">06 63 74 25 35</a>
+        </div>
+      </div>
     </li>
   </ul>
   <!-- Links -->
@@ -51,7 +51,7 @@
           </h3>
           <h1 class="h1-responsive mt-0 text-center font-thin mb-4">Votre maison familiale</h1>
           <div class="mr-auto ml-auto open-sans gray-text-700 text-center mt-4 mb-3" style="max-width: 500px;">
-            <p class="mb-0 small-xs">Faites construire votre T4 moderne pour 87&nbsp;900&nbsp;&euro;. Emménagez et dites adieu aux loyers en moins de huit mois.</p>
+            <p class="mb-0 small-xs">Faites construire votre T4 moderne pour <span style="font-weight: 700">87&nbsp;900&nbsp;&euro;</span>. Emménagez et dites adieu aux loyers en moins de huit mois.</p>
           </div>
         </div>
       </div>
@@ -297,7 +297,7 @@
                   <p class="text-secondary mb-0 small">Votre contact&nbsp;:</p>
                   <h5 class="my-0">Denis Bolomier</h5>
                   <a href="tel:0663742535" class="font-bold pink white-text p-1 my-1 d-inline-block">06 63 74 25 35</a>
-                  <small class="gray-text-700">ou</small> <a class="gray-text-700 text-underline" data-toggle="modal" data-target="#contactModal">contactez-moi</a>
+                  <%# <small class="gray-text-700">ou</small> <a class="gray-text-700 text-underline" data-toggle="modal" data-target="#contactModal">contactez-moi</a> %>
                 </div>
               </div>
             </div>
@@ -305,7 +305,7 @@
         </div>
         <div class="col-12 col-md-6 col-lg-5">
           <div class="z-depth-1 p-4 white m-1">
-            <p class="indigo-text">Contact</p>
+            <p class="indigo-text">Contactez-moi</p>
             <%= form_for @conn, page_path(@conn, :contact), [as: "contact"], fn f-> %>
               <div class="form-group row">
                 <label class="col-sm-3 col-form-label">Prénom</label>
@@ -374,51 +374,4 @@
       </div>
     </div>
   </footer>
-</div>
-
-<!-- Modal -->
-<div class="modal fade" id="contactModal" tabindex="-1" role="dialog" aria-labelledby="contactModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title indigo-text" id="contactModalLabel">Contact</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <%= form_for @conn, page_path(@conn, :contact), [as: "contact"], fn f-> %>
-          <div class="form-group row">
-            <label class="col-sm-3 col-form-label">Prénom</label>
-            <div class="col-sm-9">
-              <%= text_input f, :first_name, placeholder: "Marie", class: "form-control" %>
-            </div>
-          </div>
-          <div class="form-group row">
-            <label class="col-sm-3 col-form-label">Nom</label>
-            <div class="col-sm-9">
-              <%= text_input f, :last_name, placeholder: "Dupont", class: "form-control" %>
-            </div>
-          </div>
-          <div class="form-group row">
-            <label class="col-sm-3 col-form-label">Téléphone</label>
-            <div class="col-sm-9">
-              <%= text_input f, :phone, placeholder: "06 12 34 56 78", class: "form-control" %>
-            </div>
-          </div>
-          <div class="form-group row">
-            <label class="col-sm-3 col-form-label">Email</label>
-            <div class="col-sm-9">
-              <%= text_input f, :email, placeholder: "marie.dupont@email.com", class: "form-control" %>
-            </div>
-          </div>
-          <div class="clearfix">
-            <div class="pull-right">
-              <button type="submit" class="btn btn-indigo mr-0 mb-0"><i class="fa fa-paper-plane mr-2"></i> Contactez-moi</button>
-            </div>
-          </div>
-        <% end %>
-      </div>
-    </div>
-  </div>
 </div>

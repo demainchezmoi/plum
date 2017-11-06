@@ -22,7 +22,7 @@ defmodule Plum.Sales do
 
   """
   def list_ads do
-    Repo.all(Ad)
+    Ad |> preload(:land) |> Repo.all()
   end
 
   @doc """

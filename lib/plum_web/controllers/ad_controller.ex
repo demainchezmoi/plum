@@ -3,14 +3,27 @@ defmodule PlumWeb.AdController do
 
   alias Plum.Repo
   alias Plum.Sales
+  alias Plum.Sales.Ad
   alias PlumWeb.Mailer
   alias PlumWeb.Email
+  import Ecto.Query
 
   plug PlumWeb.Plugs.RequireLogin, {:html, []} when action in [:interested]
 
   def public(conn, %{"id" => id}) do
     ad = Sales.get_ad!(id) |> Repo.preload(:land)
     conn |> render("public.html", ad: ad)
+  end
+
+  def public_index(conn, _params) do
+    ads = Sales.list_ads()
+    ads = 
+      Ad
+      |> preload(:land)
+      |> where([ad], ad.active == true)
+      |> Repo.all
+
+    conn |> render("public_index.html", ads: ads)
   end
 
   def login(conn, %{"id" => id}) do

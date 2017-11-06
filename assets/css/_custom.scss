@@ -18,7 +18,7 @@ $spacers: (
 
 .after-nav {
   position: relative;
-  top: 65px;
+  top: 70px;
 }
 
 $spacer-ratio: 1;
@@ -44,6 +44,14 @@ $light-gray: #F5F5F5;
   @include media-breakpoint-up(xs) { width: 50px; }
   @include media-breakpoint-up(sm) { width: 70px; }
   @include media-breakpoint-up(lg) { width: 85px; }
+}
+
+.small {
+  font-size: small;
+}
+
+.tiny-avatar {
+  width: 25px;
 }
 
 .responsive-small-avatar {
@@ -93,6 +101,13 @@ img.flip {
   filter: FlipH;
   -ms-filter: "FlipH";
 }
+
+// .fa-stack .logo-svg {
+  // & g { stroke: white; }
+  // @extend .fa, .fa-stack-1x;
+  // width: 30px;
+  // height: 30px;
+// }
 
 .logo-svg {
   width: 30px;
@@ -178,6 +193,10 @@ p.paragraph {
   @include media-breakpoint-down(xs) {
     font-size: 70%;
   }
+}
+
+.tiny {
+  font-size: 70%;
 }
 
 .small-xs {

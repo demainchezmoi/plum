@@ -1,0 +1,37 @@
+<nav class="navbar navbar-expand-lg navbar-dark indigo fixed">
+  <a class="navbar-brand d-flex justify-content-center align-items-center small-xs" href="/">
+    <%= PhoenixInlineSvg.Helpers.svg_image(@conn, "logo") %>
+    Maison&nbsp;Léo
+  </a>
+  <!-- Links -->
+  <ul class="navbar-nav ml-auto d-flex flex-row">
+    <li class="nav-item active small-xs">
+      <div class="media mt-0 small white-text d-flex align-items-center flex-row">
+        <img class="mr-2 rounded-circle z-depth-1 tiny-avatar" src="http://adebeo.co.in/wp-content/uploads/2015/04/denis_bolomier_india.jpg" alt="">
+        <div class="media-body">
+          <p class="my-0">Denis Bolomier</p>
+          <a href="tel:0663742535" class="font-bold pink white-text p-0 my-0 d-inline-block">06 63 74 25 35</a>
+        </div>
+      </div>
+    </li>
+  </ul>
+
+  <!-- Links -->
+</nav>
+
+<div class="container after-nav">
+  <div class="h3-responsive blue-text font-black d-flex justify-content-start align-items-center mt-4">
+    <%= PhoenixInlineSvg.Helpers.svg_image(@conn, "logo") %>
+    Maison&nbsp;Léo&nbsp;
+  </div>
+  <h1 class="h2-responsive mt-0 mb-3 gray-text-700 font-bold">Offres Maison&nbsp;Léo&nbsp;+&nbsp;terrain</h1>
+  <ul class="list-group">
+    <%= for ad <- @ads do %>
+      <li class="list-group-item">
+        <a class="pull-right" href="<%= ad_path(@conn, :public, ad) %>"><i class="fa fa-eye mr-1"></i> Consulter</a>
+        <div class="font-black indigo-text"><%= raw Number.Currency.number_to_currency(ad.land.price + ad.house_price) %></div>
+        <i class="fa fa-map-marker mr-1"></i> <%= ad.land.city %> (<%= ad.land.department %>)
+      </li>
+    <% end %>
+  </ul>
+</div>
