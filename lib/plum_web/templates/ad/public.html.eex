@@ -25,22 +25,25 @@
 </nav>
 
 <div class="container spacer after-nav">
-  <div class="row mb-4">
+  <div class="row">
     <div class="col mb-3 order-lg-2">
-      <div class="row">
-        <div class="col">
-          <h5 class="mb-3"><i class="fa fa-map-marker mx-1 blue-text"></i> <%= @ad.land.city %> (<%= @ad.land.department %>)</h5>
-          <h1 class="h3-responsive font-bold gray-text-700 mb-2">Maison&nbsp;Léo 4 pièces + Terrain <br /> <span class="blue-text font-black"><%= raw Number.Currency.number_to_currency(@ad.land.price + @ad.house_price) %></span></h1>
+      <div class="row justify-content-start">
+        <div class="col-12 col-sm order-sm-1">
+          <p class="lead mb-1 font-thin"><i class="fa fa-map-marker mx-1 indigo-text"></i> <%= @ad.land.city %> (<%= @ad.land.department %>)</p>
+          <h1 class="h3-responsive font-bold gray-text-700 mb-2">Maison 4 pièces + Terrain <span class="blue-text font-black"><%= raw Number.Currency.number_to_currency(@ad.land.price + @ad.house_price) %></span></h1>
         </div>
-        <div class="col-sm-auto">
-          <div class="tiny gray-text-700 d-none d-sm-block">Envoyer à un ami&nbsp;:</div>
-          <div class="fb-share-button" data-href="<%= ad_url(@conn, :public, @ad) %>" data-layout="button_count" data-size="large" data-mobile-iframe="true"></div>
+        <div class="col-auto col-sm-12 order-sm-3">
+          <button class="btn btn-pink ml-0 mt-0" data-toggle="modal" data-target="#contactModal">Je suis intéressé(e)</button>
+        </div>
+        <div class="col-auto col-sm-auto order-sm-2 pl-0">
+          <div class="tiny gray-text-700">Envoyer à un ami&nbsp;:</div>
+          <div class="fb-share-button" data-href="<%= ad_url(@conn, :public, @ad) %>" data-layout="button_count" data-size="small" data-mobile-iframe="true"></div>
         </div>
       </div>
     </div>
 
     <div class="col-12 col-lg-6 mb-4 order-lg-5 mb-4">
-      <p class="font-bold gray-text-700">Votre Maison&nbsp;Léo</p>
+      <p class="font-bold gray-text-700 d-none d-sm-block">Votre Maison&nbsp;Léo</p>
 			<div id="carouselExampleIndicators" class="carousel slide img-fluid" data-ride="carousel">
   			<ol class="carousel-indicators">
     			<li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
@@ -66,7 +69,7 @@
     </div>
 
     <div class="col-12 mb-4 order-lg-4">
-      <p class="text-secondary open-sans mb-0">Devenez propriétaire à <%= @ad.land.city %> (<%= @ad.land.department %>) pour <%= raw Number.Currency.number_to_currency(@ad.land.price + @ad.house_price) %> avec cette opportunité Maison&nbsp;Léo + terrain idéal primo-accédant. Faites construire votre T4 moderne, emménagez et dites adieu aux loyers en moins de huit mois&nbsp;!</p>
+      <p class="text-secondary open-sans mb-0">Devenez propriétaire à <%= @ad.land.city %> (<%= @ad.land.department %>) pour <%= raw Number.Currency.number_to_currency(@ad.land.price + @ad.house_price) %> avec cette opportunité Maison&nbsp;Léo + terrain idéale primo-accédant. Faites construire votre T4 moderne, emménagez et dites adieu aux loyers en moins de huit mois&nbsp;!</p>
 		</div>
 
     <div class="col-12 col-lg-6 mb-4 order-lg-6">
@@ -76,12 +79,17 @@
           <tr>
             <th class="col-auto text-center lead-th"><i class="fa fa-home"></i></th>
             <th class="col-auto lead-th pl-0">Maison</th>
-            <td class="col">87&nbsp;900&nbsp;&euro; <span class="text-secondary">/</span> 87&nbsp;m<sup>2</sup></td>
+            <td class="col"></span> 87&nbsp;m<sup>2</sup> <span class="text-secondary">pour</span> 87&nbsp;900&nbsp;&euro; <span class="text-secondary"></td>
           </tr>
           <tr>
             <th class="col-auto text-center lead-th"><i class="fa fa-tree"></i></th>
             <th class="col-auto lead-th pl-0">Terrain</th>
-            <td class="col"><%= raw Number.Currency.number_to_currency(@ad.land.price) %> <span class="text-secondary">/</span> <%= @ad.land.surface %>&nbsp;m<sup>2</sup></td>
+            <td class="col"></span> <%= @ad.land.surface %>&nbsp;m<sup>2</sup> <span class="text-secondary">pour</span> <%= raw Number.Currency.number_to_currency(@ad.land.price) %> <span class="text-secondary"></td>
+          </tr>
+          <tr>
+            <th class="col-auto text-center lead-th"><i class="fa fa-wrench"></i></th>
+            <th class="col-auto lead-th pl-0">Adaptation&nbsp;sol</th>
+            <td class="col"></span>prix à déterminer</td>
           </tr>
           <tr>
             <th class="col-auto text-center lead-th"><i class="fa fa-cubes"></i></th>
@@ -141,14 +149,14 @@
               <div class="media-body">
                 <p class="text-secondary mb-0 small">Votre contact&nbsp;:</p>
                 <h5 class="my-0">Denis Bolomier</h5>
-                <a href="tel:0663742535" class="font-bold pink white-text p-1 my-1 d-inline-block">06 63 74 25 35</a>
+                <a href="tel:0663742535" class="font-bold pink white-text px-1 my-1 d-inline-block">06 63 74 25 35</a>
               </div>
             </div>
           </div>
         </div>
       </div>
       <div class="col-12 col-md-6 col-lg-6">
-        <div class="z-depth-1 p-4 white m-1"> <p class="indigo-text">Contactez-moi</p>
+        <div class="z-depth-1 p-4 white m-1"> <p class="indigo-text">Contactez-moi pour cette annonce</p>
           <%= form_for @conn, page_path(@conn, :contact), [as: "contact"], fn f-> %>
             <div class="form-group row">
               <label class="col-sm-3 col-form-label">Prénom</label>
@@ -211,6 +219,53 @@
     </div>
   </div>
 </footer>
+<!-- Modal -->
+<div class="modal fade" id="contactModal" tabindex="-1" role="dialog" aria-labelledby="contactModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title indigo-text" id="contactModalLabel">Contactez-moi pour cette annonce</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <%= form_for @conn, page_path(@conn, :contact), [as: "contact"], fn f-> %>
+          <div class="form-group row">
+            <label class="col-sm-3 col-form-label">Prénom</label>
+            <div class="col-sm-9">
+              <%= text_input f, :first_name, placeholder: "Marie", class: "form-control" %>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-sm-3 col-form-label">Nom</label>
+            <div class="col-sm-9">
+              <%= text_input f, :last_name, placeholder: "Dupont", class: "form-control" %>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-sm-3 col-form-label">Téléphone</label>
+            <div class="col-sm-9">
+              <%= text_input f, :phone, placeholder: "06 12 34 56 78", class: "form-control" %>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-sm-3 col-form-label">Email</label>
+            <div class="col-sm-9">
+              <%= text_input f, :email, placeholder: "marie.dupont@email.com", class: "form-control" %>
+            </div>
+          </div>
+          <div class="clearfix">
+            <div class="pull-right">
+              <button type="submit" class="btn btn-indigo mr-0 mb-0"><i class="fa fa-paper-plane mr-2"></i> Envoyer</button>
+            </div>
+          </div>
+          <%= hidden_input f, :ad, value: @ad.id %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.1/dist/leaflet.css" />
 <script src="https://unpkg.com/leaflet@1.0.1/dist/leaflet.js"></script>
 <script type="text/javascript">land_location=<%= raw Poison.encode!(@ad.land.location) %></script>

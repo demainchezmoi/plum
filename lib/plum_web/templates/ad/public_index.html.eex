@@ -30,7 +30,7 @@
       <li class="list-group-item">
         <a class="pull-right" href="<%= ad_path(@conn, :public, ad) %>"><i class="fa fa-eye mr-1"></i> Consulter</a>
         <a href="<%= ad_path(@conn, :public, ad) %>" class="d-block font-black indigo-text"><%= raw Number.Currency.number_to_currency(ad.land.price + ad.house_price) %></a>
-        <i class="fa fa-map-marker mr-1"></i> <%= ad.land.city %> (<%= ad.land.department %>)
+        <span class="gray-text-700"><i class="fa fa-map-marker mr-1"></i> <%= ad.land.city %> (<%= ad.land.department %>)</span>
       </li>
     <% end %>
   </ul>
