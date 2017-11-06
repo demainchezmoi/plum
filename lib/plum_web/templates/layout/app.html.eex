@@ -7,6 +7,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <meta name="google-site-verification" content="lAglJoUYSBB4sKtd6nWcHbvYwtkh4UqvcPGS7X2Tr3k" />
+    <meta property="og:image" content="https://s3-eu-west-1.amazonaws.com/demainchezmoi/cloudfront_assets/images/ete-jour-nuage-min.png" />
 
     <title>Maison Léo - Maison individuelle pour la famille</title>
     <link rel="stylesheet" href="<%= static_path(@conn, "/css/app.css") %>">
@@ -35,6 +36,16 @@
   </head>
 
   <body data-js-view-path="<%= @conn.assigns[:view_name] || js_view_path(@conn, @view_template) %>">
+
+		<div id="fb-root"></div>
+		<script>(function(d, s, id) {
+  		var js, fjs = d.getElementsByTagName(s)[0];
+  		if (d.getElementById(id)) return;
+  		js = d.createElement(s); js.id = id;
+  		js.src = 'https://connect.facebook.net/fr_FR/sdk.js#xfbml=1&version=v2.10&appId=128372621147337';
+  		fjs.parentNode.insertBefore(js, fjs);
+		}(document, 'script', 'facebook-jssdk'));</script>
+
     <div class="d-flex justify-content-center">
       <%= if get_flash(@conn, :info) do %>
         <div class="alert alert-main alert-primary alert-dismissible" role="alert">

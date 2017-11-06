@@ -30,8 +30,11 @@
   <div class="row mb-4">
 
     <div class="col mb-3 order-lg-2">
+    <div class="pull-right">
+      <div class="fb-share-button" data-href="http://www.maisons-leo.fr/maison-plus-terrain/2" data-layout="button_count" data-size="large" data-mobile-iframe="true"><a class="fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Fwww.maisons-leo.fr%2Fmaison-plus-terrain%2F2&amp;src=sdkpreparse">Partager</a></div>
+    </div>
       <h5 class="mb-3"><i class="fa fa-map-marker mr-1 blue-text"></i> <%= @ad.land.city %> (<%= @ad.land.department %>)</h5>
-      <h1 class="h2-responsive font-bold gray-text-700 mb-2">Maison&nbsp;Léo 4 pièces + Terrain <br /> <span class="blue-text font-black"><%= raw Number.Currency.number_to_currency(@ad.land.price + @ad.house_price) %></span></h1>
+      <h1 class="h3-responsive font-bold gray-text-700 mb-2">Maison&nbsp;Léo 4 pièces + Terrain <br /> <span class="blue-text font-black"><%= raw Number.Currency.number_to_currency(@ad.land.price + @ad.house_price) %></span></h1>
     </div>
 
     <div class="col-12 col-lg-6 mb-4 order-lg-5 mb-4">
