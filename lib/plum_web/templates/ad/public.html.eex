@@ -29,10 +29,11 @@
 
     <div class="col mb-3 order-lg-2">
       <h5 class="mb-3"><i class="fa fa-map-marker mr-1 blue-text"></i> <%= @ad.land.city %> (<%= @ad.land.department %>)</h5>
-      <h1 class="h2-responsive font-bold gray-text-700 mb-2">Maison&nbsp;Léo 4 pièces 87&nbsp;m<sup>2</sup> <br /> <span class="blue-text font-black"><%= raw Number.Currency.number_to_currency(@ad.land.price + @ad.house_price) %></span></h1>
+    <h1 class="h2-responsive font-bold gray-text-700 mb-2">Maison&nbsp;Léo 4 pièces <span class="blue-text">87&nbsp;m<sup>2</sup></span> + terrain <span class="blue-text"><%= @ad.land.surface %>&nbsp;m<sup>2</sup></span><br /> <span class="blue-text font-black"><%= raw Number.Currency.number_to_currency(@ad.land.price + @ad.house_price) %></span></h1>
     </div>
 
     <div class="col-12 col-lg-6 mb-3 order-lg-5 mb-3">
+      <p class="font-bold gray-text-700">Découvrez la Maison&nbsp;Léo</p>
 			<div id="carouselExampleIndicators" class="carousel slide img-fluid mb-3" data-ride="carousel">
   			<ol class="carousel-indicators">
     			<li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
@@ -76,53 +77,55 @@
     </div>
 
     <div class="col-12 col-lg-6 mb-3 order-lg-6">
+      <p class="font-bold gray-text-700">Découvrez ses caractéristiques</p>
       <table class="table table-responsive table-striped table-nowrap open-sans z-depth-1">
         <tbody>
           <tr>
             <th class="col-auto text-center lead-th"><i class="fa fa-home"></i></th>
             <th class="col-auto lead-th pl-0">Maison</th>
-            <td class="col-auto">87&nbsp;900&nbsp;&euro; <span class="text-secondary">/</span> 87&nbsp;m<sup>2</sup></td>
+            <td class="col">87&nbsp;900&nbsp;&euro; <span class="text-secondary">/</span> 87&nbsp;m<sup>2</sup></td>
           </tr>
           <tr>
             <th class="col-auto text-center lead-th"><i class="fa fa-tree"></i></th>
             <th class="col-auto lead-th pl-0">Terrain</th>
-            <td class="col-auto"><%= raw Number.Currency.number_to_currency(@ad.land.price) %> <span class="text-secondary">/</span> <%= @ad.land.surface %>&nbsp;m<sup>2</sup></td>
+            <td class="col"><%= raw Number.Currency.number_to_currency(@ad.land.price) %> <span class="text-secondary">/</span> <%= @ad.land.surface %>&nbsp;m<sup>2</sup></td>
           </tr>
           <tr>
             <th class="col-auto text-center lead-th"><i class="fa fa-cubes"></i></th>
             <th class="col-auto lead-th pl-0">Pièces</th>
-            <td class="col-auto">4</td>
+            <td class="col">4</td>
           </tr>
           <tr>
             <th class="col-auto text-center lead-th"><i class="fa fa-fire"></i></th>
             <th class="col-auto lead-th pl-0">Énergie&nbsp;/&nbsp;GES</th>
-            <td class="col-auto">Classes A / A</td>
+            <td class="col">Classes A / A</td>
           </tr>
           <tr>
             <th class="col-auto text-center lead-th"><i class="fa fa-image"></i></th>
             <th class="col-auto lead-th pl-0">Surface&nbsp;vitrée</th>
-            <td class="col-auto">16&nbsp;m<sup>2</sup></td>
+            <td class="col">16&nbsp;m<sup>2</sup></td>
           </tr>
           <tr>
             <th class="col-auto text-center lead-th"><i class="fa fa-thermometer"></i></th>
             <th class="col-auto lead-th pl-0">Chauffage</th>
-            <td class="col-auto">Pompe chaleur air / air</td>
+            <td class="col">Pompe chaleur air / air</td>
           </tr>
           <tr>
             <th class="col-auto text-center lead-th"><i class="fa fa-cube"></i></th>
             <th class="col-auto lead-th pl-0">Structure</th>
-            <td class="col-auto">Ossature bois</td>
+            <td class="col">Ossature bois</td>
           </tr>
           <tr>
             <th class="col-auto text-center lead-th"><i class="fa fa-clone"></i></th>
             <th class="col-auto lead-th pl-0"> Volets </th>
-            <td class="col-auto">Roulants&nbsp;PVC</td>
+            <td class="col">Roulants&nbsp;PVC</td>
           </tr>
         </tbody>
       </table>
     </div>
 
     <div class="col-12 mb-3 order-lg-7">
+      <p class="font-bold gray-text-700">Découvrez votre quartier&nbsp;!</p>
       <div id="map" class="img-flex"></div>
     </div>
   </div>

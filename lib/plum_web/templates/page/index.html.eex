@@ -104,7 +104,7 @@
           <div class="media">
             <img class="mr-3 rounded-circle z-depth-1 responsive-avatar" src="https://media-exp1.licdn.com/media/AAEAAQAAAAAAAAo7AAAAJGY2ZGQ1NDMyLWI0YTctNDQ4MC05NTVhLTQwM2U1ODc4MWU0Nw.jpg" alt="">
             <div class="media-body text-justify">
-              <p class="font-bold gray-text-799">La Maison&nbsp;Léo&nbsp;: un concept fort pour une maison de choix.</p>
+              <p class="font-bold gray-text-700">La Maison&nbsp;Léo&nbsp;: un concept fort pour une maison de choix.</p>
               <p class="open-sans gray-text-700 paragraph">La Maison&nbsp;Léo a la particularité de ne pas être une maison sur mesure&nbsp;: elle dispose d'un plan unique, optimisé pour la vie familiale.</p>
               <p class="open-sans gray-text-700 paragraph">Ce choix fort fournit le double avantage de réduire les coûts de fabrication de la maison et d'en augmenter la qualité. Parce que moins de changements conduisent à moins d'erreurs, et parce que les économies sur la fabrication nous permettent d'investir dans des matériaux de qualité supérieure, la Maison&nbsp;Léo propose un rapport qualité prix au-delà de toute concurrence.</p>
               <p class="open-sans gray-text-700 paragraph">Je vous propose de découvrir votre Maison&nbsp;Léo. À vous de jouer&nbsp;!</p>
@@ -129,7 +129,7 @@
       </div>
       <div class="row justify-content-center">
         <div class="col-sm-6 col-lg-6 col-xs-12">
-          <table class="table table-striped mt-3 open-sans z-depth-1">
+          <table class="table table-striped table-responsive mt-3 open-sans z-depth-1">
             <tbody>
               <tr>
                 <th class="col-auto text-center lead-th"><i class="fa fa-arrows-alt"></i></th>
@@ -155,7 +155,7 @@
           </table>
         </div>
         <div class="col-sm-6 col-lg-6 col-xs-12">
-          <table class="table table-striped mt-3 open-sans z-depth-1">
+          <table class="table table-striped table-responsive mt-3 open-sans z-depth-1">
             <tbody>
               <tr>
                 <th class="col-auto text-center lead-th"><i class="fa fa-money"></i></th>
@@ -289,13 +289,23 @@
           <div class="p-3">
         	  <p class="font-bold gray-text-800">Prenons contact</p>
             <p class="open-sans gray-text-700 paragraph">Nous serions ravis de répondre à toute demande de renseignement ou suggestion.</p>
-				    <p class="open-sans gray-text-700 paragraph">N'hésitez-pas à remplir le formulaire ou à nous joindre au numéro suivant&nbsp;:</p>
-				    <p class="open-sans lead font-bold blue-text">06 63 74 25 35</p>
+				    <p class="open-sans gray-text-700 paragraph">N'hésitez-pas à remplir le formulaire ou à nous joindre directement&nbsp;:</p>
+            <div class="p-3 light-bordered">
+              <div class="media mt-1">
+                <img class="mr-3 rounded-circle z-depth-1 responsive-small-avatar" src="http://adebeo.co.in/wp-content/uploads/2015/04/denis_bolomier_india.jpg" alt="">
+                <div class="media-body">
+                  <p class="text-secondary mb-0 small">Votre contact&nbsp;:</p>
+                  <h5 class="my-0">Denis Bolomier</h5>
+                  <a href="tel:0663742535" class="font-bold pink white-text p-1 my-1 d-inline-block">06 63 74 25 35</a>
+                  <small class="gray-text-700">ou</small> <a class="gray-text-700 text-underline" data-toggle="modal" data-target="#contactModal">contactez-moi</a>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
         <div class="col-12 col-md-6 col-lg-5">
           <div class="z-depth-1 p-4 white m-1">
-            <p class="blue-text">Contact</p>
+            <p class="indigo-text">Contact</p>
             <%= form_for @conn, page_path(@conn, :contact), [as: "contact"], fn f-> %>
               <div class="form-group row">
                 <label class="col-sm-3 col-form-label">Prénom</label>
@@ -323,7 +333,7 @@
               </div>
               <div class="clearfix">
                 <div class="pull-right">
-                  <button type="submit" class="btn btn-blue mr-0 mb-0"><i class="fa fa-paper-plane mr-2"></i> Prendre contact</button>
+                  <button type="submit" class="btn btn-indigo mr-0 mb-0"><i class="fa fa-paper-plane mr-2"></i> Prendre contact</button>
                 </div>
               </div>
             <% end %>
@@ -371,7 +381,7 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title blue-text" id="contactModalLabel">Contact</h5>
+        <h5 class="modal-title indigo-text" id="contactModalLabel">Contact</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -404,7 +414,7 @@
           </div>
           <div class="clearfix">
             <div class="pull-right">
-              <button type="submit" class="btn btn-blue mr-0 mb-0"><i class="fa fa-paper-plane mr-2"></i> Contactez-moi</button>
+              <button type="submit" class="btn btn-indigo mr-0 mb-0"><i class="fa fa-paper-plane mr-2"></i> Contactez-moi</button>
             </div>
           </div>
         <% end %>
