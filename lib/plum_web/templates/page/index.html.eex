@@ -15,7 +15,7 @@
           <i class="fa fa-stack-2x fa-circle pink-text"></i>
           <i class="fa fa-phone fa-stack-1x white-text"></i>
         </i>
-        Appelez-moi
+        Contactez-moi
       </a>
     </li>
     <li class="nav-item active small-xs">
@@ -396,9 +396,15 @@
               <%= text_input f, :phone, placeholder: "06 12 34 56 78", class: "form-control" %>
             </div>
           </div>
+          <div class="form-group row">
+            <label class="col-sm-3 col-form-label">Email</label>
+            <div class="col-sm-9">
+              <%= text_input f, :email, placeholder: "marie.dupont@email.com", class: "form-control" %>
+            </div>
+          </div>
           <div class="clearfix">
             <div class="pull-right">
-              <button type="submit" class="btn btn-blue mr-0 mb-0"><i class="fa fa-paper-plane mr-2"></i> Appelez-moi</button>
+              <button type="submit" class="btn btn-blue mr-0 mb-0"><i class="fa fa-paper-plane mr-2"></i> Contactez-moi</button>
             </div>
           </div>
         <% end %>

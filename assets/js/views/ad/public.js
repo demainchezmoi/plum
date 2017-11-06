@@ -5,6 +5,7 @@ module.exports = class View extends MainView {
   mount() {
     super.mount();
     this.trackPage();
+    this.loadMap(window.land_location);
   }
 
   unmount() {
@@ -15,5 +16,14 @@ module.exports = class View extends MainView {
     const path_elements = window.location.pathname.split('/');
     const ad = path_elements[path_elements.length - 1];
     track("VISIT_AD", {ad: ad})
+  }
+
+  loadMap({lat, lng}) {
+    const map = L.map('map').setView([lat, lng], 12);
+
+    L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png').addTo(map);
+    map.panTo(new L.LatLng(lat, lng));
+
+    new L.circle([lat, lng], 2000).addTo(map);
   }
 }

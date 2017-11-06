@@ -47,6 +47,10 @@ button.img-modal-close {
   @extend .text-shadow;
 }
 
+.table-nowrap td {
+  white-space: nowrap;
+}
+
 .border-radius-0 {
   border-radius: 0 !important;
 }
@@ -91,6 +95,10 @@ img.flip {
 
 .lead-th {
   @extend .white-text, .indigo;
+}
+
+.warning-th {
+  @extend .white-text, .orange;
 }
 
 .large-right-space {
@@ -222,30 +230,6 @@ a.default-color-text {
   }
 }
 
-.carousel-control-next-icon {
-  background-color: black;
-  border-radius: 50%;
-}
-
-.carousel-control-prev-icon {
-  background-color: black;
-  border-radius: 50%;
-}
-
-.carousel-indicators .active {
-  background-color: rgba(0, 0, 0, 0.8);
-}
-
-.carousel-indicators li {
-  background-color: rgba(0, 0, 0, 0.3);
-}
-
-a.carousel-control-prev,
-a.carousel-control-next {
-  height: 100px;
-  top: 130px;
-}
-
 .slider-card {
   // margin-bottom: 35px !important;
   .card-body {
@@ -310,9 +294,7 @@ nav.navbar.translucid {
 }
 
 #map {
-  height: 200px;
-  @include media-breakpoint-up(sm) { height: 300px; }
-  @include media-breakpoint-up(md) { height: 400px; }
+  height: 300px;
 }
 
 .font-light {
@@ -370,47 +352,19 @@ html, body, main {
   background-size: cover;
 }
 
-.intro-2 {
-  position: fixed;
-  top: 0; right: 0; bottom: 0; left: 0;
-  display: block;
-  // background-color: map-get($blue, base);
-  &::after {
-    content: "";
-    background: url("https://s3-eu-west-1.amazonaws.com/demainchezmoi/cloudfront_assets/images/ete-jour-nuage-min.png") no-repeat center center;
-    position: absolute;
-    top: 0; right: 0; bottom: 0; left: 0;
-    // opacity: 0.5;
-  }
-}
-.ellipse-svg {
-  width: 100%;
-  position: absolute;
-  & ellipse { fill: $light-gray; }
-  @include media-breakpoint-up(xs) {
-    bottom: - map-get($intro-1-height, xs) / 4;
-    height: map-get($intro-1-height, xs) / 2;
-  }
-  @include media-breakpoint-up(sm) {
-    bottom: - map-get($intro-1-height, sm) / 4;
-    height: map-get($intro-1-height, sm) / 2;
-  }
-  @include media-breakpoint-up(md) {
-    $shift: map-get($intro-1-height, md) / 2;
-    bottom: - $shift / 2;
-    height: $shift;
-  }
-  @include media-breakpoint-up(lg) {
-    $shift: map-get($intro-1-height, lg) / 1.95;
-    bottom: - $shift / 2;
-    height: $shift;
-  }
-  @include media-breakpoint-up(xl) {
-    $shift: map-get($intro-1-height, xl) / 1.95;
-    bottom: - $shift / 2;
-    height: $shift;
-  }
-}
+// .intro-2 {
+  // position: fixed;
+  // top: 0; right: 0; bottom: 0; left: 0;
+  // display: block;
+  // background-color: black;
+  // &::after {
+    // content: "";
+    // background: url("https://s3-eu-west-1.amazonaws.com/demainchezmoi/cloudfront_assets/images/ete-jour-nuage-min.png") no-repeat center center;
+    // position: absolute;
+    // top: 0; right: 0; bottom: 0; left: 0;
+    // // opacity: 0.4;
+  // }
+// }
 
 .row, .col, div[class^="col-"] {
   z-index: 1;
