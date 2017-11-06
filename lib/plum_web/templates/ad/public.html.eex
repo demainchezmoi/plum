@@ -1,13 +1,19 @@
+<%= if not @ad.active do %>
+  <div class="deactivated-ad">
+    <div class="deactivated-text">Vendu</div>
+  </div>
+<% end %>
+
 <nav class="navbar navbar-expand-lg navbar-dark indigo fixed">
   <a class="navbar-brand d-flex justify-content-center align-items-center small-xs" href="/">
     <%= PhoenixInlineSvg.Helpers.svg_image(@conn, "logo") %>
     Maison&nbsp;Léo
   </a>
   <!-- Links -->
-  <ul class="navbar-nav ml-auto d-flex flex-row">
-    <li class="nav-item active small-xs mr-2">
+  <ul class="navbar-nav ml-auto">
+    <li class="nav-item active small-xs">
       <a class="nav-link" data-toggle="modal" data-target="#contactModal">
-        <i class="fa-stack mr-1">
+        <i class="fa-stack mr-2">
           <i class="fa fa-stack-2x fa-circle pink-text"></i>
           <i class="fa fa-phone fa-stack-1x white-text"></i>
         </i>
@@ -18,27 +24,15 @@
   <!-- Links -->
 </nav>
 
-<div class="container mt-6">
-  <div class="row">
+<div class="container spacer after-nav">
+  <div class="row mb-4">
 
-    <div class="col mb-3">
-      <h5 class=""><i class="fa fa-map-marker mr-1 blue-text"></i> <%= @ad.land.city %> (<%= @ad.land.department %>)</h5>
-      <h1 class="h2-responsive font-bold gray-text-700 mb-2">Maison&nbsp;Léo 4 pièces 87&nbsp;m<sup>2</sup> - <span class="blue-text font-black"><%= raw Number.Currency.number_to_currency(@ad.land.price + @ad.house_price) %></span></h1>
-      <p>Devenez propriétaire à <%= @ad.land.city %> (<%= @ad.land.department %>) avec ce projet de construction Maison&nbsp;Léo idéal primo-accédant.</p>
-		</div>
+    <div class="col mb-3 order-lg-2">
+      <h5 class="mb-3"><i class="fa fa-map-marker mr-1 blue-text"></i> <%= @ad.land.city %> (<%= @ad.land.department %>)</h5>
+      <h1 class="h2-responsive font-bold gray-text-700 mb-2">Maison&nbsp;Léo 4 pièces 87&nbsp;m<sup>2</sup> <br /> <span class="blue-text font-black"><%= raw Number.Currency.number_to_currency(@ad.land.price + @ad.house_price) %></span></h1>
+    </div>
 
-		<div class="col-12 col-lg-auto mb-5">
-		  <div class="p-3 z-depth-1 pink white-text d-inline-block">
-        <a href="tel:0663742535" class="font-bold white-text">06 63 74 25 35</a>
-      </div>
-      <small class="text-secondary">ou</small> <a data-toggle="modal" data-target="#contactModal" >contact</a>
-		</div>
-
-  </div>
-
-  <div class="row">
-
-    <div class="col-12 col-lg-6 mb-3">
+    <div class="col-12 col-lg-6 mb-3 order-lg-5 mb-3">
 			<div id="carouselExampleIndicators" class="carousel slide img-fluid mb-3" data-ride="carousel">
   			<ol class="carousel-indicators">
     			<li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
@@ -61,65 +55,140 @@
     			<span class="sr-only">Next</span>
   			</a>
 			</div>
-      <div id="map" class="img-flex"></div>
     </div>
-    <div class="col-12 col-lg-6">
-      <table class="table table-striped table-nowrap open-sans z-depth-1">
+
+    <div class="col-12 mb-3 order-lg-4">
+      <p class="text-secondary open-sans mb-0">Devenez propriétaire à <%= @ad.land.city %> (<%= @ad.land.department %>) avec ce projet de construction Maison&nbsp;Léo idéal primo-accédant. Faites construire votre T4 moderne, emménagez et dites adieu aux loyers en moins de huit mois&nbsp;!</p>
+		</div>
+
+		<div class="col-12 col-lg-auto mb-3 order-lg-3">
+      <div class="p-3 light-bordered">
+        <div class="media mt-1">
+          <img class="mr-3 rounded-circle z-depth-1 responsive-small-avatar" src="http://adebeo.co.in/wp-content/uploads/2015/04/denis_bolomier_india.jpg" alt="">
+          <div class="media-body">
+            <p class="text-secondary mb-0 small">Votre contact&nbsp;:</p>
+            <h5 class="my-0">Denis Bolomier</h5>
+            <a href="tel:0663742535" class="font-bold pink white-text p-1 my-1 d-inline-block">06 63 74 25 35</a>
+            <small class="gray-text-700">ou</small> <a class="gray-text-700 text-underline" data-toggle="modal" data-target="#contactModal">contactez-moi</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-12 col-lg-6 mb-3 order-lg-6">
+      <table class="table table-responsive table-striped table-nowrap open-sans z-depth-1">
         <tbody>
           <tr>
             <th class="col-auto text-center lead-th"><i class="fa fa-home"></i></th>
             <th class="col-auto lead-th pl-0">Maison</th>
-            <td class="col-auto">87&nbsp;900&nbsp;&euro;</td>
-            <td class="col" style="border-left: 1px solid #e9ecef">87&nbsp;m<sup>2</sup></td>
+            <td class="col-auto">87&nbsp;900&nbsp;&euro; <span class="text-secondary">/</span> 87&nbsp;m<sup>2</sup></td>
           </tr>
           <tr>
             <th class="col-auto text-center lead-th"><i class="fa fa-tree"></i></th>
             <th class="col-auto lead-th pl-0">Terrain</th>
-            <td class="col-auto"><%= raw Number.Currency.number_to_currency(@ad.land.price) %></td>
-            <td class="col" style="border-left: 1px solid #e9ecef"><%= @ad.land.surface %>&nbsp;m<sup>2</sup></td>
+            <td class="col-auto"><%= raw Number.Currency.number_to_currency(@ad.land.price) %> <span class="text-secondary">/</span> <%= @ad.land.surface %>&nbsp;m<sup>2</sup></td>
           </tr>
           <tr>
             <th class="col-auto text-center lead-th"><i class="fa fa-cubes"></i></th>
             <th class="col-auto lead-th pl-0">Pièces</th>
             <td class="col-auto">4</td>
-            <td class="col"></td>
           </tr>
           <tr>
             <th class="col-auto text-center lead-th"><i class="fa fa-fire"></i></th>
             <th class="col-auto lead-th pl-0">Énergie&nbsp;/&nbsp;GES</th>
             <td class="col-auto">Classes A / A</td>
-            <td class="col"></td>
           </tr>
           <tr>
             <th class="col-auto text-center lead-th"><i class="fa fa-image"></i></th>
             <th class="col-auto lead-th pl-0">Surface&nbsp;vitrée</th>
             <td class="col-auto">16&nbsp;m<sup>2</sup></td>
-            <td class="col"></td>
           </tr>
           <tr>
             <th class="col-auto text-center lead-th"><i class="fa fa-thermometer"></i></th>
             <th class="col-auto lead-th pl-0">Chauffage</th>
             <td class="col-auto">Pompe chaleur air / air</td>
-            <td class="col"></td>
           </tr>
           <tr>
             <th class="col-auto text-center lead-th"><i class="fa fa-cube"></i></th>
             <th class="col-auto lead-th pl-0">Structure</th>
             <td class="col-auto">Ossature bois</td>
-            <td class="col"></td>
           </tr>
           <tr>
             <th class="col-auto text-center lead-th"><i class="fa fa-clone"></i></th>
             <th class="col-auto lead-th pl-0"> Volets </th>
             <td class="col-auto">Roulants&nbsp;PVC</td>
-            <td class="col"></td>
           </tr>
         </tbody>
       </table>
     </div>
+
+    <div class="col-12 mb-3 order-lg-7">
+      <div id="map" class="img-flex"></div>
+    </div>
   </div>
-  <div class="row">
-    <div class="col">
+</div>
+
+<div class="relative light-gray" id="contact">
+  <div class="transition-triangle light-gray top">
+    <%= PhoenixInlineSvg.Helpers.svg_image(@conn, "triangle") %>
+  </div>
+  <div class="container pb-6">
+    <div class="row align-items-center justify-content-center">
+      <div class="col-12 col-md-6 col-lg-6 order-lg-2 order-md-2">
+        <div class="p-3">
+        	<p class="font-bold gray-text-800">Prenons contact</p>
+          <p class="open-sans gray-text-700 paragraph">Nous serions ravis de répondre à toute demande de renseignement ou suggestion.</p>
+				  <p class="open-sans gray-text-700 paragraph">N'hésitez-pas à remplir le formulaire ou à nous joindre directement&nbsp;:</p>
+          <div class="p-3 light-bordered">
+            <div class="media mt-1">
+              <img class="mr-3 rounded-circle z-depth-1 responsive-small-avatar" src="http://adebeo.co.in/wp-content/uploads/2015/04/denis_bolomier_india.jpg" alt="">
+              <div class="media-body">
+                <p class="text-secondary mb-0 small">Votre contact&nbsp;:</p>
+                <h5 class="my-0">Denis Bolomier</h5>
+                <a href="tel:0663742535" class="font-bold pink white-text p-1 my-1 d-inline-block">06 63 74 25 35</a>
+                <small class="gray-text-700">ou</small> <a class="gray-text-700 text-underline" data-toggle="modal" data-target="#contactModal">contactez-moi</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-12 col-md-6 col-lg-6">
+        <div class="z-depth-1 p-4 white m-1">
+          <p class="indigo-text">Formulaire de contact</p>
+          <%= form_for @conn, page_path(@conn, :contact), [as: "contact"], fn f-> %>
+            <div class="form-group row">
+              <label class="col-sm-3 col-form-label">Prénom</label>
+              <div class="col-sm-9">
+                <%= text_input f, :first_name, placeholder: "Marie", class: "form-control" %>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-sm-3 col-form-label">Nom</label>
+              <div class="col-sm-9">
+                <%= text_input f, :last_name, placeholder: "Dupont", class: "form-control" %>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-sm-3 col-form-label">Téléphone</label>
+              <div class="col-sm-9">
+                <%= text_input f, :phone, placeholder: "06 12 34 56 78", class: "form-control" %>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-sm-3 col-form-label">Email</label>
+              <div class="col-sm-9">
+                <%= text_input f, :email, placeholder: "marie.dupont@email.com", class: "form-control" %>
+              </div>
+            </div>
+            <%= hidden_input f, :ad, value: @ad.id %>
+            <div class="clearfix">
+              <div class="pull-right">
+                <button type="submit" class="btn btn-indigo mr-0 mb-0"><i class="fa fa-paper-plane mr-2"></i> Envoyer</button>
+              </div>
+            </div>
+          <% end %>
+        </div>
+      </div>
     </div>
   </div>
 </div>
@@ -128,7 +197,7 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title blue-text" id="contactModalLabel">Contact</h5>
+        <h5 class="modal-title indigo-text" id="contactModalLabel">Formulaire de contact</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -161,7 +230,7 @@
           </div>
           <div class="clearfix">
             <div class="pull-right">
-              <button type="submit" class="btn btn-blue mr-0 mb-0"><i class="fa fa-paper-plane mr-2"></i> Contact</button>
+              <button type="submit" class="btn btn-indigo mr-0 mb-0"><i class="fa fa-paper-plane mr-2"></i> Envoyer</button>
             </div>
           </div>
           <%= hidden_input f, :ad, value: @ad.id %>
