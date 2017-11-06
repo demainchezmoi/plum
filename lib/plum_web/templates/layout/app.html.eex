@@ -9,7 +9,7 @@
     <meta name="google-site-verification" content="lAglJoUYSBB4sKtd6nWcHbvYwtkh4UqvcPGS7X2Tr3k" />
     <meta property="og:image" content="https://s3-eu-west-1.amazonaws.com/demainchezmoi/cloudfront_assets/images/ete-jour-nuage-min.png" />
 
-    <title>Maison Léo - Maison individuelle pour la famille</title>
+    <title>Maison Léo - La maison individuelle pour la famille</title>
     <link rel="stylesheet" href="<%= static_path(@conn, "/css/app.css") %>">
 
 		<!-- Facebook Pixel Code -->

@@ -17,8 +17,7 @@ $spacers: (
 );
 
 .after-nav {
-  position: relative;
-  top: 70px;
+  margin-top: 75px;
 }
 
 $spacer-ratio: 1;
@@ -113,7 +112,7 @@ img.flip {
   width: 30px;
   height: 30px;
   & g { stroke-width: 6px; }
-  @extend .m-1;
+  @extend .my-1, .mr-1;
 }
 
 .tech-svg {

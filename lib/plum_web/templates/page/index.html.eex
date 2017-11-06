@@ -11,10 +11,7 @@
   <ul class="navbar-nav ml-auto d-flex flex-row align-items-center">
     <li class="nav-item active mr-2">
       <a class="small-xs nav-link d-flex flex-column flex-sm-row align-items-center" href="<%= ad_path(@conn, :public_index) %>">
-        <i class="fa-stack mr-2 d-none d-sm-inline-block">
-          <i class="fa fa-stack-2x fa-circle pink-text"></i>
-          <i class="fa fa-home fa-stack-1x white-text"></i>
-        </i>
+        <i class="fa fa-home white-text mr-1"></i>
         <span><span class="d-none d-sm-inline">Les o</span><span class="d-sm-none">O</span>ffres</span>
       </a>
     </li>
