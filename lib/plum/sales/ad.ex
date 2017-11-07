@@ -6,7 +6,6 @@ defmodule Plum.Sales.Ad do
     Land
   }
 
-
   schema "ads" do
     belongs_to :land, Land
     field :active, :boolean, default: true
@@ -14,7 +13,7 @@ defmodule Plum.Sales.Ad do
     timestamps()
   end
 
-  @required_fields ~w(house_price active)a
+  @required_fields ~w(house_price active land_id)a
   @optional_fields ~w(land_id)a
 
   @doc false

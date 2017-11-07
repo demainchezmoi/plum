@@ -38,7 +38,8 @@ defmodule PlumWeb.AdControllerTest do
   describe "create ad" do
     @tag logged_in: ["admin"]
     test "redirects to show when data is valid", %{conn: conn} do
-      conn1 = post conn, ad_path(conn, :create), ad: params_for(:ad) 
+      land = insert(:land)
+      conn1 = post conn, ad_path(conn, :create), ad: params_for(:ad) |> Map.put(:land_id, land.id)
 
       assert %{id: id} = redirected_params(conn1)
       assert redirected_to(conn1) == ad_path(conn1, :show, id)
