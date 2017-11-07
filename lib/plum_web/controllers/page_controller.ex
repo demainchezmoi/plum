@@ -58,8 +58,11 @@ defmodule PlumWeb.PageController do
 
   def build_message(params) do
     params
-    |> Enum.map(fn {k, v} -> k <> ": " <> v <> "\n" end)
-    |> Enum.join
-    |> (& "Nouveau contact sur annonce:\n" <> &1).()
+    |> Enum.map(fn
+      {"ad", ad} -> "ad: " <> ad_url(PlumWeb.Endpoint, :public, ad)
+      {k, v} -> k <> " : " <> v
+    end)
+    |> Enum.join("\n")
+    |> (& "Un prospect a rempli un formulaire de contact :\n" <> &1).()
   end
 end
