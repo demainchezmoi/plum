@@ -95,6 +95,5 @@ RUN cd ./assets \
     && cd .. \
     && mix phx.digest \
 		&& mix compile \
-		&& mix smoothie.compile
 
 RUN mix release --env=prod --verbose

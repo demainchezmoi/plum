@@ -18,7 +18,6 @@
     "bootstrap": "^4.0.0-beta",
     "copy-webpack-plugin": "^4.0.1",
     "css-loader": "^0.28.7",
-    "elixir-smoothie": "^3.0.2",
     "elm-webpack-loader": "^4.3.1",
     "extract-text-webpack-plugin": "2.1.2",
     "file-loader": "^0.11.2",

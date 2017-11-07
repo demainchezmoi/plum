@@ -116,6 +116,5 @@ RUN cd ./assets \
     && mix phx.digest \
 		&& mix clean \
 		&& mix compile \
-		&& mix smoothie.compile
 
 CMD ["mix", "phoenix.server"]
