@@ -5,7 +5,6 @@ defmodule Plum.Factory do
   alias Plum.Sales.{
     Ad,
     Land,
-    Project,
   }
 
   alias Plum.Accounts.{
@@ -31,17 +30,6 @@ defmodule Plum.Factory do
       images: ["test"],
       description: sequence(:description, &"desc-#{&1}"),
       notary_fees: 1234
-    }
-  end
-
-  def project_factory do
-    %Project{
-      discover_land: true,
-      discover_house: false,
-      contribution: 10_000,
-      net_income: 1_800,
-      phone_call: false,
-      phone_number: "123456",
     }
   end
 
