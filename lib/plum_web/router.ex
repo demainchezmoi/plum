@@ -72,6 +72,7 @@ defmodule PlumWeb.Router do
   scope "/admin", PlumWeb do
     pipe_through :admin_browser
     resources "/lands", LandController
+    resources "/ads", AdController
   end
 
   scope "/api", PlumWeb.Api do

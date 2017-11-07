@@ -1,0 +1,28 @@
+<%= form_for @changeset, @action, fn f -> %>
+  <%= if @changeset.action do %>
+    <div class="alert alert-danger">
+      <p>Oops, something went wrong! Please check the errors below.</p>
+    </div>
+  <% end %>
+
+  <div class="form-group">
+    <label>Prix de la maison</label>
+    <%= text_input f, :house_price, class: "form-control" %>
+    <div class="text-danger"><%= error_tag f, :house_price %></div>
+  </div>
+
+  <div class="form-check">
+    <label class="form-check-label">
+      <%= checkbox f, :active, class: "form-check-input" %>
+      Active
+    </label>
+  </div>
+
+  <div class="form-group">
+    <%= select f, :land_id, lands_select(@lands), class: "custom-select" %>
+  </div>
+
+  <div class="form-group">
+    <%= submit "Submit", class: "btn btn-primary" %>
+  </div>
+<% end %>

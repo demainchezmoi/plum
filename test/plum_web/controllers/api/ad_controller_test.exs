@@ -41,7 +41,6 @@ defmodule PlumWeb.Api.AdControllerTest do
     end
   end
 
-
   describe "create ad" do
     test "doesn't create ad if not logged in", %{conn: conn} do
       ad_attrs = params_for(:ad)

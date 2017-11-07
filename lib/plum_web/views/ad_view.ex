@@ -10,4 +10,8 @@ defmodule PlumWeb.AdView do
   def login_ad_cb(ad), do:
     "/auth/facebook?state=#{ad_path(PlumWeb.Endpoint, :interested, ad) |> URI.encode}"
 
+  def lands_select(lands) do
+    lands |> Enum.map(& {&1.city, &1.id})
+  end
+
 end

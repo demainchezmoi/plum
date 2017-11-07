@@ -13,7 +13,8 @@ defmodule Plum.Sales.Location do
     lng
   )a
 
-  @optional_fields ~w()
+  @optional_fields ~w(
+  )
 
   def changeset(%Location{} = location, attrs) do
     location

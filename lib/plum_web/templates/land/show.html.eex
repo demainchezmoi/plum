@@ -11,6 +11,16 @@
         <li>Description: <%= @land.description %></li>
         <li>Image: <%= (@land.images || []) |> List.first %></li>
         <li>Frais de notaires: <%= @land.notary_fees %></li>
+        <li>
+          Annonces:
+          <ul>
+            <%= for ad <- @land.ads do %>
+              <li>
+                <%= link "#{ad.id} - active: #{ad.active}", to: ad_path(@conn, :show, ad) %>
+              </li>
+            <% end %>
+          </ul>
+        </li>
       </ul>
 
       <span><%= link "Edit", to: land_path(@conn, :edit, @land) %></span>

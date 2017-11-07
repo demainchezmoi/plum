@@ -39,7 +39,7 @@ defmodule Plum.Sales do
       ** (Ecto.NoResultsError)
 
   """
-  def get_ad!(id), do: Repo.get!(Ad, id)
+  def get_ad!(id), do: Ad |> preload(:land) |> Repo.get!(id)
 
   @doc """
   Gets a single ad by attributes.
@@ -241,5 +241,4 @@ defmodule Plum.Sales do
   def change_land(%Land{} = land) do
     Land.changeset(land, %{})
   end
-
 end

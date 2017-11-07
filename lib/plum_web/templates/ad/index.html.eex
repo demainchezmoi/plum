@@ -1,0 +1,33 @@
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <h2>Listing Ads</h2>
+
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Terrain</th>
+            <th>Création</th>
+            <th>Active</th>
+          </tr>
+        </thead>
+        <tbody>
+          <%= for ad <- @ads do %>
+            <tr>
+              <td><%= ad.land.city %> - <%= ad.land.surface %>m<sup>2</sup> - <%= ad.land.price %>&euro;</td>
+              <td><%= ad.inserted_at |> NaiveDateTime.to_date %></td>
+              <td><%= ad.active %></td>
+              <td class="text-right">
+                <span><%= link "Show", to: ad_path(@conn, :show, ad), class: "btn btn-default btn-sm" %></span>
+                <span><%= link "Edit", to: ad_path(@conn, :edit, ad), class: "btn btn-default btn-sm" %></span>
+                <span><%= link "Delete", to: ad_path(@conn, :delete, ad), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-sm" %></span>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+
+      <span><%= link "New Ad", to: ad_path(@conn, :new) %></span>
+    </div>
+  </div>
+</div>

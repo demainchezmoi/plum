@@ -60,7 +60,7 @@ defmodule PlumWeb.Api.LandControllerTest do
       land_attrs = params_for(:land)
       conn1 = post conn, api_land_path(conn, :create), land: land_attrs 
       assert json_response(conn1, 401)
-      assert_raise Ecto.NoResultsError, fn -> Sales.get_land_by!(land_attrs |> Map.delete(:ads)) end
+      assert_raise Ecto.NoResultsError, fn -> Sales.get_land_by!(land_attrs |> Map.drop([:ads, :location])) end
     end
 
     @tag :logged_in
@@ -68,7 +68,7 @@ defmodule PlumWeb.Api.LandControllerTest do
       land_attrs = params_for(:land) 
       conn1 = post conn, api_land_path(conn, :create), land: land_attrs 
       assert json_response(conn1, 403)
-      assert_raise Ecto.NoResultsError, fn -> Sales.get_land_by!(land_attrs |> Map.delete(:ads)) end
+      assert_raise Ecto.NoResultsError, fn -> Sales.get_land_by!(land_attrs |> Map.drop([:ads, :location])) end
     end
 
     @tag logged_in: ["admin"]

@@ -16,6 +16,10 @@ $spacers: (
   "xl": 10rem
 );
 
+.btn-xs {
+  @extend .btn-sm;
+}
+
 .after-nav {
   margin-top: 75px;
 }

@@ -17,7 +17,7 @@ defmodule Plum.Sales.Land do
 
     field :image, :string, virtual: true
 
-    embeds_one :location, Location
+    embeds_one :location, Location, on_replace: :delete
     has_many :ads, Ad
 
     timestamps()

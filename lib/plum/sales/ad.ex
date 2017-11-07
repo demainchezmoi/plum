@@ -11,7 +11,6 @@ defmodule Plum.Sales.Ad do
     belongs_to :land, Land
     field :active, :boolean, default: true
     field :house_price, :integer, default: 89_000
-    field :link, :string, virtual: true
     timestamps()
   end
 
