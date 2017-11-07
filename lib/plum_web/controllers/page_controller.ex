@@ -27,7 +27,8 @@ defmodule PlumWeb.PageController do
     conn =
       if not (is_undef(contact_params, "email") and is_undef(contact_params, "phone")) do
         Email.contact_email(contact_params) |> Mailer.deliver
-        HTTPoison.post "https://hooks.slack.com/services/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", Poison.encode! %{"text" => build_message(contact_params)}
+        Application.get_env(:plum, :env) == "prod" &&
+          HTTPoison.post "https://hooks.slack.com/services/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", Poison.encode! %{"text" => build_message(contact_params)}
         conn |> put_flash(:info, "Votre demande de contact a bien été prise en compte.")
       else
         conn |> put_flash(:error, "Merci de renseigner votre numéro de téléphone ou votre email pour prendre contact.")

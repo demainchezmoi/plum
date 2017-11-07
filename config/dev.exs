@@ -80,3 +80,6 @@ config :plum,
 config :plum,
   facebook_app_id: System.get_env("FACEBOOK_CLIENT_ID"),
   facebook_page_id: System.get_env("FACEBOOK_PAGE_ID")
+
+config :plum,
+  env: "dev" 

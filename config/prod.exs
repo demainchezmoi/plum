@@ -97,3 +97,6 @@ config :plum,
 config :plum,
   facebook_app_id: "${FACEBOOK_CLIENT_ID}",
   facebook_page_id: "${FACEBOOK_PAGE_ID}"
+
+config :plum,
+  env: "${MIX_ENV}"

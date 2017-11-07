@@ -1,25 +1,16 @@
 defmodule PlumWeb.Email do
   use PlumWeb, :view
-  use Smoothie,
-    template_dir: Path.join(["..", "templates", "email"]),
-    layout_file: Path.join(["..", "templates", "layout", "email.html.eex"])
-
   alias Plum.Accounts.User
 
-  import Swoosh.Email
+  use Phoenix.Swoosh, view: Sample.EmailView, layout: {PlumWeb.LayoutView, :email}
 
   def welcome_email(user = %User{}) do
     title = "Bienvenue sur maisons-leo.fr"
-    assigns = [
-      user: user,
-      title: title
-    ]
     new()
     |> to(user.email)
     |> from({"Alexandre Hervé", "aherve@demainchezmoi.fr"})
     |> subject(title)
-    |> html_body(welcome_html(assigns))
-    |> text_body(welcome_text(assigns))
+    |> render_body("welcome.html", %{title: title})
   end
 
   def contact_email(params) do

@@ -49,5 +49,3 @@ config :ueberauth, Ueberauth,
   providers: [
     facebook: {Ueberauth.Strategy.Facebook, [profile_fields: "name,email,first_name,last_name"]}
   ]
-
-config :smoothie, modules: [PlumWeb.Email]
