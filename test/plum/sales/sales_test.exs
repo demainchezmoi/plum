@@ -84,7 +84,7 @@ defmodule Plum.SalesTest do
     end
 
     test "list_lands/0 preload ads" do
-      land = insert(:land)
+      insert(:land)
       assert Sales.list_lands() |> List.first |> Map.get(:ads) |> length > 0 
     end
 

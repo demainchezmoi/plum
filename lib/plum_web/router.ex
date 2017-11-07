@@ -62,19 +62,15 @@ defmodule PlumWeb.Router do
     get "/merci", PageController, :merci
     get "/maison-plus-terrain/:id", AdController, :public
     get "/annonces-maison-plus-terrain", AdController, :public_index
-    get "/maison-plus-terrain/:id/login", AdController, :login
     get "/maison-plus-terrain/:id/cgu", AdController, :cgu
   end
 
   scope "/", PlumWeb do
     pipe_through :protected_browser
-    get "/mon-espace/*p", PageController, :prospect
-    get "/ads/:id/interested", AdController, :interested
   end
 
   scope "/", PlumWeb do
     pipe_through :admin_browser
-    get "/admin*path", PageController, :admin
   end
 
   scope "/api", PlumWeb.Api do
