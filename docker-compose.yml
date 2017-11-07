@@ -18,9 +18,11 @@ services:
         SECRET_KEY_BASE: "1234"
     volumes:
       - .:/opt/app
-      - /var/lib/docker/aufs:/var/lib/docker/aufs
+      # - /var/lib/docker/aufs:/var/lib/docker/aufs
+      - /var/lib/docker/overlay2:/var/lib/docker/overlay2
       - /var/lib/docker/images:/var/lib/docker/images
       - /var/lib/docker/image:/var/lib/docker/image
+      - /etc/docker/daemon.json:/etc/docker/daemon.json
     privileged: true
     command: "iex -S mix phx.server"
 

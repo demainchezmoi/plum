@@ -3,41 +3,6 @@ FROM bitwalker/alpine-erlang:19.3
 ENV HOME=/opt/app/ TERM=xterm
 ENV ELIXIR_VERSION=v1.5.1
 
-# Install glibc.
-# Would be better to use https://github.com/frol/docker-alpine-glibc
-RUN ALPINE_GLIBC_BASE_URL="https://github.com/sgerrand/alpine-pkg-glibc/releases/download" && \
-    ALPINE_GLIBC_PACKAGE_VERSION="2.25-r0" && \
-    ALPINE_GLIBC_BASE_PACKAGE_FILENAME="glibc-$ALPINE_GLIBC_PACKAGE_VERSION.apk" && \
-    ALPINE_GLIBC_BIN_PACKAGE_FILENAME="glibc-bin-$ALPINE_GLIBC_PACKAGE_VERSION.apk" && \
-    ALPINE_GLIBC_I18N_PACKAGE_FILENAME="glibc-i18n-$ALPINE_GLIBC_PACKAGE_VERSION.apk" && \
-    apk add --no-cache --virtual=.build-dependencies wget ca-certificates && \
-    wget \
-        "https://raw.githubusercontent.com/andyshinn/alpine-pkg-glibc/master/sgerrand.rsa.pub" \
-        -O "/etc/apk/keys/sgerrand.rsa.pub" && \
-    wget \
-        "$ALPINE_GLIBC_BASE_URL/$ALPINE_GLIBC_PACKAGE_VERSION/$ALPINE_GLIBC_BASE_PACKAGE_FILENAME" \
-        "$ALPINE_GLIBC_BASE_URL/$ALPINE_GLIBC_PACKAGE_VERSION/$ALPINE_GLIBC_BIN_PACKAGE_FILENAME" \
-        "$ALPINE_GLIBC_BASE_URL/$ALPINE_GLIBC_PACKAGE_VERSION/$ALPINE_GLIBC_I18N_PACKAGE_FILENAME" && \
-    apk add --no-cache \
-        "$ALPINE_GLIBC_BASE_PACKAGE_FILENAME" \
-        "$ALPINE_GLIBC_BIN_PACKAGE_FILENAME" \
-        "$ALPINE_GLIBC_I18N_PACKAGE_FILENAME" && \
-    \
-    rm "/etc/apk/keys/sgerrand.rsa.pub" && \
-    /usr/glibc-compat/bin/localedef --force --inputfile POSIX --charmap UTF-8 C.UTF-8 || true && \
-    echo "export LANG=C.UTF-8" > /etc/profile.d/locale.sh && \
-    \
-    apk del glibc-i18n && \
-    \
-    # rm "/root/.wget-hsts" && \
-    apk del .build-dependencies && \
-    rm \
-        "$ALPINE_GLIBC_BASE_PACKAGE_FILENAME" \
-        "$ALPINE_GLIBC_BIN_PACKAGE_FILENAME" \
-        "$ALPINE_GLIBC_I18N_PACKAGE_FILENAME"
-
-ENV LANG=C.UTF-8
-
 # Install the magic docker wrapper.
 ADD ./wrapdocker /usr/local/bin/wrapdocker
 
@@ -72,31 +37,18 @@ RUN \
     apk --update upgrade musl && \
     apk --no-cache add nodejs nodejs-npm git inotify-tools g++ python erlang-dialyzer erlang-dev make && \
 		apk add --no-cache --update --virtual .elixir-build && \
-
 		git clone https://github.com/elixir-lang/elixir --depth 1 --branch $ELIXIR_VERSION && \
     cd elixir && \
     make && make install && \
 		mix local.hex --force && \
     mix local.rebar --force && \
     cd $HOME && \
-
     apk add -U --repository http://dl-cdn.alpinelinux.org/alpine/edge/testing aufs-util && \
-
    	rm -rf /tmp/elixir-build && \
     apk del .elixir-build && \
 		rm -rf /var/cache/apk/*
 
 WORKDIR ${HOME}
-
-
-
-# Install Elm
-RUN npm install --global \
-      elm@0.18 \
-      elm-format@exp \
-      elm-live \
-      elm-test \
-      elm-upgrade
 
 # Cache elixir deps
 RUN mkdir config
