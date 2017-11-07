@@ -1,34 +1,32 @@
-<!--Navbar-->
 <nav class="navbar navbar-expand-lg navbar-dark indigo fixed">
 
-  <!-- Navbar brand -->
-  <a class="navbar-brand d-flex justify-content-center align-items-center small-xs" href="#">
+  <a class="navbar-brand d-flex justify-content-center align-items-center small-xs" href="/">
     <%= PhoenixInlineSvg.Helpers.svg_image(@conn, "logo") %>
     Maison&nbsp;Léo
   </a>
 
-  <!-- Links -->
-  <ul class="navbar-nav ml-auto d-flex flex-row align-items-center">
-    <li class="nav-item active mr-2">
-      <a class="small-xs nav-link d-flex flex-column flex-sm-row align-items-center" href="<%= ad_path(@conn, :public_index) %>">
-        <i class="fa fa-home white-text mr-1"></i>
-        <span><span class="d-none d-sm-inline">Les o</span><span class="d-sm-none">O</span>ffres</span>
+  <ul class="navbar-nav ml-auto d-flex flex-row">
+    <li class="nav-item active small-xs mr-2">
+      <a class="nav-link d-flex flex-column flex-sm-row align-items-center" data-toggle="modal" data-target="#contactModal">
+        <i class="fa-stack mr-2">
+          <i class="fa fa-stack-2x fa-circle pink-text"></i>
+          <i class="fa fa-phone fa-stack-1x white-text"></i>
+        </i>
+        Contactez-moi
       </a>
     </li>
     <li class="nav-item active small-xs">
-      <div class="media mt-0 small white-text d-flex align-items-center flex-row">
-        <img class="mr-2 rounded-circle z-depth-1 tiny-avatar" src="http://adebeo.co.in/wp-content/uploads/2015/04/denis_bolomier_india.jpg" alt="">
-        <div class="media-body">
-          <p class="my-0">Denis Bolomier</p>
-          <a href="tel:0663742535" class="font-bold pink white-text p-0 my-0 d-inline-block">06 63 74 25 35</a>
-        </div>
-      </div>
+      <a class="nav-link d-flex flex-column flex-sm-row align-items-center" href="<%= ad_path(@conn, :public_index) %>">
+        <i class="fa-stack mr-2">
+          <i class="fa fa-stack-2x fa-circle pink-text"></i>
+          <i class="fa fa-home fa-stack-1x white-text"></i>
+        </i>
+        Voir les offres
+      </a>
     </li>
   </ul>
-  <!-- Links -->
 
 </nav>
-<!--/.Navbar-->
 
 <div class="intro-1"> </div>
 
@@ -374,4 +372,51 @@
       </div>
     </div>
   </footer>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="contactModal" tabindex="-1" role="dialog" aria-labelledby="contactModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title indigo-text" id="contactModalLabel">Contactez-moi pour cette annonce</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <%= form_for @conn, page_path(@conn, :contact), [as: "contact"], fn f-> %>
+          <div class="form-group row">
+            <label class="col-sm-3 col-form-label">Prénom</label>
+            <div class="col-sm-9">
+              <%= text_input f, :first_name, placeholder: "Marie", class: "form-control" %>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-sm-3 col-form-label">Nom</label>
+            <div class="col-sm-9">
+              <%= text_input f, :last_name, placeholder: "Dupont", class: "form-control" %>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-sm-3 col-form-label">Téléphone</label>
+            <div class="col-sm-9">
+              <%= text_input f, :phone, placeholder: "06 12 34 56 78", class: "form-control" %>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-sm-3 col-form-label">Email</label>
+            <div class="col-sm-9">
+              <%= text_input f, :email, placeholder: "marie.dupont@email.com", class: "form-control" %>
+            </div>
+          </div>
+          <div class="clearfix">
+            <div class="pull-right">
+              <button type="submit" class="btn btn-indigo mr-0 mb-0"><i class="fa fa-paper-plane mr-2"></i> Envoyer</button>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
 </div>

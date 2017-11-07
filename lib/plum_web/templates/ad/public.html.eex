@@ -9,19 +9,17 @@
     <%= PhoenixInlineSvg.Helpers.svg_image(@conn, "logo") %>
     Maison&nbsp;Léo
   </a>
-  <!-- Links -->
   <ul class="navbar-nav ml-auto d-flex flex-row">
-    <li class="nav-item active small-xs">
-      <div class="media mt-0 small white-text d-flex align-items-center flex-row">
-        <img class="mr-2 rounded-circle z-depth-1 tiny-avatar" src="http://adebeo.co.in/wp-content/uploads/2015/04/denis_bolomier_india.jpg" alt="">
-        <div class="media-body">
-          <p class="my-0">Denis Bolomier</p>
-          <a href="tel:0663742535" class="font-bold pink white-text p-0 my-0 d-inline-block">06 63 74 25 35</a>
-        </div>
-      </div>
+    <li class="nav-item active small-xs mr-2">
+      <a class="nav-link d-flex flex-column flex-sm-row align-items-center" data-toggle="modal" data-target="#contactModal">
+        <i class="fa-stack mr-2">
+          <i class="fa fa-stack-2x fa-circle pink-text"></i>
+          <i class="fa fa-phone fa-stack-1x white-text"></i>
+        </i>
+        Contactez-moi
+      </a>
     </li>
   </ul>
-  <!-- Links -->
 </nav>
 
 <div class="container spacer after-nav">
@@ -125,14 +123,14 @@
       </table>
     </div>
 
-    <div class="col-12 mb-4 order-lg-7">
+    <div class="col-12 order-lg-7">
       <p class="font-bold gray-text-700">Votre quartier</p>
       <div id="map" class="img-flex"></div>
     </div>
   </div>
 </div>
 
-<div class="relative light-gray" id="contact">
+<div class="relative light-gray pt-4" id="contact">
   <div class="transition-triangle light-gray top">
     <%= PhoenixInlineSvg.Helpers.svg_image(@conn, "triangle") %>
   </div>
@@ -156,7 +154,7 @@
         </div>
       </div>
       <div class="col-12 col-md-6 col-lg-6">
-        <div class="z-depth-1 p-4 white m-1"> <p class="indigo-text">Contactez-moi pour cette annonce</p>
+        <div class="z-depth-1 p-4 white mx-1"> <p class="indigo-text">Prendre contact pour cette annonce</p>
           <%= form_for @conn, page_path(@conn, :contact), [as: "contact"], fn f-> %>
             <div class="form-group row">
               <label class="col-sm-3 col-form-label">Prénom</label>

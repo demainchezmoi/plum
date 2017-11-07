@@ -3,20 +3,6 @@
     <%= PhoenixInlineSvg.Helpers.svg_image(@conn, "logo") %>
     Maison&nbsp;Léo
   </a>
-  <!-- Links -->
-  <ul class="navbar-nav ml-auto d-flex flex-row">
-    <li class="nav-item active small-xs">
-      <div class="media mt-0 small white-text d-flex align-items-center flex-row">
-        <img class="mr-2 rounded-circle z-depth-1 tiny-avatar" src="http://adebeo.co.in/wp-content/uploads/2015/04/denis_bolomier_india.jpg" alt="">
-        <div class="media-body">
-          <p class="my-0">Denis Bolomier</p>
-          <a href="tel:0663742535" class="font-bold pink white-text p-0 my-0 d-inline-block">06 63 74 25 35</a>
-        </div>
-      </div>
-    </li>
-  </ul>
-
-  <!-- Links -->
 </nav>
 
 <div class="container after-nav">
