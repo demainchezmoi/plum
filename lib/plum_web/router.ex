@@ -69,8 +69,9 @@ defmodule PlumWeb.Router do
     pipe_through :protected_browser
   end
 
-  scope "/", PlumWeb do
+  scope "/admin", PlumWeb do
     pipe_through :admin_browser
+    resources "/lands", LandController
   end
 
   scope "/api", PlumWeb.Api do

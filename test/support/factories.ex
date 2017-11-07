@@ -5,6 +5,7 @@ defmodule Plum.Factory do
   alias Plum.Sales.{
     Ad,
     Land,
+    Location,
   }
 
   alias Plum.Accounts.{
@@ -24,12 +25,19 @@ defmodule Plum.Factory do
       ads: [build(:ad)],
       city: "Blaru",
       department: "27",
-      location: %{lat: 48.01, lng: 2.12},
+      location: build(:location),
       price: 42_000,
       surface: 396,
       images: ["test"],
       description: sequence(:description, &"desc-#{&1}"),
       notary_fees: 1234
+    }
+  end
+
+  def location_factory do
+    %Location{
+      lat: 48.01,
+      lng: 2.12,
     }
   end
 

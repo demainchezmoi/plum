@@ -2,6 +2,7 @@ defmodule Plum.Sales.Land do
   use Ecto.Schema
   import Ecto.Changeset
   alias Plum.Sales.Land
+  alias Plum.Sales.Location
   alias Plum.Sales.Ad
   alias Plum.Helpers.NotaryFees
 
@@ -10,18 +11,19 @@ defmodule Plum.Sales.Land do
     field :department, :string
     field :description, :string, default: ""
     field :images, {:array, :string}, default: []
-    field :location, :map
     field :notary_fees, :integer
     field :price, :integer
     field :surface, :integer
 
+    field :image, :string, virtual: true
+
+    embeds_one :location, Location
     has_many :ads, Ad
 
     timestamps()
   end
 
   @optional_fields ~w(
-    location
   )a
 
   @required_fields ~w(
@@ -38,6 +40,7 @@ defmodule Plum.Sales.Land do
   def changeset(%Land{} = land, attrs) do
     land
     |> cast(attrs, @required_fields ++ @optional_fields)
+    |> cast_embed(:location)
     |> set_notary_fees
     |> validate_required(@required_fields)
   end

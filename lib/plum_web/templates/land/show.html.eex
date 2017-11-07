@@ -1,0 +1,21 @@
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <h2>Show Land</h2>
+
+      <ul>
+        <li>Ville: <%= @land.city %></li>
+        <li>Département: <%= @land.department %></li>
+        <li>Surface: <%= @land.surface %></li>
+        <li>Prix: <%= @land.price %></li>
+        <li>Description: <%= @land.description %></li>
+        <li>Image: <%= (@land.images || []) |> List.first %></li>
+        <li>Frais de notaires: <%= @land.notary_fees %></li>
+      </ul>
+
+      <span><%= link "Edit", to: land_path(@conn, :edit, @land) %></span>
+      <span><%= link "Back", to: land_path(@conn, :index) %></span>
+
+    </div>
+  </div>
+</div>

@@ -1,0 +1,11 @@
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <h2>New Land</h2>
+
+      <%= render "form.html", Map.put(assigns, :action, land_path(@conn, :create)) %>
+
+      <span><%= link "Back", to: land_path(@conn, :index) %></span>
+    </div>
+  </div>
+</div>
