@@ -123,13 +123,9 @@
       </table>
     </div>
 
-    <div class="col-12 mb-4 order-lg-7">
-      <p class="font-bold gray-text-700">Votre terrain</p>
-      <p class="paragraph"><%= @ad.land.description %></p>
-    </div>
-
     <div class="col-12 order-lg-8">
-      <p class="font-bold gray-text-700">Votre quartier</p>
+      <p class="font-bold gray-text-700">Votre terrain</p>
+      <p class="paragraph mb-4"><%= @ad.land.description %></p>
       <div id="map" class="img-flex"></div>
     </div>
   </div>

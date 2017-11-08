@@ -19,11 +19,11 @@ module.exports = class View extends MainView {
   }
 
   loadMap({lat, lng}) {
-    const map = L.map('map').setView([lat, lng], 12);
+    const map = L.map('map').setView([lat, lng], 13);
 
     L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png').addTo(map);
     map.panTo(new L.LatLng(lat, lng));
 
-    new L.circle([lat, lng], 2000).addTo(map);
+    new L.circle([lat, lng], 1000).addTo(map);
   }
 }
