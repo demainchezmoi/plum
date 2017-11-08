@@ -11,7 +11,7 @@ defmodule PlumWeb.AdView do
     "/auth/facebook?state=#{ad_path(PlumWeb.Endpoint, :interested, ad) |> URI.encode}"
 
   def lands_select(lands) do
-    lands |> Enum.map(& {&1.city, &1.id})
+    lands |> Enum.map(& {"#{&1.inserted_at |> NaiveDateTime.to_date} - #{&1.city} ", &1.id})
   end
 
 end
