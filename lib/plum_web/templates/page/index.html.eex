@@ -69,23 +69,23 @@
               <i class="fa fa-square fa-stack-2x"></i>
               <i class="fa fa-thumbs-up fa-stack-1x blue-text"></i>
             </i>
-            <div class="mt-1" style="line-height: 1"><span class="small-xs">Garantie de parfait achèvement</span></div>
+            <div class="mt-1 px-md-5" style="line-height: 1"><span class="small-xs">Toutes garanties et assurances légales incluses</span></div>
           </div>
           <div class="col py-2 indigo z-depth-2 d-flex align-items-center justify-content-center" style="z-index: 2;">
 				    <div>
         	    <i class="fa-stack fa-2x">
           	    <i class="fa fa-square fa-stack-2x"></i>
-          	    <i class="fa fa-calendar-check-o fa-stack-1x blue-text" style="margin-left: 1px;"></i>
+          	    <i class="fa fa-clock-o fa-stack-1x blue-text" style="margin-left: 1px;"></i>
         	    </i>
-        	    <div class="mt-1" style="line-height: 1"><span class="small-xs">Construction ultra rapide 4 mois après PC</span></div>
+        	    <div class="mt-1 px-md-5" style="line-height: 1"><span class="small-xs">Construction ultra-rapide 4 mois sans retards</span></div>
 				    </div>
           </div>
           <div class="col py-2 indigo z-depth-1-half my-2">
             <i class="fa-stack fa-2x">
               <i class="fa fa-square fa-stack-2x"></i>
-              <i class="fa fa-file-text-o fa-stack-1x blue-text"></i>
+              <i class="fa fa-handshake-o fa-stack-1x blue-text"></i>
             </i>
-            <div class="mt-1" style="line-height: 1"><span class="small-xs">Assurance dommage d'ouvrage</span></div>
+            <div class="mt-1 px-md-5" style="line-height: 1"><span class="small-xs">Suivi personnalisé jusqu'au service après-vente</span></div>
           </div>
         </div>
       </div>
