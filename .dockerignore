@@ -1,5 +1,6 @@
 .git
 cover
+_build
 deps
 doc
 test

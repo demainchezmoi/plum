@@ -67,6 +67,6 @@ RUN cd ./assets \
     && cd .. \
     && mix phx.digest \
 		&& mix clean \
-		&& mix compile \
+		&& mix compile
 
 CMD ["mix", "phoenix.server"]

@@ -46,6 +46,6 @@ RUN cd ./assets \
     && ./node_modules/.bin/webpack -p \
     && cd .. \
     && mix phx.digest \
-		&& mix compile \
+		&& mix compile
 
 RUN mix release --env=prod --verbose
