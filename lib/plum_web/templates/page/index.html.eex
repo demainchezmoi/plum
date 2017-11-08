@@ -45,11 +45,11 @@
             </div>
           </h3>
           <h1 class="h1-responsive mt-0 text-center font-thin mb-4">Votre maison familiale</h1>
-          <div class="mr-auto ml-auto open-sans gray-text-700 text-center mt-4 mb-3" style="max-width: 500px;">
-            <p class="mb-0">Faites construire votre <span style="font-weight: 700">T4 moderne</span> pour <span style="font-weight: 700">87&nbsp;900&nbsp;&euro;</span>. Emménagez et dites adieu aux loyers en moins de huit mois.</p>
+          <div class="mr-auto ml-auto open-sans gray-text-700 text-center mt-4 mb-3" style="max-width: 700px;">
+            <p class="mb-0 lead">Faites construire votre <span style="font-weight: 700">T4 moderne</span> pour <span style="font-weight: 700">87&nbsp;900&nbsp;&euro;</span>. Emménagez et dites adieu aux loyers en moins de huit mois.</p>
           </div>
           <div class="d-flex justify-content-center">
-            <a class="btn btn-indigo" href="<%= ad_path(@conn, :public_index) %>">Trouver une offre avec terrain</a>
+            <a class="btn btn-lg btn-indigo" href="<%= ad_path(@conn, :public_index) %>">Trouver une offre avec terrain</a>
           </div>
         </div>
       </div>
@@ -64,15 +64,15 @@
 
     <div class="container spacer">
       <div class="mx-1">
-        <div class="row text-center text-white font-bold">
+        <div class="row text-center font-bold open-sans">
 
           <div class="col p-0 reinsurance z-depth-1-half m-sm-3 white">
             <div class="p-3 blue-text">
               <i class="fa-stack fa-2x">
                 <i class="fa fa-square fa-stack-2x"></i>
-                <i class="fa fa-thumbs-up fa-stack-1x white-text"></i>
+                <i class="fa fa-check fa-stack-1x white-text"></i>
               </i>
-              <div class="mt-1 px-md-5 font-bold" style="line-height: 1.1"><span class="small-xs">Toutes garanties et assurances légales incluses</span></div>
+              <div class="mt-1 px-md-5 font-bold" style="line-height: 1.1; font-weight: 700;"><span class="small-xs">Toutes garanties et assurances légales incluses</span></div>
             </div>
           </div>
 
@@ -80,9 +80,9 @@
             <div class="p-2 p-sm-3 blue-text">
         	    <i class="fa-stack fa-2x">
           	    <i class="fa fa-square fa-stack-2x"></i>
-          	    <i class="fa fa-clock-o fa-stack-1x white-text" style="margin-left: 1px;"></i>
+          	    <i class="fa fa-check fa-stack-1x white-text" style="margin-left: 1px;"></i>
         	    </i>
-        	    <div class="mt-1 px-md-5 font-bold" style="line-height: 1.1"><span class="small-xs">Construction ultra rapide en 4 mois, 100% conforme</span></div>
+        	    <div class="mt-1 px-md-5 font-bold" style="line-height: 1.1; font-weight: 700;"><span class="small-xs">Construction ultra rapide <b class="font-black text-underline">4 mois</b>, 100% conforme au plan</span></div>
 				    </div>
           </div>
 
@@ -90,9 +90,9 @@
             <div class="p-3 blue-text">
               <i class="fa-stack fa-2x">
                 <i class="fa fa-square fa-stack-2x"></i>
-                <i class="fa fa-handshake-o fa-stack-1x white-text"></i>
+                <i class="fa fa-check fa-stack-1x white-text"></i>
               </i>
-              <div class="mt-1 px-md-5 font-bold" style="line-height: 1.1"><span class="small-xs">Suivi personnalisé jusqu'au service après-vente</span></div>
+              <div class="mt-1 px-md-5 font-bold" style="line-height: 1.1; font-weight: 700;"><span class="small-xs">Suivi personnalisé jusqu'au service après-vente</span></div>
             </div>
           </div>
 
@@ -112,9 +112,9 @@
           <div class="media">
             <img class="mr-3 rounded-circle z-depth-1 responsive-avatar" src="https://media-exp1.licdn.com/media/AAEAAQAAAAAAAAo7AAAAJGY2ZGQ1NDMyLWI0YTctNDQ4MC05NTVhLTQwM2U1ODc4MWU0Nw.jpg" alt="">
             <div class="media-body text-justify">
-              <p class="font-bold gray-text-700">La Maison&nbsp;Léo&nbsp;: un concept fort pour une maison de choix.</p>
-              <p class="open-sans gray-text-700 paragraph">La Maison&nbsp;Léo a la particularité de ne pas être une maison sur mesure&nbsp;: elle dispose d'un plan unique, optimisé pour la vie familiale.</p>
-              <p class="open-sans gray-text-700 paragraph">Ce choix fort fournit le double avantage de réduire les coûts de fabrication de la maison et d'en augmenter la qualité. Parce que moins de changements conduisent à moins d'erreurs, et parce que les économies sur la fabrication nous permettent d'investir dans des matériaux de qualité supérieure, la Maison&nbsp;Léo propose un rapport qualité prix au-delà de toute concurrence.</p>
+              <p class="font-bold gray-text-700">La Maison&nbsp;Léo&nbsp;: des chantiers sans soucis, une maison impeccable.</p>
+              <p class="open-sans gray-text-700 paragraph">La Maison&nbsp;Léo dispose d'un plan unique, optimisé pour la vie familiale.</p>
+              <p class="open-sans gray-text-700 paragraph">Ce choix fort fournit de nombreux avantages&nbsp;: réduire les coûts de fabrication de la maison, en augmenter la qualité et réduire considérablement les problèmes de chantier. <br />Parce que moins de changements conduisent à moins d'erreurs, et parce que les économies sur la fabrication nous permettent d'investir dans des matériaux de qualité supérieure, la Maison&nbsp;Léo propose à la fois un rapport qualité prix et un service au-delà de toute concurrence.</p>
               <p class="open-sans gray-text-700 paragraph">Je vous propose de découvrir votre Maison&nbsp;Léo. À vous de jouer&nbsp;!</p>
               <p class="open-sans gray-text-700 paragraph text-right mb-0">Xavier Jaffray</p>
             </div>
