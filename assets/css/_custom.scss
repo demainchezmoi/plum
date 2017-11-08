@@ -128,10 +128,21 @@ img.flip {
   // height: 30px;
 // }
 
+.navbar-brand {
+  .logo-svg {
+    & g {
+      stroke: white;
+    }
+  }
+}
+
 .logo-svg {
   width: 30px;
   height: 30px;
-  & g { stroke-width: 6px; }
+  & g {
+    stroke: map-get($indigo, base);
+    stroke-width: 6px;
+  }
   @extend .my-1, .mr-1;
 }
 
@@ -195,8 +206,8 @@ p.paragraph:not(.mb-*, my-*) {
 .text-shadow { text-shadow: 2px 2px 3px rgba(0,0,0,0.3); }
 
 // .modal-dialog, .modal-content {
-  // max-height: 90%;
-  // overflow: auto;
+// max-height: 90%;
+// overflow: auto;
 // }
 
 .loading-overlay {
@@ -409,168 +420,169 @@ html, body, main {
 }
 
 // .intro-2 {
-  // position: fixed;
-  // top: 0; right: 0; bottom: 0; left: 0;
-  // display: block;
-  // background-color: black;
-  // &::after {
-    // content: "";
-    // background: url("https://s3-eu-west-1.amazonaws.com/demainchezmoi/cloudfront_assets/images/ete-jour-nuage-min.png") no-repeat center center;
-    // position: absolute;
-    // top: 0; right: 0; bottom: 0; left: 0;
-    // // opacity: 0.4;
+// position: fixed;
+// top: 0; right: 0; bottom: 0; left: 0;
+// display: block;
+// background-color: black;
+// &::after {
+// content: "";
+// background: url("https://s3-eu-west-1.amazonaws.com/demainchezmoi/cloudfront_assets/images/ete-jour-nuage-min.png") no-repeat center center;
+// position: absolute;
+// top: 0; right: 0; bottom: 0; left: 0;
+// // opacity: 0.4;
   // }
-// }
+  // }
 
-.row, .col, div[class^="col-"] {
-  z-index: 1;
-}
+  .row, .col, div[class^="col-"] {
+    z-index: 1;
+  }
 
-.transition-triangle.white svg polygon { fill: white; }
-.transition-triangle.light-gray svg polygon { fill: $light-gray; }
-.transition-triangle.gray svg polygon { fill: #eaeaea; }
+  .transition-triangle.white svg polygon { fill: white; }
+  .transition-triangle.light-gray svg polygon { fill: $light-gray; }
+  .transition-triangle.gray svg polygon { fill: #eaeaea; }
 
-.transition-triangle {
-  &.flip {
-    -moz-transform: scale(-1, -1);
-    -o-transform: scale(-1, -1);
-    -webkit-transform: scale(-1, -1);
-    transform: scale(-1, -1);
-    filter: FlipV FlipH;
-    -ms-filter: "FlipV FlipH";
+  .transition-triangle {
+    &.flip {
+      -moz-transform: scale(-1, -1);
+      -o-transform: scale(-1, -1);
+      -webkit-transform: scale(-1, -1);
+      transform: scale(-1, -1);
+      filter: FlipV FlipH;
+      -ms-filter: "FlipV FlipH";
+    }
+    &.v-flip {
+      -moz-transform: scaleY(-1);
+      -o-transform: scaleY(-1);
+      -webkit-transform: scaleY(-1);
+      transform: scaleY(-1);
+      filter: FlipV;
+      -ms-filter: "FlipV";
+    }
+    &.h-flip {
+      -moz-transform: scaleX(-1);
+      -o-transform: scaleX(-1);
+      -webkit-transform: scaleX(-1);
+      transform: scaleX(-1);
+      filter: FlipH;
+      -ms-filter: "FlipH";
+    }
+    .triangle-svg {
+      width: 100%;
+      position: absolute;
+      & polygon { position: relative; }
+    }
+
+    &.top .triangle-svg {
+      @include media-breakpoint-up(xs) {
+        $shift: map-get($spacers, xs) / $spacer-ratio;
+        height: $shift;
+        top: -$shift;
+      }
+      @include media-breakpoint-up(sm) {
+        $shift: map-get($spacers, sm) / $spacer-ratio;
+        height: $shift;
+        top: -$shift;
+      }
+      @include media-breakpoint-up(md) {
+        $shift: map-get($spacers, md) / $spacer-ratio;
+        height: $shift;
+        top: -$shift;
+      }
+      @include media-breakpoint-up(lg) {
+        $shift: map-get($spacers, lg) / $spacer-ratio;
+        height: $shift;
+        top: -$shift;
+      }
+      @include media-breakpoint-up(xl) {
+        $shift: map-get($spacers, xl) / $spacer-ratio;
+        height: $shift;
+        top: -$shift;
+      }
+    }
+
+    &.bottom .triangle-svg {
+      @include media-breakpoint-up(xs) {
+        $shift: map-get($spacers, xs);
+        height: $shift / $spacer-ratio;
+        bottom: -$shift;
+      }
+      @include media-breakpoint-up(sm) {
+        $shift: map-get($spacers, sm);
+        height: $shift / $spacer-ratio;
+        bottom: -$shift;
+      }
+      @include media-breakpoint-up(md) {
+        $shift: map-get($spacers, md);
+        height: $shift / $spacer-ratio;
+        bottom: -$shift;
+      }
+      @include media-breakpoint-up(lg) {
+        $shift: map-get($spacers, lg);
+        height: $shift / $spacer-ratio;
+        bottom: -$shift;
+      }
+      @include media-breakpoint-up(xl) {
+        $shift: map-get($spacers, xl);
+        height: $shift / $spacer-ratio;
+        bottom: -$shift;
+      }
+    }
   }
-  &.v-flip {
-    -moz-transform: scaleY(-1);
-    -o-transform: scaleY(-1);
-    -webkit-transform: scaleY(-1);
-    transform: scaleY(-1);
-    filter: FlipV;
-    -ms-filter: "FlipV";
+
+
+  .primary-background {
+    background-color: #007bff;
   }
-  &.h-flip {
-    -moz-transform: scaleX(-1);
-    -o-transform: scaleX(-1);
-    -webkit-transform: scaleX(-1);
-    transform: scaleX(-1);
-    filter: FlipH;
-    -ms-filter: "FlipH";
+
+  .certificates {
+    background-color: rgba(255, 255, 255, 0.88);
+    border-radius: 20px;
   }
-  .triangle-svg {
-    width: 100%;
+
+  .brand {
+    @include media-breakpoint-up(md) { margin-bottom: map-get($spacers, 5); }
+    @include media-breakpoint-down(xs) { font-size: small; }
+    @extend .text-shadow;
+  }
+
+  .badge { border: 0 !important; }
+
+  .img-thumbnail,
+  nav.navbar {
+    border-radius: 0;
+  }
+
+  .yellow-flash-background {
+    background-color: $base-yellow-flash;
+  }
+
+  .dark-gray-text {
+    color: $gray-700;
+  }
+
+  .gray-text-500 { color: $gray-500 !important; }
+  .gray-text-600 { color: $gray-600 !important; }
+  .gray-text-680 { color: mix($gray-700, $gray-600, 90%); }
+  .gray-text-700 { color: $gray-700 !important; }
+  .gray-text-800 { color: $gray-800; }
+  .gray-text-900 { color: $gray-900; }
+
+  .gray-700 { background-color: $gray-700; }
+  .gray-600 { background-color: $gray-600; }
+
+  .gray-background {
+    background-color: $gray-700;
+  }
+
+  footer {
+    background-color: #eaeaea;
+  }
+
+
+  .photo-stack {
     position: absolute;
-    & polygon { position: relative; }
+    top: 0; right: 0; left: 0; bottom: 0;
+    z-index: 1000;
+    margin-top: 0 !important;
+    background: transparent !important;
   }
-
-  &.top .triangle-svg {
-    @include media-breakpoint-up(xs) {
-      $shift: map-get($spacers, xs) / $spacer-ratio;
-      height: $shift;
-      top: -$shift;
-    }
-    @include media-breakpoint-up(sm) {
-      $shift: map-get($spacers, sm) / $spacer-ratio;
-      height: $shift;
-      top: -$shift;
-    }
-    @include media-breakpoint-up(md) {
-      $shift: map-get($spacers, md) / $spacer-ratio;
-      height: $shift;
-      top: -$shift;
-    }
-    @include media-breakpoint-up(lg) {
-      $shift: map-get($spacers, lg) / $spacer-ratio;
-      height: $shift;
-      top: -$shift;
-    }
-    @include media-breakpoint-up(xl) {
-      $shift: map-get($spacers, xl) / $spacer-ratio;
-      height: $shift;
-      top: -$shift;
-    }
-  }
-
-  &.bottom .triangle-svg {
-    @include media-breakpoint-up(xs) {
-      $shift: map-get($spacers, xs);
-      height: $shift / $spacer-ratio;
-      bottom: -$shift;
-    }
-    @include media-breakpoint-up(sm) {
-      $shift: map-get($spacers, sm);
-      height: $shift / $spacer-ratio;
-      bottom: -$shift;
-    }
-    @include media-breakpoint-up(md) {
-      $shift: map-get($spacers, md);
-      height: $shift / $spacer-ratio;
-      bottom: -$shift;
-    }
-    @include media-breakpoint-up(lg) {
-      $shift: map-get($spacers, lg);
-      height: $shift / $spacer-ratio;
-      bottom: -$shift;
-    }
-    @include media-breakpoint-up(xl) {
-      $shift: map-get($spacers, xl);
-      height: $shift / $spacer-ratio;
-      bottom: -$shift;
-    }
-  }
-}
-
-
-.primary-background {
-  background-color: #007bff;
-}
-
-.certificates {
-  background-color: rgba(255, 255, 255, 0.88);
-  border-radius: 20px;
-}
-
-.brand {
-  @include media-breakpoint-up(md) { margin-bottom: map-get($spacers, 5); }
-  @include media-breakpoint-down(xs) { font-size: small; }
-  @extend .text-shadow;
-}
-
-.badge { border: 0 !important; }
-
-.img-thumbnail,
-nav.navbar {
-  border-radius: 0;
-}
-
-.yellow-flash-background {
-  background-color: $base-yellow-flash;
-}
-
-.dark-gray-text {
-  color: $gray-700;
-}
-
-.gray-text-500 { color: $gray-500 !important; }
-.gray-text-600 { color: $gray-600 !important; }
-.gray-text-700 { color: $gray-700 !important; }
-.gray-text-800 { color: $gray-800; }
-.gray-text-900 { color: $gray-900; }
-
-.gray-700 { background-color: $gray-700; }
-.gray-600 { background-color: $gray-600; }
-
-.gray-background {
-  background-color: $gray-700;
-}
-
-footer {
-  background-color: #eaeaea;
-}
-
-
-.photo-stack {
-  position: absolute;
-  top: 0; right: 0; left: 0; bottom: 0;
-  z-index: 1000;
-  margin-top: 0 !important;
-  background: transparent !important;
-}
