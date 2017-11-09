@@ -33,12 +33,12 @@
     <div class="container spacer py-4 white-transp">
       <div class="row justify-content-center align-items-center">
         <div class="col">
-          <h3 class="h3-responsive my-0 font-black indigo-text col-auto d-flex justify-content-center">
+          <h2 class="h3-responsive my-0 font-black indigo-text col-auto d-flex justify-content-center">
             <div class="d-flex justify-content-center align-items-center">
               <%= PhoenixInlineSvg.Helpers.svg_image(@conn, "logo") %>
               Maison&nbsp;Léo&nbsp;
             </div>
-          </h3>
+          </h2>
           <h1 class="h2-responsive mt-0 text-center mb-4 font-bold rw-sentence" style="">
             <span style="color: #333645;">Devenez propriétaires</span>
             <div class="rw-words rw-words-2 blue-text font-bold">
