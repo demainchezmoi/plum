@@ -1,3 +1,4 @@
+<div class="intro"></div>
 <nav class="navbar navbar-expand-lg navbar-dark indigo fixed">
 
   <a class="navbar-brand d-flex justify-content-center align-items-center small-xs" href="/">
@@ -27,123 +28,90 @@
   </ul>
 </nav>
 
-<div class="content-1 relative" style="margin-top: 75px;">
-  <div class="relative white">
-    <div class="container spacer">
+<div class="content-1 relative">
+  <div class="relative">
+    <div class="container spacer py-4 white-transp">
       <div class="row justify-content-center align-items-center">
         <div class="col">
-      <div class="row justify-content-center mb-5">
-        <div class="col-12 col-md-8 col-lg-7">
-          <img
-             class="z-depth-1 d-block p-2"
-             src="https://s3-eu-west-1.amazonaws.com/demainchezmoi/cloudfront_assets/images/ete-jour-nuage-min.png"
-             style="width: 100%">
-          </div>
-      </div>
           <h3 class="h3-responsive my-0 font-black indigo-text col-auto d-flex justify-content-center">
             <div class="d-flex justify-content-center align-items-center">
               <%= PhoenixInlineSvg.Helpers.svg_image(@conn, "logo") %>
               Maison&nbsp;Léo&nbsp;
             </div>
           </h3>
-          <h1 class="h2-responsive mt-0 text-center mb-4 font-thin rw-sentence" style="">
+          <h1 class="h2-responsive mt-0 text-center mb-4 font-bold rw-sentence" style="">
             <span style="color: #333645;">Devenez propriétaires</span>
             <div class="rw-words rw-words-2 blue-text font-bold">
               <span>simplement</span>
               <span>rapidement</span>
-              <span>sans tracas</span>
+              <span>sans stess</span>
               <span>en famille</span>
             </div>
             <span style="opacity: 0">rapidement</span>
           </h1>
-          <div class="mr-auto ml-auto open-sans gray-text-700 text-center mt-4 mb-3" style="max-width: 500px;">
-            <p class="mb-0 indigo-text">Faites construire votre maison 4 pièces pour 87&nbsp;900&nbsp;&euro; sans craindre les problèmes de chantier. Emménagez et dites adieu aux loyers en moins de huit mois&nbsp;!</p>
+          <div class="mr-auto ml-auto open-sans gray-text-700 text-center mt-4 mb-3" style="max-width: 600px;">
+            <p class="mb-0 indigo-text lead">Faites construire votre maison 4 pièces pour seulement 87&nbsp;900&nbsp;&euro;<br />Emménagez et dites adieu aux loyers en moins de huit mois&nbsp;!</p>
           </div>
           <div class="d-flex justify-content-center">
-            <a class="btn btn-lg btn-indigo" href="<%= ad_path(@conn, :public_index) %>">Trouver une offre avec terrain</a>
+            <a class="btn btn-lg btn-pink" href="<%= ad_path(@conn, :public_index) %>">Trouver une offre avec terrain</a>
           </div>
         </div>
       </div>
     </div>
   </div>
 
-
-  <div class="relative light-gray">
-    <div class="transition-triangle light-gray top">
-      <%= PhoenixInlineSvg.Helpers.svg_image(@conn, "triangle") %>
-    </div>
-
-    <div class="container spacer">
-      <div class="mx-1">
-        <div class="row text-center font-bold open-sans">
-
-          <div class="col p-0 reinsurance z-depth-1-half m-sm-3 white">
-            <div class="p-3 blue-text">
-              <i class="fa-stack fa-2x">
-                <i class="fa fa-square fa-stack-2x"></i>
-                <i class="fa fa-check fa-stack-1x white-text"></i>
-              </i>
-              <div class="mt-1 px-md-5 font-bold" style="line-height: 1.1; font-weight: 700;"><span class="small-xs">Garantie décénale et assurance dommage d'ouvrage</span></div>
-            </div>
-          </div>
-
-          <div class="col p-0 reinsurance white z-depth-1-half d-flex align-items-center justify-content-center">
-            <div class="p-2 p-sm-3 blue-text">
-        	    <i class="fa-stack fa-2x">
-          	    <i class="fa fa-square fa-stack-2x"></i>
-          	    <i class="fa fa-check fa-stack-1x white-text" style="margin-left: 1px;"></i>
-        	    </i>
-        	    <div class="mt-1 px-md-5 font-bold" style="line-height: 1.1; font-weight: 700;"><span class="small-xs">Construction ultra rapide 4 mois, 100% conforme au plan</span></div>
-				    </div>
-          </div>
-
-          <div class="col p-0 reinsurance z-depth-1-half m-sm-3 white">
-            <div class="p-3 blue-text">
-              <i class="fa-stack fa-2x">
-                <i class="fa fa-square fa-stack-2x"></i>
-                <i class="fa fa-check fa-stack-1x white-text"></i>
-              </i>
-              <div class="mt-1 px-md-5 font-bold" style="line-height: 1.1; font-weight: 700;"><span class="small-xs">Suivi personnalisé jusqu'au bout du projet</span></div>
-            </div>
-          </div>
-
-        </div>
-      </div>
-    </div>
-
-    <div class="transition-triangle light-gray bottom flip">
-      <%= PhoenixInlineSvg.Helpers.svg_image(@conn, "triangle") %>
-    </div>
-  </div>
 
   <div class="relative white">
-    <div class="container spacer">
-      <div class="row align-items-center justify-content-center">
-        <div class="col col-lg-8 col-md-10 col-sm-10">
-          <div class="media">
-            <img class="mr-3 rounded-circle z-depth-1 responsive-avatar" data-src="https://media-exp1.licdn.com/media/AAEAAQAAAAAAAAo7AAAAJGY2ZGQ1NDMyLWI0YTctNDQ4MC05NTVhLTQwM2U1ODc4MWU0Nw.jpg" alt="">
-            <div class="media-body text-justify">
-              <p class="font-bold gray-text-700">La Maison&nbsp;Léo&nbsp;: des chantiers sans soucis, une maison impeccable.</p>
-              <p class="open-sans gray-text-700 paragraph">La Maison&nbsp;Léo dispose d'un plan unique, optimisé pour la vie familiale.</p>
-              <p class="open-sans gray-text-700 paragraph">Ce choix fort fournit de nombreux avantages&nbsp;: réduire les coûts de fabrication de la maison, en augmenter la qualité et réduire considérablement les problèmes de chantier. <br />Parce que moins de changements conduisent à moins d'erreurs, et parce que les économies sur la fabrication nous permettent d'investir dans des matériaux de qualité supérieure, la Maison&nbsp;Léo propose à la fois un rapport qualité prix et un service au-delà de toute concurrence.</p>
-              <p class="open-sans gray-text-700 paragraph">Je vous propose de découvrir votre Maison&nbsp;Léo. À vous de jouer&nbsp;!</p>
-              <p class="open-sans gray-text-700 paragraph text-right mb-0">Xavier Jaffray</p>
-            </div>
-          </div>
+    <div class="transition-triangle white top">
+      <%= PhoenixInlineSvg.Helpers.svg_image(@conn, "triangle") %>
+    </div>
+    <div class="container spacer pt-4">
+      <div class="row justify-content-center">
+        <div class="col-12 col-lg-6 col-sm-6">
+      	  <ul class="list-unstyled">
+      	    <li class="d-flex align-items-center my-2">
+      	      <i class="fa fa-3x fa-check light-green-text mr-2"></i>
+      	      <p class="mb-1 h4-responsive">Garantie décénale</p>
+      	    </li>
+      	    <li class="d-flex align-items-center my-2">
+      	      <i class="fa fa-3x fa-check light-green-text mr-2"></i>
+      	      <p class="mb-1 h4-responsive">Assurance dommage d'ouvrage</p>
+      	    </li>
+      	    <li class="d-flex align-items-center my-2">
+      	      <i class="fa fa-3x fa-check light-green-text mr-2"></i>
+      	      <p class="mb-1 h4-responsive">Suivi personnalisé premium</p>
+      	    </li>
+      	  </ul>
+        </div>
+        <div class="col-12 col-lg-6 col-sm-6">
+      	  <ul class="list-unstyled">
+      	    <li class="d-flex align-items-center my-2">
+      	      <i class="fa fa-3x fa-check light-green-text mr-2"></i>
+      	      <p class="mb-1 h4-responsive">Livraison 100% conforme au plan</p>
+      	    </li>
+      	    <li class="d-flex align-items-center my-2">
+      	      <i class="fa fa-3x fa-check light-green-text mr-2"></i>
+      	      <p class="mb-1 h4-responsive">Construction rapide 4 mois</p>
+      	    </li>
+      	  </ul>
         </div>
       </div>
+      <div class="row justify-content-center">
+      </div>
+    </div>
+    <div class="transition-triangle white bottom flip">
+      <%= PhoenixInlineSvg.Helpers.svg_image(@conn, "triangle") %>
     </div>
   </div>
-
 
   <div class="relative light-gray">
     <div class="transition-triangle light-gray top">
       <%= PhoenixInlineSvg.Helpers.svg_image(@conn, "triangle") %>
     </div>
-    <div class="container spacer">
+    <div class="container spacer py-4">
       <div class="row justify-content-center">
         <div class="col-12">
-      	  <p class="font-bold gray-text-700">Les caractéristiques de votre Maison&nbsp;Léo</p>
+      	  <p class="font-bold gray-text-700">Les caractéristiques Léo</p>
         </div>
       </div>
       <div class="row justify-content-center">
@@ -163,7 +131,7 @@
               <tr>
                 <th class="col-auto text-center lead-th"><i class="fa fa-cubes"></i></th>
                 <th class="col-auto lead-th pl-0">Pièces</th>
-                <td class="col">4</td>
+                <td class="col">1 salon / 3 chambres</td>
               </tr>
               <tr>
                 <th class="col-auto text-center lead-th"><i class="fa fa-cube"></i></th>
@@ -207,7 +175,7 @@
   </div>
 
   <div class="relative white">
-    <div class="container spacer">
+    <div class="container spacer py-4">
       <div class="row align-items-center justify-content-center">
         <div class="col-12 col-md-5 col-lg-5">
           <div class="p-3">
@@ -233,7 +201,7 @@
     <div class="transition-triangle light-gray top">
       <%= PhoenixInlineSvg.Helpers.svg_image(@conn, "triangle") %>
     </div>
-    <div class="container spacer">
+    <div class="container spacer py-4">
       <div class="row align-items-center justify-content-center">
         <div class="col-12 col-md-5 col-lg-5 order-lg-2 order-md-2">
           <div class="p-3">
@@ -256,7 +224,7 @@
   </div>
 
   <div class="relative white">
-    <div class="container spacer">
+    <div class="container spacer py-4">
       <div class="row justify-content-center align-items-center">
         <div class="col mb-2">
           <div class="p-3">
@@ -302,7 +270,7 @@
     <div class="transition-triangle light-gray top">
       <%= PhoenixInlineSvg.Helpers.svg_image(@conn, "triangle") %>
     </div>
-    <div class="container spacer">
+    <div class="container spacer py-4">
       <div class="row align-items-center justify-content-center">
         <div class="col-12 col-md-6 col-lg-5 order-lg-2 order-md-2">
           <div class="p-3">

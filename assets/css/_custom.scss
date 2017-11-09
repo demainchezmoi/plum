@@ -2,11 +2,11 @@
 @import url('https://fonts.googleapis.com/css?family=Roboto:900');
 
 $intro-1-height: (
-"xs": 270px,
-"sm": 300px,
-"md": 400px,
-"lg": 450px,
-"xl": 450px
+"xs": 100px,
+"sm": 150px,
+"md": 250px,
+"lg": 350px,
+"xl": 300px
 );
 
 $spacers: (
@@ -16,6 +16,52 @@ $spacers: (
 "lg": 9rem,
 "xl": 10rem
 );
+
+html, body, main {
+  height: 100%;
+}
+
+.intro {
+  position: absolute;
+  right: 0; left: 0;
+  background: url("https://s3-eu-west-1.amazonaws.com/demainchezmoi/cloudfront_assets/images/ete-jour-nuage-min.png") no-repeat center center;
+  background-size: cover;
+
+  @include media-breakpoint-up(xs) {
+    $offset: 1.5 * map-get($intro-1-height, xs);
+    top: - $offset; 
+    height: calc(100% + #{$offset});
+  }
+  @include media-breakpoint-up(sm) {
+    $offset: 2.5 * map-get($intro-1-height, xs);
+    top: - $offset; 
+    height: calc(100% + #{$offset});
+  }
+  @include media-breakpoint-up(md) {
+    top: - map-get($intro-1-height, md);
+    height: 100%;
+  }
+  @include media-breakpoint-up(lg) {
+    top: 0;
+    height: 100%;
+  }
+  @include media-breakpoint-up(xl) {
+    top: 0;
+    height: 100%;
+  }
+}
+
+.white-transp {
+  background-color: rgba(255, 255, 255, 0.88);
+}
+
+.content-1 {
+  @include media-breakpoint-up(xs) { margin-top: map-get($intro-1-height, xs) }
+  @include media-breakpoint-up(sm) { margin-top: map-get($intro-1-height, sm) }
+  @include media-breakpoint-up(md) { margin-top: map-get($intro-1-height, md) }
+  @include media-breakpoint-up(lg) { margin-top: map-get($intro-1-height, lg) }
+  @include media-breakpoint-up(xl) { margin-top: map-get($intro-1-height, xl) }
+}
 
 .rw-words span {
   position: absolute;
@@ -380,16 +426,11 @@ nav.navbar.translucid {
   background-color: $light-gray;
 }
 
-html, body, main {
-  height: 100%;
-}
-
 .title-1 {
   @extend .h1-responsive, .font-light;
 }
 
 .spacer {
-  @extend .py-4;
   @include media-breakpoint-up(xs) { margin-bottom: map-get($spacers, xs) }
   @include media-breakpoint-up(sm) { margin-bottom: map-get($spacers, sm) }
   @include media-breakpoint-up(md) { margin-bottom: map-get($spacers, md) }
