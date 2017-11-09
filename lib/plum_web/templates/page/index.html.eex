@@ -44,9 +44,18 @@
               Maison&nbsp;Léo&nbsp;
             </div>
           </h3>
-          <h1 class="h1-responsive mt-0 text-center font-thin mb-4">Votre maison familiale</h1>
+          <h1 class="h2-responsive mt-0 text-center mb-4 font-thin rw-sentence" style="">
+            <span>Devenez propriétaires</span>
+            <div class="rw-words rw-words-2 blue-text font-bold">
+              <span>simplement</span>
+              <span>rapidement</span>
+              <span>sans tracas</span>
+              <span>en famille</span>
+            </div>
+            <span style="opacity: 0">rapidement</span>
+          </h1>
           <div class="mr-auto ml-auto open-sans gray-text-700 text-center mt-4 mb-3" style="max-width: 500px;">
-            <p class="mb-0 indigo-text">Faites construire votre <span style="font-weight: 700">T4 moderne</span> pour <span style="font-weight: 700">87&nbsp;900&nbsp;&euro;</span>. Emménagez et dites adieu aux loyers en moins de huit mois.</p>
+            <p class="mb-0 indigo-text">Faites construire votre maison 4 pièces pour 87&nbsp;900&nbsp;&euro;. Emménagez et dites adieu aux loyers en moins de huit mois&nbsp;!</p>
           </div>
           <div class="d-flex justify-content-center">
             <a class="btn btn-lg btn-indigo" href="<%= ad_path(@conn, :public_index) %>">Trouver une offre avec terrain</a>
@@ -72,7 +81,7 @@
                 <i class="fa fa-square fa-stack-2x"></i>
                 <i class="fa fa-check fa-stack-1x white-text"></i>
               </i>
-              <div class="mt-1 px-md-5 font-bold" style="line-height: 1.1; font-weight: 700;"><span class="small-xs">Toutes garanties et assurances légales incluses</span></div>
+              <div class="mt-1 px-md-5 font-bold" style="line-height: 1.1; font-weight: 700;"><span class="small-xs">Garantie décénale, assurance dommage d'ouvrage</span></div>
             </div>
           </div>
 
@@ -140,19 +149,19 @@
           <table class="table table-striped table-responsive mt-3 open-sans z-depth-1">
             <tbody>
               <tr>
+                <th class="col-auto text-center lead-th"><i class="fa fa-money"></i></th>
+                <th class="col-auto lead-th pl-0">Prix</th>
+                <td class="col">87&nbsp;900&nbsp;&euro;</td>
+              </tr>
+              <tr>
                 <th class="col-auto text-center lead-th"><i class="fa fa-arrows-alt"></i></th>
                 <th class="col-auto lead-th pl-0">Surface</th>
                 <td class="col">87&nbsp;m<sup>2</sup></td>
               </tr>
               <tr>
-                <th class="col-auto text-center lead-th"><i class="fa fa-image"></i></th>
-                <th class="col-auto lead-th pl-0">Surface&nbsp;vitrée</th>
-                <td class="col">16&nbsp;m<sup>2</sup></td>
-              </tr>
-              <tr>
-                <th class="col-auto text-center lead-th"><i class="fa fa-thermometer"></i></th>
-                <th class="col-auto lead-th pl-0">Chauffage</th>
-                <td class="col">Pompe chaleur air / air</td>
+                <th class="col-auto text-center lead-th"><i class="fa fa-cubes"></i></th>
+                <th class="col-auto lead-th pl-0">Pièces</th>
+                <td class="col">4</td>
               </tr>
               <tr>
                 <th class="col-auto text-center lead-th"><i class="fa fa-cube"></i></th>
@@ -166,19 +175,19 @@
           <table class="table table-striped table-responsive mt-3 open-sans z-depth-1">
             <tbody>
               <tr>
-                <th class="col-auto text-center lead-th"><i class="fa fa-money"></i></th>
-                <th class="col-auto lead-th pl-0">Prix</th>
-                <td class="col">87&nbsp;900&nbsp;&euro;</td>
+                <th class="col-auto text-center lead-th"><i class="fa fa-thermometer"></i></th>
+                <th class="col-auto lead-th pl-0">Chauffage</th>
+                <td class="col">Pompe chaleur air / air</td>
+              </tr>
+              <tr>
+                <th class="col-auto text-center lead-th"><i class="fa fa-image"></i></th>
+                <th class="col-auto lead-th pl-0">Surface&nbsp;vitrée</th>
+                <td class="col">16&nbsp;m<sup>2</sup></td>
               </tr>
               <tr>
                 <th class="col-auto text-center lead-th"><i class="fa fa-clone"></i></th>
                 <th class="col-auto lead-th pl-0"> Volets </th>
                 <td class="col">Roulants&nbsp;PVC</td>
-              </tr>
-              <tr>
-                <th class="col-auto text-center lead-th"><i class="fa fa-cubes"></i></th>
-                <th class="col-auto lead-th pl-0">Pièces</th>
-                <td class="col">4</td>
               </tr>
               <tr>
                 <th class="col-auto text-center lead-th"><i class="fa fa-fire"></i></th>
