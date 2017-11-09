@@ -37,16 +37,6 @@
   </head>
 
   <body data-js-view-path="<%= @conn.assigns[:view_name] || js_view_path(@conn, @view_template) %>">
-
-		<div id="fb-root"></div>
-		<script>(function(d, s, id) {
-  		var js, fjs = d.getElementsByTagName(s)[0];
-  		if (d.getElementById(id)) return;
-  		js = d.createElement(s); js.id = id;
-  		js.src = 'https://connect.facebook.net/fr_FR/sdk.js#xfbml=1&version=v2.10&appId=128372621147337';
-  		fjs.parentNode.insertBefore(js, fjs);
-		}(document, 'script', 'facebook-jssdk'));</script>
-
     <div class="d-flex justify-content-center">
       <%= if get_flash(@conn, :info) do %>
         <div class="alert alert-main alert-primary alert-dismissible" role="alert">
@@ -69,8 +59,8 @@
     <main role="main">
       <%= render @view_module, @view_template, assigns %>
     </main>
-    <script src="<%= static_path(@conn, "/js/app.js") %>"></script>
   </body>
+
 
   <%= if current_user = @conn.assigns |> Map.get(:current_user) do %>
     <script type="text/javascript">current_user=<%= raw Poison.encode!(render PlumWeb.Api.UserView, "show.json", %{user: current_user}) %></script>
@@ -80,12 +70,23 @@
     <script type="text/javascript">user_just_inserted=<%= raw Poison.encode!(true) %></script>
   <% end %>
 
-    <script type="text/javascript">
-  window._chatlio = window._chatlio||[];
-  !function(){ var t=document.getElementById("chatlio-widget-embed");if(t&&window.ChatlioReact&&_chatlio.init)return void _chatlio.init(t,ChatlioReact);for(var e=function(t){return function(){_chatlio.push([t].concat(arguments)) }},i=["configure","identify","track","show","hide","isShown","isOnline", "page"],a=0;a<i.length;a++)_chatlio[i[a]]||(_chatlio[i[a]]=e(i[a]));var n=document.createElement("script"),c=document.getElementsByTagName("script")[0];n.id="chatlio-widget-embed",n.src="https://w.chatlio.com/w.chatlio-widget.js",n.async=!0,n.setAttribute("data-embed-version","2.3");
-    n.setAttribute('data-widget-id','e12dd161-d702-4c9d-604e-c6434a64e173');
-    c.parentNode.insertBefore(n,c);
-  }();
-    </script>
+  <script src="<%= static_path(@conn, "/js/app.js") %>"></script>
+
+  <script type="text/javascript">
+window._chatlio = window._chatlio||[];
+!function(){ var t=document.getElementById("chatlio-widget-embed");if(t&&window.ChatlioReact&&_chatlio.init)return void _chatlio.init(t,ChatlioReact);for(var e=function(t){return function(){_chatlio.push([t].concat(arguments)) }},i=["configure","identify","track","show","hide","isShown","isOnline", "page"],a=0;a<i.length;a++)_chatlio[i[a]]||(_chatlio[i[a]]=e(i[a]));var n=document.createElement("script"),c=document.getElementsByTagName("script")[0];n.id="chatlio-widget-embed",n.src="https://w.chatlio.com/w.chatlio-widget.js",n.async=!0,n.setAttribute("data-embed-version","2.3");
+  n.setAttribute('data-widget-id','e12dd161-d702-4c9d-604e-c6434a64e173');
+  c.parentNode.insertBefore(n,c);
+}();
+  </script>
+
+	<div id="fb-root"></div>
+	<script>(function(d, s, id) {
+var js, fjs = d.getElementsByTagName(s)[0];
+if (d.getElementById(id)) return;
+js = d.createElement(s); js.id = id;
+js.src = 'https://connect.facebook.net/fr_FR/sdk.js#xfbml=1&version=v2.10&appId=128372621147337';
+fjs.parentNode.insertBefore(js, fjs);
+	}(document, 'script', 'facebook-jssdk'));</script>
 
 </html>

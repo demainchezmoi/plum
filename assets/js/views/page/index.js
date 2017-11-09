@@ -20,6 +20,7 @@ module.exports = class View extends MainView {
     this.switchTechImg();
     $('[data-action=change-tech-image]').click(this.selectTechImg);
     $('[data-role=tech-img]').click(this.stopTechImgAutoSwitch);
+    setTimeout(this.loadLazyImages);
   }
 
   unmount() {
@@ -28,6 +29,14 @@ module.exports = class View extends MainView {
 
   trackPage() {
     track("VISIT_INDEX")
+  }
+
+  loadLazyImages() {
+    $("img[data-src]").each(function() {
+      const t = $(this);
+      t.attr("src", t.data('src'));
+      t.removeAttr("data-src");
+    });
   }
 
   switchTechImg() {

@@ -1,19 +1,20 @@
-@import url('https://fonts.googleapis.com/css?family=Open+Sans:400,700,800');
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:400,700');
+@import url('https://fonts.googleapis.com/css?family=Roboto:900');
 
 $intro-1-height: (
-  "xs": 270px,
-  "sm": 300px,
-  "md": 400px,
-  "lg": 450px,
-  "xl": 450px
+"xs": 270px,
+"sm": 300px,
+"md": 400px,
+"lg": 450px,
+"xl": 450px
 );
 
 $spacers: (
-  "xs": 4rem,
-  "sm": 6rem,
-  "md": 8rem,
-  "lg": 9rem,
-  "xl": 10rem
+"xs": 4rem,
+"sm": 6rem,
+"md": 8rem,
+"lg": 9rem,
+"xl": 10rem
 );
 
 .reinsurance {
@@ -41,7 +42,6 @@ select {
 }
 
 $spacer-ratio: 1;
-
 $light-gray: #F5F5F5;
 
 .text-underline {
@@ -122,10 +122,10 @@ img.flip {
 }
 
 // .fa-stack .logo-svg {
-  // & g { stroke: white; }
-  // @extend .fa, .fa-stack-1x;
-  // width: 30px;
-  // height: 30px;
+// & g { stroke: white; }
+// @extend .fa, .fa-stack-1x;
+// width: 30px;
+// height: 30px;
 // }
 
 .navbar-brand {
@@ -235,35 +235,8 @@ p.paragraph:not(.mb-*, my-*) {
   }
 }
 
-.next-step-footer {
-  position: fixed;
-  bottom: 0; right: 0; left: 0;
-  background-color: white;
-  z-index: 1040;
-  // box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
-  border-top: 1px solid rgba(0, 0, 0, 0.07);
-  .next-step-footer-content {
-    @extend .d-flex, .justify-content-end, .align-items-center, .pt-2, .pb-2;
-  }
-}
-
-a.default-color-text {
-  color: $default-color !important;
-}
-
-.default-color-text {
-  color: $default-color;
-}
-
 .text-underline {
   text-decoration: underline;
-}
-
-.hors-frais {
-  padding-left: 4px;
-  font-size: 12px;
-  top: 10px;
-  vertical-align: top;
 }
 
 .deactivated-ad {
@@ -331,7 +304,6 @@ hr { width: 100%; }
 
 $base-yellow-flash: map-get($yellow-flash, base);
 
-@import url('https://fonts.googleapis.com/css?family=Roboto:900');
 
 nav.navbar.translucid {
   background: rgba(0, 0, 0, 0.6);
@@ -353,10 +325,6 @@ nav.navbar.translucid {
   color: black !important;
 }
 
-.font-thin {
-  font-weight: 100;
-}
-
 #map {
   @include media-breakpoint-up(xs) { height: 200px; }
   @include media-breakpoint-up(sm) { height: 250px; }
@@ -364,17 +332,10 @@ nav.navbar.translucid {
   @include media-breakpoint-up(lg) { height: 350px; }
 }
 
-.font-light {
-  font-weight: 300;
-}
-
-.font-black {
-  font-weight: 900;
-}
-
-.semi-gray-background {
-  background-color: rgba(0, 0, 0, 0.4);
-}
+.font-thin { font-weight: 100; }
+.font-light { font-weight: 300; }
+.fong-bold { font-weight: 700; }
+.font-black { font-weight: 900; }
 
 .light-bordered {
   border: 1px solid rgba(0, 0, 0, 0.1);
@@ -431,158 +392,145 @@ html, body, main {
 // top: 0; right: 0; bottom: 0; left: 0;
 // // opacity: 0.4;
   // }
-  // }
+// }
 
-  .row, .col, div[class^="col-"] {
-    z-index: 1;
+.row, .col, div[class^="col-"] {
+  z-index: 1;
+}
+
+.transition-triangle.white svg polygon { fill: white; }
+.transition-triangle.light-gray svg polygon { fill: $light-gray; }
+.transition-triangle.gray svg polygon { fill: #eaeaea; }
+
+.transition-triangle {
+  &.flip {
+    -moz-transform: scale(-1, -1);
+    -o-transform: scale(-1, -1);
+    -webkit-transform: scale(-1, -1);
+    transform: scale(-1, -1);
+    filter: FlipV FlipH;
+    -ms-filter: "FlipV FlipH";
   }
-
-  .transition-triangle.white svg polygon { fill: white; }
-  .transition-triangle.light-gray svg polygon { fill: $light-gray; }
-  .transition-triangle.gray svg polygon { fill: #eaeaea; }
-
-  .transition-triangle {
-    &.flip {
-      -moz-transform: scale(-1, -1);
-      -o-transform: scale(-1, -1);
-      -webkit-transform: scale(-1, -1);
-      transform: scale(-1, -1);
-      filter: FlipV FlipH;
-      -ms-filter: "FlipV FlipH";
-    }
-    &.v-flip {
-      -moz-transform: scaleY(-1);
-      -o-transform: scaleY(-1);
-      -webkit-transform: scaleY(-1);
-      transform: scaleY(-1);
-      filter: FlipV;
-      -ms-filter: "FlipV";
-    }
-    &.h-flip {
-      -moz-transform: scaleX(-1);
-      -o-transform: scaleX(-1);
-      -webkit-transform: scaleX(-1);
-      transform: scaleX(-1);
-      filter: FlipH;
-      -ms-filter: "FlipH";
-    }
-    .triangle-svg {
-      width: 100%;
-      position: absolute;
-      & polygon { position: relative; }
-    }
-
-    &.top .triangle-svg {
-      @include media-breakpoint-up(xs) {
-        $shift: map-get($spacers, xs) / $spacer-ratio;
-        height: $shift;
-        top: -$shift;
-      }
-      @include media-breakpoint-up(sm) {
-        $shift: map-get($spacers, sm) / $spacer-ratio;
-        height: $shift;
-        top: -$shift;
-      }
-      @include media-breakpoint-up(md) {
-        $shift: map-get($spacers, md) / $spacer-ratio;
-        height: $shift;
-        top: -$shift;
-      }
-      @include media-breakpoint-up(lg) {
-        $shift: map-get($spacers, lg) / $spacer-ratio;
-        height: $shift;
-        top: -$shift;
-      }
-      @include media-breakpoint-up(xl) {
-        $shift: map-get($spacers, xl) / $spacer-ratio;
-        height: $shift;
-        top: -$shift;
-      }
-    }
-
-    &.bottom .triangle-svg {
-      @include media-breakpoint-up(xs) {
-        $shift: map-get($spacers, xs);
-        height: $shift / $spacer-ratio;
-        bottom: -$shift;
-      }
-      @include media-breakpoint-up(sm) {
-        $shift: map-get($spacers, sm);
-        height: $shift / $spacer-ratio;
-        bottom: -$shift;
-      }
-      @include media-breakpoint-up(md) {
-        $shift: map-get($spacers, md);
-        height: $shift / $spacer-ratio;
-        bottom: -$shift;
-      }
-      @include media-breakpoint-up(lg) {
-        $shift: map-get($spacers, lg);
-        height: $shift / $spacer-ratio;
-        bottom: -$shift;
-      }
-      @include media-breakpoint-up(xl) {
-        $shift: map-get($spacers, xl);
-        height: $shift / $spacer-ratio;
-        bottom: -$shift;
-      }
-    }
+  &.v-flip {
+    -moz-transform: scaleY(-1);
+    -o-transform: scaleY(-1);
+    -webkit-transform: scaleY(-1);
+    transform: scaleY(-1);
+    filter: FlipV;
+    -ms-filter: "FlipV";
   }
-
-
-  .primary-background {
-    background-color: #007bff;
+  &.h-flip {
+    -moz-transform: scaleX(-1);
+    -o-transform: scaleX(-1);
+    -webkit-transform: scaleX(-1);
+    transform: scaleX(-1);
+    filter: FlipH;
+    -ms-filter: "FlipH";
   }
-
-  .certificates {
-    background-color: rgba(255, 255, 255, 0.88);
-    border-radius: 20px;
-  }
-
-  .brand {
-    @include media-breakpoint-up(md) { margin-bottom: map-get($spacers, 5); }
-    @include media-breakpoint-down(xs) { font-size: small; }
-    @extend .text-shadow;
-  }
-
-  .badge { border: 0 !important; }
-
-  .img-thumbnail,
-  nav.navbar {
-    border-radius: 0;
-  }
-
-  .yellow-flash-background {
-    background-color: $base-yellow-flash;
-  }
-
-  .dark-gray-text {
-    color: $gray-700;
-  }
-
-  .gray-text-500 { color: $gray-500 !important; }
-  .gray-text-600 { color: $gray-600 !important; }
-  .gray-text-680 { color: mix($gray-700, $gray-600, 90%); }
-  .gray-text-700 { color: $gray-700 !important; }
-  .gray-text-800 { color: $gray-800; }
-  .gray-text-900 { color: $gray-900; }
-
-  .gray-700 { background-color: $gray-700; }
-  .gray-600 { background-color: $gray-600; }
-
-  .gray-background {
-    background-color: $gray-700;
-  }
-
-  footer {
-    background-color: #eaeaea;
-  }
-
-
-  .photo-stack {
+  .triangle-svg {
+    width: 100%;
     position: absolute;
-    top: 0; right: 0; left: 0; bottom: 0;
-    z-index: 1000;
-    margin-top: 0 !important;
-    background: transparent !important;
+    & polygon { position: relative; }
   }
+
+  &.top .triangle-svg {
+    @include media-breakpoint-up(xs) {
+      $shift: map-get($spacers, xs) / $spacer-ratio;
+      height: $shift;
+      top: -$shift;
+    }
+    @include media-breakpoint-up(sm) {
+      $shift: map-get($spacers, sm) / $spacer-ratio;
+      height: $shift;
+      top: -$shift;
+    }
+    @include media-breakpoint-up(md) {
+      $shift: map-get($spacers, md) / $spacer-ratio;
+      height: $shift;
+      top: -$shift;
+    }
+    @include media-breakpoint-up(lg) {
+      $shift: map-get($spacers, lg) / $spacer-ratio;
+      height: $shift;
+      top: -$shift;
+    }
+    @include media-breakpoint-up(xl) {
+      $shift: map-get($spacers, xl) / $spacer-ratio;
+      height: $shift;
+      top: -$shift;
+    }
+  }
+
+  &.bottom .triangle-svg {
+    @include media-breakpoint-up(xs) {
+      $shift: map-get($spacers, xs);
+      height: $shift / $spacer-ratio;
+      bottom: -$shift;
+    }
+    @include media-breakpoint-up(sm) {
+      $shift: map-get($spacers, sm);
+      height: $shift / $spacer-ratio;
+      bottom: -$shift;
+    }
+    @include media-breakpoint-up(md) {
+      $shift: map-get($spacers, md);
+      height: $shift / $spacer-ratio;
+      bottom: -$shift;
+    }
+    @include media-breakpoint-up(lg) {
+      $shift: map-get($spacers, lg);
+      height: $shift / $spacer-ratio;
+      bottom: -$shift;
+    }
+    @include media-breakpoint-up(xl) {
+      $shift: map-get($spacers, xl);
+      height: $shift / $spacer-ratio;
+      bottom: -$shift;
+    }
+  }
+}
+
+
+.primary-background {
+  background-color: #007bff;
+}
+
+.certificates {
+  background-color: rgba(255, 255, 255, 0.88);
+  border-radius: 20px;
+}
+
+.brand {
+  @include media-breakpoint-up(md) { margin-bottom: map-get($spacers, 5); }
+  @include media-breakpoint-down(xs) { font-size: small; }
+  @extend .text-shadow;
+}
+
+.badge { border: 0 !important; }
+
+.img-thumbnail,
+nav.navbar {
+  border-radius: 0;
+}
+
+.dark-gray-text {
+  color: $gray-700;
+}
+
+.gray-text-500 { color: $gray-500 !important; }
+.gray-text-600 { color: $gray-600 !important; }
+.gray-text-680 { color: mix($gray-700, $gray-600, 90%); }
+.gray-text-700 { color: $gray-700 !important; }
+.gray-text-800 { color: $gray-800; }
+.gray-text-900 { color: $gray-900; }
+
+.gray-700 { background-color: $gray-700; }
+.gray-600 { background-color: $gray-600; }
+
+.gray-background {
+  background-color: $gray-700;
+}
+
+footer {
+  background-color: #eaeaea;
+}

@@ -82,7 +82,7 @@
           	    <i class="fa fa-square fa-stack-2x"></i>
           	    <i class="fa fa-check fa-stack-1x white-text" style="margin-left: 1px;"></i>
         	    </i>
-        	    <div class="mt-1 px-md-5 font-bold" style="line-height: 1.1; font-weight: 700;"><span class="small-xs">Construction ultra rapide <b class="font-black text-underline">4 mois</b>, 100% conforme au plan</span></div>
+        	    <div class="mt-1 px-md-5 font-bold" style="line-height: 1.1; font-weight: 700;"><span class="small-xs">Construction ultra rapide 4 mois, 100% conforme au plan</span></div>
 				    </div>
           </div>
 
@@ -110,7 +110,7 @@
       <div class="row align-items-center justify-content-center">
         <div class="col col-lg-8 col-md-10 col-sm-10">
           <div class="media">
-            <img class="mr-3 rounded-circle z-depth-1 responsive-avatar" src="https://media-exp1.licdn.com/media/AAEAAQAAAAAAAAo7AAAAJGY2ZGQ1NDMyLWI0YTctNDQ4MC05NTVhLTQwM2U1ODc4MWU0Nw.jpg" alt="">
+            <img class="mr-3 rounded-circle z-depth-1 responsive-avatar" data-src="https://media-exp1.licdn.com/media/AAEAAQAAAAAAAAo7AAAAJGY2ZGQ1NDMyLWI0YTctNDQ4MC05NTVhLTQwM2U1ODc4MWU0Nw.jpg" alt="">
             <div class="media-body text-justify">
               <p class="font-bold gray-text-700">La Maison&nbsp;Léo&nbsp;: des chantiers sans soucis, une maison impeccable.</p>
               <p class="open-sans gray-text-700 paragraph">La Maison&nbsp;Léo dispose d'un plan unique, optimisé pour la vie familiale.</p>
@@ -210,7 +210,7 @@
         <div class="col-12 col-md-7 col-lg-7">
           <img
              class="z-depth-1 d-block p-2"
-             src="https://s3-eu-west-1.amazonaws.com/demainchezmoi/cloudfront_assets/images/distribution_commercial_maison_leo_sd.png"
+             data-src="https://s3-eu-west-1.amazonaws.com/demainchezmoi/cloudfront_assets/images/distribution_commercial_maison_leo_sd.png"
              style="width: 100%">
         </div>
 
@@ -234,7 +234,7 @@
         <div class="col-12 col-md-7 col-lg-7">
           <img
              class="z-depth-1 d-block p-2"
-             src="https://s3-eu-west-1.amazonaws.com/demainchezmoi/cloudfront_assets/images/ete-jour-nuage-min.png"
+             data-src="https://s3-eu-west-1.amazonaws.com/demainchezmoi/cloudfront_assets/images/ete-jour-nuage-min.png"
              style="width: 100%">
         </div>
       </div>
@@ -267,19 +267,19 @@
                  data-role="tech-img"
                  data-value="elec1"
                  style="display: none"
-                 src="https://s3-eu-west-1.amazonaws.com/demainchezmoi/cloudfront_assets/images/elec_1-min.png">
+                 data-src="https://s3-eu-west-1.amazonaws.com/demainchezmoi/cloudfront_assets/images/elec_1-min.png">
               <img
                  class="img-fluid w-100"
                  data-role="tech-img"
                  data-value="elec3"
                  style="display: none"
-                 src="https://s3-eu-west-1.amazonaws.com/demainchezmoi/cloudfront_assets/images/elec_3-min.png">
+                 data-src="https://s3-eu-west-1.amazonaws.com/demainchezmoi/cloudfront_assets/images/elec_3-min.png">
               <img
                  class="img-fluid w-100"
                  data-role="tech-img"
                  data-value="elec4"
                  style="display: none"
-                 src="https://s3-eu-west-1.amazonaws.com/demainchezmoi/cloudfront_assets/images/elec_4-min.png">
+                 data-src="https://s3-eu-west-1.amazonaws.com/demainchezmoi/cloudfront_assets/images/elec_4-min.png">
             </div>
           </div>
         </div>
@@ -300,7 +300,7 @@
 				    <p class="open-sans gray-text-700 paragraph">N'hésitez-pas à remplir le formulaire ou à nous joindre directement&nbsp;:</p>
             <div class="p-3 light-bordered">
               <div class="media mt-1">
-                <img class="mr-3 rounded-circle z-depth-1 responsive-small-avatar" src="http://adebeo.co.in/wp-content/uploads/2015/04/denis_bolomier_india.jpg" alt="">
+                <img class="mr-3 rounded-circle z-depth-1 responsive-small-avatar" data-src="http://adebeo.co.in/wp-content/uploads/2015/04/denis_bolomier_india.jpg" alt="">
                 <div class="media-body">
                   <p class="text-secondary mb-0 small">Votre contact&nbsp;:</p>
                   <h5 class="my-0">Denis Bolomier</h5>

@@ -24,6 +24,7 @@
     "font-awesome": "^4.7.0",
     "install": "^0.10.1",
     "jquery": "^3.2.1",
+    "leaflet": "^1.2.0",
     "mdbootstrap": "^4.4.1",
     "node-sass": "^4.5.3",
     "node-waves": "^0.7.5",

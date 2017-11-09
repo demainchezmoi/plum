@@ -1,5 +1,7 @@
 import MainView from '../main';
 import {track} from '../../helpers/mixpanel';
+import L from 'leaflet';
+import 'leaflet/dist/leaflet.css';
 
 module.exports = class View extends MainView {
   mount() {
