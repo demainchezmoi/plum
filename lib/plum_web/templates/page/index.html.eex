@@ -25,19 +25,21 @@
       </a>
     </li>
   </ul>
-
 </nav>
 
-<div class="intro-1"> </div>
-
-<div class="content-1 relative">
+<div class="content-1 relative" style="margin-top: 75px;">
   <div class="relative white">
-    <div class="transition-triangle white top">
-      <%= PhoenixInlineSvg.Helpers.svg_image(@conn, "triangle") %>
-    </div>
     <div class="container spacer">
       <div class="row justify-content-center align-items-center">
         <div class="col">
+      <div class="row justify-content-center mb-5">
+        <div class="col-12 col-md-8 col-lg-7">
+          <img
+             class="z-depth-1 d-block p-2"
+             src="https://s3-eu-west-1.amazonaws.com/demainchezmoi/cloudfront_assets/images/ete-jour-nuage-min.png"
+             style="width: 100%">
+          </div>
+      </div>
           <h3 class="h3-responsive my-0 font-black indigo-text col-auto d-flex justify-content-center">
             <div class="d-flex justify-content-center align-items-center">
               <%= PhoenixInlineSvg.Helpers.svg_image(@conn, "logo") %>
@@ -45,7 +47,7 @@
             </div>
           </h3>
           <h1 class="h2-responsive mt-0 text-center mb-4 font-thin rw-sentence" style="">
-            <span>Devenez propriétaires</span>
+            <span style="color: #333645;">Devenez propriétaires</span>
             <div class="rw-words rw-words-2 blue-text font-bold">
               <span>simplement</span>
               <span>rapidement</span>
@@ -55,7 +57,7 @@
             <span style="opacity: 0">rapidement</span>
           </h1>
           <div class="mr-auto ml-auto open-sans gray-text-700 text-center mt-4 mb-3" style="max-width: 500px;">
-            <p class="mb-0 indigo-text">Faites construire votre maison 4 pièces pour 87&nbsp;900&nbsp;&euro;. Emménagez et dites adieu aux loyers en moins de huit mois&nbsp;!</p>
+            <p class="mb-0 indigo-text">Faites construire votre maison 4 pièces pour 87&nbsp;900&nbsp;&euro; sans craindre les problèmes de chantier. Emménagez et dites adieu aux loyers en moins de huit mois&nbsp;!</p>
           </div>
           <div class="d-flex justify-content-center">
             <a class="btn btn-lg btn-indigo" href="<%= ad_path(@conn, :public_index) %>">Trouver une offre avec terrain</a>
@@ -81,7 +83,7 @@
                 <i class="fa fa-square fa-stack-2x"></i>
                 <i class="fa fa-check fa-stack-1x white-text"></i>
               </i>
-              <div class="mt-1 px-md-5 font-bold" style="line-height: 1.1; font-weight: 700;"><span class="small-xs">Garantie décénale, assurance dommage d'ouvrage</span></div>
+              <div class="mt-1 px-md-5 font-bold" style="line-height: 1.1; font-weight: 700;"><span class="small-xs">Garantie décénale et assurance dommage d'ouvrage</span></div>
             </div>
           </div>
 
@@ -101,7 +103,7 @@
                 <i class="fa fa-square fa-stack-2x"></i>
                 <i class="fa fa-check fa-stack-1x white-text"></i>
               </i>
-              <div class="mt-1 px-md-5 font-bold" style="line-height: 1.1; font-weight: 700;"><span class="small-xs">Suivi personnalisé jusqu'au service après-vente</span></div>
+              <div class="mt-1 px-md-5 font-bold" style="line-height: 1.1; font-weight: 700;"><span class="small-xs">Suivi personnalisé jusqu'au bout du projet</span></div>
             </div>
           </div>
 
@@ -268,7 +270,7 @@
             <li class="list-group-item cp" data-action="change-tech-image" data-target="elec4">Système de ventilation</li>
           </ul>
         </div>
-        <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12">
+        <div class="col-lg-7 col-md-7 col-sm-12 col-xs-12">
           <div class="relative d-block">
             <div class="z-depth-1">
               <img
