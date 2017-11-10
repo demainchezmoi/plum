@@ -167,7 +167,7 @@
       <div class="row align-items-center justify-content-center">
         <div class="col-12 col-md-5 col-lg-5">
           <div class="p-3">
-        	  <p class="font-bold gray-text-800">Un espace optimisé pour vivre ensemble</p>
+        	  <p class="font-bold gray-text-800">Un espace pour vivre ensemble</p>
             <p class="open-sans gray-text-700 paragraph">Les trois chambres de votre Maison&nbsp;Léo garantissent à chacun un espace au calme, et le séjour cuisine de 48&nbsp;m<sup>2</sup> avec deux grandes baies vitrées vous permet de partager repas et bons films tous ensemble, ainsi que lumière et air frais.</p>
             <p class="open-sans gray-text-700 paragraph">Laissez-vous tenter par des après-midis balançoire, football, cabane et soirées plancha dans le jardin !</p>
             </p>
@@ -190,7 +190,7 @@
       <div class="row align-items-center justify-content-center">
         <div class="col-12 col-md-5 col-lg-5 order-lg-2 order-md-2">
           <div class="p-3">
-        	  <p class="font-bold gray-text-800">Une exigeance de qualité</p>
+        	  <p class="font-bold gray-text-800">Une maison de qualité</p>
             <p class="open-sans gray-text-700 paragraph">La maison Léo est fabriquée près de chez vous avec des matériaux robustes et des solutions techniques éprouvées pour concillier prix compétitif et qualité irréprochable.</p>
             <p class="open-sans gray-text-700 paragraph">Garantie 0% gadget, elle offre tout le confort moderne&nbsp;: isolation par l'extérieur, prises internet dans chaque pièce, 5m2 de panneaux solaires, ventilation simple flux.</p>
           </div>
@@ -210,9 +210,9 @@
       <div class="row justify-content-center align-items-center">
         <div class="col mb-2">
           <div class="p-3">
-            <p class="font-bold gray-text-800">Découvrez votre maison aux rayons X</p>
+            <p class="font-bold gray-text-800">Une conception sans suprises</p>
             <p class="open-sans gray-text-700 paragraph">La Maison&nbsp;Léo est garantie sans mauvaise surprise. Structures et réseaux sont optimisés pour assurer une qualité de fonctionnement optimale et une maîtrise des coûts.</p>
-            <p class="open-sans gray-text-700 paragraph">Découvrez les entrailles techniques de votre maison&nbsp;!</p>
+            <p class="open-sans gray-text-700 paragraph">Visualisez les flux et systèmes de votre maison&nbsp;!</p>
           </div>
           <ul class="list-group list-group-inline">
             <li class="list-group-item cp active" data-action="change-tech-image" data-target="elec1">Prises électriques</li>
@@ -309,7 +309,7 @@
     </div>
   </div>
 
-  <footer class="gray relative pt-4">
+  <footer class="gray relative py-6">
     <div class="container">
       <div class="row justify-content-center">
         <div class="col">
