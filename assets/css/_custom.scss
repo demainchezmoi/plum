@@ -11,10 +11,10 @@ $intro-1-height: (
 
 $spacers: (
 "xs": 4rem,
-"sm": 6rem,
-"md": 8rem,
-"lg": 9rem,
-"xl": 10rem
+"sm": 5rem,
+"md": 6rem,
+"lg": 7rem,
+"xl": 8rem
 );
 
 html, body, main {
@@ -427,15 +427,49 @@ nav.navbar.translucid {
 }
 
 .title-1 {
-  @extend .h1-responsive, .font-light;
+  @include media-breakpoint-up(xs) {
+    // padding-top: map-get($spacers, xs);
+    margin-bottom: map-get($spacers, xs);
+  }
+  @include media-breakpoint-up(sm) {
+    // padding-top: map-get($spacers, sm);
+    margin-bottom: map-get($spacers, sm);
+  }
+  @include media-breakpoint-up(md) {
+    // padding-top: map-get($spacers, md);
+    margin-bottom: map-get($spacers, md);
+  }
+  @include media-breakpoint-up(lg) {
+    // padding-top: map-get($spacers, lg);
+    margin-bottom: map-get($spacers, lg);
+  }
+  @include media-breakpoint-up(xl) {
+    // padding-top: map-get($spacers, xl);
+    margin-bottom: map-get($spacers, xl);
+  }
 }
 
 .spacer {
-  @include media-breakpoint-up(xs) { margin-bottom: map-get($spacers, xs) }
-  @include media-breakpoint-up(sm) { margin-bottom: map-get($spacers, sm) }
-  @include media-breakpoint-up(md) { margin-bottom: map-get($spacers, md) }
-  @include media-breakpoint-up(lg) { margin-bottom: map-get($spacers, lg) }
-  @include media-breakpoint-up(xl) { margin-bottom: map-get($spacers, xl) }
+  @include media-breakpoint-up(xs) {
+    padding-top: map-get($spacers, xs);
+    padding-bottom: map-get($spacers, xs);
+  }
+  @include media-breakpoint-up(sm) {
+    padding-top: map-get($spacers, sm);
+    padding-bottom: map-get($spacers, sm);
+  }
+  @include media-breakpoint-up(md) {
+    padding-top: map-get($spacers, md);
+    padding-bottom: map-get($spacers, md);
+  }
+  @include media-breakpoint-up(lg) {
+    padding-top: map-get($spacers, lg);
+    padding-bottom: map-get($spacers, lg);
+  }
+  @include media-breakpoint-up(xl) {
+    padding-top: map-get($spacers, xl);
+    padding-bottom: map-get($spacers, xl);
+  }
 }
 
 .intro-1 {

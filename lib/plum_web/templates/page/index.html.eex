@@ -30,7 +30,7 @@
 
 <div class="content-1 relative">
   <div class="relative">
-    <div class="container spacer py-4 white-transp">
+    <div class="container title-1 white-transp py-7">
       <div class="row justify-content-center align-items-center">
         <div class="col">
           <h2 class="h3-responsive my-0 font-black indigo-text col-auto d-flex justify-content-center">
@@ -62,10 +62,7 @@
 
 
   <div class="relative white">
-    <div class="transition-triangle white top">
-      <%= PhoenixInlineSvg.Helpers.svg_image(@conn, "triangle") %>
-    </div>
-    <div class="container spacer pt-4">
+    <div class="container spacer">
       <div class="row justify-content-center">
         <div class="col-12 col-lg-6 col-sm-6">
       	  <ul class="list-unstyled">
@@ -99,19 +96,13 @@
       <div class="row justify-content-center">
       </div>
     </div>
-    <div class="transition-triangle white bottom flip">
-      <%= PhoenixInlineSvg.Helpers.svg_image(@conn, "triangle") %>
-    </div>
   </div>
 
   <div class="relative light-gray">
-    <div class="transition-triangle light-gray top">
-      <%= PhoenixInlineSvg.Helpers.svg_image(@conn, "triangle") %>
-    </div>
-    <div class="container spacer py-4">
+    <div class="container spacer">
       <div class="row justify-content-center">
         <div class="col-12">
-      	  <p class="font-bold gray-text-700">Les caractéristiques Léo</p>
+      	  <p class="font-bold gray-text-700">La Maison&nbsp;Léo</p>
         </div>
       </div>
       <div class="row justify-content-center">
@@ -169,13 +160,10 @@
         </div>
       </div>
     </div>
-    <div class="transition-triangle light-gray bottom flip">
-      <%= PhoenixInlineSvg.Helpers.svg_image(@conn, "triangle") %>
-    </div>
   </div>
 
   <div class="relative white">
-    <div class="container spacer py-4">
+    <div class="container spacer">
       <div class="row align-items-center justify-content-center">
         <div class="col-12 col-md-5 col-lg-5">
           <div class="p-3">
@@ -198,10 +186,7 @@
   </div>
 
   <div class="relative light-gray">
-    <div class="transition-triangle light-gray top">
-      <%= PhoenixInlineSvg.Helpers.svg_image(@conn, "triangle") %>
-    </div>
-    <div class="container spacer py-4">
+    <div class="container spacer">
       <div class="row align-items-center justify-content-center">
         <div class="col-12 col-md-5 col-lg-5 order-lg-2 order-md-2">
           <div class="p-3">
@@ -218,13 +203,10 @@
         </div>
       </div>
     </div>
-    <div class="transition-triangle light-gray bottom flip">
-      <%= PhoenixInlineSvg.Helpers.svg_image(@conn, "triangle") %>
-    </div>
   </div>
 
   <div class="relative white">
-    <div class="container spacer py-4">
+    <div class="container spacer">
       <div class="row justify-content-center align-items-center">
         <div class="col mb-2">
           <div class="p-3">
@@ -267,10 +249,7 @@
   </div>
 
   <div class="relative light-gray" id="contact">
-    <div class="transition-triangle light-gray top">
-      <%= PhoenixInlineSvg.Helpers.svg_image(@conn, "triangle") %>
-    </div>
-    <div class="container spacer py-4">
+    <div class="container spacer">
       <div class="row align-items-center justify-content-center">
         <div class="col-12 col-md-6 col-lg-5 order-lg-2 order-md-2">
           <div class="p-3">
@@ -328,15 +307,9 @@
         </div>
       </div>
     </div>
-    <div class="transition-triangle light-gray bottom flip">
-      <%= PhoenixInlineSvg.Helpers.svg_image(@conn, "triangle") %>
-    </div>
   </div>
 
   <footer class="gray relative pt-4">
-    <div class="transition-triangle gray top">
-      <%= PhoenixInlineSvg.Helpers.svg_image(@conn, "triangle") %>
-    </div>
     <div class="container">
       <div class="row justify-content-center">
         <div class="col">
