@@ -21,7 +21,7 @@ module.exports = class View extends MainView {
   }
 
   loadMap({lat, lng}) {
-    const map = L.map('map').setView([lat, lng], 13);
+    const map = L.map('map', {scrollWheelZoom: false}).setView([lat, lng], 13);
 
     L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png').addTo(map);
     map.panTo(new L.LatLng(lat, lng));
