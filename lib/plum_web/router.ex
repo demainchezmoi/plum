@@ -32,6 +32,10 @@ defmodule PlumWeb.Router do
     plug PlumWeb.Plugs.RequireLogin, {:html, ["admin"]}
   end
 
+  pipeline :public_api do
+    plug :accepts, ["json"]
+  end
+
   pipeline :protected_api do
     plug :accepts, ["json"]
     plug PlumWeb.Plugs.TokenAuthentication
@@ -73,6 +77,11 @@ defmodule PlumWeb.Router do
     pipe_through :admin_browser
     resources "/lands", LandController
     resources "/ads", AdController
+  end
+
+  scope "/api", PlumWeb.Api do
+    pipe_through :public_api
+    get "/ping", PingController, :ping
   end
 
   scope "/api", PlumWeb.Api do
