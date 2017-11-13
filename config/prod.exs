@@ -16,10 +16,11 @@ use Mix.Config
 config :plum, PlumWeb.Endpoint,
   load_from_system_env: true,
   url: [
-    scheme: "http",
+    scheme: "https",
     host: "${APP_URL}",
-    port: 80
+    port: 443
   ],
+  force_ssl: [rewrite_on: [:x_forwarded_proto]],
   cache_static_manifest: "priv/static/cache_manifest.json",
   server: true
 
