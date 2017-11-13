@@ -49,7 +49,7 @@ defmodule PlumWeb.Endpoint do
   def init(_key, config) do
     if config[:load_from_system_env] do
       port = System.get_env("PORT") || raise "expected the PORT environment variable to be set"
-      {:ok, Keyword.put(config, :http, [:inet6, port: port])}
+      {:ok, Keyword.put(config, :http, [:inet6, port: port, protocol_options: [max_request_line_length: 8192, max_header_value_length: 8192]])}
     else
       {:ok, config}
     end
