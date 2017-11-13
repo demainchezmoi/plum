@@ -5,3 +5,4 @@ defmodule PlumWeb.PingController do
     conn |> send_resp(200, "OK")
   end
 end
+

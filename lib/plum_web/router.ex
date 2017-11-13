@@ -60,6 +60,7 @@ defmodule PlumWeb.Router do
     pipe_through :browser
 
     get "/", PageController, :index
+    get "/ping", PingController, :ping
     post "/contact", PageController, :contact
     get "/confidentialite", PageController, :confidentialite
     get "/login", PageController, :login
@@ -77,11 +78,6 @@ defmodule PlumWeb.Router do
     pipe_through :admin_browser
     resources "/lands", LandController
     resources "/ads", AdController
-  end
-
-  scope "/api", PlumWeb.Api do
-    pipe_through :public_api
-    get "/ping", PingController, :ping
   end
 
   scope "/api", PlumWeb.Api do
