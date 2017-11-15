@@ -141,7 +141,10 @@
 				  <p class="open-sans gray-text-700 paragraph">N'hésitez-pas à remplir le formulaire ou à nous joindre directement&nbsp;:</p>
           <div class="p-3 light-bordered">
             <div class="media mt-1">
-              <img class="mr-3 rounded-circle z-depth-1 responsive-small-avatar" src="http://adebeo.co.in/wp-content/uploads/2015/04/denis_bolomier_india.jpg" alt="">
+              <img
+                 class="mr-3 rounded-circle z-depth-1 responsive-small-avatar"
+                 src="https://s3-eu-west-1.amazonaws.com/demainchezmoi/cloudfront_assets/images/denis_bolomier_india.jpg"
+                 alt="">
               <div class="media-body">
                 <p class="text-secondary mb-0 small">Votre contact&nbsp;:</p>
                 <h5 class="my-0">Denis Bolomier</h5>
