@@ -92,11 +92,12 @@ config :ueberauth, Ueberauth.Strategy.Facebook.OAuth,
   client_secret: "${FACEBOOK_CLIENT_SECRET}"
 
 config :plum,
-  mixpanel_token: "${MIXPANEL_TOKEN}"
+  facebook_client_id: "${FACEBOOK_CLIENT_ID}",
+  facebook_client_secret: "${FACEBOOK_CLIENT_SECRET}",
+  facebook_page_id: "${FACEBOOK_PAGE_ID}"
 
 config :plum,
-  facebook_app_id: "${FACEBOOK_CLIENT_ID}",
-  facebook_page_id: "${FACEBOOK_PAGE_ID}"
+  mixpanel_token: "${MIXPANEL_TOKEN}"
 
 config :plum,
   env: "${MIX_ENV}"

@@ -32,7 +32,7 @@ defmodule PlumWeb.Router do
     plug PlumWeb.Plugs.RequireLogin, {:html, ["admin"]}
   end
 
-  pipeline :public_api do
+  pipeline :webhooks do
     plug :accepts, ["json"]
   end
 
@@ -78,6 +78,12 @@ defmodule PlumWeb.Router do
     pipe_through :admin_browser
     resources "/lands", LandController
     resources "/ads", AdController
+  end
+
+  scope "/webhooks", PlumWeb.Webhooks do
+    pipe_through :webhooks
+    get "/facebook", FacebookController, :verify
+    post "/facebook", FacebookController, :notify
   end
 
   scope "/api", PlumWeb.Api do
