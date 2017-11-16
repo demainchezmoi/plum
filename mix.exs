@@ -40,6 +40,8 @@ defmodule Plum.Mixfile do
       {:facebook, "~> 0.15.0"},
       {:gen_smtp, "~> 0.12.0"},
       {:gettext, "~> 0.11"},
+      {:google_api_sheets, "~> 0.0.1"},
+      {:goth, "~> 0.6.0"},
       {:httpoison, "~> 0.13"},
       {:mix_docker, "~> 0.5.0"},
       {:mix_test_watch, "~> 0.3", only: [:test], runtime: false},

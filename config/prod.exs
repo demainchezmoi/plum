@@ -101,3 +101,6 @@ config :plum,
 
 config :plum,
   env: "${MIX_ENV}"
+
+config :plum,
+  prospect_sheet_id: "${PROSPECT_SHEET_ID}"

@@ -7,11 +7,6 @@ defmodule PlumWeb.Webhooks.FacebookController do
     conn |> send_resp(200, challenge)
   end
 
-  def notify(conn, %{"entry" => entry, "object" => "page"}) when is_list(entry) do
-    entry |> Enum.map(&handle_page_entry/1)
-    conn |> send_resp(200, "OK")
-  end
-
   defp handle_page_entry(%{"changes" => changes}) do
     changes |> Enum.map(&handle_page_change/1)
   end
@@ -22,6 +17,11 @@ defmodule PlumWeb.Webhooks.FacebookController do
 
   defp handle_page_change(change) do
     Logger.warn("Unexpected facebook page change: #{inspect change}")
+  end
+
+  def notify(conn, %{"entry" => entry, "object" => "page"}) when is_list(entry) do
+    entry |> Enum.map(&handle_page_entry/1)
+    conn |> send_resp(200, "OK")
   end
 
   def notify(conn, params) do

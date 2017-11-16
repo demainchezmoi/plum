@@ -84,3 +84,6 @@ config :plum,
 
 config :plum,
   env: "dev" 
+
+config :plum,
+  prospect_sheet_id: System.get_env("PROSPECT_SHEET_ID")
