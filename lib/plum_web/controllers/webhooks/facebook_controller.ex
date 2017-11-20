@@ -13,24 +13,28 @@ defmodule PlumWeb.Webhooks.FacebookController do
     changes |> Enum.map(&handle_page_change/1)
   end
 
-  defp handle_page_change(%{"field" => "leadgen", "value" => %{"leadgen_id" => leadgen_id, "form_id" => form_id}}) do
+  defp handle_page_change(change = %{"field" => "leadgen", "value" => %{"leadgen_id" => leadgen_id, "form_id" => form_id}}) do
     page_access_token = Application.get_env(:plum, :facebook_page_access_token)
     access_string = %{access_token: page_access_token} |> URI.encode_query
 
     {:json, form} = Facebook.Graph.get(form_id, access_string)
     {:json, leadgen} = Facebook.Graph.get(leadgen_id, access_string)
 
-    # Google sheet
-    row = build_contact_row(leadgen["field_data"])
-    sheet = Application.get_env(:plum, :prospect_sheet_id)
-    Plum.Google.append_row(sheet, "A1:A1", row)
-    Plum.Google.sort_sheet_by_date(sheet)
+    with leadgen_data when not is_nil(leadgen_data) <- leadgen["field_data"] do
+      # Google sheet
+      row = build_contact_row(leadgen_data)
+      sheet = Application.get_env(:plum, :prospect_sheet_id)
+      Plum.Google.append_row(sheet, "A1:A1", row)
+      Plum.Google.sort_sheet_by_date(sheet)
 
-    # Slack
-    @base_leadgen_message
-    <> "formulaire : #{form["name"]}\n"
-    <> build_leadgen_message(leadgen["field_data"])
-    |> Plum.Slack.prospect_message
+      # Slack
+      @base_leadgen_message
+      <> "formulaire : #{form["name"]}\n"
+      <> build_leadgen_message(leadgen_data)
+      |> Plum.Slack.prospect_message
+    else
+      _ -> Logger.warn("Unexpected facebook leadgen : no leadgen field_data found: #{change |> inspect}")
+    end
   end
 
   defp build_contact_row(leadgen) do
