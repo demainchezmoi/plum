@@ -22,7 +22,7 @@ defmodule PlumWeb.Webhooks.FacebookController do
 
     @base_leadgen_message
     <> "formulaire : #{form["name"]}\n"
-    <> build_leadgen_message(leadgen)
+    <> build_leadgen_message(leadgen["field_data"])
     |> Plum.Slack.prospect_message
   end
 
