@@ -20,10 +20,34 @@ defmodule Plum.Google do
     )
   end
 
-  def build_contact_row(%{"first_name" => first_name, "last_name" => last_name, "phone" => phone, "email" => email, "ad" => ad}) do
-    creation = NaiveDateTime.utc_now |> NaiveDateTime.to_iso8601
-    path = ad_url(PlumWeb.Endpoint, :public, ad)
-    name = "#{first_name} #{last_name}"
-    [creation, "", "maisons-leo.fr", name, phone, email, path]
+  def sort_sheet_by_date(spreadsheet_id) do
+    sort_sheet(spreadsheet_id, 0, "DESCENDING")
+  end
+
+  def sort_sheet(spreadsheet_id, col, order) do
+    token = get_spreadsheets_token()
+    conn = get_conn(token)
+    GoogleApi.Sheets.V4.Api.Spreadsheets.sheets_spreadsheets_batch_update(
+      conn,
+      spreadsheet_id,
+      body: %{
+        requests: [
+          %{
+            sortRange: %{
+              range: %{
+                startRowIndex: 0,
+                startColumnIndex: 0
+              },
+              sortSpecs: [
+                %{
+                  dimensionIndex: col,
+                  sortOrder: order
+                }
+              ]
+            }
+          }
+        ]
+      }
+    )
   end
 end

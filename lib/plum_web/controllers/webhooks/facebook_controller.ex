@@ -20,10 +20,32 @@ defmodule PlumWeb.Webhooks.FacebookController do
     {:json, form} = Facebook.Graph.get(form_id, access_string)
     {:json, leadgen} = Facebook.Graph.get(leadgen_id, access_string)
 
+    # Google sheet
+    row = build_contact_row(leadgen["field_data"])
+    sheet = Application.get_env(:plum, :prospect_sheet_id)
+    Plum.Google.append_row(sheet, "A1:A1", row)
+    Plum.Google.sort_sheet_by_date(sheet)
+
+    # Slack
     @base_leadgen_message
     <> "formulaire : #{form["name"]}\n"
     <> build_leadgen_message(leadgen["field_data"])
     |> Plum.Slack.prospect_message
+  end
+
+  defp build_contact_row(leadgen) do
+    creation = NaiveDateTime.utc_now |> NaiveDateTime.to_iso8601
+    name = extract_field(leadgen, "full_name")
+    phone = extract_field(leadgen, "phone_number")
+    email = extract_field(leadgen, "email")
+    [creation, "", "Facebook", name, phone, email, ""]
+  end
+
+  defp extract_field(leadgen, field) do
+    leadgen
+    |> Enum.filter(& &1["name"] == field)
+    |> Enum.map(& &1["values"] |> Enum.join(" "))
+    |> Enum.join(" / ")
   end
 
   defp build_leadgen_message([], message), do: message
