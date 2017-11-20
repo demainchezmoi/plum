@@ -1,5 +1,3 @@
-<%= Phoenix.View.render PlumWeb.SharedView, "navbar-landing.html", active: nil %>
-
 <!-- {{{ Header -->
 <header class="">
   <section class="intro-1" style="max-height: 550px;">
