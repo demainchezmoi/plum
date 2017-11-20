@@ -80,7 +80,9 @@ config :plum,
 config :plum,
   facebook_client_id: System.get_env("FACEBOOK_CLIENT_ID"),
   facebook_client_secret: System.get_env("FACEBOOK_CLIENT_SECRET"),
-  facebook_page_id: System.get_env("FACEBOOK_PAGE_ID")
+  facebook_page_id: System.get_env("FACEBOOK_PAGE_ID"),
+  facebook_user_access_token: System.get_env("FACEBOOK_USER_ACCESS_TOKEN"),
+  facebook_page_access_token: System.get_env("FACEBOOK_PAGE_ACCESS_TOKEN")
 
 config :plum,
   env: "dev" 
