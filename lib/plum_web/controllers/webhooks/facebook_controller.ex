@@ -30,7 +30,7 @@ defmodule PlumWeb.Webhooks.FacebookController do
 
   defp build_leadgen_message([field|fields], message \\ "") do
     value = field["values"] |> Enum.join(" ")
-    message <> "#{field["name"]} : #{values}\n"
+    message <> "#{field["name"]} : #{value}\n"
   end
 
   defp handle_page_change(change) do
