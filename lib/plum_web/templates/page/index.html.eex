@@ -216,8 +216,9 @@
           </div>
           <ul class="list-group list-group-inline">
             <li class="list-group-item cp active" data-action="change-tech-image" data-target="elec1">Prises électriques</li>
-            <li class="list-group-item cp" data-action="change-tech-image" data-target="elec3">Éclairages et interrupteurs</li>
-            <li class="list-group-item cp" data-action="change-tech-image" data-target="elec4">Système de ventilation</li>
+            <li class="list-group-item cp" data-action="change-tech-image" data-target="elec4">Éclairages et interrupteurs</li>
+            <li class="list-group-item cp" data-action="change-tech-image" data-target="elec2">Prises internet / téléphone</li>
+            <li class="list-group-item cp" data-action="change-tech-image" data-target="elec5">Système de ventilation</li>
           </ul>
         </div>
         <div class="col-lg-7 col-md-7 col-sm-12 col-xs-12">
@@ -228,19 +229,25 @@
                  data-role="tech-img"
                  data-value="elec1"
                  style="display: none"
-                 data-src="https://s3-eu-west-1.amazonaws.com/demainchezmoi/cloudfront_assets/images/elec_1-min.png">
-              <img
-                 class="img-fluid w-100"
-                 data-role="tech-img"
-                 data-value="elec3"
-                 style="display: none"
-                 data-src="https://s3-eu-west-1.amazonaws.com/demainchezmoi/cloudfront_assets/images/elec_3-min.png">
+                 data-src="https://s3-eu-west-1.amazonaws.com/demainchezmoi/cloudfront_assets/images/leo_schema_1-min.png">
               <img
                  class="img-fluid w-100"
                  data-role="tech-img"
                  data-value="elec4"
                  style="display: none"
-                 data-src="https://s3-eu-west-1.amazonaws.com/demainchezmoi/cloudfront_assets/images/elec_4-min.png">
+                 data-src="https://s3-eu-west-1.amazonaws.com/demainchezmoi/cloudfront_assets/images/leo_schema_4-min.png">
+              <img
+                 class="img-fluid w-100"
+                 data-role="tech-img"
+                 data-value="elec2"
+                 style="display: none"
+                 data-src="https://s3-eu-west-1.amazonaws.com/demainchezmoi/cloudfront_assets/images/leo_schema_2-min.png">
+              <img
+                 class="img-fluid w-100"
+                 data-role="tech-img"
+                 data-value="elec5"
+                 style="display: none"
+                 data-src="https://s3-eu-west-1.amazonaws.com/demainchezmoi/cloudfront_assets/images/leo_schema_5-min.png">
             </div>
           </div>
         </div>
