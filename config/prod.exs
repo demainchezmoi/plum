@@ -92,13 +92,6 @@ config :ueberauth, Ueberauth.Strategy.Facebook.OAuth,
   client_secret: "${FACEBOOK_CLIENT_SECRET}"
 
 config :plum,
-  facebook_client_id: "${FACEBOOK_CLIENT_ID}",
-  facebook_client_secret: "${FACEBOOK_CLIENT_SECRET}",
-  facebook_page_id: "${FACEBOOK_PAGE_ID}",
-  facebook_user_access_token: "${FACEBOOK_USER_ACCESS_TOKEN}",
-  facebook_page_access_token: "${FACEBOOK_PAGE_ACCESS_TOKEN}"
-
-config :plum,
   mixpanel_token: "${MIXPANEL_TOKEN}"
 
 config :plum,

@@ -284,15 +284,9 @@
             <p class="indigo-text">Contactez-moi</p>
             <%= form_for @conn, page_path(@conn, :contact), [as: "contact"], fn f-> %>
               <div class="form-group row">
-                <label class="col-sm-3 col-form-label">Prénom</label>
-                <div class="col-sm-9">
-                  <%= text_input f, :first_name, placeholder: "Marie", class: "form-control" %>
-                </div>
-              </div>
-              <div class="form-group row">
                 <label class="col-sm-3 col-form-label">Nom</label>
                 <div class="col-sm-9">
-                  <%= text_input f, :last_name, placeholder: "Dupont", class: "form-control" %>
+                  <%= text_input f, :name, placeholder: "Dupont", class: "form-control" %>
                 </div>
               </div>
               <div class="form-group row">
@@ -359,15 +353,9 @@
       <div class="modal-body">
         <%= form_for @conn, page_path(@conn, :contact), [as: "contact"], fn f-> %>
           <div class="form-group row">
-            <label class="col-sm-3 col-form-label">Prénom</label>
-            <div class="col-sm-9">
-              <%= text_input f, :first_name, placeholder: "Marie", class: "form-control" %>
-            </div>
-          </div>
-          <div class="form-group row">
             <label class="col-sm-3 col-form-label">Nom</label>
             <div class="col-sm-9">
-              <%= text_input f, :last_name, placeholder: "Dupont", class: "form-control" %>
+              <%= text_input f, :name, placeholder: "Dupont", class: "form-control" %>
             </div>
           </div>
           <div class="form-group row">
