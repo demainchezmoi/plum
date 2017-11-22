@@ -22,13 +22,13 @@
   </ul>
 </nav>
 
-<div class="container spacer after-nav">
+<div class="container mt-7 after-nav">
   <div class="row">
     <div class="col mb-3 order-lg-2">
       <div class="row justify-content-start">
         <div class="col-12 col-sm order-sm-1">
           <p class="lead mb-1 font-light gray-text-700"><i class="fa fa-map-marker mx-1 indigo-text"></i> <%= @ad.land.city %> (<%= @ad.land.department %>)</p>
-          <h1 class="h3-responsive font-bold gray-text-700 mb-2">Maison 4 pièces + Terrain <span class="blue-text font-black"><%= raw Number.Currency.number_to_currency(@ad.land.price + @ad.house_price) %></span></h1>
+          <h1 class="h3-responsive font-bold gray-text-700 mb-2">Maison 4 pièces + Terrain <span class="blue-text font-black"><%= @ad |> total_price |> Number.Currency.number_to_currency |> raw %></span></h1>
         </div>
         <div class="col-auto col-sm-12 order-sm-3">
           <button class="btn btn-pink ml-0 mt-0" data-toggle="modal" data-target="#contactModal">Je suis intéressé(e)</button>
@@ -67,7 +67,7 @@
     </div>
 
     <div class="col-12 mb-4 order-lg-4">
-      <p class="text-secondary open-sans mb-0">Devenez propriétaire à <%= @ad.land.city %> (<%= @ad.land.department %>) pour <%= raw Number.Currency.number_to_currency(@ad.land.price + @ad.house_price) %> avec cette opportunité Maison&nbsp;Léo + terrain idéale primo-accédant. Faites construire votre T4 moderne, emménagez et dites adieu aux loyers en moins de huit mois&nbsp;!</p>
+      <p class="text-secondary open-sans mb-0">Devenez propriétaire à <%= @ad.land.city %> (<%= @ad.land.department %>) pour <%= @ad |> total_price |> Number.Currency.number_to_currency |> raw %> avec cette opportunité Maison&nbsp;Léo + terrain idéale primo-accédant. Faites construire votre T4 moderne, emménagez et dites adieu aux loyers en moins de huit mois&nbsp;!</p>
 		</div>
 
     <div class="col-12 col-lg-6 mb-4 order-lg-6">
@@ -77,17 +77,23 @@
           <tr>
             <th class="col-auto text-center lead-th"><i class="fa fa-home"></i></th>
             <th class="col-auto lead-th pl-0">Maison</th>
-            <td class="col"></span> 87&nbsp;m<sup>2</sup> <span class="text-secondary">pour</span> 87&nbsp;900&nbsp;&euro; <span class="text-secondary"></td>
+            <td class="col">87&nbsp;m<sup>2</sup> <span class="text-secondary">pour</span> 87&nbsp;900&nbsp;&euro;</td>
           </tr>
           <tr>
             <th class="col-auto text-center lead-th"><i class="fa fa-tree"></i></th>
             <th class="col-auto lead-th pl-0">Terrain</th>
-            <td class="col"></span> <%= @ad.land.surface %>&nbsp;m<sup>2</sup> <span class="text-secondary">pour</span> <%= raw Number.Currency.number_to_currency(@ad.land.price) %> <span class="text-secondary"></td>
+            <td class="col"><%= @ad.land.surface %>&nbsp;m<sup>2</sup> <span class="text-secondary">pour</span> <%= raw Number.Currency.number_to_currency(@ad.land.price) %></td>
           </tr>
           <tr>
             <th class="col-auto text-center lead-th"><i class="fa fa-wrench"></i></th>
             <th class="col-auto lead-th pl-0">Adaptation&nbsp;sol</th>
-            <td class="col"></span>prix à déterminer</td>
+            <td class="col">
+              <%= if @ad.adaptation_fees do %>
+                Estimée à <%= raw Number.Currency.number_to_currency(@ad.adaptation_fees) %>
+              <% else %>
+                coûts à déterminer
+              <% end %>
+            </td>
           </tr>
           <tr>
             <th class="col-auto text-center lead-th"><i class="fa fa-cubes"></i></th>

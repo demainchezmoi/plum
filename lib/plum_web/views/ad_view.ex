@@ -14,4 +14,13 @@ defmodule PlumWeb.AdView do
     lands |> Enum.map(& {"#{&1.inserted_at |> NaiveDateTime.to_date} - #{&1.city} ", &1.id})
   end
 
+  def total_price(ad) do
+    base = ad.land.price + ad.house_price
+    if fees = ad.adaptation_fees do
+      base + fees
+    else
+      base
+    end
+  end
+
 end
