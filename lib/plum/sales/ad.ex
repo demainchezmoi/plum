@@ -10,6 +10,7 @@ defmodule Plum.Sales.Ad do
     belongs_to :land, Land
     field :active, :boolean, default: true
     field :house_price, :integer, default: 89_000
+    field :adaptation_fees, :integer
     timestamps()
   end
 
@@ -20,6 +21,7 @@ defmodule Plum.Sales.Ad do
 
   @optional_fields ~w(
     land_id
+    adaptation_fees
   )a
 
   @doc false
