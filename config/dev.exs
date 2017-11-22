@@ -78,7 +78,4 @@ config :plum,
   mixpanel_token: "570aa0ff2af04cf1609e778c6a5eda10"
 
 config :plum,
-  env: "dev" 
-
-config :plum,
-  prospect_sheet_id: System.get_env("PROSPECT_SHEET_ID")
+  env: "dev"
