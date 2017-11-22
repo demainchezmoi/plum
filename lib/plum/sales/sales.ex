@@ -22,7 +22,10 @@ defmodule Plum.Sales do
 
   """
   def list_ads do
-    Ad |> preload(:land) |> Repo.all()
+    Ad
+    |> order_by(desc: :inserted_at)
+    |> preload(:land)
+    |> Repo.all()
   end
 
   @doc """
@@ -148,7 +151,10 @@ defmodule Plum.Sales do
 
   """
   def list_lands do
-    Land |> preload(:ads) |> Repo.all
+    Land
+    |> preload(:ads)
+    |> order_by(desc: :inserted_at)
+    |> Repo.all
   end
 
   @doc """
