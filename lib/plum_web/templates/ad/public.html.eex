@@ -29,6 +29,7 @@
         <div class="col-12 col-sm order-sm-1">
           <p class="lead mb-1 font-light gray-text-700"><i class="fa fa-map-marker mx-1 indigo-text"></i> <%= @ad.land.city %> (<%= @ad.land.department %>)</p>
           <h1 class="h3-responsive font-bold gray-text-700 mb-2">Maison 4 pièces + Terrain <span class="blue-text font-black"><%= @ad |> total_price |> Number.Currency.number_to_currency |> raw %></span></h1>
+          <p class="text-secondary mt-0">Annonce visionnée <%= @ad.view_count %> fois.</p>
         </div>
         <div class="col-auto col-sm-12 order-sm-3">
           <button class="btn btn-pink ml-0 mt-0" data-toggle="modal" data-target="#contactModal">Je suis intéressé(e)</button>

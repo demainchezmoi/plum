@@ -122,6 +122,20 @@ defmodule Plum.Sales do
     Ad.changeset(ad, %{})
   end
 
+  @doc """
+  Increments ad view count.
+
+  ## Examples
+
+      iex> increment_view_count!(ad)
+      %Ad{}
+
+  """
+  def increment_view_count!(%Ad{} = ad) do
+    {:ok, ad} = ad |> update_ad(%{view_count: ad.view_count + 1})
+    ad
+  end
+
   alias Plum.Sales.Land
 
   @doc """
