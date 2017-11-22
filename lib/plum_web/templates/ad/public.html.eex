@@ -91,7 +91,7 @@
               <%= if @ad.adaptation_fees do %>
                 Estimée à <%= raw Number.Currency.number_to_currency(@ad.adaptation_fees) %>
               <% else %>
-                coûts à déterminer
+                frais à déterminer
               <% end %>
             </td>
           </tr>
