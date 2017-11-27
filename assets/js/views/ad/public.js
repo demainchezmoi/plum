@@ -23,7 +23,8 @@ module.exports = class View extends MainView {
   loadMap({lat, lng}) {
     const map = L.map('map', {scrollWheelZoom: false}).setView([lat, lng], 13);
 
-    L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png').addTo(map);
+    const layers = 'https://korona.geog.uni-heidelberg.de/tiles/roads/x={x}&y={y}&z={z}';
+    L.tileLayer(layers, {}).addTo(map);
     map.panTo(new L.LatLng(lat, lng));
 
     new L.circle([lat, lng], 1000).addTo(map);

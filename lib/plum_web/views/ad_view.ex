@@ -1,5 +1,6 @@
 defmodule PlumWeb.AdView do
   use PlumWeb, :view
+  import PlumWeb.PlumViewHelpers
 
   def interested_url(ad, current_user) when not is_nil(current_user), do:
     ad_path(PlumWeb.Endpoint, :interested, ad)
@@ -22,5 +23,4 @@ defmodule PlumWeb.AdView do
       base
     end
   end
-
 end

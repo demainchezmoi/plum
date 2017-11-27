@@ -7,6 +7,10 @@ export default class MainView {
     $(".carousel.lazy").on("slide.bs.carousel", function(ev) {
       var lazy;
       lazy = $(ev.relatedTarget).find("img[data-src]");
+
+      lazy.attr("srcset", lazy.data('srcset'));
+      lazy.removeAttr("data-srcset");
+
       lazy.attr("src", lazy.data('src'));
       lazy.removeAttr("data-src");
     });
