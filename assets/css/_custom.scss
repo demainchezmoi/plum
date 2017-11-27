@@ -21,6 +21,25 @@ html, body, main {
   height: 100%;
 }
 
+.px-xs-0 {
+  @include media-breakpoint-down(xs) {
+    margin-right: 0 !important;
+    margin-left: 0 !important;
+  }
+}
+
+.btn-xs-block {
+  @include media-breakpoint-down(xs) {
+    margin: inherit;
+    display: block;
+    width: 100%;
+  }
+}
+
+.lead-paragraph::first-letter {
+  font-weight: bold;
+}
+
 .intro {
   position: absolute;
   right: 0; left: 0;

@@ -54,12 +54,12 @@
       </div>
     <% else %>
       <div class="col-12 order-lg-2 mb-4">
-        <button class="btn btn-pink mb-0 btn-block btn-sm-inline" data-toggle="modal" data-target="#contactModal">Prendre contact</button>
+        <button class="btn btn-pink mb-0 btn-xs-block" data-toggle="modal" data-target="#contactModal">Prendre contact</button>
       </div>
     <% end %>
 
 
-    <div class="col-12 mb-4 px-0 order-lg-5">
+    <div class="col-12 mb-4 px-xs-0 order-lg-5">
       <p class="font-bold gray-text-700 d-none d-sm-block">Votre Maison&nbsp;Léo</p>
 			<div id="carouselExampleIndicators" class="carousel lazy slide img-fluid" data-ride="carousel">
   			<ol class="carousel-indicators">
@@ -94,7 +94,7 @@
     </div>
 
     <div class="col-12 mb-4 order-lg-4">
-      <p class="gray-text-700 open-sans mb-0">Devenez propriétaire à <%= @ad.land.city %> (<%= @ad.land.department %>) pour <%= @ad |> total_price |> Number.Currency.number_to_currency |> raw %> avec cette opportunité exceptionnelle Maison&nbsp;Léo + terrain. Faites construire votre T4 moderne, emménagez et dites adieu aux loyers en moins de huit mois&nbsp;!</p>
+      <p class="gray-text-700 open-sans mb-0 lead-paragraph">Devenez propriétaire à <%= @ad.land.city %> (<%= @ad.land.department %>) pour <%= @ad |> total_price |> Number.Currency.number_to_currency |> raw %> avec cette opportunité exceptionnelle Maison&nbsp;Léo + terrain. Faites construire votre T4 moderne, emménagez et dites adieu aux loyers en moins de huit mois&nbsp;!</p>
 		</div>
 
     <div class="col-12 mb-4 order-lg-6">
