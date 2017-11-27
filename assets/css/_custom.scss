@@ -115,7 +115,8 @@ select {
 }
 
 .after-nav {
-  margin-top: 75px;
+  top: 64px;
+  position: relative;
 }
 
 $spacer-ratio: 1;
@@ -632,6 +633,7 @@ nav.navbar {
 
 .gray-700 { background-color: $gray-700; }
 .gray-600 { background-color: $gray-600; }
+.gray-900 { background-color: $gray-900; }
 
 .gray-background {
   background-color: $gray-700;
