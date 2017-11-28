@@ -25,7 +25,7 @@ defmodule PlumWeb.AdView do
   end
 
   def ongoing_flash(ad) do
-    %{percentage: 10}
+    %{percentage: 5}
     nil
   end
 end

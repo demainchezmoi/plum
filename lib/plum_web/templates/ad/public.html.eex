@@ -25,10 +25,6 @@
   <ul class="navbar-nav ml-auto d-flex flex-row">
     <li class="nav-item active small-xs mr-2">
       <a class="nav-link d-flex flex-row flex-sm-row align-items-center" data-toggle="modal" data-target="#contactModal">
-        <i class="fa-stack mr-1">
-          <i class="fa fa-stack-2x fa-circle pink-text"></i>
-          <i class="fa fa-phone fa-stack-1x white-text"></i>
-        </i>
         Contact
       </a>
     </li>
@@ -36,17 +32,18 @@
 </nav>
 
 <div class="container mb-7 after-nav">
-  <div class="row">
-    <div class="col order-lg-2">
+  <div class="row pt-2 mt-4">
+    <div class="col order-lg-2 order-sm-1">
       <div class="row justify-content-start">
         <div class="col-12 col-sm order-sm-1 mb-2">
-          <p class="mt-4 pt-2 mb-1 pink-text font-bold"><i class="fa fa-map-marker mr-0 pink-text"></i> <%= @ad.land.city %> (<%= @ad.land.department %>)</p>
-          <h1 class="h4-responsive mb-3 font-bold gray-text-700">
+          <p class="mb-1 pink-text font-bold"><%= @ad.land.city %> (<%= @ad.land.department %>)</p>
+          <h1 class="h4-responsive font-bold gray-text-700">
             Maison + Terrain <span class="orange-text font-black" style="<%= if ongoing_flash(@ad) do %>text-decoration: line-through;<% end %>"><%= @ad |> total_price |> Number.Currency.number_to_currency |> raw %>
             </span>
-            <%= if ongoing_flash(@ad) do %><span class="pink-text font-black"><%= @ad |> total_price |> (& &1 - 5000).() |> Number.Currency.number_to_currency |> raw %></span><% end %>
+            <%= if flash = ongoing_flash(@ad) do %><span class="pink-text font-black"><%= @ad |> total_price |> (& &1 * (100 - flash.percentage) / 100).() |> Number.Currency.number_to_currency |> raw %></span><% end %>
           </h1>
-          <p class="gray-text-600">Plain-pied bois, 3 chambres, grand salon.</p>
+          <p class="gray-text-600 mb-4 pb-2 open-sans">Plain-pied ossature bois, 3 chambres et grand salon.</p>
+          <%# <p><span class="badge gray-500"><i class="fa fa-clock-o"></i> Reste 3 jours</span></p> %>
         </div>
         <div class="col-auto col-sm-auto order-sm-2 pl-0" style="display: none">
           <div class="tiny gray-text-700">Envoyer à un ami&nbsp;:</div>
@@ -56,18 +53,18 @@
     </div>
 
     <%= if flash = ongoing_flash(@ad) do %>
-      <div class="col-12 black orange-text order-lg-2">
+      <div class="col-12 black orange-text order-lg-3 order-sm-3 mb-4">
         <div class="py-3">
           <div class="font-bold text-center">
-            <div class="lead font-bold mb-2" style="line-height: 1.2"><i class="fa fa-bolt text-white"></i> Économisez <span class="pink-text"><%= 5000 |> Number.Currency.number_to_currency |> raw %></span> prenez contact d'ici <span class="white-text">5h 30min 45sec</span></div>
-            <div><a href="#" class="tiny-xs small orange-text text-underline">Tenez-moi au courant en cas d'autres remises flash</a></div>
+            <div class="lead font-bold mb-2" style="line-height: 1.2"><i class="fa fa-bolt text-white"></i> Promotion <span class="pink-text">-<%= flash.percentage %>%</span> prenez contact avant <span class="white-text">5h 30min 45sec</span></div>
+            <div><a href="#" class="tiny-xs small orange-text text-underline">Tenez-moi au courant en cas d'autres promotions</a></div>
           </div>
         </div>
       </div>
     <% end %>
 
 
-    <div class="col-12 mb-4 px-xs-0 order-lg-5">
+    <div class="col-12 mb-3 px-xs-0 order-lg-5 order-sm-5">
       <p class="font-bold gray-text-700 d-none d-sm-block">Votre Maison&nbsp;Léo</p>
 			<div id="carouselExampleIndicators" class="carousel lazy slide img-fluid" data-ride="carousel">
   			<ol class="carousel-indicators">
@@ -75,6 +72,8 @@
     			<li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
     			<li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
     			<li data-target="#carouselExampleIndicators" data-slide-to="3"></li>
+    			<li data-target="#carouselExampleIndicators" data-slide-to="4"></li>
+    			<li data-target="#carouselExampleIndicators" data-slide-to="5"></li>
   			</ol>
   			<div class="carousel-inner">
     			<div class="carousel-item active">
@@ -89,6 +88,12 @@
     			<div class="carousel-item">
       			<img class="d-block w-100" alt="Cuisine 2" <%= src_tags("rendu-cuisine-2a", lazy: true) %>>
     			</div>
+    			<div class="carousel-item">
+      			<img class="d-block w-100" alt="Maison extérieur" <%= src_tags("maison-ete-jour-nuage-rendu", lazy: true) %>>
+    			</div>
+    			<div class="carousel-item">
+      			<img class="d-block w-100" alt="Maison extérieur" <%= src_tags("perspective-interieur", lazy: true) %>>
+    			</div>
   			</div>
   			<a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
     			<span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -101,15 +106,16 @@
 			</div>
     </div>
 
-    <div class="col-12 order-lg-2 mb-4">
-      <button class="btn btn-pink m-0 btn-xs-block" data-toggle="modal" data-target="#contactModal">Prendre contact</button>
+    <div class="col-12 col-md-auto col-sm-auto order-lg-2 order-sm-2 mb-4">
+      <p class="open-sans gray-text-700 text-center text-sm-right mb-sm-1"><em>Devenez propriétiare</em></p>
+      <button class="btn btn-pink m-0 btn-xs-block" data-toggle="modal" data-target="#contactModal"><i class="fa fa-handshake-o mr-1"></i> Prendre contact</button>
     </div>
 
-    <div class="col-12 mb-4 order-lg-4">
-      <p class="gray-text-700 open-sans mb-0 lead-paragraph">Devenez propriétaire à <%= @ad.land.city %> (<%= @ad.land.department %>) pour <%= @ad |> total_price |> Number.Currency.number_to_currency |> raw %> avec cette opportunité exceptionnelle Maison&nbsp;Léo + terrain. Faites construire votre T4 moderne, emménagez et dites adieu aux loyers en moins de huit mois&nbsp;!</p>
+    <div class="col-12 mb-4 order-lg-4 order-sm-4">
+      <p class="gray-text-600 open-sans mb-0 lead-paragraph">Devenez propriétaire à <%= @ad.land.city %> (<%= @ad.land.department %>) pour <%= @ad |> total_price |> Number.Currency.number_to_currency |> raw %> avec cette opportunité exceptionnelle maison plus terrain à durée limitée. Faites construire votre T4 moderne, emménagez et dites adieu aux loyers en moins de huit mois&nbsp;!</p>
 		</div>
 
-    <div class="col-12 mb-4 order-lg-6">
+    <div class="col-12 mb-4 order-lg-6 order-sm-6">
       <div class="row">
         <div class="col-12">
           <p class="font-bold gray-text-700">Les détails</p>
@@ -181,10 +187,16 @@
       </div>
     </div>
 
-    <div class="col-12 order-lg-8">
+    <div class="col-12 order-lg-8 order-sm-8 mb-4">
       <p class="font-bold gray-text-700">Le terrain</p>
       <p class="paragraph mb-4"><%= @ad.land.description %></p>
       <div id="map" class="img-flex"></div>
+    </div>
+
+    <div class="col-12 order-lg-8 order-sm-8">
+      <p class="font-bold gray-text-700">L'habitat</p>
+      <p class="paragraph mb-4">Non seulement le plan de la Maison&nbsp;Léo est-il optimisé pour la vie ensemble, mais sa conception soignée nous permet de maîtriser parfaitement le processus de construction de la maison pour un rendu à temps et sans encombres.</p>
+      <img class="d-block w-100" alt="Coupe intérieure" <%= src_tags("coupe-interieure") %>>
     </div>
 
   </div>
@@ -193,20 +205,20 @@
 <div class="relative light-gray py-5" id="contact">
   <div class="container">
     <div class="row align-items-center justify-content-center">
-      <div class="col-12 col-md-6 col-lg-6 order-lg-2 order-md-2">
+      <div class="col-12 col-md-6 col-lg-6 order-lg-2 order-md-2 order-sm-2">
         <div class="p-3">
         	<p class="font-bold gray-text-800">Saisissez l'opportunité</p>
 				  <p class="open-sans gray-text-700 paragraph">Nos annonces maison + terrain sont des opportunités d'exception sur des terrains séléctionnés avec soin et ont une durée de vie limitée.</p>
 				  <p class="open-sans gray-text-700 paragraph">Remplissez le formulaire ou joignez-nous directement pour ne pas passer à côté&nbsp;!</p>
         </div>
         <div class="p-3 mb-3 white z-depth-1">
+          <p class="indigo-text small">Contactez directement</p>
           <div class="media mt-1">
             <img
                class="mr-3 rounded-circle z-depth-1 responsive-small-avatar"
                src="https://s3-eu-west-1.amazonaws.com/demainchezmoi/cloudfront_assets/images/denis_bolomier_india.jpg"
                alt="">
             <div class="media-body">
-              <p class="text-secondary mb-0 small">Votre contact&nbsp;:</p>
               <h5 class="my-0">Denis Bolomier</h5>
               <a href="tel:0663742535" class="font-bold pink white-text px-1 my-1 d-inline-block">06 63 74 25 35</a>
             </div>
@@ -214,7 +226,9 @@
         </div>
       </div>
       <div class="col-12 col-md-6 col-lg-6">
-        <div class="z-depth-1 p-4 white"> <p class="indigo-text">Contactez-moi</p>
+        <div class="z-depth-1 p-3 white">
+          <p class="indigo-text small">Nous vous contactons</p>
+          <p class="text-secondary">Nous vous répondons sous 24 heures</p>
           <%= form_for @conn, page_path(@conn, :contact), [as: "contact"], fn f-> %>
             <div class="form-group row">
               <label class="col-2 col-form-label">Nom</label>
@@ -250,6 +264,7 @@
   <div class="container">
     <div class="row justify-content-center">
       <div class="col">
+        <p class="p-1 mb-0 font-bold gray-text-600">Qui sommes-nous ?</p>
         <dl class="p-1">
           <dt>Contact</dt>
           <dd>Email&nbsp;: contact@demainchezmoi.fr <br /> Tél&nbsp;: 06 63 74 25 35</dd>
@@ -277,14 +292,14 @@
   <div class="modal-dialog mb-7" role="document">
     <div class="modal-content light-gray">
       <div class="modal-header p-3 white">
-        <h5 class="modal-title indigo-text" id="contactModalLabel">Prenez contact</h5>
+        <h5 class="modal-title indigo-text" id="contactModalLabel">Prenons contact</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
-        <div class="p-3 z-depth-1 white">
-          <p class="text-secondary small indigo-text">Contactez&nbsp;:</p>
+        <div class="p-3 mb-3 z-depth-1 white">
+          <p class="text-secondary small indigo-text">Contactez directement</p>
           <div class="media mt-1">
             <img
                class="mr-3 rounded-circle z-depth-1 responsive-small-avatar"
@@ -296,9 +311,9 @@
             </div>
           </div>
         </div>
-        <div class="text-center p-2 gray-text-600 text-underline">ou</div>
         <div class="p-3 z-depth-1 white">
-          <p class="text-secondary small indigo-text">Contactez-moi&nbsp;:</p>
+          <p class="text-secondary small indigo-text">Nous vous contactons</p>
+          <p class="text-secondary">Nous vous répondons sous 24 heures</p>
           <%= form_for @conn, page_path(@conn, :contact), [as: "contact"], fn f-> %>
             <div class="form-group row">
               <label class="col-2 col-form-label">Nom</label>

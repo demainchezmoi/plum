@@ -8,21 +8,21 @@
 
   <ul class="navbar-nav ml-auto d-flex flex-row">
     <li class="nav-item active small-xs mr-2">
-      <a class="nav-link d-flex flex-column flex-sm-row align-items-center" data-toggle="modal" data-target="#contactModal">
-        <i class="fa-stack mr-2">
+      <a class="nav-link d-flex align-items-center" data-toggle="modal" data-target="#contactModal">
+        <i class="fa-stack mr-1">
           <i class="fa fa-stack-2x fa-circle pink-text"></i>
           <i class="fa fa-phone fa-stack-1x white-text"></i>
         </i>
-        Contactez-moi
+        Contact
       </a>
     </li>
     <li class="nav-item active small-xs">
-      <a class="nav-link d-flex flex-column flex-sm-row align-items-center" href="<%= ad_path(@conn, :public_index) %>">
-        <i class="fa-stack mr-2">
+      <a class="nav-link d-flex align-items-center" href="<%= ad_path(@conn, :public_index) %>">
+        <i class="fa-stack mr-1">
           <i class="fa fa-stack-2x fa-circle pink-text"></i>
           <i class="fa fa-home fa-stack-1x white-text"></i>
         </i>
-        Voir les offres
+        Offres
       </a>
     </li>
   </ul>
@@ -262,18 +262,17 @@
           <div class="p-3">
         	  <p class="font-bold gray-text-800">Prenons contact</p>
             <p class="open-sans gray-text-700 paragraph">Nous serions ravis de répondre à toute demande de renseignement ou suggestion.</p>
-				    <p class="open-sans gray-text-700 paragraph">N'hésitez-pas à remplir le formulaire ou à nous joindre directement&nbsp;:</p>
-            <div class="p-3 light-bordered">
+				    <p class="open-sans gray-text-700 paragraph">N'hésitez-pas à remplir le formulaire ou à nous joindre directement</p>
+            <div class="p-3 mb-3 z-depth-1 white">
+              <p class="text-secondary small indigo-text">Contactez directement</p>
               <div class="media mt-1">
                 <img
                    class="mr-3 rounded-circle z-depth-1 responsive-small-avatar"
-                   data-src="https://s3-eu-west-1.amazonaws.com/demainchezmoi/cloudfront_assets/images/denis_bolomier_india.jpg"
+                   src="https://s3-eu-west-1.amazonaws.com/demainchezmoi/cloudfront_assets/images/denis_bolomier_india.jpg"
                    alt="">
                 <div class="media-body">
-                  <p class="text-secondary mb-0 small">Votre contact&nbsp;:</p>
                   <h5 class="my-0">Denis Bolomier</h5>
                   <a href="tel:0663742535" class="font-bold pink white-text px-1 my-1 d-inline-block">06 63 74 25 35</a>
-                  <%# <small class="gray-text-700">ou</small> <a class="gray-text-700 text-underline" data-toggle="modal" data-target="#contactModal">contactez-moi</a> %>
                 </div>
               </div>
             </div>
@@ -281,24 +280,25 @@
         </div>
         <div class="col-12 col-md-6 col-lg-5">
           <div class="z-depth-1 p-4 white m-1">
-            <p class="indigo-text">Contactez-moi</p>
+            <p class="indigo-text small">Nous vous contactons</p>
+            <p class="text-secondary">Nous vous répondons sous 24 heures</p>
             <%= form_for @conn, page_path(@conn, :contact), [as: "contact"], fn f-> %>
               <div class="form-group row">
-                <label class="col-sm-3 col-form-label">Nom</label>
-                <div class="col-sm-9">
+                <label class="col-sm-2 col-form-label">Nom</label>
+                <div class="col-sm-10">
                   <%= text_input f, :name, placeholder: "Dupont", class: "form-control" %>
                 </div>
               </div>
               <div class="form-group row">
-                <label class="col-sm-3 col-form-label">Téléphone</label>
-                <div class="col-sm-9">
+                <label class="col-sm-2 col-form-label">Tél</label>
+                <div class="col-sm-10">
                   <%= text_input f, :phone, placeholder: "06 12 34 56 78", class: "form-control" %>
                 </div>
               </div>
               <div class="form-group row">
-                <label class="col-sm-3 col-form-label">Email</label>
-                <div class="col-sm-9">
-                  <%= text_input f, :email, placeholder: "marie.dupont@email.com", class: "form-control" %>
+                <label class="col-2 col-form-label">Info</label>
+                <div class="col-10">
+                  <%= textarea f, :remark, placeholder: "Ex : avant 18 heures", class: "form-control" %>
                 </div>
               </div>
               <div class="clearfix">
@@ -345,14 +345,14 @@
   <div class="modal-dialog mb-7" role="document">
     <div class="modal-content light-gray">
       <div class="modal-header p-3 white">
-        <h5 class="modal-title indigo-text" id="contactModalLabel">Prenez contact</h5>
+        <h5 class="modal-title indigo-text" id="contactModalLabel">Prenons contact</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
-        <div class="p-3 z-depth-1 white">
-          <p class="text-secondary small indigo-text">Contactez&nbsp;:</p>
+        <div class="p-3 mb-3 z-depth-1 white">
+          <p class="text-secondary small indigo-text">Contactez directement</p>
           <div class="media mt-1">
             <img
                class="mr-3 rounded-circle z-depth-1 responsive-small-avatar"
@@ -364,9 +364,9 @@
             </div>
           </div>
         </div>
-        <div class="text-center p-2 gray-text-600 text-underline">ou</div>
         <div class="p-3 z-depth-1 white">
-          <p class="text-secondary small indigo-text">Contactez-moi&nbsp;:</p>
+          <p class="text-secondary small indigo-text">Nous vous contactons</p>
+          <p class="text-secondary">Nous vous répondons sous 24 heures</p>
           <%= form_for @conn, page_path(@conn, :contact), [as: "contact"], fn f-> %>
             <div class="form-group row">
               <label class="col-2 col-form-label">Nom</label>
