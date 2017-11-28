@@ -107,7 +107,7 @@
       <button class="btn btn-pink m-0 btn-xs-block" data-toggle="modal" data-target="#contactModal"><i class="fa fa-handshake-o mr-1"></i> Prendre contact</button>
     </div>
 
-    <div class="col-12 mb-4 order-lg-4 order-sm-4">
+    <div class="col-12 mb-4 order-lg-5 order-sm-5">
       <p class="gray-text-600 open-sans mb-0 lead-paragraph">Devenez propriétaire à <%= @ad.land.city %> (<%= @ad.land.department %>) pour <%= @ad |> total_price |> Number.Currency.number_to_currency |> raw %> avec cette opportunité unique maison plus terrain. Faites construire votre quatre pièces moderne et dites adieu aux loyers en moins de huit mois&nbsp;!</p>
 		</div>
 
