@@ -25,18 +25,24 @@
   <ul class="navbar-nav ml-auto d-flex flex-row">
     <li class="nav-item active small-xs mr-2">
       <a class="nav-link d-flex flex-row flex-sm-row align-items-center" data-toggle="modal" data-target="#contactModal">
-        Contact
+        <i class="fa fa-handshake-o mr-1"></i> Contact
       </a>
     </li>
   </ul>
 </nav>
 
 <div class="container mb-7 after-nav">
-  <div class="row pt-2 mt-4">
-    <div class="col order-lg-2 order-sm-1">
+  <div class="row pt-2 mt-sm-3">
+
+    <div class="col-12 d-sm-none d-flex justify-content-end mb-3">
+      <div class="mr-2 gray-text-700"><small><i class="fa fa-eye"></i> <%= @ad.view_count %></small></div>
+      <div class="fb-share-button" data-href="<%= ad_url(@conn, :public, @ad) %>" data-layout="button" data-size="small" data-mobile-iframe="true" style="height: 21px; width: 75px;"></div>
+    </div>
+
+    <div class="col order-lg-2 order-sm-1 mt-2">
       <div class="row justify-content-start">
         <div class="col-12 col-sm order-sm-1 mb-2">
-          <p class="mb-1 pink-text font-bold"><%= @ad.land.city %> (<%= @ad.land.department %>)</p>
+          <p class="mb-1 mt-sm-2 pink-text font-bold"><%= @ad.land.city %> (<%= @ad.land.department %>)</p>
           <h1 class="h4-responsive font-bold gray-text-700">
             Maison + Terrain <span class="orange-text font-black" style="<%= if ongoing_flash(@ad) do %>text-decoration: line-through;<% end %>"><%= @ad |> total_price |> Number.Currency.number_to_currency |> raw %>
             </span>
@@ -44,10 +50,6 @@
           </h1>
           <p class="gray-text-600 mb-4 pb-2 open-sans">Plain-pied ossature bois, 3 chambres et grand salon.</p>
           <%# <p><span class="badge gray-500"><i class="fa fa-clock-o"></i> Reste 3 jours</span></p> %>
-        </div>
-        <div class="col-auto col-sm-auto order-sm-2 pl-0" style="display: none">
-          <div class="tiny gray-text-700">Envoyer à un ami&nbsp;:</div>
-          <div class="fb-share-button" data-href="<%= ad_url(@conn, :public, @ad) %>" data-layout="button_count" data-size="small" data-mobile-iframe="true"></div>
         </div>
       </div>
     </div>
@@ -106,9 +108,13 @@
 			</div>
     </div>
 
-    <div class="col-12 col-md-auto col-sm-auto order-lg-2 order-sm-2 mb-4">
+    <div class="col-12 col-md-auto col-sm-auto order-lg-2 order-sm-2 mb-4 d-flex flex-column align-items-sm-end">
       <p class="open-sans gray-text-700 text-center text-sm-right mb-sm-1"><em>Devenez propriétiare</em></p>
       <button class="btn btn-pink m-0 btn-xs-block" data-toggle="modal" data-target="#contactModal"><i class="fa fa-handshake-o mr-1"></i> Prendre contact</button>
+      <div class="d-none d-sm-flex justify-content-end mt-1">
+        <div class="gray-text-700 mr-2"><small><i class="fa fa-eye"></i> <%= @ad.view_count %></small></div>
+        <div class="fb-share-button" data-href="<%= ad_url(@conn, :public, @ad) %>" data-layout="button" data-size="small" data-mobile-iframe="true" style="height: 21px; width: 75px;"></div>
+      </div>
     </div>
 
     <div class="col-12 mb-4 order-lg-4 order-sm-4">
@@ -195,7 +201,7 @@
 
     <div class="col-12 order-lg-8 order-sm-8">
       <p class="font-bold gray-text-700">L'habitat</p>
-      <p class="paragraph mb-4">Non seulement le plan de la Maison&nbsp;Léo est-il optimisé pour la vie ensemble, mais sa conception soignée nous permet de maîtriser parfaitement le processus de construction de la maison pour un rendu à temps et sans encombres.</p>
+      <p class="paragraph mb-4">Le plan de la Maison&nbsp;Léo est optimisé pour la vie ensemble. Sa conception soignée nous permet de maîtriser parfaitement le processus de construction de la maison pour un rendu à temps et sans encombres.</p>
       <img class="d-block w-100" alt="Coupe intérieure" <%= src_tags("coupe-interieure") %>>
     </div>
 
@@ -208,7 +214,7 @@
       <div class="col-12 col-md-6 col-lg-6 order-lg-2 order-md-2 order-sm-2">
         <div class="p-3">
         	<p class="font-bold gray-text-800">Saisissez l'opportunité</p>
-				  <p class="open-sans gray-text-700 paragraph">Nos annonces maison + terrain sont des opportunités d'exception sur des terrains séléctionnés avec soin et ont une durée de vie limitée.</p>
+				  <p class="open-sans gray-text-700 paragraph">Nos annonces maison + terrain sont des opportunités d'exception sur des terrains séléctionnés avec soin. Elles ont une durée de vie limitée.</p>
 				  <p class="open-sans gray-text-700 paragraph">Remplissez le formulaire ou joignez-nous directement pour ne pas passer à côté&nbsp;!</p>
         </div>
         <div class="p-3 mb-3 white z-depth-1">
@@ -262,23 +268,21 @@
 </div>
 <footer class="gray relative py-6">
   <div class="container">
+
     <div class="row justify-content-center">
-      <div class="col-md-12 col-lg-6 order-lg-2">
-        <p class="font-bold gray-text-600">Pourquoi la Maison Léo&nbsp;?</p>
+      <div class="col col-md-7 order-md-2">
+        <p class="font-bold gray-text-700">Pourquoi la Maison Léo&nbsp;?</p>
         <p class="paragraph">
-        La Maison Léo est issue de la toute nouvelle génération de maisons à ossature bois, écologique robuste et fortement isolée. Elle vous fera réaliser d'importantes économies tant à l'achat qu'à l'usage, en énergie.<p>
-        <p class="paragraph">Son processus de fabrication local en atelier vous garantit une qualité à laquelle ne peuvent tout simplement pas prétendre les maisons construites avec chantier traditionnel, pour un coût au mètre carré et une durée de construction drastiquement réduits.
+        La Maison Léo est issue de la toute nouvelle génération de maisons à ossature bois, écologique robuste et fortement isolée. Elle vous fera réaliser d'importantes économies tant à l'achat qu'en énergie au cours de sa vie.<p>
+        <p class="paragraph">Son processus de fabrication local en atelier vous garantit une qualité et une fiabilité auxquelles ne peuvent pas prétendre les maisons construites avec chantier traditionnel, pour un coût au mètre carré et une durée de construction drastiquement réduits.
         <p class="paragraph">À vous de jouer&nbsp;!</p>
         </p>
       </div>
-      <div class="col-md-12 col-lg-6 order-lg-1">
-        <p class="font-bold gray-text-600">Qui sommes-nous ?</p>
+      <div class="col-md-5 col-12 order-md-1">
+        <p class="font-bold gray-text-700">Qui sommes-nous ?</p>
         <dl class="">
-          <dt>Contact</dt>
-          <dd>Email&nbsp;: contact@demainchezmoi.fr <br /> Tél&nbsp;: 06 63 74 25 35</dd>
-          <dt>Editeur</dt>
           <dd>Demainchezmoi SAS <br />41 rue Laure Diebold <br />69009 Lyon</dd>
-          <dt>Réseaux sociaux</dt>
+          <dd>Email&nbsp;: contact@demainchezmoi.fr <br /> Tél&nbsp;: 06 63 74 25 35</dd>
           <dd>
           <a href="https://www.facebook.com/lamaisonleo" target="_blank" class="blue-text">
             <i class="fa-stack">
@@ -289,6 +293,11 @@
           </dd>
         </dl>
       </div>
+
+      <%# <div class="col-md-12 col-lg-6 order-lg-2"> %>
+        <%# <p class="font-bold gray-text-700">Nos partenaires</p> %>
+      <%# </div> %>
+
     </div>
   </div>
 </footer>
@@ -345,6 +354,7 @@
               </div>
             </div>
             <%= hidden_input f, :ad, value: @ad.id %>
+            <%= hidden_input f, :ref, value: @params["ref"] %>
           <% end %>
         </div>
       </div>

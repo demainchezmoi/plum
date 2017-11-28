@@ -6,12 +6,12 @@ defmodule PlumWeb.AdController do
   alias Plum.Sales.Ad
   import Ecto.Query
 
-  def public(conn, %{"id" => id}) do
+  def public(conn, params = %{"id" => id}) do
     ad =
       Sales.get_ad!(id)
       |> Repo.preload(:land)
       |> Sales.increment_view_count!
-    conn |> render("public.html", ad: ad)
+    conn |> render("public.html", ad: ad, params: params)
   end
 
   def public_index(conn, _params) do
