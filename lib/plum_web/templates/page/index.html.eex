@@ -342,40 +342,57 @@
 
 <!-- Modal -->
 <div class="modal fade" id="contactModal" tabindex="-1" role="dialog" aria-labelledby="contactModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
+  <div class="modal-dialog mb-7" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title indigo-text" id="contactModalLabel">Contactez-moi pour cette annonce</h5>
+        <h5 class="modal-title indigo-text" id="contactModalLabel">Prendre contact</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
-        <%= form_for @conn, page_path(@conn, :contact), [as: "contact"], fn f-> %>
-          <div class="form-group row">
-            <label class="col-sm-3 col-form-label">Nom</label>
-            <div class="col-sm-9">
-              <%= text_input f, :name, placeholder: "Dupont", class: "form-control" %>
+        <p class="text-secondary small mb-1">Contactez&nbsp;:</p>
+        <div class="p-3 light-bordered">
+          <div class="media mt-1">
+            <img
+               class="mr-3 rounded-circle z-depth-1 responsive-small-avatar"
+               src="https://s3-eu-west-1.amazonaws.com/demainchezmoi/cloudfront_assets/images/denis_bolomier_india.jpg"
+               alt="">
+            <div class="media-body">
+              <h5 class="my-0">Denis Bolomier</h5>
+              <a href="tel:0663742535" class="font-bold pink white-text px-1 my-1 d-inline-block">06 63 74 25 35</a>
             </div>
           </div>
-          <div class="form-group row">
-            <label class="col-sm-3 col-form-label">Téléphone</label>
-            <div class="col-sm-9">
-              <%= text_input f, :phone, placeholder: "06 12 34 56 78", class: "form-control" %>
+        </div>
+        <div class="text-center p-2 gray-text-600 text-underline">ou</div>
+        <p class="text-secondary small mb-1">Contactez-moi&nbsp;:</p>
+        <div class="p-3 light-bordered">
+          <%= form_for @conn, page_path(@conn, :contact), [as: "contact"], fn f-> %>
+            <div class="form-group row">
+              <label class="col-2 col-form-label">Nom</label>
+              <div class="col-10">
+                <%= text_input f, :name, placeholder: "Marie Dupont", class: "form-control" %>
+              </div>
             </div>
-          </div>
-          <div class="form-group row">
-            <label class="col-sm-3 col-form-label">Email</label>
-            <div class="col-sm-9">
-              <%= text_input f, :email, placeholder: "marie.dupont@email.com", class: "form-control" %>
+            <div class="form-group row">
+              <label class="col-2 col-form-label">Tél</label>
+              <div class="col-10">
+                <%= text_input f, :phone, placeholder: "06 12 34 56 78", class: "form-control" %>
+              </div>
             </div>
-          </div>
-          <div class="clearfix">
-            <div class="pull-right">
-              <button type="submit" class="btn btn-indigo mr-0 mb-0"><i class="fa fa-paper-plane mr-2"></i> Envoyer</button>
+            <div class="form-group row">
+              <label class="col-2 col-form-label">Info</label>
+              <div class="col-10">
+                <%= textarea f, :remark, placeholder: "Ex : avant 18 heures", class: "form-control" %>
+              </div>
             </div>
-          </div>
-        <% end %>
+            <div class="clearfix">
+              <div class="pull-right">
+                <button type="submit" class="btn btn-indigo mr-0 mb-0"><i class="fa fa-paper-plane mr-2"></i> Envoyer</button>
+              </div>
+            </div>
+          <% end %>
+        </div>
       </div>
     </div>
   </div>

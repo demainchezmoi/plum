@@ -1,4 +1,17 @@
 <%= if not @ad.active do %>
+  <div class="p-3 light-bordered">
+    <div class="media mt-1">
+      <img
+         class="mr-3 rounded-circle z-depth-1 responsive-small-avatar"
+         src="https://s3-eu-west-1.amazonaws.com/demainchezmoi/cloudfront_assets/images/denis_bolomier_india.jpg"
+         alt="">
+      <div class="media-body">
+        <p class="text-secondary mb-0 small">Appelez</p>
+        <h5 class="my-0">Denis Bolomier</h5>
+        <a href="tel:0663742535" class="font-bold pink white-text px-1 my-1 d-inline-block">06 63 74 25 35</a>
+      </div>
+    </div>
+  </div>
   <div class="deactivated-ad">
     <div class="deactivated-text">Vendu</div>
   </div>
@@ -24,15 +37,16 @@
 
 <div class="container mb-7 after-nav">
   <div class="row">
-
     <div class="col order-lg-2">
       <div class="row justify-content-start">
         <div class="col-12 col-sm order-sm-1 mb-2">
-          <p class="mt-3 mb-0 pink-text font-bold"><i class="fa fa-map-marker mr-0 pink-text"></i> Opportunité à <%= @ad.land.city %> (<%= @ad.land.department %>)</p>
-          <h1 class="h4-responsive mb-1 font-bold gray-text-700">
-            Maison + Terrain <span class="orange-text font-black" style="<%= if ongoing_flash(@ad) do %>text-decoration: line-through;<% end %>"><%= @ad |> total_price |> Number.Currency.number_to_currency |> raw %></span>
+          <p class="mt-4 pt-2 mb-1 pink-text font-bold"><i class="fa fa-map-marker mr-0 pink-text"></i> <%= @ad.land.city %> (<%= @ad.land.department %>)</p>
+          <h1 class="h4-responsive mb-3 font-bold gray-text-700">
+            Maison + Terrain <span class="orange-text font-black" style="<%= if ongoing_flash(@ad) do %>text-decoration: line-through;<% end %>"><%= @ad |> total_price |> Number.Currency.number_to_currency |> raw %>
+            </span>
+            <%= if ongoing_flash(@ad) do %><span class="pink-text font-black"><%= @ad |> total_price |> (& &1 - 5000).() |> Number.Currency.number_to_currency |> raw %></span><% end %>
           </h1>
-          <p class="gray-text-600">Ossature Bois, 3 chambres, grand salon</p>
+          <p class="gray-text-600">Plain-pied bois, 3 chambres, grand salon.</p>
         </div>
         <div class="col-auto col-sm-auto order-sm-2 pl-0" style="display: none">
           <div class="tiny gray-text-700">Envoyer à un ami&nbsp;:</div>
@@ -45,16 +59,10 @@
       <div class="col-12 black orange-text order-lg-2">
         <div class="py-3">
           <div class="font-bold text-center">
-            <div class="lead font-bold mb-2" style="line-height: 1.2"><i class="fa fa-bolt text-white"></i> Remise <span class="pink-text"><%= 5000 |> Number.Currency.number_to_currency |> raw %></span> prenez contact d'ici <span class="white-text">5h 30min 45sec</span></div>
-            <div class="pink-text font-black h3-responsive"><%= @ad |> total_price |> (& &1 - 5000).() |> Number.Currency.number_to_currency |> raw %></div>
-            <button class="btn btn-pink mb-0" data-toggle="modal" data-target="#contactModal">Prendre contact</button>
+            <div class="lead font-bold mb-2" style="line-height: 1.2"><i class="fa fa-bolt text-white"></i> Économisez <span class="pink-text"><%= 5000 |> Number.Currency.number_to_currency |> raw %></span> prenez contact d'ici <span class="white-text">5h 30min 45sec</span></div>
             <div><a href="#" class="tiny-xs small orange-text text-underline">Tenez-moi au courant en cas d'autres remises flash</a></div>
           </div>
         </div>
-      </div>
-    <% else %>
-      <div class="col-12 order-lg-2 mb-4">
-        <button class="btn btn-pink mb-0 btn-xs-block" data-toggle="modal" data-target="#contactModal">Prendre contact</button>
       </div>
     <% end %>
 
@@ -93,6 +101,10 @@
 			</div>
     </div>
 
+    <div class="col-12 order-lg-2 mb-4">
+      <button class="btn btn-pink m-0 btn-xs-block" data-toggle="modal" data-target="#contactModal">Prendre contact</button>
+    </div>
+
     <div class="col-12 mb-4 order-lg-4">
       <p class="gray-text-700 open-sans mb-0 lead-paragraph">Devenez propriétaire à <%= @ad.land.city %> (<%= @ad.land.department %>) pour <%= @ad |> total_price |> Number.Currency.number_to_currency |> raw %> avec cette opportunité exceptionnelle Maison&nbsp;Léo + terrain. Faites construire votre T4 moderne, emménagez et dites adieu aux loyers en moins de huit mois&nbsp;!</p>
 		</div>
@@ -100,25 +112,25 @@
     <div class="col-12 mb-4 order-lg-6">
       <div class="row">
         <div class="col-12">
-          <p class="font-bold gray-text-700">Les caractéristiques de votre projet</p>
+          <p class="font-bold gray-text-700">Les détails</p>
         </div>
         <div class="col-12 col-lg-6">
           <table class="table table-responsive table-striped table-nowrap open-sans z-depth-1">
             <tbody>
               <tr>
-                <th class="col-auto text-center lead-th"><i class="fa fa-home"></i></th>
-                <th class="col-auto lead-th pl-0">Maison</th>
-                <td class="col">87&nbsp;m<sup>2</sup> <span class="text-secondary">pour</span> 87&nbsp;900&nbsp;&euro;</td>
+                <th class="col-auto text-center lead-th d-none d-sm-block"><i class="fa fa-home"></i></th>
+                <th class="col-auto lead-th pl-sm-0 small-xs">Maison</th>
+                <td class="col small-xs">87&nbsp;m<sup>2</sup> <span class="text-secondary">pour</span> 87&nbsp;900&nbsp;&euro;</td>
               </tr>
               <tr>
-                <th class="col-auto text-center lead-th"><i class="fa fa-tree"></i></th>
-                <th class="col-auto lead-th pl-0">Terrain</th>
-                <td class="col"><%= @ad.land.surface %>&nbsp;m<sup>2</sup> <span class="text-secondary">pour</span> <%= raw Number.Currency.number_to_currency(@ad.land.price) %></td>
+                <th class="col-auto text-center lead-th d-none d-sm-block"><i class="fa fa-tree"></i></th>
+                <th class="col-auto lead-th pl-sm-0 small-xs">Terrain</th>
+                <td class="col small-xs"><%= @ad.land.surface %>&nbsp;m<sup>2</sup> <span class="text-secondary">pour</span> <%= raw Number.Currency.number_to_currency(@ad.land.price) %></td>
               </tr>
               <tr>
-                <th class="col-auto text-center lead-th"><i class="fa fa-wrench"></i></th>
-                <th class="col-auto lead-th pl-0">Adaptation&nbsp;sol</th>
-                <td class="col">
+                <th class="col-auto text-center lead-th d-none d-sm-block"><i class="fa fa-wrench"></i></th>
+                <th class="col-auto lead-th pl-sm-0 small-xs">Adaptation&nbsp;sol</th>
+                <td class="col small-xs">
                   <%= if @ad.adaptation_fees do %>
                     Estimée à <%= raw Number.Currency.number_to_currency(@ad.adaptation_fees) %>
                   <% else %>
@@ -127,14 +139,14 @@
                 </td>
               </tr>
               <tr>
-                <th class="col-auto text-center lead-th"><i class="fa fa-cubes"></i></th>
-                <th class="col-auto lead-th pl-0">Pièces</th>
-                <td class="col">4</td>
+                <th class="col-auto text-center lead-th d-none d-sm-block"><i class="fa fa-cubes"></i></th>
+                <th class="col-auto lead-th pl-sm-0 small-xs">Pièces</th>
+                <td class="col small-xs">4</td>
               </tr>
               <tr>
-                <th class="col-auto text-center lead-th"><i class="fa fa-fire"></i></th>
-                <th class="col-auto lead-th pl-0">Énergie&nbsp;/&nbsp;GES</th>
-                <td class="col">Classes A / A</td>
+                <th class="col-auto text-center lead-th d-none d-sm-block"><i class="fa fa-fire"></i></th>
+                <th class="col-auto lead-th pl-sm-0 small-xs">Énergie&nbsp;/&nbsp;GES</th>
+                <td class="col small-xs">Classes A / A</td>
               </tr>
             </tbody>
           </table>
@@ -144,24 +156,24 @@
           <table class="table table-responsive table-striped table-nowrap open-sans z-depth-1">
             <tbody>
               <tr>
-                <th class="col-auto text-center lead-th"><i class="fa fa-image"></i></th>
-                <th class="col-auto lead-th pl-0">Surface&nbsp;vitrée</th>
-                <td class="col">16&nbsp;m<sup>2</sup></td>
+                <th class="col-auto text-center lead-th d-none d-sm-block"><i class="fa fa-image"></i></th>
+                <th class="col-auto lead-th pl-sm-0 small-xs">Surface&nbsp;vitrée</th>
+                <td class="col small-xs">16&nbsp;m<sup>2</sup></td>
               </tr>
               <tr>
-                <th class="col-auto text-center lead-th"><i class="fa fa-thermometer"></i></th>
-                <th class="col-auto lead-th pl-0">Chauffage</th>
-                <td class="col">Pompe chaleur air / air</td>
+                <th class="col-auto text-center lead-th d-none d-sm-block"><i class="fa fa-thermometer"></i></th>
+                <th class="col-auto lead-th pl-sm-0 small-xs">Chauffage</th>
+                <td class="col small-xs">Pompe chaleur air / air</td>
               </tr>
               <tr>
-                <th class="col-auto text-center lead-th"><i class="fa fa-cube"></i></th>
-                <th class="col-auto lead-th pl-0">Structure</th>
-                <td class="col">Ossature bois</td>
+                <th class="col-auto text-center lead-th d-none d-sm-block"><i class="fa fa-cube"></i></th>
+                <th class="col-auto lead-th pl-sm-0 small-xs">Structure</th>
+                <td class="col small-xs">Ossature bois</td>
               </tr>
               <tr>
-                <th class="col-auto text-center lead-th"><i class="fa fa-clone"></i></th>
-                <th class="col-auto lead-th pl-0"> Volets </th>
-                <td class="col">Roulants&nbsp;PVC</td>
+                <th class="col-auto text-center lead-th d-none d-sm-block"><i class="fa fa-clone"></i></th>
+                <th class="col-auto lead-th pl-sm-0 small-xs"> Volets </th>
+                <td class="col small-xs">Roulants&nbsp;PVC</td>
               </tr>
             </tbody>
           </table>
@@ -170,7 +182,7 @@
     </div>
 
     <div class="col-12 order-lg-8">
-      <p class="font-bold gray-text-700">L'opportunité de terrain</p>
+      <p class="font-bold gray-text-700">Le terrain</p>
       <p class="paragraph mb-4"><%= @ad.land.description %></p>
       <div id="map" class="img-flex"></div>
     </div>
@@ -178,56 +190,56 @@
   </div>
 </div>
 
-<div class="relative light-gray" id="contact">
-  <div class="container py-6">
+<div class="relative light-gray py-5" id="contact">
+  <div class="container">
     <div class="row align-items-center justify-content-center">
       <div class="col-12 col-md-6 col-lg-6 order-lg-2 order-md-2">
         <div class="p-3">
-        	<p class="font-bold gray-text-800">Prenons contact</p>
-          <p class="open-sans gray-text-700 paragraph">Nous serions ravis de répondre à toute demande de renseignement ou suggestion.</p>
-				  <p class="open-sans gray-text-700 paragraph">N'hésitez-pas à remplir le formulaire ou à nous joindre directement&nbsp;:</p>
-          <div class="p-3 light-bordered">
-            <div class="media mt-1">
-              <img
-                 class="mr-3 rounded-circle z-depth-1 responsive-small-avatar"
-                 src="https://s3-eu-west-1.amazonaws.com/demainchezmoi/cloudfront_assets/images/denis_bolomier_india.jpg"
-                 alt="">
-              <div class="media-body">
-                <p class="text-secondary mb-0 small">Votre contact&nbsp;:</p>
-                <h5 class="my-0">Denis Bolomier</h5>
-                <a href="tel:0663742535" class="font-bold pink white-text px-1 my-1 d-inline-block">06 63 74 25 35</a>
-              </div>
+        	<p class="font-bold gray-text-800">Saisissez l'opportunité</p>
+				  <p class="open-sans gray-text-700 paragraph">Nos annonces maison + terrain sont des opportunités d'exception sur des terrains séléctionnés avec soin et ont une durée de vie limitée.</p>
+				  <p class="open-sans gray-text-700 paragraph">Remplissez le formulaire ou joignez-nous directement pour ne pas passer à côté&nbsp;!</p>
+        </div>
+        <div class="p-3 mb-3 white z-depth-1">
+          <div class="media mt-1">
+            <img
+               class="mr-3 rounded-circle z-depth-1 responsive-small-avatar"
+               src="https://s3-eu-west-1.amazonaws.com/demainchezmoi/cloudfront_assets/images/denis_bolomier_india.jpg"
+               alt="">
+            <div class="media-body">
+              <p class="text-secondary mb-0 small">Votre contact&nbsp;:</p>
+              <h5 class="my-0">Denis Bolomier</h5>
+              <a href="tel:0663742535" class="font-bold pink white-text px-1 my-1 d-inline-block">06 63 74 25 35</a>
             </div>
           </div>
         </div>
       </div>
       <div class="col-12 col-md-6 col-lg-6">
-        <div class="z-depth-1 p-4 white mx-1"> <p class="indigo-text">Prendre contact</p>
+        <div class="z-depth-1 p-4 white"> <p class="indigo-text">Contactez-moi</p>
           <%= form_for @conn, page_path(@conn, :contact), [as: "contact"], fn f-> %>
             <div class="form-group row">
-              <label class="col-sm-3 col-form-label">Nom</label>
-              <div class="col-sm-9">
-                <%= text_input f, :name, placeholder: "Dupont", class: "form-control" %>
+              <label class="col-2 col-form-label">Nom</label>
+              <div class="col-10">
+                <%= text_input f, :name, placeholder: "Marie Dupont", class: "form-control" %>
               </div>
             </div>
             <div class="form-group row">
-              <label class="col-sm-3 col-form-label">Téléphone</label>
-              <div class="col-sm-9">
+              <label class="col-2 col-form-label">Tél</label>
+              <div class="col-10">
                 <%= text_input f, :phone, placeholder: "06 12 34 56 78", class: "form-control" %>
               </div>
             </div>
             <div class="form-group row">
-              <label class="col-sm-3 col-form-label">Email</label>
-              <div class="col-sm-9">
-                <%= text_input f, :email, placeholder: "marie.dupont@email.com", class: "form-control" %>
+              <label class="col-2 col-form-label">Info</label>
+              <div class="col-10">
+                <%= textarea f, :remark, placeholder: "Ex : avant 18 heures", class: "form-control" %>
               </div>
             </div>
-            <%= hidden_input f, :ad, value: @ad.id %>
             <div class="clearfix">
               <div class="pull-right">
                 <button type="submit" class="btn btn-indigo mr-0 mb-0"><i class="fa fa-paper-plane mr-2"></i> Envoyer</button>
               </div>
             </div>
+            <%= hidden_input f, :ad, value: @ad.id %>
           <% end %>
         </div>
       </div>
@@ -262,41 +274,58 @@
 
 <!-- Modal -->
 <div class="modal fade" id="contactModal" tabindex="-1" role="dialog" aria-labelledby="contactModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
+  <div class="modal-dialog mb-7" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title indigo-text" id="contactModalLabel">Contactez-moi</h5>
+        <h5 class="modal-title indigo-text" id="contactModalLabel">Prenez contact</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
-        <%= form_for @conn, page_path(@conn, :contact), [as: "contact"], fn f-> %>
-          <div class="form-group row">
-            <label class="col-sm-3 col-form-label">Nom</label>
-            <div class="col-sm-9">
-              <%= text_input f, :name, placeholder: "Dupont", class: "form-control" %>
+        <p class="text-secondary small mb-1">Contactez&nbsp;:</p>
+        <div class="p-3 light-bordered">
+          <div class="media mt-1">
+            <img
+               class="mr-3 rounded-circle z-depth-1 responsive-small-avatar"
+               src="https://s3-eu-west-1.amazonaws.com/demainchezmoi/cloudfront_assets/images/denis_bolomier_india.jpg"
+               alt="">
+            <div class="media-body">
+              <h5 class="my-0">Denis Bolomier</h5>
+              <a href="tel:0663742535" class="font-bold pink white-text px-1 my-1 d-inline-block">06 63 74 25 35</a>
             </div>
           </div>
-          <div class="form-group row">
-            <label class="col-sm-3 col-form-label">Téléphone</label>
-            <div class="col-sm-9">
-              <%= text_input f, :phone, placeholder: "06 12 34 56 78", class: "form-control" %>
+        </div>
+        <div class="text-center p-2 gray-text-600 text-underline">ou</div>
+        <p class="text-secondary small mb-1">Contactez-moi&nbsp;:</p>
+        <div class="p-3 light-bordered">
+          <%= form_for @conn, page_path(@conn, :contact), [as: "contact"], fn f-> %>
+            <div class="form-group row">
+              <label class="col-2 col-form-label">Nom</label>
+              <div class="col-10">
+                <%= text_input f, :name, placeholder: "Marie Dupont", class: "form-control" %>
+              </div>
             </div>
-          </div>
-          <div class="form-group row">
-            <label class="col-sm-3 col-form-label">Email</label>
-            <div class="col-sm-9">
-              <%= text_input f, :email, placeholder: "marie.dupont@email.com", class: "form-control" %>
+            <div class="form-group row">
+              <label class="col-2 col-form-label">Tél</label>
+              <div class="col-10">
+                <%= text_input f, :phone, placeholder: "06 12 34 56 78", class: "form-control" %>
+              </div>
             </div>
-          </div>
-          <div class="clearfix">
-            <div class="pull-right">
-              <button type="submit" class="btn btn-indigo mr-0 mb-0"><i class="fa fa-paper-plane mr-2"></i> Envoyer</button>
+            <div class="form-group row">
+              <label class="col-2 col-form-label">Info</label>
+              <div class="col-10">
+                <%= textarea f, :remark, placeholder: "Ex : avant 18 heures", class: "form-control" %>
+              </div>
             </div>
-          </div>
-          <%= hidden_input f, :ad, value: @ad.id %>
-        <% end %>
+            <div class="clearfix">
+              <div class="pull-right">
+                <button type="submit" class="btn btn-indigo mr-0 mb-0"><i class="fa fa-paper-plane mr-2"></i> Envoyer</button>
+              </div>
+            </div>
+            <%= hidden_input f, :ad, value: @ad.id %>
+          <% end %>
+        </div>
       </div>
     </div>
   </div>

@@ -23,12 +23,13 @@ defmodule PlumWeb.PageController do
 
   def contact(conn, %{"contact" => contact_params}) do
     conn =
-      if not (is_undef(contact_params, "email") and is_undef(contact_params, "phone")) do
+      if not is_undef(contact_params, "phone") do
         creation = NaiveDateTime.utc_now |> NaiveDateTime.to_iso8601
-        Plum.Zapier.new_prospect(contact_params |> Map.put("creation", creation))
+        # Application.get_env(:plum, :env) == "prod" &&
+          Plum.Zapier.new_prospect(contact_params |> Map.put("creation", creation))
         conn |> put_flash(:info, "Votre demande de contact a bien été prise en compte.")
       else
-        conn |> put_flash(:error, "Merci de renseigner votre numéro de téléphone ou votre email pour prendre contact.")
+        conn |> put_flash(:error, "Merci de renseigner votre numéro de téléphone afin que nous puissions vous contacter.")
       end
     if not is_nil(ad = contact_params["ad"]) do
       ad = Sales.get_ad!(ad) |> Repo.preload(:land)
