@@ -280,8 +280,8 @@
         </div>
         <div class="col-12 col-md-6 col-lg-5">
           <div class="z-depth-1 p-4 white m-1">
-            <p class="indigo-text small">Nous vous contactons</p>
-            <p class="text-secondary">Nous vous répondons sous 24 heures</p>
+            <p class="indigo-text mb-0">Laissez-nous vous contacter</p>
+            <p class="text-secondary">Nous vous contactons sous 24 heures ou quand vous le souhaitez</p>
             <%= form_for @conn, page_path(@conn, :contact), [as: "contact"], fn f-> %>
               <div class="form-group row">
                 <label class="col-sm-2 col-form-label">Nom</label>
@@ -365,8 +365,8 @@
           </div>
         </div>
         <div class="p-3 z-depth-1 white">
-          <p class="text-secondary small indigo-text">Nous vous contactons</p>
-          <p class="text-secondary">Nous vous répondons sous 24 heures</p>
+          <p class="indigo-text mb-0">Nous vous contactons</p>
+          <p class="text-secondary">Nous répondons habituellement sous 24 heures</p>
           <%= form_for @conn, page_path(@conn, :contact), [as: "contact"], fn f-> %>
             <div class="form-group row">
               <label class="col-2 col-form-label">Nom</label>

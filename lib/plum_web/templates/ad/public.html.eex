@@ -34,21 +34,16 @@
 <div class="container mb-7 after-nav">
   <div class="row pt-2 mt-sm-3">
 
-    <div class="col-12 d-sm-none d-flex justify-content-end mb-3">
-      <div class="mr-2 gray-text-700"><small><i class="fa fa-eye"></i> <%= @ad.view_count %></small></div>
-      <div class="fb-share-button" data-href="<%= ad_url(@conn, :public, @ad) %>" data-layout="button" data-size="small" data-mobile-iframe="true" style="height: 21px; width: 75px;"></div>
-    </div>
-
     <div class="col order-lg-2 order-sm-1 mt-2">
       <div class="row justify-content-start">
         <div class="col-12 col-sm order-sm-1 mb-2">
-          <p class="mb-1 mt-sm-2 pink-text font-bold"><%= @ad.land.city %> (<%= @ad.land.department %>)</p>
-          <h1 class="h4-responsive font-bold gray-text-700">
+          <p class="mb-1 mt-2 pink-text font-bold h5-responsive"><%= @ad.land.city %> (<%= @ad.land.department %>)</p>
+          <h1 class="h3-responsive mt-0 font-bold gray-text-700 mb-3">
             Maison + Terrain <span class="orange-text font-black" style="<%= if ongoing_flash(@ad) do %>text-decoration: line-through;<% end %>"><%= @ad |> total_price |> Number.Currency.number_to_currency |> raw %>
             </span>
             <%= if flash = ongoing_flash(@ad) do %><span class="pink-text font-black"><%= @ad |> total_price |> (& &1 * (100 - flash.percentage) / 100).() |> Number.Currency.number_to_currency |> raw %></span><% end %>
           </h1>
-          <p class="gray-text-600 mb-4 pb-2 open-sans">Plain-pied ossature bois, 3 chambres et grand salon.</p>
+          <p class="gray-text-700 mb-4 pb-2 open-sans">Maison bois plain-pied, 3 chambres et grand salon.</p>
           <%# <p><span class="badge gray-500"><i class="fa fa-clock-o"></i> Reste 3 jours</span></p> %>
         </div>
       </div>
@@ -58,7 +53,7 @@
       <div class="col-12 black orange-text order-lg-3 order-sm-3 mb-4">
         <div class="py-3">
           <div class="font-bold text-center">
-            <div class="lead font-bold mb-2" style="line-height: 1.2"><i class="fa fa-bolt text-white"></i> Promotion <span class="pink-text">-<%= flash.percentage %>%</span> prenez contact avant <span class="white-text">5h 30min 45sec</span></div>
+            <div class="lead font-bold mb-2" style="line-height: 1.2"><i class="fa fa-bolt text-white"></i> Promotion flash <span class="pink-text">-<%= flash.percentage %>%</span> prenez contact avant <span class="white-text">5h 30min 45sec</span></div>
             <div><a href="#" class="tiny-xs small orange-text text-underline">Tenez-moi au courant en cas d'autres promotions</a></div>
           </div>
         </div>
@@ -66,8 +61,7 @@
     <% end %>
 
 
-    <div class="col-12 mb-3 px-xs-0 order-lg-5 order-sm-5">
-      <p class="font-bold gray-text-700 d-none d-sm-block">Votre Maison&nbsp;Léo</p>
+    <div class="col-12 mb-3 px-xs-0 order-lg-5 order-sm-5 mb-4">
 			<div id="carouselExampleIndicators" class="carousel lazy slide img-fluid" data-ride="carousel">
   			<ol class="carousel-indicators">
     			<li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
@@ -109,22 +103,18 @@
     </div>
 
     <div class="col-12 col-md-auto col-sm-auto order-lg-2 order-sm-2 mb-4 d-flex flex-column align-items-sm-end">
-      <p class="open-sans gray-text-700 text-center text-sm-right mb-sm-1"><em>Devenez propriétiare</em></p>
+      <p class="open-sans gray-text-700 text-center text-sm-right mb-sm-1"><em>Devenez propriétaire&nbsp;!</em></p>
       <button class="btn btn-pink m-0 btn-xs-block" data-toggle="modal" data-target="#contactModal"><i class="fa fa-handshake-o mr-1"></i> Prendre contact</button>
-      <div class="d-none d-sm-flex justify-content-end mt-1">
-        <div class="gray-text-700 mr-2"><small><i class="fa fa-eye"></i> <%= @ad.view_count %></small></div>
-        <div class="fb-share-button" data-href="<%= ad_url(@conn, :public, @ad) %>" data-layout="button" data-size="small" data-mobile-iframe="true" style="height: 21px; width: 75px;"></div>
-      </div>
     </div>
 
     <div class="col-12 mb-4 order-lg-4 order-sm-4">
-      <p class="gray-text-600 open-sans mb-0 lead-paragraph">Devenez propriétaire à <%= @ad.land.city %> (<%= @ad.land.department %>) pour <%= @ad |> total_price |> Number.Currency.number_to_currency |> raw %> avec cette opportunité exceptionnelle maison plus terrain à durée limitée. Faites construire votre quatre pièces moderne, emménagez et dites adieu aux loyers en moins de huit mois&nbsp;!</p>
+      <p class="gray-text-600 open-sans mb-0 lead-paragraph">Devenez propriétaire à <%= @ad.land.city %> (<%= @ad.land.department %>) pour <%= @ad |> total_price |> Number.Currency.number_to_currency |> raw %> avec cette opportunité unique maison plus terrain. Faites construire votre quatre pièces moderne et dites adieu aux loyers en moins de huit mois&nbsp;!</p>
 		</div>
 
-    <div class="col-12 mb-4 order-lg-6 order-sm-6">
+    <div class="col-12 mb-5 order-lg-6 order-sm-6">
       <div class="row">
         <div class="col-12">
-          <p class="font-bold gray-text-700">Les détails</p>
+          <p class="font-bold gray-text-700">Le projet</p>
         </div>
         <div class="col-12 col-lg-6">
           <table class="table table-responsive table-striped table-nowrap open-sans z-depth-1">
@@ -193,14 +183,14 @@
       </div>
     </div>
 
-    <div class="col-12 order-lg-8 order-sm-8 mb-4">
-      <p class="font-bold gray-text-700">Le terrain</p>
+    <div class="col-12 order-lg-8 order-sm-8 mb-5">
+      <p class="font-bold gray-text-700">L'opportunité de terrain</p>
       <p class="paragraph mb-4"><%= @ad.land.description %></p>
       <div id="map" class="img-flex"></div>
     </div>
 
     <div class="col-12 order-lg-8 order-sm-8">
-      <p class="font-bold gray-text-700">L'habitat</p>
+      <p class="font-bold gray-text-700">Votre espace de vie</p>
       <p class="paragraph mb-4">Le plan de la Maison&nbsp;Léo est optimisé pour la vie ensemble. Sa conception soignée nous permet de maîtriser parfaitement le processus de construction de la maison pour un rendu à temps et sans encombres.</p>
       <img class="d-block w-100" alt="Coupe intérieure" <%= src_tags("coupe-interieure") %>>
     </div>
@@ -218,7 +208,7 @@
 				  <p class="open-sans gray-text-700 paragraph">Remplissez le formulaire ou joignez-nous directement pour ne pas passer à côté&nbsp;!</p>
         </div>
         <div class="p-3 mb-3 white z-depth-1">
-          <p class="indigo-text small">Contactez-nous directement</p>
+          <p class="indigo-text">Contactez-nous directement</p>
           <div class="media mt-1">
             <img
                class="mr-3 rounded-circle z-depth-1 responsive-small-avatar"
@@ -233,8 +223,8 @@
       </div>
       <div class="col-12 col-md-6 col-lg-6">
         <div class="z-depth-1 p-3 white">
-          <p class="indigo-text small">Nous vous contactons</p>
-          <p class="text-secondary">Nous vous répondons sous 24 heures</p>
+          <p class="indigo-text mb-0">Laissez-nous vous contacter</p>
+          <p class="text-secondary">Nous vous contactons sous 24 heures ou quand vous le souhaitez</p>
           <%= form_for @conn, page_path(@conn, :contact), [as: "contact"], fn f-> %>
             <div class="form-group row">
               <label class="col-2 col-form-label">Nom</label>
@@ -271,20 +261,20 @@
 
     <div class="row justify-content-center">
       <div class="col col-md-7 order-md-2">
-        <p class="font-bold gray-text-700">Pourquoi la Maison Léo&nbsp;?</p>
+        <p class="font-bold gray-text-800">Pourquoi la Maison Léo&nbsp;?</p>
         <p class="paragraph">
-        La Maison Léo est issue de la toute nouvelle génération de maisons à ossature bois, écologique robuste et fortement isolée. Elle vous fera réaliser d'importantes économies tant à l'achat qu'en énergie au cours de sa vie.<p>
+        La Maison Léo est la toute nouvelle génération de maisons à ossature bois, écologique robuste et fortement isolée. Elle vous fera réaliser d'importantes économies tant à l'achat qu'en énergie au cours de sa vie.<p>
         <p class="paragraph">Son processus de fabrication local en atelier vous garantit une qualité et une fiabilité auxquelles ne peuvent pas prétendre les maisons construites avec chantier traditionnel, pour un coût au mètre carré et une durée de construction drastiquement réduits.
         <p class="paragraph">À vous de jouer&nbsp;!</p>
         </p>
       </div>
       <div class="col-md-5 col-12 order-md-1">
-        <p class="font-bold gray-text-700">Qui sommes-nous ?</p>
+        <p class="font-bold gray-text-800">Qui sommes-nous ?</p>
         <dl class="">
           <dd>Demainchezmoi SAS <br />41 rue Laure Diebold <br />69009 Lyon</dd>
           <dd>Email&nbsp;: contact@demainchezmoi.fr <br /> Tél&nbsp;: 06 63 74 25 35</dd>
           <dd>
-          <a href="https://www.facebook.com/lamaisonleo" target="_blank" class="blue-text">
+          <a href="https://www.facebook.com/lamaisonleo" target="_blank" class="indigo-text">
             <i class="fa-stack">
               <i class="fa fa-circle fa-stack-2x"></i>
               <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
@@ -314,7 +304,7 @@
       </div>
       <div class="modal-body">
         <div class="p-3 mb-3 z-depth-1 white">
-          <p class="text-secondary small indigo-text">Contactez-nous directement</p>
+          <p class="text-secondary indigo-text">Contactez-nous directement</p>
           <div class="media mt-1">
             <img
                class="mr-3 rounded-circle z-depth-1 responsive-small-avatar"
@@ -327,8 +317,8 @@
           </div>
         </div>
         <div class="p-3 z-depth-1 white">
-          <p class="text-secondary small indigo-text">Nous vous contactons</p>
-          <p class="text-secondary">Nous vous répondons sous 24 heures</p>
+          <p class="indigo-text mb-0">Laissez-nous vous contacter</p>
+          <p class="text-secondary">Nous vous contactons sous 24 heures ou quand vous le souhaitez</p>
           <%= form_for @conn, page_path(@conn, :contact), [as: "contact"], fn f-> %>
             <div class="form-group row">
               <label class="col-2 col-form-label">Nom</label>
