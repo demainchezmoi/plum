@@ -264,11 +264,16 @@
   <div class="container">
     <div class="row justify-content-center">
       <div class="col-md-12 col-lg-6 order-lg-2">
-        <p class="p-1 mb-0 font-bold gray-text-600">Pourquoi la Maison Léo&nbsp;?</p>
+        <p class="font-bold gray-text-600">Pourquoi la Maison Léo&nbsp;?</p>
+        <p class="paragraph">
+        La Maison Léo est issue de la toute nouvelle génération de maisons à ossature bois, écologique robuste et fortement isolée. Elle vous fera réaliser d'importantes économies tant à l'achat qu'à l'usage, en énergie.<p>
+        <p class="paragraph">Son processus de fabrication local en atelier vous garantit une qualité à laquelle ne peuvent tout simplement pas prétendre les maisons construites avec chantier traditionnel, pour un coût au mètre carré et une durée de construction drastiquement réduits.
+        <p class="paragraph">À vous de jouer&nbsp;!</p>
+        </p>
       </div>
       <div class="col-md-12 col-lg-6 order-lg-1">
-        <p class="p-1 mb-0 font-bold gray-text-600">Qui sommes-nous ?</p>
-        <dl class="p-1">
+        <p class="font-bold gray-text-600">Qui sommes-nous ?</p>
+        <dl class="">
           <dt>Contact</dt>
           <dd>Email&nbsp;: contact@demainchezmoi.fr <br /> Tél&nbsp;: 06 63 74 25 35</dd>
           <dt>Editeur</dt>
