@@ -264,7 +264,7 @@
             <p class="open-sans gray-text-700 paragraph">Nous serions ravis de répondre à toute demande de renseignement ou suggestion.</p>
 				    <p class="open-sans gray-text-700 paragraph">N'hésitez-pas à remplir le formulaire ou à nous joindre directement</p>
             <div class="p-3 mb-3 z-depth-1 white">
-              <p class="text-secondary small indigo-text">Contactez directement</p>
+              <p class="text-secondary small indigo-text">Contactez-nous directement</p>
               <div class="media mt-1">
                 <img
                    class="mr-3 rounded-circle z-depth-1 responsive-small-avatar"
@@ -352,7 +352,7 @@
       </div>
       <div class="modal-body">
         <div class="p-3 mb-3 z-depth-1 white">
-          <p class="text-secondary small indigo-text">Contactez directement</p>
+          <p class="text-secondary small indigo-text">Contactez-nous directement</p>
           <div class="media mt-1">
             <img
                class="mr-3 rounded-circle z-depth-1 responsive-small-avatar"
