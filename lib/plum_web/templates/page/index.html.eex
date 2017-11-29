@@ -343,16 +343,18 @@
 <!-- Modal -->
 <div class="modal fade" id="contactModal" tabindex="-1" role="dialog" aria-labelledby="contactModalLabel" aria-hidden="true">
   <div class="modal-dialog mb-7" role="document">
-    <div class="modal-content light-gray">
-      <div class="modal-header p-3 white">
-        <h5 class="modal-title indigo-text" id="contactModalLabel">Prenons contact</h5>
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title text-secondary small" id="contactModalLabel">Prenons contact</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
-        <div class="p-3 mb-3 z-depth-1 white">
-          <p class="text-secondary small indigo-text">Contactez-nous directement</p>
+        <div class="px-1">
+          <p class="text-secondary indigo-text mb-0">Contactez-nous directement</p>
+          <p class="text-secondary small mb-2">Nous serions ravis de répondre à vos questions.</p>
+          <div class="p-3 light-bordered w-100">
           <div class="media mt-1">
             <img
                class="mr-3 rounded-circle z-depth-1 responsive-small-avatar"
@@ -363,10 +365,16 @@
               <a href="tel:0663742535" class="font-bold pink white-text px-1 my-1 d-inline-block">06 63 74 25 35</a>
             </div>
           </div>
+          </div>
         </div>
-        <div class="p-3 z-depth-1 white">
-          <p class="indigo-text mb-0">Nous vous contactons</p>
-          <p class="text-secondary">Nous répondons habituellement sous 24 heures</p>
+        <div class="d-flex flex-row align-items-center my-3">
+          <hr class="m-0"/>
+          <div class="px-3 small">ou</div>
+          <hr class="m-0"/>
+        </div>
+        <div class="px-1">
+          <p class="indigo-text mb-0">Laissez-nous vous contacter</p>
+          <p class="text-secondary small mb-2">Nous vous contactons sous 24 heures, ou quand vous le souhaitez.</p>
           <%= form_for @conn, page_path(@conn, :contact), [as: "contact"], fn f-> %>
             <div class="form-group row">
               <label class="col-2 col-form-label">Nom</label>
@@ -391,10 +399,10 @@
                 <button type="submit" class="btn btn-indigo mr-0 mb-0"><i class="fa fa-paper-plane mr-2"></i> Envoyer</button>
               </div>
             </div>
+            <%= hidden_input f, :ref, value: @params["ref"] %>
           <% end %>
         </div>
       </div>
     </div>
   </div>
 </div>
-

@@ -37,7 +37,7 @@
     <div class="col order-lg-2 order-sm-1 mt-2">
       <div class="row justify-content-start">
         <div class="col-12 col-sm order-sm-1 mb-2">
-          <p class="mb-1 mt-2 pink-text font-bold h5-responsive"><%= @ad.land.city %> (<%= @ad.land.department %>)</p>
+          <p class="mb-0 mt-2 pink-text font-bold h5-responsive"><%= @ad.land.city %> (<%= @ad.land.department %>)</p>
           <h1 class="h3-responsive mt-0 font-bold gray-text-700 mb-3">
             Maison + Terrain <span class="orange-text font-black" style="<%= if ongoing_flash(@ad) do %>text-decoration: line-through;<% end %>"><%= @ad |> total_price |> Number.Currency.number_to_currency |> raw %>
             </span>
@@ -61,7 +61,7 @@
     <% end %>
 
 
-    <div class="col-12 mb-3 px-xs-0 order-lg-5 order-sm-5 mb-4">
+    <div class="col-12 mb-3 px-xs-0 order-lg-5 order-sm-5 mb-3">
 			<div id="carouselExampleIndicators" class="carousel lazy slide img-fluid" data-ride="carousel">
   			<ol class="carousel-indicators">
     			<li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
@@ -102,12 +102,12 @@
 			</div>
     </div>
 
-    <div class="col-12 col-md-auto col-sm-auto order-lg-2 order-sm-2 mb-4 d-flex flex-column align-items-sm-end">
-      <p class="open-sans gray-text-700 text-center text-sm-right mb-sm-1"><em>Devenez propriétaire&nbsp;!</em></p>
+    <div class="col-12 col-md-auto col-sm-auto order-lg-2 order-sm-2 mb-4 d-flex flex-column align-items-sm-end mt-sm-2">
+      <p class="open-sans gray-text-700 text-center text-sm-right mb-sm-1"><em>Devenez propriétaire</em></p>
       <button class="btn btn-pink m-0 btn-xs-block" data-toggle="modal" data-target="#contactModal"><i class="fa fa-handshake-o mr-1"></i> Prendre contact</button>
     </div>
 
-    <div class="col-12 mb-4 order-lg-5 order-sm-5">
+    <div class="col-12 mb-5 order-lg-5 order-sm-5">
       <p class="gray-text-600 open-sans mb-0 lead-paragraph">Devenez propriétaire à <%= @ad.land.city %> (<%= @ad.land.department %>) pour <%= @ad |> total_price |> Number.Currency.number_to_currency |> raw %> avec cette opportunité unique maison plus terrain. Faites construire votre quatre pièces moderne et dites adieu aux loyers en moins de huit mois&nbsp;!</p>
 		</div>
 
@@ -198,17 +198,19 @@
   </div>
 </div>
 
-<div class="relative light-gray py-5" id="contact">
+<div class="relative light-gray py-6" id="contact">
   <div class="container">
     <div class="row align-items-center justify-content-center">
       <div class="col-12 col-md-6 col-lg-6 order-lg-2 order-md-2 order-sm-2">
-        <div class="p-3">
-        	<p class="font-bold gray-text-800">Saisissez l'opportunité</p>
+        <div class="px-3 pb-3">
+        	<p class="font-bold gray-text-800">Saisissez cette opportunité</p>
 				  <p class="open-sans gray-text-700 paragraph">Nos annonces maison + terrain sont des opportunités d'exception sur des terrains séléctionnés avec soin. Elles ont une durée de vie limitée.</p>
 				  <p class="open-sans gray-text-700 paragraph">Remplissez le formulaire ou joignez-nous directement pour ne pas passer à côté&nbsp;!</p>
         </div>
         <div class="p-3 mb-3 white z-depth-1">
-          <p class="indigo-text">Contactez-nous directement</p>
+          <p class="indigo-text mb-0">Contactez-nous directement</p>
+          <p class="text-secondary small mb-2">Nous serions ravis de répondre à vos questions.</p>
+          <div class="p-3 light-bordered w-100">
           <div class="media mt-1">
             <img
                class="mr-3 rounded-circle z-depth-1 responsive-small-avatar"
@@ -219,12 +221,13 @@
               <a href="tel:0663742535" class="font-bold pink white-text px-1 my-1 d-inline-block">06 63 74 25 35</a>
             </div>
           </div>
+          </div>
         </div>
       </div>
       <div class="col-12 col-md-6 col-lg-6">
         <div class="z-depth-1 p-3 white">
           <p class="indigo-text mb-0">Laissez-nous vous contacter</p>
-          <p class="text-secondary">Nous vous contactons sous 24 heures ou quand vous le souhaitez</p>
+          <p class="text-secondary small mb-2">Nous vous contactons sous 24 heures, ou quand vous le souhaitez.</p>
           <%= form_for @conn, page_path(@conn, :contact), [as: "contact"], fn f-> %>
             <div class="form-group row">
               <label class="col-2 col-form-label">Nom</label>
@@ -256,9 +259,9 @@
     </div>
   </div>
 </div>
+
 <footer class="gray relative py-6">
   <div class="container">
-
     <div class="row justify-content-center">
       <div class="col col-md-7 order-md-2">
         <p class="font-bold gray-text-800">Pourquoi la Maison Léo&nbsp;?</p>
@@ -295,16 +298,18 @@
 <!-- Modal -->
 <div class="modal fade" id="contactModal" tabindex="-1" role="dialog" aria-labelledby="contactModalLabel" aria-hidden="true">
   <div class="modal-dialog mb-7" role="document">
-    <div class="modal-content light-gray">
-      <div class="modal-header p-3 white">
-        <h5 class="modal-title indigo-text" id="contactModalLabel">Prenons contact</h5>
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title text-secondary small" id="contactModalLabel">Prenons contact</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
-        <div class="p-3 mb-3 z-depth-1 white">
-          <p class="text-secondary indigo-text">Contactez-nous directement</p>
+        <div class="px-1">
+          <p class="text-secondary indigo-text mb-0">Contactez-nous directement</p>
+          <p class="text-secondary small mb-2">Nous serions ravis de répondre à vos questions.</p>
+          <div class="p-3 light-bordered w-100">
           <div class="media mt-1">
             <img
                class="mr-3 rounded-circle z-depth-1 responsive-small-avatar"
@@ -315,10 +320,16 @@
               <a href="tel:0663742535" class="font-bold pink white-text px-1 my-1 d-inline-block">06 63 74 25 35</a>
             </div>
           </div>
+          </div>
         </div>
-        <div class="p-3 z-depth-1 white">
+        <div class="d-flex flex-row align-items-center my-3">
+          <hr class="m-0"/>
+          <div class="px-3 small">ou</div>
+          <hr class="m-0"/>
+        </div>
+        <div class="px-1">
           <p class="indigo-text mb-0">Laissez-nous vous contacter</p>
-          <p class="text-secondary">Nous vous contactons sous 24 heures ou quand vous le souhaitez</p>
+          <p class="text-secondary small mb-2">Nous vous contactons sous 24 heures, ou quand vous le souhaitez.</p>
           <%= form_for @conn, page_path(@conn, :contact), [as: "contact"], fn f-> %>
             <div class="form-group row">
               <label class="col-2 col-form-label">Nom</label>
