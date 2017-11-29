@@ -38,11 +38,16 @@
       <div class="row justify-content-start">
         <div class="col-12 col-sm order-sm-1 mb-2">
           <p class="mb-0 mt-2 pink-text font-bold h5-responsive"><%= @ad.land.city %> (<%= @ad.land.department %>)</p>
-          <h1 class="h3-responsive mt-0 font-bold gray-text-700 mb-3">
+          <h1 class="h3-responsive mt-0 font-bold gray-text-700">
             Maison + Terrain <span class="orange-text font-black" style="<%= if ongoing_flash(@ad) do %>text-decoration: line-through;<% end %>"><%= @ad |> total_price |> Number.Currency.number_to_currency |> raw %>
             </span>
             <%= if flash = ongoing_flash(@ad) do %><span class="pink-text font-black"><%= @ad |> total_price |> (& &1 * (100 - flash.percentage) / 100).() |> Number.Currency.number_to_currency |> raw %></span><% end %>
           </h1>
+          <p class="mb-3 gray-text-500 small">
+            <i class="fa fa-eye"></i> <%= @ad.view_count %>
+            <br />
+            <i class="fa fa-clock-o mr-1"></i> en ligne depuis <%= Date.diff(Date.utc_today, @ad.inserted_at |> NaiveDateTime.to_date) %> jours
+          </p>
           <p class="gray-text-700 mb-4 pb-2 open-sans">Maison bois plain-pied, 3 chambres et grand salon.</p>
           <%# <p><span class="badge gray-500"><i class="fa fa-clock-o"></i> Reste 3 jours</span></p> %>
         </div>
