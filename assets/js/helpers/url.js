@@ -1,4 +1,4 @@
-import url from 'urljs';
+import url from 'urljs/src/url.min.js';
 
 export function parseLocation() {
   const location = url.getLocation();
