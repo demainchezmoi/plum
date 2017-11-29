@@ -46,7 +46,8 @@
           <p class="mb-3 gray-text-500 small">
             <i class="fa fa-eye"></i> <%= @ad.view_count %>
             <br />
-            <i class="fa fa-clock-o mr-1"></i> en ligne depuis <%= Date.diff(Date.utc_today, @ad.inserted_at |> NaiveDateTime.to_date) %> jours
+            <% days = Date.diff(Date.utc_today, @ad.inserted_at |> NaiveDateTime.to_date) %>
+            <i class="fa fa-clock-o mr-1"></i> en ligne depuis <%= if days == 0, do: "moins d'un jour", else: "#{days} jour#{if days > 1, do: "s"}" %>
           </p>
           <p class="gray-text-700 mb-4 pb-2 open-sans">Maison bois plain-pied, 3 chambres et grand salon.</p>
           <%# <p><span class="badge gray-500"><i class="fa fa-clock-o"></i> Reste 3 jours</span></p> %>
