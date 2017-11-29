@@ -1,5 +1,6 @@
 import MainView from '../main';
 import {track} from '../../helpers/mixpanel';
+import {parseLocation} from '../../helpers/url';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 
@@ -17,7 +18,8 @@ module.exports = class View extends MainView {
   trackPage() {
     const path_elements = window.location.pathname.split('/');
     const ad = path_elements[path_elements.length - 1];
-    track("VISIT_AD", {ad: ad})
+    const params = parseLocation();
+    track("VISIT_AD", Object.assign({}, params, {ad: ad}))
   }
 
   loadMap({lat, lng}) {

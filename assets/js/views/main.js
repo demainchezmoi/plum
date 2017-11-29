@@ -1,4 +1,5 @@
 import {identify, track} from '../helpers/mixpanel';
+import {parseLocation} from '../helpers/url';
 
 export default class MainView {
   mount() {
@@ -16,7 +17,8 @@ export default class MainView {
     });
 
     $('[data-target="#contactModal"]').click(function() {
-      track("OPEN_CONTACT_MODAL");
+      const params = parseLocation();
+      track("OPEN_CONTACT_MODAL", params);
     });
   }
 

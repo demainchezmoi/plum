@@ -35,6 +35,7 @@
     "style-loader": "^0.18.2",
     "tether": "^1.4.0",
     "url-loader": "^0.5.9",
+    "urljs": "^2.3.1",
     "waves": "^0.1.1",
     "webpack": "^2.7.0"
   }
