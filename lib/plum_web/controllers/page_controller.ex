@@ -32,9 +32,9 @@ defmodule PlumWeb.PageController do
       end
     if not is_nil(ad = contact_params["ad"]) do
       ad = Sales.get_ad!(ad) |> Repo.preload(:land)
-      render conn, PlumWeb.AdView, "public.html", %{ad: ad, params: params}
+      conn |> redirect(to: ad_path(conn, :public, ad))
     else
-      conn |> render("index.html")
+      conn |> redirect(to: page_path(conn, :index))
     end
   end
 
