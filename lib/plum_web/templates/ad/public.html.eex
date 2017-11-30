@@ -194,13 +194,13 @@
     <div class="col-12 order-lg-8 order-sm-8 mb-5">
       <p class="font-bold gray-text-700">L'opportunité de terrain</p>
       <p class="paragraph mb-4"><%= @ad.land.description %></p>
-      <div id="map" class="img-flex"></div>
+      <div id="map" class="img-flex z-depth-1"></div>
     </div>
 
     <div class="col-12 order-lg-8 order-sm-8">
       <p class="font-bold gray-text-700">Votre espace de vie</p>
       <p class="paragraph mb-4">Le plan de la Maison&nbsp;Léo est optimisé pour la vie ensemble. Sa conception soignée nous permet de maîtriser parfaitement le processus de construction de la maison pour un rendu à temps et sans encombres.</p>
-      <img class="d-block w-100" alt="Coupe intérieure" <%= src_tags("coupe-interieure") %>>
+      <img class="d-block w-100 z-depth-1" alt="Coupe intérieure" <%= src_tags("coupe-interieure") %>>
     </div>
 
   </div>
