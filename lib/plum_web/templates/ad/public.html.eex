@@ -112,7 +112,7 @@
 
     <div class="col-12 col-md-auto col-sm-auto order-lg-2 order-sm-2 mb-4 d-flex flex-column align-items-sm-end mt-sm-2">
       <p class="open-sans gray-text-700 text-center text-sm-right mb-sm-1"><em>Devenez propriétaire</em></p>
-      <button class="btn btn-pink m-0 btn-xs-block" data-toggle="modal" data-target="#contactModal"><i class="fa fa-handshake-o mr-1"></i> Prendre contact</button>
+      <button class="btn btn-pink m-0 btn-xs-block z-depth-1-half" data-toggle="modal" data-target="#contactModal"><i class="fa fa-handshake-o mr-1"></i> Prendre contact</button>
     </div>
 
     <div class="col-12 mb-5 order-lg-5 order-sm-5">
