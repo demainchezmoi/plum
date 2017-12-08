@@ -74,8 +74,8 @@
     width: auto;
     height: auto;
     * {
-      stroke: map-get($indigo, base);
-      stroke-width: 0.6;
+      stroke: map-get($indigo, accent-3);
+      stroke-width: 2;
     }
   }
 

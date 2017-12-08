@@ -26,23 +26,25 @@
     </div>
   </nav>
 
-  <div class="container">
-
-    <%= if ad = @conn.assigns[:ad] do %>
-      <div class="mt-3">
-        <div class="row" id="ad_stripe">
-          <div class="col">
-            <div class="indigo accent-3 z-depth-1 p-3 white-text relative" style="z-index: 10">
-              <div class="container p-0">
-              <%= render PlumWeb.AdView, "stripe.html", ad: ad %>
+  <%= if ad = @conn.assigns[:ad] do %>
+    <div class="pt-3">
+      <div class="absolute w-100 pt-2" id="ad_stripe">
+        <div class="container">
+          <div class="row">
+            <div class="col">
+              <div class="indigo accent-3 z-depth-1 p-3 white-text relative" style="z-index: 10">
+                <div class="container p-0">
+                  <%= render PlumWeb.AdView, "stripe.html", ad: ad %>
+                </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
-    <% end %>
+    </div>
+  <% end %>
 
-    <div class="row <%= if @conn.assigns[:ad], do: "mt-4", else: "mt-5" %> mb-3">
+  <div class="container">
+    <div class="row <%= if @conn.assigns[:ad], do: "mt-7", else: "mt-5" %> mb-3">
       <div class="col">
         <div class="logo-lead">
           <div class="logo-wrapper"><%= PhoenixInlineSvg.Helpers.svg_image(@conn, "logo3") %></div>
@@ -71,36 +73,35 @@
       </div>
     </div>
 
-    <div class="row mb-5 d-flex justify-content-around">
-      <div class="col col-lg-2 col-sm-3">
+    <div class="row mb-5">
+      <div class="col-4">
         <div class="d-flex flex-column align-items-center leo-item">
-          <div class="leo-item-wrapper" style="width: 100%; max-width: 100px;"><%= PhoenixInlineSvg.Helpers.svg_image(@conn, "leo_mini") %></div>
+          <div class="leo-item-wrapper" style="width: 100%;"><%= PhoenixInlineSvg.Helpers.svg_image(@conn, "Mini") %></div>
           <div class="montserrat font-bold small gray-text-700">Léo Mini</div>
           <div class="tiny">74&nbsp;900&nbsp;&euro;</div>
         </div>
       </div>
 
-      <div class="col col-lg-2 col-sm-3">
+      <div class="col-4">
         <div class="d-flex flex-column align-items-center leo-item">
-          <div class="leo-item-wrapper" style="width: 100%; max-width: 100px;"><%= PhoenixInlineSvg.Helpers.svg_image(@conn, "leo_coupe") %></div>
+          <div class="leo-item-wrapper" style="width: 100%;"><%= PhoenixInlineSvg.Helpers.svg_image(@conn, "Berline") %></div>
           <div class="montserrat font-bold small gray-text-700">Léo Berline</div>
           <div class="tiny">86&nbsp;900&nbsp;&euro;</div>
         </div>
       </div>
 
-      <div class="col col-lg-2 col-sm-3">
+      <div class="col-4">
         <div class="d-flex flex-column align-items-center leo-item">
-          <div class="leo-item-wrapper" style="width: 100%; max-width: 100px;"><%= PhoenixInlineSvg.Helpers.svg_image(@conn, "leo_break") %></div>
+          <div class="leo-item-wrapper" style="width: 100%;"><%= PhoenixInlineSvg.Helpers.svg_image(@conn, "Break") %></div>
           <div class="montserrat font-bold small gray-text-700">Léo Break</div>
           <div class="tiny">116&nbsp;900&nbsp;&euro;</div>
         </div>
       </div>
     </div>
 
-    <div class="row mb-5">
-      <div class="col">
+    <div class="row mb-5 d-flex justify-content-center">
+      <div class="col col-lg-8">
         <p class="font-bold gray-text-700 mb-3">Le concept Léo</p>
-
         <div class="media">
           <img class="mr-3 rounded-circle z-depth-1 responsive-avatar" data-src="<%= img_path("xavier_jaffray.jpg") %>" alt="">
           <div class="media-body">
@@ -111,12 +112,11 @@
             <p class="text-right gray-text-600">Entrepreneur, fondateur de la Maison Léo</p>
           </div>
         </div>
-
       </div>
     </div>
 
-    <div class="row mb-5">
-      <div class="col">
+    <div class="row mb-5 d-flex justify-content-center">
+      <div class="col col-lg-8">
         <p class="font-bold gray-text-700 mb-3">Le comparatif Léo</p>
         <table class="table table-sm table-bordered">
           <thead class="thead-dark">
@@ -162,8 +162,8 @@
       </div>
     </div>
 
-    <div class="row mb-7">
-      <div class="col-12">
+    <div class="row mb-7 d-flex justify-content-center">
+      <div class="col-12 col-lg-8">
         <p class="font-bold gray-text-700 mb-3">Les partenaires Léo</p>
       </div>
       <div class="col col-md-6 col-lg-8">
@@ -191,5 +191,9 @@
     </div>
   </div>
 </div>
+
+<%= if ad = @conn.assigns[:ad] do %>
+  <script type="text/javascript">ad=<%= raw Poison.encode!(@ad.id) %></script>
+<% end %>
 
 <%= render PlumWeb.SharedView, "contact_modal.html", conn: @conn, params: @params %>

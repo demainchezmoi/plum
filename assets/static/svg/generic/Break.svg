@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg viewBox="0 0 132 77" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 48.1 (47250) - http://www.bohemiancoding.com/sketch -->
+    <title>Break</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="gamme_leo" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" transform="translate(-299.000000, -76.000000)">
+        <g id="Break" transform="translate(299.680715, 76.500000)" stroke="#979797">
+            <polygon id="Line" stroke-linecap="square" points="6.05 27.8499713 6.05 69.15 75.9514485 69.15 75.9514485 27.8499713"></polygon>
+            <polyline id="Line-2" stroke-linecap="square" points="25.95 27.85 25.95 41.5514598 39.95 41.5514598"></polyline>
+            <polyline id="Line-3" stroke-linecap="square" points="45.5 27.85 45.5 41.6 49.25 41.6"></polyline>
+            <polyline id="Line-5" stroke-linecap="square" points="25.75 54.45 25.75 60.3095637 28.9 60.3095637 28.9 69.15"></polyline>
+            <polyline id="Line-8" stroke-linecap="square" points="31.25 48.2 57.05 48.2 57.05 53.65"></polyline>
+            <polyline id="Line-11" stroke-linecap="square" points="45.4968466 27.8289061 45.4968466 6.026842 6.04684663 6.026842 6.04684663 27.8289061"></polyline>
+            <rect id="Rectangle" x="87.5468466" y="18.6789061" width="37.4" height="50.6"></rect>
+            <path d="M6.46279395,48.4410603 L25.4627939,48.4410603" id="Line-17" stroke-linecap="square"></path>
+            <path d="M31.4627939,55.4410603 L51.4627939,55.4410603" id="Line-18" stroke-linecap="square"></path>
+            <path d="M51.4627939,55.4410603 L51.4627939,48.4410603" id="Line-19" stroke-linecap="square"></path>
+            <path d="M39.4627939,55.4410603 L39.4627939,48.4410603" id="Line-20" stroke-linecap="square"></path>
+            <path d="M42.4627939,55.4410603 L42.4627939,68.4410603" id="Line-21" stroke-linecap="square"></path>
+        </g>
+    </g>
+</svg>
