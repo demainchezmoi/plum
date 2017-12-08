@@ -1,5 +1,14 @@
-@import url('https://fonts.googleapis.com/css?family=Open+Sans:400,700');
-@import url('https://fonts.googleapis.com/css?family=Roboto:900');
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:300,400');
+@import url('https://fonts.googleapis.com/css?family=Montserrat:300,400,500');
+
+.font-thin { font-weight: 100; }
+.font-light { font-weight: 300; }
+.font-regular { font-weight: 400; }
+.font-medium { font-weight: 500; }
+.font-bold { font-weight: 700; }
+.font-black { font-weight: 900; }
+
+
 
 $intro-1-height: (
 "xs": 100px,
@@ -16,6 +25,39 @@ $spacers: (
 "lg": 7rem,
 "xl": 8rem
 );
+
+body {
+  font-family: "Open Sans";
+  font-weight: 400;
+}
+
+.lead {
+  font-weight: 400;
+}
+
+.montserrat.font-bold {
+  font-weight: 700;
+}
+
+.image-spacer {
+  @include media-breakpoint-up(xs) { padding-top: 56.25% * 1 / 1; }
+  @include media-breakpoint-up(sm) { padding-top: 56.25% * 3 / 4; }
+  @include media-breakpoint-up(md) { padding-top: 56.25% * 2 / 3; }
+  @include media-breakpoint-up(lg) { padding-top: 56.25% * 1 / 2; }
+  @include media-breakpoint-up(xl) { padding-top: 56.25% * 1 / 3; }
+}
+
+
+// .stripe {
+  // $stripe-border: map-get($indigo, darken-2);
+  // .square {
+    // border-top: 1px solid $stripe-border;
+    // border-bottom: 1px solid $stripe-border;
+    // &:not(:last-child) {
+      // border-right: 1px solid $stripe-border;
+    // }
+  // }
+// }
 
 html, body, main {
   height: 100%;
@@ -156,18 +198,22 @@ $light-gray: #F5F5F5;
   font-family: "Open Sans";
 }
 
+.montserrat {
+  font-family: 'Montserrat', sans-serif;
+}
+
 .responsive-avatar {
   @include media-breakpoint-up(xs) { width: 50px; }
   @include media-breakpoint-up(sm) { width: 70px; }
   @include media-breakpoint-up(lg) { width: 85px; }
 }
 
-.small {
-  font-size: small;
-}
-
 .tiny-avatar {
   width: 25px;
+}
+
+.small {
+  font-size: 90%;
 }
 
 .responsive-small-avatar {
@@ -423,16 +469,11 @@ nav.navbar.translucid {
 }
 
 #map {
-  @include media-breakpoint-up(xs) { height: 200px; }
-  @include media-breakpoint-up(sm) { height: 250px; }
-  @include media-breakpoint-up(md) { height: 300px; }
-  @include media-breakpoint-up(lg) { height: 350px; }
+  @include media-breakpoint-up(xs) { height: 250px; }
+  @include media-breakpoint-up(sm) { height: 300px; }
+  @include media-breakpoint-up(md) { height: 400px; }
+  @include media-breakpoint-up(lg) { height: 500px; }
 }
-
-.font-thin { font-weight: 100; }
-.font-light { font-weight: 300; }
-.fong-bold { font-weight: 700; }
-.font-black { font-weight: 900; }
 
 .light-bordered {
   border: 1px solid rgba(0, 0, 0, 0.1);
@@ -656,6 +697,9 @@ nav.navbar {
 .gray-500 { background-color: $gray-500; }
 .gray-600 { background-color: $gray-600; }
 .gray-700 { background-color: $gray-700; }
+$test: #343a40;
+.198 { background-color: $test; }
+.gray-800 { background-color: $gray-800; }
 .gray-900 { background-color: $gray-900; }
 
 .gray-background {

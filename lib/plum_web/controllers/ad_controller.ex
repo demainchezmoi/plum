@@ -11,7 +11,8 @@ defmodule PlumWeb.AdController do
       Sales.get_ad!(id)
       |> Repo.preload(:land)
       |> Sales.increment_view_count!
-    conn |> render("public.html", ad: ad, params: params)
+
+    conn |> render(PlumWeb.PageView, "index.html", ad: ad, params: params, conn: conn)
   end
 
   def public_index(conn, _params) do

@@ -88,7 +88,7 @@ $progress-bar-bg-color: map-get($grey, lighten-3);
 // Text Inputs + Textarea
 $input-border-color: map-get($grey, "lighten-1");
 $input-focus-color: $primary-color;
-$input-font-size: 1rem;
+$input-font-size: 12px;
 $form-control-margin: 0.5rem;
 $form-control-border-color: $primary-color;
 // TODO

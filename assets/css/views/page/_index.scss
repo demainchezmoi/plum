@@ -1,0 +1,107 @@
+.public3 {
+  .logo-leo {
+    g {
+      stroke-width: 7px;
+    }
+    path, polyline, polygon {
+      // stroke: map-get($indigo, base);
+    }
+  }
+
+  nav .logo-wrapper {
+    * {
+      stroke: white;
+    }
+  }
+
+  .logo-wrapper {
+    width: 40px;
+    height: auto;
+  }
+
+  .logo-title {
+    @extend .montserrat, .font-medium;
+    letter-spacing: 2px;
+  }
+
+  .logo-inline {
+    @extend .d-flex, .flex-row, .align-items-center, .justify-content-center;
+   }
+
+  .logo-lead {
+    @extend .d-flex, .flex-column, .align-items-center;
+    .logo-title {
+      @extend .indigo-text;
+      margin-top: -5px;
+    }
+    .logo-wrapper {
+      * {
+        stroke: map-get($indigo, base);
+      }
+    }
+  }
+
+  .inline-input {
+    @extend .indigo.lighten-5, .indigo-text, .p-3;
+    @include media-breakpoint-up(xs) { width: 100%; }
+    @include media-breakpoint-up(md) { width: 250px; }
+    @include media-breakpoint-up(lg) { width: 300px; }
+    border-top: 0;
+    border-right: 0;
+    border-bottom: 0;
+    border-left: 0;
+    border-radius: 0;
+    margin-left: 2px;
+    &::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+      color: map-get($indigo, base);
+    }
+    &::-moz-placeholder { /* Firefox 19+ */
+      color: map-get($indigo, base);
+    }
+    &:-ms-input-placeholder { /* IE 10+ */
+      color: map-get($indigo, base);
+    }
+    &:-moz-placeholder { /* Firefox 18- */
+      color: map-get($indigo, base);
+    }
+    // padding-right: 5px;
+    // padding-left: 5px;
+    // padding-bottom: 5px;
+    // padding-top: 5px;
+  }
+
+  .leo-item {
+    width: auto;
+    height: auto;
+    * {
+      stroke: map-get($indigo, base);
+      stroke-width: 0.6;
+    }
+  }
+
+  .keys {
+    width: 30px;
+    height: auto;
+    margin-right: auto;
+    margin-left: auto;
+    display: block;
+    path, rect {
+      stroke: $gray-600;
+      fill: $gray-600;
+    }
+  }
+
+  .partner-logo {
+    width: 100%;
+  }
+
+}
+@include media-breakpoint-down(xs) {
+  .pac-container{
+    left: 20px !important;
+    margin-top: 5px !important;
+    right: 20px !important;
+    width: auto !important;
+  }
+}
+

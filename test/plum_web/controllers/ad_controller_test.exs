@@ -10,13 +10,6 @@ defmodule PlumWeb.AdControllerTest do
       conn = get conn, ad_path(conn, :public, ad)
       assert html_response(conn, 200)
     end
-
-    test "doesn't show deactivated add", %{conn: conn, ad: ad} do
-      Plum.Sales.update_ad(ad, %{active: false})
-      conn = get conn, ad_path(conn, :public, ad)
-      res = html_response(conn, 200)
-      assert res |> String.downcase =~ ~S(class="deactivated-ad")
-    end
   end
 
   describe "index" do

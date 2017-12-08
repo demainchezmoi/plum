@@ -1,343 +1,195 @@
-<div class="intro"></div>
-<nav class="navbar navbar-expand-lg navbar-dark indigo fixed">
+<% color="indigo" %>
 
-  <a class="navbar-brand d-flex justify-content-center align-items-center small-xs" href="/">
-    <%= PhoenixInlineSvg.Helpers.svg_image(@conn, "logo") %>
-    Maison&nbsp;Léo
-  </a>
-
-  <ul class="navbar-nav ml-auto d-flex flex-row">
-    <li class="nav-item active small-xs mr-2">
-      <a class="nav-link d-flex align-items-center" data-toggle="modal" data-target="#contactModal">
-        <i class="fa-stack mr-1">
-          <i class="fa fa-stack-2x fa-circle pink-text"></i>
-          <i class="fa fa-phone fa-stack-1x white-text"></i>
-        </i>
-        Contact
-      </a>
-    </li>
-    <li class="nav-item active small-xs">
-      <a class="nav-link d-flex align-items-center" href="<%= ad_path(@conn, :public_index) %>">
-        <i class="fa-stack mr-1">
-          <i class="fa fa-stack-2x fa-circle pink-text"></i>
-          <i class="fa fa-home fa-stack-1x white-text"></i>
-        </i>
-        Offres
-      </a>
-    </li>
-  </ul>
-</nav>
-
-<div class="content-1 relative">
-  <div class="relative">
-    <div class="container title-1 white-transp py-7">
-      <div class="row justify-content-center align-items-center">
-        <div class="col">
-          <h2 class="h3-responsive my-0 font-black indigo-text col-auto d-flex justify-content-center">
-            <div class="d-flex justify-content-center align-items-center">
-              <%= PhoenixInlineSvg.Helpers.svg_image(@conn, "logo") %>
-              Maison&nbsp;Léo&nbsp;
-            </div>
-          </h2>
-          <h1 class="h2-responsive mt-0 text-center mb-4 font-bold rw-sentence" style="">
-            <span style="color: #333645;">Devenez propriétaires</span>
-            <div class="rw-words rw-words-2 blue-text font-bold">
-              <span>simplement</span>
-              <span>rapidement</span>
-              <span>sans stress</span>
-              <span>en famille</span>
-            </div>
-            <span style="opacity: 0">rapidement</span>
-          </h1>
-          <div class="mr-auto ml-auto open-sans gray-text-700 text-center mt-4 mb-3" style="max-width: 600px;">
-            <p class="mb-0 indigo-text lead">Faites construire votre maison 4 pièces pour seulement 87&nbsp;900&nbsp;&euro;<br />Emménagez et dites adieu aux loyers en moins de huit mois&nbsp;!</p>
-          </div>
-          <div class="d-flex justify-content-center">
-            <a class="btn btn-lg btn-pink" href="<%= ad_path(@conn, :public_index) %>">Trouver une offre avec terrain</a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-
-  <div class="relative white">
-    <div class="container spacer">
-      <div class="row justify-content-center">
-        <div class="col-12 col-lg-6 col-sm-6">
-      	  <ul class="list-unstyled">
-      	    <li class="d-flex align-items-center my-2">
-      	      <i class="fa fa-3x fa-check light-green-text mr-2"></i>
-      	      <p class="mb-1 h4-responsive">Garantie décénale</p>
-      	    </li>
-      	    <li class="d-flex align-items-center my-2">
-      	      <i class="fa fa-3x fa-check light-green-text mr-2"></i>
-      	      <p class="mb-1 h4-responsive">Assurance dommage d'ouvrage</p>
-      	    </li>
-      	    <li class="d-flex align-items-center my-2">
-      	      <i class="fa fa-3x fa-check light-green-text mr-2"></i>
-      	      <p class="mb-1 h4-responsive">Suivi personnalisé premium</p>
-      	    </li>
-      	  </ul>
-        </div>
-        <div class="col-12 col-lg-6 col-sm-6">
-      	  <ul class="list-unstyled">
-      	    <li class="d-flex align-items-center my-2">
-      	      <i class="fa fa-3x fa-check light-green-text mr-2"></i>
-      	      <p class="mb-1 h4-responsive">Livraison 100% conforme au plan</p>
-      	    </li>
-      	    <li class="d-flex align-items-center my-2">
-      	      <i class="fa fa-3x fa-check light-green-text mr-2"></i>
-      	      <p class="mb-1 h4-responsive">Construction rapide 4 mois</p>
-      	    </li>
-      	  </ul>
-        </div>
-      </div>
-      <div class="row justify-content-center">
-      </div>
-    </div>
-  </div>
-
-  <div class="relative light-gray">
-    <div class="container spacer">
-      <div class="row justify-content-center">
-        <div class="col-12">
-      	  <p class="font-bold gray-text-700">La Maison&nbsp;Léo</p>
-        </div>
-      </div>
-      <div class="row justify-content-center">
-        <div class="col-sm-6 col-lg-6 col-xs-12">
-          <table class="table table-striped table-responsive mt-3 open-sans z-depth-1">
-            <tbody>
-              <tr>
-                <th class="col-auto text-center lead-th"><i class="fa fa-money"></i></th>
-                <th class="col-auto lead-th pl-0">Prix</th>
-                <td class="col">87&nbsp;900&nbsp;&euro;</td>
-              </tr>
-              <tr>
-                <th class="col-auto text-center lead-th"><i class="fa fa-arrows-alt"></i></th>
-                <th class="col-auto lead-th pl-0">Surface</th>
-                <td class="col">87&nbsp;m<sup>2</sup></td>
-              </tr>
-              <tr>
-                <th class="col-auto text-center lead-th"><i class="fa fa-cubes"></i></th>
-                <th class="col-auto lead-th pl-0">Pièces</th>
-                <td class="col">1 salon / 3 chambres</td>
-              </tr>
-              <tr>
-                <th class="col-auto text-center lead-th"><i class="fa fa-cube"></i></th>
-                <th class="col-auto lead-th pl-0">Structure</th>
-                <td class="col">Ossature bois</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-        <div class="col-sm-6 col-lg-6 col-xs-12">
-          <table class="table table-striped table-responsive mt-3 open-sans z-depth-1">
-            <tbody>
-              <tr>
-                <th class="col-auto text-center lead-th"><i class="fa fa-thermometer"></i></th>
-                <th class="col-auto lead-th pl-0">Chauffage</th>
-                <td class="col">Pompe chaleur air / air</td>
-              </tr>
-              <tr>
-                <th class="col-auto text-center lead-th"><i class="fa fa-image"></i></th>
-                <th class="col-auto lead-th pl-0">Surface&nbsp;vitrée</th>
-                <td class="col">16&nbsp;m<sup>2</sup></td>
-              </tr>
-              <tr>
-                <th class="col-auto text-center lead-th"><i class="fa fa-clone"></i></th>
-                <th class="col-auto lead-th pl-0"> Volets </th>
-                <td class="col">Roulants&nbsp;PVC</td>
-              </tr>
-              <tr>
-                <th class="col-auto text-center lead-th"><i class="fa fa-fire"></i></th>
-                <th class="col-auto lead-th pl-0">Énergie&nbsp;/&nbsp;GES</th>
-                <td class="col">Classes A / A</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="relative white">
-    <div class="container spacer">
-      <div class="row align-items-center justify-content-center">
-        <div class="col-12 col-md-5 col-lg-5">
-          <div class="p-3">
-        	  <p class="font-bold gray-text-800">Un espace pour vivre ensemble</p>
-            <p class="open-sans gray-text-700 paragraph">Les trois chambres de votre Maison&nbsp;Léo garantissent à chacun un espace au calme, et le séjour cuisine de 48&nbsp;m<sup>2</sup> avec deux grandes baies vitrées vous permet de partager repas et bons films tous ensemble, ainsi que lumière et air frais.</p>
-            <p class="open-sans gray-text-700 paragraph">Laissez-vous tenter par des après-midis balançoire, football, cabane et soirées plancha dans le jardin !</p>
-            </p>
-          </div>
-        </div>
-
-        <div class="col-12 col-md-7 col-lg-7">
-          <img
-             class="z-depth-1 d-block p-2"
-             data-src="https://s3-eu-west-1.amazonaws.com/demainchezmoi/cloudfront_assets/images/distribution_commercial_maison_leo_sd.png"
-             style="width: 100%">
-        </div>
-
-      </div>
-    </div>
-  </div>
-
-  <div class="relative light-gray">
-    <div class="container spacer">
-      <div class="row align-items-center justify-content-center">
-        <div class="col-12 col-md-5 col-lg-5 order-lg-2 order-md-2">
-          <div class="p-3">
-        	  <p class="font-bold gray-text-800">Une maison de qualité</p>
-            <p class="open-sans gray-text-700 paragraph">La maison Léo est fabriquée près de chez vous avec des matériaux robustes et des solutions techniques éprouvées pour concillier prix compétitif et qualité irréprochable.</p>
-            <p class="open-sans gray-text-700 paragraph">Garantie 0% gadget, elle offre tout le confort moderne&nbsp;: isolation par l'extérieur, prises internet dans chaque pièce, 5m2 de panneaux solaires, ventilation simple flux.</p>
-          </div>
-        </div>
-        <div class="col-12 col-md-7 col-lg-7">
-          <img
-             class="z-depth-1 d-block p-2"
-             data-src="https://s3-eu-west-1.amazonaws.com/demainchezmoi/cloudfront_assets/images/ete-jour-nuage-min.png"
-             style="width: 100%">
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="relative white">
-    <div class="container spacer">
-      <div class="row justify-content-center align-items-center">
-        <div class="col mb-2">
-          <div class="p-3">
-            <p class="font-bold gray-text-800">Une conception sans suprises</p>
-            <p class="open-sans gray-text-700 paragraph">La Maison&nbsp;Léo est garantie sans mauvaise surprise. Structures et réseaux sont optimisés pour assurer une qualité de fonctionnement optimale et une maîtrise des coûts.</p>
-            <p class="open-sans gray-text-700 paragraph">Visualisez les flux et systèmes de votre maison&nbsp;!</p>
-          </div>
-          <ul class="list-group list-group-inline">
-            <li class="list-group-item cp active" data-action="change-tech-image" data-target="elec1">Prises électriques</li>
-            <li class="list-group-item cp" data-action="change-tech-image" data-target="elec4">Éclairages et interrupteurs</li>
-            <li class="list-group-item cp" data-action="change-tech-image" data-target="elec2">Prises internet / téléphone</li>
-            <li class="list-group-item cp" data-action="change-tech-image" data-target="elec5">Système de ventilation</li>
-          </ul>
-        </div>
-        <div class="col-lg-7 col-md-7 col-sm-12 col-xs-12">
-          <div class="relative d-block">
-            <div class="z-depth-1">
-              <img
-                 class="img-fluid w-100"
-                 data-role="tech-img"
-                 data-value="elec1"
-                 style="display: none"
-                 data-src="https://s3-eu-west-1.amazonaws.com/demainchezmoi/cloudfront_assets/images/leo_schema_1-min.png">
-              <img
-                 class="img-fluid w-100"
-                 data-role="tech-img"
-                 data-value="elec4"
-                 style="display: none"
-                 data-src="https://s3-eu-west-1.amazonaws.com/demainchezmoi/cloudfront_assets/images/leo_schema_4-min.png">
-              <img
-                 class="img-fluid w-100"
-                 data-role="tech-img"
-                 data-value="elec2"
-                 style="display: none"
-                 data-src="https://s3-eu-west-1.amazonaws.com/demainchezmoi/cloudfront_assets/images/leo_schema_2-min.png">
-              <img
-                 class="img-fluid w-100"
-                 data-role="tech-img"
-                 data-value="elec5"
-                 style="display: none"
-                 data-src="https://s3-eu-west-1.amazonaws.com/demainchezmoi/cloudfront_assets/images/leo_schema_5-min.png">
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="relative light-gray" id="contact">
-    <div class="container spacer">
-      <div class="row align-items-center justify-content-center">
-        <div class="col-12 col-md-6 col-lg-5 order-lg-2 order-md-2">
-          <div class="p-3">
-        	  <p class="font-bold gray-text-800">Prenons contact</p>
-            <p class="open-sans gray-text-700 paragraph">Nous serions ravis de répondre à toute demande de renseignement ou suggestion.</p>
-				    <p class="open-sans gray-text-700 paragraph">N'hésitez-pas à remplir le formulaire ou à nous joindre directement</p>
-            <div class="p-3 mb-3 z-depth-1 white">
-              <p class="text-secondary small indigo-text">Contactez-nous directement</p>
-              <div class="media mt-1">
-                <img
-                   class="mr-3 rounded-circle z-depth-1 responsive-small-avatar"
-                   src="https://s3-eu-west-1.amazonaws.com/demainchezmoi/cloudfront_assets/images/denis_bolomier_india.jpg"
-                   alt="">
-                <div class="media-body">
-                  <h5 class="my-0">Denis Bolomier</h5>
-                  <a href="tel:0663742535" class="font-bold pink white-text px-1 my-1 d-inline-block">06 63 74 25 35</a>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col-12 col-md-6 col-lg-5">
-          <div class="z-depth-1 p-4 white m-1">
-            <p class="indigo-text mb-0">Laissez-nous vous contacter</p>
-            <p class="text-secondary">Nous vous contactons sous 24 heures ou quand vous le souhaitez</p>
-            <%= form_for @conn, page_path(@conn, :contact), [as: "contact"], fn f-> %>
-              <div class="form-group row">
-                <label class="col-sm-2 col-form-label">Nom</label>
-                <div class="col-sm-10">
-                  <%= text_input f, :name, placeholder: "Dupont", class: "form-control" %>
-                </div>
-              </div>
-              <div class="form-group row">
-                <label class="col-sm-2 col-form-label">Tél</label>
-                <div class="col-sm-10">
-                  <%= text_input f, :phone, placeholder: "06 12 34 56 78", class: "form-control" %>
-                </div>
-              </div>
-              <div class="form-group row">
-                <label class="col-2 col-form-label">Info</label>
-                <div class="col-10">
-                  <%= textarea f, :remark, placeholder: "Ex : avant 18 heures", class: "form-control" %>
-                </div>
-              </div>
-              <div class="clearfix">
-                <div class="pull-right">
-                  <button type="submit" class="btn btn-indigo mr-0 mb-0"><i class="fa fa-paper-plane mr-2"></i> Prendre contact</button>
-                </div>
-              </div>
-            <% end %>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <footer class="gray relative py-6">
+<div class="public3">
+  <nav class="navbar navbar-expand-lg navbar-dark <%= color %>">
     <div class="container">
-      <div class="row justify-content-center">
-        <div class="col">
-          <dl class="p-1">
-            <dt>Contact</dt>
-            <dd>Email&nbsp;: contact@demainchezmoi.fr <br /> Téléphone&nbsp;: 06 63 74 25 35</dd>
-            <dt>Editeur</dt>
-            <dd>Demainchezmoi SAS <br />41 rue Laure Diebold <br />69009 Lyon</dd>
-            <dt>Réseaux sociaux</dt>
-            <dd>
-            <a href="https://www.facebook.com/lamaisonleo" target="_blank" class="blue-text">
-              <i class="fa-stack">
-                <i class="fa fa-circle fa-stack-2x"></i>
-                <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
-              </i>
-            </a>
-            </dd>
-          </dl>
+      <a class="navbar-brand logo-inline" href="/">
+        <div class="d-flex align-items-end">
+          <div class="logo-wrapper mr-1"><%= PhoenixInlineSvg.Helpers.svg_image(@conn, "logo3") %></div>
+          <div>
+            <div class="logo-title" style="font-size: 12px; line-height: 12px;">Maison&nbsp;Léo </div>
+            <div class="tiny" style="font-size: 12px; line-height: 12px;"><em>Bretagne</em></div>
+          </div>
         </div>
-        <div class="col-md-12 col-lg-6">
+      </a>
+      <ul class="navbar-nav ml-auto d-flex flex-row">
+        <li class="nav-item active small-xs mr-2">
+          <a class="nav-link d-flex align-items-center" data-toggle="modal" data-target="#contactModal">
+            <i class="fa-stack mr-1">
+              <i class="fa fa-stack-2x fa-circle white-text"></i>
+              <i class="fa fa-phone fa-stack-1x indigo-text"></i>
+            </i>
+            Contact
+          </a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+  <div class="container">
+
+    <%= if ad = @conn.assigns[:ad] do %>
+      <div class="mt-3">
+        <div class="row" id="ad_stripe">
+          <div class="col">
+            <div class="indigo accent-3 z-depth-1 p-3 white-text relative" style="z-index: 10">
+              <div class="container p-0">
+              <%= render PlumWeb.AdView, "stripe.html", ad: ad %>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    <% end %>
+
+    <div class="row <%= if @conn.assigns[:ad], do: "mt-4", else: "mt-5" %> mb-3">
+      <div class="col">
+        <div class="logo-lead">
+          <div class="logo-wrapper"><%= PhoenixInlineSvg.Helpers.svg_image(@conn, "logo3") %></div>
+          <div class="logo-title">Maison Léo</div>
+          <%# <div class="tiny indigo-text" style="font-size: 12px; line-height: 12px;"><em>Bretagne</em></div> %>
         </div>
       </div>
     </div>
-  </footer>
+    <div class="row d-flex justify-content-center mb-4">
+      <div class="col-12">
+        <div class="text-center mb-0 h3-responsive gray-text-800 font-medium">Faites-vous livrer une maison</div>
+        <div class="montserrat text-center mb-4 h5-responsive indigo-text font-medium relative">
+          et profitez de la vie
+        </div>
+      </div>
+      <div class="col col-sm-8">
+        <p class="text-center gray-text-600 h5-responsive font-light">Devenez propriétaire simplement&nbsp;: votre maison ossature bois neuve livrée en 4 mois dès 597&euro;&nbsp;/&nbsp;mois</p>
+      </div>
+    </div>
+
+    <div class="row mb-5">
+      <div class="col text-center relative d-sm-flex align-items-center justify-content-center" id="pac-container">
+        <%# <span class="h5-responsive font-regular indigo-text font-medium montserrat">Je souhaite habiter à&nbsp;</span> %>
+        <input type="text" class="form-control d-inline-block inline-input" data-action="search-location" placeholder="Je souhaite habiter à ..."/>
+        <button class="btn mt-2 <%= "indigo" %>" data-action="find-me-a-land">Trouvez-moi un terrain</button>
+      </div>
+    </div>
+
+    <div class="row mb-5 d-flex justify-content-around">
+      <div class="col col-lg-2 col-sm-3">
+        <div class="d-flex flex-column align-items-center leo-item">
+          <div class="leo-item-wrapper" style="width: 100%; max-width: 100px;"><%= PhoenixInlineSvg.Helpers.svg_image(@conn, "leo_mini") %></div>
+          <div class="montserrat font-bold small gray-text-700">Léo Mini</div>
+          <div class="tiny">74&nbsp;900&nbsp;&euro;</div>
+        </div>
+      </div>
+
+      <div class="col col-lg-2 col-sm-3">
+        <div class="d-flex flex-column align-items-center leo-item">
+          <div class="leo-item-wrapper" style="width: 100%; max-width: 100px;"><%= PhoenixInlineSvg.Helpers.svg_image(@conn, "leo_coupe") %></div>
+          <div class="montserrat font-bold small gray-text-700">Léo Berline</div>
+          <div class="tiny">86&nbsp;900&nbsp;&euro;</div>
+        </div>
+      </div>
+
+      <div class="col col-lg-2 col-sm-3">
+        <div class="d-flex flex-column align-items-center leo-item">
+          <div class="leo-item-wrapper" style="width: 100%; max-width: 100px;"><%= PhoenixInlineSvg.Helpers.svg_image(@conn, "leo_break") %></div>
+          <div class="montserrat font-bold small gray-text-700">Léo Break</div>
+          <div class="tiny">116&nbsp;900&nbsp;&euro;</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row mb-5">
+      <div class="col">
+        <p class="font-bold gray-text-700 mb-3">Le concept Léo</p>
+
+        <div class="media">
+          <img class="mr-3 rounded-circle z-depth-1 responsive-avatar" data-src="<%= img_path("xavier_jaffray.jpg") %>" alt="">
+          <div class="media-body">
+            <p class="gray-text-600 ">La Maison Léo est issue de la toute nouvelle génération de maisons hors-site à ossature bois, écologique robuste et fortement isolée. Elle vous fera réaliser d'importantes économies tant à l'achat qu'au cours de sa vie grâce aux économies d'énergie.</p>
+            <p class="gray-text-600">Son processus de fabrication local en atelier vous garantit une qualité et une fiabilité imbattables par des maisons construites avec chantier traditionnel. Résultat&nbsp;: un coût au mètre carré minimal, une durée de construction réduite et un habitat top qualité.</p>
+            <p class="gray-text-600">À vous de jouer&nbsp;!</p>
+            <p class="text-right mb-0">Xavier Jaffray</p>
+            <p class="text-right gray-text-600">Entrepreneur, fondateur de la Maison Léo</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="row mb-5">
+      <div class="col">
+        <p class="font-bold gray-text-700 mb-3">Le comparatif Léo</p>
+        <table class="table table-sm table-bordered">
+          <thead class="thead-dark">
+            <tr>
+              <th scope="col"></th>
+              <th scope="col">Léo</th>
+              <th scope="col">Traditionnelle</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row" class="">Construction</th>
+              <td scope="row" class="indigo-text font-medium">4 mois sans chantier</td>
+              <td scope="row" class="red-text font-medium">9 mois avec chantier</td>
+            </tr>
+            <tr>
+              <th scope="row" class="">Conformité aux plans</th>
+              <td scope="row" class="indigo-text font-medium">100%</td>
+              <td scope="row" class="red-text font-medium">Pas toujours respectée ...</td>
+            </tr>
+            <tr>
+              <th scope="row" class="">Coût</th>
+              <td scope="row" class="indigo-text font-medium">986&euro;/m<sup>2</sup></td>
+              <td scope="row" class="red-text font-medium">> 1200&euro;/m<sup>2</sup>&nbsp;!</td>
+            </tr>
+            <tr>
+              <th scope="row" class="">Suivi construction</th>
+              <td scope="row" class="indigo-text font-medium">Quotidien</td>
+              <td scope="row" class="red-text font-medium">Mensuel</td>
+            </tr>
+            <tr>
+              <th scope="row" class="">Garantie décénale</th>
+              <td scope="row" class="indigo-text font-medium">Oui</td>
+              <td scope="row" class="orange-text font-medium">Selon constructeur</td>
+            </tr>
+            <tr>
+              <th scope="row" class="">Garantie achèvement travaux</th>
+              <td scope="row" class="indigo-text font-medium">Oui</td>
+              <td scope="row" class="orange-text font-medium">Selon constructeur</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="row mb-7">
+      <div class="col-12">
+        <p class="font-bold gray-text-700 mb-3">Les partenaires Léo</p>
+      </div>
+      <div class="col col-md-6 col-lg-8">
+        <div class="row d-flex align-items-center">
+          <div class="col-2 col-sm pb-3">
+            <img class="partner-logo" data-src="<%= img_path("logo_next_habitat.png") %>">
+          </div>
+          <div class="col-3 col-sm pb-3">
+            <img class="partner-logo" data-src="<%= img_path("logo_primo_extenso.png") %>">
+          </div>
+          <div class="col-3 col-sm pb-3">
+            <img class="partner-logo" data-src="<%= img_path("logo_lightmenu.png") %>">
+          </div>
+          <div class="col-3 col-sm pb-3">
+            <img class="partner-logo" data-src="<%= img_path("logo_adebeo.png") %>">
+          </div>
+          <div class="col-3 col-sm pb-3">
+            <img class="partner-logo" data-src="<%= img_path("logo_crisalide_numerique.png") %>">
+          </div>
+          <div class="col-3 col-sm pb-3">
+            <img class="partner-logo" data-src="<%= img_path("logo_dominho.png") %>">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 
 <%= render PlumWeb.SharedView, "contact_modal.html", conn: @conn, params: @params %>

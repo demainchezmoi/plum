@@ -1,75 +1,71 @@
 import MainView from '../main';
-import {track} from '../../helpers/mixpanel';
+import GoogleMapsLoader from 'google-maps';
+
+GoogleMapsLoader.KEY = 'AIzaSyDKvX-CXe8vAoyx69fEk91EmGIyiYydoC0';
+GoogleMapsLoader.LIBRARIES = ['places'];
 
 module.exports = class View extends MainView {
 
   constructor() {
     super();
-    this.techHandToggled = false;
-    this.techImg = null;
-    this.techImgTimeout = null;
-    this.techImgs = ['elec1', 'elec3', 'elec4'];
-    this.switchTechImg = this.switchTechImg.bind(this);
-    this.selectTechImg = this.selectTechImg.bind(this);
-    this.stopTechImgAutoSwitch = this.stopTechImgAutoSwitch.bind(this);
+    this.google = null;
+    this.initMap = this.initMap.bind(this);
   }
 
   mount() {
     super.mount();
-    this.trackPage();
-    this.switchTechImg();
-    $('[data-action=change-tech-image]').click(this.selectTechImg);
-    $('[data-role=tech-img]').click(this.stopTechImgAutoSwitch);
-    setTimeout(this.loadLazyImages);
+    this.place = null;
+
+    const lazy = $("img[data-src]");
+
+    lazy.each(function() { this.setAttribute("src", this.getAttribute('data-src')); });
+    lazy.removeAttr("data-src");
+
+    GoogleMapsLoader.load((google) => {
+      this.google = google;
+      this.initMap();
+    });
+
+    $('[data-action=find-me-a-land]').click(function() {
+      const input = $('[data-action=search-location]').val();
+      $('#contactModal').modal('show');
+      $('#contact_remark').val(`Je souhaite habiter à ${input}`);
+    });
   }
 
   unmount() {
     super.unmount();
   }
 
-  trackPage() {
-    track("VISIT_INDEX")
+  initMap() {
+    const input = $('[data-action=search-location]')[0];
+    const autocompleteOptions = {componentRestrictions: {country: 'fr'}};
+    const autocomplete = new this.google.maps.places.Autocomplete(input, autocompleteOptions);
   }
+}
 
-  loadLazyImages() {
-    $("img[data-src]").each(function() {
-      const t = $(this);
-      t.attr("src", t.data('src'));
-      t.removeAttr("data-src");
-    });
-  }
 
-  switchTechImg() {
-    const currentIndex = this.techImgs.indexOf(this.techImg);
-    const nextIndex = (currentIndex + 1) % 3
-    const next = this.techImgs[nextIndex]
-    this.setTechImg(next);
-    if (this.techHandToggled == false) {
-      this.techImgTimeout = setTimeout(this.switchTechImg, 3000);
-    }
-  }
+var h = document.getElementById("ad_stripe");
+var stuck = false;
+var stickPoint = getDistance();
 
-  selectTechImg(e) {
-    const target = e.target;
-    const targetAttr = target.getAttribute('data-target');
-    this.techHandToggled = true;
-    this.stopTechImgAutoSwitch();
-    this.setTechImg(targetAttr);
-  }
+function getDistance() {
+  var topDist = h.offsetTop;
+  return topDist;
+}
 
-  setTechImg(techImg) {
-    const button = $("[data-target='" + techImg + "']");
-    const images = $("[data-role=tech-img]");
-    const image = $("[data-value='" + techImg + "']");
-
-    this.techImg = techImg;
-    $(button).siblings().removeClass('active');
-    $(button).addClass('active');
-    images.hide();
-    image.show();
-  }
-
-  stopTechImgAutoSwitch() {
-    !!this.techImgTimeout && clearTimeout(this.techImgTimeout);
+window.onscroll = function(e) {
+  var distance = getDistance() - window.pageYOffset;
+  var offset = window.pageYOffset;
+  if ( (distance <= 0) && !stuck) {
+    h.style.position = 'fixed';
+    h.style.top = '0px';
+    h.style.right = '0px';
+    h.style.left = '0px';
+    h.style['z-index'] = '1000';
+    stuck = true;
+  } else if (stuck && (offset <= stickPoint)){
+    h.style.position = 'static';
+    stuck = false;
   }
 }

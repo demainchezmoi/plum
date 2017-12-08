@@ -3,7 +3,7 @@
   <div class="modal-dialog mb-7" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title text-secondary small" id="contactModalLabel">Prenons contact</h5>
+        <h5 class="modal-title gray-text-700 small" id="contactModalLabel">Prenons contact</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -20,7 +20,7 @@
                alt="">
             <div class="media-body">
               <h5 class="my-0">Denis Bolomier</h5>
-              <a href="tel:0663742535" class="font-bold pink white-text px-1 my-1 d-inline-block">06 63 74 25 35</a>
+              <a href="tel:0663742535" class="font-bold indigo white-text px-1 my-1 d-inline-block">06 63 74 25 35</a>
             </div>
           </div>
           </div>

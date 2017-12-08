@@ -4,10 +4,6 @@ import 'phoenix_html';
 import loadView from './views/loader';
 import '../css/app.scss';
 
-// import 'waves/dist/waves.js'
-// import 'mdbootstrap/js/popper.min.js'
-// import 'mdbootstrap/js/mdb.js'
-
 jQuery.fn.extend({
   scrollToMe: function () {
     var x = jQuery(this).offset().top - 100;

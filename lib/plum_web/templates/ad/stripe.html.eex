@@ -1,0 +1,12 @@
+<button
+  class="btn btn-outline-white btn-xs btn-lg-lg m-0 pull-right z-depth-0 ml-1"
+  style="border-width: 1px"
+  data-toggle="modal"
+  data-target="#contactModal">
+  <span class="d-none d-sm-inline">prendre </span>contact
+</button>
+
+<div class="">
+  <div class="montserrat font-bold small"><i class="fa fa-bolt mr-1"></i><span class="d-none d-sm-inline">Opportunité </span><%= @ad.land.city %>&nbsp;(<%= @ad.land.department %>)</div>
+  <div class="font-light small">Terrain <%= @ad.land.surface %>m<sup>2</sup> - <%= @ad.land.price |> Number.Currency.number_to_currency |> raw %></div>
+</div>

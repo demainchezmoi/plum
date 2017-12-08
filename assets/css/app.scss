@@ -21,6 +21,7 @@ $spacers: (
   6: ($spacer * 5),
   7: ($spacer * 7)
 );
+$font-size-base: 14px;
 @import "mixins";
 @import "print";
 @import "reboot";
@@ -79,7 +80,6 @@ $spacers: (
 // @import "mdb/free/data/variables";
 
 $image-path: "/images";
-$input-focus-color: map-get($yellow-flash, "base");
 
 @import "mdb/free/global";
 // @import "mdb/free/animations";
@@ -115,3 +115,4 @@ $input-focus-color: map-get($yellow-flash, "base");
 @import "custom";
 @import "animations";
 @import "views/ad";
+@import "views/page";

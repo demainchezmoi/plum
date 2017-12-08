@@ -5,10 +5,10 @@ defmodule PlumWeb.PlumViewHelpers do
   @resolutions [
     {"400x225", 400},
     {"800x450", 800},
-    {"1200x675", 1200},
-    {"1920x1080", 1920}
+    {"1200x675", 1200}
   ]
 
+  def img_path(name), do: "#{@img_path_base}/#{name}"
   def img_path(name, :default, format), do: "#{@img_path_base}/#{name}-800X450.#{format}"
   def img_path(name, res, format), do: "#{@img_path_base}/#{name}-#{res}.#{format}"
 
