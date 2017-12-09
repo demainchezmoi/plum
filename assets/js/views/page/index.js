@@ -40,7 +40,7 @@ module.exports = class View extends MainView {
 
     $('[data-action=find-me-a-land]').click(function() {
       $('#contactModal').modal('show');
-      $('#contact_remark').val(`Je souhaite habiter à ${input.val()}`);
+      $('#contact_remark').val(`Je souhaite trouver un terrain à ${input.val()}`);
     });
   }
 

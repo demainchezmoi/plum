@@ -40,11 +40,12 @@
             </div>
           </div>
         </div>
+      </div>
     </div>
   <% end %>
 
   <div class="container">
-    <div class="row <%= if @conn.assigns[:ad], do: "mt-7", else: "mt-5" %> mb-3">
+    <div class="row <%= if @conn.assigns[:ad], do: "mt-7", else: "mt-6" %> mb-3">
       <div class="col">
         <div class="logo-lead">
           <div class="logo-wrapper"><%= PhoenixInlineSvg.Helpers.svg_image(@conn, "logo3") %></div>
@@ -55,46 +56,51 @@
     </div>
     <div class="row d-flex justify-content-center mb-4">
       <div class="col-12">
-        <div class="text-center mb-0 h3-responsive gray-text-800 font-medium">Faites-vous livrer une maison</div>
+        <div class="montserrat text-center mb-0 h3-responsive gray-text-800">Faites-vous livrer une maison</div>
         <div class="montserrat text-center mb-4 h5-responsive indigo-text font-medium relative">
           et profitez de la vie
         </div>
       </div>
       <div class="col col-sm-8">
-        <p class="text-center gray-text-600 h5-responsive font-light">Devenez propriétaire simplement&nbsp;: votre maison ossature bois neuve livrée en 4 mois dès 597&euro;&nbsp;/&nbsp;mois</p>
+        <p class="text-center gray-text-700 h5-responsive font-thin">Votre maison ossature bois neuve construite hors sol en quatre mois, installée sur votre terrain à partir de 597&euro;&nbsp;/&nbsp;mois</p>
       </div>
     </div>
 
     <div class="row mb-5">
       <div class="col text-center relative d-sm-flex align-items-center justify-content-center" id="pac-container">
         <%# <span class="h5-responsive font-regular indigo-text font-medium montserrat">Je souhaite habiter à&nbsp;</span> %>
-        <input type="text" class="form-control d-inline-block inline-input" data-action="search-location" placeholder="Je souhaite habiter à ..."/>
-        <button class="btn mt-2 <%= "indigo" %>" data-action="find-me-a-land">Trouvez-moi un terrain</button>
+        <input type="text" class="form-control d-inline-block inline-input form-control-lg" data-action="search-location" placeholder="Je souhaite habiter à ..."/>
+        <button class="btn btn-lg mt-2 <%= "indigo" %>" data-action="find-me-a-land">Trouvez-moi un terrain</button>
       </div>
     </div>
 
-    <div class="row mb-5">
-      <div class="col-4">
-        <div class="d-flex flex-column align-items-center leo-item">
-          <div class="leo-item-wrapper" style="width: 100%;"><%= PhoenixInlineSvg.Helpers.svg_image(@conn, "Mini") %></div>
-          <div class="montserrat font-bold small gray-text-700">Léo Mini</div>
-          <div class="tiny">74&nbsp;900&nbsp;&euro;</div>
-        </div>
-      </div>
+    <div class="row mb-5 d-flex justify-content-center justify-content-sm-around">
+      <div class="col">
+        <div class="row d-flex justify-content-around">
 
-      <div class="col-4">
-        <div class="d-flex flex-column align-items-center leo-item">
-          <div class="leo-item-wrapper" style="width: 100%;"><%= PhoenixInlineSvg.Helpers.svg_image(@conn, "Berline") %></div>
-          <div class="montserrat font-bold small gray-text-700">Léo Berline</div>
-          <div class="tiny">86&nbsp;900&nbsp;&euro;</div>
-        </div>
-      </div>
+          <div class="col leo-item-col">
+            <div class="d-flex flex-column align-items-center leo-item">
+              <div class="leo-item-wrapper" style="width: 100%;"><%= PhoenixInlineSvg.Helpers.svg_image(@conn, "Mini") %></div>
+              <div class="montserrat font-bold small gray-text-700"><span class="d-none d-sm-inline">Léo</span> Mini</div>
+              <div class="tiny">74&nbsp;900&nbsp;&euro;</div>
+            </div>
+          </div>
 
-      <div class="col-4">
-        <div class="d-flex flex-column align-items-center leo-item">
-          <div class="leo-item-wrapper" style="width: 100%;"><%= PhoenixInlineSvg.Helpers.svg_image(@conn, "Break") %></div>
-          <div class="montserrat font-bold small gray-text-700">Léo Break</div>
-          <div class="tiny">116&nbsp;900&nbsp;&euro;</div>
+          <div class="col leo-item-col">
+            <div class="d-flex flex-column align-items-center leo-item">
+              <div class="leo-item-wrapper" style="width: 100%;"><%= PhoenixInlineSvg.Helpers.svg_image(@conn, "Berline") %></div>
+              <div class="montserrat font-bold small gray-text-700"><span class="d-none d-sm-inline">Léo</span> Berline</div>
+              <div class="tiny">86&nbsp;900&nbsp;&euro;</div>
+            </div>
+          </div>
+
+          <div class="col leo-item-col">
+            <div class="d-flex flex-column align-items-center leo-item">
+              <div class="leo-item-wrapper" style="width: 100%;"><%= PhoenixInlineSvg.Helpers.svg_image(@conn, "Break") %></div>
+              <div class="montserrat font-bold small gray-text-700"><span class="d-none d-sm-inline">Léo</span> Break</div>
+              <div class="tiny">116&nbsp;900&nbsp;&euro;</div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -105,10 +111,10 @@
         <div class="media">
           <img class="mr-3 rounded-circle z-depth-1 responsive-avatar" data-src="<%= img_path("xavier_jaffray.jpg") %>" alt="">
           <div class="media-body">
-            <p class="gray-text-600 ">La Maison Léo est issue de la toute nouvelle génération de maisons hors-site à ossature bois, écologique robuste et fortement isolée. Elle vous fera réaliser d'importantes économies tant à l'achat qu'au cours de sa vie grâce aux économies d'énergie.</p>
-            <p class="gray-text-600">Son processus de fabrication local en atelier vous garantit une qualité et une fiabilité imbattables par des maisons construites avec chantier traditionnel. Résultat&nbsp;: un coût au mètre carré minimal, une durée de construction réduite et un habitat top qualité.</p>
+            <p class="gray-text-600 ">La <b>Maison Léo</b> est issue de la toute nouvelle génération de maisons <b>hors-site</b> à <b>ossature bois</b>, <b>écologique</b> <b>robuste</b> et <b>fortement isolée</b>. Elle vous fera réaliser d'<b>importantes économies</b> tant à l'achat qu'au cours de sa vie grâce aux économies d'énergie.</p>
+            <p class="gray-text-600">Son processus de fabrication local en atelier vous garantit une <b>qualité</b> et une <b>fiabilité</b> imbattables par des maisons construites avec chantier traditionnel. Résultat&nbsp;: un <b>coût au mètre carré minimal</b>, une <b>durée de construction réduite</b> et un <b>habitat top qualité</b>.</p>
             <p class="gray-text-600">À vous de jouer&nbsp;!</p>
-            <p class="text-right mb-0">Xavier Jaffray</p>
+            <p class="text-right mb-0 gray-text-600 font-bold">Xavier Jaffray</p>
             <p class="text-right gray-text-600">Entrepreneur, fondateur de la Maison Léo</p>
           </div>
         </div>
@@ -118,44 +124,44 @@
     <div class="row mb-5 d-flex justify-content-center">
       <div class="col col-lg-8">
         <p class="font-bold gray-text-700 mb-3">Le comparatif Léo</p>
-        <table class="table table-sm table-bordered">
+        <table class="table table-bordered z-depth-1">
           <thead class="thead-dark">
             <tr>
               <th scope="col"></th>
               <th scope="col">Léo</th>
-              <th scope="col">Traditionnelle</th>
+              <%# <th scope="col">Traditionnelle</th> %>
             </tr>
           </thead>
           <tbody>
             <tr>
               <th scope="row" class="">Construction</th>
               <td scope="row" class="indigo-text font-medium">4 mois sans chantier</td>
-              <td scope="row" class="red-text font-medium">9 mois avec chantier</td>
-            </tr>
-            <tr>
-              <th scope="row" class="">Conformité aux plans</th>
-              <td scope="row" class="indigo-text font-medium">100%</td>
-              <td scope="row" class="red-text font-medium">Pas toujours respectée ...</td>
-            </tr>
-            <tr>
-              <th scope="row" class="">Coût</th>
-              <td scope="row" class="indigo-text font-medium">986&euro;/m<sup>2</sup></td>
-              <td scope="row" class="red-text font-medium">> 1200&euro;/m<sup>2</sup>&nbsp;!</td>
+              <%# <td scope="row" class="red-text font-medium">9 mois avec chantier</td> %>
             </tr>
             <tr>
               <th scope="row" class="">Suivi construction</th>
               <td scope="row" class="indigo-text font-medium">Quotidien</td>
-              <td scope="row" class="red-text font-medium">Mensuel</td>
+              <%# <td scope="row" class="red-text font-medium">Mensuel</td> %>
             </tr>
             <tr>
-              <th scope="row" class="">Garantie décénale</th>
-              <td scope="row" class="indigo-text font-medium">Oui</td>
-              <td scope="row" class="orange-text font-medium">Selon constructeur</td>
+              <th scope="row" class="">Conformité aux plans</th>
+              <td scope="row" class="indigo-text font-medium">100%</td>
+              <%# <td scope="row" class="red-text font-medium">Pas toujours respectée ...</td> %>
+            </tr>
+            <tr>
+              <th scope="row" class="">Coût</th>
+              <td scope="row" class="indigo-text font-medium">986&euro;/m<sup>2</sup></td>
+              <%# <td scope="row" class="red-text font-medium">> 1200&euro;/m<sup>2</sup>&nbsp;!</td> %>
             </tr>
             <tr>
               <th scope="row" class="">Garantie achèvement travaux</th>
               <td scope="row" class="indigo-text font-medium">Oui</td>
-              <td scope="row" class="orange-text font-medium">Selon constructeur</td>
+              <%# <td scope="row" class="orange-text font-medium">Selon constructeur</td> %>
+            </tr>
+            <tr>
+              <th scope="row" class="">Garantie décénale</th>
+              <td scope="row" class="indigo-text font-medium">Oui</td>
+              <%# <td scope="row" class="orange-text font-medium">Selon constructeur</td> %>
             </tr>
           </tbody>
         </table>
