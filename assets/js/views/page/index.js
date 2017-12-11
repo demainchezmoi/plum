@@ -28,7 +28,11 @@ module.exports = class View extends MainView {
     }
 
     const lazy = $("img[data-src]");
+    const lazySrcset = $("img[data-srcset]");
     const input = $('[data-action=search-location]');
+
+    lazySrcset.each(function() { this.setAttribute("srcset", this.getAttribute('data-srcset')); });
+    lazySrcset.removeAttr("data-srcset");
 
     lazy.each(function() { this.setAttribute("src", this.getAttribute('data-src')); });
     lazy.removeAttr("data-src");

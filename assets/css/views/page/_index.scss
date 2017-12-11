@@ -1,4 +1,11 @@
+$indigo-gray: #56687a;
+
 .public3 {
+
+  .indigo-gray-text {
+    color: $indigo-gray;
+  }
+
   .logo-leo {
     g {
       stroke-width: 7px;
@@ -20,7 +27,7 @@
   }
 
   .logo-title {
-    @extend .montserrat, .font-medium;
+    @extend .montserrat, .font-bold;
     letter-spacing: 2px;
   }
 
@@ -31,22 +38,33 @@
   .logo-lead {
     @extend .d-flex, .flex-column, .align-items-center;
     .logo-title {
-      @extend .indigo-text;
+      @extend .indigo-gray-text;
       margin-top: -5px;
     }
     .logo-wrapper {
       * {
-        stroke: map-get($indigo, base);
+        stroke: $indigo-gray;
       }
     }
   }
 
+  .main-btn {
+    @extend .mt-2;
+    border-radius: 0;
+    height: 48px;
+    padding-top: 0;
+    padding-bottom: 0;
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+
   .inline-input {
-    @extend .indigo.lighten-5, .indigo-text;
+    @extend .indigo-text, .mt-2;
     @include media-breakpoint-up(xs) { width: 100%; }
     @include media-breakpoint-up(md) { width: 250px; }
     @include media-breakpoint-up(lg) { width: 300px; }
-    border: 0;
+    // border: 0;
+    border-radius: 0;
     // border-bottom: 0;
     margin-left: 2px;
     &::-webkit-input-placeholder { /* Chrome/Opera/Safari */
@@ -68,21 +86,20 @@
   }
 
   .leo-item-col {
-    @extend .z-depth-1, .mx-1;
     height: 100%;
     cursor: pointer;
-    &:hover, &:focus {
-      @extend .z-depth-2;
-    }
   }
 
   .leo-item {
-    @extend .py-3;
+    @extend .z-depth-1, .pb-3, .pt-sm-3, .my-1;
+    &:hover, &:focus {
+      @extend .z-depth-2;
+    }
     width: auto;
     height: auto;
     * {
-      stroke: map-get($indigo, accent-3);
-      stroke-width: 2;
+      stroke: $indigo-gray;
+      stroke-width: .8;
     }
   }
 
@@ -101,6 +118,28 @@
   .partner-logo {
     @extend .z-depth-1;
     width: 100%;
+  }
+
+  .intro3 {
+    @include media-breakpoint-up(xs) {
+      background-image: url("https://dx6bud56fsm7y.cloudfront.net/maison_leo/images/girl-400x225.png");
+    }
+    @include media-breakpoint-up(sm) {
+      background-image: url("https://dx6bud56fsm7y.cloudfront.net/maison_leo/images/girl-800x450.png");
+    }
+    @include media-breakpoint-up(md) {
+      background-image: url("https://dx6bud56fsm7y.cloudfront.net/maison_leo/images/girl-1200x675.png");
+    }
+    @include media-breakpoint-up(lg) {
+      background-image: url("https://dx6bud56fsm7y.cloudfront.net/maison_leo/images/girl-1920x1080.png");
+    }
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    .container {
+      background-color: rgba(255, 255, 255, 0.88);
+      @extend .pb-4;
+    }
   }
 
 }
