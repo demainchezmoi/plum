@@ -217,9 +217,19 @@
       </div>
     </div>
   </div>
+  <footer class="">
+    <div class="container">
+      <div class="row d-flex justify-content-center">
+        <div class="col col-lg-8 py-5">
+          <%= link "Mentions légales", to: page_path(@conn, :legal), class: "gray-text-600"%>
+        </div>
+      </div>
+    </div>
+  </footer>
 </div>
 
 <%= render PlumWeb.SharedView, "contact_modal.html", conn: @conn, params: @params %>
+
 <%= render "leo_item_modal.html", conn: @conn, params: @params, img_name: "plan-mini-v3-1", modal_id: "leoItemMiniModal" %>
 <%= render "leo_item_modal.html", conn: @conn, params: @params, img_name: "plan-berline-v3-1", modal_id: "leoItemBerlineModal" %>
 <%= render "leo_item_modal.html", conn: @conn, params: @params, img_name: "plan-break-v3-1", modal_id: "leoItemBreakModal" %>

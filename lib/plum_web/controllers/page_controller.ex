@@ -13,6 +13,10 @@ defmodule PlumWeb.PageController do
     conn |> render("merci.html")
   end
 
+  def legal(conn, _params) do
+    conn |> render("legal.html")
+  end
+
   def confidentialite(conn, _params) do
     conn |> render("confidentialite.html")
   end

@@ -1,0 +1,43 @@
+<div class="public3">
+  <nav class="navbar navbar-expand-lg navbar-dark indigo">
+    <div class="container">
+      <a class="navbar-brand logo-inline" href="/">
+        <div class="d-flex align-items-end">
+          <div class="logo-wrapper mr-1"><%= PhoenixInlineSvg.Helpers.svg_image(@conn, "logo3") %></div>
+          <div>
+            <div class="logo-title" style="font-size: 12px; line-height: 12px;">Maison&nbsp;Léo </div>
+            <div class="tiny" style="font-size: 12px; line-height: 12px;"><em>Bretagne</em></div>
+          </div>
+        </div>
+      </a>
+      <ul class="navbar-nav ml-auto d-flex flex-row">
+        <li class="nav-item active small-xs mr-2">
+          <a class="nav-link d-flex align-items-center" data-toggle="modal" data-target="#contactModal">
+            <i class="fa-stack mr-1">
+              <i class="fa fa-stack-2x fa-circle white-text"></i>
+              <i class="fa fa-phone fa-stack-1x indigo-text"></i>
+            </i>
+            Contact
+          </a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+  <div class="container">
+    <div class="row">
+      <div class="col gray-text-700 py-5">
+        <div class="mb-3">
+          <b>Editeur&nbsp;:</b><br />
+          Demainchezmoi SAS<br />
+          41 rue Laure Diebold<br />
+          69009 Lyon
+        </div>
+        <div class="mb-3">
+          <b>Contact&nbsp;:</b><br />
+          Email&nbsp;: <a href="mailto:contact@demainchezmoi.fr" class="">contact@demainchezmoi.fr</a><br />
+          Téléphone&nbsp;: <a href="tel:0663742535" class="">06 63 74 25 35</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
