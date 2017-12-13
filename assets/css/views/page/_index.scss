@@ -94,6 +94,10 @@ $indigo-gray: #56687a;
     cursor: pointer;
   }
 
+  .leo-item-wrapper {
+    max-width: 250px;
+  }
+
   .leo-item {
     @extend .z-depth-1, .pb-3, .pt-sm-3, .my-1;
     &:hover, &:focus {

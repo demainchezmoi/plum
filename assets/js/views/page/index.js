@@ -1,6 +1,8 @@
 import MainView from '../main';
 import GoogleMapsLoader from 'google-maps';
 import {track} from '../../helpers/mixpanel';
+import {track as fbqTrack} from '../../helpers/facebook';
+import {parseLocation} from '../../helpers/url';
 
 GoogleMapsLoader.KEY = 'AIzaSyDKvX-CXe8vAoyx69fEk91EmGIyiYydoC0';
 GoogleMapsLoader.LIBRARIES = ['places'];
@@ -45,6 +47,15 @@ module.exports = class View extends MainView {
     $('[data-action=find-me-a-land]').click(function() {
       $('#contactModal').modal('show');
       $('#contact_remark').val(`Je souhaite trouver un terrain à ${input.val()}`);
+      const params = parseLocation();
+      track("OPEN_FIND_LAND", params);
+    });
+
+    $('form[action="/contact"]').submit(function() {
+      const params = parseLocation();
+      track("SUBMIT_CONTACT", params);
+      fbqTrack('CompleteRegistration');
+      return true;
     });
   }
 
