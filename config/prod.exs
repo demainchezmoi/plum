@@ -92,7 +92,10 @@ config :ueberauth, Ueberauth.Strategy.Facebook.OAuth,
   client_secret: "${FACEBOOK_CLIENT_SECRET}"
 
 config :plum,
-  mixpanel_token: "${MIXPANEL_TOKEN}"
+  mixpanel_token: "${MIXPANEL_TOKEN}",
+  aircall_webhook_token: "${AIRCALL_WEBHOOK_TOKEN}",
+  aircall_api_id: "${AIRCALL_API_ID}",
+  aircall_api_token: "${AIRCALL_API_TOKEN}"
 
 config :plum,
   env: "${MIX_ENV}"

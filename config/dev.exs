@@ -75,7 +75,10 @@ config :ueberauth, Ueberauth.Strategy.Facebook.OAuth,
   client_secret: System.get_env("FACEBOOK_CLIENT_SECRET")
 
 config :plum,
-  mixpanel_token: "570aa0ff2af04cf1609e778c6a5eda10"
+  mixpanel_token: "570aa0ff2af04cf1609e778c6a5eda10",
+  aircall_webhook_token: System.get_env("AIRCALL_WEBHOOK_TOKEN"),
+  aircall_api_id: System.get_env("AIRCALL_API_ID"),
+  aircall_api_token: System.get_env("AIRCALL_API_TOKEN")
 
 config :plum,
   env: "dev"
