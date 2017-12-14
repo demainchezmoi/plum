@@ -19,10 +19,9 @@ defmodule Plum.Aircall do
 
   def handle_webhook(%{"event" => "call.answered", "data" => data}) do
     call = Call.changeset(%Call{}, data) |> Ecto.Changeset.apply_changes
-    Logger.info(call)
   end
 
-  def handle_webhook(_), do: nil
+  def handle_webhook(_), do: nil 
 
   # =========
   # Helpers

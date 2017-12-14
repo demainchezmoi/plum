@@ -44,6 +44,10 @@ defmodule PlumWeb.Router do
     plug PlumWeb.Plugs.RequireLogin, {:json, ["admin"]}
   end
 
+  pipeline :webhooks do
+    plug :accepts, ["json"]
+  end
+
   # Scopes
 
   scope "/auth", PlumWeb do
@@ -85,5 +89,10 @@ defmodule PlumWeb.Router do
     pipe_through :admin_api
     resources "/lands", LandController, only: [:index, :create, :show, :update, :delete], name: "api_land"
     resources "/ads", AdController, only: [:index, :create, :show], name: "api_ad"
+  end
+
+  scope "/webhooks", PlumWeb.Webhooks do
+    pipe_through :webhooks
+    post "/aircall", AircallController, :handle_call
   end
 end
