@@ -1,18 +1,25 @@
 defmodule Plum.Aircall.User do
+
   use Ecto.Schema
   import Ecto.Changeset
 
-  alias Plum.Aircall.User
+  alias Plum.Aircall.{
+    Number,
+    User
+  }
 
-  @primary_key false
-  embedded_schema do
-    field :id, :integer
+  @primary_key {:id, :id, autogenerate: false}
+
+  schema "aircall_users" do
     field :direct_link, :string
     field :name, :string
     field :email, :string
-    field :available, :string
+    field :available, :boolean
     field :availability_status, :string
-    field :numbers, {:array, :string}
+
+    many_to_many :numbers, Number,
+      join_through: "aircall_users_aircall_numbers",
+      join_keys: [aircall_user_id: :id, aircall_number_id: :id]
   end
 
   @optional_fields ~w()
@@ -23,7 +30,6 @@ defmodule Plum.Aircall.User do
     email
     available
     availability_status
-    numbers
   )a
 
   def changeset(%User{} = user, attrs) do

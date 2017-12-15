@@ -1,16 +1,18 @@
 defmodule Plum.Aircall.Call do
+
   use Ecto.Schema
   import Ecto.Changeset
 
   alias Plum.Aircall.{
     Call,
     Contact,
+    Number,
     User
   }
 
-  @primary_key false
-  embedded_schema do
-    field :id, :integer
+  @primary_key {:id, :id, autogenerate: false}
+
+  schema "aircall_calls" do
     field :direct_link, :string
     field :status, :string
     field :direction, :string
@@ -23,15 +25,23 @@ defmodule Plum.Aircall.Call do
     field :recording, :string
     field :archived, :boolean
     field :missed_call_reason, :string
-    # field :number, :string
-    embeds_one :user, User
-    embeds_one :contact, Contact
-    embeds_one :assigned_to, User 
-    # field :comments, :string
-    # field :tags, :string
+
+    belongs_to :number, Number
+    belongs_to :user, User
+    belongs_to :contact, Contact
+    belongs_to :assigned_to, User
+
+    field :comments, {:array, :map}
+    field :tags, {:array, :map}
   end
 
-  @optional_fields ~w()a
+  @optional_fields ~w(
+    number_id
+    user_id
+    contact_id
+    assigned_to_id
+  )a
+
   @required_fields ~w(
     id
     direct_link
@@ -46,21 +56,13 @@ defmodule Plum.Aircall.Call do
     recording
     archived
     missed_call_reason
+    comments
+    tags
   )a
-
-  # number
-  # user
-  # contact
-  # assigned_to
-  # comments
-  # tags
 
   def changeset(%Call{} = call, attrs) do
     call
     |> cast(attrs, @required_fields ++ @optional_fields)
-    |> cast_embed(:user)
-    |> cast_embed(:contact)
-    |> cast_embed(:assigned_to)
     |> validate_required(@required_fields)
   end
 end
