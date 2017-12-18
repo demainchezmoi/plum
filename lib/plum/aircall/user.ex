@@ -4,6 +4,7 @@ defmodule Plum.Aircall.User do
   import Ecto.Changeset
 
   alias Plum.Aircall.{
+    Call,
     Number,
     User
   }
@@ -20,16 +21,20 @@ defmodule Plum.Aircall.User do
     many_to_many :numbers, Number,
       join_through: "aircall_users_aircall_numbers",
       join_keys: [aircall_user_id: :id, aircall_number_id: :id]
+
+    has_many :calls, Call
   end
 
-  @optional_fields ~w()
-  @required_fields ~w(
-    id
+  @optional_fields ~w(
     direct_link
     name
     email
     available
     availability_status
+  )
+
+  @required_fields ~w(
+    id
   )a
 
   def changeset(%User{} = user, attrs) do

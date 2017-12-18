@@ -28,11 +28,6 @@ defmodule Plum.Aircall.Number do
   end
 
   @optional_fields ~w(
-    messages
-  )a
-
-  @required_fields ~w(
-		id
 		direct_link
 		name
 		digits
@@ -41,6 +36,11 @@ defmodule Plum.Aircall.Number do
 		open
 		availability_status
 		is_ivr
+    messages
+  )a
+
+  @required_fields ~w(
+		id
   )a
 
 	# users

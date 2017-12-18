@@ -232,14 +232,14 @@
   <div class="modal-dialog mb-7" role="document">
     <div class="modal-content">
       <div class="modal-header indigo accent-3 white-text">
-        <h5 class="modal-title h5-responsive font-medium">Ma prospection personnalisée à</h5>
+        <h5 class="modal-title h5-responsive font-medium">Ma prospection personnalisée</h5>
         <button type="button" class="close white-text" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
         <div class="p-1">
-          <p class="text-center indigo-text text-accent-3 font-bold " data-role="searched-location-display"></p>
+          <p class="text-center indigo-text text-accent-3 font-bold h5-responsive" data-role="searched-location-display"></p>
           <%= form_for @conn, page_path(@conn, :contact), [as: "contact"], fn f-> %>
             <div class="form-group row">
               <label class="col-2 col-form-label gray-text-800">Nom</label>
@@ -254,10 +254,10 @@
               </div>
             </div>
             <%= hidden_input f, :remark, class: "form-control", "data-role": "searched-location-hidden-input" %>
-            <p class="small text-right gray-text-600">Nous étudions votre projet ensemble et vous proposons une sélection de terrains</p>
+            <p class="small text-right gray-text-600">Nous étudions votre projet ensemble et vous proposons une sélection de terrains personnalisée</p>
             <div class="clearfix">
               <div class="pull-right">
-                <button type="submit" class="btn btn-indigo indigo accent-3 mr-0 mb-0"><i class="fa fa-paper-plane mr-2"></i> Envoyer</button>
+                <button type="submit" class="btn btn-indigo indigo accent-3 mr-0 mb-0"><i class="fa fa-paper-plane mr-2"></i> Valider</button>
               </div>
             </div>
             <%= if @params[:ad_id] do %><%= hidden_input f, :ad, value: @params[:ad_id] %><% end %>

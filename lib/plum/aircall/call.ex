@@ -1,8 +1,6 @@
 defmodule Plum.Aircall.Call do
-
   use Ecto.Schema
   import Ecto.Changeset
-
   alias Plum.Aircall.{
     Call,
     Contact,
@@ -36,14 +34,6 @@ defmodule Plum.Aircall.Call do
   end
 
   @optional_fields ~w(
-    number_id
-    user_id
-    contact_id
-    assigned_to_id
-  )a
-
-  @required_fields ~w(
-    id
     direct_link
     status
     direction
@@ -58,6 +48,14 @@ defmodule Plum.Aircall.Call do
     missed_call_reason
     comments
     tags
+    number_id
+    user_id
+    contact_id
+    assigned_to_id
+  )a
+
+  @required_fields ~w(
+    id
   )a
 
   def changeset(%Call{} = call, attrs) do

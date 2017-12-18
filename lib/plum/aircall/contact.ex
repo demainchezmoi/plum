@@ -1,8 +1,6 @@
 defmodule Plum.Aircall.Contact do
-
   use Ecto.Schema
   import Ecto.Changeset
-
   alias Plum.Aircall.{
     Contact
   }
@@ -15,13 +13,15 @@ defmodule Plum.Aircall.Contact do
     field :last_name, :string
     field :company_name, :string
     field :information, :string
+
     field :phone_numbers, {:array, :map}
     field :emails, {:array, :map}
+
+    has_many :calls, Aircall.Call
+    has_one :contact, Plum.Sales.Contact
   end
 
-  @optional_fields ~w()a
-  @required_fields ~w(
-    id
+  @optional_fields ~w(
     direct_link
     first_name
     last_name
@@ -29,6 +29,10 @@ defmodule Plum.Aircall.Contact do
     information
     phone_numbers
     emails
+  )a
+
+  @required_fields ~w(
+    id
   )a
 
   def changeset(%Contact{} = contact, attrs) do

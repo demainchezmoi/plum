@@ -2,7 +2,7 @@ defmodule Plum.Accounts.User do
   use Ecto.Schema
   import Ecto.Changeset
   alias Plum.Accounts.User
-
+  alias Plum.Aircall
 
   schema "users" do
     field :first_name, :string
@@ -11,15 +11,17 @@ defmodule Plum.Accounts.User do
     field :email, :string
     field :facebook_id, :string
     field :roles, {:array, :string}, default: []
-
+    belongs_to :aircall_user, Aircall.User
+    has_many :aircall_user_calls, through: [:aircall_user, :calls]
     timestamps()
   end
 
   @optional_fields ~w(
+    aircall_user_id
     email
-    roles
     first_name
     last_name
+    roles
   )a
 
   @required_fields ~w(
