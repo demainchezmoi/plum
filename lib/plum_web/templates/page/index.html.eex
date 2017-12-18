@@ -227,6 +227,48 @@
   </footer>
 </div>
 
+<!-- Modal -->
+<div class="modal fade" id="findMeLandModal" tabindex="-1" role="dialog" aria-labelledby="findMeLandModal" aria-hidden="true">
+  <div class="modal-dialog mb-7" role="document">
+    <div class="modal-content">
+      <div class="modal-header indigo accent-3 white-text">
+        <h5 class="modal-title h5-responsive font-medium">Ma prospection personnalisée à</h5>
+        <button type="button" class="close white-text" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="p-1">
+          <p class="text-center indigo-text text-accent-3 font-bold " data-role="searched-location-display"></p>
+          <%= form_for @conn, page_path(@conn, :contact), [as: "contact"], fn f-> %>
+            <div class="form-group row">
+              <label class="col-2 col-form-label gray-text-800">Nom</label>
+              <div class="col-10">
+                <%= text_input f, :name, placeholder: "Marie Dupont", class: "form-control", required: true %>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-2 col-form-label gray-text-800">Tél</label>
+              <div class="col-10">
+                <%= text_input f, :phone, placeholder: "06 12 34 56 78", class: "form-control", required: true %>
+              </div>
+            </div>
+            <%= hidden_input f, :remark, class: "form-control", "data-role": "searched-location-hidden-input" %>
+            <p class="small text-right gray-text-600">Nous étudions votre projet ensemble et vous proposons une sélection de terrains</p>
+            <div class="clearfix">
+              <div class="pull-right">
+                <button type="submit" class="btn btn-indigo indigo accent-3 mr-0 mb-0"><i class="fa fa-paper-plane mr-2"></i> Envoyer</button>
+              </div>
+            </div>
+            <%= if @params[:ad_id] do %><%= hidden_input f, :ad, value: @params[:ad_id] %><% end %>
+            <%= hidden_input f, :ref, value: @params["ref"] %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
 <%= render PlumWeb.SharedView, "contact_modal.html", conn: @conn, params: @params %>
 
 <%= render "leo_item_modal.html", conn: @conn, params: @params, img_name: "plan-mini-v3-1", modal_id: "leoItemMiniModal" %>

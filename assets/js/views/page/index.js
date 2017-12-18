@@ -45,10 +45,18 @@ module.exports = class View extends MainView {
     });
 
     $('[data-action=find-me-a-land]').click(function() {
-      $('#contactModal').modal('show');
-      $('#contact_remark').val(`Je souhaite trouver un terrain à ${input.val()}`);
-      const params = parseLocation();
-      track("OPEN_FIND_LAND", params);
+      const location = input.val();
+      if (!!location) {
+        $('#findMeLandModal').modal('show');
+        $('[data-role=searched-location-hidden-input]').val(location);
+        $('[data-role=searched-location-display]').text(location);
+        const params = parseLocation();
+        track("OPEN_FIND_LAND", params);
+      }
+      else {
+        input.addClass('shake');
+        setTimeout(() => input.removeClass('shake'), 1000);
+      }
     });
 
     $('form[action="/contact"]').submit(function() {
