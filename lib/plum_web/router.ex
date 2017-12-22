@@ -87,6 +87,7 @@ defmodule PlumWeb.Router do
 
   scope "/api", PlumWeb.Api do
     pipe_through :admin_api
+    get "/ping", PingController, :ping
     resources "/lands", LandController, only: [:index, :create, :show, :update, :delete], name: "api_land"
     resources "/ads", AdController, only: [:index, :create, :show], name: "api_ad"
   end
