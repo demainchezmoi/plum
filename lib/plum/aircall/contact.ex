@@ -2,6 +2,7 @@ defmodule Plum.Aircall.Contact do
   use Ecto.Schema
   import Ecto.Changeset
   alias Plum.Aircall.{
+    Call,
     Contact
   }
 
@@ -17,7 +18,7 @@ defmodule Plum.Aircall.Contact do
     field :phone_numbers, {:array, :map}
     field :emails, {:array, :map}
 
-    has_many :calls, Aircall.Call
+    has_many :calls, Call
     has_one :contact, Plum.Sales.Contact
   end
 
