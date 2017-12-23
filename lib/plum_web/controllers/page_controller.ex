@@ -3,8 +3,6 @@ defmodule PlumWeb.PageController do
   alias Plum.Sales
   alias Plum.Repo
 
-  plug PlumWeb.Plugs.JustInsertedUser when action in [:prospect]
-
   def index(conn, params) do
     conn |> render("index.html", params: params)
   end
