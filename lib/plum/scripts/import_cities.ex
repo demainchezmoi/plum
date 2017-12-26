@@ -3,7 +3,6 @@ defmodule Plum.Scripts.ImportCities do
   require Logger
 
   alias Plum.Geo
-  alias Plum.Geo
   alias Plum.Repo
   alias ExAws.S3
 
