@@ -35,6 +35,7 @@ defmodule Plum.Mixfile do
     [
       {:cors_plug, "~> 1.2"},
       {:cowboy, "~> 1.0"},
+      {:csv, "~> 1.4.2"},
       {:dialyxir, "~> 0.5", only: [:dev], runtime: false},
       {:ecto_conditionals, "~> 0.1.0"},
       {:ex_aws, "~> 2.0"},
