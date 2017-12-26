@@ -1,13 +1,14 @@
 defmodule Plum.Geo.City do
   use Ecto.Schema
   import Ecto.Changeset
-  alias Plum.Geo.City
-
+  alias Plum.Geo.{City, Land}
 
   schema "geo_cities" do
     field :insee_id, :string
     field :name, :string
     field :postal_code, :string
+
+    has_many :lands, Land
 
     timestamps()
   end

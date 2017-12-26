@@ -2,8 +2,12 @@ defmodule Plum.Geo do
   import Ecto.Query, warn: false
 
   alias Plum.Repo
-  alias Plum.Geo.City
+  alias Plum.Geo.{City, Land, LandAd}
   alias Ecto.Changeset
+
+  # ==============
+  # City
+  # ==============
 
   @doc """
   Returns the list of city.
@@ -129,5 +133,149 @@ defmodule Plum.Geo do
   """
   def change_city(%City{} = city) do
     City.changeset(city, %{})
+  end
+
+  @doc """
+  Finds a city with a similar name in the same department or returns nil.
+
+  ## Examples
+
+      iex> find_matching_city("Blaru", "78")
+      %City{}
+
+      iex> find_matching_city("Blaru", "72")
+      nil
+  """
+
+  def find_matching_city(name, department) do
+    query =
+      from c in City,
+      where: fragment("? LIKE '?%'", c.insee_id, ^department),
+      where: fragment("? % ?", c.name, ^name),
+      order_by: fragment("similarity(?, ?) DESC", c.name, ^name),
+      limit: 1
+    query |> Repo.one
+  end
+
+  # ==============
+  # Land
+  # ==============
+
+  @doc """
+  Returns an `%Ecto.Changeset{}` for tracking land changes.
+
+  ## Examples
+
+      iex> change_land(land)
+      %Ecto.Changeset{source: %Land{}}
+
+  """
+  def change_land(%Land{} = land) do
+    Land.changeset(land, %{})
+  end
+
+  @doc """
+  Creates a Land.
+
+  ## Examples
+
+      iex> create_land(%{field: value})
+      {:ok, %Land{}}
+
+      iex> create_land(%{field: value})
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def create_land(attrs \\ %{}) do
+    %Land{}
+    |> Land.changeset(attrs)
+    |> Repo.insert()
+  end
+
+  def find_matching_land(params) do
+    Land
+    |> matching_price(params)
+    |> matching_surface(params)
+    |> matching_description(params)
+    |> limit(1)
+    |> Repo.one
+  end
+
+  defp matching_price(query, %{
+    "price" => price
+  }) when is_nil(price) or price == "", do: query
+  defp matching_price(query, %{"price" => price}) do
+    from l in query, where: l.price == ^price
+  end
+  defp matching_price(query, _), do: query
+
+
+  defp matching_surface(query, %{
+    "surface" => surface
+  }) when is_nil(surface) or surface == "", do: query
+  defp matching_surface(query, %{"surface" => surface}) do
+    from l in query, where: l.surface == ^surface
+  end
+  defp matching_surface(query, _), do: query
+
+
+  defp matching_description(query, %{
+    "description" => description
+  }) when is_nil(description) or description == "", do: query
+  defp matching_description(query, %{"description" => description}) do
+    from l in query,
+      where: fragment("similarity(?, ?) > 0.4", ^description, l.description),
+      order_by: [desc: fragment("similarity(?, ?)", ^description, l.description)]
+  end
+  defp matching_description(query, _), do: query
+
+  # ==============
+  # LandAd
+  # ==============
+
+  @doc """
+  Returns an `%Ecto.Changeset{}` for tracking land_ad changes.
+
+  ## Examples
+
+      iex> change_land_ad(land_ad)
+      %Ecto.Changeset{source: %LandAd{}}
+
+  """
+  def change_land_ad(%LandAd{} = land_ad) do
+    LandAd.changeset(land_ad, %{})
+  end
+
+
+  @doc """
+  Gets a single ad by attributes.
+
+  ## Examples
+
+      iex> get_ad_by(%{param: value})
+      %LandAd{}
+
+      iex> get_ad_by(%{param: value})
+      nil
+
+  """
+  def get_ad_by(params), do: Repo.get_by(LandAd, params)
+
+  @doc """
+  Creates a LandAd.
+
+  ## Examples
+
+      iex> create_land_ad(%{field: value})
+      {:ok, %LandAd{}}
+
+      iex> create_land_ad(%{field: value})
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def create_land_ad(attrs \\ %{}) do
+    %Land{}
+    |> Land.changeset(attrs)
+    |> Repo.insert()
   end
 end
