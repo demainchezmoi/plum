@@ -1,5 +1,7 @@
 defmodule Plum.Scripts.ImportCities do
 
+  require Logger
+
   alias Plum.Geo
   alias Plum.Geo
   alias Plum.Repo
@@ -20,6 +22,7 @@ defmodule Plum.Scripts.ImportCities do
   end
 
   def run do
+    Logger.info("Running import cities script")
     case S3.get_object(@bucket, @aws_object_id) |> ExAws.request do
       {:ok, %{body: body}} ->
         stream =

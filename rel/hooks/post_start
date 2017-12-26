@@ -13,5 +13,4 @@ set -e
 
 echo "Running migrations"
 bin/plum rpc Elixir.Release.Tasks migrate
-bin/plum rpc Plum.Scripts.ImportCities.run
 echo "Migrations run successfully"

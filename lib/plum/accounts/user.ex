@@ -3,6 +3,7 @@ defmodule Plum.Accounts.User do
   import Ecto.Changeset
   alias Plum.Accounts.User
   alias Plum.Aircall
+  alias Plum.Accounts.AuthToken
 
   schema "users" do
     field :first_name, :string
