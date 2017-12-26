@@ -13,6 +13,8 @@ defmodule Plum.Accounts.User do
     field :roles, {:array, :string}, default: []
     belongs_to :aircall_user, Aircall.User
     has_many :aircall_user_calls, through: [:aircall_user, :calls]
+    has_many :auth_tokens, AuthToken
+
     timestamps()
   end
 
@@ -34,6 +36,8 @@ defmodule Plum.Accounts.User do
     user
     |> cast(attrs, @optional_fields ++ @required_fields)
     |> validate_required(@required_fields)
+    |> validate_length(:email, min: 1, max: 255)
+    |> validate_format(:email, ~r/@/)
     |> unique_constraint(:email)
   end
 end

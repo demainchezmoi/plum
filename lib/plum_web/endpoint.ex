@@ -38,6 +38,7 @@ defmodule PlumWeb.Endpoint do
     key: "_plum_key",
     signing_salt: "75N1lhlM"
 
+  plug CORSPlug
   plug PlumWeb.Router
 
   @doc """

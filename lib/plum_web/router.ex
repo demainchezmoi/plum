@@ -32,6 +32,10 @@ defmodule PlumWeb.Router do
     plug PlumWeb.Plugs.RequireLogin, {:html, ["admin"]}
   end
 
+  pipeline :api do
+    plug :accepts, ["json"]
+  end
+
   pipeline :protected_api do
     plug :accepts, ["json"]
     plug PlumWeb.Plugs.TokenAuthentication
@@ -82,7 +86,9 @@ defmodule PlumWeb.Router do
   end
 
   scope "/api", PlumWeb.Api do
-    pipe_through :protected_api
+    pipe_through :api
+    get "/signin/token/:token", AuthController, :show
+    post "/signin/create", AuthController, :create
   end
 
   scope "/api", PlumWeb.Api do

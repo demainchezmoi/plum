@@ -29,7 +29,7 @@ defmodule PlumWeb.Plugs.TokenAuthentication do
   defp parse_token(_non_token_header), do: :error
 
   def verify_token(token) do
-    case Token.verify(Endpoint, "user", token, max_age: 1209600) do
+    case Token.verify(Endpoint, "user", token, max_age: 1_814_400) do
       {:ok, token} -> {:ok, token}
       _ -> Token.verify(Endpoint, "api_key", token)
     end

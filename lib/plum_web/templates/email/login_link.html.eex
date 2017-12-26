@@ -1,0 +1,5 @@
+<div>Voici votre lien de login:</div>
+<br />
+<div><%= "#{Application.get_env(:plum, :dodo_url)}/signin/#{@token}" %></div>
+<br />
+<p>Il est valide 30 minutes.</p>

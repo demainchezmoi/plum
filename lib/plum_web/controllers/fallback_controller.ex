@@ -17,4 +17,10 @@ defmodule PlumWeb.FallbackController do
     |> put_status(:not_found)
     |> render(PlumWeb.ErrorView, :"404")
   end
+
+  def call(conn, {:error, status}) when status in ~w(forbidden invalid expired)a do
+    conn
+    |> put_status(:forbidden)
+    |> render(PlumWeb.ErrorView, :"403")
+  end
 end
