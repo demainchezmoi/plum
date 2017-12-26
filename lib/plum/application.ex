@@ -11,7 +11,9 @@ defmodule Plum.Application do
       # Start the Ecto repository
       supervisor(Plum.Repo, []),
       # Start the endpoint when the application starts
+      supervisor(Task.Supervisor, [[name: Plum.TaskSupervisor]]),
       supervisor(PlumWeb.Endpoint, []),
+      supervisor(Plum.AdsImporter, []),
       # Start your own worker by calling: Plum.Worker.start_link(arg1, arg2, arg3)
       # worker(Plum.Worker, [arg1, arg2, arg3]),
     ]

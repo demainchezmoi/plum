@@ -87,10 +87,6 @@ config :plum, PlumWeb.Mailer,
   auth: :always,
   retries: 3
 
-config :ueberauth, Ueberauth.Strategy.Facebook.OAuth,
-  client_id: "${FACEBOOK_CLIENT_ID}",
-  client_secret: "${FACEBOOK_CLIENT_SECRET}"
-
 config :plum,
   mixpanel_token: "${MIXPANEL_TOKEN}",
   aircall_webhook_token: "${AIRCALL_WEBHOOK_TOKEN}",
@@ -99,3 +95,21 @@ config :plum,
 
 config :plum,
   env: "${MIX_ENV}"
+
+config :plum,
+  dodo_url: "${DODO_URL}"
+
+config :plum,
+  land_ads_sqs_queue: "${LAND_ADS_SQS_QUEUE}",
+  land_ads_s3_bucket: "${LAND_ADS_S3_BUCKET}"
+
+config :ex_aws,
+  access_key_id: "${AWS_ACCESS_KEY_ID}",
+  secret_access_key: "${AWS_SECRET_ACCESS_KEY}",
+  region: "eu-west-1",
+  s3: [
+    scheme: "https://",
+    host: "s3-eu-west-1.amazonaws.com",
+    region: "eu-west-1"
+  ]
+

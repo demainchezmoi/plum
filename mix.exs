@@ -33,13 +33,19 @@ defmodule Plum.Mixfile do
   # Type `mix help deps` for examples and options.
   defp deps do
     [
+      {:cors_plug, "~> 1.2"},
       {:cowboy, "~> 1.0"},
       {:dialyxir, "~> 0.5", only: [:dev], runtime: false},
       {:ecto_conditionals, "~> 0.1.0"},
+      {:ex_aws, "~> 2.0"},
+      {:ex_aws_s3, "~> 2.0"},
+      {:ex_aws_sqs, "~> 2.0"},
       {:ex_machina, "~> 2.1", only: [:test]},
       {:facebook, "~> 0.15.0"},
       {:gen_smtp, "~> 0.12.0"},
+      {:gen_stage, "~> 0.12.2"},
       {:gettext, "~> 0.11"},
+      {:hackney, "~> 1.9"},
       {:httpoison, "~> 0.13"},
       {:mix_docker, "~> 0.5.0"},
       {:mix_test_watch, "~> 0.3", only: [:test], runtime: false},
@@ -53,8 +59,7 @@ defmodule Plum.Mixfile do
       {:phoenix_swoosh, "~> 0.2"},
       {:postgrex, ">= 0.0.0"},
       {:secure_random, "~> 0.5"},
-      {:ueberauth, "~> 0.4"},
-      {:ueberauth_facebook, "~> 0.7"},
+      {:sweet_xml, "~> 0.6"},
     ]
   end
 

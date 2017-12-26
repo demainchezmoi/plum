@@ -21,3 +21,12 @@ config :plum, Plum.Repo,
 config :plum, PlumWeb.Mailer,
   adapter: Swoosh.Adapters.Test
 
+config :ex_aws,
+  access_key_id: [{:system, "AWS_ACCESS_KEY_ID"}, :instance_role],
+  secret_access_key: [{:system, "AWS_SECRET_ACCESS_KEY"}, :instance_role],
+  region: "eu-west-1",
+  s3: [
+    scheme: "https://",
+    host: "s3-eu-west-1.amazonaws.com",
+    region: "eu-west-1"
+  ]
