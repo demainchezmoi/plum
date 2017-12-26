@@ -1,7 +1,9 @@
 defmodule PlumWeb.Router do
   use PlumWeb, :router
 
+  # ==========
   # Pipelines
+  # ==========
 
   pipeline :browser do
     plug :accepts, ["html"]
@@ -52,14 +54,11 @@ defmodule PlumWeb.Router do
     plug :accepts, ["json"]
   end
 
+  # ==========
   # Scopes
+  # ==========
 
-  scope "/auth", PlumWeb do
-    pipe_through :browser
-    get "/:provider", AuthController, :request
-    get "/:provider/callback", AuthController, :callback
-  end
-
+  # Browser
   scope "/", PlumWeb do
     pipe_through :browser
 
@@ -75,29 +74,39 @@ defmodule PlumWeb.Router do
     get "/maison-plus-terrain/:id/cgu", AdController, :cgu
   end
 
+  # Protected Browser
   scope "/", PlumWeb do
     pipe_through :protected_browser
   end
 
+  # Admin Browser
   scope "/admin", PlumWeb do
     pipe_through :admin_browser
     resources "/lands", LandController
     resources "/ads", AdController
   end
 
+  # Api
   scope "/api", PlumWeb.Api do
     pipe_through :api
     get "/signin/token/:token", AuthController, :show
     post "/signin/create", AuthController, :create
   end
 
+  # Protected Api
+  scope "/api", PlumWeb.Api do
+    pipe_through :protected_api
+    get "/ping", PingController, :ping
+  end
+
+  # Admin api
   scope "/api", PlumWeb.Api do
     pipe_through :admin_api
-    get "/ping", PingController, :ping
     resources "/lands", LandController, only: [:index, :create, :show, :update, :delete], name: "api_land"
     resources "/ads", AdController, only: [:index, :create, :show], name: "api_ad"
   end
 
+  # Webhooks
   scope "/webhooks", PlumWeb.Webhooks do
     pipe_through :webhooks
     post "/aircall", AircallController, :handle_call
