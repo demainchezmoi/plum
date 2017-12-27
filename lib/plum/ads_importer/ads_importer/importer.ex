@@ -9,8 +9,6 @@ defmodule Plum.AdsImporter.Importer do
   alias Plum.TaskSupervisor
   alias Task.Supervisor
 
-  import Ecto.Query
-
   require Logger
 
   # ================
@@ -114,7 +112,7 @@ defmodule Plum.AdsImporter.Importer do
             params = ad |> attach_city
 
             %Land{}
-            |> Land.changeset(ad)
+            |> Land.changeset(params)
             |> Changeset.put_assoc(:ads, [ad_changeset])
             |> Repo.insert
             |> case do

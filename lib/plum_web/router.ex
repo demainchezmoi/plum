@@ -69,9 +69,6 @@ defmodule PlumWeb.Router do
     get "/login", PageController, :login
     get "/merci", PageController, :merci
     get "/mentions-legales", PageController, :legal
-    get "/maison-plus-terrain/:id", AdController, :public
-    get "/annonces-maison-plus-terrain", AdController, :public_index
-    get "/maison-plus-terrain/:id/cgu", AdController, :cgu
   end
 
   # Protected Browser
@@ -82,8 +79,6 @@ defmodule PlumWeb.Router do
   # Admin Browser
   scope "/admin", PlumWeb do
     pipe_through :admin_browser
-    resources "/lands", LandController
-    resources "/ads", AdController
   end
 
   # Api
@@ -102,8 +97,6 @@ defmodule PlumWeb.Router do
   # Admin api
   scope "/api", PlumWeb.Api do
     pipe_through :admin_api
-    resources "/lands", LandController, only: [:index, :create, :show, :update, :delete], name: "api_land"
-    resources "/ads", AdController, only: [:index, :create, :show], name: "api_ad"
   end
 
   # Webhooks

@@ -3,7 +3,6 @@ defmodule Plum.Geo do
 
   alias Plum.Repo
   alias Plum.Geo.{City, Land, LandAd}
-  alias Ecto.Changeset
 
   require Logger
 

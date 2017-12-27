@@ -32,12 +32,7 @@ defmodule PlumWeb.PageController do
       else
         conn |> put_flash(:error, "Merci de renseigner votre numéro de téléphone afin que nous puissions vous contacter.")
       end
-    if not is_nil(ad = contact_params["ad"]) do
-      ad = Sales.get_ad!(ad) |> Repo.preload(:land)
-      conn |> redirect(to: ad_path(conn, :public, ad))
-    else
-      conn |> redirect(to: page_path(conn, :index))
-    end
+    conn |> redirect(to: page_path(conn, :index))
   end
 
   def is_undef(params, field), do: params[field] == "" or is_nil(params[field])

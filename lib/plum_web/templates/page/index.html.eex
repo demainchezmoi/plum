@@ -26,27 +26,9 @@
     </div>
   </nav>
 
-  <%= if ad = @conn.assigns[:ad] do %>
-    <div class="pt-3 pb-4">
-      <div class="absolute w-100 pt-2" id="ad_stripe">
-        <div class="container">
-          <div class="row">
-            <div class="col">
-              <div class="indigo accent-3 z-depth-1 p-3 white-text relative" style="z-index: 10">
-                <div class="container p-0">
-                  <%= render PlumWeb.AdView, "stripe.html", ad: ad %>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  <% end %>
-
   <div class="intro3">
     <div class="container mb-5">
-      <div class="row <%= if @conn.assigns[:ad], do: "mt-6", else: "mt-5" %> mb-3 pt-5">
+      <div class="row mb-3 pt-5">
         <div class="col">
           <div class="logo-lead">
             <div class="logo-wrapper"><%= PhoenixInlineSvg.Helpers.svg_image(@conn, "logo3") %></div>
@@ -274,7 +256,3 @@
 <%= render "leo_item_modal.html", conn: @conn, params: @params, img_name: "plan-mini-v3-1", modal_id: "leoItemMiniModal" %>
 <%= render "leo_item_modal.html", conn: @conn, params: @params, img_name: "plan-berline-v3-1", modal_id: "leoItemBerlineModal" %>
 <%= render "leo_item_modal.html", conn: @conn, params: @params, img_name: "plan-break-v3-1", modal_id: "leoItemBreakModal" %>
-
-<%= if ad = @conn.assigns[:ad] do %>
-  <script type="text/javascript">ad=<%= raw Poison.encode!(@ad.id) %></script>
-<% end %>
