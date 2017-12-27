@@ -1,11 +1,11 @@
 defmodule Plum.AdsImporter.Importer do
-
   use GenStage
 
   alias Ecto.Changeset
   alias Plum.AdsImporter.{S3Server}
   alias Plum.Geo
   alias Plum.Geo.{City, Land, LandAd}
+  alias Plum.Repo
   alias Plum.TaskSupervisor
   alias Task.Supervisor
 
@@ -38,7 +38,7 @@ defmodule Plum.AdsImporter.Importer do
     file_task = Task.async(fn -> handle_event(event) end)
     # S3Server.release_and_delete(events)
     forward_events = Task.await(file_task, 10 * 60 * 1_000)
-    {:noreply, Task.await(file_task, 3_600_000), pipeline_name}
+    {:noreply, forward_events, pipeline_name}
   end
 
   # ================
@@ -79,6 +79,8 @@ defmodule Plum.AdsImporter.Importer do
   end
 
   defp attach_city(struct) do
+    Logger.debug("attach_city to struct #{inspect struct}")
+
     with cp when is_binary(cp) <- struct["raw_postal_code"],
          name when is_binary(name) <- struct["raw_city_name"],
          dep <- cp |> String.slice(0..1),
@@ -91,6 +93,8 @@ defmodule Plum.AdsImporter.Importer do
   end
 
   defp import_ad(ad) do
+    Logger.debug("Importing ad #{inspect ad}")
+
     case Geo.get_ad_by(%{origin: ad["origin"], link: ad["link"]}) do
       %LandAd{} ->
         {:ok, :ad_existing}
@@ -111,7 +115,7 @@ defmodule Plum.AdsImporter.Importer do
 
             %Land{}
             |> Land.changeset(ad)
-            |> Changeset.cast_assoc(:ads, [ad_changeset])
+            |> Changeset.put_assoc(:ads, [ad_changeset])
             |> Repo.insert
             |> case do
               {:ok, _} -> {:ok, :land_inserted}

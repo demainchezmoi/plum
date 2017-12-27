@@ -19,7 +19,7 @@ defmodule Plum.Geo.Land do
   end
 
   @required_params ~w()a
-  @optional_params ~w(city_id surface price description images notary_fees location)a
+  @optional_params ~w(city_id surface price description images notary_fees)a
 
   @doc false
   def changeset(%Land{} = land, attrs) do

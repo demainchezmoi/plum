@@ -5,6 +5,8 @@ defmodule Plum.Geo do
   alias Plum.Geo.{City, Land, LandAd}
   alias Ecto.Changeset
 
+  require Logger
+
   # ==============
   # City
   # ==============
@@ -148,13 +150,19 @@ defmodule Plum.Geo do
   """
 
   def find_matching_city(name, department) do
+    Logger.debug("Find matching city for #{name} and #{department}")
+
     query =
       from c in City,
-      where: fragment("? LIKE '?%'", c.insee_id, ^department),
+      where: fragment("? LIKE ? || '%'", c.insee_id, ^department),
       where: fragment("? % ?", c.name, ^name),
       order_by: fragment("similarity(?, ?) DESC", c.name, ^name),
       limit: 1
-    query |> Repo.one
+
+    city = query |> Repo.one
+
+    Logger.debug("Found city #{inspect city}")
+    city
   end
 
   # ==============

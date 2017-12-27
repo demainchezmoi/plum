@@ -121,6 +121,7 @@ defmodule Plum.AdsImporter.S3Server do
 
   defp get_path({:error, _}), do: []
   defp get_path({:ok, json}) do
+    Logger.debug("Getting s3 path from #{json |> inspect}")
     s3 =
       json
     	|> Map.get("Records")
