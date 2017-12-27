@@ -3,43 +3,12 @@ defmodule Plum.Factory do
   use ExMachina.Ecto, repo: Plum.Repo
 
   alias Plum.Sales.{
-    Ad,
-    Land,
-    Location,
   }
 
   alias Plum.Accounts.{
     Session,
     User,
   }
-
-  def ad_factory do
-    %Ad{
-      active: true,
-      house_price: 89_000,
-    }
-  end
-
-  def land_factory do
-    %Land{
-      ads: [build(:ad)],
-      city: "Blaru",
-      department: "27",
-      location: build(:location),
-      price: 42_000,
-      surface: 396,
-      images: ["test"],
-      description: sequence(:description, &"desc-#{&1}"),
-      notary_fees: 1234
-    }
-  end
-
-  def location_factory do
-    %Location{
-      lat: 48.01,
-      lng: 2.12,
-    }
-  end
 
   def session_factory do
     %Session{
