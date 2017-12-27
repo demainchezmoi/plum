@@ -18,7 +18,6 @@ defmodule Plum.Geo.LandAdContact do
   def changeset(%LandAdContact{} = land_ad_contact, attrs) do
     land_ad_contact
     |> cast(attrs, @required_params ++ @optional_params)
-    |> cast_embed(:contact)
     |> validate_required(@required_params)
   end
 end
