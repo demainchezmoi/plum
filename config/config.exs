@@ -9,6 +9,9 @@ use Mix.Config
 config :plum,
   ecto_repos: [Plum.Repo]
 
+config :phoenix,
+  :format_encoders, json: ProperCase.JSONEncoder.CamelCase
+
 # Configures the endpoint
 config :plum, PlumWeb.Endpoint,
   url: [host: "localhost"],

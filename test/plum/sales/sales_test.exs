@@ -6,6 +6,7 @@ defmodule Plum.SalesTest do
   alias Plum.Sales
 
   alias Plum.Sales.{
+    Contact,
     Prospect,
   }
 
@@ -27,7 +28,9 @@ defmodule Plum.SalesTest do
 
     test "create_prospect/1 with valid data creates a prospect" do
       prospect_params = params_for(:prospect)
-      assert {:ok, %Prospect{}} = Sales.create_prospect(prospect_params)
+      assert {:ok, p = %Prospect{}} = Sales.create_prospect(prospect_params)
+      p_id = p.id
+      assert %Prospect{contact: %Contact{prospect_id: ^p_id}} = p |> Repo.preload(:contact)
     end
 
     test "create_prospect/1 with invalid data returns error changeset" do

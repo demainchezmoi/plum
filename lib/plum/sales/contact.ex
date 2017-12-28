@@ -2,10 +2,12 @@ defmodule Plum.Sales.Contact do
   use Ecto.Schema
   import Ecto.Changeset
   alias Plum.Aircall
+
   alias Plum.Sales.{
     Contact,
     ContactEmail,
-    ContactPhone
+    ContactPhone,
+    Prospect,
   }
 
   schema "contacts" do
@@ -15,6 +17,9 @@ defmodule Plum.Sales.Contact do
     field :last_name, :string
     field :origin, :string
     field :type, :string
+
+    belongs_to :prospect, Prospect
+
     embeds_many :emails, ContactEmail
     embeds_many :phone_numbers, ContactPhone
     timestamps()
@@ -37,6 +42,6 @@ defmodule Plum.Sales.Contact do
     |> cast(attrs, @required_fields ++ @optional_fields)
     |> validate_required(@required_fields)
     |> cast_embed(:emails)
-    |> cast_embed(:phones)
+    |> cast_embed(:phone_numbers)
   end
 end

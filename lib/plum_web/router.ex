@@ -36,18 +36,21 @@ defmodule PlumWeb.Router do
 
   pipeline :api do
     plug :accepts, ["json"]
+    plug ProperCase.Plug.SnakeCaseParams
   end
 
   pipeline :protected_api do
     plug :accepts, ["json"]
     plug PlumWeb.Plugs.TokenAuthentication
     plug PlumWeb.Plugs.RequireLogin, {:json, []}
+    plug ProperCase.Plug.SnakeCaseParams
   end
 
   pipeline :admin_api do
     plug :accepts, ["json"]
     plug PlumWeb.Plugs.TokenAuthentication
     plug PlumWeb.Plugs.RequireLogin, {:json, ["admin"]}
+    plug ProperCase.Plug.SnakeCaseParams
   end
 
   pipeline :webhooks do
@@ -92,7 +95,7 @@ defmodule PlumWeb.Router do
   scope "/api", PlumWeb.Api do
     pipe_through :protected_api
     get "/ping", PingController, :ping
-    resources "/prospects", ProspectController, name: "api_prospect"
+    resources "/prospects", ProspectController, only: [:create, :index, :show, :delete, :update], name: "api_prospect"
   end
 
   # Admin api

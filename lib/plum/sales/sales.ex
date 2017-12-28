@@ -66,7 +66,10 @@ defmodule Plum.Sales do
 
   """
   def create_prospect(attrs \\ %{}) do
-    changeset = %Prospect{} |> Prospect.changeset(attrs)
+    changeset =
+      %Prospect{}
+      |> Prospect.changeset(attrs)
+      |> Changeset.cast_assoc(:contact)
     changeset |> Repo.insert()
   end
 
