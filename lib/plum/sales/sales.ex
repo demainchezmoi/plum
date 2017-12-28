@@ -2,7 +2,7 @@ defmodule Plum.Sales do
   alias Ecto.Changeset
   alias Plum.Repo
   alias Plum.Sales
-  alias Plum.Sales.Prospect
+  alias Plum.Sales.{Prospect, Contact}
 
   import Ecto.Query, warn: false
 
@@ -18,6 +18,7 @@ defmodule Plum.Sales do
   def list_prospects do
     Prospect
     |> order_by(desc: :inserted_at)
+    |> preload(:contact)
     |> Repo.all
   end
 
@@ -35,7 +36,7 @@ defmodule Plum.Sales do
       ** (Ecto.NoResultsError)
 
   """
-  def get_prospect!(id), do: Prospect |> Repo.get!(id)
+  def get_prospect!(id), do: Prospect |> preload(:contact) |> Repo.get!(id)
 
   @doc """
   Gets a single prospect by attributes.
@@ -51,7 +52,7 @@ defmodule Plum.Sales do
       ** (Ecto.NoResultsError)
 
   """
-  def get_prospect_by!(params), do: Prospect |> Repo.get_by!(params)
+  def get_prospect_by!(params), do: Prospect |> preload(:contact) |> Repo.get_by!(params)
 
   @doc """
   Creates a prospect.
@@ -86,8 +87,15 @@ defmodule Plum.Sales do
 
   """
   def update_prospect(%Prospect{} = prospect, attrs) do
+    prospect =
+      prospect |> Repo.preload(:contact)
+
+    contact_changeset =
+      prospect.contact |> Contact.changeset(attrs["contact"])
+
     prospect
     |> Prospect.changeset(attrs)
+    |> Changeset.put_assoc(:contact, contact_changeset)
     |> Repo.update()
   end
 

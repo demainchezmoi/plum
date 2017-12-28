@@ -9,6 +9,10 @@ defmodule Plum.Factory do
     Prospect,
   }
 
+  alias Plum.Geo.{
+    Land,
+  }
+
   alias Plum.Accounts.{
     Session,
     User,
@@ -28,6 +32,29 @@ defmodule Plum.Factory do
     %ContactEmail{
       label: "Work",
       value: "test@lol.com"
+    }
+  end
+
+  def land_factory do
+    %Land{
+      description: "desc",
+      images: ["image"],
+      notary_fees: 123,
+      price: 123,
+      surface: 123,
+      address: "rue",
+      land_register_ref: "lrr",
+      serviced: false,
+      slope: "weak",
+      type: "tye",
+      soc: "soc",
+      on_field_elements: "none",
+      accessibility: "oui",
+      sanitation: "non",
+      environment: "arbre",
+      geoportail: "www",
+      googlemaps: "www",
+      openstreetmaps: "www",
     }
   end
 

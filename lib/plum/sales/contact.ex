@@ -20,8 +20,8 @@ defmodule Plum.Sales.Contact do
 
     belongs_to :prospect, Prospect
 
-    embeds_many :emails, ContactEmail
-    embeds_many :phone_numbers, ContactPhone
+    embeds_many :emails, ContactEmail, on_replace: :delete
+    embeds_many :phone_numbers, ContactPhone, on_replace: :delete
     timestamps()
   end
 
