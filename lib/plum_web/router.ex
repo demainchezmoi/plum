@@ -92,6 +92,7 @@ defmodule PlumWeb.Router do
   scope "/api", PlumWeb.Api do
     pipe_through :protected_api
     get "/ping", PingController, :ping
+    resources "/prospects", ProspectController, name: "api_prospect"
   end
 
   # Admin api

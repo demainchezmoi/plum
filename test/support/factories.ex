@@ -3,12 +3,47 @@ defmodule Plum.Factory do
   use ExMachina.Ecto, repo: Plum.Repo
 
   alias Plum.Sales.{
+    Contact,
+    ContactEmail,
+    ContactPhone,
+    Prospect,
   }
 
   alias Plum.Accounts.{
     Session,
     User,
   }
+
+  def contact_factory do
+    %Contact{
+      first_name: "Marc",
+      last_name: "Test",
+      origin: "origin",
+      emails: [build(:email)],
+      phone_numbers: [build(:phone_number)]
+    }
+  end
+
+  def email_factory do
+    %ContactEmail{
+      label: "Work",
+      value: "test@lol.com"
+    }
+  end
+
+  def phone_number_factory do
+    %ContactPhone{
+      label: "Private",
+      value: "+33666666666"
+    }
+  end
+
+  def prospect_factory do
+    %Prospect{
+      contact: build(:contact),
+      max_budget: 140_000
+    }
+  end
 
   def session_factory do
     %Session{

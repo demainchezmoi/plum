@@ -8,7 +8,7 @@ defmodule PlumWeb.ViewHelpers do
           method,
           %{view_key => value}
         ])
-        Map.put(struct, key, rendered_sub_view)
+        Map.put(struct, key, rendered_sub_view[:data])
     end
   end
 end
