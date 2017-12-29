@@ -11,6 +11,7 @@ defmodule PlumWeb.Api.ProspectView do
 
   @attributes ~w(
     max_budget
+    land_budget
     inserted_at
     updated_at
     id

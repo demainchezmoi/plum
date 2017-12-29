@@ -47,7 +47,7 @@ defmodule Plum.Factory do
       serviced: false,
       slope: "weak",
       type: "tye",
-      soc: "soc",
+      soc: 0.7,
       on_field_elements: "none",
       accessibility: "oui",
       sanitation: "non",

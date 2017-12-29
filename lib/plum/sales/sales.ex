@@ -90,12 +90,15 @@ defmodule Plum.Sales do
     prospect =
       prospect |> Repo.preload(:contact)
 
-    contact_changeset =
-      prospect.contact |> Contact.changeset(attrs["contact"])
+    contact =
+      case attrs["contact"] do
+        nil -> prospect.contact
+        contact -> prospect.contact |> Contact.changeset(contact)
+      end
 
     prospect
     |> Prospect.changeset(attrs)
-    |> Changeset.put_assoc(:contact, contact_changeset)
+    |> Changeset.put_assoc(:contact, contact)
     |> Repo.update()
   end
 

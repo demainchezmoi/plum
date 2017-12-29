@@ -167,6 +167,52 @@ defmodule Plum.Geo do
   # ==============
   # Land
   # ==============
+  @doc """
+  Returns the list of lands.
+
+  ## Examples
+
+      iex> list_lands()
+      [%Land{}, ...]
+
+  """
+  def list_lands do
+    Land
+    |> order_by(desc: :inserted_at)
+    |> Repo.all
+  end
+
+  @doc """
+  Gets a single land.
+
+  Raises `Ecto.NoResultsError` if the Land does not exist.
+
+  ## Examples
+
+      iex> get_land!(123)
+      %Land{}
+
+      iex> get_land!(456)
+      ** (Ecto.NoResultsError)
+
+  """
+  def get_land!(id), do: Land |> Repo.get!(id)
+
+  @doc """
+  Gets a single land by attributes.
+
+  Raises `Ecto.NoResultsError` if the Land does not exist with those attributes.
+
+  ## Examples
+
+      iex> get_land_by!(%{id: 123, field: value})
+      %Land{}
+
+      iex> get_land_where!(%{id: 123, field: value})
+      ** (Ecto.NoResultsError)
+
+  """
+  def get_land_by!(params), do: Land |> Repo.get_by!(params)
 
   @doc """
   Returns an `%Ecto.Changeset{}` for tracking land changes.
@@ -197,6 +243,40 @@ defmodule Plum.Geo do
     %Land{}
     |> Land.changeset(attrs)
     |> Repo.insert()
+  end
+
+  @doc """
+  Updates a land.
+
+  ## Examples
+
+      iex> update_land(land, %{field: new_value})
+      {:ok, %Land{}}
+
+      iex> update_land(land, %{field: bad_value})
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def update_land(%Land{} = land, attrs) do
+    land
+    |> Land.changeset(attrs)
+    |> Repo.update()
+  end
+
+  @doc """
+  Deletes a Land.
+
+  ## Examples
+
+      iex> delete_land(land)
+      {:ok, %Land{}}
+
+      iex> delete_land(land)
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def delete_land(%Land{} = land) do
+    Repo.delete(land)
   end
 
   def find_matching_land(params) do

@@ -96,6 +96,7 @@ defmodule PlumWeb.Router do
     pipe_through :protected_api
     get "/ping", PingController, :ping
     resources "/prospects", ProspectController, only: [:create, :index, :show, :delete, :update], name: "api_prospect"
+    resources "/lands", LandController, only: [:create, :index, :show, :delete, :update], name: "api_land"
   end
 
   # Admin api
