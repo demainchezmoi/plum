@@ -16,6 +16,8 @@ defmodule Plum.Sales.ProspectLand do
 
     belongs_to :land, Land
     belongs_to :prospect, Prospect
+
+    timestamps()
   end
 
   @required_fields ~w(status)a

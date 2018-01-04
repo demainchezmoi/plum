@@ -6,10 +6,13 @@ defmodule Plum.Factory do
     Contact,
     ContactEmail,
     ContactPhone,
+    EstateAgent,
     Prospect,
+    ProspectLand,
   }
 
   alias Plum.Geo.{
+    City,
     Land,
   }
 
@@ -18,13 +21,22 @@ defmodule Plum.Factory do
     User,
   }
 
+  def city_factory do
+    %City{
+      name: sequence(:name, &"city name #{&1}"),
+      insee_id: sequence(:insee_id, &"city insee_id #{&1}"),
+      insee_id: sequence(:postal_code, &"city postal_code #{&1}"),
+    }
+  end
+
   def contact_factory do
     %Contact{
       first_name: "Marc",
       last_name: "Test",
       origin: "origin",
       emails: [build(:email)],
-      phone_numbers: [build(:phone_number)]
+      phone_numbers: [build(:phone_number)],
+      company: "Company"
     }
   end
 
@@ -32,6 +44,14 @@ defmodule Plum.Factory do
     %ContactEmail{
       label: "Work",
       value: "test@lol.com"
+    }
+  end
+
+  def estate_agent_factory do
+    %EstateAgent{
+      notes: "notes",
+      contact: build(:contact),
+      lands: [build(:land)],
     }
   end
 
@@ -69,6 +89,12 @@ defmodule Plum.Factory do
     %Prospect{
       contact: build(:contact),
       max_budget: 140_000
+    }
+  end
+
+  def prospect_land_factory do
+    %ProspectLand{
+      status: "interesting"
     }
   end
 

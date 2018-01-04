@@ -12,8 +12,8 @@ defmodule PlumWeb.Api.CityView do
     postal_code
   )a
 
-  def render("index.json", %{citys: citys}) do
-    %{data: render_many(citys, CityView, "city.json")}
+  def render("index.json", %{cities: cites}) do
+    %{data: render_many(cites, CityView, "city.json")}
   end
 
   def render("show.json", %{city: city}) do
@@ -21,8 +21,7 @@ defmodule PlumWeb.Api.CityView do
   end
 
   def render("city.json", %{city: city}) do
-    city
-    |> Map.take(@attributes)
+    city |> Map.take(@attributes)
   end
 end
 

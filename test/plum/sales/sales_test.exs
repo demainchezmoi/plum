@@ -55,6 +55,25 @@ defmodule Plum.SalesTest do
       assert prospect.max_budget == Sales.get_prospect!(prospect.id).max_budget
     end
 
+    test "update_prospect/2 updates the cities association" do
+      city1 = insert(:city)
+      city2 = insert(:city)
+      prospect = insert(:prospect, cities: [city1])
+      params = %{"cities" => [%{"id" => city2.id}]}
+      assert {:ok, prospect} = Sales.update_prospect(prospect, params)
+      assoc_cities_ids = prospect |> Repo.preload(:cities) |> Map.get(:cities) |> Enum.map(& &1.id)
+      assert city2.id in assoc_cities_ids 
+      refute city1.id in assoc_cities_ids
+    end
+
+    test "update_prospect/2 updates the contact association" do
+      prospect = insert(:prospect)
+      first_name = "lloyd"
+      params = %{"contact" => %{"id" => prospect.contact.id, "first_name" => first_name}}
+      assert {:ok, prospect} = Sales.update_prospect(prospect, params)
+      assert prospect |> Repo.preload(:contact) |> Map.get(:contact) |> Map.get(:first_name) == first_name
+    end
+
     test "delete_prospect/1 deletes the prospect" do
       prospect = insert(:prospect)
       assert {:ok, %Prospect{}} = Sales.delete_prospect(prospect)
@@ -64,6 +83,32 @@ defmodule Plum.SalesTest do
     test "change_prospect/1 returns a prospect changeset" do
       prospect = insert(:prospect)
       assert %Ecto.Changeset{} = Sales.change_prospect(prospect)
+    end
+  end
+
+  describe "estate_agents" do
+    test "estate_agents_autocomplete finds by first_name" do
+      contact = insert(:contact, first_name: "Patrick", last_name: "Poirier")
+      estate_agent = insert(:estate_agent, contact: contact)
+      results = Sales.estate_agents_autocomplete(%{first_name: "patri"})
+      ids = results |> Enum.map(& &1.id)
+      assert estate_agent.id in ids
+    end
+
+    test "estate_agents_autocomplete rejects by first_name" do
+      contact = insert(:contact, first_name: "Patrick", last_name: "Poirier")
+      estate_agent = insert(:estate_agent, contact: contact)
+      results = Sales.estate_agents_autocomplete(%{first_name: "jean paul"})
+      ids = results |> Enum.map(& &1.id)
+      refute estate_agent.id in ids
+    end
+
+    test "estate_agents_autocomplete rejects by company" do
+      contact = insert(:contact, first_name: "Patrick", last_name: "Poirier")
+      estate_agent = insert(:estate_agent, contact: contact)
+      results = Sales.estate_agents_autocomplete(%{last_name: "Poirier", company: "trucmiche"})
+      ids = results |> Enum.map(& &1.id)
+      refute estate_agent.id in ids
     end
   end
 end

@@ -3,6 +3,7 @@ defmodule PlumWeb.Api.LandAdView do
 
   alias PlumWeb.Api.{
     LandAdContactView,
+    LandAdView,
     LandView,
   }
 
@@ -16,18 +17,18 @@ defmodule PlumWeb.Api.LandAdView do
     land
   )a
 
-  def render("index.json", %{lands: lands}) do
-    %{data: render_many(lands, LandView, "land.json")}
+  def render("index.json", %{land_ads: land_ads}) do
+    %{data: render_many(land_ads, LandAdView, "land_ad.json")}
   end
 
-  def render("show.json", %{land: land}) do
-    %{data: render_one(land, LandView, "land.json")}
+  def render("show.json", %{land_ad: land_ad}) do
+    %{data: render_one(land_ad, LandAdView, "land_ad.json")}
   end
 
-  def render("land.json", %{land: land}) do
-    land
+  def render("land_ad.json", %{land_ad: land_ad}) do
+    land_ad
     |> Map.take(@attributes)
-    |> put_loaded_assoc({:contact, LandAdContactView, "show.json", :contact})
+    |> put_loaded_assoc({:contact, LandAdContactView, "show.json", :land_ad_contact})
     |> put_loaded_assoc({:land, LandView, "show.json", :land})
   end
 end

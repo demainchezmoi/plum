@@ -7,6 +7,7 @@ defmodule Plum.Sales.Contact do
     Contact,
     ContactEmail,
     ContactPhone,
+    EstateAgent,
     Prospect,
   }
 
@@ -17,8 +18,10 @@ defmodule Plum.Sales.Contact do
     field :last_name, :string
     field :origin, :string
     field :type, :string
+    field :company, :string
 
     belongs_to :prospect, Prospect
+    belongs_to :estate_agent, EstateAgent
 
     embeds_many :emails, ContactEmail, on_replace: :delete
     embeds_many :phone_numbers, ContactPhone, on_replace: :delete
@@ -34,6 +37,7 @@ defmodule Plum.Sales.Contact do
     last_name
     origin
     type
+    company
   )a
 
   @doc false

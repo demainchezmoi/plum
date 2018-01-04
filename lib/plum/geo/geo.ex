@@ -11,6 +11,25 @@ defmodule Plum.Geo do
   # ==============
 
   @doc """
+  Finds a list of cities matching a string
+
+  ## Examples
+
+      iex> cities_autocomplete("Abe")
+      [%City{}, ...]
+  """
+  def cities_autocomplete(s) do
+    query =
+      from c in City,
+      where: fragment("(unaccent(?) % unaccent(?)) OR (? % ?)", c.name, ^s, c.postal_code, ^s),
+      order_by: [desc: fragment("greatest(similarity(unaccent(?), unaccent(?)), similarity(?, ?))", c.name, ^s, c.postal_code, ^s)],
+      select: map(c, [:id, :postal_code, :name]),
+      limit: 15
+
+    query |> Repo.all
+  end
+
+  @doc """
   Returns the list of city.
 
   ## Examples
@@ -153,9 +172,9 @@ defmodule Plum.Geo do
 
     query =
       from c in City,
-      where: fragment("? LIKE ? || '%'", c.insee_id, ^department),
-      where: fragment("? % ?", c.name, ^name),
-      order_by: fragment("similarity(?, ?) DESC", c.name, ^name),
+      where: fragment("unaccent(?) LIKE unaccent(?) || '%'", c.insee_id, ^department),
+      where: fragment("unaccent(?) % unaccent(?)", c.name, ^name),
+      order_by: fragment("similarity(unaccent(?), unaccent(?)) DESC", c.name, ^name),
       limit: 1
 
     city = query |> Repo.one
@@ -168,6 +187,28 @@ defmodule Plum.Geo do
   # Land
   # ==============
   @doc """
+  Buids a query to fetch a list of lands with filters
+  """
+
+  def list_lands_query(params \\ %{}) do
+    query =
+      from l in Land,
+      join: c in assoc(l, :city),
+      preload: [:city, :ads, [estate_agent: :contact]],
+      order_by: [desc: :inserted_at],
+      limit: 20
+
+    query
+    |> for_max_price(params)
+    |> for_prospect(params)
+    # |> for_max_surface(params)
+    # |> for_min_price(params)
+    # |> for_min_surface(params)
+    |> for_cities(params)
+  end
+
+
+  @doc """
   Returns the list of lands.
 
   ## Examples
@@ -176,11 +217,52 @@ defmodule Plum.Geo do
       [%Land{}, ...]
 
   """
-  def list_lands do
-    Land
-    |> order_by(desc: :inserted_at)
-    |> Repo.all
+  def list_lands(params \\ %{}) do
+    list_lands_query(params) |> Repo.all
   end
+
+  def for_prospect(query, %{"prospect" => prospect_id, "pl_status" => status}) do
+    from l in query,
+      join: pl in assoc(l, :prospects_lands),
+      on: pl.prospect_id == ^prospect_id and pl.status == ^status
+  end
+
+  def for_prospect(query, %{"prospect" => prospect_id}) do
+    from l in query,
+      left_join: pl in assoc(l, :prospects_lands),
+      on: pl.prospect_id == ^prospect_id,
+      where: is_nil(pl.id)
+  end
+
+  def for_prospect(query, _), do: query
+
+  def for_cities(query, %{"cities" => cities}) do
+    cities = cities |> Enum.map(&String.to_integer/1)
+    from l in query,
+      join: c in assoc(l, :city),
+      where: l.city_id in ^cities
+  end
+  def for_cities(query, _), do: query
+
+  def for_max_price(query, %{"max_price" => max_price}) do
+    from l in query, where: l.price <= ^max_price
+  end
+  def for_max_price(query, _), do: query
+
+  def for_min_price(query, %{"min_price" => min_price}) do
+    from l in query, where: l.price >= ^min_price
+  end
+  def for_min_price(query, _), do: query
+
+  def for_max_surface(query, %{"max_surface" => max_surface}) do
+    from l in query, where: l.surface <= ^max_surface
+  end
+  def for_max_surface(query, _), do: query
+
+  def for_min_surface(query, %{"min_surface" => min_surface}) do
+    from l in query, where: l.surface >= ^min_surface
+  end
+  def for_min_surface(query, _), do: query
 
   @doc """
   Gets a single land.
@@ -196,7 +278,7 @@ defmodule Plum.Geo do
       ** (Ecto.NoResultsError)
 
   """
-  def get_land!(id), do: Land |> Repo.get!(id)
+  def get_land!(id), do: Land |> preload([:city, [estate_agent: :contact]]) |> Repo.get!(id)
 
   @doc """
   Gets a single land by attributes.
@@ -212,7 +294,7 @@ defmodule Plum.Geo do
       ** (Ecto.NoResultsError)
 
   """
-  def get_land_by!(params), do: Land |> Repo.get_by!(params)
+  def get_land_by!(params), do: Land |> preload([:city, [estate_agent: :contact]]) |> Repo.get_by!(params)
 
   @doc """
   Returns an `%Ecto.Changeset{}` for tracking land changes.

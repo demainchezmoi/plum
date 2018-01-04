@@ -16,6 +16,7 @@ defmodule PlumWeb.Api.ContactView do
     type
     emails
     phone_numbers
+    company
   )a
 
   def render("index.json", %{contacts: contacts}) do

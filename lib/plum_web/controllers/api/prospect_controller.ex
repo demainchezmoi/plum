@@ -2,6 +2,7 @@ defmodule PlumWeb.Api.ProspectController do
   use PlumWeb, :controller
   alias Plum.Sales
   alias Plum.Sales.Prospect
+  alias Plum.Geo
 
   action_fallback PlumWeb.FallbackController
 

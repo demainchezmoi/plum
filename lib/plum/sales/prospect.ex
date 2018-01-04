@@ -16,6 +16,7 @@ defmodule Plum.Sales.Prospect do
   schema "sales_prospects" do
     field :max_budget, :integer
     field :land_budget, :integer
+    field :notes, :string
     has_one :contact, Contact
     many_to_many :cities, City,
       join_through: "sales_prospects_geo_cities",
@@ -34,6 +35,7 @@ defmodule Plum.Sales.Prospect do
   @optional_fields ~w(
     max_budget
     land_budget
+    notes
   )a
 
   @doc false

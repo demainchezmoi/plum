@@ -2,6 +2,7 @@ defmodule PlumWeb.Api.ProspectView do
   use PlumWeb, :view
 
   alias PlumWeb.Api.{
+    CityView,
     ContactView,
     LandView,
     ProspectView,
@@ -18,6 +19,7 @@ defmodule PlumWeb.Api.ProspectView do
     contact
     lands
     cities
+    notes
   )a
 
   def render("index.json", %{prospects: prospects}) do

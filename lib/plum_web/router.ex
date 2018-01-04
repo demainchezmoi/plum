@@ -12,8 +12,7 @@ defmodule PlumWeb.Router do
     plug :protect_from_forgery
     plug :put_secure_browser_headers
     plug PlumWeb.Plugs.SessionAuthentication
-  end
-
+  end 
   pipeline :protected_browser do
     plug :accepts, ["html"]
     plug :fetch_session
@@ -97,6 +96,10 @@ defmodule PlumWeb.Router do
     get "/ping", PingController, :ping
     resources "/prospects", ProspectController, only: [:create, :index, :show, :delete, :update], name: "api_prospect"
     resources "/lands", LandController, only: [:create, :index, :show, :delete, :update], name: "api_land"
+    get "/cities/autocomplete", CityController, :autocomplete, as: "api_city"
+    post "/prospects_lands", ProspectLandController, :create, as: "api_prospect_land"
+    get "/estate_agents/autocomplete", EstateAgentController, :autocomplete, as: "api_estate_agent"
+    resources "/estate_agents", EstateAgentController, only: [:create, :index, :show, :delete, :update], name: "api_estate_agent"
   end
 
   # Admin api

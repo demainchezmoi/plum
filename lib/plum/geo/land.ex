@@ -3,7 +3,7 @@ defmodule Plum.Geo.Land do
   import Ecto.Changeset
   alias Plum.Geo.{City, Land, LandAd, LandLocation}
   alias Plum.Helpers.NotaryFees
-  alias Plum.Sales.{Prospect}
+  alias Plum.Sales.{EstateAgent, Prospect, ProspectLand}
 
   schema "geo_lands" do
     field :description, :string
@@ -28,12 +28,15 @@ defmodule Plum.Geo.Land do
 
     has_many :ads, LandAd
     belongs_to :city, City
+    belongs_to :estate_agent, EstateAgent
     embeds_one :location, LandLocation, on_replace: :delete
 
     many_to_many :prospects, Prospect,
       join_through: ProspectLand,
       join_keys: [land_id: :id, prospect_id: :id],
       on_replace: :delete
+
+    has_many :prospects_lands, ProspectLand
 
     timestamps()
   end
@@ -43,7 +46,7 @@ defmodule Plum.Geo.Land do
     city_id surface price description images notary_fees
     address land_register_ref serviced slope type soc
     on_field_elements accessibility sanitation environment
-    geoportail googlemaps openstreetmaps
+    geoportail googlemaps openstreetmaps estate_agent_id
   )a
 
   @doc false

@@ -16,6 +16,41 @@ defmodule PlumWeb.Api.LandControllerTest do
       conn = get conn, api_land_path(conn, :index)
       assert json_response(conn, 401)
     end
+
+    @tag :logged_in
+    test "get prospect lands whith given status", %{conn: conn} do
+      prospect = insert(:prospect)
+      land = insert :land, city: build(:city)
+      params = [land_id: land.id, prospect_id: prospect.id, status: "test"]
+      insert :prospect_land, params
+
+      query_params = %{"prospect" => prospect.id, "pl_status" => "test"}
+      conn = get conn, api_land_path(conn, :index, query_params)
+      ids = json_response(conn, 200) |> Map.get("data") |> Enum.map(& &1["id"])
+      assert land.id in ids
+    end
+
+    @tag :logged_in
+    test "get prospectlands without association", %{conn: conn} do
+      prospect = insert(:prospect)
+      land = insert :land, city: build(:city)
+      query_params = %{"prospect" => prospect.id}
+      conn = get conn, api_land_path(conn, :index, query_params)
+      ids = json_response(conn, 200) |> Map.get("data") |> Enum.map(& &1["id"])
+      assert land.id in ids
+    end
+
+    @tag :logged_in
+    test "reject prospect lands with associations", %{conn: conn} do
+      prospect = insert(:prospect)
+      land = insert :land, city: build(:city)
+      params = [land_id: land.id, prospect_id: prospect.id, status: "test"]
+      insert :prospect_land, params
+      query_params = %{"prospect" => prospect.id}
+      conn = get conn, api_land_path(conn, :index, query_params)
+      ids = json_response(conn, 200) |> Map.get("data") |> Enum.map(& &1["id"])
+      refute land.id in ids
+    end
   end
 
 

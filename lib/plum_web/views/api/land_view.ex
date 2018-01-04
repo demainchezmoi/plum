@@ -6,6 +6,7 @@ defmodule PlumWeb.Api.LandView do
     LandView,
     LandAdView,
     ProspectView,
+    EstateAgentView,
   }
 
   import PlumWeb.ViewHelpers, only: [put_loaded_assoc: 2]
@@ -34,6 +35,8 @@ defmodule PlumWeb.Api.LandView do
     city
     location
     prospects
+    inserted_at
+    estate_agent
   )a
 
   def render("index.json", %{lands: lands}) do
@@ -47,9 +50,9 @@ defmodule PlumWeb.Api.LandView do
   def render("land.json", %{land: land}) do
     land
     |> Map.take(@attributes)
-    |> put_loaded_assoc({:ads, LandAdView, "index.json", :ads})
+    |> put_loaded_assoc({:ads, LandAdView, "index.json", :land_ads})
     |> put_loaded_assoc({:city, CityView, "show.json", :city})
     |> put_loaded_assoc({:prospects, ProspectView, "index.json", :prospects})
+    |> put_loaded_assoc({:estate_agent, EstateAgentView, "show.json", :estate_agent})
   end
 end
-

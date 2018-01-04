@@ -1,12 +1,13 @@
 defmodule PlumWeb.Api.LandController do
   use PlumWeb, :controller
+  alias Plum.Repo
   alias Plum.Geo
   alias Plum.Geo.Land
 
   action_fallback PlumWeb.FallbackController
 
-  def index(conn, _params) do
-    lands = Geo.list_lands()
+  def index(conn, params) do
+    lands = Geo.list_lands(params)
     conn |> render("index.json", lands: lands)
   end
 
@@ -27,6 +28,7 @@ defmodule PlumWeb.Api.LandController do
   def update(conn, %{"id" => id, "land" => land_params}) do
     land = Geo.get_land!(id)
     with {:ok, %Land{} = land} <- Geo.update_land(land, land_params) do
+      land = land |> Repo.preload([:ads, [estate_agent: :contact]], force: true)
       render(conn, "show.json", land: land)
     end
   end

@@ -7,9 +7,33 @@ defmodule Plum.GeoTest do
     Land,
   }
 
+  describe "cities" do
+    setup [:create_city]
+
+    test "cities_autocomplete finds city by uppercase name", %{city: city} do
+      assert city.id in (Geo.cities_autocomplete("BLA") |> Enum.map(& &1.id))
+    end
+
+    test "cities_autocomplete finds city by downcase name", %{city: city} do
+      assert city.id in (Geo.cities_autocomplete("bla") |> Enum.map(& &1.id))
+    end
+
+    test "cities_autocomplete finds city by string in middle of name", %{city: city} do
+      assert city.id in (Geo.cities_autocomplete("laru") |> Enum.map(& &1.id))
+    end
+
+    test "cities_autocomplete finds city by department", %{city: city} do
+      assert city.id in (Geo.cities_autocomplete("123") |> Enum.map(& &1.id))
+    end
+
+    test "cities_autocomplete rejetc unmatching cities", %{city: city} do
+      refute city.id in (Geo.cities_autocomplete("678 Man") |> Enum.map(& &1.id))
+    end
+  end
+
   describe "lands" do
-    test "list_lands/0 returns all lands" do
-      land = insert(:land)
+    test "list_lands/0 returns all lands with cities" do
+      land = insert(:land, city: build(:city))
       assert Geo.list_lands() |> Enum.map(& &1.id) == [land.id]
     end
 
@@ -25,11 +49,11 @@ defmodule Plum.GeoTest do
 
     test "create_land/1 with valid data creates a land" do
       land_params = params_for(:land)
-      assert {:ok, p = %Land{}} = Geo.create_land(land_params)
+      assert {:ok, %Land{}} = Geo.create_land(land_params)
     end
 
     test "create_land/1 with invalid data returns error changeset" do
-      land_params = params_for(:land) |> Map.put(:max_budget, "abc")
+      land_params = params_for(:land) |> Map.put(:surface, "abc")
       assert {:error, %Ecto.Changeset{}} = Geo.create_land(land_params)
     end
 
@@ -61,5 +85,9 @@ defmodule Plum.GeoTest do
       assert %Ecto.Changeset{} = Geo.change_land(land)
     end
   end
-end
 
+  defp create_city(_) do
+    city = insert(:city, name: "Blaru", postal_code: "1234")
+    {:ok, city: city}
+  end
+end
