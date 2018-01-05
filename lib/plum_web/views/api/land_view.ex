@@ -33,10 +33,12 @@ defmodule PlumWeb.Api.LandView do
     openstreetmaps
     ads
     city
+    city_id
     location
     prospects
     inserted_at
     estate_agent
+    estate_agent_id
   )a
 
   def render("index.json", %{lands: lands}) do
