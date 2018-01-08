@@ -20,6 +20,7 @@ defmodule PlumWeb.Api.ProspectView do
     lands
     cities
     notes
+    origin
   )a
 
   def render("index.json", %{prospects: prospects}) do

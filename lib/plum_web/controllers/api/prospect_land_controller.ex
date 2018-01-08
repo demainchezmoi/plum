@@ -3,7 +3,7 @@ defmodule PlumWeb.Api.ProspectLandController do
 
   alias Plum.Sales
 
-  def create(conn, params = %{
+  def create(conn, %{
     "land_id" => land_id,
     "prospect_id" => prospect_id,
     "status" => status

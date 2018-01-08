@@ -1,7 +1,5 @@
 defmodule PlumWeb.PageController do
   use PlumWeb, :controller
-  alias Plum.Sales
-  alias Plum.Repo
 
   def index(conn, params) do
     conn |> render("index.html", params: params)
@@ -23,7 +21,7 @@ defmodule PlumWeb.PageController do
     conn |> render("login.html", query_params: conn.query_params)
   end
 
-  def contact(conn, params = %{"contact" => contact_params}) do
+  def contact(conn, %{"contact" => contact_params}) do
     conn =
       if not is_undef(contact_params, "phone") do
         creation = NaiveDateTime.utc_now |> NaiveDateTime.to_iso8601

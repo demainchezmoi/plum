@@ -1,6 +1,5 @@
 defmodule PlumWeb.Api.AuthController do
   use PlumWeb, :controller
-  alias PlumWeb.Api.SuccessView
   alias PlumWeb.Endpoint
   alias Phoenix.Token
   alias Plum.Accounts

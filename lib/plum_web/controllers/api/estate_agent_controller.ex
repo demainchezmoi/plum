@@ -25,8 +25,8 @@ defmodule PlumWeb.Api.EstateAgentController do
     conn |> render("index.json", %{estate_agents: estate_agents})
   end
 
-  def index(conn, params) do
-    estate_agents = Sales.list_estate_agents(params)
+  def index(conn, _params) do
+    estate_agents = Sales.list_estate_agents()
     conn |> render("index.json", estate_agents: estate_agents)
   end
 

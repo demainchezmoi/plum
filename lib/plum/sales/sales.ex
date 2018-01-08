@@ -1,7 +1,6 @@
 defmodule Plum.Sales do
   alias Ecto.Changeset
   alias Plum.Repo
-  alias Plum.Sales
   alias Plum.Sales.{Prospect, Contact, EstateAgent, ProspectLand}
   alias Plum.Geo.{City}
 
@@ -164,9 +163,9 @@ defmodule Plum.Sales do
   """
 
   def associate_prospect_land!(params = %{
-    prospect_id: prospect_id,
-    land_id: land_id,
-    status: status
+    prospect_id: _prospect_id,
+    land_id: _land_id,
+    status: _status
   }) do
     search_params = Map.delete(params, :status)
     case ProspectLand |> Repo.get_by(search_params) do

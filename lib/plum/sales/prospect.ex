@@ -17,6 +17,7 @@ defmodule Plum.Sales.Prospect do
     field :max_budget, :integer
     field :land_budget, :integer
     field :notes, :string
+    field :origin, :string
     has_one :contact, Contact
     many_to_many :cities, City,
       join_through: "sales_prospects_geo_cities",
@@ -36,6 +37,7 @@ defmodule Plum.Sales.Prospect do
     max_budget
     land_budget
     notes
+    origin
   )a
 
   @doc false
