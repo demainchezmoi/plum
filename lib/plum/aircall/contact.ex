@@ -19,7 +19,7 @@ defmodule Plum.Aircall.Contact do
     field :emails, {:array, :map}
 
     has_many :calls, Call
-    has_one :contact, Plum.Sales.Contact
+    has_one :contact, Plum.Sales.Contact, foreign_key: :aircall_contact_id
   end
 
   @optional_fields ~w(

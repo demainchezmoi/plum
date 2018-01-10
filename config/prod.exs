@@ -69,6 +69,7 @@ config :plum, PlumWeb.Endpoint,
 
 config :plum, Plum.Repo,
   adapter: Ecto.Adapters.Postgres,
+  types: Plum.PostgresTypes,
   username: "${RDS_USERNAME}",
   password: "${RDS_PASSWORD}",
   database: "${RDS_DB_NAME}",
@@ -94,10 +95,9 @@ config :plum,
   aircall_api_token: "${AIRCALL_API_TOKEN}"
 
 config :plum,
-  env: "${MIX_ENV}"
-
-config :plum,
-  dodo_url: "${DODO_URL}"
+  env: "${MIX_ENV}",
+  dodo_url: "${DODO_URL}",
+  geocoding_api_key: "${GEOCODING_API_KEY}"
 
 config :plum,
   land_ads_sqs_queue: "${LAND_ADS_SQS_QUEUE}",

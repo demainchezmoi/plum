@@ -1,6 +1,8 @@
 defmodule PlumWeb.Api.LandView do
   use PlumWeb, :view
 
+  alias Plum.Helpers.Geo, as: GeoHelpers
+
   alias PlumWeb.Api.{
     CityView,
     LandView,
@@ -12,33 +14,33 @@ defmodule PlumWeb.Api.LandView do
   import PlumWeb.ViewHelpers, only: [put_loaded_assoc: 2]
 
   @attributes ~w(
-    id
-    description
-    images
-    notary_fees
-    price
-    surface
-    address
-    land_register_ref
-    serviced
-    slope
-    type
-    soc
-    on_field_elements
     accessibility
-    sanitation
-    environment
-    geoportail
-    googlemaps
-    openstreetmaps
+    address
     ads
     city
     city_id
-    location
-    prospects
-    inserted_at
+    description
+    environment
     estate_agent
     estate_agent_id
+    geoportail
+    googlemaps
+    id
+    images
+    inserted_at
+    land_register_ref
+    location
+    notary_fees
+    on_field_elements
+    openstreetmaps
+    price
+    prospects
+    sanitation
+    serviced
+    slope
+    soc
+    surface
+    type
   )a
 
   def render("index.json", %{lands: lands}) do
@@ -52,6 +54,7 @@ defmodule PlumWeb.Api.LandView do
   def render("land.json", %{land: land}) do
     land
     |> Map.take(@attributes)
+    |> GeoHelpers.format_geo(:location)
     |> put_loaded_assoc({:ads, LandAdView, "index.json", :land_ads})
     |> put_loaded_assoc({:city, CityView, "show.json", :city})
     |> put_loaded_assoc({:prospects, ProspectView, "index.json", :prospects})

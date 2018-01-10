@@ -16,7 +16,8 @@ config :plum, Plum.Repo,
   password: "postgres",
   database: "plum_test",
   hostname: System.get_env("DATABASE_HOST") || "localhost",
-  pool: Ecto.Adapters.SQL.Sandbox
+  pool: Ecto.Adapters.SQL.Sandbox,
+  types: Plum.PostgresTypes
 
 config :plum, PlumWeb.Mailer,
   adapter: Swoosh.Adapters.Test
@@ -30,3 +31,6 @@ config :ex_aws,
     host: "s3-eu-west-1.amazonaws.com",
     region: "eu-west-1"
   ]
+
+config :plum,
+  env: "dev"

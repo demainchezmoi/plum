@@ -110,5 +110,41 @@ defmodule Plum.SalesTest do
       ids = results |> Enum.map(& &1.id)
       refute estate_agent.id in ids
     end
+
+    test "estate_agents_autocomplete associates by phone_number" do
+      phone_number = "0123456789"
+      contact = insert(:contact, phone_numbers: [%{label: "Principal", value: phone_number}])
+      estate_agent = insert(:estate_agent, contact: contact)
+      results = Sales.estate_agents_autocomplete(%{phone_number: "12345678"})
+      ids = results |> Enum.map(& &1.id)
+      assert estate_agent.id in ids
+    end
+
+    test "estate_agents_autocomplete rejects by phone_number" do
+      phone_number = "0123456789"
+      contact = insert(:contact, phone_numbers: [%{label: "Principal", value: phone_number}])
+      estate_agent = insert(:estate_agent, contact: contact)
+      results = Sales.estate_agents_autocomplete(%{phone_number: "98712"})
+      ids = results |> Enum.map(& &1.id)
+      refute estate_agent.id in ids
+    end
+
+    test "estate_agents_autocomplete associates by email" do
+      email = "coucou@test.com"
+      contact = insert(:contact, emails: [%{label: "Principal", value: email}])
+      estate_agent = insert(:estate_agent, contact: contact)
+      results = Sales.estate_agents_autocomplete(%{email: "coucou@test"})
+      ids = results |> Enum.map(& &1.id)
+      assert estate_agent.id in ids
+    end
+
+    test "estate_agents_autocomplete rejects by email" do
+      email = "coucou@test.com"
+      contact = insert(:contact, emails: [%{label: "Principal", value: email}])
+      estate_agent = insert(:estate_agent, contact: contact)
+      results = Sales.estate_agents_autocomplete(%{email: "salut@cava.com"})
+      ids = results |> Enum.map(& &1.id)
+      refute estate_agent.id in ids
+    end
   end
 end

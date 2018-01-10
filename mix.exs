@@ -45,6 +45,7 @@ defmodule Plum.Mixfile do
       {:facebook, "~> 0.15.0"},
       {:gen_smtp, "~> 0.12.0"},
       {:gen_stage, "~> 0.12.2"},
+      {:geo, "~> 1.4.1"},
       {:gettext, "~> 0.11"},
       {:hackney, "~> 1.9"},
       {:httpoison, "~> 0.13"},

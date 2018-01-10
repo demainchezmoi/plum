@@ -12,12 +12,15 @@ defmodule PlumWeb.Api.EstateAgentController do
       first_name: search["first_name"],
       last_name: search["last_name"],
       company: search["company"],
+      phone_number: search["phone_number"],
+      email: search["email"],
     }
 
     params =
       params
       |> Map.keys
       |> Enum.reject(& is_nil(params |> Map.get(&1)))
+      |> Enum.reject(& params |> Map.get(&1) == "")
       |> Enum.map(&{&1, Map.get(params, &1)})
       |> Enum.into(%{})
 

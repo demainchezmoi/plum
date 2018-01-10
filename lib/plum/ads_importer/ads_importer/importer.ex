@@ -66,7 +66,7 @@ defmodule Plum.AdsImporter.Importer do
 
   defp process_file(file) do
     data = file |> Poison.decode!
-    with ads when is_list(ads) and length(ads) > 0 <- data["land_ads"] do
+    with ads when is_list(ads) and length(ads) > 0 <- data["ads"] do
       ads |> Enum.map(&import_ad/1)
     else
       [] ->

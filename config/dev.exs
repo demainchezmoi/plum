@@ -54,7 +54,8 @@ config :plum, Plum.Repo,
   password: "postgres",
   database: "plum_dev",
   hostname: System.get_env("DATABASE_HOST") || "localhost",
-  pool_size: 10
+  pool_size: 10,
+  types: Plum.PostgresTypes
 
 config :plum, PlumWeb.Mailer,
   adapter: Swoosh.Adapters.Local
@@ -77,10 +78,9 @@ config :plum,
   aircall_api_token: System.get_env("AIRCALL_API_TOKEN")
 
 config :plum,
-  env: "dev"
-
-config :plum,
-  dodo_url: "localhost:4200"
+  env: "dev",
+  dodo_url: "localhost:4200",
+  geocoding_api_key: System.get_env("GEOCODING_API_KEY")
 
 config :plum,
   land_ads_sqs_queue: System.get_env("LAND_ADS_SQS_QUEUE"),

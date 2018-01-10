@@ -57,24 +57,33 @@ defmodule Plum.Factory do
 
   def land_factory do
     %Land{
-      description: "desc",
-      images: ["image"],
-      notary_fees: 123,
-      price: 123,
-      surface: 123,
-      address: "rue",
-      land_register_ref: "lrr",
-      serviced: false,
-      slope: "weak",
-      type: "tye",
-      soc: 0.7,
-      on_field_elements: "none",
       accessibility: "oui",
-      sanitation: "non",
+      address: "rue",
+      description: "desc",
       environment: "arbre",
       geoportail: "www",
       googlemaps: "www",
+      images: ["image"],
+      land_register_ref: "lrr",
+      lat: 44.03,
+      lng: 2.01,
+      notary_fees: 123,
+      on_field_elements: "none",
       openstreetmaps: "www",
+      price: 123,
+      sanitation: "non",
+      serviced: false,
+      slope: "weak",
+      soc: 0.7,
+      surface: 123,
+      type: "tye",
+    }
+  end
+
+  def point_factory do
+    %Geo.Point{
+      coordinates: {2.33826401958, 43.3003282686},
+      srid: 4326
     }
   end
 

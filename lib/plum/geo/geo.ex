@@ -236,12 +236,15 @@ defmodule Plum.Geo do
 
   def for_prospect(query, _), do: query
 
-  def for_cities(query, %{"cities" => cities}) do
+  def for_cities(query, %{"cities" => cities}) when is_list(cities) do
     cities = cities |> Enum.map(&String.to_integer/1)
     from l in query,
       join: c in assoc(l, :city),
       where: l.city_id in ^cities
   end
+
+  def for_cities(query, params = %{"cities" => cities}), do: for_cities(query, Map.put(params, "cities", [cities]))
+
   def for_cities(query, _), do: query
 
   def for_max_price(query, %{"max_price" => max_price}) do

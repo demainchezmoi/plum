@@ -324,8 +324,24 @@ defmodule Plum.Sales do
     |> ea_first_name_like(params)
     |> ea_last_name_like(params)
     |> ea_company_like(params)
+    |> ea_phone_like(params)
+    |> ea_email_like(params)
     |> Repo.all
   end
+
+  def ea_phone_like(query, %{phone_number: phone_number}) do
+    from ea in query,
+      join: c in assoc(ea, :contact),
+      where: fragment("EXISTS (SELECT 1 FROM jsonb_array_elements(to_jsonb(?)) as j(data) WHERE (data#>> '{value}') % ?)", c.phone_numbers, ^phone_number)
+  end
+  def ea_phone_like(query, _), do: query
+
+  def ea_email_like(query, %{email: email}) do
+    from ea in query,
+      join: c in assoc(ea, :contact),
+      where: fragment("EXISTS (SELECT 1 FROM jsonb_array_elements(to_jsonb(?)) as j(data) WHERE (data#>> '{value}') % ?)", c.emails, ^email)
+  end
+  def ea_email_like(query, _), do: query
 
   def ea_first_name_like(query, %{first_name: first_name}) do
     from ea in query,
