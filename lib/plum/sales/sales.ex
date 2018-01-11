@@ -9,6 +9,16 @@ defmodule Plum.Sales do
   # =============
   # Prospect
   # =============
+  @doc """
+  Buids a query to fetch a list of prospects with filters
+  """
+
+  def list_prospects_query(params) do
+    Prospect
+    |> order_by(desc: :inserted_at)
+    |> preload(:contact)
+    |> preload(:cities)
+  end
 
   @doc """
   Returns the list of prospects.
@@ -19,12 +29,8 @@ defmodule Plum.Sales do
       [%Prospect{}, ...]
 
   """
-  def list_prospects do
-    Prospect
-    |> order_by(desc: :inserted_at)
-    |> preload(:contact)
-    |> preload(:cities)
-    |> Repo.all
+  def list_prospects(params) do
+    list_prospects_query(params) |> Repo.all
   end
 
   @doc """

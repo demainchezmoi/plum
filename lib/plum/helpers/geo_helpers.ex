@@ -62,6 +62,16 @@ defmodule Plum.Helpers.Geo do
     end
   end
 
+  # defp extract_city(%{"address_components" => address_components}) do
+    # address_components
+    # |> Enum.first(& "locality" in &1["types"])
+    # |> case do
+      # %{"long_name" => name} -> name
+      # _ -> nil
+    # end
+  # end
+  # defp extract_city(_), do: nil
+
   def mock_get_location(_address) do
     if (Mix.env != :test) do
       throw "Warning: using mock outside test mode."

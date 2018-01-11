@@ -1,13 +1,19 @@
 defmodule PlumWeb.Api.ProspectController do
   use PlumWeb, :controller
+  alias Plum.Repo
   alias Plum.Sales
   alias Plum.Sales.Prospect
 
   action_fallback PlumWeb.FallbackController
 
-  def index(conn, _params) do
-    prospects = Sales.list_prospects()
-    conn |> render("index.json", prospects: prospects)
+  def index(conn, params) do
+    prospects_query = Sales.list_prospects_query(params)
+    page = prospects_query |> Repo.paginate(params)
+
+    render conn, "index.json",
+      prospects: page.entries,
+      page_number: page.page_number,
+      total_pages: page.total_pages
   end
 
   def create(conn, %{"prospect" => prospect_params}) do

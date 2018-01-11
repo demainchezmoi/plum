@@ -43,8 +43,12 @@ defmodule PlumWeb.Api.LandView do
     type
   )a
 
-  def render("index.json", %{lands: lands}) do
-    %{data: render_many(lands, LandView, "land.json")}
+  def render("index.json", params = %{lands: lands}) do
+    %{
+      data: render_many(lands, LandView, "land.json"),
+      page_number: params[:page_number],
+      total_pages: params[:total_pages],
+    }
   end
 
   def render("show.json", %{land: land}) do

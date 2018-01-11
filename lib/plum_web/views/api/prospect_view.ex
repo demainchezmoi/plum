@@ -23,8 +23,12 @@ defmodule PlumWeb.Api.ProspectView do
     origin
   )a
 
-  def render("index.json", %{prospects: prospects}) do
-    %{data: render_many(prospects, ProspectView, "prospect.json")}
+  def render("index.json", params = %{prospects: prospects}) do
+    %{
+      data: render_many(prospects, ProspectView, "prospect.json"),
+      page_number: params[:page_number],
+      total_pages: params[:total_pages],
+    }
   end
 
   def render("show.json", %{prospect: prospect}) do

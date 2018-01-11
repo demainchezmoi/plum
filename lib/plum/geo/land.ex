@@ -45,9 +45,11 @@ defmodule Plum.Geo.Land do
     timestamps()
   end
 
-  @required_params ~w()a
+  @required_params ~w(
+    city_id
+  )a
   @optional_params ~w(
-    city_id surface price description images notary_fees
+    surface price description images notary_fees
     address land_register_ref serviced slope type soc
     on_field_elements accessibility sanitation environment
     geoportail googlemaps openstreetmaps estate_agent_id

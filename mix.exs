@@ -61,6 +61,7 @@ defmodule Plum.Mixfile do
       {:phoenix_swoosh, "~> 0.2"},
       {:postgrex, ">= 0.0.0"},
       {:proper_case, "~> 1.0.2"},
+      {:scrivener_ecto, "~> 1.0"},
       {:secure_random, "~> 0.5"},
       {:sweet_xml, "~> 0.6"},
     ]

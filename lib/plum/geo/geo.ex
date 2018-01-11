@@ -195,8 +195,7 @@ defmodule Plum.Geo do
       from l in Land,
       join: c in assoc(l, :city),
       preload: [:city, :ads, [estate_agent: :contact]],
-      order_by: [desc: :inserted_at],
-      limit: 20
+      order_by: [desc: :inserted_at]
 
     query
     |> for_max_price(params)
@@ -327,7 +326,14 @@ defmodule Plum.Geo do
   def create_land(attrs \\ %{}) do
     %Land{}
     |> Land.changeset(attrs)
+    |> Ecto.Changeset.cast_assoc(:prospects_lands)
     |> Repo.insert()
+    |> case do
+      {:ok, land = %Land{}} ->
+        {:ok, land |> Repo.preload([:city, [estate_agent: :contact]])}
+      {:error, err} ->
+        {:error, err}
+    end
   end
 
   @doc """

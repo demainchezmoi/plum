@@ -103,7 +103,7 @@ defmodule Plum.Factory do
 
   def prospect_land_factory do
     %ProspectLand{
-      status: "interesting"
+      status: "selected"
     }
   end
 

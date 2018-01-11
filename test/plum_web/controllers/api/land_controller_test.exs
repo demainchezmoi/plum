@@ -75,7 +75,8 @@ defmodule PlumWeb.Api.LandControllerTest do
 
     @tag :logged_in
     test "renders land when data is valid", %{conn: conn} do
-      land_attrs = params_for(:land)
+      city = insert(:city)
+      land_attrs = params_for(:land, city_id: city.id)
       conn1 = post conn, api_land_path(conn, :create), land: land_attrs 
       assert %{"id" => id} = json_response(conn1, 201) |> Map.get("data")
 

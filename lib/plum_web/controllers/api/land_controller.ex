@@ -7,8 +7,13 @@ defmodule PlumWeb.Api.LandController do
   action_fallback PlumWeb.FallbackController
 
   def index(conn, params) do
-    lands = Geo.list_lands(params)
-    conn |> render("index.json", lands: lands)
+    lands_query = Geo.list_lands_query(params)
+    page = lands_query |> Repo.paginate(params)
+
+    render conn, "index.json",
+      lands: page.entries,
+      page_number: page.page_number,
+      total_pages: page.total_pages
   end
 
   def create(conn, %{"land" => land_params}) do
@@ -28,7 +33,7 @@ defmodule PlumWeb.Api.LandController do
   def update(conn, %{"id" => id, "land" => land_params}) do
     land = Geo.get_land!(id)
     with {:ok, %Land{} = land} <- Geo.update_land(land, land_params) do
-      land = land |> Repo.preload([:ads, [estate_agent: :contact]], force: true)
+      land = land |> Repo.preload([:ads, :city, [estate_agent: :contact]], force: true)
       render(conn, "show.json", land: land)
     end
   end

@@ -6,6 +6,9 @@ defmodule Plum.GeoTest do
   alias Plum.Geo.{
     Land,
   }
+  alias Plum.Sales.{
+    ProspectLand
+  }
 
   describe "cities" do
     setup [:create_city]
@@ -48,8 +51,26 @@ defmodule Plum.GeoTest do
     end
 
     test "create_land/1 with valid data creates a land" do
-      land_params = params_for(:land)
+      city = insert(:city)
+      land_params = params_for(:land, city_id: city.id)
       assert {:ok, %Land{}} = Geo.create_land(land_params)
+    end
+
+    test "create_land/1 associates prospects from prospects_lands" do
+      city = insert(:city)
+      prospect = insert(:prospect)
+      prospect_id = prospect.id
+      prospect_land = params_for(:prospect_land, prospect: prospect, status: "test")
+      land_params = params_for(:land, city_id: city.id) |> Map.put(:prospects_lands, [prospect_land])
+      assert {:ok, %Land{id: land_id}} = Geo.create_land(land_params)
+      assert %ProspectLand{status: "test"} = ProspectLand |> Repo.get_by(%{prospect_id: prospect_id, land_id: land_id})
+    end
+
+    test "create_land/1 associates city" do
+      city = insert(:city)
+      city_id = city.id
+      land_params = params_for(:land) |> Map.put(:city_id, city.id)
+      assert {:ok, %Land{city_id: ^city_id}} = Geo.create_land(land_params)
     end
 
     test "create_land/1 with invalid data returns error changeset" do
@@ -58,7 +79,8 @@ defmodule Plum.GeoTest do
     end
 
     test "update_land/2 with valid data updates the land" do
-      land_params = params_for(:land)
+      city = insert(:city)
+      land_params = params_for(:land, city_id: city.id)
       land = insert(:land, land_params)
       land_params_updated = land_params |> Map.put(:surface, 1_000)
       assert {:ok, land} = Geo.update_land(land, land_params_updated)
