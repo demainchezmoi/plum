@@ -13,7 +13,7 @@ defmodule Plum.Sales do
   Buids a query to fetch a list of prospects with filters
   """
 
-  def list_prospects_query(params) do
+  def list_prospects_query(params \\ %{}) do
     Prospect
     |> order_by(desc: :inserted_at)
     |> preload(:contact)
@@ -29,7 +29,7 @@ defmodule Plum.Sales do
       [%Prospect{}, ...]
 
   """
-  def list_prospects(params) do
+  def list_prospects(params \\ %{}) do
     list_prospects_query(params) |> Repo.all
   end
 
