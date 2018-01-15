@@ -452,8 +452,8 @@ defmodule Plum.Geo do
 
   """
   def create_land_ad(attrs \\ %{}) do
-    %Land{}
-    |> Land.changeset(attrs)
+    %LandAd{}
+    |> LandAd.changeset(attrs)
     |> Repo.insert()
   end
 end

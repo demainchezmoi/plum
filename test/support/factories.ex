@@ -14,6 +14,8 @@ defmodule Plum.Factory do
   alias Plum.Geo.{
     City,
     Land,
+    LandAd,
+    LandAdContact,
   }
 
   alias Plum.Accounts.{
@@ -77,6 +79,21 @@ defmodule Plum.Factory do
       soc: 0.7,
       surface: 123,
       type: "tye",
+      ads: [build(:land_ad)],
+    }
+  end
+
+  def land_ad_factory do
+    %LandAd {
+      link: sequence(:link, &"link-#{&1}"),
+      origin: sequence(:origin, &"origin-#{&1}"),
+      contact: build(:land_ad_contact),
+    }
+  end
+
+  def land_ad_contact_factory do
+    %LandAdContact{
+      address: "address"
     }
   end
 

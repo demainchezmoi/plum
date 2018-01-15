@@ -17,7 +17,7 @@ defmodule Plum.Geo.LandAd do
   @doc false
   def changeset(%LandAd{} = land_ad, attrs) do
     land_ad
-    |> cast(attrs, [:link, :origin])
+    |> cast(attrs, [:link, :origin, :land_id])
     |> cast_embed(:contact)
     |> validate_required([:link, :origin])
   end
