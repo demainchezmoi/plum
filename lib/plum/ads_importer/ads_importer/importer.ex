@@ -80,9 +80,9 @@ defmodule Plum.AdsImporter.Importer do
     Logger.debug("attach_city to struct #{inspect struct}")
 
     with cp when is_binary(cp) <- struct["raw_postal_code"],
-         name when is_binary(name) <- struct["raw_city_name"],
-         dep <- cp |> String.slice(0..1),
-         %City{id: city_id} <- Geo.find_matching_city(name, dep)
+      name when is_binary(name) <- struct["raw_city_name"],
+      dep <- cp |> String.slice(0..1),
+      %City{id: city_id} <- Geo.find_matching_city(name, dep)
     do
       struct |> Map.put("city_id", city_id)
     else
@@ -90,36 +90,56 @@ defmodule Plum.AdsImporter.Importer do
     end
   end
 
-  defp import_ad(ad) do
+  @constructors [
+    "maison-plouay",
+    "maisons de l'avenir",
+    "maisons dominique charles",
+    "maisons marines",
+    "maisons privat",
+    "maisons revea",
+    "natilia",
+    "trecobat",
+  ]
+
+  def is_constructor(%{"contact" => %{"name" => name}}) when not is_nil(name) do
+    Enum.any?(@constructors, fn c_name -> String.downcase(name) =~ c_name end)
+  end
+  def is_constructor(_ad), do: false
+
+  def import_ad(ad) do
     Logger.debug("Importing ad #{inspect ad}")
 
-    case Geo.get_ad_by(%{origin: ad["origin"], link: ad["link"]}) do
-      %LandAd{} ->
-        {:ok, :ad_existing}
-      nil ->
-        case Geo.find_matching_land(ad) do
-          %Land{id: id} ->
-            ad
-            |> Map.put("land_id", id)
-            |> Geo.create_land_ad
-            |> case do
-              {:ok, _} -> {:ok, :ad_inserted}
-              _ -> {:error, :ad_not_inserted}
-            end
+    if (is_constructor(ad)) do
+      {:ok, :rejected_as_constructor}
+    else
+      case Geo.get_ad_by(%{origin: ad["origin"], link: ad["link"]}) do
+        %LandAd{} ->
+          {:ok, :ad_existing}
+        nil ->
+          case Geo.find_matching_land(ad) do
+            %Land{id: id} ->
+              ad
+              |> Map.put("land_id", id)
+              |> Geo.create_land_ad
+              |> case do
+                {:ok, _} -> {:ok, :ad_inserted}
+                _ -> {:error, :ad_not_inserted}
+              end
 
-          nil ->
-            ad_changeset = %LandAd{} |> LandAd.changeset(ad)
-            params = ad |> attach_city
+            nil ->
+              ad_changeset = %LandAd{} |> LandAd.changeset(ad)
+              params = ad |> attach_city
 
-            %Land{}
-            |> Land.changeset(params)
-            |> Changeset.put_assoc(:ads, [ad_changeset])
-            |> Repo.insert
-            |> case do
-              {:ok, _} -> {:ok, :land_inserted}
-              _ -> {:error, :land_not_inserted}
-            end
-        end
+              %Land{}
+              |> Land.changeset(params)
+              |> Changeset.put_assoc(:ads, [ad_changeset])
+              |> Repo.insert
+              |> case do
+                {:ok, _} -> {:ok, :land_inserted}
+                _ -> {:error, :land_not_inserted}
+              end
+          end
+      end
     end
   end
 end
