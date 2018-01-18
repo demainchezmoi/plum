@@ -69,10 +69,8 @@ defmodule Plum.AdsImporter.Importer do
     with ads when is_list(ads) and length(ads) > 0 <- data["ads"] do
       ads |> Enum.map(&import_ad/1)
     else
-      [] ->
-        Logger.warn("[warn] Empty lands import file #{inspect data}")
-      error ->
-        Logger.error("[error] Unprocessable lands import file #{inspect error}")
+      [] -> Logger.debug("[warn] Empty lands import file #{inspect data}")
+      error -> Logger.error("[error] Unprocessable lands import file #{inspect error}")
     end
   end
 
