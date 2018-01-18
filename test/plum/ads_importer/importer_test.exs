@@ -1,6 +1,6 @@
 defmodule Plum.AdsImporter.ImporterTest do
   use Plum.DataCase
-  alias Plum.Geo.LandAd
+  alias Plum.Geo.{Land, LandAd}
   import Plum.AdsImporter.Importer
   import Plum.Factory
 
@@ -28,6 +28,26 @@ defmodule Plum.AdsImporter.ImporterTest do
         origin: origin,
         link: new_link,
       })
+    end
+
+    test "creates land along with ad" do
+      city = insert(:city)
+      origin = "asxxuw,./"
+      link = "x[[]qqq.,;is"
+      ad = %{
+        "origin" => origin,
+        "link" => link,
+        "price" => 12345,
+        "surface" => 54321,
+        "description" => "description",
+        "raw_city_name" => city.name,
+        "raw_postal_code" => city.postal_code,
+      }
+      import_ad(ad)
+      assert %LandAd{id: id, land: %Land{}} = LandAd |> Repo.get_by!(%{
+        origin: origin,
+        link: link
+      }) |> Repo.preload(:land)
     end
   end
 end

@@ -26,8 +26,8 @@ defmodule Plum.Factory do
   def city_factory do
     %City{
       name: sequence(:name, &"city name #{&1}"),
-      insee_id: sequence(:insee_id, &"city insee_id #{&1}"),
-      insee_id: sequence(:postal_code, &"city postal_code #{&1}"),
+      insee_id: sequence(:insee_id, &"#{&1}"),
+      postal_code: sequence(:postal_code, &"#{&1}"),
     }
   end
 

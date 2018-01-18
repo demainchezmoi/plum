@@ -84,7 +84,8 @@ defmodule Plum.AdsImporter.Importer do
     do
       struct |> Map.put("city_id", city_id)
     else
-      _ -> struct
+      _ ->
+        struct
     end
   end
 
