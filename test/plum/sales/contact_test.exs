@@ -1,5 +1,4 @@
 defmodule Plum.Sales.ContactTest do
-  alias Ecto.Changeset
   alias Plum.Repo
   alias Plum.Sales.Contact
   import Plum.Factory

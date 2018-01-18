@@ -44,7 +44,7 @@ defmodule Plum.AdsImporter.ImporterTest do
         "raw_postal_code" => city.postal_code,
       }
       import_ad(ad)
-      assert %LandAd{id: id, land: %Land{}} = LandAd |> Repo.get_by!(%{
+      assert %LandAd{land: %Land{}} = LandAd |> Repo.get_by!(%{
         origin: origin,
         link: link
       }) |> Repo.preload(:land)
