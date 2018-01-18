@@ -30,7 +30,7 @@ defmodule Plum.AdsImporter.Notifier do
     }
   end
 
-  def handle_events(events, _from, pipeline_name) do
+  def handle_events(_events, _from, pipeline_name) do
     {:noreply, [], pipeline_name}
   end
 

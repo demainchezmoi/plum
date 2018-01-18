@@ -2,8 +2,6 @@ defmodule PlumWeb.Api.ProspectControllerTest do
   use PlumWeb.ConnCase
   import Plum.Factory
   alias Plum.Sales
-  alias Plum.Geo
-  alias Plum.Geo.{Land}
 
   describe "index" do
     setup [:create_prospect]

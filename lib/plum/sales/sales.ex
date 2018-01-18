@@ -18,7 +18,15 @@ defmodule Plum.Sales do
     |> order_by(desc: :inserted_at)
     |> preload(:contact)
     |> preload(:cities)
+    |> p_for_status(params)
   end
+
+  def p_for_status(query, %{
+    "prospect_status" => prospect_status
+  }) when is_binary(prospect_status) and prospect_status != "" do
+    from p in query, where: p.status == ^prospect_status
+  end
+  def p_for_status(query, _), do: query
 
   @doc """
   Returns the list of prospects.
@@ -30,7 +38,9 @@ defmodule Plum.Sales do
 
   """
   def list_prospects(params \\ %{}) do
-    list_prospects_query(params) |> Repo.all
+    list_prospects_query(params)
+    |> order_by(desc: :inserted_at)
+    |> Repo.all
   end
 
   @doc """

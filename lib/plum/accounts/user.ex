@@ -25,11 +25,11 @@ defmodule Plum.Accounts.User do
     first_name
     last_name
     roles
+    facebook_id
+    admin
   )a
 
   @required_fields ~w(
-    facebook_id
-    admin
   )a
 
   @doc false

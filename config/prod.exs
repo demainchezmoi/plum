@@ -113,3 +113,12 @@ config :ex_aws,
     region: "eu-west-1"
   ]
 
+config :logger, :logger_papertrail_backend,
+  host: "logs6.papertrailapp.com:14884",
+  level: :warn,
+  system_name: "Plum",
+  format: "$metadata $message"
+
+config :logger,
+  backends: [:console, LoggerPapertrailBackend.Logger],
+  level: :debug

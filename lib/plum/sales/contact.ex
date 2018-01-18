@@ -16,6 +16,7 @@ defmodule Plum.Sales.Contact do
     has_many :aircall_contact_calls, through: [:aircall_contact, :calls]
     field :first_name, :string
     field :last_name, :string
+    field :name, :string, virtual: true
     field :origin, :string
     field :type, :string
     field :company, :string
@@ -24,7 +25,11 @@ defmodule Plum.Sales.Contact do
     belongs_to :estate_agent, EstateAgent
 
     embeds_many :emails, ContactEmail, on_replace: :delete
+    field :email, :string, virtual: true
+
     embeds_many :phone_numbers, ContactPhone, on_replace: :delete
+    field :phone_number, :string, virtual: true
+
     timestamps()
   end
 
@@ -45,7 +50,36 @@ defmodule Plum.Sales.Contact do
     contact
     |> cast(attrs, @required_fields ++ @optional_fields)
     |> validate_required(@required_fields)
+    |> set_emails_from_virtual
+    |> set_phone_numbers_from_virtual
+    |> set_fname_lname_from_virtual
     |> cast_embed(:emails)
     |> cast_embed(:phone_numbers)
+  end
+
+  def set_emails_from_virtual(changeset) do
+    case changeset.params do
+      %{"email" => email} ->
+        changeset |> put_change(:emails, [%{value: email, label: "Principal"}])
+      _ ->  changeset
+    end
+  end
+
+  def set_phone_numbers_from_virtual(changeset) do
+    case changeset.params do
+      %{"phone_number" => phone_number} ->
+        changeset |> put_change(:phone_numbers, [%{value: phone_number, label: "Principal"}])
+      _ ->  changeset
+    end
+  end
+
+  def set_fname_lname_from_virtual(changeset) do
+    case changeset.params do
+      %{"name" => name} ->
+        changeset
+        |> put_change(:first_name, name |> String.split(" ") |> List.first)
+        |> put_change(:last_name, name |> String.split(" ") |> Enum.drop(1) |> Enum.join(" "))
+      _ ->  changeset
+    end
   end
 end

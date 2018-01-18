@@ -33,4 +33,4 @@ config :ex_aws,
   ]
 
 config :plum,
-  env: "dev"
+  env: "test"

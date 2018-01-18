@@ -114,7 +114,8 @@ defmodule Plum.Factory do
   def prospect_factory do
     %Prospect{
       contact: build(:contact),
-      max_budget: 140_000
+      max_budget: 140_000,
+      status: "new",
     }
   end
 

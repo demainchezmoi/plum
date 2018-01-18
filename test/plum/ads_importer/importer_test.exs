@@ -22,7 +22,6 @@ defmodule Plum.AdsImporter.ImporterTest do
         "surface" => land.surface,
         "description" => land.description
       }
-      ads_count = land.ads |> length
       import_ad(ad)
       assert %LandAd{} = LandAd |> Repo.get_by(%{
         land_id: land.id,

@@ -18,6 +18,7 @@ defmodule PlumWeb.Api.LandController do
 
   def create(conn, %{"land" => land_params}) do
     with {:ok, %Land{} = land} <- Geo.create_land(land_params) do
+      land = land |> Repo.preload([:ads, :city, [estate_agent: :contact]], force: true)
       conn
       |> put_status(:created)
       |> put_resp_header("location", api_land_path(conn, :show, land))

@@ -49,6 +49,7 @@ defmodule Plum.Mixfile do
       {:gettext, "~> 0.11"},
       {:hackney, "~> 1.9"},
       {:httpoison, "~> 0.13"},
+      {:logger_papertrail_backend, "~> 1.0"},
       {:mix_docker, "~> 0.5.0"},
       {:mix_test_watch, "~> 0.3", only: [:test], runtime: false},
       {:number, "~> 0.5.4"},

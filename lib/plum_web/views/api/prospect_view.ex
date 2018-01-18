@@ -21,6 +21,7 @@ defmodule PlumWeb.Api.ProspectView do
     cities
     notes
     origin
+    status
   )a
 
   def render("index.json", params = %{prospects: prospects}) do
