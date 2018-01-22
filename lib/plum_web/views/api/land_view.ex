@@ -17,8 +17,11 @@ defmodule PlumWeb.Api.LandView do
     accessibility
     address
     ads
+    agency_fees
     city
     city_id
+    connection_fees
+    demolition_fees
     description
     environment
     estate_agent
@@ -36,7 +39,9 @@ defmodule PlumWeb.Api.LandView do
     price
     prospects
     sanitation
+    sanitation_fees
     serviced
+    servicing_fees
     slope
     soc
     surface

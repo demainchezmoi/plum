@@ -28,6 +28,12 @@ defmodule Plum.Sales.Prospect do
       join_through: ProspectLand,
       join_keys: [prospect_id: :id, land_id: :id],
       on_replace: :delete
+    field :house_price, :integer
+    field :garage_price, :integer
+    field :kitchen_price, :integer
+    field :soil_price, :integer
+    field :walls_ceiling_price, :integer
+    field :terrace_price, :integer
     timestamps()
   end
 
@@ -40,6 +46,12 @@ defmodule Plum.Sales.Prospect do
     notes
     origin
     status
+    house_price
+    garage_price
+    kitchen_price
+    soil_price
+    walls_ceiling_price
+    terrace_price
   )a
 
   @possible_status ~w(

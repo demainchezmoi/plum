@@ -80,6 +80,11 @@ defmodule Plum.Factory do
       surface: 123,
       type: "tye",
       ads: [build(:land_ad)],
+      agency_fees: 0,
+      connection_fees: 0,
+      sanitation_fees: 0,
+      servicing_fees: 0,
+      demolition_fees: 0,
     }
   end
 

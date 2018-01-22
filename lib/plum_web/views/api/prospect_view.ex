@@ -11,17 +11,23 @@ defmodule PlumWeb.Api.ProspectView do
   import PlumWeb.ViewHelpers, only: [put_loaded_assoc: 2]
 
   @attributes ~w(
-    max_budget
-    land_budget
-    inserted_at
-    updated_at
-    id
-    contact
-    lands
     cities
+    contact
+    garage_price
+    house_price
+    id
+    inserted_at
+    kitchen_price
+    land_budget
+    lands
+    max_budget
     notes
     origin
+    soil_price
     status
+    terrace_price
+    updated_at
+    walls_ceiling_price
   )a
 
   def render("index.json", params = %{prospects: prospects}) do

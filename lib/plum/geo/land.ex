@@ -9,8 +9,6 @@ defmodule Plum.Geo.Land do
   schema "geo_lands" do
     field :description, :string
     field :images, {:array, :string}
-    field :notary_fees, :integer
-    field :price, :integer
     field :surface, :integer
 
     field :address, :string
@@ -42,6 +40,14 @@ defmodule Plum.Geo.Land do
     field :lat, :float, virtual: true
     field :location, Geo.Geometry
 
+    field :price, :integer
+    field :notary_fees, :integer
+    field :agency_fees, :integer
+    field :connection_fees, :integer
+    field :sanitation_fees, :integer
+    field :servicing_fees, :integer
+    field :demolition_fees, :integer
+
     timestamps()
   end
 
@@ -53,7 +59,8 @@ defmodule Plum.Geo.Land do
     address land_register_ref serviced slope type soc
     on_field_elements accessibility sanitation environment
     geoportail googlemaps openstreetmaps estate_agent_id
-    location lat lng
+    location lat lng agency_fees connection_fees
+    sanitation_fees servicing_fees demolition_fees
   )a
 
   @doc false

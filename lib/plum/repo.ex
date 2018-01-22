@@ -1,6 +1,6 @@
 defmodule Plum.Repo do
   use Ecto.Repo, otp_app: :plum
-  use Scrivener, page_size: 10
+  use Scrivener, page_size: 15
 
   @doc """
   Dynamically loads the repository url from the

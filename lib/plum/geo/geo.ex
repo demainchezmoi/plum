@@ -204,6 +204,7 @@ defmodule Plum.Geo do
     # |> for_min_price(params)
     # |> for_min_surface(params)
     |> for_cities(params)
+    |> for_origin(params)
   end
 
 
@@ -234,6 +235,13 @@ defmodule Plum.Geo do
   end
 
   def for_prospect(query, _), do: query
+
+  def for_origin(query, %{"origin" => origin}) do
+    from l in query,
+      join: a in assoc(l, :ads),
+      where: a.origin == ^origin
+  end
+  def for_origin(query, _), do: query
 
   def for_cities(query, %{"cities" => cities}) when is_list(cities) do
     cities = cities |> Enum.map(&String.to_integer/1)
