@@ -14,15 +14,14 @@ defmodule Plum.AdsImporter.S3Server do
     limited_count = min(10, count)
 
     # Cancel any running loops
-    children =
-			Task.Supervisor.children(Plum.AdsImporter.S3Server.TaskSupervisor)
-
+    children = Task.Supervisor.children(Plum.AdsImporter.S3Server.TaskSupervisor)
     terminate_servers(children)
 
     # Start a new loop
-    {:ok, _pid} =
-			Task.Supervisor.start_child(Plum.AdsImporter.S3Server.TaskSupervisor, fn -> loop(limited_count, 0) end)
-
+    {:ok, _pid} = Task.Supervisor.start_child(
+      Plum.AdsImporter.S3Server.TaskSupervisor,
+      fn -> loop(limited_count, 0) end
+    )
     {0, []}
   end
 

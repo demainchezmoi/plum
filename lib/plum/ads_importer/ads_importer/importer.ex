@@ -34,8 +34,8 @@ defmodule Plum.AdsImporter.Importer do
 
   def handle_events([event], _from, pipeline_name) do
     file_task = Task.async(fn -> handle_event(event) end)
-    # S3Server.release_and_delete(events)
     forward_events = Task.await(file_task, 10 * 60 * 1_000)
+    Logger.debug("Importer is forwarding events: #{inspect forward_events}")
     {:noreply, forward_events, pipeline_name}
   end
 
@@ -43,6 +43,7 @@ defmodule Plum.AdsImporter.Importer do
   # Private functions
   # ================
   defp handle_event(%{file: file} = event) do
+    Logger.debug("Impoter is handling event #{inspect event}")
     %{ref: ref} = Supervisor.async_nolink(TaskSupervisor, fn -> process_file(file) end)
     collect_results(ref, event)
   end
@@ -69,8 +70,12 @@ defmodule Plum.AdsImporter.Importer do
     with ads when is_list(ads) and length(ads) > 0 <- data["ads"] do
       ads |> Enum.map(&import_ad/1)
     else
-      [] -> Logger.debug("Empty lands import file #{inspect data}")
-      error -> Logger.error("[error] Unprocessable lands import file #{inspect error}")
+      [] ->
+        Logger.debug("Empty lands import file #{inspect data}")
+        []
+      error ->
+        Logger.error("[error] Unprocessable lands import file #{inspect error}")
+        []
     end
   end
 

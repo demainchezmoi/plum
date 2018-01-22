@@ -20,9 +20,7 @@ defmodule Plum.AdsImporter.Notifier do
   # Server callbacks
   ##########
   def init(pipeline_name) do
-    upstream =
-      Enum.join([pipeline_name, "Importer"], "")
-
+    upstream = Enum.join([pipeline_name, "Importer"], "")
     {
       :consumer,
       pipeline_name,
@@ -31,6 +29,7 @@ defmodule Plum.AdsImporter.Notifier do
   end
 
   def handle_events(_events, _from, pipeline_name) do
+    Logger.debug("Notifier is handling events")
     {:noreply, [], pipeline_name}
   end
 

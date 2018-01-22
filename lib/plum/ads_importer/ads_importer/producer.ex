@@ -1,6 +1,7 @@
 defmodule Plum.AdsImporter.Producer do
   use GenStage
   alias Plum.AdsImporter.{Producer, S3Server}
+  require Logger
 
   ##########
   # Client API
@@ -22,12 +23,14 @@ defmodule Plum.AdsImporter.Producer do
   end
 
   def handle_demand(demand, state) when demand > 0 do
+    Logger.debug("Producer is handling a demand of #{inspect demand} with state #{inspect state}")
     new_demand = demand + state
     {count, events} = take(new_demand)
     {:noreply, events, new_demand - count}
   end
 
   def handle_cast({:events, {count, events}}, state) do
+    Logger.debug("Producer is handling cast with count #{inspect count}, events #{inspect events} with state #{inspect state}")
     {:noreply, events, state - count}
   end
 

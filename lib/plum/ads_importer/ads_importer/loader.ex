@@ -30,6 +30,7 @@ defmodule Plum.AdsImporter.Loader do
 
   def handle_events([event] = _events, _from, pipeline_name) do
     # Retrieve file from S3
+    Logger.debug("Loader is handling event #{inspect event}")
     ExAws.S3.get_object(event.bucket, event.key) |> ExAws.request |> case do
       {_status, %{body: file}} ->
         {:noreply, [Map.put(event, :file, file)], pipeline_name}
