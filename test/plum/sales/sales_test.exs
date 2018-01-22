@@ -16,6 +16,13 @@ defmodule Plum.SalesTest do
       assert Sales.list_prospects() |> Enum.map(& &1.id) == [prospect.id]
     end
 
+    test "list_prospects/0 filters by name" do
+      prospect1 = insert(:prospect, contact: %{first_name: "first_name_1", last_name: "last_name_1"})
+      prospect2 = insert(:prospect, contact: %{first_name: "another", last_name: "blaz"})
+      params = %{"prospect_name" => "first_name_1 last_na"}
+      assert Sales.list_prospects(params) |> Enum.map(& &1.id) == [prospect1.id]
+    end
+
     test "get_prospect!/1 returns the prospect with given id" do
       prospect = insert(:prospect)
       assert Sales.get_prospect!(prospect.id).id == prospect.id
