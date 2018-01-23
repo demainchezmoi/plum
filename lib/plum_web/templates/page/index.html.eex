@@ -232,7 +232,7 @@
             <div class="form-group row">
               <label class="col-2 col-form-label gray-text-800">Tél</label>
               <div class="col-10">
-                <%= text_input f, :phone, placeholder: "06 12 34 56 78", class: "form-control", required: true %>
+                <%= text_input f, :phone, placeholder: "06 12 34 56 78", class: "form-control", required: true, minlength: 10 %>
               </div>
             </div>
             <%= hidden_input f, :remark, class: "form-control", "data-role": "searched-location-hidden-input" %>
