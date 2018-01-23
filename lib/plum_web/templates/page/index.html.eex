@@ -236,6 +236,8 @@
               </div>
             </div>
             <%= hidden_input f, :remark, class: "form-control", "data-role": "searched-location-hidden-input" %>
+            <%= hidden_input f, :city, class: "form-control", "data-role": "searched-city-hidden-input" %>
+            <%= hidden_input f, :postal_code, class: "form-control", "data-role": "searched-postal-code-hidden-input" %>
             <p class="small text-right gray-text-600">Nous étudions votre projet ensemble et vous proposons une sélection de terrains personnalisée</p>
             <div class="clearfix">
               <div class="pull-right">

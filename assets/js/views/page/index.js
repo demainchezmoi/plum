@@ -71,16 +71,29 @@ module.exports = class View extends MainView {
     super.unmount();
   }
 
+  findPostalCode(components) {
+    const data = components.filter(c => c.types.indexOf('postal_code') > -1)[0];
+    return !!data ? data.short_name : null;
+  }
+
+  findCity(components) {
+    const data = components.filter(c => c.types.indexOf('locality') > -1)[0];
+    return !!data ? data.short_name : null;
+  }
+
   initMap() {
     const input = $('[data-action=search-location]')[0];
-    const autocompleteOptions = {componentRestrictions: {country: 'fr'}};
+    const cityInput = $('[data-role=searched-city-hidden-input]');
+    const postalCodeInput = $('[data-role=searched-postal-code-hidden-input]');
+    const autocompleteOptions = {componentRestrictions: {country: 'fr'}, types: ['(cities)']};
     const autocomplete = new this.google.maps.places.Autocomplete(input, autocompleteOptions);
-    /**
-      * autocomplete.addListener('place_changed', function() {
-      *   const place = autocomplete.getPlace();
-      *   console.log(place);
-      * })
-      */
+    autocomplete.addListener('place_changed', () => {
+      const place = autocomplete.getPlace();
+      const postalCode = this.findPostalCode(place.address_components);
+      const city = this.findCity(place.address_components);
+      cityInput.val(city);
+      postalCodeInput.val(postalCode);
+    })
   }
 
   getDistance() {

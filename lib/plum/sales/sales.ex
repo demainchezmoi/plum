@@ -2,6 +2,7 @@ defmodule Plum.Sales do
   alias Ecto.Changeset
   alias Plum.Repo
   alias Plum.Sales.{Prospect, Contact, EstateAgent, ProspectLand}
+  alias Plum.Geo
   alias Plum.Geo.{City}
 
   import Ecto.Query, warn: false
@@ -122,9 +123,18 @@ defmodule Plum.Sales do
       origin: "maisons-leo.fr",
       notes: params["remark"],
     }
-    create_prospect(prospect)
-  end
+    city = params["city"]
+    postal_code = params["postal_code"]
 
+    case create_prospect(prospect) do
+      {:ok, prospect} ->
+        case Geo.find_matching_city(city, postal_code) do
+          %Geo.City{id: id} -> prospect |> update_prospect(%{"cities" => [%{"id" => id}]})
+          nil -> prospect
+        end
+      {:error, changeset} -> {:error, changeset}
+    end
+  end
 
   @doc """
   Updates a prospect.
@@ -140,9 +150,7 @@ defmodule Plum.Sales do
   """
   def update_prospect(%Prospect{} = prospect, attrs) do
     changeset =
-      prospect
-      |> Repo.preload(:cities)
-      |> Prospect.changeset(attrs)
+      prospect |> Repo.preload(:cities) |> Prospect.changeset(attrs)
 
     changeset =
       case attrs["contact"] do
@@ -156,7 +164,7 @@ defmodule Plum.Sales do
     changeset =
       case attrs["cities"] do
         cities when is_list(cities) ->
-          city_ids = cities |> Enum.map(& &1["id"])
+          city_ids = cities |> Enum.map(& &1["id"] || &1[:id])
           cities = City |> where([c], c.id in ^city_ids) |> Repo.all
           changeset |> Changeset.put_assoc(:cities, cities)
         _ ->

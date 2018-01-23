@@ -167,12 +167,13 @@ defmodule Plum.Geo do
       nil
   """
 
-  def find_matching_city(name, department) do
+  def find_matching_city(name, department) when is_binary(name) and is_binary(department) do
     Logger.debug("Find matching city for #{name} and #{department}")
+    dep_short = department |> String.slice(0..1)
 
     query =
       from c in City,
-      where: fragment("unaccent(?) LIKE unaccent(?) || '%'", c.insee_id, ^department),
+      where: fragment("? LIKE ? || '%'", c.postal_code, ^dep_short),
       where: fragment("unaccent(?) % unaccent(?)", c.name, ^name),
       order_by: fragment("similarity(unaccent(?), unaccent(?)) DESC", c.name, ^name),
       limit: 1
@@ -182,6 +183,7 @@ defmodule Plum.Geo do
     Logger.debug("Found city #{inspect city}")
     city
   end
+  def find_matching_city(_, _), do: nil
 
   # ==============
   # Land
