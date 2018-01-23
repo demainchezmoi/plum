@@ -102,6 +102,31 @@ defmodule Plum.Sales do
   end
 
   @doc """
+  Creates a prospect from a contact form.
+  """
+  def create_prospect_from_contact(params) do
+    {first_name, last_name} =
+      case params["name"] do
+        name when is_binary(name) ->
+          [first_name|rest] = name |> String.split(" ")
+          {first_name, rest |> Enum.join(" ")}
+        nil ->
+          {nil, nil}
+      end
+    prospect = %{
+      contact: %{
+        first_name: first_name,
+        last_name: last_name,
+        phone_numbers: [%{value: params["phone"], label: "Principal"}]
+      },
+      origin: "maisons-leo.fr",
+      notes: params["remark"],
+    }
+    create_prospect(prospect)
+  end
+
+
+  @doc """
   Updates a prospect.
 
   ## Examples

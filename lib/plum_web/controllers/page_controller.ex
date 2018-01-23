@@ -1,5 +1,6 @@
 defmodule PlumWeb.PageController do
   use PlumWeb, :controller
+  alias Plum.Sales
 
   def index(conn, params) do
     conn |> render("index.html", params: params)
@@ -26,6 +27,7 @@ defmodule PlumWeb.PageController do
       if not is_undef(contact_params, "phone") do
         creation = NaiveDateTime.utc_now |> NaiveDateTime.to_iso8601
         Plum.Zapier.new_prospect(contact_params |> Map.put("creation", creation))
+        Sales.create_prospect_from_contact(contact_params)
         conn |> put_flash(:info, "Votre demande a bien été prise en compte.")
       else
         conn |> put_flash(:error, "Merci de renseigner votre numéro de téléphone afin que nous puissions vous contacter.")

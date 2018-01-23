@@ -75,6 +75,12 @@ module.exports = class View extends MainView {
     const input = $('[data-action=search-location]')[0];
     const autocompleteOptions = {componentRestrictions: {country: 'fr'}};
     const autocomplete = new this.google.maps.places.Autocomplete(input, autocompleteOptions);
+    /**
+      * autocomplete.addListener('place_changed', function() {
+      *   const place = autocomplete.getPlace();
+      *   console.log(place);
+      * })
+      */
   }
 
   getDistance() {
