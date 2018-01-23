@@ -121,4 +121,4 @@ config :logger, :logger_papertrail_backend,
 
 config :logger,
   backends: [:console, LoggerPapertrailBackend.Logger],
-  level: :debug
+  level: :warn

@@ -122,6 +122,7 @@ defmodule Plum.AdsImporter.Importer do
         nil ->
           case Geo.find_matching_land(ad) do
             %Land{id: id} ->
+              # replace ad with same origin ?
               ad
               |> Map.put("land_id", id)
               |> Geo.create_land_ad
