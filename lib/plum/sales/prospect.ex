@@ -56,9 +56,11 @@ defmodule Plum.Sales.Prospect do
 
   @possible_status ~w(
     new
-    in_progress
-    rejected
+    search_land
+    search_funding
+    signing
     signed
+    rejected
     duplicate
   )
 

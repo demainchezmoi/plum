@@ -43,6 +43,10 @@ defmodule Plum.Sales do
   end
   def p_for_name(query, _), do: query
 
+  def p_for_status(query, %{"prospect_status" => "_active"}) do
+    active_status = ~w(new search_land search_funding signing)
+    from p in query, where: p.status in ^active_status
+  end
   def p_for_status(query, %{
     "prospect_status" => prospect_status
   }) when is_binary(prospect_status) and prospect_status != "" do
