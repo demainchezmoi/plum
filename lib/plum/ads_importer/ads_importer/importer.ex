@@ -110,7 +110,7 @@ defmodule Plum.AdsImporter.Importer do
   end
   def is_constructor(_ad), do: false
 
-  def import_ad(ad) do
+  def import_ad(ad = %{"link" => link}) when not is_nil(link) do
     Logger.debug("Importing ad #{inspect ad}")
 
     if (is_constructor(ad)) do
@@ -146,5 +146,9 @@ defmodule Plum.AdsImporter.Importer do
           end
       end
     end
+  end
+  def import_ad(ad) do
+    Logger.warn("Ad without link #{inspect ad}")
+    {:error, :ad_not_inserted}
   end
 end

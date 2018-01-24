@@ -5,9 +5,8 @@ defmodule Plum.AdsImporter.ImporterTest do
   import Plum.Factory
 
   describe "import_ad" do
-
     test "rejects ads by constructor" do
-      ad = %{"contact" => %{"name" => "TRECOBAT BRETAGNE"}}
+      ad = %{"contact" => %{"name" => "TRECOBAT BRETAGNE"}, "link" => "abc"}
       assert {:ok, :rejected_as_constructor} = import_ad(ad)
     end
 
