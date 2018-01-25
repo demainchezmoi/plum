@@ -1,7 +1,7 @@
 defmodule Plum.Sales do
   alias Ecto.Changeset
   alias Plum.Repo
-  alias Plum.Sales.{Prospect, Contact, EstateAgent, ProspectLand}
+  alias Plum.Sales.{Prospect, Contact, EstateAgent, ProspectLand, Todo}
   alias Plum.Geo
   alias Plum.Geo.{City}
 
@@ -10,30 +10,20 @@ defmodule Plum.Sales do
   # =============
   # Prospect
   # =============
-  @doc """
-  Returns the list of prospects.
-
-  ## Examples
-
-      iex> list_prospects()
-      [%Prospect{}, ...]
-
-  """
   def list_prospects(params \\ %{}) do
     list_prospects_query(params) |> Repo.all
   end
 
-  @doc """
-  Buids a query to fetch a list of prospects with filters
-  """
-
   def list_prospects_query(params \\ %{}) do
     Prospect
     |> order_by(desc: :inserted_at)
-    |> preload(:contact)
-    |> preload(:cities)
+    |> prospect_preloads
     |> p_for_status(params)
     |> p_for_name(params)
+  end
+
+  def prospect_preloads(query) do
+    query |> preload(:contact) |> preload(:cities) |> preload(:todos)
   end
 
   def p_for_name(query, %{"prospect_name" => name}) when is_binary(name) and name != "" do
@@ -54,61 +44,33 @@ defmodule Plum.Sales do
   end
   def p_for_status(query, _), do: query
 
-  @doc """
-  Gets a single prospect.
+  def get_prospect!(id), do: Prospect |> prospect_preloads |> Repo.get!(id)
 
-  Raises `Ecto.NoResultsError` if the Prospect does not exist.
+  def get_prospect_by!(params), do: Prospect |> prospect_preloads |> Repo.get_by!(params)
 
-  ## Examples
-
-      iex> get_prospect!(123)
-      %Prospect{}
-
-      iex> get_prospect!(456)
-      ** (Ecto.NoResultsError)
-
-  """
-  def get_prospect!(id), do: Prospect |> preload(:contact) |> preload(:cities) |> Repo.get!(id)
-
-  @doc """
-  Gets a single prospect by attributes.
-
-  Raises `Ecto.NoResultsError` if the Prospect does not exist with those attributes.
-
-  ## Examples
-
-      iex> get_prospect_by!(%{id: 123, field: value})
-      %Prospect{}
-
-      iex> get_prospect_where!(%{id: 123, field: value})
-      ** (Ecto.NoResultsError)
-
-  """
-  def get_prospect_by!(params), do: Prospect |> preload(:contact) |> preload(:cities) |> Repo.get_by!(params)
-
-  @doc """
-  Creates a prospect.
-
-  ## Examples
-
-      iex> create_prospect(%{field: value})
-      {:ok, %Prospect{}}
-
-      iex> create_prospect(%{field: bad_value})
-      {:error, %Ecto.Changeset{}}
-
-  """
   def create_prospect(attrs \\ %{}) do
     changeset =
       %Prospect{}
       |> Prospect.changeset(attrs)
       |> Changeset.cast_assoc(:contact)
+    changeset =
+      case changeset.changes do
+        %{to_be_called: true} ->
+          changeset
+          |> Changeset.put_assoc(:todos, [prospect_to_be_called_todo()])
+        _ -> changeset
+      end
     changeset |> Repo.insert()
   end
 
-  @doc """
-  Creates a prospect from a contact form.
-  """
+  def prospect_to_be_called_todo do
+    %{
+      title: "Premier contact",
+      priority: 30,
+      start_date: Date.utc_today(),
+    }
+  end
+
   def create_prospect_from_contact(params) do
     {first_name, last_name} =
       case params["name"] do
@@ -126,6 +88,7 @@ defmodule Plum.Sales do
       },
       origin: "maisons-leo.fr",
       notes: params["remark"],
+      to_be_called: true,
     }
     city = params["city"]
     postal_code = params["postal_code"]
@@ -140,18 +103,6 @@ defmodule Plum.Sales do
     end
   end
 
-  @doc """
-  Updates a prospect.
-
-  ## Examples
-
-      iex> update_prospect(prospect, %{field: new_value})
-      {:ok, %Prospect{}}
-
-      iex> update_prospect(prospect, %{field: bad_value})
-      {:error, %Ecto.Changeset{}}
-
-  """
   def update_prospect(%Prospect{} = prospect, attrs) do
     changeset =
       prospect |> Repo.preload(:cities) |> Prospect.changeset(attrs)
@@ -178,31 +129,10 @@ defmodule Plum.Sales do
     changeset |> Repo.update()
   end
 
-  @doc """
-  Deletes a Prospect.
-
-  ## Examples
-
-      iex> delete_prospect(prospect)
-      {:ok, %Prospect{}}
-
-      iex> delete_prospect(prospect)
-      {:error, %Ecto.Changeset{}}
-
-  """
   def delete_prospect(%Prospect{} = prospect) do
     Repo.delete(prospect)
   end
 
-  @doc """
-  Returns an `%Ecto.Changeset{}` for tracking prospect changes.
-
-  ## Examples
-
-      iex> change_prospect(prospect)
-      %Ecto.Changeset{source: %Prospect{}}
-
-  """
   def change_prospect(%Prospect{} = prospect) do
     Prospect.changeset(prospect, %{})
   end
@@ -210,16 +140,6 @@ defmodule Plum.Sales do
   # =============
   # ProspectLand
   # =============
-
-  @doc """
-  Creates or updates the given status association between a land and a prospect.
-  Raises if there is an error.
-
-  ## Examples
-
-      iex> associate_prospect_land!(%{land_id: 1, prospect_id: 2, status: "interesting"})
-      %ProspectLand{land_id: 1, prospect_id: 2, status: "interesting"}
-  """
 
   def associate_prospect_land!(params = %{
     prospect_id: _prospect_id,
@@ -240,63 +160,14 @@ defmodule Plum.Sales do
   # EstateAgent
   # =============
 
-  @doc """
-  Returns the list of estate_agents.
-
-  ## Examples
-
-      iex> list_estate_agents()
-      [%EstateAgent{}, ...]
-
-  """
   def list_estate_agents do
     EstateAgent |> preload(:contact) |> Repo.all
   end
 
-  @doc """
-  Gets a single estate_agent.
-
-  Raises `Ecto.NoResultsError` if the EstateAgent does not exist.
-
-  ## Examples
-
-      iex> get_estate_agent!(123)
-      %EstateAgent{}
-
-      iex> get_estate_agent!(456)
-      ** (Ecto.NoResultsError)
-
-  """
   def get_estate_agent!(id), do: EstateAgent |> preload(:contact) |> preload(:lands) |> Repo.get!(id)
 
-  @doc """
-  Gets a single estate_agent by attributes.
-
-  Raises `Ecto.NoResultsError` if the EstateAgent does not exist with those attributes.
-
-  ## Examples
-
-      iex> get_estate_agent_by!(%{id: 123, field: value})
-      %EstateAgent{}
-
-      iex> get_estate_agent_where!(%{id: 123, field: value})
-      ** (Ecto.NoResultsError)
-
-  """
   def get_estate_agent_by!(params), do: EstateAgent |> preload(:contact) |> preload(:lands) |> Repo.get_by!(params)
 
-  @doc """
-  Creates a estate_agent.
-
-  ## Examples
-
-      iex> create_estate_agent(%{field: value})
-      {:ok, %EstateAgent{}}
-
-      iex> create_estate_agent(%{field: bad_value})
-      {:error, %Ecto.Changeset{}}
-
-  """
   def create_estate_agent(attrs \\ %{}) do
     changeset =
       %EstateAgent{}
@@ -305,18 +176,6 @@ defmodule Plum.Sales do
     changeset |> Repo.insert()
   end
 
-  @doc """
-  Updates a estate_agent.
-
-  ## Examples
-
-      iex> update_estate_agent(estate_agent, %{field: new_value})
-      {:ok, %EstateAgent{}}
-
-      iex> update_estate_agent(estate_agent, %{field: bad_value})
-      {:error, %Ecto.Changeset{}}
-
-  """
   def update_estate_agent(%EstateAgent{} = estate_agent, attrs) do
     changeset =
       estate_agent |> EstateAgent.changeset(attrs)
@@ -333,46 +192,14 @@ defmodule Plum.Sales do
     changeset |> Repo.update()
   end
 
-  @doc """
-  Deletes a EstateAgent.
-
-  ## Examples
-
-      iex> delete_estate_agent(estate_agent)
-      {:ok, %EstateAgent{}}
-
-      iex> delete_estate_agent(estate_agent)
-      {:error, %Ecto.Changeset{}}
-
-  """
   def delete_estate_agent(%EstateAgent{} = estate_agent) do
     Repo.delete(estate_agent)
   end
 
-  @doc """
-  Returns an `%Ecto.Changeset{}` for tracking estate_agent changes.
-
-  ## Examples
-
-      iex> change_estate_agent(estate_agent)
-      %Ecto.Changeset{source: %EstateAgent{}}
-
-  """
   def change_estate_agent(%EstateAgent{} = estate_agent) do
     EstateAgent.changeset(estate_agent, %{})
   end
 
-  @doc """
-  Finds a list of estate agents matching a request
-
-  ## Examples
-
-      iex> estate_agents_autocomplete(%{
-        phone_number: "123",
-        name: "Bob"
-      })
-      [%EstateAgent{}, ...]
-  """
   def estate_agents_autocomplete(params) do
     query =
       from ea in EstateAgent,
@@ -422,4 +249,54 @@ defmodule Plum.Sales do
       where: fragment("unaccent(?) % unaccent(?)", c.company, ^company)
   end
   def ea_company_like(query, _), do: query
+
+  # =============
+  # Todo
+  # =============
+
+  def list_todos_query(params \\ %{}) do
+    Todo
+    |> todo_for_done(params)
+    |> todo_for_futur(params)
+    |> order_by([t], desc: :priority, desc: :start_date)
+  end
+
+  def list_todos(params \\ %{}) do
+    list_todos_query(params) |> Repo.all
+  end
+
+  def todo_for_done(query, %{"done" => "both"}), do: query
+  def todo_for_done(query, %{"done" => done}) when done in ["false", "true"]do
+    done = if done == "true", do: true, else: false
+    from t in query, where: t.done == ^done
+  end
+  def todo_for_done(query, _), do: query
+
+  def todo_for_futur(query, %{"futur_todos" => "false"}) do
+    date = Date.utc_today
+    from t in query, where: t.start_date <= ^date
+  end
+  def todo_for_futur(query, _), do: query
+
+  def get_todo!(id), do: Todo |> Repo.get!(id)
+
+  def get_todo_by!(params), do: Todo |> Repo.get_by!(params)
+
+  def create_todo(attrs \\ %{}) do
+    changeset = %Todo{} |> Todo.changeset(attrs)
+    changeset |> Repo.insert()
+  end
+
+  def update_todo(%Todo{} = todo, attrs) do
+    changeset = todo |> Todo.changeset(attrs)
+    changeset |> Repo.update()
+  end
+
+  def delete_todo(%Todo{} = todo) do
+    Repo.delete(todo)
+  end
+
+  def change_todo(%Todo{} = todo) do
+    Todo.changeset(todo, %{})
+  end
 end

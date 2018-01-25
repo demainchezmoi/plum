@@ -6,6 +6,7 @@ defmodule PlumWeb.Api.ProspectView do
     ContactView,
     LandView,
     ProspectView,
+    TodoView,
   }
 
   import PlumWeb.ViewHelpers, only: [put_loaded_assoc: 2]
@@ -26,6 +27,7 @@ defmodule PlumWeb.Api.ProspectView do
     soil_price
     status
     terrace_price
+    todos
     updated_at
     walls_ceiling_price
   )a
@@ -48,5 +50,6 @@ defmodule PlumWeb.Api.ProspectView do
     |> put_loaded_assoc({:contact, ContactView, "show.json", :contact})
     |> put_loaded_assoc({:lands, LandView, "index.json", :lands})
     |> put_loaded_assoc({:cities, CityView, "index.json", :cities})
+    |> put_loaded_assoc({:todos, TodoView, "index.json", :todos})
   end
 end

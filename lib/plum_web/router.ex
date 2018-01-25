@@ -100,6 +100,7 @@ defmodule PlumWeb.Router do
     post "/prospects_lands", ProspectLandController, :create, as: "api_prospect_land"
     get "/estate_agents/autocomplete", EstateAgentController, :autocomplete, as: "api_estate_agent"
     resources "/estate_agents", EstateAgentController, only: [:create, :index, :show, :delete, :update], name: "api_estate_agent"
+    resources "/todos", TodoController, only: [:create, :index, :show, :delete, :update], name: "api_todo"
   end
 
   # Admin api

@@ -50,6 +50,16 @@ defmodule PlumWeb.Api.ProspectControllerTest do
     end
 
     @tag :logged_in
+    test "creates todo along with prospect", %{conn: conn} do
+      prospect_attrs = params_for(:prospect)
+      conn1 = post conn, api_prospect_path(conn, :create), prospect: prospect_attrs 
+      assert %{"id" => id} = json_response(conn1, 201) |> Map.get("data")
+
+      conn2 = get conn, api_prospect_path(conn, :show, id)
+      assert is_list(json_response(conn2, 200)["data"]["todos"])
+    end
+
+    @tag :logged_in
     test "renders errors when data is invalid", %{conn: conn} do
       prospect_attrs = params_for(:prospect) |> Map.put(:max_budget, "string")
       conn = post conn, api_prospect_path(conn, :create), prospect: prospect_attrs

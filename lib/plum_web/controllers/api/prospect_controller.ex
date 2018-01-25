@@ -17,7 +17,8 @@ defmodule PlumWeb.Api.ProspectController do
   end
 
   def create(conn, %{"prospect" => prospect_params}) do
-    with {:ok, %Prospect{} = prospect} <- Sales.create_prospect(prospect_params) do
+    params = prospect_params |> Map.put("to_be_called", true)
+    with {:ok, %Prospect{} = prospect} <- Sales.create_prospect(params) do
       conn
       |> put_status(:created)
       |> put_resp_header("location", api_prospect_path(conn, :show, prospect))

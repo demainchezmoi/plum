@@ -11,6 +11,7 @@ defmodule Plum.Sales.Prospect do
     Contact,
     Prospect,
     ProspectLand,
+    Todo,
   }
 
   schema "sales_prospects" do
@@ -20,6 +21,8 @@ defmodule Plum.Sales.Prospect do
     field :origin, :string
     field :status, :string, default: "new"
     has_one :contact, Contact
+    field :to_be_called, :boolean, virtual: true
+    has_many :todos, Todo, on_replace: :delete
     many_to_many :cities, City,
       join_through: "sales_prospects_geo_cities",
       join_keys: [sales_prospect_id: :id, geo_city_id: :id],
@@ -52,6 +55,7 @@ defmodule Plum.Sales.Prospect do
     soil_price
     walls_ceiling_price
     terrace_price
+    to_be_called
   )a
 
   @possible_status ~w(

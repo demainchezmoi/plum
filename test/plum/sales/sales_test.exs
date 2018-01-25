@@ -1,13 +1,11 @@
 defmodule Plum.SalesTest do
   use Plum.DataCase
-
   import Plum.Factory
-
   alias Plum.Sales
-
   alias Plum.Sales.{
     Contact,
     Prospect,
+    Todo,
   }
 
   describe "prospects" do
@@ -18,7 +16,7 @@ defmodule Plum.SalesTest do
 
     test "list_prospects/0 filters by name" do
       prospect1 = insert(:prospect, contact: %{first_name: "first_name_1", last_name: "last_name_1"})
-      prospect2 = insert(:prospect, contact: %{first_name: "another", last_name: "blaz"})
+      insert(:prospect, contact: %{first_name: "another", last_name: "blaz"})
       params = %{"prospect_name" => "first_name_1 last_na"}
       assert Sales.list_prospects(params) |> Enum.map(& &1.id) == [prospect1.id]
     end
@@ -38,6 +36,13 @@ defmodule Plum.SalesTest do
       assert {:ok, p = %Prospect{}} = Sales.create_prospect(prospect_params)
       p_id = p.id
       assert %Prospect{contact: %Contact{prospect_id: ^p_id}} = p |> Repo.preload(:contact)
+    end
+
+    test "create_prospect/1 with to_be_called creates a todo along with prospect" do
+      prospect_params = params_for(:prospect) |> Map.put(:to_be_called, true)
+      assert {:ok, p = %Prospect{}} = Sales.create_prospect(prospect_params)
+      p_id = p.id
+      assert %Prospect{todos: [%Todo{prospect_id: ^p_id}]} = p |> Repo.preload(:todos)
     end
 
     test "create_prospect/1 with invalid data returns error changeset" do
@@ -152,6 +157,29 @@ defmodule Plum.SalesTest do
       results = Sales.estate_agents_autocomplete(%{email: "salut@cava.com"})
       ids = results |> Enum.map(& &1.id)
       refute estate_agent.id in ids
+    end
+  end
+
+  describe "todos" do
+    test "list todos orders by priority" do
+      todo1 = insert(:todo, priority: 1)
+      todo2 = insert(:todo, priority: 3)
+      todo3 = insert(:todo, priority: 2)
+      assert Sales.list_todos |> Enum.map(& &1.id) == [todo2.id, todo3.id, todo1.id]
+    end
+
+    test "list todos orders by by date for equal priorities" do
+      todo1 = insert(:todo, start_date: Date.utc_today |> Date.add(-3))
+      todo2 = insert(:todo, start_date: Date.utc_today |> Date.add(-2))
+      todo3 = insert(:todo, start_date: Date.utc_today |> Date.add(-4))
+      assert Sales.list_todos |> Enum.map(& &1.id) == [todo2.id, todo1.id, todo3.id]
+    end
+
+    test "list todos hide future todos" do
+      todo1 = insert(:todo, start_date: Date.utc_today |> Date.add(2))
+      todo2 = insert(:todo, start_date: Date.utc_today |> Date.add(-2))
+      assert Sales.list_todos(%{"futur_todos" => "false"}) |> Enum.map(& &1.id) == [todo2.id]
+      assert Sales.list_todos() |> Enum.map(& &1.id) == [todo1.id, todo2.id]
     end
   end
 end

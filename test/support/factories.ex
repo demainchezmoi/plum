@@ -9,6 +9,7 @@ defmodule Plum.Factory do
     EstateAgent,
     Prospect,
     ProspectLand,
+    Todo,
   }
 
   alias Plum.Geo.{
@@ -133,6 +134,15 @@ defmodule Plum.Factory do
   def session_factory do
     %Session{
       token: sequence(:token, &"token_#{&1}")
+    }
+  end
+
+  def todo_factory do
+    %Todo {
+      done: false,
+      priority: 1,
+      start_date: Date.utc_today(),
+      title: "title",
     }
   end
 
