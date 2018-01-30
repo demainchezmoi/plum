@@ -53,6 +53,7 @@ defmodule Plum.Factory do
   def estate_agent_factory do
     %EstateAgent{
       notes: "notes",
+      evaluation: "miser",
       contact: build(:contact),
       lands: [build(:land)],
     }

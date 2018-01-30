@@ -76,7 +76,10 @@ defmodule Plum.Sales do
       case params["name"] do
         name when is_binary(name) ->
           [first_name|rest] = name |> String.split(" ")
-          {first_name, rest |> Enum.join(" ")}
+          {
+            first_name |> String.capitalize,
+            rest |> Enum.map(&String.capitalize/1) |> Enum.join(" ")
+          }
         nil ->
           {nil, nil}
       end

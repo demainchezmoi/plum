@@ -10,11 +10,12 @@ defmodule PlumWeb.Api.EstateAgentView do
   import PlumWeb.ViewHelpers, only: [put_loaded_assoc: 2]
 
   @attributes ~w(
+    contact
+    evaluation
     id
-    notes
     inserted_at
     lands
-    contact
+    notes
   )a
 
   def render("index.json", %{estate_agents: estate_agents}) do

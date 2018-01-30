@@ -13,6 +13,7 @@ defmodule Plum.Sales.EstateAgent do
 
   schema "sales_estate_agents" do
     field :notes, :string
+    field :evaluation, :string
     has_one :contact, Contact
     has_many :lands, Land
     timestamps()
@@ -23,12 +24,20 @@ defmodule Plum.Sales.EstateAgent do
 
   @optional_fields ~w(
     notes
+    evaluation
   )a
+
+  @evaluations ~w(
+    miser
+    share_location
+    share_and_visit
+  )
 
   @doc false
   def changeset(%EstateAgent{} = estate_agent, attrs) do
     estate_agent
     |> cast(attrs, @required_fields ++ @optional_fields)
     |> validate_required(@required_fields)
+    |> validate_inclusion(:evaluation, @evaluations)
   end
 end
