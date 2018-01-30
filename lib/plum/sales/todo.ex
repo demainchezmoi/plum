@@ -9,6 +9,7 @@ defmodule Plum.Sales.Todo do
 
   schema "sales_todos" do
     field :done, :boolean, default: false
+    field :end_date, :date
     field :priority, :integer, default: 10
     field :start_date, :date 
     field :title, :string
@@ -17,14 +18,15 @@ defmodule Plum.Sales.Todo do
   end
 
   @required_fields ~w(
+    title
+    start_date
+    end_date
   )a
 
   @optional_fields ~w(
     done
     priority
     prospect_id
-    start_date
-    title
   )a
 
   @doc false

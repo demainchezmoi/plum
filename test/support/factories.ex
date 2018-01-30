@@ -140,6 +140,7 @@ defmodule Plum.Factory do
   def todo_factory do
     %Todo {
       done: false,
+      end_date: Date.utc_today(),
       priority: 1,
       start_date: Date.utc_today(),
       title: "title",

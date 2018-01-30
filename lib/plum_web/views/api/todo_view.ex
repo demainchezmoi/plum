@@ -3,14 +3,17 @@ defmodule PlumWeb.Api.TodoView do
 
   alias PlumWeb.Api.{
     TodoView,
+    ProspectView,
   }
 
-  # import PlumWeb.ViewHelpers, only: [put_loaded_assoc: 2]
+  import PlumWeb.ViewHelpers, only: [put_loaded_assoc: 2]
 
   @attributes ~w(
     done
+    end_date
     id
     priority
+    prospect
     prospect_id
     start_date
     title
@@ -31,6 +34,7 @@ defmodule PlumWeb.Api.TodoView do
   def render("todo.json", %{todo: todo}) do
     todo
     |> Map.take(@attributes)
+    |> put_loaded_assoc({:prospect, ProspectView, "show.json", :prospect})
   end
 end
 

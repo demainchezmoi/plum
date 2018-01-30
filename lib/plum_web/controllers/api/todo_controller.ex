@@ -17,6 +17,7 @@ defmodule PlumWeb.Api.TodoController do
 
   def create(conn, %{"todo" => todo_params}) do
     with {:ok, %Todo{} = todo} <- Sales.create_todo(todo_params) do
+      todo = todo |> Repo.preload([prospect: :contact])
       conn
       |> put_status(:created)
       |> put_resp_header("location", api_todo_path(conn, :show, todo))
@@ -32,6 +33,7 @@ defmodule PlumWeb.Api.TodoController do
   def update(conn, %{"id" => id, "todo" => todo_params}) do
     todo = Sales.get_todo!(id)
     with {:ok, %Todo{} = todo} <- Sales.update_todo(todo, todo_params) do
+      todo = todo |> Repo.preload([prospect: :contact])
       render(conn, "show.json", todo: todo)
     end
   end

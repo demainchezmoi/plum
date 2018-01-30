@@ -56,8 +56,7 @@ defmodule Plum.Sales do
     changeset =
       case changeset.changes do
         %{to_be_called: true} ->
-          changeset
-          |> Changeset.put_assoc(:todos, [prospect_to_be_called_todo()])
+          changeset |> Changeset.put_assoc(:todos, [prospect_to_be_called_todo()])
         _ -> changeset
       end
     changeset |> Repo.insert()
@@ -68,6 +67,7 @@ defmodule Plum.Sales do
       title: "Premier contact",
       priority: 30,
       start_date: Date.utc_today(),
+      end_date: Date.utc_today(),
     }
   end
 
@@ -256,9 +256,18 @@ defmodule Plum.Sales do
 
   def list_todos_query(params \\ %{}) do
     Todo
+    |> order_todos
+    |> todo_preloads
     |> todo_for_done(params)
     |> todo_for_futur(params)
-    |> order_by([t], desc: :priority, desc: :start_date)
+  end
+
+  def order_todos(query) do
+    from t in query, order_by: [asc: :end_date]
+  end
+
+  def todo_preloads(query) do
+    query |> preload([prospect: :contact])
   end
 
   def list_todos(params \\ %{}) do

@@ -161,18 +161,18 @@ defmodule Plum.SalesTest do
   end
 
   describe "todos" do
-    test "list todos orders by priority" do
-      todo1 = insert(:todo, priority: 1)
-      todo2 = insert(:todo, priority: 3)
-      todo3 = insert(:todo, priority: 2)
-      assert Sales.list_todos |> Enum.map(& &1.id) == [todo2.id, todo3.id, todo1.id]
-    end
+    # test "list todos orders by priority" do
+      # todo1 = insert(:todo, priority: 1)
+      # todo2 = insert(:todo, priority: 3)
+      # todo3 = insert(:todo, priority: 2)
+      # assert Sales.list_todos |> Enum.map(& &1.id) == [todo2.id, todo3.id, todo1.id]
+    # end
 
-    test "list todos orders by by date for equal priorities" do
-      todo1 = insert(:todo, start_date: Date.utc_today |> Date.add(-3))
-      todo2 = insert(:todo, start_date: Date.utc_today |> Date.add(-2))
-      todo3 = insert(:todo, start_date: Date.utc_today |> Date.add(-4))
-      assert Sales.list_todos |> Enum.map(& &1.id) == [todo2.id, todo1.id, todo3.id]
+    test "list todos orders by by end date" do
+      todo1 = insert(:todo, end_date: Date.utc_today |> Date.add(-3))
+      todo2 = insert(:todo, end_date: Date.utc_today |> Date.add(-2))
+      todo3 = insert(:todo, end_date: Date.utc_today |> Date.add(-4))
+      assert Sales.list_todos |> Enum.map(& &1.id) == [todo3.id, todo1.id, todo2.id]
     end
 
     test "list todos hide future todos" do
