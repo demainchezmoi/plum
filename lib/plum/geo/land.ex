@@ -88,7 +88,8 @@ defmodule Plum.Geo.Land do
 
   def set_notary_fees(changeset) do
     price = get_field(changeset, :price) || 0
-    changeset |> put_change(:notary_fees, NotaryFees.notary_fees(price))
+    agency_fees = get_field(changeset, :notary_fees) || 0
+    changeset |> put_change(:notary_fees, NotaryFees.notary_fees(price + agency_fees))
   end
 
   def set_geoportail_link(changeset = %{changes: %{location: %Geo.Point{coordinates: {lng, lat}}}}) do
