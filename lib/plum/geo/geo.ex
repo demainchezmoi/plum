@@ -382,6 +382,7 @@ defmodule Plum.Geo do
 
   def find_matching_land(params) do
     Land
+    |> preload(:ads)
     |> matching_price(params)
     |> matching_surface(params)
     |> matching_description(params)

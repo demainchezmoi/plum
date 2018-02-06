@@ -117,18 +117,22 @@ defmodule Plum.AdsImporter.Importer do
       {:ok, :rejected_as_constructor}
     else
       case Geo.get_ad_by(%{origin: ad["origin"], link: ad["link"]}) do
-        %LandAd{} ->
-          {:ok, :ad_existing}
+        %LandAd{} -> {:ok, :ad_existing}
         nil ->
           case Geo.find_matching_land(ad) do
-            %Land{id: id} ->
+            %Land{id: id, ads: ads} ->
               # replace ad with same origin ?
+              same_origin_ads = ads |> Enum.filter(& &1.origin == ad["origin"])
+
               ad
               |> Map.put("land_id", id)
               |> Geo.create_land_ad
               |> case do
-                {:ok, _} -> {:ok, :ad_inserted}
-                _ -> {:error, :ad_not_inserted}
+                {:ok, _} ->
+                  same_origin_ads |> Enum.each(& &1 |> Repo.delete)
+                  {:ok, :ad_inserted}
+                _ ->
+                  {:error, :ad_not_inserted}
               end
 
             nil ->

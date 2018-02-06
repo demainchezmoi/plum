@@ -29,6 +29,59 @@ defmodule Plum.AdsImporter.ImporterTest do
       })
     end
 
+    test "replaces ad with same origin for existing land" do
+      land = insert(:land)
+      ad = land.ads |> List.first
+      new_link = ad |> Map.get(:link) |> (&"#{&1}-alt").()
+      origin = ad.origin
+      crawled_ad = %{
+        "origin" => origin,
+        "link" => new_link,
+        "price" => land.price,
+        "surface" => land.surface,
+        "description" => land.description
+      }
+      import_ad(crawled_ad)
+      assert %LandAd{} = LandAd |> Repo.get_by(%{
+        land_id: land.id,
+        origin: origin,
+        link: new_link,
+      })
+      assert is_nil(LandAd |> Repo.get_by(%{
+        land_id: land.id,
+        origin: origin,
+        link: ad.link,
+      }))
+    end
+
+    # test "associates ads replace association" do
+      # city = insert(:city)
+      # land = insert(:land, ads: [build(:land_ad), build(:land_ad)], city: city)
+
+      # ads = land |> Repo.preload(:ads, force: true) |> Map.get(:ads)
+      # ad_ids_init = ads |> Enum.map(& &1.id)
+
+      # ad1 = ads |> Enum.at(0)
+      # ad2 = ads |> Enum.at(1)
+
+      # assert length(ads) == 2
+
+      # ad_changes = [%LandAd{} |> LandAd.changeset(params_for(:land_ad)) | ad1]
+
+      # land =
+        # land
+        # |> Land.changeset(%{})
+        # |> Ecto.Changeset.put_assoc(:ads, ad_changes)
+        # |> Repo.update!
+
+      # ads_new = land |> Repo.preload(:ads, force: true) |> Map.get(:ads)
+      # ad_ids_new = ads_new |> Enum.map(& &1.id)
+
+      # assert length(ads_new) == 2
+      # assert ad1.id in ad_ids_new
+      # refute ad2.id in ad_ids_new
+    # end
+
     test "creates land along with ad" do
       city = insert(:city)
       origin = "asxxuw,./"
