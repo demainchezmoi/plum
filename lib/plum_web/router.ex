@@ -95,8 +95,9 @@ defmodule PlumWeb.Router do
     pipe_through :protected_api
     get "/ping", PingController, :ping
     resources "/prospects", ProspectController, only: [:create, :index, :show, :delete, :update], name: "api_prospect"
-    resources "/lands", LandController, only: [:create, :index, :show, :delete, :update], name: "api_land"
     get "/cities/autocomplete", CityController, :autocomplete, as: "api_city"
+    resources "/cities", CityController, only: [:create, :index, :show, :delete, :update], name: "api_city"
+    resources "/lands", LandController, only: [:create, :index, :show, :delete, :update], name: "api_land"
     post "/prospects_lands", ProspectLandController, :create, as: "api_prospect_land"
     get "/estate_agents/autocomplete", EstateAgentController, :autocomplete, as: "api_estate_agent"
     resources "/estate_agents", EstateAgentController, only: [:create, :index, :show, :delete, :update], name: "api_estate_agent"

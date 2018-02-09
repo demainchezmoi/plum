@@ -38,11 +38,20 @@ defmodule Plum.Geo do
       [%City{}, ...]
 
   """
-  def list_cities do
-    City
-    |> order_by(desc: :inserted_at)
-    |> Repo.all()
+  def list_cities(params \\ %{}) do
+    list_cities_query(params) |> Repo.all()
   end
+
+  def list_cities_query(params \\ %{}) do
+    query = from c in City
+    query
+    |> cities_with_ids(params)
+  end
+
+  def cities_with_ids(query, %{"city_ids" => ids}) when is_list(ids) do
+    from c in query, where: c.id in ^ids
+  end
+  def cities_with_ids(query, _), do: query
 
   @doc """
   Gets a single city.
@@ -88,6 +97,7 @@ defmodule Plum.Geo do
       nil
 
   """
+  # index needed ? check params
   def get_city_by(params), do: Repo.get_by(City, params)
 
   @doc """
@@ -171,6 +181,7 @@ defmodule Plum.Geo do
     Logger.debug("Find matching city for #{name} and #{department}")
     dep_short = department |> String.slice(0..1)
 
+    # index needed
     query =
       from c in City,
       where: fragment("? LIKE ? || '%'", c.postal_code, ^dep_short),
@@ -202,9 +213,9 @@ defmodule Plum.Geo do
     query
     |> for_max_price(params)
     |> for_prospect(params)
-    # |> for_max_surface(params)
-    # |> for_min_price(params)
-    # |> for_min_surface(params)
+    |> for_max_surface(params)
+    |> for_min_price(params)
+    |> for_min_surface(params)
     |> for_cities(params)
     |> for_origin(params)
   end
@@ -224,12 +235,14 @@ defmodule Plum.Geo do
   end
 
   def for_prospect(query, %{"prospect" => prospect_id, "pl_status" => status}) do
+    # index needed
     from l in query,
       join: pl in assoc(l, :prospects_lands),
       on: pl.prospect_id == ^prospect_id and pl.status == ^status
   end
 
   def for_prospect(query, %{"prospect" => prospect_id}) do
+    # index needed
     from l in query,
       left_join: pl in assoc(l, :prospects_lands),
       on: pl.prospect_id == ^prospect_id,
@@ -239,6 +252,7 @@ defmodule Plum.Geo do
   def for_prospect(query, _), do: query
 
   def for_origin(query, %{"origin" => origin}) do
+    # index needed
     from l in query,
       join: a in assoc(l, :ads),
       where: a.origin == ^origin
@@ -246,6 +260,7 @@ defmodule Plum.Geo do
   def for_origin(query, _), do: query
 
   def for_cities(query, %{"cities" => cities}) when is_list(cities) do
+    # index needed
     cities = cities |> Enum.map(&String.to_integer/1)
     from l in query,
       join: c in assoc(l, :city),
@@ -257,21 +272,25 @@ defmodule Plum.Geo do
   def for_cities(query, _), do: query
 
   def for_max_price(query, %{"max_price" => max_price}) do
+    # index needed
     from l in query, where: l.price <= ^max_price
   end
   def for_max_price(query, _), do: query
 
   def for_min_price(query, %{"min_price" => min_price}) do
+    # index needed
     from l in query, where: l.price >= ^min_price
   end
   def for_min_price(query, _), do: query
 
   def for_max_surface(query, %{"max_surface" => max_surface}) do
+    # index needed
     from l in query, where: l.surface <= ^max_surface
   end
   def for_max_surface(query, _), do: query
 
   def for_min_surface(query, %{"min_surface" => min_surface}) do
+    # index needed
     from l in query, where: l.surface >= ^min_surface
   end
   def for_min_surface(query, _), do: query
@@ -394,6 +413,7 @@ defmodule Plum.Geo do
     "price" => price
   }) when is_nil(price) or price == "", do: query
   defp matching_price(query, %{"price" => price}) do
+    # index needed
     from l in query, where: l.price == ^price
   end
   defp matching_price(query, _), do: query
@@ -403,6 +423,7 @@ defmodule Plum.Geo do
     "surface" => surface
   }) when is_nil(surface) or surface == "", do: query
   defp matching_surface(query, %{"surface" => surface}) do
+    # index needed
     from l in query, where: l.surface == ^surface
   end
   defp matching_surface(query, _), do: query
@@ -412,6 +433,7 @@ defmodule Plum.Geo do
     "description" => description
   }) when is_nil(description) or description == "", do: query
   defp matching_description(query, %{"description" => description}) do
+    # index needed
     from l in query,
       where: fragment("similarity(?, ?) > 0.4", ^description, l.description),
       order_by: [desc: fragment("similarity(?, ?)", ^description, l.description)]

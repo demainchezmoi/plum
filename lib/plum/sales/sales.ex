@@ -27,6 +27,7 @@ defmodule Plum.Sales do
   end
 
   def p_for_name(query, %{"prospect_name" => name}) when is_binary(name) and name != "" do
+    # index needed
     from p in query,
       join: c in assoc(p, :contact),
       where: fragment("similarity(unaccent(? || ' ' || ?), unaccent(?)) > 0.2", c.first_name, c.last_name, ^name)
@@ -34,6 +35,7 @@ defmodule Plum.Sales do
   def p_for_name(query, _), do: query
 
   def p_for_status(query, %{"prospect_status" => "_active"}) do
+    # index needed
     active_status = ~w(new search_land search_funding signing)
     from p in query, where: p.status in ^active_status
   end
@@ -219,6 +221,7 @@ defmodule Plum.Sales do
   end
 
   def ea_phone_like(query, %{phone_number: phone_number}) do
+    # index needed
     from ea in query,
       join: c in assoc(ea, :contact),
       where: fragment("EXISTS (SELECT 1 FROM jsonb_array_elements(to_jsonb(?)) as j(data) WHERE (data#>> '{value}') % ?)", c.phone_numbers, ^phone_number)
@@ -226,6 +229,7 @@ defmodule Plum.Sales do
   def ea_phone_like(query, _), do: query
 
   def ea_email_like(query, %{email: email}) do
+    # index needed
     from ea in query,
       join: c in assoc(ea, :contact),
       where: fragment("EXISTS (SELECT 1 FROM jsonb_array_elements(to_jsonb(?)) as j(data) WHERE (data#>> '{value}') % ?)", c.emails, ^email)
@@ -233,6 +237,7 @@ defmodule Plum.Sales do
   def ea_email_like(query, _), do: query
 
   def ea_first_name_like(query, %{first_name: first_name}) do
+    # index needed
     from ea in query,
       join: c in assoc(ea, :contact),
       where: fragment("unaccent(?) % unaccent(?)", c.first_name, ^first_name)
@@ -240,6 +245,7 @@ defmodule Plum.Sales do
   def ea_first_name_like(query, _), do: query
 
   def ea_last_name_like(query, %{last_name: last_name}) do
+    # index needed
     from ea in query,
       join: c in assoc(ea, :contact),
       where: fragment("unaccent(?) % unaccent(?)", c.last_name, ^last_name)
@@ -247,6 +253,7 @@ defmodule Plum.Sales do
   def ea_last_name_like(query, _), do: query
 
   def ea_company_like(query, %{company: company}) do
+    # index needed
     from ea in query,
       join: c in assoc(ea, :contact),
       where: fragment("unaccent(?) % unaccent(?)", c.company, ^company)
@@ -279,12 +286,14 @@ defmodule Plum.Sales do
 
   def todo_for_done(query, %{"done" => "both"}), do: query
   def todo_for_done(query, %{"done" => done}) when done in ["false", "true"]do
+    # index needed
     done = if done == "true", do: true, else: false
     from t in query, where: t.done == ^done
   end
   def todo_for_done(query, _), do: query
 
   def todo_for_futur(query, %{"futur_todos" => "false"}) do
+    # index needed
     date = Date.utc_today
     from t in query, where: t.start_date <= ^date
   end
@@ -292,6 +301,7 @@ defmodule Plum.Sales do
 
   def get_todo!(id), do: Todo |> Repo.get!(id)
 
+  # index needed ? check use cases
   def get_todo_by!(params), do: Todo |> Repo.get_by!(params)
 
   def create_todo(attrs \\ %{}) do
