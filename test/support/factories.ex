@@ -26,8 +26,9 @@ defmodule Plum.Factory do
 
   def city_factory do
     %City{
-      name: sequence(:name, &"city name #{&1}"),
       insee_id: sequence(:insee_id, &"#{&1}"),
+      location: build(:point),
+      name: sequence(:name, &"city name #{&1}"),
       postal_code: sequence(:postal_code, &"#{&1}"),
     }
   end
@@ -63,6 +64,10 @@ defmodule Plum.Factory do
     %Land{
       accessibility: "oui",
       address: "rue",
+      ads: [build(:land_ad)],
+      agency_fees: 0,
+      connection_fees: 0,
+      demolition_fees: 0,
       description: "desc",
       environment: "arbre",
       geoportail: "www",
@@ -76,17 +81,13 @@ defmodule Plum.Factory do
       openstreetmaps: "www",
       price: 123,
       sanitation: "non",
+      sanitation_fees: 0,
       serviced: false,
+      servicing_fees: 0,
       slope: "weak",
       soc: 0.7,
       surface: 123,
       type: "tye",
-      ads: [build(:land_ad)],
-      agency_fees: 0,
-      connection_fees: 0,
-      sanitation_fees: 0,
-      servicing_fees: 0,
-      demolition_fees: 0,
     }
   end
 
