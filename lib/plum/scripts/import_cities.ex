@@ -2,6 +2,7 @@ defmodule Plum.Scripts.ImportCities do
 
   require Logger
 
+  alias Geo.Point
   alias Plum.Geo
   alias ExAws.S3
 
@@ -16,6 +17,7 @@ defmodule Plum.Scripts.ImportCities do
       "Code_commune_INSEE" => {:insee_id, &id/2},
       "Nom_commune" => {:name, &id/2},
       "Code_postal" => {:postal_code, &id/2},
+      "coordonnees_gps" => {:location, &location/2},
     }
   end
 
@@ -43,7 +45,7 @@ defmodule Plum.Scripts.ImportCities do
   defp insert(struct) do
     case Geo.get_city_by(%{insee_id: struct.insee_id}) do
       nil -> Geo.create_city(struct)
-      _ -> nil
+      city = %Geo.City{} -> Geo.update_city(city, struct)
     end
   end
 
@@ -62,4 +64,11 @@ defmodule Plum.Scripts.ImportCities do
   end
 
   defp id(d, _acc), do: d
+
+  defp location(d, _acc) do
+    d |> String.split(", ") |> case do
+      [lat, lng] -> %Point{coordinates: {lng, lat}, srid: 4326}
+      _ -> nil
+    end
+  end
 end

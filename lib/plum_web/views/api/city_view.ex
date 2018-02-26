@@ -3,13 +3,18 @@ defmodule PlumWeb.Api.CityView do
 
   alias PlumWeb.Api.{
     CityView,
+    LandView,
   }
+
+  import PlumWeb.ViewHelpers, only: [put_loaded_assoc: 2]
 
   @attributes ~w(
     id
     insee_id
     name
     postal_code
+    lands
+    location
   )a
 
   def render("index.json", %{cities: cites}) do
@@ -21,8 +26,16 @@ defmodule PlumWeb.Api.CityView do
   end
 
   def render("city.json", %{city: city}) do
-    city |> Map.take(@attributes)
+    city
+    |> Map.take(@attributes)
+    |> format_geo(:location)
+    |> put_loaded_assoc({:lands, LandView, "index.json", :lands})
+  end
+
+  def format_geo(struct, field) do
+    case struct |> Map.get(field) do
+      nil -> struct
+      value -> struct |> Map.put(field, value |> Geo.JSON.encode)
+    end
   end
 end
-
-

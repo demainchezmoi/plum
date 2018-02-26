@@ -46,12 +46,23 @@ defmodule Plum.Geo do
     query = from c in City
     query
     |> cities_with_ids(params)
+    |> cities_with_lands(params)
   end
 
-  def cities_with_ids(query, %{"city_ids" => ids}) when is_list(ids) do
+  def cities_with_ids(query, %{"cities" => id}) when not is_list(id) do
+    ids = [id]
+    from c in query, where: c.id in ^ids
+  end
+  def cities_with_ids(query, %{"cities" => ids}) when is_list(ids) do
     from c in query, where: c.id in ^ids
   end
   def cities_with_ids(query, _), do: query
+
+  def cities_with_lands(query, params = %{"count_lands" => "true"}) do
+    lands_query = list_lands_query(params)
+    from c in query, preload: [lands: ^lands_query]
+  end
+  def cities_with_lands(query, _), do: query
 
   @doc """
   Gets a single city.
