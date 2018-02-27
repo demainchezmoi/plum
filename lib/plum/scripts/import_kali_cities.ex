@@ -19,7 +19,7 @@ defmodule Plum.Scripts.ImportKaliCities do
   end
 
   def handle_department(department) do
-    bucket = "dev-demainchezmoi" 
+    bucket = "demainchezmoi" 
     object = "/cities/department_#{department}_cities.json"
 
     S3.get_object(bucket, object)
