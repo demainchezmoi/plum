@@ -2,7 +2,9 @@ defmodule Plum.Geo do
   import Ecto.Query, warn: false
 
   alias Plum.Repo
+  alias Geo.Point, as: GeoPoint
   alias Plum.Geo.{City, Land, LandAd}
+  import Geo.PostGIS
 
   require Logger
 
@@ -26,6 +28,32 @@ defmodule Plum.Geo do
       select: map(c, [:id, :postal_code, :name]),
       limit: 15
 
+    query |> Repo.all
+  end
+
+
+  @doc """
+  Finds a list of cities within a circle 
+
+  ## Examples
+
+      iex> within_circle(%{"circle" => %{"center_lng" => ...}})
+      [%City{}, ...]
+  """
+
+  def within_circle(%{"circle" => %{
+    "center_lng" => center_lng,
+    "center_lat" => center_lat,
+    "radius" => radius
+  }}) do
+    point = %GeoPoint{coordinates: {center_lng, center_lat}}
+    radius = radius |> Float.parse |> elem(0)
+    query =
+      from c in City,
+      select: map(c, [:id, :name, :postal_code, :location]),
+      where: st_distance(c.location, ^point) <= ^radius,
+      order_by: [asc: st_distance(c.location, ^point)],
+      limit: 50
     query |> Repo.all
   end
 

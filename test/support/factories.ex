@@ -30,6 +30,7 @@ defmodule Plum.Factory do
       location: build(:point),
       name: sequence(:name, &"city name #{&1}"),
       postal_code: sequence(:postal_code, &"#{&1}"),
+      department: sequence(:department, &"#{&1}"),
     }
   end
 

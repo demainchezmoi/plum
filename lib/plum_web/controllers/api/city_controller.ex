@@ -12,6 +12,14 @@ defmodule PlumWeb.Api.CityController do
     conn |> render("index.json", %{cities: cities})
   end
 
+  def within_circle(conn, params = %{"circle" => %{
+    "center_lng" => _center_lng,
+    "center_lat" => _center_lat,
+    "radius" => _radius
+  }}) do
+    render(conn, "index.json", %{cities: Geo.within_circle(params)})
+  end
+
   def index(conn, params) do
     cities_query = Geo.list_cities_query(params)
     page = cities_query |> Repo.paginate(params)

@@ -8,6 +8,7 @@ defmodule Plum.Geo.City do
     field :name, :string
     field :postal_code, :string
     field :location, Geo.Geometry
+    field :department, :string
 
     has_many :lands, Land
 
@@ -15,7 +16,7 @@ defmodule Plum.Geo.City do
   end
 
   @required_params ~w(insee_id name)a
-  @optional_params ~w(postal_code location)a
+  @optional_params ~w(postal_code location department)a
 
   @doc false
   def changeset(%City{} = city, attrs) do
