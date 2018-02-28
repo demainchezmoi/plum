@@ -33,7 +33,7 @@ defmodule Plum.Geo do
 
 
   @doc """
-  Finds a list of cities within a circle 
+  Finds a list of cities within a circle
 
   ## Examples
 
