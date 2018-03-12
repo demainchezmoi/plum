@@ -33,7 +33,7 @@ config :plum, PlumWeb.Endpoint,
 config :plum, PlumWeb.Endpoint,
   live_reload: [
     patterns: [
-      ~r{priv/static/.*(js|css|png|jpeg|jpg|gif|svg)$},
+      ~r{priv/static/.*(js|css|png|jpeg|jpg|gif|svg|scss)$},
       ~r{priv/gettext/.*(po)$},
       ~r{lib/plum_web/views/.*(ex)$},
       ~r{lib/plum_web/templates/.*(eex)$}

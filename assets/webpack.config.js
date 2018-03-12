@@ -32,7 +32,6 @@ config = {
               includePaths: [
                 path.resolve(__dirname, 'node_modules/bootstrap/scss'),
                 path.resolve(__dirname, 'node_modules/font-awesome/scss'),
-                path.resolve(__dirname, 'node_modules/mdbootstrap/sass')
               ]
             }
           }
@@ -74,10 +73,6 @@ config = {
     new CopyWebpackPlugin([{
       from: './static'
     }, {
-      from: './node_modules/mdbootstrap/font/roboto', to: 'fonts'
-    }, {
-      from: './node_modules/mdbootstrap/img/svg', to: 'images/svg'
-    }, {
       from: './node_modules/font-awesome/fonts', to: 'fonts'
     }]),
     new webpack.ProvidePlugin({
@@ -85,8 +80,6 @@ config = {
 			'jQuery': 'jquery',
 			'window.jQuery': 'jquery',
       'Popper': ['popper.js', 'default'],
-			// 'Tether': 'tether',
-			// 'Waves': 'node-waves'
 		})
   ]
 };

@@ -1,0 +1,12 @@
+@each $key,
+$val in $grid-breakpoints {
+    @include media-breakpoint-up($key) {
+        $y: map-get($responsive-headings, $key);
+        @each $name,
+        $value in $y {
+            .#{$name}-responsive {
+                font-size: $value;
+            }
+        }
+    }
+}

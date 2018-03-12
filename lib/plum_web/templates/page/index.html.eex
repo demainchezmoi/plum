@@ -1,260 +1,127 @@
-<% color="indigo" %>
+<nav class="navbar navbar-expand-lg navbar-light">
+  <div class="container">
+    <a class="navbar-brand">
+      <div class="d-flex flex-row align-items-center justify-content-center">
+        <div class="logo-wrapper mr-1"><%= PhoenixInlineSvg.Helpers.svg_image(@conn, "logo3") %></div>
+        <div class="m-0 accent-1" style="position: relative; top: 1px; right: -4px">Maisons Léo</div>
+      </div>
+	  </a>
+	  <ul class="navbar-nav ml-auto">
+	    <li class="nav-item"><a class="nav-link" href="#house">la maison</a></li>
+	    <li class="nav-item"><a class="nav-link" href="#land">le terrain</a></li>
+	    <li class="nav-item"><a class="nav-link" href="#service">le service</a></li>
+	    <li class="nav-item"><a class="nav-link" href="">contact</a></li>
+	  </ul>
+  </div>
+</nav>
 
-<div class="public3">
-  <nav class="navbar navbar-expand-lg navbar-dark <%= color %>">
-    <div class="container">
-      <a class="navbar-brand logo-inline" href="/">
-        <div class="d-flex align-items-end">
-          <div class="logo-wrapper mr-1"><%= PhoenixInlineSvg.Helpers.svg_image(@conn, "logo3") %></div>
-          <div>
-            <div class="logo-title" style="font-size: 12px; line-height: 12px;">Maison&nbsp;Léo </div>
-            <div class="tiny" style="font-size: 12px; line-height: 12px;"><em>Bretagne</em></div>
-          </div>
+<div class="container intro">
+
+  <div class="row d-flex align-items-center text-center">
+    <div class="col-12">
+      <h1 class="mb-0 mt-0 h2-responsive">
+        Faire construire <br class="d-sm-none" />est un plaisir
+      </h1>
+      <%# <p class="secondary">Découvrez l'expérience Léo</p> %>
+    </div>
+  </div>
+
+  <div class="row mt-2">
+    <div class="col">
+      <div class="mt-0 lead-responsive text-center">
+        Votre <span class="accent-1">maison Léo 3 chambres</span>
+        <br class="d-block d-sm-none"/>
+        construite en <span class="accent-1">deux mois</span>
+        <br class="d-block d-sm-none"/>
+        pour <span class="accent-1">93&nbsp;900&nbsp;&euro;</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="row mt-5">
+    <div class="col-12">
+      <div class="d-flex justify-content-center relative">
+        <div class="d-sm-flex align-items-center justify-content-left cta-wrapper">
+          <input type="text" class="form-control mr-1 input-cta" placeholder="Je souhaite habiter à ..."/>
+          <button class="btn btn-primary btn-cta">Trouver un terrain&nbsp;!</button>
         </div>
-      </a>
-      <ul class="navbar-nav ml-auto d-flex flex-row">
-        <li class="nav-item active small-xs mr-2">
-          <a class="nav-link d-flex align-items-center" data-toggle="modal" data-target="#contactModal">
-            <i class="fa-stack mr-1">
-              <i class="fa fa-stack-2x fa-circle white-text"></i>
-              <i class="fa fa-phone fa-stack-1x indigo-text"></i>
-            </i>
-            Contact
-          </a>
-        </li>
+      </div>
+    </div>
+  </div>
+
+  <div class="row" style="margin-top: 120px">
+    <div class="col-sm-4 col-12">
+      <div class="font-bold">La meilleure maison est en bois</div>
+			<div class="secondary">Découvrez comment la Léo Break assure un standard au top du marché</div>
+      <div class="mt-1"><a href="#house">découvrir ></a></div>
+    </div>
+
+    <div class="col-sm-4 col-12">
+      <div class="font-bold">Le terrain qu'il vous faut</div>
+      <div class="secondary">Profitez de notre expérience foncière et trouvez votre terrain en une semaine</div>
+      <div class="mt-1"><a href="#land">découvrir ></a></div>
+    </div>
+
+    <div class="col-sm-4 col-12">
+      <div class="font-bold">Un service exceptionnel</div>
+      <div class="secondary">Découvrez pourquoi l'expérience Léo vous simplifie la vie</div>
+      <div class="mt-1"><a href="#service">découvrir ></a></div>
+    </div>
+  </div>
+</div>
+
+
+<div class="container">
+  <div class="row mt-7" id="house">
+    <div class="col">
+      <p>La Léo Break est issue de la toute nouvelle génération de maisons à <span class="font-bold">ossature bois</span></p>
+      <p>Ses <span class="font-bold">trois chambres</span> et sa grande <span class="font-bold">pièce de vie de 37m<sup>2</sup></span> sont idéalement agencées pour la vie de votre famille</p>
+      <p>Vous ne manquerez pas de lumière grâce à ses deux grande baies vitrées</p>
+      <p></p>
+
+      <ul class="d-none">
+        <%# <li>ossature bois</li> %>
+        <li>vide sanitaire</li>
+        <%# <li>pièce de vie 37 m<sup>2</sup></li> %>
+        <li>baie et porte fenetre alu</li>
+        <%# <li>3 chambres</li> %>
+        <li>Isolation B</li>
+        <li>Lumière 2 grandes baies</li>
+        <li>Cuisine Américaine</li>
+        <li>Détails tech transparents : lien doc technique</li>
       </ul>
     </div>
-  </nav>
-
-  <div class="intro3">
-    <div class="container mb-5">
-      <div class="row mb-3 pt-5">
-        <div class="col">
-          <div class="logo-lead">
-            <div class="logo-wrapper"><%= PhoenixInlineSvg.Helpers.svg_image(@conn, "logo3") %></div>
-            <div class="logo-title">Maison Léo</div>
-            <div class="tiny font-medium indigo-gray-text" style="font-size: 12px; line-height: 12px;"><em>Bretagne</em></div>
-          </div>
-        </div>
-      </div>
-      <div class="row d-flex justify-content-center mb-4">
-        <div class="col-12">
-          <div class="montserrat text-center mb-0 h3-responsive indigo-text text-darken-3 font-bold">Faites-vous livrer une maison</div>
-          <div class="montserrat text-center mb-4 h5-responsive indigo-text text-accent-2 font-bold relative">
-            et devenez propriétaire, c'est facile&nbsp;!
-          </div>
-        </div>
-        <div class="col col-sm-8">
-          <p class="text-center h5-responsive" style="color: #56687a">Votre maison <b>ossature bois</b> neuve construite hors site en <b>quatre mois</b>, installée sur votre terrain à partir de <b>597&euro;&nbsp;/&nbsp;mois</b></p>
-        </div>
-      </div>
-
-      <div class="row mb-5">
-        <div class="col text-center relative " id="pac-container">
-          <p class="small mb-0 gray-text-600">Pas de terrain&nbsp;? Nous vous aidons à trouver la perle&nbsp;!</p>
-          <div class="d-sm-flex align-items-center justify-content-center">
-          <input type="text" class="form-control d-inline-block inline-input form-control-lg" data-action="search-location" placeholder="Je souhaite habiter à ..."/>
-          <button class="btn btn-lg main-btn indigo" data-action="find-me-a-land">Trouver un terrain</button>
-          </div>
-        </div>
-      </div>
+    <div class="col">
+      <img src="/images/leo_contour.png" class="leo_contour"/>
     </div>
   </div>
-
-  <div class="container">
-    <div class="row mb-5 d-flex justify-content-center justify-content-sm-around">
-      <div class="col">
-        <p class="font-bold gray-text-700 mb-3 d-block d-sm-none">La gamme Léo&nbsp;: <span class="gray-text-600">Mini, Berline, Break</span></p>
-        <div class="row d-flex flex-column flex-sm-row justify-content-around">
-
-          <div class="col-12 col-sm leo-item-col">
-            <div class="d-flex flex-column align-items-center leo-item" data-toggle="modal" data-target="#leoItemMiniModal">
-              <div class="leo-item-wrapper" style="width: 100%;"><%= PhoenixInlineSvg.Helpers.svg_image(@conn, "Mini") %></div>
-              <div class="montserrat font-bold gray-text-800 pb-2">Léo Mini</div>
-              <div class="text-center">
-                <span class="badge indigo accent-2 p-2 mb-1">64&nbsp;m<sup>2</sup></span>
-                <span class="badge indigo accent-2 p-2 mb-1">1 chambre</span>
-                <span class="badge indigo accent-2 p-2 mb-1">74&nbsp;900&nbsp;&euro;</span>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-12 col-sm leo-item-col">
-            <div class="d-flex flex-column align-items-center leo-item" data-toggle="modal" data-target="#leoItemBerlineModal">
-              <div class="leo-item-wrapper" style="width: 100%;"><%= PhoenixInlineSvg.Helpers.svg_image(@conn, "Berline") %></div>
-              <div class="montserrat font-bold gray-text-800 pb-2">Léo Berline</div>
-              <div class="text-center">
-                <span class="badge indigo accent-2 p-2 mb-1">87&nbsp;m<sup>2</sup></span>
-                <span class="badge indigo accent-2 p-2 mb-1">3 chambres</span>
-                <span class="badge indigo accent-2 p-2 mb-1">86&nbsp;900&nbsp;&euro;</span>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-12 col-sm leo-item-col">
-            <div class="d-flex flex-column align-items-center leo-item" data-toggle="modal" data-target="#leoItemBreakModal">
-              <div class="leo-item-wrapper" style="width: 100%;"><%= PhoenixInlineSvg.Helpers.svg_image(@conn, "Break") %></div>
-              <div class="montserrat font-bold gray-text-800 pb-2">Léo Break</div>
-              <div class="text-center">
-                <span class="badge indigo accent-2 p-2 mb-1">96&nbsp;m<sup>2</sup></span>
-                <span class="badge indigo accent-2 p-2 mb-1">3 chambres</span>
-                <span class="badge indigo accent-2 p-2 mb-1">Garage 48m<sup>2</sup></span>
-                <span class="badge indigo accent-2 p-2 mb-1">116&nbsp;900&nbsp;&euro;</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="row mb-5 d-flex justify-content-center">
-      <div class="col col-lg-8">
-        <p class="font-bold gray-text-700 mb-3">Le concept Léo</p>
-        <div class="media">
-          <img class="mr-3 rounded-circle z-depth-1 responsive-avatar" data-src="<%= img_path("xavier_jaffray.jpg") %>" alt="">
-          <div class="media-body">
-            <p class="gray-text-600 ">La <b>Maison Léo</b> est issue de la toute nouvelle génération de maisons <b>hors-site</b> à <b>ossature bois</b>, <b>écologique</b> <b>robuste</b> et <b>fortement isolée</b>. Elle vous fera réaliser d'<b>importantes économies</b> tant à l'achat qu'en <b>économies d'énergie</b> au cours de sa vie.</p>
-            <p class="gray-text-600">Son processus de fabrication local en atelier vous garantit une <b>qualité</b> et une <b>fiabilité</b> imbattables par des maisons construites avec chantier traditionnel. Résultat&nbsp;: un <b>coût au mètre carré minimal</b>, une <b>durée de construction réduite</b> et un <b>habitat top qualité</b>.</p>
-            <p class="gray-text-600">À vous de jouer&nbsp;!</p>
-            <p class="text-right mb-0 gray-text-600 font-bold">Xavier Jaffray</p>
-            <p class="text-right gray-text-600">Entrepreneur, fondateur de la Maison Léo</p>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="row mb-5 d-flex justify-content-center">
-      <div class="col col-lg-8">
-        <p class="font-bold gray-text-700 mb-3">Les avantages Léo</p>
-        <table class="table table-bordered z-depth-1">
-          <thead class="">
-            <tr>
-              <th scope="col"></th>
-              <th scope="col">Maison Léo</th>
-              <%# <th scope="col">Traditionnelle</th> %>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <th scope="row" class="">Construction</th>
-              <td scope="row" class="indigo-text font-medium">4 mois sans chantier</td>
-              <%# <td scope="row" class="red-text font-medium">9 mois avec chantier</td> %>
-            </tr>
-            <tr>
-              <th scope="row" class="">Suivi construction</th>
-              <td scope="row" class="indigo-text font-medium">Quotidien</td>
-              <%# <td scope="row" class="red-text font-medium">Mensuel</td> %>
-            </tr>
-            <tr>
-              <th scope="row" class="">Conformité aux plans</th>
-              <td scope="row" class="indigo-text font-medium">100%</td>
-              <%# <td scope="row" class="red-text font-medium">Pas toujours respectée ...</td> %>
-            </tr>
-            <tr>
-              <th scope="row" class="">Coût</th>
-              <td scope="row" class="indigo-text font-medium">986&nbsp;&euro;&nbsp;/&nbsp;m<sup>2</sup></td>
-              <%# <td scope="row" class="red-text font-medium">> 1200&euro;/m<sup>2</sup>&nbsp;!</td> %>
-            </tr>
-            <tr>
-              <th scope="row" class="">Garantie achèvement travaux</th>
-              <td scope="row" class="indigo-text font-medium">Oui</td>
-              <%# <td scope="row" class="orange-text font-medium">Selon constructeur</td> %>
-            </tr>
-            <tr>
-              <th scope="row" class="">Garantie décennale</th>
-              <td scope="row" class="indigo-text font-medium">Oui</td>
-              <%# <td scope="row" class="orange-text font-medium">Selon constructeur</td> %>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
-
-    <div class="row mb-7 d-flex justify-content-center">
-      <div class="col-12 col-lg-8">
-        <p class="font-bold gray-text-700 mb-3">Les partenaires Léo</p>
-      </div>
-      <div class="col col-md-6 col-lg-8">
-        <div class="row d-flex align-items-center">
-          <div class="col-2 col-sm pb-3">
-            <img class="partner-logo" data-src="<%= img_path("logo_next_habitat.png") %>">
-          </div>
-          <div class="col-3 col-sm pb-3">
-            <img class="partner-logo" data-src="<%= img_path("logo_primo_extenso.png") %>">
-          </div>
-          <div class="col-3 col-sm pb-3">
-            <img class="partner-logo" data-src="<%= img_path("logo_lightmenu.png") %>">
-          </div>
-          <div class="col-3 col-sm pb-3">
-            <img class="partner-logo" data-src="<%= img_path("logo_adebeo.png") %>">
-          </div>
-          <div class="col-3 col-sm pb-3">
-            <img class="partner-logo" data-src="<%= img_path("logo_crisalide_numerique.png") %>">
-          </div>
-          <div class="col-3 col-sm pb-3">
-            <img class="partner-logo" data-src="<%= img_path("logo_dominho.png") %>">
-          </div>
-        </div>
-      </div>
+  <div class="row" id="land">
+    <div class="col">
+      <h4 class="h5-responsive">Le terrain qu'il vous faut</h4>
+      <ul>
+        <li>Expérience</li>
+        <li>Outils de recherche foncière</li>
+        <li>Implantation</li>
+      </ul>
     </div>
   </div>
-  <footer class="">
-    <div class="container">
-      <div class="row d-flex justify-content-center">
-        <div class="col col-lg-8 py-5">
-          <%= link "Mentions légales", to: page_path(@conn, :legal), class: "gray-text-600"%>
-        </div>
-      </div>
-    </div>
-  </footer>
-</div>
-
-<!-- Modal -->
-<div class="modal fade" id="findMeLandModal" tabindex="-1" role="dialog" aria-labelledby="findMeLandModal" aria-hidden="true">
-  <div class="modal-dialog mb-7" role="document">
-    <div class="modal-content">
-      <div class="modal-header indigo accent-3 white-text">
-        <h5 class="modal-title h5-responsive font-medium">Ma prospection personnalisée</h5>
-        <button type="button" class="close white-text" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <div class="p-1">
-          <p class="text-center indigo-text text-accent-3 font-bold h5-responsive" data-role="searched-location-display"></p>
-          <%= form_for @conn, page_path(@conn, :contact), [as: "contact"], fn f-> %>
-            <div class="form-group row">
-              <label class="col-2 col-form-label gray-text-800">Nom</label>
-              <div class="col-10">
-                <%= text_input f, :name, placeholder: "Marie Dupont", class: "form-control", required: true %>
-              </div>
-            </div>
-            <div class="form-group row">
-              <label class="col-2 col-form-label gray-text-800">Tél</label>
-              <div class="col-10">
-                <%= text_input f, :phone, placeholder: "06 12 34 56 78", class: "form-control", required: true, minlength: 10 %>
-              </div>
-            </div>
-            <%= hidden_input f, :remark, class: "form-control", "data-role": "searched-location-hidden-input" %>
-            <%= hidden_input f, :city, class: "form-control", "data-role": "searched-city-hidden-input" %>
-            <%= hidden_input f, :postal_code, class: "form-control", "data-role": "searched-postal-code-hidden-input" %>
-            <p class="small text-right gray-text-600">Nous étudions votre projet ensemble et vous proposons une sélection de terrains personnalisée</p>
-            <div class="clearfix">
-              <div class="pull-right">
-                <button type="submit" class="btn btn-indigo indigo accent-3 mr-0 mb-0"><i class="fa fa-paper-plane mr-2"></i> Valider</button>
-              </div>
-            </div>
-            <%= if @params[:ad_id] do %><%= hidden_input f, :ad, value: @params[:ad_id] %><% end %>
-            <%= hidden_input f, :ref, value: @params["ref"] %>
-          <% end %>
-        </div>
-      </div>
+  <div class="row" id="service">
+    <div class="col">
+      <h4 class="h5-responsive">Un service exceptionnel</h4>
+      <ul>
+        <li>Manifeste</li>
+        <li>Délais</li>
+        <li>Pas de chantier</li>
+        <li>Fondations pieux pas de dalle</li>
+        <li>Contact</li>
+        <li>Partenaires</li>
+      </ul>
     </div>
   </div>
 </div>
 
-<%= render PlumWeb.SharedView, "contact_modal.html", conn: @conn, params: @params %>
-
-<%= render "leo_item_modal.html", conn: @conn, params: @params, img_name: "plan-mini-v3-1", modal_id: "leoItemMiniModal" %>
-<%= render "leo_item_modal.html", conn: @conn, params: @params, img_name: "plan-berline-v3-1", modal_id: "leoItemBerlineModal" %>
-<%= render "leo_item_modal.html", conn: @conn, params: @params, img_name: "plan-break-v3-1", modal_id: "leoItemBreakModal" %>
+<%# <div class="col col-md-4 d-none d-md-block"> %>
+  <%# <div class="front-house-holder"> %>
+    <%# <img src="/images/face.png" class="front-house"/> %>
+    <%# </div> %>
+  <%# </div> %>

@@ -1,6 +1,3 @@
-$roboto-font-path: "/fonts/";
-// $yellow-flash: #e4ff00;
-// $green-flash: #07d82b;
 $fa-font-path: "/fonts/";
 
 /*
@@ -9,50 +6,39 @@ $fa-font-path: "/fonts/";
  * =================
  */
 @import "functions";
-@import "variables";
-$spacer: 1rem;
-$spacers: (
-  0: 0,
-  1: ($spacer * .25),
-  2: ($spacer * .5),
-  3: $spacer,
-  4: ($spacer * 1.5),
-  5: ($spacer * 3),
-  6: ($spacer * 5),
-  7: ($spacer * 7)
-);
-$font-size-base: 14px;
+// @import "variables";
+@import "bootstrap_variables";
 @import "mixins";
-@import "print";
+// @import "print";
 @import "reboot";
 @import "type";
-@import "images";
+// @import "images";
 // @import "code";
 @import "grid";
-@import "tables";
+// @import "tables";
 @import "forms";
 @import "buttons";
-@import "transitions";
+// @import "transitions";
 @import "dropdown";
-@import "button-group";
-@import "input-group";
-@import "custom-forms";
+// @import "button-group";
+// @import "input-group";
+// @import "custom-forms";
 @import "nav";
 @import "navbar";
-@import "card";
-@import "breadcrumb";
+// @import "card";
+// @import "breadcrumb";
 // @import "pagination";
-@import "badge";
+// @import "badge";
 // @import "jumbotron";
-@import "alert";
+// @import "alert";
 // @import "progress";
 @import "media";
-@import "list-group";
-@import "close";
-@import "modal";
+// @import "list-group";
+// @import "close";
+// @import "modal";
 // @import "tooltip";
 // @import "popover";
-@import "carousel";
+// @import "carousel";
 @import "utilities";
 
 
@@ -63,56 +49,13 @@ $font-size-base: 14px;
  */
 @import "font-awesome";
 
-
 /*
  * =================
- * Import mdbootstrap
+ * Import custom styles
  * =================
  */
-@charset "UTF-8";
-
-@import "mdb/free/data/functions";
-@import "mdb/free/data/variables-b4";
-@import "mdb/free/data/prefixer";
-@import "mdb/free/data/mixins";
-@import "_colors"; // CUSTOMIZED FILE
-@import "_mdb_variables"; // CUSTOMIZED FILE
-// @import "mdb/free/data/variables";
-
-$image-path: "/images";
-
-@import "mdb/free/global";
-// @import "mdb/free/animations";
-@import "mdb/free/helpers";
-@import "mdb/free/typography";
-@import "mdb/free/buttons";
-@import "mdb/free/cards-basic";
-// @import "mdb/free/dropdowns";
-// @import "mdb/free/navbar";
-// @import "mdb/free/pagination";
-@import "mdb/free/badge";
-@import "mdb/free/breadcrumb";
-@import "mdb/free/modals";
-// @import "mdb/free/progress";
-// @import "mdb/free/carousel-basic";
-// @import "mdb/free/collapse";
-// @import "mdb/free/jumbotron";
-// @import "mdb/free/masks";
-// @import "mdb/free/waves";
-// @import "mdb/free/forms-basic";
-// @import "mdb/free/msc";
-// @import "mdb/free/footer";
-// @import "mdb/free/list-group";
-@import "mdb/free/tables";
-// @import "mdb/custom";
-
-
-/*
- * =================
- * Import custom styles 
- * =================
- */
+@import "custom_variables";
+@import "fonts";
 @import "custom";
-@import "animations";
-@import "views/ad";
+@import "types";
 @import "views/page";
