@@ -8,6 +8,36 @@ $gradient-end: $background;
 $gradient-start: $background;
 $gradient-opacity: 1;
 
+$blue: #0092CA; // bleu
+$orange-pink: #ff6460; // rose orangé
+$purple: #8d04c2; // violet saturé
+$light-purple: #6c42ca;
+$orange: #FD7014; // orange
+$green: #04c276; // vert
+$pink: #FC5185; // rose
+$pastel-pink: #ff6091;
+$pink-orange: #f3614f; // orange rosé
+$deep-orange: #FF5722; // orange profond
+$turquoise-green: #11BFAE; // vert turquoise
+$turquoise-blue: #39c6cf; // bleu turquoise
+$yellow: #FFDE25; // jaune
+$pink-background: #431834;
+$pink-purple-background: #3e1843;
+$blue-gray-background: darken(#364F6B, 10%);
+
+$base: $blue-gray-background;
+$accent-1: $green;
+$primary: $green;
+$accent-2: $pink;
+$background: #fcfcfc;
+$secondary: #42505f;
+
+.fa-phone:before {
+  position: relative;
+  top: .7px;
+  right: -.4px;
+}
+
 .front-house-holder {
   overflow: hidden;
   position: relative;
@@ -19,13 +49,69 @@ $gradient-opacity: 1;
   }
 }
 
-.intro {
-  @include media-breakpoint-up(xs) { margin-top: 50px; }
-  @include media-breakpoint-up(sm) { margin-top: 100px; }
-  @include media-breakpoint-up(md) { margin-top: 150px; }
-  @include media-breakpoint-up(lg) { margin-top: 180px; }
-  @include media-breakpoint-up(xl) { margin-top: 200px; }
+.navbar .nav-link {
+  font-size: $font-size-sm;
 }
+
+.nav-link.primary {
+  color: $primary !important;
+}
+
+.nowrap {
+  white-space: nowrap;
+}
+
+.fixed {
+  position: fixed;
+}
+
+.relative {
+  position: relative;
+}
+
+.absolute {
+  position: absolute;
+}
+
+.top {
+  top: 0;
+}
+
+.min-full-height {
+  min-height: 100%;
+  // position: relative;
+}
+
+.full-height {
+  height: 100%;
+}
+
+.flip {
+  -moz-transform: scaleX(-1);
+  -o-transform: scaleX(-1);
+  -webkit-transform: scaleX(-1);
+  transform: scaleX(-1);
+  filter: FlipH;
+  -ms-filter: "FlipH";
+}
+
+.house-point {
+  // @include media-breakpoint-up(xs) { height: 500px; }
+  // @include media-breakpoint-up(sm) { height: 500px; }
+  // @include media-breakpoint-up(md) { height: 500px; }
+  // @include media-breakpoint-up(lg) { height: 500px; }
+  // @include media-breakpoint-up(xl) { height: 700px; }
+}
+
+.intro {
+  position: relative;
+  @include media-breakpoint-up(xs) { padding-top: 150px; }
+  @include media-breakpoint-up(sm) { padding-top: 180px; }
+  @include media-breakpoint-up(md) { padding-top: 200px; }
+  @include media-breakpoint-up(lg) { padding-top: 220px; }
+  @include media-breakpoint-up(xl) { padding-top: 270px; }
+}
+
 
 .leo_contour {
   width: 100%;
@@ -195,22 +281,6 @@ $gradient-opacity: 1;
 // $base: #E8F1F5;
 // $secondary: darken($base, 10%);
 
-$blue: #0092CA; // bleu
-$orange-pink: #ff6460; // rose orangé
-$purple: #8d04c2; // violet saturé
-$light-purple: #6c42ca;
-$orange: #FD7014; // orange
-$green: #04c276; // vert
-$pink: #FC5185; // rose
-$pastel-pink: #ff6091;
-$pink-orange: #f3614f; // orange rosé
-$deep-orange: #FF5722; // orange profond
-$turquoise-green: #11BFAE; // vert turquoise
-$turquoise-blue: #39c6cf; // bleu turquoise
-$yellow: #FFDE25; // jaune
-$pink-background: #431834;
-$pink-purple-background: #3e1843;
-$blue-gray-background: darken(#364F6B, 10%);
 
 // sympa boutton rose ++
 // $background: $blue-gray-background;
@@ -251,13 +321,11 @@ $blue-gray-background: darken(#364F6B, 10%);
 // $primary: #0c8fb8;
 // $secondary: darken($base, 10%);
 
-$base: $blue-gray-background;
-$accent-1: $green;
-$primary: $green;
-$accent-2: $light-purple;
-$background: #fefefe;
-$secondary: #42505f;
 
+.navbar {
+  background: rgba(white, .9);
+  border-bottom: 1px solid rgba(black, .05);
+}
 
 .background {
   // background: url("https://s3-eu-west-1.amazonaws.com/demainchezmoi/cloudfront_assets/images/pano-ete-jour-min.png") no-repeat center center;
@@ -286,7 +354,7 @@ html, body, main {
   position: relative;
   height: 100%;
   color: $base;
-  background: #fcfcfc;
+  background: $background;
 }
 .accent-1 { color: $accent-1; }
 .accent-2 { color: $accent-2; }
@@ -335,3 +403,22 @@ $logo-size: 35px;
 
 .font-bold { font-weight: 700; }
 
+.big-modal {
+  padding-right: 0 !important;
+  .modal-dialog {
+    // margin-top: 0;
+    border-radius: 0;
+    max-width: none;
+    width: auto;
+    @include media-breakpoint-down(xs) { margin: 0; }
+    // @include media-breakpoint-up(sm) { margin: 0; }
+    // @include media-breakpoint-up(md) { margin: 0; }
+    // @include media-breakpoint-up(lg) { margin: 0; }
+    // @include media-breakpoint-up(xl) { margin: 0; }
+    .modal-content {
+      // border-top: 0;
+      border: 0;
+      border-radius: 0;
+    }
+  }
+}
