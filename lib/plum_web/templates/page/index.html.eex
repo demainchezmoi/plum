@@ -10,13 +10,13 @@
 	  </a>
 	  <ul class="navbar-nav ml-auto">
 	    <li class="nav-item">
-	        <a class="nav-link primary" href="">
+	      <a class="nav-link primary" href="" data-toggle="modal" data-target="#contactModal">
 	        <i class="fa-stack" style="font-size: 12px">
 	          <i class="fa fa-circle fa-stack-2x"></i>
 	          <i class="fa fa-phone fa-stack-1x fa-inverse"></i>
 	        </i>
 	        <span class="relative" style="top: 1px">contact</span>
-	        </a>
+	      </a>
 	    </li>
 	  </ul>
   </div>
@@ -29,7 +29,6 @@
         <h1 class="mb-0 mt-0 h2-responsive">
           Faire construire <br class="d-sm-none" />est un plaisir
         </h1>
-        <%# <p class="secondary">Découvrez l'expérience Léo</p> %>
       </div>
     </div>
 
@@ -50,29 +49,29 @@
         <div class="d-flex justify-content-center relative">
           <div class="d-sm-flex align-items-center justify-content-left cta-wrapper">
             <input type="text" class="form-control mr-1 input-cta" placeholder="Je souhaite habiter à ..." data-action="search-location"/>
-            <button class="btn btn-primary btn-cta" data-toggle="modal" data-target="#exampleModal" data-action="find-me-a-land">Trouver un terrain&nbsp;!</button>
+            <button class="btn btn-primary btn-cta" data-toggle="modal" data-target="#exampleModal" data-action="find-me-a-land">On en discute&nbsp;!</button>
           </div>
         </div>
       </div>
     </div>
 
-    <div class="row lead mt-5 mt-sm-7">
+    <div class="row lead mt-6 mt-sm-7">
       <div class="col-sm-4 col-12 mb-4">
         <div class="font-bold">La meilleure maison est en bois</div>
 			  <div class="">Découvrez comment la Léo Break surpasse les standards du marché</div>
-        <div class="mt-1"><a href="#house">découvrir ></a></div>
+        <div class="mt-0"><a href="#house">découvrir ></a></div>
       </div>
 
       <div class="col-sm-4 col-12 mb-4">
         <div class="font-bold">Le terrain qu'il vous faut</div>
         <div class="">Profitez de notre service, trouvez votre terrain en une semaine</div>
-        <div class="mt-1"><a href="#land">trouver un terrain ></a></div>
+        <div class="mt-0"><a href="#get-leo">trouver un terrain ></a></div>
       </div>
 
       <div class="col-sm-4 col-12 mb-4">
         <div class="font-bold">Une expérience exceptionnelle</div>
         <div class="">Découvrez pourquoi faire construire Léo est un plaisir</div>
-        <div class="mt-1"><a href="#service">découvrir ></a></div>
+        <div class="mt-0"><a href="#service-timming">découvrir ></a></div>
       </div>
     </div>
   </div>
@@ -84,7 +83,7 @@
     <div class="row d-flex align-items-center full-height relative justify-content-center">
       <div class="col-12 col-md-8">
         <img src="/images/leo_contour.png" class="leo_contour flip"/>
-        <div><p class="h5-responsive">Chaque détail a été optimisé pour créer la meilleure maison trois chambre possible&nbsp;: découvrez la <strong class="nowrap">Léo Break</strong>, plain-pied 96m<sup>2</sup> ossature bois <span class="nowrap">ultra-moderne</span></div>
+        <div><p class="h5-responsive">Chaque détail est optimisé pour créer la maison la plus aboutie du marché&nbsp;: découvrez la <strong class="">Maison Léo Break</strong>, plain-pied 96m<sup>2</sup> ossature bois <span class="">ultra-moderne</span></div>
         <div class="text-left"><a href="#layout">découvrir <i class="fa fa-chevron-down"></i></a></div>
       </div>
     </div>
@@ -94,7 +93,7 @@
     <div class="row d-flex align-items-center">
       <div class="col-12 col-sm-6 order-2 order-sm-1">
         <div class="mt-2 house-point d-flex align-items-start flex-column justify-content-center">
-          <div><p class="h5-responsive">Avec sa <strong class="nowrap">pièce de vie de 37m<sup>2</sup></strong> éclairée par deux grandes baies vitrées, ses <strong class="nowrap">trois chambres</strong> isolées et sa <strong class="nowrap">cuisine ouverte</strong>, la plan de la Léo Break optimise impeccablement ses 96m<sup>2</sup></p></div>
+          <div><p class="h5-responsive"><strong class="">Pièce de vie de 37m<sup>2</sup></strong>, deux grandes baies vitrées, trois chambres isolées, cuisine ouverte&nbsp;: la plan de la Léo Break utilise idéalement ses 96m<sup>2</sup></p></div>
           <div><a href="#structure">suite <i class="fa fa-chevron-down"></i></a></div>
         </div>
       </div>
@@ -108,7 +107,7 @@
     <div class="row d-flex align-items-center">
       <div class="col-12 col-sm-6 relative order-2 order-sm-1">
         <div class="mt-2 house-point d-flex align-items-start flex-column justify-content-center">
-          <div><p class="h5-responsive">Léo Break est équipée de la <strong>meilleure structure</strong> de maison moderne&nbsp;: son <strong class="nowrap">ossature bois</strong> vous garantit en effet rigidité, isolation et confort de vie optimal</p></div>
+          <div><p class="h5-responsive">Léo Break est équipée de la meilleure structure de maison moderne&nbsp;: son <strong class="">ossature bois</strong> vous garantit rigidité, isolation et confort de vie optimal</p></div>
           <div><a href="#crawlspace">suite <i class="fa fa-chevron-down"></i></a></div>
         </div>
       </div>
@@ -122,7 +121,7 @@
     <div class="row d-flex align-items-center">
       <div class="col-12 col-sm-6 relative order-2 order-sm-1">
         <div class="mt-2 house-point d-flex align-items-start flex-column justify-content-center">
-          <div><p class="h5-responsive">Les robustes <strong class="nowrap">fondations sur pieux</strong> et le <strong class="nowrap">vide sanitaire</strong> sur lesquels elle repose protègent la Léo Break de l'humidité et des affaisements pour une maison <strong>fiable dans la temps</strong></p></div>
+          <div><p class="h5-responsive">Ses robustes fondations sur pieux et son <strong class="">vide sanitaire</strong> protègent la Léo Break de l'humidité et des affaisements pour une maison fiable dans le temps</p></div>
           <div><a href="#equipment">suite <i class="fa fa-chevron-down"></i></a></div>
         </div>
       </div>
@@ -136,46 +135,23 @@
     <div class="row d-flex align-items-center">
       <div class="col-12 col-sm-6 relative order-2 order-sm-1">
         <div class="mt-2 house-point d-flex align-items-start flex-column justify-content-center">
-          <div><p class="h5-responsive">Faites-vous plaisir avec les <strong class="nowrap">meilleurs équipements</strong> du marché&nbsp;: électricité Legrand, chauffage thermostatic double flux, menuiserie aluminium et plus encore&nbsp;! <br /><a class="small mb-2 primary" href="https://dx6bud56fsm7y.cloudfront.net/maison_leo/Leo_Break.pdf" target="_blank">découvrir la plaquette technique.</a></p></div>
-          <div><a href="#service">suite <i class="fa fa-chevron-down"></i></a></div>
+          <div><p class="h5-responsive">Faites-vous plaisir avec les <strong class="">meilleurs équipements</strong>&nbsp;: électricité Legrand, chauffage thermostatic double flux, menuiserie aluminium et plus encore&nbsp;! </p></div>
+          <div><a href="#service-timming">suite <i class="fa fa-chevron-down"></i></a></div>
         </div>
       </div>
       <div class="col-12 col-sm-6 order-1 order-sm-2">
         <img src="/images/leo_contour.png" class="leo_contour flip" id="leo_contour"/>
-      </div>
-    </div>
-  </div>
-
-  <%# <div class="container min-full-height relative d-flex justify-content-center flex-column" id="land"> %>
-    <%# <div class="row d-flex justify-content-center"> %>
-      <%# <div class="col-12 col-sm-6"> %>
-        <%# <p class="h5-responsive"><strong>Trouvez votre terrain&nbsp;!</strong> Une maison s'implante sur un terrain, et nous vous aidons à trouver la perle.</p> %>
-        <%# <div class="d-flex justify-content-left relative"> %>
-          <%# <div class="d-sm-flex align-items-center justify-content-left cta-wrapper"> %>
-            <%# <input type="text" class="form-control mr-1 input-cta" placeholder="Je souhaite habiter à ..." data-action="search-location"/> %>
-            <%# <button class="btn btn-primary btn-cta" data-toggle="modal" data-target="#exampleModal" data-action="find-me-a-land">Trouver un terrain&nbsp;!</button> %>
-          <%# </div> %>
-        <%# </div> %>
-        <%# <div class="mt-3"><a href="#service">suite <i class="fa fa-chevron-down"></i></a></div> %>
-      <%# </div> %>
-    <%# </div> %>
-  <%# </div> %>
-
-  <div class="container min-full-height relative d-flex justify-content-center flex-column" id="service">
-    <div class="row d-flex justify-content-center">
-      <div class="col-12 col-sm-6">
-        <p class="h5-responsive">Pour que vous preniez <strong class="nowrap accent-1">plaisir à construire</strong>, nous avons pensé un processus de construction fluide et rapide.</p>
-        <p class="h5-responsive">Découvrez-en les points clefs.</p>
-      <%# <p class="h5-responsive">Découvrez-en les trois axes.</p> %>
-      <div class="mt-3"><a href="#service-timming">découvrir <i class="fa fa-chevron-down"></i></a></div>
+        <div class="text-center">
+          <a class="small mb-2 secondary" href="https://dx6bud56fsm7y.cloudfront.net/maison_leo/Leo_Break.pdf" target="_blank">Découvrir la plaquette technique</a>
+        </div>
       </div>
     </div>
   </div>
 
   <div class="container min-full-height relative d-flex justify-content-center flex-column" id="service-timming">
     <div class="row d-flex justify-content-center">
-      <div class="col-12 col-sm-6">
-        <p class="h5-responsive"><strong>Rapidité</strong>. Grâce à son procédé révolutionnaire Dhomino, le temps de construction d'une Léo Break descend jusqu'à <strong class="nowrap">5 semaines</strong>. N'attendez-pas votre maison un an&nbsp;!</p>
+      <div class="col-12 col-sm-8">
+        <p class="h5-responsive">Une Léo Break se <strong class="">construit en jusqu'à 5 semaines</strong> grâce à sa technologie modulaire ossature bois. Emménagez chez vous plus tôt que vous ne le pensiez&nbsp;!</p>
         <div class="mt-3"><a href="#service-no-construction-site">suite <i class="fa fa-chevron-down"></i></a></div>
       </div>
     </div>
@@ -183,8 +159,8 @@
 
   <div class="container min-full-height relative d-flex justify-content-center flex-column" id="service-no-construction-site">
     <div class="row d-flex justify-content-center">
-      <div class="col-12 col-sm-6">
-        <p class="h5-responsive"><strong>Sérénité</strong>. Votre Léo Break est <strong class="nowrap">construite en atelier</strong> près de chez vous puis livrée par camion. Pas de stress de chantier, pas de débris sur votre terrain et pas de retards&nbsp;!</p>
+      <div class="col-12 col-sm-8">
+        <p class="h5-responsive">Votre Léo Break est construite en atelier près de chez vous puis livrée sur votre terrain. Ce qui veut dire <strong>pas de chantier</strong>, pas de débris sur votre terrain et une qualité invariable</p>
         <div class="mt-3"><a href="#service-transparency">suite <i class="fa fa-chevron-down"></i></a></div>
       </div>
     </div>
@@ -192,49 +168,88 @@
 
   <div class="container min-full-height relative d-flex justify-content-center flex-column" id="service-transparency">
     <div class="row d-flex justify-content-center">
-      <div class="col-12 col-sm-6">
-        <p class="h5-responsive"><strong>Transparence</strong>. Nous sommes <strong class="nowrap">100% transparents</strong> sur le futur contenu de votre maison. Avec Maison Léo, pas de changements de plans dans votre dos, et vous connaissez les marques des équipements à l'avance&nbsp;!</p>
-        <div class="mt-3"><a href="#service-trust">suite <i class="fa fa-chevron-down"></i></a></div>
+      <div class="col-12 col-sm-8">
+        <p class="h5-responsive">Nous sommes <strong class="">100% transparents</strong> sur le futur contenu de votre maison. Avec Maison Léo, pas de changements de plans, et vous connaissez les marques des équipements à l'avance</p>
+        <div class="mt-3"><a href="#get-leo">suite <i class="fa fa-chevron-down"></i></a></div>
       </div>
     </div>
   </div>
 
-  <div class="container min-full-height relative d-flex justify-content-center flex-column" id="service-trust">
+  <div class="container min-full-height relative d-flex justify-content-center flex-column" id="get-leo">
     <div class="row d-flex justify-content-center">
-      <div class="col-12 col-sm-6">
-        <p class="h5-responsive"><strong>Confiance</strong>. C'est la clef de voûte de tout projet et la confiance est au cœur de nos préoccupations. Nous serons joignables et disponibles pour répondre à vos questions tout au long du processus de construction.</p>
-        <div class="mt-3"><a href="#service-trust">suite <i class="fa fa-chevron-down"></i></a></div>
+      <div class="col-12 col-sm-8">
+        <p class="h5-responsive"></p>
+        <div class="d-sm-flex align-items-center justify-content-left cta-wrapper">
+          <input type="text" class="form-control mr-1 input-cta" placeholder="Je souhaite habiter à ..." data-action="search-location"/>
+          <button class="btn btn-primary btn-cta" data-toggle="modal" data-target="#exampleModal" data-action="find-me-a-land">On en discute&nbsp;!</button>
+        </div>
+        <%# <div class="mt-3"><a href="#top">haut <i class="fa fa-chevron-up"></i></a></div> %>
       </div>
     </div>
   </div>
 
-  <%# <div class="container min-full-height relative d-flex justify-content-center flex-column" id="service"> %>
-    <%# <div class="row"> %>
-      <%# <div class="col"> %>
-        <%# <h4 class="h5-responsive">Une expérience exceptionnelle</h4> %>
-        <%# <ul> %>
-          <%# <li>Manifeste</li> %>
-          <%# <li>Délais</li> %>
-          <%# <li>Pas de chantier</li> %>
-          <%# <li>Fondations pieux pas de dalle</li> %>
-          <%# <li>Contact</li> %>
-          <%# <li>Partenaires</li> %>
-        <%# </ul> %>
-      <%# </div> %>
-    <%# </div> %>
-  <%# </div> %>
-<%# </div> %>
+<footer class="">
+  <div class="container">
+    <div class="row">
+      <div class="col py-5">
+        <%= link "Mentions légales", to: page_path(@conn, :legal), class: "gray-text-600"%>
+      </div>
+    </div>
+  </div>
+</footer>
 
 <!-- Contact Modal -->
-<div class="modal fade big-modal" id="findMeLandModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="container p-0">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-body" style="height: 500px">
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
+<div class="modal fade" id="findMeLandModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <div class="d-flex flex-row align-items-center justify-content-center">
+          <div class="logo-wrapper mr-1"><%= PhoenixInlineSvg.Helpers.svg_image(@conn, "logo3") %></div>
+          <div class="m-0 accent-1" style="position: relative; top: 1px; right: -4px">Maisons Léo</div>
         </div>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body" style="height: 500px">
+        <div class="mb-4 mt-2 lead">
+          Discutons d'un projet Léo à&nbsp;:
+          <div data-role="city" class="font-bold primary"></div>
+        </div>
+
+        <%= form_for @conn, page_path(@conn, :contact), [as: "contact"], fn f-> %>
+          <div class="form-group">
+            <label class="">Votre nom</label>
+            <div class=""><%= text_input f, :name, placeholder: "Marie Dupont", class: "form-control", required: true %></div>
+          </div>
+          <div class="form-group">
+            <label class="">Votre numéro de téléphone</label>
+            <div class=""><%= text_input f, :phone, placeholder: "06 12 34 56 78", class: "form-control", minlength: 10 %></div>
+          </div>
+          <div class="form-group mb-4">
+            <label class="">Votre email</label>
+            <div class=""><%= text_input f, :email, placeholder: "marie@dupont.com", class: "form-control" %></div>
+          </div>
+          <div class="form-check pl-0">
+            <%= checkbox f, :has_land %>
+            <%= label f, :has_land, "J'ai mon terrain" %>
+          </div>
+          <div class="form-check pl-0">
+            <%= checkbox f, :has_funding %>
+            <%= label f, :has_funding, "J'ai mon financement" %>
+          </div>
+
+          <%= hidden_input f, :remark, class: "form-control", "data-role": "searched-location-hidden-input" %>
+          <%= hidden_input f, :city, class: "form-control", "data-role": "searched-city-hidden-input" %>
+          <%= hidden_input f, :postal_code, class: "form-control", "data-role": "searched-postal-code-hidden-input" %>
+          <div class="clearfix">
+            <div class="pull-right">
+              <button type="submit" class="btn btn-primary btn-cta mr-0 mb-0"><i class="fa fa-paper-plane mr-2"></i> Contactez-moi</button>
+            </div>
+          </div>
+          <%= if @params[:ad_id] do %><%= hidden_input f, :ad, value: @params[:ad_id] %><% end %>
+          <%= hidden_input f, :ref, value: @params["ref"] %>
+        <% end %>
       </div>
     </div>
   </div>

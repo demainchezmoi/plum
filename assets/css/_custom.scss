@@ -32,6 +32,26 @@ $accent-2: $pink;
 $background: #fcfcfc;
 $secondary: #42505f;
 
+.form-control {
+  // border-radius: 0;
+}
+
+footer {
+  background: #f3f3f3; 
+  border-top: 1px solid darken(#f3f3f3, 10%);
+}
+
+.alert {
+  z-index: 10000;
+  margin-top: 50px;
+  position: fixed;
+  top: 0;
+}
+
+.light-bordered {
+  border: 1px solid #ced4da;
+}
+
 .fa-phone:before {
   position: relative;
   top: .7px;
@@ -421,4 +441,12 @@ $logo-size: 35px;
       border-radius: 0;
     }
   }
+}
+
+.modal-dialog {
+  overflow-y: initial !important
+}
+.modal-body{
+  height: 250px;
+  overflow-y: auto;
 }

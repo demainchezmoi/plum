@@ -32,7 +32,6 @@ module.exports = class View extends MainView {
 
     const lazy = $("img[data-src]");
     const lazySrcset = $("img[data-srcset]");
-    const input = $('[data-action=search-location]');
 
     lazySrcset.each(function() { this.setAttribute("srcset", this.getAttribute('data-srcset')); });
     lazySrcset.removeAttr("data-srcset");
@@ -46,6 +45,7 @@ module.exports = class View extends MainView {
     });
 
     $('[data-action=find-me-a-land]').click(function() {
+      const input = $(arguments[0].target).siblings('input')
       const location = input.val();
       if (!!location) {
         $('#findMeLandModal').modal('show');
@@ -93,9 +93,10 @@ module.exports = class View extends MainView {
         const place = autocomplete.getPlace();
         const postalCode = this.findPostalCode(place.address_components);
         const city = this.findCity(place.address_components);
-        inputs.val(place.formatted_address);
-        // cityInput.val(city);
-        // postalCodeInput.val(postalCode);
+        // inputs.val(place.formatted_address);
+        $('[data-role=city]').text(place.formatted_address);
+        cityInput.val(city);
+        postalCodeInput.val(postalCode);
       });
     })
   }

@@ -1,15 +1,12 @@
 <div class="public3">
   <nav class="navbar navbar-expand-lg navbar-dark indigo">
     <div class="container">
-      <a class="navbar-brand logo-inline" href="/">
-        <div class="d-flex align-items-end">
+      <a class="navbar-brand">
+        <div class="d-flex flex-row align-items-center justify-content-center">
           <div class="logo-wrapper mr-1"><%= PhoenixInlineSvg.Helpers.svg_image(@conn, "logo3") %></div>
-          <div>
-            <div class="logo-title" style="font-size: 12px; line-height: 12px;">Maison&nbsp;Léo </div>
-            <div class="tiny" style="font-size: 12px; line-height: 12px;"><em>Bretagne</em></div>
-          </div>
+          <div class="m-0 accent-1" style="position: relative; top: 1px; right: -4px">Maisons Léo</div>
         </div>
-      </a>
+	    </a>
       <ul class="navbar-nav ml-auto d-flex flex-row">
         <li class="nav-item active small-xs mr-2">
           <a class="nav-link d-flex align-items-center" data-toggle="modal" data-target="#contactModal">
